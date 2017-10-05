@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		349299F64D1EFB3468381177 /* Pods_Numnu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 973AA0559EB278E9E52BDD05 /* Pods_Numnu.framework */; };
 		3FC6CEBA1F6F744700DF2A12 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6CEB91F6F744700DF2A12 /* AppDelegate.swift */; };
 		3FC6CEBC1F6F744700DF2A12 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6CEBB1F6F744700DF2A12 /* ViewController.swift */; };
 		3FC6CEBF1F6F744700DF2A12 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FC6CEBD1F6F744700DF2A12 /* Main.storyboard */; };
@@ -14,6 +15,14 @@
 		3FC6CEC41F6F744700DF2A12 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FC6CEC21F6F744700DF2A12 /* LaunchScreen.storyboard */; };
 		3FC6CECF1F6F744700DF2A12 /* NumnuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6CECE1F6F744700DF2A12 /* NumnuTests.swift */; };
 		3FC6CEDA1F6F744700DF2A12 /* NumnuUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6CED91F6F744700DF2A12 /* NumnuUITests.swift */; };
+		3FC6CEE81F6FA17300DF2A12 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6CEE71F6FA17300DF2A12 /* HomeViewController.swift */; };
+		3FC6CEEA1F6FA25600DF2A12 /* feedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6CEE91F6FA25600DF2A12 /* feedTableViewCell.swift */; };
+		B4A2C06B1F8669A600C3D400 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4A2C06A1F8669A600C3D400 /* Auth.storyboard */; };
+		B4BD9EF01F6FA57300C43182 /* PostList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BD9EEF1F6FA57300C43182 /* PostList.swift */; };
+		B4BD9EF51F6FAAA400C43182 /* DBProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BD9EF41F6FAAA400C43182 /* DBProvider.swift */; };
+		B4BD9EF71F6FB14200C43182 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BD9EF61F6FB14200C43182 /* Constants.swift */; };
+		B4BD9EF91F6FB3E700C43182 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BD9EF81F6FB3E700C43182 /* PostViewModel.swift */; };
+		B4BD9EFB1F6FD08F00C43182 /* Processors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BD9EFA1F6FD08F00C43182 /* Processors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +56,18 @@
 		3FC6CED51F6F744700DF2A12 /* NumnuUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NumnuUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FC6CED91F6F744700DF2A12 /* NumnuUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumnuUITests.swift; sourceTree = "<group>"; };
 		3FC6CEDB1F6F744700DF2A12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3FC6CEE71F6FA17300DF2A12 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		3FC6CEE91F6FA25600DF2A12 /* feedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = feedTableViewCell.swift; sourceTree = "<group>"; };
+		973AA0559EB278E9E52BDD05 /* Pods_Numnu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Numnu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4A2C06A1F8669A600C3D400 /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
+		B4A2C06C1F867CE400C3D400 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B4BD9EEF1F6FA57300C43182 /* PostList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostList.swift; sourceTree = "<group>"; };
+		B4BD9EF41F6FAAA400C43182 /* DBProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBProvider.swift; sourceTree = "<group>"; };
+		B4BD9EF61F6FB14200C43182 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		B4BD9EF81F6FB3E700C43182 /* PostViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
+		B4BD9EFA1F6FD08F00C43182 /* Processors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Processors.swift; sourceTree = "<group>"; };
+		C488392BD62ED69D8D4F143A /* Pods-Numnu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Numnu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Numnu/Pods-Numnu.debug.xcconfig"; sourceTree = "<group>"; };
+		D0B6B3214A0EA9A12E275CB5 /* Pods-Numnu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Numnu.release.xcconfig"; path = "Pods/Target Support Files/Pods-Numnu/Pods-Numnu.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				349299F64D1EFB3468381177 /* Pods_Numnu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +103,8 @@
 				3FC6CECD1F6F744700DF2A12 /* NumnuTests */,
 				3FC6CED81F6F744700DF2A12 /* NumnuUITests */,
 				3FC6CEB71F6F744700DF2A12 /* Products */,
+				707410A8190E3AB69F4CEA57 /* Pods */,
+				7AE04205F6DDC47253BF8816 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,11 +121,17 @@
 		3FC6CEB81F6F744700DF2A12 /* Numnu */ = {
 			isa = PBXGroup;
 			children = (
+				B4BD9EF31F6FAA5E00C43182 /* DBManager */,
+				B4BD9EEE1F6FA55D00C43182 /* Helpers */,
+				B4BD9EED1F6FA55400C43182 /* Constants */,
+				B4BD9EEC1F6FA54B00C43182 /* ViewModel */,
+				B4BD9EEB1F6FA54400C43182 /* Model */,
+				B4BD9EE91F6FA4AF00C43182 /* Controller */,
+				B4BD9EEA1F6FA4E500C43182 /* View */,
+				B4A2C0691F86697400C3D400 /* Storyboards */,
 				3FC6CEB91F6F744700DF2A12 /* AppDelegate.swift */,
-				3FC6CEBB1F6F744700DF2A12 /* ViewController.swift */,
-				3FC6CEBD1F6F744700DF2A12 /* Main.storyboard */,
+				B4A2C06C1F867CE400C3D400 /* GoogleService-Info.plist */,
 				3FC6CEC01F6F744700DF2A12 /* Assets.xcassets */,
-				3FC6CEC21F6F744700DF2A12 /* LaunchScreen.storyboard */,
 				3FC6CEC51F6F744700DF2A12 /* Info.plist */,
 			);
 			path = Numnu;
@@ -125,6 +155,90 @@
 			path = NumnuUITests;
 			sourceTree = "<group>";
 		};
+		707410A8190E3AB69F4CEA57 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C488392BD62ED69D8D4F143A /* Pods-Numnu.debug.xcconfig */,
+				D0B6B3214A0EA9A12E275CB5 /* Pods-Numnu.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		7AE04205F6DDC47253BF8816 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				973AA0559EB278E9E52BDD05 /* Pods_Numnu.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B4A2C0691F86697400C3D400 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				3FC6CEBD1F6F744700DF2A12 /* Main.storyboard */,
+				3FC6CEC21F6F744700DF2A12 /* LaunchScreen.storyboard */,
+				B4A2C06A1F8669A600C3D400 /* Auth.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		B4BD9EE91F6FA4AF00C43182 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3FC6CEBB1F6F744700DF2A12 /* ViewController.swift */,
+				3FC6CEE71F6FA17300DF2A12 /* HomeViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		B4BD9EEA1F6FA4E500C43182 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3FC6CEE91F6FA25600DF2A12 /* feedTableViewCell.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		B4BD9EEB1F6FA54400C43182 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B4BD9EEF1F6FA57300C43182 /* PostList.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		B4BD9EEC1F6FA54B00C43182 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B4BD9EF81F6FB3E700C43182 /* PostViewModel.swift */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		B4BD9EED1F6FA55400C43182 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				B4BD9EF61F6FB14200C43182 /* Constants.swift */,
+			);
+			name = Constants;
+			sourceTree = "<group>";
+		};
+		B4BD9EEE1F6FA55D00C43182 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				B4BD9EFA1F6FD08F00C43182 /* Processors.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		B4BD9EF31F6FAA5E00C43182 /* DBManager */ = {
+			isa = PBXGroup;
+			children = (
+				B4BD9EF41F6FAAA400C43182 /* DBProvider.swift */,
+			);
+			name = DBManager;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +246,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3FC6CEDE1F6F744700DF2A12 /* Build configuration list for PBXNativeTarget "Numnu" */;
 			buildPhases = (
+				A240B9B0B1958403FE235136 /* [CP] Check Pods Manifest.lock */,
 				3FC6CEB21F6F744600DF2A12 /* Sources */,
 				3FC6CEB31F6F744600DF2A12 /* Frameworks */,
 				3FC6CEB41F6F744600DF2A12 /* Resources */,
+				B487976E5ED1EF7219BB5C96 /* [CP] Embed Pods Frameworks */,
+				EE7B1306210A14F63A581530 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -193,6 +310,7 @@
 				TargetAttributes = {
 					3FC6CEB51F6F744600DF2A12 = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = XSJRRDKMW9;
 						ProvisioningStyle = Automatic;
 					};
 					3FC6CEC91F6F744700DF2A12 = {
@@ -232,6 +350,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4A2C06B1F8669A600C3D400 /* Auth.storyboard in Resources */,
 				3FC6CEC41F6F744700DF2A12 /* LaunchScreen.storyboard in Resources */,
 				3FC6CEC11F6F744700DF2A12 /* Assets.xcassets in Resources */,
 				3FC6CEBF1F6F744700DF2A12 /* Main.storyboard in Resources */,
@@ -254,13 +373,68 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		A240B9B0B1958403FE235136 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B487976E5ED1EF7219BB5C96 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Numnu/Pods-Numnu-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EE7B1306210A14F63A581530 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Numnu/Pods-Numnu-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		3FC6CEB21F6F744600DF2A12 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4BD9EF91F6FB3E700C43182 /* PostViewModel.swift in Sources */,
 				3FC6CEBC1F6F744700DF2A12 /* ViewController.swift in Sources */,
+				B4BD9EF01F6FA57300C43182 /* PostList.swift in Sources */,
+				3FC6CEEA1F6FA25600DF2A12 /* feedTableViewCell.swift in Sources */,
 				3FC6CEBA1F6F744700DF2A12 /* AppDelegate.swift in Sources */,
+				B4BD9EF71F6FB14200C43182 /* Constants.swift in Sources */,
+				B4BD9EF51F6FAAA400C43182 /* DBProvider.swift in Sources */,
+				3FC6CEE81F6FA17300DF2A12 /* HomeViewController.swift in Sources */,
+				B4BD9EFB1F6FD08F00C43182 /* Processors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,11 +586,14 @@
 		};
 		3FC6CEDF1F6F744700DF2A12 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C488392BD62ED69D8D4F143A /* Pods-Numnu.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = XSJRRDKMW9;
 				INFOPLIST_FILE = Numnu/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.czsm.Numnu;
+				PRODUCT_BUNDLE_IDENTIFIER = com.numnu.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -424,11 +601,14 @@
 		};
 		3FC6CEE01F6F744700DF2A12 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D0B6B3214A0EA9A12E275CB5 /* Pods-Numnu.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = XSJRRDKMW9;
 				INFOPLIST_FILE = Numnu/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.czsm.Numnu;
+				PRODUCT_BUNDLE_IDENTIFIER = com.numnu.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -507,6 +687,7 @@
 				3FC6CEE01F6F744700DF2A12 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3FC6CEE11F6F744700DF2A12 /* Build configuration list for PBXNativeTarget "NumnuTests" */ = {
 			isa = XCConfigurationList;
@@ -515,6 +696,7 @@
 				3FC6CEE31F6F744700DF2A12 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3FC6CEE41F6F744700DF2A12 /* Build configuration list for PBXNativeTarget "NumnuUITests" */ = {
 			isa = XCConfigurationList;
@@ -523,6 +705,7 @@
 				3FC6CEE61F6F744700DF2A12 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
