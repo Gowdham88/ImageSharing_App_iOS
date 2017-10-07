@@ -17,6 +17,8 @@
 		3FC6CEDA1F6F744700DF2A12 /* NumnuUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6CED91F6F744700DF2A12 /* NumnuUITests.swift */; };
 		3FC6CEE81F6FA17300DF2A12 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6CEE71F6FA17300DF2A12 /* HomeViewController.swift */; };
 		3FC6CEEA1F6FA25600DF2A12 /* feedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6CEE91F6FA25600DF2A12 /* feedTableViewCell.swift */; };
+		B47F63A61F88E2BC001D7A18 /* ViewExtender.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47F63A51F88E2BC001D7A18 /* ViewExtender.swift */; };
+		B47F63A81F88E7B6001D7A18 /* ButtonExtender.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47F63A71F88E7B6001D7A18 /* ButtonExtender.swift */; };
 		B4A2C06B1F8669A600C3D400 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4A2C06A1F8669A600C3D400 /* Auth.storyboard */; };
 		B4BD9EF01F6FA57300C43182 /* PostList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BD9EEF1F6FA57300C43182 /* PostList.swift */; };
 		B4BD9EF51F6FAAA400C43182 /* DBProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BD9EF41F6FAAA400C43182 /* DBProvider.swift */; };
@@ -59,6 +61,13 @@
 		3FC6CEE71F6FA17300DF2A12 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		3FC6CEE91F6FA25600DF2A12 /* feedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = feedTableViewCell.swift; sourceTree = "<group>"; };
 		973AA0559EB278E9E52BDD05 /* Pods_Numnu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Numnu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B47F63A01F88DA8A001D7A18 /* Proxima Nova Alt Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Proxima Nova Alt Regular.otf"; sourceTree = "<group>"; };
+		B47F63A11F88DDD7001D7A18 /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.otf"; sourceTree = "<group>"; };
+		B47F63A21F88DDEF001D7A18 /* Proxima Nova ScOsf Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Proxima Nova ScOsf Regular.otf"; sourceTree = "<group>"; };
+		B47F63A31F88DDFF001D7A18 /* Proxima Nova ScOsf Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Proxima Nova ScOsf Bold.otf"; sourceTree = "<group>"; };
+		B47F63A41F88DF23001D7A18 /* Proxima Nova Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Proxima Nova Bold.otf"; sourceTree = "<group>"; };
+		B47F63A51F88E2BC001D7A18 /* ViewExtender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtender.swift; sourceTree = "<group>"; };
+		B47F63A71F88E7B6001D7A18 /* ButtonExtender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtender.swift; sourceTree = "<group>"; };
 		B4A2C06A1F8669A600C3D400 /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 		B4A2C06C1F867CE400C3D400 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B4BD9EEF1F6FA57300C43182 /* PostList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostList.swift; sourceTree = "<group>"; };
@@ -121,6 +130,7 @@
 		3FC6CEB81F6F744700DF2A12 /* Numnu */ = {
 			isa = PBXGroup;
 			children = (
+				B47F639F1F88D697001D7A18 /* CustomFont */,
 				B4BD9EF31F6FAA5E00C43182 /* DBManager */,
 				B4BD9EEE1F6FA55D00C43182 /* Helpers */,
 				B4BD9EED1F6FA55400C43182 /* Constants */,
@@ -170,6 +180,18 @@
 				973AA0559EB278E9E52BDD05 /* Pods_Numnu.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B47F639F1F88D697001D7A18 /* CustomFont */ = {
+			isa = PBXGroup;
+			children = (
+				B47F63A41F88DF23001D7A18 /* Proxima Nova Bold.otf */,
+				B47F63A31F88DDFF001D7A18 /* Proxima Nova ScOsf Bold.otf */,
+				B47F63A21F88DDEF001D7A18 /* Proxima Nova ScOsf Regular.otf */,
+				B47F63A11F88DDD7001D7A18 /* ProximaNova-Regular.otf */,
+				B47F63A01F88DA8A001D7A18 /* Proxima Nova Alt Regular.otf */,
+			);
+			name = CustomFont;
 			sourceTree = "<group>";
 		};
 		B4A2C0691F86697400C3D400 /* Storyboards */ = {
@@ -227,6 +249,8 @@
 			isa = PBXGroup;
 			children = (
 				B4BD9EFA1F6FD08F00C43182 /* Processors.swift */,
+				B47F63A51F88E2BC001D7A18 /* ViewExtender.swift */,
+				B47F63A71F88E7B6001D7A18 /* ButtonExtender.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -435,6 +459,8 @@
 				B4BD9EF51F6FAAA400C43182 /* DBProvider.swift in Sources */,
 				3FC6CEE81F6FA17300DF2A12 /* HomeViewController.swift in Sources */,
 				B4BD9EFB1F6FD08F00C43182 /* Processors.swift in Sources */,
+				B47F63A81F88E7B6001D7A18 /* ButtonExtender.swift in Sources */,
+				B47F63A61F88E2BC001D7A18 /* ViewExtender.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
