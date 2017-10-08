@@ -20,6 +20,8 @@
 		B47BD4011F8A26A30099061C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B47BD4001F8A26A30099061C /* GoogleService-Info.plist */; };
 		B47BD4031F8A48010099061C /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47BD4021F8A48010099061C /* OnboardingVC.swift */; };
 		B47BD4051F8A615C0099061C /* loginMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47BD4041F8A615C0099061C /* loginMainVC.swift */; };
+		B47BD4071F8A75FA0099061C /* signupwithEmailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47BD4061F8A75FA0099061C /* signupwithEmailVC.swift */; };
+		B47BD4091F8A836D0099061C /* ForgotpasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47BD4081F8A836D0099061C /* ForgotpasswordVC.swift */; };
 		B47F63A61F88E2BC001D7A18 /* ViewExtender.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47F63A51F88E2BC001D7A18 /* ViewExtender.swift */; };
 		B47F63A81F88E7B6001D7A18 /* ButtonExtender.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47F63A71F88E7B6001D7A18 /* ButtonExtender.swift */; };
 		B4A2C06B1F8669A600C3D400 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4A2C06A1F8669A600C3D400 /* Auth.storyboard */; };
@@ -67,6 +69,8 @@
 		B47BD4001F8A26A30099061C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B47BD4021F8A48010099061C /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
 		B47BD4041F8A615C0099061C /* loginMainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginMainVC.swift; sourceTree = "<group>"; };
+		B47BD4061F8A75FA0099061C /* signupwithEmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signupwithEmailVC.swift; sourceTree = "<group>"; };
+		B47BD4081F8A836D0099061C /* ForgotpasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotpasswordVC.swift; sourceTree = "<group>"; };
 		B47F63A01F88DA8A001D7A18 /* Proxima Nova Alt Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Proxima Nova Alt Regular.otf"; sourceTree = "<group>"; };
 		B47F63A11F88DDD7001D7A18 /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.otf"; sourceTree = "<group>"; };
 		B47F63A21F88DDEF001D7A18 /* Proxima Nova ScOsf Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Proxima Nova ScOsf Regular.otf"; sourceTree = "<group>"; };
@@ -216,6 +220,8 @@
 				3FC6CEE71F6FA17300DF2A12 /* HomeViewController.swift */,
 				B47BD4021F8A48010099061C /* OnboardingVC.swift */,
 				B47BD4041F8A615C0099061C /* loginMainVC.swift */,
+				B47BD4061F8A75FA0099061C /* signupwithEmailVC.swift */,
+				B47BD4081F8A836D0099061C /* ForgotpasswordVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -467,8 +473,10 @@
 				B4BD9EF71F6FB14200C43182 /* Constants.swift in Sources */,
 				B4BD9EF51F6FAAA400C43182 /* DBProvider.swift in Sources */,
 				B47BD4051F8A615C0099061C /* loginMainVC.swift in Sources */,
+				B47BD4071F8A75FA0099061C /* signupwithEmailVC.swift in Sources */,
 				3FC6CEE81F6FA17300DF2A12 /* HomeViewController.swift in Sources */,
 				B4BD9EFB1F6FD08F00C43182 /* Processors.swift in Sources */,
+				B47BD4091F8A836D0099061C /* ForgotpasswordVC.swift in Sources */,
 				B47F63A81F88E7B6001D7A18 /* ButtonExtender.swift in Sources */,
 				B47F63A61F88E2BC001D7A18 /* ViewExtender.swift in Sources */,
 			);

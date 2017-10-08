@@ -1,5 +1,5 @@
 //
-//  OnboardingVC.swift
+//  ForgotpasswordVC.swift
 //  Numnu
 //
 //  Created by CZ Ltd on 10/8/17.
@@ -8,19 +8,17 @@
 
 import UIKit
 
-class OnboardingVC: UIViewController {
+class ForgotpasswordVC: UIViewController {
 
-   
+    @IBOutlet weak var forgotpassEmail: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        forgotpassEmail.useUnderline()
 
         // Do any additional setup after loading the view.
     }
 
-    @IBAction func emailTextField(_ sender: Any) {
-        
-        
-    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -38,4 +36,3 @@ class OnboardingVC: UIViewController {
     */
 
 }
-
