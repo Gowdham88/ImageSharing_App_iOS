@@ -10,4 +10,5 @@ target 'Numnu' do
   pod 'Nuke', '~> 4.0'
   pod 'Toucan'
   pod 'Firebase/Auth'
+  pod 'XLPagerTabStrip', '~> 8.0'
 end
