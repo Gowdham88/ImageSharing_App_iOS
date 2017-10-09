@@ -8,7 +8,7 @@
 
 import UIKit
 
-class signupwithEmailVC: UIViewController {
+class signupwithEmailVC: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
@@ -17,12 +17,33 @@ class signupwithEmailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        emailTextfield.useUnderline()
-        passwordTextfield.useUnderline()
+//        emailTextfield.useUnderline()
+//        passwordTextfield.useUnderline()
         
         // Do any additional setup after loading the view.
     }
 
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        
+        return true
+        
+    }
+    
+    @IBAction func forgotPassword(_ sender: Any) {
+        
+    }
+    
+    @IBAction func signupPressed(_ sender: Any) {
+        
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
