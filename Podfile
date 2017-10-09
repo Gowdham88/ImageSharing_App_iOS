@@ -9,4 +9,5 @@ target 'Numnu' do
   pod 'Firebase/Database'
   pod 'Nuke', '~> 4.0'
   pod 'Toucan'
+  pod 'Firebase/Auth'
 end

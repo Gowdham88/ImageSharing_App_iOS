@@ -17,7 +17,13 @@
 		3FC6CEDA1F6F744700DF2A12 /* NumnuUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6CED91F6F744700DF2A12 /* NumnuUITests.swift */; };
 		3FC6CEE81F6FA17300DF2A12 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6CEE71F6FA17300DF2A12 /* HomeViewController.swift */; };
 		3FC6CEEA1F6FA25600DF2A12 /* feedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6CEE91F6FA25600DF2A12 /* feedTableViewCell.swift */; };
-		60C71EBC1F87A52600A87792 /* proxima font in Resources */ = {isa = PBXBuildFile; fileRef = 60C71EBB1F87A52600A87792 /* proxima font */; };
+		B47BD4011F8A26A30099061C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B47BD4001F8A26A30099061C /* GoogleService-Info.plist */; };
+		B47BD4031F8A48010099061C /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47BD4021F8A48010099061C /* OnboardingVC.swift */; };
+		B47BD4051F8A615C0099061C /* loginMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47BD4041F8A615C0099061C /* loginMainVC.swift */; };
+		B47BD4071F8A75FA0099061C /* signupwithEmailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47BD4061F8A75FA0099061C /* signupwithEmailVC.swift */; };
+		B47BD4091F8A836D0099061C /* ForgotpasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47BD4081F8A836D0099061C /* ForgotpasswordVC.swift */; };
+		B47F63A61F88E2BC001D7A18 /* ViewExtender.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47F63A51F88E2BC001D7A18 /* ViewExtender.swift */; };
+		B47F63A81F88E7B6001D7A18 /* ButtonExtender.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47F63A71F88E7B6001D7A18 /* ButtonExtender.swift */; };
 		B4A2C06B1F8669A600C3D400 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4A2C06A1F8669A600C3D400 /* Auth.storyboard */; };
 		B4BD9EF01F6FA57300C43182 /* PostList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BD9EEF1F6FA57300C43182 /* PostList.swift */; };
 		B4BD9EF51F6FAAA400C43182 /* DBProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BD9EF41F6FAAA400C43182 /* DBProvider.swift */; };
@@ -59,10 +65,20 @@
 		3FC6CEDB1F6F744700DF2A12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FC6CEE71F6FA17300DF2A12 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		3FC6CEE91F6FA25600DF2A12 /* feedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = feedTableViewCell.swift; sourceTree = "<group>"; };
-		60C71EBB1F87A52600A87792 /* proxima font */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "proxima font"; sourceTree = "<group>"; };
 		973AA0559EB278E9E52BDD05 /* Pods_Numnu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Numnu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B47BD4001F8A26A30099061C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B47BD4021F8A48010099061C /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
+		B47BD4041F8A615C0099061C /* loginMainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginMainVC.swift; sourceTree = "<group>"; };
+		B47BD4061F8A75FA0099061C /* signupwithEmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signupwithEmailVC.swift; sourceTree = "<group>"; };
+		B47BD4081F8A836D0099061C /* ForgotpasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotpasswordVC.swift; sourceTree = "<group>"; };
+		B47F63A01F88DA8A001D7A18 /* Proxima Nova Alt Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Proxima Nova Alt Regular.otf"; sourceTree = "<group>"; };
+		B47F63A11F88DDD7001D7A18 /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.otf"; sourceTree = "<group>"; };
+		B47F63A21F88DDEF001D7A18 /* Proxima Nova ScOsf Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Proxima Nova ScOsf Regular.otf"; sourceTree = "<group>"; };
+		B47F63A31F88DDFF001D7A18 /* Proxima Nova ScOsf Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Proxima Nova ScOsf Bold.otf"; sourceTree = "<group>"; };
+		B47F63A41F88DF23001D7A18 /* Proxima Nova Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Proxima Nova Bold.otf"; sourceTree = "<group>"; };
+		B47F63A51F88E2BC001D7A18 /* ViewExtender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtender.swift; sourceTree = "<group>"; };
+		B47F63A71F88E7B6001D7A18 /* ButtonExtender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtender.swift; sourceTree = "<group>"; };
 		B4A2C06A1F8669A600C3D400 /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
-		B4A2C06C1F867CE400C3D400 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B4BD9EEF1F6FA57300C43182 /* PostList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostList.swift; sourceTree = "<group>"; };
 		B4BD9EF41F6FAAA400C43182 /* DBProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBProvider.swift; sourceTree = "<group>"; };
 		B4BD9EF61F6FB14200C43182 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -123,7 +139,8 @@
 		3FC6CEB81F6F744700DF2A12 /* Numnu */ = {
 			isa = PBXGroup;
 			children = (
-				60C71EBB1F87A52600A87792 /* proxima font */,
+				B47BD4001F8A26A30099061C /* GoogleService-Info.plist */,
+				B47F639F1F88D697001D7A18 /* CustomFont */,
 				B4BD9EF31F6FAA5E00C43182 /* DBManager */,
 				B4BD9EEE1F6FA55D00C43182 /* Helpers */,
 				B4BD9EED1F6FA55400C43182 /* Constants */,
@@ -133,7 +150,6 @@
 				B4BD9EEA1F6FA4E500C43182 /* View */,
 				B4A2C0691F86697400C3D400 /* Storyboards */,
 				3FC6CEB91F6F744700DF2A12 /* AppDelegate.swift */,
-				B4A2C06C1F867CE400C3D400 /* GoogleService-Info.plist */,
 				3FC6CEC01F6F744700DF2A12 /* Assets.xcassets */,
 				3FC6CEC51F6F744700DF2A12 /* Info.plist */,
 			);
@@ -175,6 +191,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B47F639F1F88D697001D7A18 /* CustomFont */ = {
+			isa = PBXGroup;
+			children = (
+				B47F63A41F88DF23001D7A18 /* Proxima Nova Bold.otf */,
+				B47F63A31F88DDFF001D7A18 /* Proxima Nova ScOsf Bold.otf */,
+				B47F63A21F88DDEF001D7A18 /* Proxima Nova ScOsf Regular.otf */,
+				B47F63A11F88DDD7001D7A18 /* ProximaNova-Regular.otf */,
+				B47F63A01F88DA8A001D7A18 /* Proxima Nova Alt Regular.otf */,
+			);
+			name = CustomFont;
+			sourceTree = "<group>";
+		};
 		B4A2C0691F86697400C3D400 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +218,10 @@
 			children = (
 				3FC6CEBB1F6F744700DF2A12 /* ViewController.swift */,
 				3FC6CEE71F6FA17300DF2A12 /* HomeViewController.swift */,
+				B47BD4021F8A48010099061C /* OnboardingVC.swift */,
+				B47BD4041F8A615C0099061C /* loginMainVC.swift */,
+				B47BD4061F8A75FA0099061C /* signupwithEmailVC.swift */,
+				B47BD4081F8A836D0099061C /* ForgotpasswordVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -230,6 +262,8 @@
 			isa = PBXGroup;
 			children = (
 				B4BD9EFA1F6FD08F00C43182 /* Processors.swift */,
+				B47F63A51F88E2BC001D7A18 /* ViewExtender.swift */,
+				B47F63A71F88E7B6001D7A18 /* ButtonExtender.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -354,9 +388,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4A2C06B1F8669A600C3D400 /* Auth.storyboard in Resources */,
+				B47BD4011F8A26A30099061C /* GoogleService-Info.plist in Resources */,
 				3FC6CEC41F6F744700DF2A12 /* LaunchScreen.storyboard in Resources */,
 				3FC6CEC11F6F744700DF2A12 /* Assets.xcassets in Resources */,
-				60C71EBC1F87A52600A87792 /* proxima font in Resources */,
 				3FC6CEBF1F6F744700DF2A12 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -431,14 +465,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4BD9EF91F6FB3E700C43182 /* PostViewModel.swift in Sources */,
+				B47BD4031F8A48010099061C /* OnboardingVC.swift in Sources */,
 				3FC6CEBC1F6F744700DF2A12 /* ViewController.swift in Sources */,
 				B4BD9EF01F6FA57300C43182 /* PostList.swift in Sources */,
 				3FC6CEEA1F6FA25600DF2A12 /* feedTableViewCell.swift in Sources */,
 				3FC6CEBA1F6F744700DF2A12 /* AppDelegate.swift in Sources */,
 				B4BD9EF71F6FB14200C43182 /* Constants.swift in Sources */,
 				B4BD9EF51F6FAAA400C43182 /* DBProvider.swift in Sources */,
+				B47BD4051F8A615C0099061C /* loginMainVC.swift in Sources */,
+				B47BD4071F8A75FA0099061C /* signupwithEmailVC.swift in Sources */,
 				3FC6CEE81F6FA17300DF2A12 /* HomeViewController.swift in Sources */,
 				B4BD9EFB1F6FD08F00C43182 /* Processors.swift in Sources */,
+				B47BD4091F8A836D0099061C /* ForgotpasswordVC.swift in Sources */,
+				B47F63A81F88E7B6001D7A18 /* ButtonExtender.swift in Sources */,
+				B47F63A61F88E2BC001D7A18 /* ViewExtender.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -595,7 +635,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = XSJRRDKMW9;
 				INFOPLIST_FILE = Numnu/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.numnu.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -610,7 +650,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = XSJRRDKMW9;
 				INFOPLIST_FILE = Numnu/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.numnu.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
