@@ -17,6 +17,7 @@
 		3FC6CEDA1F6F744700DF2A12 /* NumnuUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6CED91F6F744700DF2A12 /* NumnuUITests.swift */; };
 		3FC6CEE81F6FA17300DF2A12 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6CEE71F6FA17300DF2A12 /* HomeViewController.swift */; };
 		3FC6CEEA1F6FA25600DF2A12 /* feedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6CEE91F6FA25600DF2A12 /* feedTableViewCell.swift */; };
+		601D46771F8D205E00832BDD /* signInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601D46761F8D205E00832BDD /* signInVC.swift */; };
 		B415308D1F8BB78C000FB369 /* ParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B415308C1F8BB78C000FB369 /* ParentViewController.swift */; };
 		B41530901F8BBC39000FB369 /* Tab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B415308F1F8BBC39000FB369 /* Tab.storyboard */; };
 		B41530921F8BBCB8000FB369 /* PostTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41530911F8BBCB8000FB369 /* PostTabController.swift */; };
@@ -71,6 +72,7 @@
 		3FC6CEDB1F6F744700DF2A12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FC6CEE71F6FA17300DF2A12 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		3FC6CEE91F6FA25600DF2A12 /* feedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = feedTableViewCell.swift; sourceTree = "<group>"; };
+		601D46761F8D205E00832BDD /* signInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signInVC.swift; sourceTree = "<group>"; };
 		973AA0559EB278E9E52BDD05 /* Pods_Numnu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Numnu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B415308C1F8BB78C000FB369 /* ParentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentViewController.swift; sourceTree = "<group>"; };
 		B415308F1F8BBC39000FB369 /* Tab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tab.storyboard; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 				B47BD4061F8A75FA0099061C /* signupwithEmailVC.swift */,
 				B47BD4081F8A836D0099061C /* ForgotpasswordVC.swift */,
 				B415308C1F8BB78C000FB369 /* ParentViewController.swift */,
+				601D46761F8D205E00832BDD /* signInVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -510,6 +513,7 @@
 				B47BD4091F8A836D0099061C /* ForgotpasswordVC.swift in Sources */,
 				B47F63A81F88E7B6001D7A18 /* ButtonExtender.swift in Sources */,
 				B415308D1F8BB78C000FB369 /* ParentViewController.swift in Sources */,
+				601D46771F8D205E00832BDD /* signInVC.swift in Sources */,
 				B47F63A61F88E2BC001D7A18 /* ViewExtender.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
