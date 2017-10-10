@@ -24,6 +24,7 @@
 		B41530961F8BBCF1000FB369 /* UserTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41530951F8BBCF1000FB369 /* UserTabController.swift */; };
 		B41530981F8BBD27000FB369 /* MenuTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41530971F8BBD27000FB369 /* MenuTabController.swift */; };
 		B464D78D1F8D0FEC002A1FDC /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B464D78C1F8D0FEC002A1FDC /* UIColor.swift */; };
+		B464D78F1F8D1F3E002A1FDC /* EventCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B464D78E1F8D1F3E002A1FDC /* EventCollectionCell.swift */; };
 		B47BD4011F8A26A30099061C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B47BD4001F8A26A30099061C /* GoogleService-Info.plist */; };
 		B47BD4031F8A48010099061C /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47BD4021F8A48010099061C /* OnboardingVC.swift */; };
 		B47BD4051F8A615C0099061C /* loginMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47BD4041F8A615C0099061C /* loginMainVC.swift */; };
@@ -80,6 +81,7 @@
 		B41530951F8BBCF1000FB369 /* UserTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTabController.swift; sourceTree = "<group>"; };
 		B41530971F8BBD27000FB369 /* MenuTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTabController.swift; sourceTree = "<group>"; };
 		B464D78C1F8D0FEC002A1FDC /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		B464D78E1F8D1F3E002A1FDC /* EventCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionCell.swift; sourceTree = "<group>"; };
 		B47BD4001F8A26A30099061C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B47BD4021F8A48010099061C /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
 		B47BD4041F8A615C0099061C /* loginMainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginMainVC.swift; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 			isa = PBXGroup;
 			children = (
 				3FC6CEE91F6FA25600DF2A12 /* feedTableViewCell.swift */,
+				B464D78E1F8D1F3E002A1FDC /* EventCollectionCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -504,6 +507,7 @@
 				3FC6CEEA1F6FA25600DF2A12 /* feedTableViewCell.swift in Sources */,
 				B41530941F8BBCD9000FB369 /* EventTabController.swift in Sources */,
 				3FC6CEBA1F6F744700DF2A12 /* AppDelegate.swift in Sources */,
+				B464D78F1F8D1F3E002A1FDC /* EventCollectionCell.swift in Sources */,
 				B4BD9EF71F6FB14200C43182 /* Constants.swift in Sources */,
 				B4BD9EF51F6FAAA400C43182 /* DBProvider.swift in Sources */,
 				B47BD4051F8A615C0099061C /* loginMainVC.swift in Sources */,
