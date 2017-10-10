@@ -17,6 +17,12 @@
 		3FC6CEDA1F6F744700DF2A12 /* NumnuUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6CED91F6F744700DF2A12 /* NumnuUITests.swift */; };
 		3FC6CEE81F6FA17300DF2A12 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6CEE71F6FA17300DF2A12 /* HomeViewController.swift */; };
 		3FC6CEEA1F6FA25600DF2A12 /* feedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6CEE91F6FA25600DF2A12 /* feedTableViewCell.swift */; };
+		B415308D1F8BB78C000FB369 /* ParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B415308C1F8BB78C000FB369 /* ParentViewController.swift */; };
+		B41530901F8BBC39000FB369 /* Tab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B415308F1F8BBC39000FB369 /* Tab.storyboard */; };
+		B41530921F8BBCB8000FB369 /* PostTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41530911F8BBCB8000FB369 /* PostTabController.swift */; };
+		B41530941F8BBCD9000FB369 /* EventTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41530931F8BBCD9000FB369 /* EventTabController.swift */; };
+		B41530961F8BBCF1000FB369 /* UserTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41530951F8BBCF1000FB369 /* UserTabController.swift */; };
+		B41530981F8BBD27000FB369 /* MenuTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41530971F8BBD27000FB369 /* MenuTabController.swift */; };
 		B47BD4011F8A26A30099061C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B47BD4001F8A26A30099061C /* GoogleService-Info.plist */; };
 		B47BD4031F8A48010099061C /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47BD4021F8A48010099061C /* OnboardingVC.swift */; };
 		B47BD4051F8A615C0099061C /* loginMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47BD4041F8A615C0099061C /* loginMainVC.swift */; };
@@ -66,6 +72,12 @@
 		3FC6CEE71F6FA17300DF2A12 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		3FC6CEE91F6FA25600DF2A12 /* feedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = feedTableViewCell.swift; sourceTree = "<group>"; };
 		973AA0559EB278E9E52BDD05 /* Pods_Numnu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Numnu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B415308C1F8BB78C000FB369 /* ParentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentViewController.swift; sourceTree = "<group>"; };
+		B415308F1F8BBC39000FB369 /* Tab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tab.storyboard; sourceTree = "<group>"; };
+		B41530911F8BBCB8000FB369 /* PostTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTabController.swift; sourceTree = "<group>"; };
+		B41530931F8BBCD9000FB369 /* EventTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTabController.swift; sourceTree = "<group>"; };
+		B41530951F8BBCF1000FB369 /* UserTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTabController.swift; sourceTree = "<group>"; };
+		B41530971F8BBD27000FB369 /* MenuTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTabController.swift; sourceTree = "<group>"; };
 		B47BD4001F8A26A30099061C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B47BD4021F8A48010099061C /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
 		B47BD4041F8A615C0099061C /* loginMainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginMainVC.swift; sourceTree = "<group>"; };
@@ -147,6 +159,7 @@
 				B4BD9EEC1F6FA54B00C43182 /* ViewModel */,
 				B4BD9EEB1F6FA54400C43182 /* Model */,
 				B4BD9EE91F6FA4AF00C43182 /* Controller */,
+				B415308E1F8BBC11000FB369 /* TabControllers */,
 				B4BD9EEA1F6FA4E500C43182 /* View */,
 				B4A2C0691F86697400C3D400 /* Storyboards */,
 				3FC6CEB91F6F744700DF2A12 /* AppDelegate.swift */,
@@ -191,6 +204,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B415308E1F8BBC11000FB369 /* TabControllers */ = {
+			isa = PBXGroup;
+			children = (
+				B41530911F8BBCB8000FB369 /* PostTabController.swift */,
+				B41530931F8BBCD9000FB369 /* EventTabController.swift */,
+				B41530951F8BBCF1000FB369 /* UserTabController.swift */,
+				B41530971F8BBD27000FB369 /* MenuTabController.swift */,
+			);
+			name = TabControllers;
+			sourceTree = "<group>";
+		};
 		B47F639F1F88D697001D7A18 /* CustomFont */ = {
 			isa = PBXGroup;
 			children = (
@@ -209,6 +233,7 @@
 				3FC6CEBD1F6F744700DF2A12 /* Main.storyboard */,
 				3FC6CEC21F6F744700DF2A12 /* LaunchScreen.storyboard */,
 				B4A2C06A1F8669A600C3D400 /* Auth.storyboard */,
+				B415308F1F8BBC39000FB369 /* Tab.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -222,6 +247,7 @@
 				B47BD4041F8A615C0099061C /* loginMainVC.swift */,
 				B47BD4061F8A75FA0099061C /* signupwithEmailVC.swift */,
 				B47BD4081F8A836D0099061C /* ForgotpasswordVC.swift */,
+				B415308C1F8BB78C000FB369 /* ParentViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -391,6 +417,7 @@
 				B47BD4011F8A26A30099061C /* GoogleService-Info.plist in Resources */,
 				3FC6CEC41F6F744700DF2A12 /* LaunchScreen.storyboard in Resources */,
 				3FC6CEC11F6F744700DF2A12 /* Assets.xcassets in Resources */,
+				B41530901F8BBC39000FB369 /* Tab.storyboard in Resources */,
 				3FC6CEBF1F6F744700DF2A12 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -464,20 +491,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B41530921F8BBCB8000FB369 /* PostTabController.swift in Sources */,
 				B4BD9EF91F6FB3E700C43182 /* PostViewModel.swift in Sources */,
+				B41530981F8BBD27000FB369 /* MenuTabController.swift in Sources */,
 				B47BD4031F8A48010099061C /* OnboardingVC.swift in Sources */,
 				3FC6CEBC1F6F744700DF2A12 /* ViewController.swift in Sources */,
 				B4BD9EF01F6FA57300C43182 /* PostList.swift in Sources */,
 				3FC6CEEA1F6FA25600DF2A12 /* feedTableViewCell.swift in Sources */,
+				B41530941F8BBCD9000FB369 /* EventTabController.swift in Sources */,
 				3FC6CEBA1F6F744700DF2A12 /* AppDelegate.swift in Sources */,
 				B4BD9EF71F6FB14200C43182 /* Constants.swift in Sources */,
 				B4BD9EF51F6FAAA400C43182 /* DBProvider.swift in Sources */,
 				B47BD4051F8A615C0099061C /* loginMainVC.swift in Sources */,
 				B47BD4071F8A75FA0099061C /* signupwithEmailVC.swift in Sources */,
+				B41530961F8BBCF1000FB369 /* UserTabController.swift in Sources */,
 				3FC6CEE81F6FA17300DF2A12 /* HomeViewController.swift in Sources */,
 				B4BD9EFB1F6FD08F00C43182 /* Processors.swift in Sources */,
 				B47BD4091F8A836D0099061C /* ForgotpasswordVC.swift in Sources */,
 				B47F63A81F88E7B6001D7A18 /* ButtonExtender.swift in Sources */,
+				B415308D1F8BB78C000FB369 /* ParentViewController.swift in Sources */,
 				B47F63A61F88E2BC001D7A18 /* ViewExtender.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

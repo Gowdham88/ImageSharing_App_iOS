@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ADD972DE1623704BC579F66B92042F88"
+               BlueprintIdentifier = "C9CDD9CA8176E1F6B70396C6B5C3FEE4"
                BuildableName = "Pods_Numnu.framework"
                BlueprintName = "Pods-Numnu"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -26,6 +26,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
@@ -36,6 +37,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = ""
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -45,7 +47,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "ADD972DE1623704BC579F66B92042F88"
+            BlueprintIdentifier = "C9CDD9CA8176E1F6B70396C6B5C3FEE4"
             BuildableName = "Pods_Numnu.framework"
             BlueprintName = "Pods-Numnu"
             ReferencedContainer = "container:Pods.xcodeproj">
