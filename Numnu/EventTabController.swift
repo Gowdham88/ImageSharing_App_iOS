@@ -11,10 +11,16 @@ import XLPagerTabStrip
 
 class EventTabController: UIViewController,IndicatorInfoProvider {
 
+    @IBOutlet weak var eventCollectionView: UICollectionView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        eventCollectionView.delegate  = self
+        eventCollectionView.dataSource = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,4 +45,35 @@ class EventTabController: UIViewController,IndicatorInfoProvider {
     }
     */
 
+}
+
+extension EventTabController : UICollectionViewDataSource,UICollectionViewDelegate {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        return 6
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "eventcollectioncell", for: indexPath) as! EventCollectionCell
+        
+        return cell
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        
+    }
+    
+    
+    
+    
+    
 }

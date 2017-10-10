@@ -8,8 +8,13 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="ProximaNova-Regular.otf">
+            <string>ProximaNova-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
-        <!--Parent View Controller-->
+        <!--Explore-->
         <scene sceneID="KSY-vs-z1l">
             <objects>
                 <viewController id="OQc-D9-1pk" customClass="ParentViewController" customModule="Numnu" customModuleProvider="target" sceneMemberID="viewController">
@@ -22,13 +27,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sfO-qW-Atc">
-                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                                <rect key="frame" x="0.0" y="170" width="320" height="349"/>
                             </scrollView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lyo-UJ-qpi" customClass="ButtonBarView" customModule="XLPagerTabStrip">
-                                <rect key="frame" x="0.0" y="64" width="320" height="64"/>
+                                <rect key="frame" x="0.0" y="170" width="320" height="64"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="8OO-5C-2tQ"/>
+                                    <constraint firstAttribute="height" constant="64" id="rWR-xN-anh"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="sH0-Il-POY">
                                     <size key="itemSize" width="50" height="50"/>
@@ -38,19 +43,67 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ilc-xn-VB5">
+                                <rect key="frame" x="0.0" y="64" width="320" height="106"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search by location" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="GjQ-bI-QVw">
+                                        <rect key="frame" x="82" y="61" width="220" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search by item" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="pKU-lp-6b3">
+                                        <rect key="frame" x="82" y="15" width="220" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fgK-KH-pgZ" customClass="ButtonExtender" customModule="Numnu" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="61" width="45" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.14999999999999999" colorSpace="calibratedRGB"/>
+                                        <state key="normal" image="Shape Copy 192"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J5F-h2-eUl" customClass="ButtonExtender" customModule="Numnu" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="15" width="45" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.14999999999999999" colorSpace="calibratedRGB"/>
+                                        <state key="normal" image="Search Icon Copy"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.91764705882352937" green="0.12941176470588234" blue="0.14509803921568626" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="106" id="fha-dy-mjX"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="sfO-qW-Atc" firstAttribute="top" secondItem="LjE-up-1oV" secondAttribute="bottom" id="3ip-mA-n1R"/>
-                            <constraint firstItem="S5t-uM-QBn" firstAttribute="top" secondItem="sfO-qW-Atc" secondAttribute="bottom" id="8PK-sq-914"/>
-                            <constraint firstItem="lyo-UJ-qpi" firstAttribute="leading" secondItem="LzB-eL-Xhu" secondAttribute="leading" id="cE9-PZ-Rzd"/>
-                            <constraint firstItem="lyo-UJ-qpi" firstAttribute="top" secondItem="LjE-up-1oV" secondAttribute="bottom" id="hXB-eS-2yq"/>
-                            <constraint firstItem="sfO-qW-Atc" firstAttribute="leading" secondItem="LzB-eL-Xhu" secondAttribute="leading" id="jbj-Hm-d7U"/>
-                            <constraint firstAttribute="trailing" secondItem="lyo-UJ-qpi" secondAttribute="trailing" id="kGI-5z-FAr"/>
-                            <constraint firstAttribute="trailing" secondItem="sfO-qW-Atc" secondAttribute="trailing" id="uJ8-vJ-c5M"/>
+                            <constraint firstAttribute="trailing" secondItem="lyo-UJ-qpi" secondAttribute="trailing" id="22b-Lh-TG4"/>
+                            <constraint firstItem="lyo-UJ-qpi" firstAttribute="leading" secondItem="LzB-eL-Xhu" secondAttribute="leading" id="98e-Sw-mCg"/>
+                            <constraint firstAttribute="trailing" secondItem="sfO-qW-Atc" secondAttribute="trailing" id="9QT-h2-nSg"/>
+                            <constraint firstAttribute="trailing" secondItem="ilc-xn-VB5" secondAttribute="trailing" id="R4D-zo-K9U"/>
+                            <constraint firstItem="ilc-xn-VB5" firstAttribute="leading" secondItem="LzB-eL-Xhu" secondAttribute="leading" id="VZn-zs-dO2"/>
+                            <constraint firstItem="ilc-xn-VB5" firstAttribute="top" secondItem="LjE-up-1oV" secondAttribute="bottom" id="d07-ho-EwC"/>
+                            <constraint firstItem="S5t-uM-QBn" firstAttribute="top" secondItem="sfO-qW-Atc" secondAttribute="bottom" id="dhI-ne-Dxh"/>
+                            <constraint firstItem="lyo-UJ-qpi" firstAttribute="top" secondItem="ilc-xn-VB5" secondAttribute="bottom" id="fxA-T3-9BY"/>
+                            <constraint firstItem="sfO-qW-Atc" firstAttribute="leading" secondItem="LzB-eL-Xhu" secondAttribute="leading" id="gNm-ZK-clm"/>
+                            <constraint firstItem="sfO-qW-Atc" firstAttribute="top" secondItem="ilc-xn-VB5" secondAttribute="bottom" id="nCr-66-OhF"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="VQ0-pp-ENm"/>
+                    <navigationItem key="navigationItem" title="Explore" id="VQ0-pp-ENm"/>
                     <connections>
                         <outlet property="buttonBarView" destination="lyo-UJ-qpi" id="XpE-bC-pid"/>
                         <outlet property="containerView" destination="sfO-qW-Atc" id="W89-rm-k44"/>
@@ -275,7 +328,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="13C-je-PkV">
             <objects>
-                <tabBarController id="l2s-s6-Ny1" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabcontroller" id="l2s-s6-Ny1" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="EfT-X5-qhw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -330,6 +383,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Search Icon Copy" width="15" height="15"/>
+        <image name="Shape Copy 192" width="11" height="16"/>
         <image name="cloche" width="13" height="9"/>
         <image name="comment" width="20" height="16"/>
         <image name="cottage" width="14" height="13"/>
