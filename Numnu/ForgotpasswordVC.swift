@@ -7,10 +7,14 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
+
 
 class ForgotpasswordVC: UIViewController {
 
     @IBOutlet weak var forgotpassEmail: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -19,11 +23,29 @@ class ForgotpasswordVC: UIViewController {
         // Do any additional setup after loading the view.
     }
 
+    @IBAction func resetPassword(_ sender: Any) {
+        
+        var email = forgotpassEmail.text
+        
+        Auth.auth().sendPasswordReset(withEmail: email!) { error in
+            if let error = error {
+                self.showAlertMessagepop(title: "Password reset failed \(error)")
+                
+            } else {
+                 self.showAlertMessagepop(title: "Password reset email sent")
+                
+            }
+        }
+        
+        
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+
 
     /*
     // MARK: - Navigation
@@ -36,3 +58,4 @@ class ForgotpasswordVC: UIViewController {
     */
 
 }
+

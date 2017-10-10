@@ -8,6 +8,9 @@
 
 import UIKit
 import Firebase
+import GSMessages
+import UserNotifications
+import SystemConfiguration
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -56,3 +59,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+ extension UIViewController {
+    
+    func showAlertMessage() {
+        
+        self.showMessage("Oops! It seems you are not connected to internet.", type: .warning,options: [
+            .animation(.slide),
+            .animationDuration(0.3),
+            .autoHide(true),
+            .autoHideDelay(3.0),
+            .height(44.0),
+            .hideOnTap(true),
+            .position(.bottom),
+            .textAlignment(.center),
+            .textColor(UIColor.white),
+            .textNumberOfLines(1),
+            .textPadding(30.0)
+            ])
+        
+    }
+    
+    func showAlertMessagepop(title : String) {
+        
+        self.showMessage(title, type: .warning,options: [
+            .animation(.slide),
+            .animationDuration(0.3),
+            .autoHide(true),
+            .autoHideDelay(3.0),
+            .height(44.0),
+            .hideOnTap(true),
+            .position(.bottom),
+            .textAlignment(.center),
+            .textColor(UIColor.white),
+            .textNumberOfLines(1),
+            .textPadding(30.0)
+            ])
+        
+    }
+ }

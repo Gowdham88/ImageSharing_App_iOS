@@ -18,12 +18,15 @@ class loginMainVC: UIViewController {
 
     @IBAction func createAccount(_ sender: Any) {
         
-//        let vc = signupwithEmailVC()
-//        self.present(vc, animated: true, completion: nil)
-        
         self.performSegue(withIdentifier: "signupwithEmail", sender: self)
         
     }
+    
+    @IBAction func signInPressed(_ sender: Any) {
+        
+        self.performSegue(withIdentifier: "signIn", sender: self)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
