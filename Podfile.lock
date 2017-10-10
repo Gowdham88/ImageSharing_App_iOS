@@ -48,6 +48,7 @@ PODS:
   - nanopb/encode (0.3.8)
   - Nuke (4.1.2)
   - Toucan (0.6.0)
+  - XLPagerTabStrip (8.0.0)
 
 DEPENDENCIES:
   - Firebase
@@ -57,6 +58,7 @@ DEPENDENCIES:
   - GSMessages
   - Nuke (~> 4.0)
   - Toucan
+  - XLPagerTabStrip (~> 8.0)
 
 SPEC CHECKSUMS:
   Firebase: ebebf41db7f10e0c7668b6eaaa857fbe599aa478
@@ -72,7 +74,8 @@ SPEC CHECKSUMS:
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Nuke: 7cfd2acdf90c36f66e6ea40795bac0d851a9afe0
   Toucan: 47485bbc9cb4541ef6318d6886103e6eaf16e919
+  XLPagerTabStrip: d1ab378af0923320ec0b5eab11d7b2f803d31261
 
-PODFILE CHECKSUM: 6cff14a865f8a7206470d83086b5fd782cc9caa0
+PODFILE CHECKSUM: df7767828f21ededcbfbf6d13feeb8d06c818ea4
 
 COCOAPODS: 1.2.1

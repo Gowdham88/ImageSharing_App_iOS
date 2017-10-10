@@ -12,5 +12,6 @@ target 'Numnu' do
   pod 'Nuke', '~> 4.0'
   pod 'Toucan'
   pod 'GSMessages'
+  pod 'XLPagerTabStrip', '~> 8.0'
 
 end
