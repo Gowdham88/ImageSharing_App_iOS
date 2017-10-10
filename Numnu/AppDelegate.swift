@@ -24,9 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
-        let storyboard = UIStoryboard(name: "Auth", bundle: nil)
+        let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
         
-        let initialViewController = storyboard.instantiateViewController(withIdentifier: "LoginSignupVC")
+        let initialViewController = storyboard.instantiateViewController(withIdentifier: "tabcontroller")
         
         self.window?.rootViewController = initialViewController
         self.window?.makeKeyAndVisible()

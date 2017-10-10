@@ -26,10 +26,13 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
         settings.style.buttonBarItemsShouldFillAvailiableWidth = true
         settings.style.buttonBarLeftContentInset = 0
         settings.style.buttonBarRightContentInset = 0
+        buttonBarView.selectedBar.backgroundColor = UIColor.appThemeColor()
+       
         changeCurrentIndexProgressive = { [weak self] (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
             guard changeCurrentIndex == true else { return }
-            oldCell?.label.textColor = .black
-            newCell?.label.textColor = self?.purpleInspireColor
+            oldCell?.label.textColor = UIColor.textlightDark()
+            newCell?.label.textColor = UIColor.appBlackColor()
+            
         }
    
         
@@ -51,5 +54,18 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
         return [child_1, child_2,child_3,child_4]
     }
   
+    func setnavBar()  {
+        
+        let searchController = UISearchController(searchResultsController: nil)
+        if #available(iOS 11.0, *) {
+           navigationController?.navigationBar.prefersLargeTitles = true
+            navigationItem.searchController = searchController
+            navigationItem.hidesSearchBarWhenScrolling = true
+        } else {
+            // Fallback on earlier versions
+        }
+       
+        
+    }
 
 }

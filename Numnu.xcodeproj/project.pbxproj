@@ -23,6 +23,7 @@
 		B41530941F8BBCD9000FB369 /* EventTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41530931F8BBCD9000FB369 /* EventTabController.swift */; };
 		B41530961F8BBCF1000FB369 /* UserTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41530951F8BBCF1000FB369 /* UserTabController.swift */; };
 		B41530981F8BBD27000FB369 /* MenuTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41530971F8BBD27000FB369 /* MenuTabController.swift */; };
+		B464D78D1F8D0FEC002A1FDC /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B464D78C1F8D0FEC002A1FDC /* UIColor.swift */; };
 		B47BD4011F8A26A30099061C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B47BD4001F8A26A30099061C /* GoogleService-Info.plist */; };
 		B47BD4031F8A48010099061C /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47BD4021F8A48010099061C /* OnboardingVC.swift */; };
 		B47BD4051F8A615C0099061C /* loginMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47BD4041F8A615C0099061C /* loginMainVC.swift */; };
@@ -78,6 +79,7 @@
 		B41530931F8BBCD9000FB369 /* EventTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTabController.swift; sourceTree = "<group>"; };
 		B41530951F8BBCF1000FB369 /* UserTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTabController.swift; sourceTree = "<group>"; };
 		B41530971F8BBD27000FB369 /* MenuTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTabController.swift; sourceTree = "<group>"; };
+		B464D78C1F8D0FEC002A1FDC /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		B47BD4001F8A26A30099061C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B47BD4021F8A48010099061C /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
 		B47BD4041F8A615C0099061C /* loginMainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginMainVC.swift; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 				B4BD9EFA1F6FD08F00C43182 /* Processors.swift */,
 				B47F63A51F88E2BC001D7A18 /* ViewExtender.swift */,
 				B47F63A71F88E7B6001D7A18 /* ButtonExtender.swift */,
+				B464D78C1F8D0FEC002A1FDC /* UIColor.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -492,6 +495,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B41530921F8BBCB8000FB369 /* PostTabController.swift in Sources */,
+				B464D78D1F8D0FEC002A1FDC /* UIColor.swift in Sources */,
 				B4BD9EF91F6FB3E700C43182 /* PostViewModel.swift in Sources */,
 				B41530981F8BBD27000FB369 /* MenuTabController.swift in Sources */,
 				B47BD4031F8A48010099061C /* OnboardingVC.swift in Sources */,
