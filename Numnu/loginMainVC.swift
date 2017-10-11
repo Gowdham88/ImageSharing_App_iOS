@@ -7,13 +7,20 @@
 //
 
 import UIKit
-
-class loginMainVC: UIViewController {
+import WebKit
+class loginMainVC: UIViewController, UIWebViewDelegate {
+    
+    var webView: UIWebView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+
+        
+        
+        
         // Do any additional setup after loading the view.
+        
     }
 
     @IBAction func createAccount(_ sender: Any) {
