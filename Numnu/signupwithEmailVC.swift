@@ -23,7 +23,6 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
   
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
-    @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet var labelcredentials: UILabel!
 
     override func viewDidLoad() {
@@ -82,8 +81,6 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                     
                 }
                
-               
-                
                 self.idprim.removeAll()
                 self.handler = self.dbref.queryOrdered(byChild: "userid").queryEqual(toValue: user?.uid).observe(.value, with: {
                     (snapshot) in
@@ -93,7 +90,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                         self.idprim.removeAll()
                         HUD.hide()
                         
-                        if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
+                        if snapshot.children.allObjects is [DataSnapshot] {
                             
                             print("true rooms exist")
                             
@@ -126,12 +123,9 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                         
                         print("false room doesn't exist")
                        
-                        let nme = ""
-                        let startdate = ""
-                        let enddate = ""
-                        let uniquecode = ""
+                         let useritem : [String :AnyObject] = ["useremail" : email as AnyObject]
                         
-                        let useritem : [String :AnyObject] = ["username" : nme as AnyObject , "useremail" : email as AnyObject , "userid" : (user?.uid)! as AnyObject, "userstartdate" : startdate as AnyObject , "userenddate" : enddate as AnyObject , "userpaymentstatus" : "pending" as AnyObject,"useraccesscount" : "0" as AnyObject,"uniquecode" : uniquecode as AnyObject,"usertransactionid" : "" as AnyObject]
+                       // let useritem : [String :AnyObject] = ["username" : nme as AnyObject , "useremail" : email as AnyObject , "userid" : (user?.uid)! as AnyObject, "userstartdate" : startdate as AnyObject , "userenddate" : enddate as AnyObject , "userpaymentstatus" : "pending" as AnyObject,"useraccesscount" : "0" as AnyObject,"uniquecode" : uniquecode as AnyObject,"usertransactionid" : "" as AnyObject]
                         
                         
                         self.dbref.childByAutoId().setValue(useritem, withCompletionBlock:{ (error,ref) in
@@ -164,9 +158,12 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
             print("Please fill in all the fields")
         }
         
+    }
+    
+    @IBAction func dismissPressed(_ sender: Any) {
         
-        
-        
+        dismiss(animated: true, completion: nil)
+
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -184,9 +181,6 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         
     }
     
-    
-  
-
 }
 
 extension UITextField {
