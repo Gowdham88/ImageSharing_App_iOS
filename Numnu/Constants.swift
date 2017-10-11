@@ -14,11 +14,16 @@ class Constants {
     static let POST = "PostList";
     
     
-    // Storyboards
+    // Storyboards name
     
     static let Tab   = "Tab"
     static let Auth  = "Auth"
     static let Main  = "Main"
+    
+    // Storyboards id
+    
+    static let TabStoryId   = "tabcontrollerid"
+   
     
     // Tab name
     

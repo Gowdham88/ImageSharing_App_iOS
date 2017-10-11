@@ -25,19 +25,22 @@ class ForgotpasswordVC: UIViewController {
 
     @IBAction func resetPassword(_ sender: Any) {
         
-        var email = forgotpassEmail.text
+        let email = forgotpassEmail.text
         
         Auth.auth().sendPasswordReset(withEmail: email!) { error in
+            
             if let error = error {
+                
                 self.showAlertMessagepop(title: "Password reset failed \(error)")
                 
             } else {
+                
                  self.showAlertMessagepop(title: "Password reset email sent")
+                
+                self.dismiss(animated: true, completion: nil)
                 
             }
         }
-        
-        
         
     }
     override func didReceiveMemoryWarning() {
@@ -46,7 +49,11 @@ class ForgotpasswordVC: UIViewController {
     }
     
 
-
+    @IBAction func ButtonClose(_ sender: UIButton) {
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
     /*
     // MARK: - Navigation
 
