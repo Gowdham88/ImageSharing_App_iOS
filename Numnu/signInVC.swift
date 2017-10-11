@@ -7,9 +7,20 @@
 //
 
 import UIKit
+import FirebaseAuth
+import Firebase
+import PKHUD
 
 class signInVC: UIViewController {
 
+    var idprim = [String]()
+    var window: UIWindow?
+    var credential: AuthCredential?
+    var userprofilename : String = ""
+    var userprofileimage : String = ""
+    var handler : DatabaseHandle!
+    let dbref   = Database.database().reference().child("UserList")
+    
     @IBOutlet weak var emailAddressTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
     
@@ -37,6 +48,116 @@ class signInVC: UIViewController {
     
     @IBAction func signinPressed(_ sender: Any) {
         
+        login()
+        
+    }
+    var iconClick = Bool()
+    
+    func login() {
+        
+        if let email = emailAddressTF.text , email != "", let pwd = passwordTF.text , pwd != "" {
+            
+            Auth.auth().signIn(withEmail: email, password: pwd, completion: { (user, error) in
+                
+                HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
+                
+                if user == nil {
+                    
+                    self.showAlertMessagepop(title: "Oops! Invalid login.")
+                    
+                    HUD.hide()
+                    
+                    return
+                    
+                }
+                
+//                let userprofileimage = UserDefaults.standard
+//                userprofileimage.set(self.userprofileimage, forKey: "userprofileimage")
+                
+                
+               
+                
+                self.idprim.removeAll()
+                
+                self.handler = self.dbref.queryOrdered(byChild: "userid").queryEqual(toValue: user?.uid).observe(.value, with: {
+                    (snapshot) in
+                    
+                    if snapshot.exists() {
+                        
+                        self.idprim.removeAll()
+                        
+                        if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
+                            
+                            print("true rooms exist")
+                            
+                            let useritem = UserList()
+                            
+                            for snap in snapshots {
+                                
+                                autoreleasepool {
+                                    
+                                    if let postDict = snap.value as? Dictionary<String, AnyObject> {
+                                        let key      = snap.key
+                                        
+                                        useritem.setValuesForKeys(postDict)
+                                        self.idprim.append(key)
+                                        
+                                        
+                                    }
+                                    
+                                }
+                            }
+                            
+                          
+                            
+                            self.dbref.removeObserver(withHandle: self.handler)
+                            
+                            DispatchQueue.main.async {
+                                
+                                HUD.hide()
+                                self.revealviewLogin()
+                                
+                                self.emailAddressTF.text = ""
+                                self.passwordTF.text  = ""
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                })
+                
+                print("Login FIRAuth Sign in called")
+            })
+            
+        } else {
+            
+            HUD.hide()
+            self.showAlertMessagepop(title: "Hey! Enter email and password.")
+            
+            
+        }
+    }
+    func revealviewLogin() {
+        
+        self.window                     = UIWindow(frame: UIScreen.main.bounds)
+        let storyboard                  = UIStoryboard(name: Constants.Main, bundle: nil)
+        let initialViewController       = storyboard.instantiateViewController(withIdentifier: Constants.TabStoryId)
+        self.window?.rootViewController = initialViewController
+        self.window?.makeKeyAndVisible()
+        
+    }
+    
+    @IBAction func showPassword(_ sender: Any) {
+        
+        if(iconClick == true) {
+            passwordTF.isSecureTextEntry = false
+            iconClick = false
+        } else {
+            passwordTF.isSecureTextEntry = true
+            iconClick = true
+        }
         
     }
     
