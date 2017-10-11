@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+var closed = String()
 class signupwithEmailVC: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var emailTextfield: UITextField!
@@ -17,16 +17,24 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        emailTextfield.useUnderline()
-//        passwordTextfield.useUnderline()
+        emailTextfield.useUnderline()
+        passwordTextfield.useUnderline()
         
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func dismissPressed(_ sender: Any) {
+        
+        dismiss(animated: true, completion: nil)
+        
+    }
+
     
     @IBAction func signInPressed(_ sender: Any) {
         
-        self.performSegue(withIdentifier: "signIn", sender: self)
+        closed = "signIn"
+        
+        dismiss(animated: true, completion: nil)
         
     }
     
@@ -43,13 +51,80 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         
     }
     
-    @IBAction func forgotPassword(_ sender: Any) {
-        
-    }
-    
     @IBAction func signupPressed(_ sender: Any) {
         
-        
+        FIRAuth.auth()?.createUser(withEmail: email, password: pwd) { (user: FIRUser?, error) in
+            
+            print("user right after creating\(user)")
+            
+            if user == nil {
+                
+                self.showAlertMessagepop(title: "Oops! Sign up failed.")
+                
+                HUD.hide()
+                return
+                
+            }
+         
+            self.idprim.removeAll()
+            self.handler = self.dbref.queryOrdered(byChild: "userid").queryEqual(toValue: user?.uid).observe(.value, with: {
+                (snapshot) in
+                
+                if snapshot.exists() {
+                    
+                    self.idprim.removeAll()
+                    
+                    if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                        
+                        print("true rooms exist")
+                        
+                        let useritem = UserList()
+                        
+                        for snap in snapshots {
+                            
+                            autoreleasepool {
+                                
+                                if let postDict = snap.value as? Dictionary<String, AnyObject> {
+                                    let key      = snap.key
+                                    
+                                    useritem.setValuesForKeys(postDict)
+                                    self.idprim.append(key)
+                                    
+                                    
+                                }
+                                
+                            }
+                        }
+                        
+                        self.dbref.removeObserver(withHandle: self.handler)
+                        HUD.hide()
+                        self.revealviewLogin()
+                        
+                    }
+                    
+                } else {
+                    
+                    print("false room doesn't exist")
+                    print("nme: \(nme)")
+                    print("useremail: \(email)")
+                    print("user: \(user)")
+                    
+                    let useritem : [String :AnyObject] = ["username" : "\(nme) \(lastnme)" as AnyObject , "useremail" : email as AnyObject , "userid" : (user?.uid)! as AnyObject, "userstartdate" : startdate as AnyObject , "userenddate" : enddate as AnyObject , "userpaymentstatus" : "pending" as AnyObject,"useraccesscount" : "0" as AnyObject,"uniquecode" : uniquecode as AnyObject,"usertransactionid" : "" as AnyObject]
+                    
+                    
+                    self.dbref.childByAutoId().setValue(useritem, withCompletionBlock:{ (error,ref) in
+                        
+                        
+                        
+                        
+                    })
+                    
+                }
+                
+                
+            })
+            print(" App Delegate SignIn with credential called")
+        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
