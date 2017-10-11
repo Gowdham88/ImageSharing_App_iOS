@@ -13,6 +13,7 @@ class EventTabController: UIViewController,IndicatorInfoProvider {
 
     @IBOutlet weak var eventCollectionView: UICollectionView!
     
+    @IBOutlet weak var eventTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,8 @@ class EventTabController: UIViewController,IndicatorInfoProvider {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
     
     // Tab intialliaze
     
@@ -75,5 +78,28 @@ extension EventTabController : UICollectionViewDataSource,UICollectionViewDelega
     
     
     
+    
+}
+
+
+extension EventTabController : UITableViewDataSource,UITableViewDelegate {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        
+        return 1
+    }
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "eventtablecell", for: indexPath) as! EventTableViewCell
+        
+        return cell
+    }
     
 }
