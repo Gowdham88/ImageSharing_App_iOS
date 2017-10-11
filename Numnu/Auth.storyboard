@@ -220,7 +220,7 @@
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="dismissPressed:" destination="URX-2s-g1Q" eventType="touchUpInside" id="ada-vh-jMG"/>
+                                    <action selector="dismissPressed:" destination="URX-2s-g1Q" eventType="touchUpInside" id="Cqi-C1-zB6"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -229,7 +229,6 @@
                     </view>
                     <connections>
                         <outlet property="emailTextfield" destination="h6X-V3-3ha" id="WR6-X0-eV7"/>
-                        <outlet property="infoLabel" destination="fOp-Lf-ACx" id="wEX-eT-zJO"/>
                         <outlet property="labelcredentials" destination="fOp-Lf-ACx" id="AuU-1l-fuV"/>
                         <outlet property="passwordTextfield" destination="gt3-3P-gNM" id="xAZ-1i-2Xx"/>
                     </connections>
