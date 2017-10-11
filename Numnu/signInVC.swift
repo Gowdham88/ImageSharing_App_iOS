@@ -41,9 +41,7 @@ class signInVC: UIViewController {
     }
     
     @IBAction func signupPressed(_ sender: Any) {
-        
-        closed = "signUp"
-
+     
         dismiss(animated: true, completion: nil)
 
     }
@@ -53,7 +51,8 @@ class signInVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    
+    
     /*
     // MARK: - Navigation
 

@@ -41,23 +41,7 @@ class loginMainVC: UIViewController, UIWebViewDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         
-        if closed == "signUp" {
-            
-            closed = String()
-            
-            self.performSegue(withIdentifier: "signupwithEmail", sender: self)
-            
-        } else if closed == "signIn" {
-            
-            closed = String()
-
-            self.performSegue(withIdentifier: "signIn", sender: self)
-            
-        } else {
-            
-            print("Nothing")
-            
-        }
+        
     }
 
     /*

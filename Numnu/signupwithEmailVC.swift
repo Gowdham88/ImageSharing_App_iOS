@@ -18,10 +18,9 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     var credential: AuthCredential?
     var userprofilename : String = ""
     var userprofileimage : String = ""
-    var handler:DatabaseHandle!
-    let dbref = Database.database().reference().child("UserList")
-
-    
+    var handler : DatabaseHandle!
+    let dbref   = Database.database().reference().child("UserList")
+  
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
     @IBOutlet weak var infoLabel: UILabel!
@@ -35,8 +34,6 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         
         // Do any additional setup after loading the view.
     }
-    
-    
     
     
     
@@ -68,8 +65,6 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
             
             Auth.auth().createUser(withEmail: email, password: pwd) { (user: User?, error) in
                 
-                print("user right after creating\(user)")
-                
                 if user == nil {
                     
                     self.labelcredentials.alpha = 1
@@ -87,8 +82,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                     
                 }
                
-                let userprofileimage = UserDefaults.standard
-//                userprofileimage.set(self.userprofileimage, forKey: "userprofileimage")
+               
                 
                 self.idprim.removeAll()
                 self.handler = self.dbref.queryOrdered(byChild: "userid").queryEqual(toValue: user?.uid).observe(.value, with: {
@@ -97,32 +91,33 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                     if snapshot.exists() {
                         
                         self.idprim.removeAll()
+                        HUD.hide()
                         
                         if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
                             
                             print("true rooms exist")
                             
-                            let useritem = UserList()
-                            
-                            for snap in snapshots {
-                                
-                                autoreleasepool {
-                                    
-                                    if let postDict = snap.value as? Dictionary<String, AnyObject> {
-                                        let key      = snap.key
-                                        
-                                        useritem.setValuesForKeys(postDict)
-                                        self.idprim.append(key)
-                                        
-                                        
-                                    }
-                                    
-                                }
-                            }
-                         
-                            
-                            self.dbref.removeObserver(withHandle: self.handler)
-                            
+//                            let useritem = UserList()
+//
+//                            for snap in snapshots {
+//
+//                                autoreleasepool {
+//
+//                                    if let postDict = snap.value as? Dictionary<String, AnyObject> {
+//                                        let key      = snap.key
+//
+//                                        useritem.setValuesForKeys(postDict)
+//                                        self.idprim.append(key)
+//
+//
+//                                    }
+//
+//                                }
+//                            }
+//
+//
+//                            self.dbref.removeObserver(withHandle: self.handler)
+//
                             self.revealviewLogin()
                             
                         }
@@ -131,17 +126,17 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                         
                         print("false room doesn't exist")
                        
-                        var nme = ""
-                        var startdate = ""
-                        var enddate = ""
-                        var uniquecode = ""
+                        let nme = ""
+                        let startdate = ""
+                        let enddate = ""
+                        let uniquecode = ""
                         
                         let useritem : [String :AnyObject] = ["username" : nme as AnyObject , "useremail" : email as AnyObject , "userid" : (user?.uid)! as AnyObject, "userstartdate" : startdate as AnyObject , "userenddate" : enddate as AnyObject , "userpaymentstatus" : "pending" as AnyObject,"useraccesscount" : "0" as AnyObject,"uniquecode" : uniquecode as AnyObject,"usertransactionid" : "" as AnyObject]
                         
                         
                         self.dbref.childByAutoId().setValue(useritem, withCompletionBlock:{ (error,ref) in
                             
-                            
+                            HUD.hide()
                             
                             
                         })
@@ -179,15 +174,18 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func revealviewLogin() {
+        
+        self.window                     = UIWindow(frame: UIScreen.main.bounds)
+        let storyboard                  = UIStoryboard(name: Constants.Main, bundle: nil)
+        let initialViewController       = storyboard.instantiateViewController(withIdentifier: Constants.TabStoryId)
+        self.window?.rootViewController = initialViewController
+        self.window?.makeKeyAndVisible()
+        
     }
-    */
+    
+    
+  
 
 }
 

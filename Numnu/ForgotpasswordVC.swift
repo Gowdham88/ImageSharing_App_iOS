@@ -49,7 +49,11 @@ class ForgotpasswordVC: UIViewController {
     }
     
 
-
+    @IBAction func ButtonClose(_ sender: UIButton) {
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
     /*
     // MARK: - Navigation
 
