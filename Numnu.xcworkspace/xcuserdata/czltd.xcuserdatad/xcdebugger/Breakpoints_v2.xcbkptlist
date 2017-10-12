@@ -10,13 +10,45 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Numnu/signupwithEmailVC.swift"
-            timestampString = "529433946.27065"
+            timestampString = "529516982.517392"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "170"
-            endingLineNumber = "170"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
             landmarkName = "Login()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Numnu.signupwithEmailVC.Login() -&gt; ()"
+                  moduleName = "Numnu"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/czltd/Documents/Development/Numnu_client/Numnu/signupwithEmailVC.swift"
+                  timestampString = "529516982.607067"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "178"
+                  endingLineNumber = "178"
+                  offsetFromSymbolStart = "4475">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__ObjC.User&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Numnu.signupwithEmailVC.Login() -&gt; ()"
+                  moduleName = "Numnu"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/czltd/Documents/Development/Numnu_client/Numnu/signupwithEmailVC.swift"
+                  timestampString = "529516982.609366"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "178"
+                  endingLineNumber = "178"
+                  offsetFromSymbolStart = "4453">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -26,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Numnu/signInVC.swift"
-            timestampString = "529478529.255258"
+            timestampString = "529516982.517471"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "login()"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Numnu/signInVC.swift"
-            timestampString = "529478534.591045"
+            timestampString = "529516982.517526"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
             landmarkName = "login()"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Numnu/signInVC.swift"
-            timestampString = "529478538.062931"
+            timestampString = "529516982.517571"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
             landmarkName = "login()"
             landmarkType = "7">
          </BreakpointContent>

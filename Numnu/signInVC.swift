@@ -11,6 +11,8 @@ import FirebaseAuth
 import Firebase
 import PKHUD
 
+var closed = String()
+
 class signInVC: UIViewController, UITextFieldDelegate {
 
     var idprim = [String]()
@@ -196,6 +198,8 @@ class signInVC: UIViewController, UITextFieldDelegate {
     
     @IBAction func signupPressed(_ sender: Any) {
      
+        closed = "signUp"
+        
         dismiss(animated: true, completion: nil)
 
     }

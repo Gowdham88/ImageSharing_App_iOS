@@ -50,6 +50,14 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         
     }
     
+    @IBAction func signinPressed(_ sender: Any) {
+        
+        closed = "signIn"
+        dismiss(animated: true, completion: nil)
+
+        
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         self.view.endEditing(true)
