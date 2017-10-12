@@ -34,7 +34,19 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view.
     }
     
+    var iconClick = Bool()
     
+    @IBAction func passwordHideButton(_ sender: Any) {
+        
+        if(iconClick == true) {
+            passwordTextfield.isSecureTextEntry = false
+            iconClick = false
+        } else {
+            passwordTextfield.isSecureTextEntry = true
+            iconClick = true
+        }
+        
+    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
@@ -54,11 +66,22 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         Login()
     }
     
+    func isPasswordValid(_ password : String) -> Bool{
+        let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{8,}")
+        return passwordTest.evaluate(with: password)
+    }
+    
     func Login() {
         
         //Make sure there is an email and a password
         if let email = emailTextfield.text , email != "", let pwd = passwordTextfield.text , pwd != "" { //, let nme = firstnametextfield.text , nme != "" {
             
+            let passwordvalid = isPasswordValid(pwd)
+            
+            if passwordvalid ==  true {
+                
+                labelcredentials.alpha = 0
+                
             HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
             self.labelcredentials.alpha = 0
             
@@ -132,14 +155,20 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                             
                             HUD.hide()
                             
+                            self.revealviewLogin()
                             
                         })
                         
                     }
                     
-                    
                 })
                 print(" App Delegate SignIn with credential called")
+                }
+                
+            } else {
+                
+                labelcredentials.alpha = 1
+                
             }
             
         } else {
