@@ -61,6 +61,10 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        labelcredentials.isHidden = true
+    }
+    
     @IBAction func signupPressed(_ sender: Any) {
         
         Login()
@@ -80,16 +84,17 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
             
             if passwordvalid ==  true {
                 
-                labelcredentials.alpha = 0
+            labelcredentials.isHidden = true
                 
             HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
-            self.labelcredentials.alpha = 0
+            
             
             Auth.auth().createUser(withEmail: email, password: pwd) { (user: User?, error) in
                 
                 if user == nil {
                     
-                    self.labelcredentials.alpha = 1
+                self.labelcredentials.isHidden = false
+                    
                     HUD.hide()
                     
                     let animation = CABasicAnimation(keyPath: "position")

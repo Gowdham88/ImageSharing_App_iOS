@@ -26,7 +26,6 @@ class ForgotpasswordVC: UIViewController {
     @IBAction func resetPassword(_ sender: Any) {
         
         let email = forgotpassEmail.text
-        
         Auth.auth().sendPasswordReset(withEmail: email!) { error in
             
             if let error = error {
@@ -43,6 +42,19 @@ class ForgotpasswordVC: UIViewController {
         }
         
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        return true
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

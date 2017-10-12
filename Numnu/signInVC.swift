@@ -11,7 +11,7 @@ import FirebaseAuth
 import Firebase
 import PKHUD
 
-class signInVC: UIViewController {
+class signInVC: UIViewController, UITextFieldDelegate {
 
     var idprim = [String]()
     var window: UIWindow?
@@ -24,10 +24,12 @@ class signInVC: UIViewController {
     @IBOutlet weak var emailAddressTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
     
+    @IBOutlet var passwordInfoLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        passwordInfoLabel.isHidden = true
         emailAddressTF.useUnderline()
         passwordTF.useUnderline()
         
@@ -151,6 +153,25 @@ class signInVC: UIViewController {
             
         }
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        
+        return true
+        
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        passwordInfoLabel.isHidden = true
+    }
+    
+    
     func revealviewLogin() {
         
         self.window                     = UIWindow(frame: UIScreen.main.bounds)
