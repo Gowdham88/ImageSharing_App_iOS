@@ -18,6 +18,7 @@
 		3FC6CEE81F6FA17300DF2A12 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6CEE71F6FA17300DF2A12 /* HomeViewController.swift */; };
 		3FC6CEEA1F6FA25600DF2A12 /* feedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6CEE91F6FA25600DF2A12 /* feedTableViewCell.swift */; };
 		601D46771F8D205E00832BDD /* signInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601D46761F8D205E00832BDD /* signInVC.swift */; };
+		601D46791F8F3B1C00832BDD /* UserList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601D46781F8F3B1C00832BDD /* UserList.swift */; };
 		B415308D1F8BB78C000FB369 /* ParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B415308C1F8BB78C000FB369 /* ParentViewController.swift */; };
 		B41530901F8BBC39000FB369 /* Tab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B415308F1F8BBC39000FB369 /* Tab.storyboard */; };
 		B41530921F8BBCB8000FB369 /* PostTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41530911F8BBCB8000FB369 /* PostTabController.swift */; };
@@ -26,7 +27,6 @@
 		B41530981F8BBD27000FB369 /* MenuTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41530971F8BBD27000FB369 /* MenuTabController.swift */; };
 		B42201B21F8E661E0058A4ED /* ImageExtender.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42201B11F8E661E0058A4ED /* ImageExtender.swift */; };
 		B42201B41F8E70DA0058A4ED /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42201B31F8E70DA0058A4ED /* EventTableViewCell.swift */; };
-		B42201B61F8E80330058A4ED /* UserList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42201B51F8E80330058A4ED /* UserList.swift */; };
 		B464D78D1F8D0FEC002A1FDC /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B464D78C1F8D0FEC002A1FDC /* UIColor.swift */; };
 		B464D78F1F8D1F3E002A1FDC /* EventCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B464D78E1F8D1F3E002A1FDC /* EventCollectionCell.swift */; };
 		B47BD4011F8A26A30099061C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B47BD4001F8A26A30099061C /* GoogleService-Info.plist */; };
@@ -78,6 +78,7 @@
 		3FC6CEE71F6FA17300DF2A12 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		3FC6CEE91F6FA25600DF2A12 /* feedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = feedTableViewCell.swift; sourceTree = "<group>"; };
 		601D46761F8D205E00832BDD /* signInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signInVC.swift; sourceTree = "<group>"; };
+		601D46781F8F3B1C00832BDD /* UserList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserList.swift; sourceTree = "<group>"; };
 		973AA0559EB278E9E52BDD05 /* Pods_Numnu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Numnu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B415308C1F8BB78C000FB369 /* ParentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentViewController.swift; sourceTree = "<group>"; };
 		B415308F1F8BBC39000FB369 /* Tab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tab.storyboard; sourceTree = "<group>"; };
@@ -87,7 +88,6 @@
 		B41530971F8BBD27000FB369 /* MenuTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTabController.swift; sourceTree = "<group>"; };
 		B42201B11F8E661E0058A4ED /* ImageExtender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtender.swift; sourceTree = "<group>"; };
 		B42201B31F8E70DA0058A4ED /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
-		B42201B51F8E80330058A4ED /* UserList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserList.swift; path = /Users/czltd/Documents/Development/Numnu_client/Numnu/UserList.swift; sourceTree = "<absolute>"; };
 		B464D78C1F8D0FEC002A1FDC /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		B464D78E1F8D1F3E002A1FDC /* EventCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionCell.swift; sourceTree = "<group>"; };
 		B47BD4001F8A26A30099061C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -278,7 +278,7 @@
 		B4BD9EEB1F6FA54400C43182 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B42201B51F8E80330058A4ED /* UserList.swift */,
+				601D46781F8F3B1C00832BDD /* UserList.swift */,
 				B4BD9EEF1F6FA57300C43182 /* PostList.swift */,
 			);
 			name = Model;
@@ -519,7 +519,7 @@
 				3FC6CEEA1F6FA25600DF2A12 /* feedTableViewCell.swift in Sources */,
 				B42201B41F8E70DA0058A4ED /* EventTableViewCell.swift in Sources */,
 				B41530941F8BBCD9000FB369 /* EventTabController.swift in Sources */,
-				B42201B61F8E80330058A4ED /* UserList.swift in Sources */,
+				601D46791F8F3B1C00832BDD /* UserList.swift in Sources */,
 				3FC6CEBA1F6F744700DF2A12 /* AppDelegate.swift in Sources */,
 				B464D78F1F8D1F3E002A1FDC /* EventCollectionCell.swift in Sources */,
 				B4BD9EF71F6FB14200C43182 /* Constants.swift in Sources */,
