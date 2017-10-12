@@ -77,6 +77,8 @@ class signInVC: UIViewController {
                 
                 self.idprim.removeAll()
                 
+                print("user?.uid: \(user?.uid)")
+                
                 self.handler = self.dbref.queryOrdered(byChild: "userid").queryEqual(toValue: user?.uid).observe(.value, with: {
                     (snapshot) in
                     
@@ -121,6 +123,18 @@ class signInVC: UIViewController {
                             }
                             
                         }
+                        
+                    } else {
+                        
+                        print("false room doesn't exist")
+                        
+                        let useritem : [String :AnyObject] = ["useremail" : email as AnyObject]
+                        self.dbref.child((user?.uid)!).setValue(useritem, withCompletionBlock:{ (error,ref) in
+                            
+                            HUD.hide()
+                            self.revealviewLogin()
+                            
+                        })
                         
                     }
                     

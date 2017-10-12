@@ -107,7 +107,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                 self.idprim.removeAll()
                 self.handler = self.dbref.queryOrdered(byChild: "userid").queryEqual(toValue: user?.uid).observe(.value, with: {
                     (snapshot) in
-                    
+                    let userid = user?.uid
                     if snapshot.exists() {
                         
                         self.idprim.removeAll()
@@ -149,12 +149,9 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                          let useritem : [String :AnyObject] = ["useremail" : email as AnyObject]
                         
                        // let useritem : [String :AnyObject] = ["username" : nme as AnyObject , "useremail" : email as AnyObject , "userid" : (user?.uid)! as AnyObject, "userstartdate" : startdate as AnyObject , "userenddate" : enddate as AnyObject , "userpaymentstatus" : "pending" as AnyObject,"useraccesscount" : "0" as AnyObject,"uniquecode" : uniquecode as AnyObject,"usertransactionid" : "" as AnyObject]
-                        
-                        
-                        self.dbref.childByAutoId().setValue(useritem, withCompletionBlock:{ (error,ref) in
+                        self.dbref.child((user?.uid)!).setValue(useritem, withCompletionBlock:{ (error,ref) in
                             
                             HUD.hide()
-                            
                             self.revealviewLogin()
                             
                         })

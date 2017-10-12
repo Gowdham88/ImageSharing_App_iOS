@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Zpp-RP-GwK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Nwh-bO-qr9">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -21,7 +21,7 @@
         <!--Login MainVC-->
         <scene sceneID="zdG-hI-0B1">
             <objects>
-                <viewController storyboardIdentifier="LoginSignupVC" id="Zpp-RP-GwK" customClass="loginMainVC" customModule="Numnu" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Zpp-RP-GwK" customClass="loginMainVC" customModule="Numnu" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7wn-r0-r4H">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -311,7 +311,7 @@
         <!--OnboardingVC-->
         <scene sceneID="OhM-ck-lBd">
             <objects>
-                <viewController id="Nwh-bO-qr9" customClass="OnboardingVC" customModule="Numnu" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginSignupVC" id="Nwh-bO-qr9" customClass="OnboardingVC" customModule="Numnu" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ohr-pL-k41">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -321,7 +321,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discover delicious food and drink at events and festivals near you" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zMO-xg-2eT">
-                                <rect key="frame" x="16" y="430.5" width="288" height="73.5"/>
+                                <rect key="frame" x="16" y="427" width="288" height="77"/>
                                 <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="21"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -390,10 +390,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Ihs-Uz-weR"/>
                     </view>
+                    <connections>
+                        <segue destination="Zpp-RP-GwK" kind="show" id="3s5-Xx-b2L"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IQ7-nA-o41" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="228.75" y="89.788732394366193"/>
+            <point key="canvasLocation" x="-1404" y="90"/>
         </scene>
         <!--Sign InVC-->
         <scene sceneID="LJp-8i-GCn">
