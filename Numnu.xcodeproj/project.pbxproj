@@ -391,7 +391,7 @@
 				TargetAttributes = {
 					3FC6CEB51F6F744600DF2A12 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = XSJRRDKMW9;
+						DevelopmentTeam = 74E53UM8BJ;
 						ProvisioningStyle = Automatic;
 					};
 					3FC6CEC91F6F744700DF2A12 = {
@@ -689,7 +689,7 @@
 			baseConfigurationReference = C488392BD62ED69D8D4F143A /* Pods-Numnu.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = XSJRRDKMW9;
+				DEVELOPMENT_TEAM = 74E53UM8BJ;
 				INFOPLIST_FILE = Numnu/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -704,7 +704,7 @@
 			baseConfigurationReference = D0B6B3214A0EA9A12E275CB5 /* Pods-Numnu.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = XSJRRDKMW9;
+				DEVELOPMENT_TEAM = 74E53UM8BJ;
 				INFOPLIST_FILE = Numnu/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

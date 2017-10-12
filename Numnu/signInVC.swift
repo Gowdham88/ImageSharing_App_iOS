@@ -75,8 +75,6 @@ class signInVC: UIViewController {
 //                userprofileimage.set(self.userprofileimage, forKey: "userprofileimage")
                 
                 
-               
-                
                 self.idprim.removeAll()
                 
                 self.handler = self.dbref.queryOrdered(byChild: "userid").queryEqual(toValue: user?.uid).observe(.value, with: {
