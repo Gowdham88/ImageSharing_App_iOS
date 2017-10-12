@@ -24,6 +24,9 @@
 		B41530941F8BBCD9000FB369 /* EventTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41530931F8BBCD9000FB369 /* EventTabController.swift */; };
 		B41530961F8BBCF1000FB369 /* UserTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41530951F8BBCF1000FB369 /* UserTabController.swift */; };
 		B41530981F8BBD27000FB369 /* MenuTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41530971F8BBD27000FB369 /* MenuTabController.swift */; };
+		B42201B21F8E661E0058A4ED /* ImageExtender.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42201B11F8E661E0058A4ED /* ImageExtender.swift */; };
+		B42201B41F8E70DA0058A4ED /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42201B31F8E70DA0058A4ED /* EventTableViewCell.swift */; };
+		B42201B61F8E80330058A4ED /* UserList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42201B51F8E80330058A4ED /* UserList.swift */; };
 		B464D78D1F8D0FEC002A1FDC /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B464D78C1F8D0FEC002A1FDC /* UIColor.swift */; };
 		B464D78F1F8D1F3E002A1FDC /* EventCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B464D78E1F8D1F3E002A1FDC /* EventCollectionCell.swift */; };
 		B47BD4011F8A26A30099061C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B47BD4001F8A26A30099061C /* GoogleService-Info.plist */; };
@@ -82,6 +85,9 @@
 		B41530931F8BBCD9000FB369 /* EventTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTabController.swift; sourceTree = "<group>"; };
 		B41530951F8BBCF1000FB369 /* UserTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTabController.swift; sourceTree = "<group>"; };
 		B41530971F8BBD27000FB369 /* MenuTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTabController.swift; sourceTree = "<group>"; };
+		B42201B11F8E661E0058A4ED /* ImageExtender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtender.swift; sourceTree = "<group>"; };
+		B42201B31F8E70DA0058A4ED /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
+		B42201B51F8E80330058A4ED /* UserList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserList.swift; path = /Users/czltd/Documents/Development/Numnu_client/Numnu/UserList.swift; sourceTree = "<absolute>"; };
 		B464D78C1F8D0FEC002A1FDC /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		B464D78E1F8D1F3E002A1FDC /* EventCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionCell.swift; sourceTree = "<group>"; };
 		B47BD4001F8A26A30099061C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -264,6 +270,7 @@
 			children = (
 				3FC6CEE91F6FA25600DF2A12 /* feedTableViewCell.swift */,
 				B464D78E1F8D1F3E002A1FDC /* EventCollectionCell.swift */,
+				B42201B31F8E70DA0058A4ED /* EventTableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -271,6 +278,7 @@
 		B4BD9EEB1F6FA54400C43182 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B42201B51F8E80330058A4ED /* UserList.swift */,
 				B4BD9EEF1F6FA57300C43182 /* PostList.swift */,
 			);
 			name = Model;
@@ -299,6 +307,7 @@
 				B47F63A51F88E2BC001D7A18 /* ViewExtender.swift */,
 				B47F63A71F88E7B6001D7A18 /* ButtonExtender.swift */,
 				B464D78C1F8D0FEC002A1FDC /* UIColor.swift */,
+				B42201B11F8E661E0058A4ED /* ImageExtender.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -382,7 +391,7 @@
 				TargetAttributes = {
 					3FC6CEB51F6F744600DF2A12 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = XSJRRDKMW9;
+						DevelopmentTeam = 74E53UM8BJ;
 						ProvisioningStyle = Automatic;
 					};
 					3FC6CEC91F6F744700DF2A12 = {
@@ -508,7 +517,9 @@
 				3FC6CEBC1F6F744700DF2A12 /* ViewController.swift in Sources */,
 				B4BD9EF01F6FA57300C43182 /* PostList.swift in Sources */,
 				3FC6CEEA1F6FA25600DF2A12 /* feedTableViewCell.swift in Sources */,
+				B42201B41F8E70DA0058A4ED /* EventTableViewCell.swift in Sources */,
 				B41530941F8BBCD9000FB369 /* EventTabController.swift in Sources */,
+				B42201B61F8E80330058A4ED /* UserList.swift in Sources */,
 				3FC6CEBA1F6F744700DF2A12 /* AppDelegate.swift in Sources */,
 				B464D78F1F8D1F3E002A1FDC /* EventCollectionCell.swift in Sources */,
 				B4BD9EF71F6FB14200C43182 /* Constants.swift in Sources */,
@@ -516,6 +527,7 @@
 				B47BD4051F8A615C0099061C /* loginMainVC.swift in Sources */,
 				B47BD4071F8A75FA0099061C /* signupwithEmailVC.swift in Sources */,
 				B41530961F8BBCF1000FB369 /* UserTabController.swift in Sources */,
+				B42201B21F8E661E0058A4ED /* ImageExtender.swift in Sources */,
 				3FC6CEE81F6FA17300DF2A12 /* HomeViewController.swift in Sources */,
 				B4BD9EFB1F6FD08F00C43182 /* Processors.swift in Sources */,
 				B47BD4091F8A836D0099061C /* ForgotpasswordVC.swift in Sources */,
@@ -677,11 +689,11 @@
 			baseConfigurationReference = C488392BD62ED69D8D4F143A /* Pods-Numnu.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = XSJRRDKMW9;
+				DEVELOPMENT_TEAM = 74E53UM8BJ;
 				INFOPLIST_FILE = Numnu/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.numnu.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = com.numnu.numnu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -692,11 +704,11 @@
 			baseConfigurationReference = D0B6B3214A0EA9A12E275CB5 /* Pods-Numnu.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = XSJRRDKMW9;
+				DEVELOPMENT_TEAM = 74E53UM8BJ;
 				INFOPLIST_FILE = Numnu/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.numnu.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = com.numnu.numnu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
