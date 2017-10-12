@@ -31,6 +31,8 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         emailTextfield.useUnderline()
         passwordTextfield.useUnderline()
         
+        labelcredentials.isHidden = true
+        
         // Do any additional setup after loading the view.
     }
     
@@ -169,14 +171,13 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                 
             } else {
                 
-                labelcredentials.alpha = 1
-                
+                labelcredentials.isHidden = false
+              
             }
             
         } else {
             
-            self.labelcredentials.alpha = 1
-            HUD.hide()
+            labelcredentials.isHidden = false
             
             let animation = CABasicAnimation(keyPath: "position")
             animation.duration = 0.07
