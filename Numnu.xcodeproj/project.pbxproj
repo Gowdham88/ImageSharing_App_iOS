@@ -25,6 +25,9 @@
 		B41530941F8BBCD9000FB369 /* EventTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41530931F8BBCD9000FB369 /* EventTabController.swift */; };
 		B41530961F8BBCF1000FB369 /* UserTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41530951F8BBCF1000FB369 /* UserTabController.swift */; };
 		B41530981F8BBD27000FB369 /* MenuTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41530971F8BBD27000FB369 /* MenuTabController.swift */; };
+		B41842391F8FCBF100CBBA57 /* Edit_ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41842381F8FCBF100CBBA57 /* Edit_ProfileVC.swift */; };
+		B418423F1F8FD1B000CBBA57 /* NotificationsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B418423E1F8FD1B000CBBA57 /* NotificationsVC.swift */; };
+		B41842411F8FD28500CBBA57 /* NotificationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41842401F8FD28500CBBA57 /* NotificationsTableViewCell.swift */; };
 		B42201B21F8E661E0058A4ED /* ImageExtender.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42201B11F8E661E0058A4ED /* ImageExtender.swift */; };
 		B42201B41F8E70DA0058A4ED /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42201B31F8E70DA0058A4ED /* EventTableViewCell.swift */; };
 		B464D78D1F8D0FEC002A1FDC /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B464D78C1F8D0FEC002A1FDC /* UIColor.swift */; };
@@ -86,6 +89,9 @@
 		B41530931F8BBCD9000FB369 /* EventTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTabController.swift; sourceTree = "<group>"; };
 		B41530951F8BBCF1000FB369 /* UserTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTabController.swift; sourceTree = "<group>"; };
 		B41530971F8BBD27000FB369 /* MenuTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTabController.swift; sourceTree = "<group>"; };
+		B41842381F8FCBF100CBBA57 /* Edit_ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edit_ProfileVC.swift; sourceTree = "<group>"; };
+		B418423E1F8FD1B000CBBA57 /* NotificationsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsVC.swift; sourceTree = "<group>"; };
+		B41842401F8FD28500CBBA57 /* NotificationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewCell.swift; sourceTree = "<group>"; };
 		B42201B11F8E661E0058A4ED /* ImageExtender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtender.swift; sourceTree = "<group>"; };
 		B42201B31F8E70DA0058A4ED /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		B464D78C1F8D0FEC002A1FDC /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -261,6 +267,8 @@
 				B47BD4081F8A836D0099061C /* ForgotpasswordVC.swift */,
 				B415308C1F8BB78C000FB369 /* ParentViewController.swift */,
 				601D46761F8D205E00832BDD /* signInVC.swift */,
+				B41842381F8FCBF100CBBA57 /* Edit_ProfileVC.swift */,
+				B418423E1F8FD1B000CBBA57 /* NotificationsVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -271,6 +279,7 @@
 				3FC6CEE91F6FA25600DF2A12 /* feedTableViewCell.swift */,
 				B464D78E1F8D1F3E002A1FDC /* EventCollectionCell.swift */,
 				B42201B31F8E70DA0058A4ED /* EventTableViewCell.swift */,
+				B41842401F8FD28500CBBA57 /* NotificationsTableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -515,11 +524,13 @@
 				B41530981F8BBD27000FB369 /* MenuTabController.swift in Sources */,
 				B47BD4031F8A48010099061C /* OnboardingVC.swift in Sources */,
 				3FC6CEBC1F6F744700DF2A12 /* ViewController.swift in Sources */,
+				B41842411F8FD28500CBBA57 /* NotificationsTableViewCell.swift in Sources */,
 				B4BD9EF01F6FA57300C43182 /* PostList.swift in Sources */,
 				3FC6CEEA1F6FA25600DF2A12 /* feedTableViewCell.swift in Sources */,
 				B42201B41F8E70DA0058A4ED /* EventTableViewCell.swift in Sources */,
 				B41530941F8BBCD9000FB369 /* EventTabController.swift in Sources */,
 				601D46791F8F3B1C00832BDD /* UserList.swift in Sources */,
+				B41842391F8FCBF100CBBA57 /* Edit_ProfileVC.swift in Sources */,
 				3FC6CEBA1F6F744700DF2A12 /* AppDelegate.swift in Sources */,
 				B464D78F1F8D1F3E002A1FDC /* EventCollectionCell.swift in Sources */,
 				B4BD9EF71F6FB14200C43182 /* Constants.swift in Sources */,
@@ -527,6 +538,7 @@
 				B47BD4051F8A615C0099061C /* loginMainVC.swift in Sources */,
 				B47BD4071F8A75FA0099061C /* signupwithEmailVC.swift in Sources */,
 				B41530961F8BBCF1000FB369 /* UserTabController.swift in Sources */,
+				B418423F1F8FD1B000CBBA57 /* NotificationsVC.swift in Sources */,
 				B42201B21F8E661E0058A4ED /* ImageExtender.swift in Sources */,
 				3FC6CEE81F6FA17300DF2A12 /* HomeViewController.swift in Sources */,
 				B4BD9EFB1F6FD08F00C43182 /* Processors.swift in Sources */,
