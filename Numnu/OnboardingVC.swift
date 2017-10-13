@@ -15,7 +15,6 @@ class OnboardingVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         letmeinButtonoutlet.isUserInteractionEnabled = false
         
     }
@@ -25,14 +24,12 @@ class OnboardingVC: UIViewController {
         notificationsAlert.isHidden = true
     letmeinButtonoutlet.isUserInteractionEnabled = true
         
-        
     }
     
     @IBAction func ignorePressed(_ sender: Any) {
         
         notificationsAlert.isHidden = true
-        letmeinButtonoutlet.isUserInteractionEnabled = true
-        
+    letmeinButtonoutlet.isUserInteractionEnabled = true
         
     }
     
