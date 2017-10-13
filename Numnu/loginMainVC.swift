@@ -17,8 +17,6 @@ class loginMainVC: UIViewController, UIWebViewDelegate {
 
 
         
-        
-        
         // Do any additional setup after loading the view.
         
     }
@@ -28,7 +26,28 @@ class loginMainVC: UIViewController, UIWebViewDelegate {
         self.performSegue(withIdentifier: "signupwithEmail", sender: self)
         
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        
+                if closed == "signUp" {
+            
+                           closed = String()
+                
+                            self.performSegue(withIdentifier: "signupwithEmail", sender: self)
+                
+                   } else if closed == "signIn" {
+            
+                            closed = String()
+                
+                           self.performSegue(withIdentifier: "signIn", sender: self)
+                
+                    } else {
+            
+                            print("Nothing")
+                
+                    }
+        
+    }
+
     @IBAction func signInPressed(_ sender: Any) {
         
         self.performSegue(withIdentifier: "signIn", sender: self)
@@ -39,10 +58,7 @@ class loginMainVC: UIViewController, UIWebViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        
-        
-    }
+
 
     /*
     // MARK: - Navigation
