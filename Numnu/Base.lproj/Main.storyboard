@@ -51,14 +51,20 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="OQc-D9-1pk" id="HHW-m4-J6b"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search by item" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="pKU-lp-6b3">
                                         <rect key="frame" x="82" y="15" width="220" height="30"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="OQc-D9-1pk" id="ajQ-OD-5H4"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fgK-KH-pgZ" customClass="ButtonExtender" customModule="Numnu" customModuleProvider="target">
                                         <rect key="frame" x="20" y="61" width="45" height="30"/>
@@ -70,6 +76,9 @@
                                                 <real key="value" value="5"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="ButtonLocation:" destination="OQc-D9-1pk" eventType="touchUpInside" id="Fbs-4u-IWd"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J5F-h2-eUl" customClass="ButtonExtender" customModule="Numnu" customModuleProvider="target">
                                         <rect key="frame" x="20" y="15" width="45" height="30"/>
@@ -81,6 +90,9 @@
                                                 <real key="value" value="5"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="ButtonSearach:" destination="OQc-D9-1pk" eventType="touchUpInside" id="YG5-Lt-Qp6"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.91764705882352937" green="0.12941176470588234" blue="0.14509803921568626" alpha="1" colorSpace="calibratedRGB"/>
@@ -103,10 +115,16 @@
                             <constraint firstItem="sfO-qW-Atc" firstAttribute="top" secondItem="ilc-xn-VB5" secondAttribute="bottom" id="nCr-66-OhF"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Explore" id="VQ0-pp-ENm"/>
+                    <navigationItem key="navigationItem" title="Explore" id="VQ0-pp-ENm">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="ic_arrow_back" landscapeImage="ic_arrow_back" id="07s-HM-OkK">
+                            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="buttonBarView" destination="lyo-UJ-qpi" id="XpE-bC-pid"/>
                         <outlet property="containerView" destination="sfO-qW-Atc" id="W89-rm-k44"/>
+                        <outlet property="editsearchbyItem" destination="pKU-lp-6b3" id="zf5-tE-o1x"/>
+                        <outlet property="editsearchbyLocation" destination="GjQ-bI-QVw" id="EFy-pa-KLk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0af-Og-Kq2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -487,6 +505,7 @@
         <image name="cottage" width="14" height="13"/>
         <image name="editPic" width="25" height="25"/>
         <image name="home" width="30" height="29"/>
+        <image name="ic_arrow_back" width="25" height="17"/>
         <image name="ic_more_horiz" width="16" height="4"/>
         <image name="menu" width="24" height="18"/>
         <image name="notification" width="27" height="23"/>

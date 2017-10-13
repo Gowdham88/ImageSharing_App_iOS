@@ -23,8 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        let storyboard = UIStoryboard(name: Constants.Auth, bundle: nil)
-        let initialViewController = storyboard.instantiateViewController(withIdentifier: "LoginSignupVC")
+        let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
+        let initialViewController = storyboard.instantiateViewController(withIdentifier: Constants.TabStoryId)
         self.window?.rootViewController = initialViewController
         self.window?.makeKeyAndVisible()
         
@@ -92,5 +92,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             .textPadding(30.0)
             ])
         
+    }
+    
+    /*****Keyboard close******/
+    
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
     }
  }
