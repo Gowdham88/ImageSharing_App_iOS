@@ -17,38 +17,6 @@
             endingLineNumber = "178"
             landmarkName = "Login()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Numnu.signupwithEmailVC.Login() -&gt; ()"
-                  moduleName = "Numnu"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/czltd/Documents/Development/Numnu_client/Numnu/signupwithEmailVC.swift"
-                  timestampString = "529596916.837018"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "178"
-                  endingLineNumber = "178"
-                  offsetFromSymbolStart = "4475">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__ObjC.User&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Numnu.signupwithEmailVC.Login() -&gt; ()"
-                  moduleName = "Numnu"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/czltd/Documents/Development/Numnu_client/Numnu/signupwithEmailVC.swift"
-                  timestampString = "529596916.838712"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "178"
-                  endingLineNumber = "178"
-                  offsetFromSymbolStart = "4453">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -81,6 +49,38 @@
             endingLineNumber = "80"
             landmarkName = "login()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__ObjC.User&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Numnu.signInVC.login() -&gt; ()"
+                  moduleName = "Numnu"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/czltd/Documents/Development/Numnu_client/Numnu/signInVC.swift"
+                  timestampString = "529678566.088067"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "81"
+                  endingLineNumber = "81"
+                  offsetFromSymbolStart = "1508">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #1 (Swift.Optional&lt;__ObjC.User&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Numnu.signInVC.login() -&gt; ()"
+                  moduleName = "Numnu"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/czltd/Documents/Development/Numnu_client/Numnu/signInVC.swift"
+                  timestampString = "529678566.090509"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "83"
+                  endingLineNumber = "83"
+                  offsetFromSymbolStart = "17">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -97,6 +97,38 @@
             endingLineNumber = "88"
             landmarkName = "login()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__ObjC.User&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Numnu.signInVC.login() -&gt; ()"
+                  moduleName = "Numnu"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/czltd/Documents/Development/Numnu_client/Numnu/signInVC.swift"
+                  timestampString = "529678566.095394"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "89"
+                  endingLineNumber = "89"
+                  offsetFromSymbolStart = "1738">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #1 (Swift.Optional&lt;__ObjC.User&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Numnu.signInVC.login() -&gt; ()"
+                  moduleName = "Numnu"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/czltd/Documents/Development/Numnu_client/Numnu/signInVC.swift"
+                  timestampString = "529678566.09756"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "89"
+                  endingLineNumber = "89"
+                  offsetFromSymbolStart = "565">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
