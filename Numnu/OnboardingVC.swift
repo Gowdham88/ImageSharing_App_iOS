@@ -12,11 +12,14 @@ class OnboardingVC: UIViewController {
    
     @IBOutlet var letmeinButtonoutlet: UIButton!
     @IBOutlet var notificationsAlert: ViewExtender!
+    @IBOutlet var onboardingText: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         letmeinButtonoutlet.isUserInteractionEnabled = false
+        onboardingText.isHidden = true
+        letmeinButtonoutlet.isHidden = true
         
     }
 
@@ -25,14 +28,17 @@ class OnboardingVC: UIViewController {
         notificationsAlert.isHidden = true
     letmeinButtonoutlet.isUserInteractionEnabled = true
         
+        onboardingText.isHidden = false
+        letmeinButtonoutlet.isHidden = false
         
     }
     
     @IBAction func ignorePressed(_ sender: Any) {
         
         notificationsAlert.isHidden = true
-        letmeinButtonoutlet.isUserInteractionEnabled = true
-        
+    letmeinButtonoutlet.isUserInteractionEnabled = true
+        onboardingText.isHidden = false
+        letmeinButtonoutlet.isHidden = false
         
     }
     

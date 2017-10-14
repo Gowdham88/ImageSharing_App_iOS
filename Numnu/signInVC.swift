@@ -20,8 +20,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
     var credential: AuthCredential?
     var userprofilename : String = ""
     var userprofileimage : String = ""
-    var handler : DatabaseHandle!
-    let dbref   = Database.database().reference().child("UserList")
+
     
     @IBOutlet weak var emailAddressTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
@@ -75,47 +74,10 @@ class signInVC: UIViewController, UITextFieldDelegate {
                     
                 }
                 
-//                let userprofileimage = UserDefaults.standard
-//                userprofileimage.set(self.userprofileimage, forKey: "userprofileimage")
-                
-                
                 self.idprim.removeAll()
                 
                 print("user?.uid: \(user?.uid)")
-                
-                self.handler = self.dbref.queryOrdered(byChild: "userid").queryEqual(toValue: user?.uid).observe(.value, with: {
-                    (snapshot) in
                     
-                    if snapshot.exists() {
-                        
-                        self.idprim.removeAll()
-                        
-                        if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
-                            
-                            print("true rooms exist")
-                            
-                            let useritem = UserList()
-                            
-                            for snap in snapshots {
-                                
-                                autoreleasepool {
-                                    
-                                    if let postDict = snap.value as? Dictionary<String, AnyObject> {
-                                        let key      = snap.key
-                                        
-                                        useritem.setValuesForKeys(postDict)
-                                        self.idprim.append(key)
-                                        
-                                        
-                                    }
-                                    
-                                }
-                            }
-                            
-                          
-                            
-                            self.dbref.removeObserver(withHandle: self.handler)
-                            
                             DispatchQueue.main.async {
                                 
                                 HUD.hide()
@@ -123,26 +85,8 @@ class signInVC: UIViewController, UITextFieldDelegate {
                                 
                                 self.emailAddressTF.text = ""
                                 self.passwordTF.text  = ""
-                                
-                            }
                             
-                        }
-                        
-                    } else {
-                        
-                        print("false room doesn't exist")
-                        
-                        let useritem : [String :AnyObject] = ["useremail" : email as AnyObject]
-                        self.dbref.child((user?.uid)!).setValue(useritem, withCompletionBlock:{ (error,ref) in
-                            
-                            HUD.hide()
-                            self.revealviewLogin()
-                            
-                        })
-                        
                     }
-                    
-                })
                 
                 print("Login FIRAuth Sign in called")
             })
@@ -151,8 +95,6 @@ class signInVC: UIViewController, UITextFieldDelegate {
             
             HUD.hide()
             self.showAlertMessagepop(title: "Hey! Enter email and password.")
-            
-            
         }
     }
     
