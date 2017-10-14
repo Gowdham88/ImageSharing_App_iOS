@@ -18,9 +18,8 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     var credential: AuthCredential?
     var userprofilename : String = ""
     var userprofileimage : String = ""
-    var handler : DatabaseHandle!
-    let dbref   = Database.database().reference().child("UserList")
-  
+
+    
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
     @IBOutlet var labelcredentials: UILabel!
@@ -119,61 +118,13 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                     
                 }
                
+                HUD.hide()
+                
+                self.revealviewLogin()
+                
+                
                 self.idprim.removeAll()
-                self.handler = self.dbref.queryOrdered(byChild: "userid").queryEqual(toValue: user?.uid).observe(.value, with: {
-                    (snapshot) in
-                    let userid = user?.uid
-                    if snapshot.exists() {
-                        
-                        self.idprim.removeAll()
-                        HUD.hide()
-                        
-                        if snapshot.children.allObjects is [DataSnapshot] {
-                            
-                            print("true rooms exist")
-                            
-//                            let useritem = UserList()
-//
-//                            for snap in snapshots {
-//
-//                                autoreleasepool {
-//
-//                                    if let postDict = snap.value as? Dictionary<String, AnyObject> {
-//                                        let key      = snap.key
-//
-//                                        useritem.setValuesForKeys(postDict)
-//                                        self.idprim.append(key)
-//
-//
-//                                    }
-//
-//                                }
-//                            }
-//
-//
-//                            self.dbref.removeObserver(withHandle: self.handler)
-//
-                            self.revealviewLogin()
-                            
-                        }
-                        
-                    } else {
-                        
-                        print("false room doesn't exist")
-                       
-                         let useritem : [String :AnyObject] = ["useremail" : email as AnyObject]
-                        
-                       // let useritem : [String :AnyObject] = ["username" : nme as AnyObject , "useremail" : email as AnyObject , "userid" : (user?.uid)! as AnyObject, "userstartdate" : startdate as AnyObject , "userenddate" : enddate as AnyObject , "userpaymentstatus" : "pending" as AnyObject,"useraccesscount" : "0" as AnyObject,"uniquecode" : uniquecode as AnyObject,"usertransactionid" : "" as AnyObject]
-                        self.dbref.child((user?.uid)!).setValue(useritem, withCompletionBlock:{ (error,ref) in
-                            
-                            HUD.hide()
-                            self.revealviewLogin()
-                            
-                        })
-                        
-                    }
-                    
-                })
+ 
                 print(" App Delegate SignIn with credential called")
                 }
                 
