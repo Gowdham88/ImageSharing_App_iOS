@@ -47,7 +47,6 @@ class HomeViewController: UIViewController {
                 self.postviewModel.removepostObserver()
                 self.feed.reloadData()
                 
-                
             }
         }
         
@@ -187,7 +186,6 @@ extension HomeViewController : UITableViewDelegate,UITableViewDataSource {
                 cell.Usertags.isHidden  = false
                 cell.tagCounts.isHidden = true
                 
-                
                 if tagnameArray.count > 2 {
                     
                     cell.Usertags.setTitle("\(tagnameArray[0]),\(tagnameArray[1])", for: .normal)
@@ -197,11 +195,7 @@ extension HomeViewController : UITableViewDelegate,UITableViewDataSource {
                     attributeString.append(NSAttributedString(string: "+ \(tagnameArray.count - 2) others",attributes: buttonAttributes))
                     cell.Usertags.setAttributedTitle(attributeString, for: .normal)
                     
-                   
-                    
                 } else if tagnameArray.count == 2 || tagnameArray.count < 2 {
-                    
-                    
                     
                     if tagnameArray.count == 2 {
                         
@@ -211,8 +205,6 @@ extension HomeViewController : UITableViewDelegate,UITableViewDataSource {
                         
                         cell.Usertags.setTitle("\(tagnameArray[0])", for: .normal)
                     }
-                    
-                   
                     
                 }
                 
@@ -228,8 +220,6 @@ extension HomeViewController : UITableViewDelegate,UITableViewDataSource {
         return cell
         
     }
-     
-    
     
 }
 
@@ -247,9 +237,7 @@ extension HomeViewController {
             button.setImage(UIImage(named: "unlike"), for: .normal)
         }
         
-        
     }
-    
     
 }
 
