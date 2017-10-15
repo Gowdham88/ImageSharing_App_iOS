@@ -364,7 +364,7 @@
                                     <action selector="letmeinPressed:" destination="Nwh-bO-qr9" eventType="touchUpInside" id="hqO-Es-qME"/>
                                 </connections>
                             </button>
-                            <view alpha="0.0" contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hpc-x7-f8x" customClass="ViewExtender" customModule="Numnu" customModuleProvider="target">
+                            <view contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hpc-x7-f8x" customClass="ViewExtender" customModule="Numnu" customModuleProvider="target">
                                 <rect key="frame" x="48" y="151" width="228" height="211"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <subviews>
