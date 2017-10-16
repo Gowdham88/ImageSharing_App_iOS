@@ -27,8 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        let storyboard = UIStoryboard(name: Constants.Auth, bundle: nil)
-        let initialViewController = storyboard.instantiateViewController(withIdentifier: "LoginSignupVC")
+        let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
+        let initialViewController = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)
         self.window?.rootViewController = initialViewController
         self.window?.makeKeyAndVisible()
         

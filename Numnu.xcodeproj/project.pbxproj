@@ -23,6 +23,8 @@
 		6F44F25F1F9365F200AF45F2 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F44F25B1F9365F200AF45F2 /* CoreFoundation.framework */; };
 		6F44F2601F9365F200AF45F2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F44F25C1F9365F200AF45F2 /* CoreData.framework */; };
 		8023269D710766514ACD6769 /* Pods_Numnu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5498D158AA5E7ED296B4F8AE /* Pods_Numnu.framework */; };
+		B410DF9C1F94CDF900858E4E /* Event.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B410DF9B1F94CDF900858E4E /* Event.storyboard */; };
+		B410DF9E1F94E01400858E4E /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B410DF9D1F94E01400858E4E /* EventViewController.swift */; };
 		B415308D1F8BB78C000FB369 /* ParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B415308C1F8BB78C000FB369 /* ParentViewController.swift */; };
 		B41530901F8BBC39000FB369 /* Tab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B415308F1F8BBC39000FB369 /* Tab.storyboard */; };
 		B41530921F8BBCB8000FB369 /* PostTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41530911F8BBCB8000FB369 /* PostTabController.swift */; };
@@ -92,6 +94,8 @@
 		6F44F25A1F9365F200AF45F2 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		6F44F25B1F9365F200AF45F2 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		6F44F25C1F9365F200AF45F2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		B410DF9B1F94CDF900858E4E /* Event.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Event.storyboard; sourceTree = "<group>"; };
+		B410DF9D1F94E01400858E4E /* EventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		B415308C1F8BB78C000FB369 /* ParentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentViewController.swift; sourceTree = "<group>"; };
 		B415308F1F8BBC39000FB369 /* Tab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tab.storyboard; sourceTree = "<group>"; };
 		B41530911F8BBCB8000FB369 /* PostTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTabController.swift; sourceTree = "<group>"; };
@@ -270,6 +274,7 @@
 				3FC6CEC21F6F744700DF2A12 /* LaunchScreen.storyboard */,
 				B4A2C06A1F8669A600C3D400 /* Auth.storyboard */,
 				B415308F1F8BBC39000FB369 /* Tab.storyboard */,
+				B410DF9B1F94CDF900858E4E /* Event.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -287,6 +292,7 @@
 				601D46761F8D205E00832BDD /* signInVC.swift */,
 				B41842381F8FCBF100CBBA57 /* Edit_ProfileVC.swift */,
 				B418423E1F8FD1B000CBBA57 /* NotificationsVC.swift */,
+				B410DF9D1F94E01400858E4E /* EventViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -471,6 +477,7 @@
 				3FC6CEC41F6F744700DF2A12 /* LaunchScreen.storyboard in Resources */,
 				3FC6CEC11F6F744700DF2A12 /* Assets.xcassets in Resources */,
 				B41530901F8BBC39000FB369 /* Tab.storyboard in Resources */,
+				B410DF9C1F94CDF900858E4E /* Event.storyboard in Resources */,
 				3FC6CEBF1F6F744700DF2A12 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -507,7 +514,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		B487976E5ED1EF7219BB5C96 /* [CP] Embed Pods Frameworks */ = {
@@ -577,6 +584,7 @@
 				B4BD9EF91F6FB3E700C43182 /* PostViewModel.swift in Sources */,
 				B41530981F8BBD27000FB369 /* MenuTabController.swift in Sources */,
 				B47BD4031F8A48010099061C /* OnboardingVC.swift in Sources */,
+				B410DF9E1F94E01400858E4E /* EventViewController.swift in Sources */,
 				3FC6CEBC1F6F744700DF2A12 /* ViewController.swift in Sources */,
 				B41842411F8FD28500CBBA57 /* NotificationsTableViewCell.swift in Sources */,
 				B4BD9EF01F6FA57300C43182 /* PostList.swift in Sources */,
