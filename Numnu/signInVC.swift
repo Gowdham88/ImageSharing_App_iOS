@@ -31,8 +31,6 @@ class signInVC: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
 
         passwordInfoLabel.isHidden = true
-        emailAddressTF.useUnderline()
-        passwordTF.useUnderline()
         
         // Do any additional setup after loading the view.
     }
