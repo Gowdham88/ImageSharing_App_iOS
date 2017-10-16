@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		349299F64D1EFB3468381177 /* Pods_Numnu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 973AA0559EB278E9E52BDD05 /* Pods_Numnu.framework */; };
 		3FC6CEBA1F6F744700DF2A12 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6CEB91F6F744700DF2A12 /* AppDelegate.swift */; };
 		3FC6CEBC1F6F744700DF2A12 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6CEBB1F6F744700DF2A12 /* ViewController.swift */; };
 		3FC6CEBF1F6F744700DF2A12 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FC6CEBD1F6F744700DF2A12 /* Main.storyboard */; };
@@ -19,6 +18,11 @@
 		3FC6CEEA1F6FA25600DF2A12 /* feedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6CEE91F6FA25600DF2A12 /* feedTableViewCell.swift */; };
 		601D46771F8D205E00832BDD /* signInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601D46761F8D205E00832BDD /* signInVC.swift */; };
 		601D46791F8F3B1C00832BDD /* UserList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601D46781F8F3B1C00832BDD /* UserList.swift */; };
+		6F44F25D1F9365F200AF45F2 /* CoreAudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F44F2591F9365F100AF45F2 /* CoreAudioKit.framework */; };
+		6F44F25E1F9365F200AF45F2 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F44F25A1F9365F200AF45F2 /* CoreBluetooth.framework */; };
+		6F44F25F1F9365F200AF45F2 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F44F25B1F9365F200AF45F2 /* CoreFoundation.framework */; };
+		6F44F2601F9365F200AF45F2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F44F25C1F9365F200AF45F2 /* CoreData.framework */; };
+		8023269D710766514ACD6769 /* Pods_Numnu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5498D158AA5E7ED296B4F8AE /* Pods_Numnu.framework */; };
 		B415308D1F8BB78C000FB369 /* ParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B415308C1F8BB78C000FB369 /* ParentViewController.swift */; };
 		B41530901F8BBC39000FB369 /* Tab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B415308F1F8BBC39000FB369 /* Tab.storyboard */; };
 		B41530921F8BBCB8000FB369 /* PostTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41530911F8BBCB8000FB369 /* PostTabController.swift */; };
@@ -80,10 +84,14 @@
 		3FC6CEDB1F6F744700DF2A12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FC6CEE71F6FA17300DF2A12 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		3FC6CEE91F6FA25600DF2A12 /* feedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = feedTableViewCell.swift; sourceTree = "<group>"; };
+		5498D158AA5E7ED296B4F8AE /* Pods_Numnu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Numnu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		601D46761F8D205E00832BDD /* signInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signInVC.swift; sourceTree = "<group>"; };
 		601D46781F8F3B1C00832BDD /* UserList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserList.swift; sourceTree = "<group>"; };
 		601D467A1F8FAF4B00832BDD /* Numnu.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Numnu.entitlements; sourceTree = "<group>"; };
-		973AA0559EB278E9E52BDD05 /* Pods_Numnu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Numnu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F44F2591F9365F100AF45F2 /* CoreAudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudioKit.framework; path = System/Library/Frameworks/CoreAudioKit.framework; sourceTree = SDKROOT; };
+		6F44F25A1F9365F200AF45F2 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		6F44F25B1F9365F200AF45F2 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		6F44F25C1F9365F200AF45F2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		B415308C1F8BB78C000FB369 /* ParentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentViewController.swift; sourceTree = "<group>"; };
 		B415308F1F8BBC39000FB369 /* Tab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tab.storyboard; sourceTree = "<group>"; };
 		B41530911F8BBCB8000FB369 /* PostTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTabController.swift; sourceTree = "<group>"; };
@@ -124,7 +132,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				349299F64D1EFB3468381177 /* Pods_Numnu.framework in Frameworks */,
+				6F44F25D1F9365F200AF45F2 /* CoreAudioKit.framework in Frameworks */,
+				6F44F25E1F9365F200AF45F2 /* CoreBluetooth.framework in Frameworks */,
+				6F44F25F1F9365F200AF45F2 /* CoreFoundation.framework in Frameworks */,
+				6F44F2601F9365F200AF45F2 /* CoreData.framework in Frameworks */,
+				8023269D710766514ACD6769 /* Pods_Numnu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,7 +231,11 @@
 		7AE04205F6DDC47253BF8816 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				973AA0559EB278E9E52BDD05 /* Pods_Numnu.framework */,
+				6F44F2591F9365F100AF45F2 /* CoreAudioKit.framework */,
+				6F44F25A1F9365F200AF45F2 /* CoreBluetooth.framework */,
+				6F44F25C1F9365F200AF45F2 /* CoreData.framework */,
+				6F44F25B1F9365F200AF45F2 /* CoreFoundation.framework */,
+				5498D158AA5E7ED296B4F8AE /* Pods_Numnu.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -405,6 +421,9 @@
 						DevelopmentTeam = 74E53UM8BJ;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -479,13 +498,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Numnu-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B487976E5ED1EF7219BB5C96 /* [CP] Embed Pods Frameworks */ = {
@@ -494,9 +516,34 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Numnu/Pods-Numnu-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/GSMessages/GSMessages.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
+				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/Toucan/Toucan.framework",
+				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GSMessages.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nuke.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toucan.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
