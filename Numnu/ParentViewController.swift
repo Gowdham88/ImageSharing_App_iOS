@@ -12,7 +12,11 @@ import XLPagerTabStrip
 class ParentViewController: ButtonBarPagerTabStripViewController {
     
     let purpleInspireColor = UIColor(red:0.13, green:0.03, blue:0.25, alpha:1.0)
-
+    
+    
+    @IBOutlet weak var editsearchbyLocation: UITextField!
+    @IBOutlet weak var editsearchbyItem: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // change selected bar color
@@ -34,6 +38,8 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
             newCell?.label.textColor = UIColor.appBlackColor()
             
         }
+        
+        hideKeyboardWhenTappedAround()
    
         
     }
@@ -44,6 +50,15 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
         
     }
     
+    @IBAction func ButtonSearach(_ sender: UIButton) {
+        
+         dismissKeyboard()
+        
+    }
+    @IBAction func ButtonLocation(_ sender: UIButton) {
+        
+         dismissKeyboard()
+    }
     // Tab controllers switch func
 
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
@@ -69,3 +84,18 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
     }
 
 }
+
+extension ParentViewController : UITextFieldDelegate {
+    
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        dismissKeyboard()
+        
+        return true
+    }
+    
+    
+    
+}
+
