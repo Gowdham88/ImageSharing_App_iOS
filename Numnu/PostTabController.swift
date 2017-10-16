@@ -9,6 +9,8 @@
 import UIKit
 import XLPagerTabStrip
 
+
+
 class PostTabController: UIViewController,IndicatorInfoProvider {
 
     override func viewDidLoad() {
