@@ -11,7 +11,10 @@ import Firebase
 import GSMessages
 import UserNotifications
 import SystemConfiguration
-
+import FBSDKCoreKit
+import FBSDKLoginKit
+ 
+ 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -21,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let storyboard = UIStoryboard(name: Constants.Auth, bundle: nil)
@@ -29,7 +33,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.makeKeyAndVisible()
         
         return true
-    }
+ }
+    
+ 
+ 
+    
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -47,19 +55,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        FBSDKAppEvents.activateApp()
     }
+
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+ func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    return FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
+ }
 
-}
-
+ }
  extension UIViewController {
-    
+
     func showAlertMessage() {
-        
+
         self.showMessage("Oops! It seems you are not connected to internet.", type: .warning,options: [
             .animation(.slide),
             .animationDuration(0.3),
@@ -73,11 +85,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             .textNumberOfLines(1),
             .textPadding(30.0)
             ])
-        
+
     }
-    
+
     func showAlertMessagepop(title : String) {
-        
+
         self.showMessage(title, type: .warning,options: [
             .animation(.slide),
             .animationDuration(0.3),
@@ -91,18 +103,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             .textNumberOfLines(1),
             .textPadding(30.0)
             ])
-        
+
     }
-    
+
     /*****Keyboard close******/
-    
+
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
-    
+
     func dismissKeyboard() {
         view.endEditing(true)
     }
  }
+ 

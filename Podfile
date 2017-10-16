@@ -14,5 +14,9 @@ target 'Numnu' do
   pod 'GSMessages'
   pod 'PKHUD', '~> 4.0’
   pod 'XLPagerTabStrip', '~> 8.0'
+  pod 'Bolts'
+  pod 'FBSDKCoreKit'
+  pod 'FBSDKLoginKit'
 
 end
+
