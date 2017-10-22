@@ -26,11 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-        let storyboard = UIStoryboard(name: Constants.Auth, bundle: nil)
-        let initialViewController = storyboard.instantiateViewController(withIdentifier: "LoginSignupVC")
-        self.window?.rootViewController = initialViewController
-        self.window?.makeKeyAndVisible()
+        /*****Screen opening function******/
+        openFirstScreen()
         
         return true
  }
@@ -66,6 +63,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
     return FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
  }
+ 
+ /********************opening onboard screen***********************/
+  
+    func openFirstScreen() {
+        
+        let when = DispatchTime.now() + 3
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            
+            self.window    = UIWindow(frame: UIScreen.main.bounds)
+            let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
+            let initialViewController = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)
+            self.window?.rootViewController = initialViewController
+            self.window?.makeKeyAndVisible()
+            
+        }
+        
+        
+    }
 
  }
  extension UIViewController {

@@ -19,11 +19,12 @@ class Constants {
     static let Tab   = "Tab"
     static let Auth  = "Auth"
     static let Main  = "Main"
+    static let Event = "Event"
     
     // Storyboards id
     
     static let TabStoryId   = "tabcontrollerid"
-   
+    static let EventStoryId = "eventstoryid"
     
     // Tab name
     
