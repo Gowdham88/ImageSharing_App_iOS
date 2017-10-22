@@ -37,7 +37,6 @@
                     <view key="view" contentMode="scaleToFill" id="BXS-rI-J3y">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.60000002384185791" green="0.40000000596046448" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
                         <viewLayoutGuide key="safeArea" id="6va-Sa-Drn"/>
                     </view>
                 </viewController>
@@ -52,7 +51,6 @@
                     <view key="view" contentMode="scaleToFill" id="evd-8H-qZW">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
                         <viewLayoutGuide key="safeArea" id="sWr-Q7-VnN"/>
                     </view>
                 </viewController>

@@ -36,6 +36,8 @@
 		B41842411F8FD28500CBBA57 /* NotificationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41842401F8FD28500CBBA57 /* NotificationsTableViewCell.swift */; };
 		B42201B21F8E661E0058A4ED /* ImageExtender.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42201B11F8E661E0058A4ED /* ImageExtender.swift */; };
 		B42201B41F8E70DA0058A4ED /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42201B31F8E70DA0058A4ED /* EventTableViewCell.swift */; };
+		B45CD86E1F9C8CC5009262B8 /* TextSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CD86D1F9C8CC5009262B8 /* TextSize.swift */; };
+		B45CD8701F9C940C009262B8 /* EventTagCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CD86F1F9C940C009262B8 /* EventTagCollectionCell.swift */; };
 		B464D78D1F8D0FEC002A1FDC /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B464D78C1F8D0FEC002A1FDC /* UIColor.swift */; };
 		B464D78F1F8D1F3E002A1FDC /* EventCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B464D78E1F8D1F3E002A1FDC /* EventCollectionCell.swift */; };
 		B47BD4011F8A26A30099061C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B47BD4001F8A26A30099061C /* GoogleService-Info.plist */; };
@@ -107,6 +109,8 @@
 		B41842401F8FD28500CBBA57 /* NotificationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewCell.swift; sourceTree = "<group>"; };
 		B42201B11F8E661E0058A4ED /* ImageExtender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtender.swift; sourceTree = "<group>"; };
 		B42201B31F8E70DA0058A4ED /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
+		B45CD86D1F9C8CC5009262B8 /* TextSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSize.swift; sourceTree = "<group>"; };
+		B45CD86F1F9C940C009262B8 /* EventTagCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTagCollectionCell.swift; sourceTree = "<group>"; };
 		B464D78C1F8D0FEC002A1FDC /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		B464D78E1F8D1F3E002A1FDC /* EventCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionCell.swift; sourceTree = "<group>"; };
 		B47BD4001F8A26A30099061C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -304,6 +308,7 @@
 				B464D78E1F8D1F3E002A1FDC /* EventCollectionCell.swift */,
 				B42201B31F8E70DA0058A4ED /* EventTableViewCell.swift */,
 				B41842401F8FD28500CBBA57 /* NotificationsTableViewCell.swift */,
+				B45CD86F1F9C940C009262B8 /* EventTagCollectionCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -341,6 +346,7 @@
 				B47F63A71F88E7B6001D7A18 /* ButtonExtender.swift */,
 				B464D78C1F8D0FEC002A1FDC /* UIColor.swift */,
 				B42201B11F8E661E0058A4ED /* ImageExtender.swift */,
+				B45CD86D1F9C8CC5009262B8 /* TextSize.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -580,6 +586,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B41530921F8BBCB8000FB369 /* PostTabController.swift in Sources */,
+				B45CD8701F9C940C009262B8 /* EventTagCollectionCell.swift in Sources */,
 				B464D78D1F8D0FEC002A1FDC /* UIColor.swift in Sources */,
 				B4BD9EF91F6FB3E700C43182 /* PostViewModel.swift in Sources */,
 				B41530981F8BBD27000FB369 /* MenuTabController.swift in Sources */,
@@ -595,6 +602,7 @@
 				B41842391F8FCBF100CBBA57 /* Edit_ProfileVC.swift in Sources */,
 				3FC6CEBA1F6F744700DF2A12 /* AppDelegate.swift in Sources */,
 				B464D78F1F8D1F3E002A1FDC /* EventCollectionCell.swift in Sources */,
+				B45CD86E1F9C8CC5009262B8 /* TextSize.swift in Sources */,
 				B4BD9EF71F6FB14200C43182 /* Constants.swift in Sources */,
 				B4BD9EF51F6FAAA400C43182 /* DBProvider.swift in Sources */,
 				B47BD4051F8A615C0099061C /* loginMainVC.swift in Sources */,

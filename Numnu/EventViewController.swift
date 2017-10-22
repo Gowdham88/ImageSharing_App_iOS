@@ -10,7 +10,25 @@ import UIKit
 import XLPagerTabStrip
 
 class EventViewController: ButtonBarPagerTabStripViewController {
-
+    
+    @IBOutlet weak var eventImageView: ImageExtender!
+    @IBOutlet weak var eventTitleLabel: UILabel!
+    
+    @IBOutlet weak var eventDateLabel: UILabel!
+    @IBOutlet weak var eventPlaceLabel: UILabel!
+    @IBOutlet weak var eventMap: UILabel!
+    
+    
+    @IBOutlet weak var EventLinkLabel1: UILabel!
+    @IBOutlet weak var eventLinkLabel2: UILabel!
+    @IBOutlet weak var eventLinkLabel3: UILabel!
+    @IBOutlet weak var eventDescriptionLabel: UITextView!
+   
+    @IBOutlet weak var tagScrollView: UIScrollView!
+    var tagarray = ["Festival","Wine","Party","Rum","Barbaque","Pasta","Sandwich","Burger"]
+    var labelArray = [UILabel()]
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,7 +51,50 @@ class EventViewController: ButtonBarPagerTabStripViewController {
             
         }
 
-        // Do any additional setup after loading the view.
+        /****************event label tap function************************/
+        
+        tapRegistration()
+        
+        var expandableWidth : CGFloat = 0
+        
+        for (i,text) in tagarray.enumerated() {
+            
+            let textLabel : UILabel = UILabel()
+            let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: text, fontname: "AvenirNext-Regular", size: 15)
+            textLabel.font = UIFont(name: "AvenirNext-Regular", size: 15)
+            textLabel.text = text
+            print(expandableWidth)
+            
+            if i == 0 {
+                
+                textLabel.frame = CGRect(x: 0, y: 0, width: textSize.width, height: 30)
+                
+            } else {
+                
+                if i == 1 {
+                    
+                    expandableWidth = TextSize.sharedinstance.sizeofString(text: tagarray[0], fontname: "AvenirNext-Regular", size: 15).width
+                } else {
+                    
+                    expandableWidth += textSize.width
+                }
+                
+                
+                textLabel.frame = CGRect(x: expandableWidth+50, y: 0, width: textSize.width, height: 30)
+                
+                
+            }
+            
+            print(textLabel.frame)
+            tagScrollView.addSubview(textLabel)
+            
+            
+        }
+      
+        tagScrollView.contentSize = CGSize(width: expandableWidth, height: 0)
+        
+        tagScrollView.isScrollEnabled = true
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,14 +110,52 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
 
 }
+
+extension EventViewController {
+    
+    /****************event label tap function************************/
+    
+    func tapRegistration() {
+        
+        let link1 = UITapGestureRecognizer(target: self, action: #selector(EventViewController.webLink1(sender:)))
+        EventLinkLabel1.isUserInteractionEnabled = true
+        EventLinkLabel1.addGestureRecognizer(link1)
+        
+        let link2 = UITapGestureRecognizer(target: self, action: #selector(EventViewController.webLink2(sender:)))
+        eventLinkLabel2.isUserInteractionEnabled = true
+        eventLinkLabel2.addGestureRecognizer(link2)
+        
+        let link3 = UITapGestureRecognizer(target: self, action: #selector(EventViewController.webLink1(sender:)))
+        eventLinkLabel3.isUserInteractionEnabled = true
+        eventLinkLabel3.addGestureRecognizer(link3)
+        
+        let maptap = UITapGestureRecognizer(target: self, action: #selector(EventViewController.mapRedirect(sender:)))
+        eventMap.isUserInteractionEnabled = true
+        eventMap.addGestureRecognizer(maptap)
+        
+    }
+    
+    func webLink1(sender:UITapGestureRecognizer){
+        
+    }
+    
+    func webLink2(sender:UITapGestureRecognizer){
+        
+    }
+    
+    func webLink3(sender:UITapGestureRecognizer){
+        
+    }
+    
+    func mapRedirect(sender:UITapGestureRecognizer){
+        
+    }
+    
+    
+}
+
+
+
