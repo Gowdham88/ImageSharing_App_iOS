@@ -26,7 +26,22 @@ struct TextSize{
         
     }
     
+    func getLabelHeight(text: String, width: CGFloat, font: UIFont) -> CGFloat {
+        let lbl = UILabel(frame: .zero)
+        lbl.frame.size.width = width
+        lbl.font = font
+        lbl.numberOfLines = 0
+        lbl.text = text
+        lbl.sizeToFit()
+        
+        return lbl.frame.size.height
+    }
     
+    func getLabelWidth(text: String,font: UIFont) -> CGFloat {
+        
+        let size = text.size(attributes: [NSFontAttributeName: font])
+        return size.width
+    }
     
     
 }

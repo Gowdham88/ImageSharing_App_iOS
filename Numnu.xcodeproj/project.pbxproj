@@ -38,6 +38,7 @@
 		B42201B41F8E70DA0058A4ED /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42201B31F8E70DA0058A4ED /* EventTableViewCell.swift */; };
 		B45CD86E1F9C8CC5009262B8 /* TextSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CD86D1F9C8CC5009262B8 /* TextSize.swift */; };
 		B45CD8701F9C940C009262B8 /* EventTagCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CD86F1F9C940C009262B8 /* EventTagCollectionCell.swift */; };
+		B45CD8721F9CDA99009262B8 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CD8711F9CDA99009262B8 /* UILabel.swift */; };
 		B464D78D1F8D0FEC002A1FDC /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B464D78C1F8D0FEC002A1FDC /* UIColor.swift */; };
 		B464D78F1F8D1F3E002A1FDC /* EventCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B464D78E1F8D1F3E002A1FDC /* EventCollectionCell.swift */; };
 		B47BD4011F8A26A30099061C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B47BD4001F8A26A30099061C /* GoogleService-Info.plist */; };
@@ -111,6 +112,7 @@
 		B42201B31F8E70DA0058A4ED /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		B45CD86D1F9C8CC5009262B8 /* TextSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSize.swift; sourceTree = "<group>"; };
 		B45CD86F1F9C940C009262B8 /* EventTagCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTagCollectionCell.swift; sourceTree = "<group>"; };
+		B45CD8711F9CDA99009262B8 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		B464D78C1F8D0FEC002A1FDC /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		B464D78E1F8D1F3E002A1FDC /* EventCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionCell.swift; sourceTree = "<group>"; };
 		B47BD4001F8A26A30099061C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -347,6 +349,7 @@
 				B464D78C1F8D0FEC002A1FDC /* UIColor.swift */,
 				B42201B11F8E661E0058A4ED /* ImageExtender.swift */,
 				B45CD86D1F9C8CC5009262B8 /* TextSize.swift */,
+				B45CD8711F9CDA99009262B8 /* UILabel.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -610,6 +613,7 @@
 				B41530961F8BBCF1000FB369 /* UserTabController.swift in Sources */,
 				B418423F1F8FD1B000CBBA57 /* NotificationsVC.swift in Sources */,
 				B42201B21F8E661E0058A4ED /* ImageExtender.swift in Sources */,
+				B45CD8721F9CDA99009262B8 /* UILabel.swift in Sources */,
 				3FC6CEE81F6FA17300DF2A12 /* HomeViewController.swift in Sources */,
 				B4BD9EFB1F6FD08F00C43182 /* Processors.swift in Sources */,
 				B47BD4091F8A836D0099061C /* ForgotpasswordVC.swift in Sources */,

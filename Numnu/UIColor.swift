@@ -26,4 +26,16 @@ extension UIColor {
         
     }
     
+    static func tagBgColor() -> UIColor {
+        
+        return UIColor(red:236/255, green:236/255, blue:236/255, alpha:1.00)
+        
+    }
+    
+    static func tagTextColor() -> UIColor {
+        
+        return UIColor(red:138/255, green:138/255, blue:138/255, alpha:1.00)
+        
+    }
+    
 }
