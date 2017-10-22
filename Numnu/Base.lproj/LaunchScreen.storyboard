@@ -28,7 +28,7 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Numnu background - dark" translatesAutoresizingMaskIntoConstraints="NO" id="mhm-ho-drb">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Numnu_appicon" translatesAutoresizingMaskIntoConstraints="NO" id="efD-tG-Sac">
                                 <rect key="frame" x="109" y="167" width="100" height="100"/>
