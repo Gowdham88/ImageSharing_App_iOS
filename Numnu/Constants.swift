@@ -25,6 +25,7 @@ class Constants {
     
     static let TabStoryId   = "tabcontrollerid"
     static let EventStoryId = "eventstoryid"
+    static let LoginStoryId = "loginStoryId"
     
     // Tab name
     
@@ -38,4 +39,6 @@ class Constants {
     static let Tabid2  = "UserTab"
     static let Tabid3  = "MenuTab"
     static let Tabid4  = "EventTab"
+    
+    static let dummy   = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolfdfdfdfdfdfdfdfdfdfdfdf fdfdfddsdsdsdsdsds djhdjs dsjhdjhsjdhsjhdhs dsjhd Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolfdfdfdfdfdfdfdfdfdfdfdf fdfdfddsdsdsdsdsds djhdjs dsjhdjhsjdhsjhdhs dsjhd Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolfdfdfdfdfdfdfdfdfdfdfdf fdfdfddsdsdsdsdsds djhdjs dsjhdjhsjdhsjhdhs dsjhd"
 }

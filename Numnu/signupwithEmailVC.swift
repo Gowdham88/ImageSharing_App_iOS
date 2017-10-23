@@ -26,13 +26,10 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        emailTextfield.useUnderline()
-        passwordTextfield.useUnderline()
-        
+  
         labelcredentials.isHidden = true
         
-        // Do any additional setup after loading the view.
+      
     }
     
     var iconClick = Bool()
@@ -40,11 +37,15 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     @IBAction func passwordHideButton(_ sender: Any) {
         
         if(iconClick == true) {
+            
             passwordTextfield.isSecureTextEntry = false
             iconClick = false
+            
         } else {
+            
             passwordTextfield.isSecureTextEntry = true
             iconClick = true
+            
         }
         
     }
@@ -171,6 +172,8 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         self.window?.makeKeyAndVisible()
         
     }
+    
+    
     
 }
 

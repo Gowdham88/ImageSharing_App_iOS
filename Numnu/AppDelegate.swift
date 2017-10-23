@@ -30,11 +30,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         openFirstScreen()
         
         return true
- }
+  }
     
  
- 
-    
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -72,14 +70,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DispatchQueue.main.asyncAfter(deadline: when) {
             
             self.window    = UIWindow(frame: UIScreen.main.bounds)
-            let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
-            let initialViewController = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)
+            let storyboard = UIStoryboard(name: Constants.Auth, bundle: nil)
+            let initialViewController = storyboard.instantiateViewController(withIdentifier: Constants.LoginStoryId)
             self.window?.rootViewController = initialViewController
             self.window?.makeKeyAndVisible()
             
         }
-        
-        
+       
     }
 
  }

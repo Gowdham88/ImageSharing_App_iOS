@@ -22,12 +22,26 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     @IBOutlet weak var EventLinkLabel1: UILabel!
     @IBOutlet weak var eventLinkLabel2: UILabel!
     @IBOutlet weak var eventLinkLabel3: UILabel!
-    @IBOutlet weak var eventDescriptionLabel: UITextView!
-   
-    @IBOutlet weak var tagScrollView: UIScrollView!
-    var tagarray = ["Festival","Wine","Party","Rum","Barbaque","Pasta","Sandwich","Burger"]
-    var labelArray = [UILabel()]
     
+    @IBOutlet weak var eventDescriptionLabel: UILabel!
+    @IBOutlet weak var readMoreButton: UIButton!
+    
+    
+    @IBOutlet weak var TabBarView: ButtonBarView!
+    @IBOutlet weak var pagerView: UIScrollView!
+    @IBOutlet weak var tagScrollView: UIScrollView!
+    
+    var tagarray = ["Festival","Wine","Party","Rum","Barbaque","Pasta","Sandwich","Burger"]
+    
+    /***************contraints***********************/
+    
+    @IBOutlet weak var eventDescriptionHeight: NSLayoutConstraint!
+    @IBOutlet weak var containerViewTop: NSLayoutConstraint!
+    @IBOutlet weak var barButtonTop: NSLayoutConstraint!
+    
+    /***************Read more variable*********************/
+    
+    var isLabelAtMaxHeight = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,45 +69,24 @@ class EventViewController: ButtonBarPagerTabStripViewController {
         
         tapRegistration()
         
-        var expandableWidth : CGFloat = 0
+        tagViewUpdate()
         
-        for (i,text) in tagarray.enumerated() {
+        eventDescriptionLabel.text = Constants.dummy
+        
+         /****************Checking number of lines************************/
+     
+        if (eventDescriptionLabel.numberOfVisibleLines > 4)  {
             
-            let textLabel : UILabel = UILabel()
-            let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: text, fontname: "AvenirNext-Regular", size: 15)
-            textLabel.font = UIFont(name: "AvenirNext-Regular", size: 15)
-            textLabel.text = text
-            print(expandableWidth)
+            readMoreButton.isHidden = false
+      
+        } else {
             
-            if i == 0 {
-                
-                textLabel.frame = CGRect(x: 0, y: 0, width: textSize.width, height: 30)
-                
-            } else {
-                
-                if i == 1 {
-                    
-                    expandableWidth = TextSize.sharedinstance.sizeofString(text: tagarray[0], fontname: "AvenirNext-Regular", size: 15).width
-                } else {
-                    
-                    expandableWidth += textSize.width
-                }
-                
-                
-                textLabel.frame = CGRect(x: expandableWidth+50, y: 0, width: textSize.width, height: 30)
-                
-                
-            }
-            
-            print(textLabel.frame)
-            tagScrollView.addSubview(textLabel)
-            
-            
+            readMoreButton.isHidden = true
+            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
+            containerViewTop.constant  = 683
+            barButtonTop.constant      = 683
         }
       
-        tagScrollView.contentSize = CGSize(width: expandableWidth, height: 0)
-        
-        tagScrollView.isScrollEnabled = true
         
     }
 
@@ -110,6 +103,26 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     }
     
 
+    @IBAction func ButtonReadMore(_ sender: UIButton) {
+        
+        if isLabelAtMaxHeight {
+            readMoreButton.setTitle("Read more", for: .normal)
+            isLabelAtMaxHeight = false
+            eventDescriptionHeight.constant = 85
+            containerViewTop.constant  = 713
+            barButtonTop.constant      = 713
+            
+        } else {
+            readMoreButton.setTitle("Read less", for: .normal)
+            isLabelAtMaxHeight = true
+            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
+            containerViewTop.constant  = 628+TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
+            barButtonTop.constant      = 628+TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
+            
+        }
+        
+        
+    }
     
 
 }
@@ -151,6 +164,45 @@ extension EventViewController {
     }
     
     func mapRedirect(sender:UITapGestureRecognizer){
+        
+    }
+    
+    /*************************Tag view updating************************************/
+    
+    func tagViewUpdate(){
+        
+        var expandableWidth : CGFloat = 0
+        
+        for (i,text) in tagarray.enumerated() {
+            
+            let textLabel : UILabel = UILabel()
+            let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: text, fontname: "AvenirNext-Regular", size: 15)
+            textLabel.font = UIFont(name: "AvenirNext-Regular", size: 15)
+            textLabel.text = text
+            textLabel.backgroundColor  = UIColor.tagBgColor()
+            textLabel.textColor        = UIColor.tagTextColor()
+            textLabel.layer.cornerRadius = 10
+            textLabel.layer.masksToBounds = true
+            textLabel.textAlignment = .center
+            
+            if i == 0 {
+                
+                textLabel.frame = CGRect(x: 0, y: 0, width: textSize.width+20, height: 30)
+                
+            } else {
+                
+                textLabel.frame = CGRect(x: expandableWidth, y: 0, width: textSize.width+20, height: 30)
+                
+            }
+            
+            expandableWidth += textSize.width+30
+            tagScrollView.addSubview(textLabel)
+           
+        }
+        
+        tagScrollView.contentSize = CGSize(width: expandableWidth, height: 0)
+        tagScrollView.isScrollEnabled = true
+     
         
     }
     
