@@ -70,7 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DispatchQueue.main.asyncAfter(deadline: when) {
             
             self.window    = UIWindow(frame: UIScreen.main.bounds)
-            let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
+            let storyboard = UIStoryboard(name: Constants.Auth, bundle: nil)
             let initialViewController = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)
             self.window?.rootViewController = initialViewController
             self.window?.makeKeyAndVisible()
