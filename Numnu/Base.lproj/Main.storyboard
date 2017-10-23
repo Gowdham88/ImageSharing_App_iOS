@@ -116,8 +116,8 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Explore" id="VQ0-pp-ENm">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="ic_arrow_back" landscapeImage="ic_arrow_back" id="07s-HM-OkK">
-                            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="ic_arrow_back" id="07s-HM-OkK">
+                            <color key="tintColor" red="0.21568627450980393" green="0.21568627450980393" blue="0.21568627450980393" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -247,7 +247,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5i3-nZ-7Qf">
-                                                    <rect key="frame" x="17" y="78" width="283" height="156"/>
+                                                    <rect key="frame" x="17" y="77" width="283" height="156"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ajC-SE-v6a">

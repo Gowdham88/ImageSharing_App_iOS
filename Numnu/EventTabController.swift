@@ -14,6 +14,7 @@ class EventTabController: UIViewController,IndicatorInfoProvider {
     @IBOutlet weak var eventCollectionView: UICollectionView!
     
     @IBOutlet weak var eventTableView: UITableView!
+    var window : UIWindow?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,10 +73,18 @@ extension EventTabController : UICollectionViewDataSource,UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        openStoryBoard(name: Constants.Event, id: Constants.EventStoryId)
         
     }
     
-    
+    func openStoryBoard(name: String,id : String) {
+        
+        window                          = UIWindow(frame: UIScreen.main.bounds)
+        let storyboard                  = UIStoryboard(name: name, bundle: nil)
+        let initialViewController       = storyboard.instantiateViewController(withIdentifier: id)
+        self.navigationController!.pushViewController(initialViewController, animated: true)
+        
+    }
     
     
     

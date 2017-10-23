@@ -41,4 +41,10 @@ class Constants {
     static let Tabid4  = "EventTab"
     
     static let dummy   = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolfdfdfdfdfdfdfdfdfdfdfdf fdfdfddsdsdsdsdsds djhdjs dsjhdjhsjdhsjhdhs dsjhd Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolfdfdfdfdfdfdfdfdfdfdfdf fdfdfddsdsdsdsdsds djhdjs dsjhdjhsjdhsjhdhs dsjhd Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolfdfdfdfdfdfdfdfdfdfdfdf fdfdfddsdsdsdsdsds djhdjs dsjhdjhsjdhsjhdhs dsjhd"
+    
+    // Authentication Label
+    
+    static let Emailpasserror = "Enter email address and password."
+    static let Passworderror  = "Enter valid password with 8 characters & a special character."
+    static let Emailerror     = "Enter valid email address."
 }

@@ -58,6 +58,8 @@ class signInVC: UIViewController, UITextFieldDelegate {
         
         if let email = emailAddressTF.text , email != "", let pwd = passwordTF.text , pwd != "" {
             
+           if isPasswordValid(pwd) {
+            
             Auth.auth().signIn(withEmail: email, password: pwd, completion: { (user, error) in
                 
                 HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
@@ -75,24 +77,30 @@ class signInVC: UIViewController, UITextFieldDelegate {
                 self.idprim.removeAll()
                 
                 print("user?.uid: \(user?.uid)")
+                
+                DispatchQueue.main.async {
                     
-                            DispatchQueue.main.async {
-                                
-                                HUD.hide()
-                                self.revealviewLogin()
-                                
-                                self.emailAddressTF.text = ""
-                                self.passwordTF.text  = ""
-                            
-                    }
+                    HUD.hide()
+                     self.openStoryBoard(name: Constants.Main, id: Constants.TabStoryId)
+                    
+                    self.emailAddressTF.text = ""
+                    self.passwordTF.text     = ""
+                    
+                }
                 
                 print("Login FIRAuth Sign in called")
             })
+                
+           } else {
             
+              authenticationError(error: Constants.Passworderror)
+            
+           }
+       
         } else {
             
-            HUD.hide()
-            self.showAlertMessagepop(title: "Hey! Enter email and password.")
+            
+            authenticationError(error: Constants.Emailpasserror)
         }
     }
     
@@ -114,15 +122,6 @@ class signInVC: UIViewController, UITextFieldDelegate {
     }
     
     
-    func revealviewLogin() {
-        
-        self.window                     = UIWindow(frame: UIScreen.main.bounds)
-        let storyboard                  = UIStoryboard(name: Constants.Main, bundle: nil)
-        let initialViewController       = storyboard.instantiateViewController(withIdentifier: Constants.TabStoryId)
-        self.window?.rootViewController = initialViewController
-        self.window?.makeKeyAndVisible()
-        
-    }
     
     @IBAction func showPassword(_ sender: Any) {
         
@@ -139,7 +138,6 @@ class signInVC: UIViewController, UITextFieldDelegate {
     @IBAction func signupPressed(_ sender: Any) {
      
         closed = "signUp"
-        
         dismiss(animated: true, completion: nil)
 
     }
@@ -149,16 +147,40 @@ class signInVC: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    /***************Password validation********************/
     
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func isPasswordValid(_ password : String) -> Bool{
+        let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{8,}")
+        return passwordTest.evaluate(with: password)
     }
-    */
-
+    
+     /***************Authenticate popup********************/
+    
+    func authenticationError(error : String){
+        
+        passwordInfoLabel.text     = error
+        passwordInfoLabel.isHidden = false
+        
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.07
+        animation.repeatCount = 4
+        animation.autoreverses = true
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: self.passwordInfoLabel.center.x - 10, y: self.passwordInfoLabel.center.y))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: self.passwordInfoLabel.center.x + 10, y: self.passwordInfoLabel.center.y))
+        self.passwordInfoLabel.layer.add(animation, forKey: "position")
+        HUD.hide()
+        
+    }
+    
+    func openStoryBoard(name: String,id : String) {
+        
+        window                          = UIWindow(frame: UIScreen.main.bounds)
+        let storyboard                  = UIStoryboard(name: name, bundle: nil)
+        let initialViewController       = storyboard.instantiateViewController(withIdentifier: id)
+        window?.rootViewController = initialViewController
+        window?.makeKeyAndVisible()
+        
+    }
+    
+   
 }

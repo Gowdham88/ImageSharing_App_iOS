@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        Thread.sleep(forTimeInterval: 3.0)
         
         /*****Screen opening function******/
         openFirstScreen()
@@ -66,7 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
     func openFirstScreen() {
         
-        let when = DispatchTime.now() + 3
+        let when = DispatchTime.now() + 0
         DispatchQueue.main.asyncAfter(deadline: when) {
             
             self.window    = UIWindow(frame: UIScreen.main.bounds)
@@ -81,6 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
  }
  extension UIViewController {
+   
 
     func showAlertMessage() {
 
@@ -117,6 +119,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             ])
 
     }
+    
+   
 
     /*****Keyboard close******/
 
