@@ -25,6 +25,7 @@ class Constants {
     
     static let TabStoryId   = "tabcontrollerid"
     static let EventStoryId = "eventstoryid"
+    static let LoginStoryId = "loginStoryId"
     
     // Tab name
     
