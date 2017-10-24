@@ -16,6 +16,11 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
     
     @IBOutlet weak var editsearchbyLocation: UITextField!
     @IBOutlet weak var editsearchbyItem: UITextField!
+
+    
+    @IBOutlet weak var buttonTabBarView: ButtonBarView!
+    var searchClick : Bool = false
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +45,7 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
         }
         
         hideKeyboardWhenTappedAround()
+        buttonTabBarView.isHidden = true
    
         
     }
@@ -50,23 +56,46 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+       
+    }
+    
     @IBAction func ButtonSearach(_ sender: UIButton) {
         
-         dismissKeyboard()
+        dismissKeyboard()
+        searchClick = true
+        reloadPagerTabStripView()
+        buttonTabBarView.isHidden = false
         
     }
     @IBAction func ButtonLocation(_ sender: UIButton) {
         
-         dismissKeyboard()
+        dismissKeyboard()
+        searchClick = true
+        reloadPagerTabStripView()
+        buttonTabBarView.isHidden = false
     }
     // Tab controllers switch func
 
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-        let child_1 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1)
-        let child_2 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid2)
-        let child_3 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid3)
-        let child_4 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid4)
-        return [child_1, child_2,child_3,child_4]
+        
+        if searchClick {
+            
+            let child_1 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1)
+            let child_2 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid2)
+            let child_3 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid3)
+            let child_4 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid4)
+            return [child_1, child_2,child_3,child_4]
+            
+        } else {
+            
+            let child_1 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.DefaultTab)
+            return [child_1]
+        }
+        
+       
     }
   
     func setnavBar()  {
@@ -91,6 +120,9 @@ extension ParentViewController : UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         dismissKeyboard()
+        searchClick = true
+        reloadPagerTabStripView()
+        buttonTabBarView.isHidden = false
         
         return true
     }
@@ -98,4 +130,6 @@ extension ParentViewController : UITextFieldDelegate {
     
     
 }
+
+
 

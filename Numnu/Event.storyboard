@@ -62,7 +62,7 @@
                                                     <constraint firstAttribute="width" constant="20" id="k59-ak-kAD"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aug 20 - Aug 30 2017 (7:30 am - 9:30 pm)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5iE-8T-Lm3">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aug 20, 7:30 am - Aug 30, 9:30 pm" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5iE-8T-Lm3">
                                                 <rect key="frame" x="38" y="300" width="270" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="sW7-rv-MBE"/>
@@ -78,7 +78,7 @@
                                                     <constraint firstAttribute="height" constant="20" id="9N6-Hz-iDy"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Montea Real" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5m-9M-c9p">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Montreal" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5m-9M-c9p">
                                                 <rect key="frame" x="36" y="340" width="120" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="120" id="Shl-ma-aka"/>
@@ -124,7 +124,7 @@
                                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wrk-kO-3lX">
                                                         <rect key="frame" x="287" y="13" width="25" height="25"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                                        <state key="normal" image="ic_arrow_back"/>
+                                                        <state key="normal" image="arrow"/>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
@@ -132,7 +132,7 @@
                                                     <constraint firstAttribute="height" constant="50" id="1Bf-mG-XGk"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description for event" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3NW-yD-oxA">
+                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description for event" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3NW-yD-oxA">
                                                 <rect key="frame" x="10" y="552" width="300" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="GN9-wb-eKV"/>
@@ -201,7 +201,7 @@
                                                     <constraint firstAttribute="height" constant="30" id="IAm-ho-oNm"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="17"/>
-                                                <state key="normal" title="Read more"/>
+                                                <state key="normal" title="more"/>
                                                 <connections>
                                                     <action selector="ButtonReadMore:" destination="EYG-gd-lNw" eventType="touchUpInside" id="T0L-lj-DEk"/>
                                                 </connections>
@@ -315,8 +315,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrow" width="18" height="10"/>
         <image name="event" width="14" height="14"/>
-        <image name="ic_arrow_back" width="25" height="17"/>
         <image name="maplocation" width="15" height="15"/>
         <image name="onboardbg" width="2225" height="1348"/>
     </resources>
