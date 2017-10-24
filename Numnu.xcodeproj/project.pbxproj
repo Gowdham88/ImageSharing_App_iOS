@@ -36,6 +36,7 @@
 		B41842411F8FD28500CBBA57 /* NotificationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41842401F8FD28500CBBA57 /* NotificationsTableViewCell.swift */; };
 		B42201B21F8E661E0058A4ED /* ImageExtender.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42201B11F8E661E0058A4ED /* ImageExtender.swift */; };
 		B42201B41F8E70DA0058A4ED /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42201B31F8E70DA0058A4ED /* EventTableViewCell.swift */; };
+		B426C68E1F9E0A6B008D586B /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B426C68D1F9E0A6B008D586B /* SplashViewController.swift */; };
 		B45CD86E1F9C8CC5009262B8 /* TextSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CD86D1F9C8CC5009262B8 /* TextSize.swift */; };
 		B45CD8701F9C940C009262B8 /* EventTagCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CD86F1F9C940C009262B8 /* EventTagCollectionCell.swift */; };
 		B45CD8721F9CDA99009262B8 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CD8711F9CDA99009262B8 /* UILabel.swift */; };
@@ -48,12 +49,16 @@
 		B47BD4091F8A836D0099061C /* ForgotpasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47BD4081F8A836D0099061C /* ForgotpasswordVC.swift */; };
 		B47F63A61F88E2BC001D7A18 /* ViewExtender.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47F63A51F88E2BC001D7A18 /* ViewExtender.swift */; };
 		B47F63A81F88E7B6001D7A18 /* ButtonExtender.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47F63A71F88E7B6001D7A18 /* ButtonExtender.swift */; };
+		B49ABD881F9F25A60091C5D1 /* DefaultTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49ABD871F9F25A60091C5D1 /* DefaultTabController.swift */; };
+		B49ABD8A1F9F271D0091C5D1 /* EventDefaulCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49ABD891F9F271D0091C5D1 /* EventDefaulCollectionCell.swift */; };
+		B49ABD8C1F9F28690091C5D1 /* EventDefaulCollectionCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49ABD8B1F9F28690091C5D1 /* EventDefaulCollectionCell2.swift */; };
 		B4A2C06B1F8669A600C3D400 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4A2C06A1F8669A600C3D400 /* Auth.storyboard */; };
 		B4BD9EF01F6FA57300C43182 /* PostList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BD9EEF1F6FA57300C43182 /* PostList.swift */; };
 		B4BD9EF51F6FAAA400C43182 /* DBProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BD9EF41F6FAAA400C43182 /* DBProvider.swift */; };
 		B4BD9EF71F6FB14200C43182 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BD9EF61F6FB14200C43182 /* Constants.swift */; };
 		B4BD9EF91F6FB3E700C43182 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BD9EF81F6FB3E700C43182 /* PostViewModel.swift */; };
 		B4BD9EFB1F6FD08F00C43182 /* Processors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BD9EFA1F6FD08F00C43182 /* Processors.swift */; };
+		B4C7BCEB1F9F74E500B2BEC4 /* PostEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C7BCEA1F9F74E500B2BEC4 /* PostEventTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +115,7 @@
 		B41842401F8FD28500CBBA57 /* NotificationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewCell.swift; sourceTree = "<group>"; };
 		B42201B11F8E661E0058A4ED /* ImageExtender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtender.swift; sourceTree = "<group>"; };
 		B42201B31F8E70DA0058A4ED /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
+		B426C68D1F9E0A6B008D586B /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		B45CD86D1F9C8CC5009262B8 /* TextSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSize.swift; sourceTree = "<group>"; };
 		B45CD86F1F9C940C009262B8 /* EventTagCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTagCollectionCell.swift; sourceTree = "<group>"; };
 		B45CD8711F9CDA99009262B8 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
@@ -127,12 +133,16 @@
 		B47F63A41F88DF23001D7A18 /* Proxima Nova Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Proxima Nova Bold.otf"; sourceTree = "<group>"; };
 		B47F63A51F88E2BC001D7A18 /* ViewExtender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtender.swift; sourceTree = "<group>"; };
 		B47F63A71F88E7B6001D7A18 /* ButtonExtender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtender.swift; sourceTree = "<group>"; };
+		B49ABD871F9F25A60091C5D1 /* DefaultTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTabController.swift; sourceTree = "<group>"; };
+		B49ABD891F9F271D0091C5D1 /* EventDefaulCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDefaulCollectionCell.swift; sourceTree = "<group>"; };
+		B49ABD8B1F9F28690091C5D1 /* EventDefaulCollectionCell2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDefaulCollectionCell2.swift; sourceTree = "<group>"; };
 		B4A2C06A1F8669A600C3D400 /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 		B4BD9EEF1F6FA57300C43182 /* PostList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostList.swift; sourceTree = "<group>"; };
 		B4BD9EF41F6FAAA400C43182 /* DBProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBProvider.swift; sourceTree = "<group>"; };
 		B4BD9EF61F6FB14200C43182 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B4BD9EF81F6FB3E700C43182 /* PostViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		B4BD9EFA1F6FD08F00C43182 /* Processors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Processors.swift; sourceTree = "<group>"; };
+		B4C7BCEA1F9F74E500B2BEC4 /* PostEventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEventTableViewCell.swift; sourceTree = "<group>"; };
 		C488392BD62ED69D8D4F143A /* Pods-Numnu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Numnu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Numnu/Pods-Numnu.debug.xcconfig"; sourceTree = "<group>"; };
 		D0B6B3214A0EA9A12E275CB5 /* Pods-Numnu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Numnu.release.xcconfig"; path = "Pods/Target Support Files/Pods-Numnu/Pods-Numnu.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -257,6 +267,7 @@
 				B41530931F8BBCD9000FB369 /* EventTabController.swift */,
 				B41530951F8BBCF1000FB369 /* UserTabController.swift */,
 				B41530971F8BBD27000FB369 /* MenuTabController.swift */,
+				B49ABD871F9F25A60091C5D1 /* DefaultTabController.swift */,
 			);
 			name = TabControllers;
 			sourceTree = "<group>";
@@ -299,6 +310,7 @@
 				B41842381F8FCBF100CBBA57 /* Edit_ProfileVC.swift */,
 				B418423E1F8FD1B000CBBA57 /* NotificationsVC.swift */,
 				B410DF9D1F94E01400858E4E /* EventViewController.swift */,
+				B426C68D1F9E0A6B008D586B /* SplashViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -311,6 +323,9 @@
 				B42201B31F8E70DA0058A4ED /* EventTableViewCell.swift */,
 				B41842401F8FD28500CBBA57 /* NotificationsTableViewCell.swift */,
 				B45CD86F1F9C940C009262B8 /* EventTagCollectionCell.swift */,
+				B49ABD891F9F271D0091C5D1 /* EventDefaulCollectionCell.swift */,
+				B49ABD8B1F9F28690091C5D1 /* EventDefaulCollectionCell2.swift */,
+				B4C7BCEA1F9F74E500B2BEC4 /* PostEventTableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -588,25 +603,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B49ABD881F9F25A60091C5D1 /* DefaultTabController.swift in Sources */,
 				B41530921F8BBCB8000FB369 /* PostTabController.swift in Sources */,
 				B45CD8701F9C940C009262B8 /* EventTagCollectionCell.swift in Sources */,
 				B464D78D1F8D0FEC002A1FDC /* UIColor.swift in Sources */,
+				B426C68E1F9E0A6B008D586B /* SplashViewController.swift in Sources */,
 				B4BD9EF91F6FB3E700C43182 /* PostViewModel.swift in Sources */,
 				B41530981F8BBD27000FB369 /* MenuTabController.swift in Sources */,
 				B47BD4031F8A48010099061C /* OnboardingVC.swift in Sources */,
 				B410DF9E1F94E01400858E4E /* EventViewController.swift in Sources */,
 				3FC6CEBC1F6F744700DF2A12 /* ViewController.swift in Sources */,
+				B4C7BCEB1F9F74E500B2BEC4 /* PostEventTableViewCell.swift in Sources */,
 				B41842411F8FD28500CBBA57 /* NotificationsTableViewCell.swift in Sources */,
 				B4BD9EF01F6FA57300C43182 /* PostList.swift in Sources */,
 				3FC6CEEA1F6FA25600DF2A12 /* feedTableViewCell.swift in Sources */,
 				B42201B41F8E70DA0058A4ED /* EventTableViewCell.swift in Sources */,
 				B41530941F8BBCD9000FB369 /* EventTabController.swift in Sources */,
 				601D46791F8F3B1C00832BDD /* UserList.swift in Sources */,
+				B49ABD8C1F9F28690091C5D1 /* EventDefaulCollectionCell2.swift in Sources */,
 				B41842391F8FCBF100CBBA57 /* Edit_ProfileVC.swift in Sources */,
 				3FC6CEBA1F6F744700DF2A12 /* AppDelegate.swift in Sources */,
 				B464D78F1F8D1F3E002A1FDC /* EventCollectionCell.swift in Sources */,
 				B45CD86E1F9C8CC5009262B8 /* TextSize.swift in Sources */,
 				B4BD9EF71F6FB14200C43182 /* Constants.swift in Sources */,
+				B49ABD8A1F9F271D0091C5D1 /* EventDefaulCollectionCell.swift in Sources */,
 				B4BD9EF51F6FAAA400C43182 /* DBProvider.swift in Sources */,
 				B47BD4051F8A615C0099061C /* loginMainVC.swift in Sources */,
 				B47BD4071F8A75FA0099061C /* signupwithEmailVC.swift in Sources */,

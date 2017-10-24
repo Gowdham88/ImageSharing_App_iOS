@@ -13,38 +13,42 @@ class OnboardingVC: UIViewController {
     @IBOutlet var letmeinButtonoutlet: UIButton!
     @IBOutlet var notificationsAlert: ViewExtender!
     @IBOutlet var onboardingText: UILabel!
-    
+    var window : UIWindow?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        letmeinButtonoutlet.isUserInteractionEnabled = false
-        onboardingText.isHidden = true
-        letmeinButtonoutlet.isHidden = true
+        
+        
+        self.notificationsAlert.frame.origin.y += self.view.frame.height
         
     }
 
     @IBAction func okPressed(_ sender: Any) {
         
         notificationsAlert.isHidden = true
-    letmeinButtonoutlet.isUserInteractionEnabled = true
         
-        onboardingText.isHidden = false
-        letmeinButtonoutlet.isHidden = false
+        self.openStoryBoard(name: Constants.Main, id: Constants.TabStoryId)
+       
         
     }
     
     @IBAction func ignorePressed(_ sender: Any) {
         
         notificationsAlert.isHidden = true
-    letmeinButtonoutlet.isUserInteractionEnabled = true
-        onboardingText.isHidden = false
+        letmeinButtonoutlet.isUserInteractionEnabled = true
+        onboardingText.isHidden      = false
         letmeinButtonoutlet.isHidden = false
         
     }
     
     @IBAction func letmeinPressed(_ sender: Any) {
         
-        performSegue(withIdentifier: "letmein", sender: self)
+        onboardingText.isHidden      = true
+        letmeinButtonoutlet.isHidden = true
+        UIView.animate(withDuration: 0.5, animations: {
+            self.notificationsAlert.frame.origin.y -= self.view.frame.height
+        }, completion: nil)
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -52,16 +56,18 @@ class OnboardingVC: UIViewController {
         
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func openStoryBoard(name: String,id : String) {
+        
+        window                          = UIWindow(frame: UIScreen.main.bounds)
+        let storyboard                  = UIStoryboard(name: name, bundle: nil)
+        let initialViewController       = storyboard.instantiateViewController(withIdentifier: id)
+        window?.rootViewController = initialViewController
+        window?.makeKeyAndVisible()
+        
     }
-    */
+    
+
+    
 
 }
 

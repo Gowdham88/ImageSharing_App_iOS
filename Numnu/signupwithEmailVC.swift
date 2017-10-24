@@ -121,7 +121,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                
                 HUD.hide()
                 
-                self.revealviewLogin()
+                self.openStoryBoard(name: Constants.Main, id: Constants.TabStoryId)
                 
                 
                 self.idprim.removeAll()
@@ -131,22 +131,13 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                 
             } else {
                 
-                labelcredentials.isHidden = false
+                authenticationError(error: Constants.Passworderror)
               
             }
             
         } else {
             
-            labelcredentials.isHidden = false
-            
-            let animation = CABasicAnimation(keyPath: "position")
-            animation.duration = 0.07
-            animation.repeatCount = 4
-            animation.autoreverses = true
-            animation.fromValue = NSValue(cgPoint: CGPoint(x: self.labelcredentials.center.x - 10, y: self.labelcredentials.center.y))
-            animation.toValue = NSValue(cgPoint: CGPoint(x: self.labelcredentials.center.x + 10, y: self.labelcredentials.center.y))
-            self.labelcredentials.layer.add(animation, forKey: "position")
-            HUD.hide()
+            authenticationError(error: Constants.Emailpasserror)
             print("Please fill in all the fields")
         }
         
@@ -161,19 +152,33 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+  
     
-
-    func revealviewLogin() {
+    func authenticationError(error : String){
         
-        self.window                     = UIWindow(frame: UIScreen.main.bounds)
-        let storyboard                  = UIStoryboard(name: Constants.Main, bundle: nil)
-        let initialViewController       = storyboard.instantiateViewController(withIdentifier: Constants.TabStoryId)
-        self.window?.rootViewController = initialViewController
-        self.window?.makeKeyAndVisible()
+        labelcredentials.text     = error
+        labelcredentials.isHidden = false
+        
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.07
+        animation.repeatCount = 4
+        animation.autoreverses = true
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: self.labelcredentials.center.x - 10, y: self.labelcredentials.center.y))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: self.labelcredentials.center.x + 10, y: self.labelcredentials.center.y))
+        self.labelcredentials.layer.add(animation, forKey: "position")
+        HUD.hide()
         
     }
     
-    
+    func openStoryBoard(name: String,id : String) {
+        
+        window                          = UIWindow(frame: UIScreen.main.bounds)
+        let storyboard                  = UIStoryboard(name: name, bundle: nil)
+        let initialViewController       = storyboard.instantiateViewController(withIdentifier: id)
+        window?.rootViewController = initialViewController
+        window?.makeKeyAndVisible()
+        
+    }
     
 }
 

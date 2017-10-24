@@ -106,14 +106,16 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     @IBAction func ButtonReadMore(_ sender: UIButton) {
         
         if isLabelAtMaxHeight {
-            readMoreButton.setTitle("Read more", for: .normal)
+            
+            readMoreButton.setTitle("more", for: .normal)
             isLabelAtMaxHeight = false
             eventDescriptionHeight.constant = 85
             containerViewTop.constant  = 713
             barButtonTop.constant      = 713
             
         } else {
-            readMoreButton.setTitle("Read less", for: .normal)
+            
+            readMoreButton.setTitle("less", for: .normal)
             isLabelAtMaxHeight = true
             eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
             containerViewTop.constant  = 628+TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
@@ -169,7 +171,7 @@ extension EventViewController {
     
     /*************************Tag view updating************************************/
     
-    func tagViewUpdate(){
+    func tagViewUpdate() {
         
         var expandableWidth : CGFloat = 0
         

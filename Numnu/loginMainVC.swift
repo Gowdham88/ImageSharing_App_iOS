@@ -17,6 +17,7 @@ import FirebaseAuth
 class loginMainVC: UIViewController, UIWebViewDelegate {
     
     var webView: UIWebView!
+    var window: UIWindow?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +59,6 @@ class loginMainVC: UIViewController, UIWebViewDelegate {
     }
     @IBAction func facebookLoginPressed(_ sender: Any) {
         let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
-//        let fbLoginManager = FBSDKLoginManager()
         fbLoginManager.logIn(withReadPermissions: ["public_profile", "email"], from: self) { (result, error) in
             if let error = error {
                 print("Failed to login: \(error.localizedDescription)")
@@ -86,39 +86,24 @@ class loginMainVC: UIViewController, UIWebViewDelegate {
                 }
 
 //                 Present the main view
-                if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "MainView") {
-                    UIApplication.shared.keyWindow?.rootViewController = viewController
-                    self.dismiss(animated: true, completion: nil)
-                }
+                  self.openStoryBoard(name: Constants.Main, id: Constants.TabStoryId)
 
             })
 
         }
 
     }
-}//class
-
-
-
-
-
-
-//    override func didReceiveMemoryWarning() {
-//        super.didReceiveMemoryWarning()
-//        // Dispose of any resources that can be recreated.
-//    }
     
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func openStoryBoard(name: String,id : String) {
+        
+        window                          = UIWindow(frame: UIScreen.main.bounds)
+        let storyboard                  = UIStoryboard(name: name, bundle: nil)
+        let initialViewController       = storyboard.instantiateViewController(withIdentifier: id)
+        window?.rootViewController = initialViewController
+        window?.makeKeyAndVisible()
+        
     }
-    */
+}
 
 
 
