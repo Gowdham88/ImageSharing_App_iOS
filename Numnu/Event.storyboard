@@ -319,6 +319,44 @@
             </objects>
             <point key="canvasLocation" x="281.25" y="-3.1690140845070425"/>
         </scene>
+        <!--Title-->
+        <scene sceneID="UJV-8I-47J">
+            <objects>
+                <viewController storyboardIdentifier="webstroyId" id="eiK-Ng-lB0" customClass="WebViewController" customModule="Numnu" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ojn-Cn-My5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="lcJ-s2-egd"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="HG8-UL-ktS"/>
+                    <connections>
+                        <outlet property="navigationItemList" destination="HG8-UL-ktS" id="aJd-3j-E8x"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s8i-rr-hn8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1112" y="-167"/>
+        </scene>
+        <!--Title-->
+        <scene sceneID="ILq-sZ-yCm">
+            <objects>
+                <viewController storyboardIdentifier="mapstoryboardid" id="MFS-AC-mN5" customClass="EventMapViewController" customModule="Numnu" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="doK-5K-4YW">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="1Sj-3D-1TA"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="Qvs-Pc-RBz"/>
+                    <connections>
+                        <outlet property="navigationItemList" destination="Qvs-Pc-RBz" id="0og-JW-ebp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y9R-jl-XbD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1875" y="-179"/>
+        </scene>
     </scenes>
     <resources>
         <image name="arrow" width="18" height="10"/>

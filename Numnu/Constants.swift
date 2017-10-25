@@ -27,6 +27,11 @@ class Constants {
     static let EventStoryId = "eventstoryid"
     static let LoginStoryId = "loginStoryId"
     
+    // Event story id
+    
+    static let WebViewStoryId = "webstroyId"
+    static let MapStoryId     = "mapstoryboardid"
+    
     // Home Tab name
     
     static let Tab1  = "Events"
@@ -52,4 +57,8 @@ class Constants {
     static let Emailpasserror = "Enter email address and password."
     static let Passworderror  = "Enter valid password with 8 characters & a special character."
     static let Emailerror     = "Enter valid email address."
+    
+    // Map Api key
+    
+    static let MapApiKey      = "AIzaSyAuKzAZP8SLYJf_jfVUsxdcjChIU00FmDQ"
 }

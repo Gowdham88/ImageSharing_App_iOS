@@ -172,20 +172,26 @@ extension EventViewController {
         
     }
     
-    func webLink1(sender:UITapGestureRecognizer){
+    func webLink1(sender:UITapGestureRecognizer) {
+      
+        openWebBoard(url: "http://czsm.co.in/")
+    }
+    
+    func webLink2(sender:UITapGestureRecognizer) {
+        
+        openWebBoard(url: "http://czsm.co.in/")
         
     }
     
-    func webLink2(sender:UITapGestureRecognizer){
+    func webLink3(sender:UITapGestureRecognizer) {
+        
+        openWebBoard(url: "http://czsm.co.in/")
         
     }
     
-    func webLink3(sender:UITapGestureRecognizer){
+    func mapRedirect(sender:UITapGestureRecognizer) {
         
-    }
-    
-    func mapRedirect(sender:UITapGestureRecognizer){
-        
+        openMapBoard()
     }
     
     /*************************Tag view updating************************************/
@@ -247,7 +253,7 @@ extension EventViewController {
         let rightButton = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         
         // Create two buttons for the navigation item
-        navigationItemList.leftBarButtonItem = leftButton
+        navigationItemList.leftBarButtonItem  = leftButton
         navigationItemList.rightBarButtonItem = rightButton
  
         
@@ -256,6 +262,23 @@ extension EventViewController {
     func backButtonClicked() {
         
         _ = self.navigationController?.popToRootViewController(animated: true)
+        
+    }
+    
+    func openWebBoard (url: String) {
+      
+        let storyboard      = UIStoryboard(name: Constants.Event, bundle: nil)
+        let vc              = storyboard.instantiateViewController(withIdentifier: Constants.WebViewStoryId) as! WebViewController
+        vc.url_str          = url
+        self.navigationController!.pushViewController(vc, animated: true)
+        
+    }
+    
+    func openMapBoard () {
+        
+        let storyboard      = UIStoryboard(name: Constants.Event, bundle: nil)
+        let vc              = storyboard.instantiateViewController(withIdentifier: Constants.MapStoryId) as! EventMapViewController
+        self.navigationController!.pushViewController(vc, animated: true)
         
     }
     

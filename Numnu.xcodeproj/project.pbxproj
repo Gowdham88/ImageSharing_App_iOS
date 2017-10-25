@@ -59,9 +59,11 @@
 		B4BD9EF71F6FB14200C43182 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BD9EF61F6FB14200C43182 /* Constants.swift */; };
 		B4BD9EF91F6FB3E700C43182 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BD9EF81F6FB3E700C43182 /* PostViewModel.swift */; };
 		B4BD9EFB1F6FD08F00C43182 /* Processors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BD9EFA1F6FD08F00C43182 /* Processors.swift */; };
+		B4C4ACFC1FA0C60B00105D20 /* EventMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C4ACFB1FA0C60B00105D20 /* EventMapViewController.swift */; };
 		B4C515861FA0800000348E2A /* MenuEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C515851FA0800000348E2A /* MenuEventTableViewCell.swift */; };
 		B4C515881FA085BB00348E2A /* ListTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C515871FA085BB00348E2A /* ListTabController.swift */; };
 		B4C5158A1FA085D100348E2A /* BusinessTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C515891FA085D100348E2A /* BusinessTabController.swift */; };
+		B4C515911FA0AC1700348E2A /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C515901FA0AC1600348E2A /* WebViewController.swift */; };
 		B4C7BCEB1F9F74E500B2BEC4 /* PostEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C7BCEA1F9F74E500B2BEC4 /* PostEventTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -147,9 +149,11 @@
 		B4BD9EF61F6FB14200C43182 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B4BD9EF81F6FB3E700C43182 /* PostViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		B4BD9EFA1F6FD08F00C43182 /* Processors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Processors.swift; sourceTree = "<group>"; };
+		B4C4ACFB1FA0C60B00105D20 /* EventMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMapViewController.swift; sourceTree = "<group>"; };
 		B4C515851FA0800000348E2A /* MenuEventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuEventTableViewCell.swift; sourceTree = "<group>"; };
 		B4C515871FA085BB00348E2A /* ListTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTabController.swift; sourceTree = "<group>"; };
 		B4C515891FA085D100348E2A /* BusinessTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessTabController.swift; sourceTree = "<group>"; };
+		B4C515901FA0AC1600348E2A /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		B4C7BCEA1F9F74E500B2BEC4 /* PostEventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEventTableViewCell.swift; sourceTree = "<group>"; };
 		C488392BD62ED69D8D4F143A /* Pods-Numnu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Numnu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Numnu/Pods-Numnu.debug.xcconfig"; sourceTree = "<group>"; };
 		D0B6B3214A0EA9A12E275CB5 /* Pods-Numnu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Numnu.release.xcconfig"; path = "Pods/Target Support Files/Pods-Numnu/Pods-Numnu.release.xcconfig"; sourceTree = "<group>"; };
@@ -399,6 +403,8 @@
 			isa = PBXGroup;
 			children = (
 				B410DF9D1F94E01400858E4E /* EventViewController.swift */,
+				B4C515901FA0AC1600348E2A /* WebViewController.swift */,
+				B4C4ACFB1FA0C60B00105D20 /* EventMapViewController.swift */,
 			);
 			name = EventDetailController;
 			sourceTree = "<group>";
@@ -657,6 +663,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B49ABD881F9F25A60091C5D1 /* DefaultTabController.swift in Sources */,
+				B4C4ACFC1FA0C60B00105D20 /* EventMapViewController.swift in Sources */,
 				B41530921F8BBCB8000FB369 /* PostTabController.swift in Sources */,
 				B45CD8701F9C940C009262B8 /* EventTagCollectionCell.swift in Sources */,
 				B464D78D1F8D0FEC002A1FDC /* UIColor.swift in Sources */,
@@ -681,6 +688,7 @@
 				3FC6CEBA1F6F744700DF2A12 /* AppDelegate.swift in Sources */,
 				B464D78F1F8D1F3E002A1FDC /* EventCollectionCell.swift in Sources */,
 				B45CD86E1F9C8CC5009262B8 /* TextSize.swift in Sources */,
+				B4C515911FA0AC1700348E2A /* WebViewController.swift in Sources */,
 				B4BD9EF71F6FB14200C43182 /* Constants.swift in Sources */,
 				B49ABD8A1F9F271D0091C5D1 /* EventDefaulCollectionCell.swift in Sources */,
 				B4BD9EF51F6FAAA400C43182 /* DBProvider.swift in Sources */,
