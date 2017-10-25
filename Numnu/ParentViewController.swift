@@ -17,10 +17,12 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
     @IBOutlet weak var editsearchbyLocation: UITextField!
     @IBOutlet weak var editsearchbyItem: UITextField!
 
+    @IBOutlet weak var navigationItemList: UINavigationItem!
     
     @IBOutlet weak var buttonTabBarView: ButtonBarView!
     var searchClick : Bool = false
    
+    @IBOutlet weak var tabScrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +48,8 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
         
         hideKeyboardWhenTappedAround()
         buttonTabBarView.isHidden = true
+        
+        hideNavBar()
    
         
     }
@@ -65,17 +69,13 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
     @IBAction func ButtonSearach(_ sender: UIButton) {
         
         dismissKeyboard()
-        searchClick = true
-        reloadPagerTabStripView()
-        buttonTabBarView.isHidden = false
+        setNavBar()
         
     }
     @IBAction func ButtonLocation(_ sender: UIButton) {
         
         dismissKeyboard()
-        searchClick = true
-        reloadPagerTabStripView()
-        buttonTabBarView.isHidden = false
+        setNavBar()
     }
     // Tab controllers switch func
 
@@ -87,7 +87,9 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
             let child_2 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid2)
             let child_3 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid3)
             let child_4 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid4)
-            return [child_1, child_2,child_3,child_4]
+            let child_5 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid5)
+            let child_6 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid6)
+            return [child_1, child_2,child_3,child_4,child_5,child_6]
             
         } else {
             
@@ -120,14 +122,68 @@ extension ParentViewController : UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         dismissKeyboard()
-        searchClick = true
-        reloadPagerTabStripView()
-        buttonTabBarView.isHidden = false
+        setNavBar()
         
         return true
     }
     
     
+    
+}
+
+extension ParentViewController {
+    
+    /******************Set navigation bar**************************/
+    
+    func setNavBar() {
+        
+        searchClick = true
+        reloadPagerTabStripView()
+        buttonTabBarView.isHidden = false
+        tabScrollView.isScrollEnabled = true
+        
+        navigationItemList.title = "Explore"
+        
+        let button: UIButton = UIButton(type: UIButtonType.custom)
+        //set image for button
+        button.setImage(UIImage(named: "ic_arrow_back"), for: UIControlState.normal)
+        //add function for button
+        button.addTarget(self, action: #selector(EventViewController.backButtonClicked), for: UIControlEvents.touchUpInside)
+        //set frame
+        button.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
+        
+        // Create left and right button for navigation item
+        let leftButton =  UIBarButtonItem(customView: button)
+        leftButton.isEnabled = true
+        
+        let rightButton = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        
+        // Create two buttons for the navigation item
+        navigationItemList.leftBarButtonItem = leftButton
+        navigationItemList.rightBarButtonItem = rightButton
+     
+        
+    }
+    
+    func backButtonClicked() {
+        
+        hideNavBar()
+        
+    }
+    
+    
+    func hideNavBar() {
+        
+        searchClick = false
+        reloadPagerTabStripView()
+        buttonTabBarView.isHidden = true
+        tabScrollView.isScrollEnabled = false
+        
+        let leftButton =  UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        leftButton.isEnabled = false
+        navigationItemList.leftBarButtonItem = leftButton
+        
+    }
     
 }
 

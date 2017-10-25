@@ -8,17 +8,35 @@
 
 import UIKit
 
-class EventTableViewCell: UITableViewCell {
-
+class EventTableViewCell : UITableViewCell {
+    
+    @IBOutlet weak var eventDateLabel: UILabel!
+    @IBOutlet weak var eventNameLabel: UILabel!
+    @IBOutlet weak var eventImageView: ImageExtender!
+    @IBOutlet weak var eventTagCollectionView: UICollectionView!
+  
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+      
     }
+    
+    func setCollectionViewDataSourceDelegate<D: UICollectionViewDataSource & UICollectionViewDelegate>(_ dataSourceDelegate: D, forRow row: Int) {
+        
+        eventTagCollectionView.delegate   = dataSourceDelegate
+        eventTagCollectionView.dataSource = dataSourceDelegate
+        eventTagCollectionView.tag        = row
+        eventTagCollectionView.reloadData()
+        
+    }
+ 
 
 }

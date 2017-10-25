@@ -1,15 +1,15 @@
 //
-//  UserTabController.swift
+//  BusinessTabController.swift
 //  Numnu
 //
-//  Created by CZ Ltd on 10/9/17.
+//  Created by CZ Ltd on 10/25/17.
 //  Copyright © 2017 czsm. All rights reserved.
 //
 
 import UIKit
 import XLPagerTabStrip
 
-class UserTabController: UIViewController,IndicatorInfoProvider {
+class BusinessTabController: UIViewController,IndicatorInfoProvider {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,13 +22,10 @@ class UserTabController: UIViewController,IndicatorInfoProvider {
         // Dispose of any resources that can be recreated.
     }
     
-     // Tab intialliaze
-    
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: Constants.Tab5)
+        return IndicatorInfo(title: Constants.Tab2)
     }
-    
 
-   
+    
 
 }

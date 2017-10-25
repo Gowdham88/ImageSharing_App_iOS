@@ -10,19 +10,20 @@ import UIKit
 import XLPagerTabStrip
 
 class EventTabController: UIViewController,IndicatorInfoProvider {
-
-    @IBOutlet weak var eventCollectionView: UICollectionView!
-    
+ 
     @IBOutlet weak var eventTableView: UITableView!
     var window : UIWindow?
+    
+     var tagarray = ["Festival","Wine","Party","Rum","Barbaque","Pasta","Sandwich","Burger"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
-        eventCollectionView.delegate  = self
-        eventCollectionView.dataSource = self
+        eventTableView.delegate   = self
+        eventTableView.dataSource = self
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,7 +36,7 @@ class EventTabController: UIViewController,IndicatorInfoProvider {
     // Tab intialliaze
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: Constants.Tab4)
+        return IndicatorInfo(title: Constants.Tab1)
     }
     
 
@@ -51,64 +52,62 @@ class EventTabController: UIViewController,IndicatorInfoProvider {
 
 }
 
-extension EventTabController : UICollectionViewDataSource,UICollectionViewDelegate {
+extension EventTabController : UITableViewDelegate,UITableViewDataSource {
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return 6
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "eventcollectioncell", for: indexPath) as! EventCollectionCell
-        
-        return cell
-        
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        openStoryBoard(name: Constants.Event, id: Constants.EventStoryId)
-        
-    }
-    
-    func openStoryBoard(name: String,id : String) {
-        
-        window                          = UIWindow(frame: UIScreen.main.bounds)
-        let storyboard                  = UIStoryboard(name: name, bundle: nil)
-        let initialViewController       = storyboard.instantiateViewController(withIdentifier: id)
-        self.navigationController!.pushViewController(initialViewController, animated: true)
-        
-    }
-    
-    
-    
-}
-
-
-extension EventTabController : UITableViewDataSource,UITableViewDelegate {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 1
-    }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 5
+        return 6
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "eventtablecell", for: indexPath) as! EventTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "eventcell", for: indexPath) as! EventTableViewCell
+        
+        cell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.row)
         
         return cell
+        
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+    
+    
+}
+
+extension EventTabController : UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        return tagarray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "tagcell", for: indexPath) as! EventTagCollectionCell
+        
+        let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagarray[indexPath.row], fontname: "AvenirNext-Regular", size: 15)
+        
+        cell.tagnamelabel.text = tagarray[indexPath.row]
+        
+        cell.setLabelSize(size: textSize)
+        
+        
+        return cell
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagarray[indexPath.row], fontname: "AvenirNext-Regular", size: 15)
+        
+        return CGSize(width: textSize.width+20, height: 30)
+    }
+    
+    
     
 }
