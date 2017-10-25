@@ -31,6 +31,10 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     @IBOutlet weak var pagerView: UIScrollView!
     @IBOutlet weak var tagScrollView: UIScrollView!
     
+    @IBOutlet weak var navigationItemList: UINavigationItem!
+    
+    @IBOutlet weak var mainContainerViewBottom: NSLayoutConstraint!
+    @IBOutlet weak var mainContainerView: NSLayoutConstraint!
     var tagarray = ["Festival","Wine","Party","Rum","Barbaque","Pasta","Sandwich","Burger"]
     
     /***************contraints***********************/
@@ -64,6 +68,10 @@ class EventViewController: ButtonBarPagerTabStripViewController {
             newCell?.label.textColor = UIColor.appBlackColor()
             
         }
+        
+        /**********************set Nav bar****************************/
+        
+        setNavBar()
 
         /****************event label tap function************************/
         
@@ -73,9 +81,9 @@ class EventViewController: ButtonBarPagerTabStripViewController {
         
         eventDescriptionLabel.text = Constants.dummy
         
-         /****************Checking number of lines************************/
+       /****************Checking number of lines************************/
      
-        if (eventDescriptionLabel.numberOfVisibleLines > 4)  {
+        if (eventDescriptionLabel.numberOfVisibleLines > 4) {
             
             readMoreButton.isHidden = false
       
@@ -83,8 +91,17 @@ class EventViewController: ButtonBarPagerTabStripViewController {
             
             readMoreButton.isHidden = true
             eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
-            containerViewTop.constant  = 683
-            barButtonTop.constant      = 683
+            containerViewTop.constant  = 587
+            barButtonTop.constant      = 587
+        }
+        
+        /******************checking iphone device****************************/
+        
+        if self.view.frame.height <= 568 {
+            
+            mainContainerView.constant = 1000
+            mainContainerViewBottom.constant = 0
+            
         }
       
         
@@ -96,10 +113,12 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     }
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+        
         let child_1 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1)
         let child_2 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid2)
         let child_3 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid4)
         return [child_1, child_2,child_3]
+        
     }
     
 
@@ -110,16 +129,16 @@ class EventViewController: ButtonBarPagerTabStripViewController {
             readMoreButton.setTitle("more", for: .normal)
             isLabelAtMaxHeight = false
             eventDescriptionHeight.constant = 85
-            containerViewTop.constant  = 713
-            barButtonTop.constant      = 713
+            containerViewTop.constant  = 617
+            barButtonTop.constant      = 617
             
         } else {
             
             readMoreButton.setTitle("less", for: .normal)
             isLabelAtMaxHeight = true
             eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
-            containerViewTop.constant  = 628+TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
-            barButtonTop.constant      = 628+TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
+            containerViewTop.constant  = 532+TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
+            barButtonTop.constant      = 532+TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
             
         }
         
@@ -208,6 +227,37 @@ extension EventViewController {
         
     }
     
+    /******************Set navigation bar**************************/
+    
+    func setNavBar() {
+
+        navigationItemList.title = "Event Detail"
+        
+        let button: UIButton = UIButton(type: UIButtonType.custom)
+        //set image for button
+        button.setImage(UIImage(named: "ic_arrow_back"), for: UIControlState.normal)
+        //add function for button
+        button.addTarget(self, action: #selector(EventViewController.backButtonClicked), for: UIControlEvents.touchUpInside)
+        //set frame
+        button.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
+        
+        // Create left and right button for navigation item
+        let leftButton =  UIBarButtonItem(customView: button)
+        
+        let rightButton = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        
+        // Create two buttons for the navigation item
+        navigationItemList.leftBarButtonItem = leftButton
+        navigationItemList.rightBarButtonItem = rightButton
+ 
+        
+    }
+    
+    func backButtonClicked() {
+        
+        _ = self.navigationController?.popToRootViewController(animated: true)
+        
+    }
     
 }
 

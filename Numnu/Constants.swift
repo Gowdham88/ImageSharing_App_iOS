@@ -27,18 +27,22 @@ class Constants {
     static let EventStoryId = "eventstoryid"
     static let LoginStoryId = "loginStoryId"
     
-    // Tab name
+    // Home Tab name
     
-    static let Tab1  = "Posts"
-    static let Tab2  = "Users"
+    static let Tab1  = "Events"
+    static let Tab2  = "Businesses"
     static let Tab3  = "Menu Items"
-    static let Tab4  = "Events"
+    static let Tab4  = "Posts"
+    static let Tab5  = "Users"
+    static let Tab6  = "Lists"
     
-    // Tab id
-    static let Tabid1  = "PostTab"
-    static let Tabid2  = "UserTab"
+    // Home Tab id
+    static let Tabid1  = "EventTab"
+    static let Tabid2  = "BusinessesTab"
     static let Tabid3  = "MenuTab"
-    static let Tabid4  = "EventTab"
+    static let Tabid4  = "PostTab"
+    static let Tabid5  = "UserTab"
+    static let Tabid6  = "ListTab"
     static let DefaultTab = "DefaultTab"
     
     static let dummy   = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolfdfdfdfdfdfdfdfdfdfdfdf fdfdfddsdsdsdsdsds djhdjs dsjhdjhsjdhsjhdhs dsjhd Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolfdfdfdfdfdfdfdfdfdfdfdf fdfdfddsdsdsdsdsds djhdjs dsjhdjhsjdhsjhdhs dsjhd Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolfdfdfdfdfdfdfdfdfdfdfdf fdfdfddsdsdsdsdsds djhdjs dsjhdjhsjdhsjhdhs dsjhd"

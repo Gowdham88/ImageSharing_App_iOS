@@ -1,20 +1,19 @@
 //
-//  PostEventTableViewCell.swift
+//  MenuEventTableViewCell.swift
 //  Numnu
 //
-//  Created by CZ Ltd on 10/24/17.
+//  Created by CZ Ltd on 10/25/17.
 //  Copyright © 2017 czsm. All rights reserved.
 //
 
 import UIKit
 
-class PostEventTableViewCell: UITableViewCell {
- 
-    @IBOutlet weak var postEventTagCollectionview: UICollectionView!
-    @IBOutlet weak var postEventImage: ImageExtender!
-    @IBOutlet weak var postEventLabel: UILabel!
+class MenuEventTableViewCell: UITableViewCell {
     
-    
+    @IBOutlet weak var menuImageview: ImageExtender!
+    @IBOutlet weak var menuNameLabel: UILabel!
+    @IBOutlet weak var menuTagCollectionView: UICollectionView!
+    @IBOutlet weak var menuDateLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,13 +26,12 @@ class PostEventTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    
     func setCollectionViewDataSourceDelegate<D: UICollectionViewDataSource & UICollectionViewDelegate>(_ dataSourceDelegate: D, forRow row: Int) {
         
-        postEventTagCollectionview.delegate   = dataSourceDelegate
-        postEventTagCollectionview.dataSource = dataSourceDelegate
-        postEventTagCollectionview.tag        = row
-        postEventTagCollectionview.reloadData()
+        menuTagCollectionView.delegate   = dataSourceDelegate
+        menuTagCollectionView.dataSource = dataSourceDelegate
+        menuTagCollectionView.tag        = row
+        menuTagCollectionView.reloadData()
         
     }
 
