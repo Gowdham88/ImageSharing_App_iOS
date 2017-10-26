@@ -33,10 +33,8 @@ class EventMapViewController: UIViewController {
         locationManager.startUpdatingLocation()
         locationManager.delegate = self
         
-        
-      
-       
-        
+        self.tabBarController?.tabBar.isHidden = true
+     
 
         // Do any additional setup after loading the view.
     }
@@ -49,11 +47,7 @@ class EventMapViewController: UIViewController {
     /******************Set navigation bar**************************/
     
     func setMap() {
-        
-       
-        
-       
-        
+      
         let camera = GMSCameraPosition.camera(withLatitude: 45.5017, longitude: 73.5673, zoom: zoomLevel)
         mapView = GMSMapView.map(withFrame: view.bounds, camera: camera)
         mapView.settings.myLocationButton = true

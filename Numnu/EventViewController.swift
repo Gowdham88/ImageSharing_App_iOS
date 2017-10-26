@@ -69,6 +69,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
             
         }
         
+        
         /**********************set Nav bar****************************/
         
         setNavBar()
@@ -121,6 +122,12 @@ class EventViewController: ButtonBarPagerTabStripViewController {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
 
     @IBAction func ButtonReadMore(_ sender: UIButton) {
         
@@ -137,8 +144,8 @@ class EventViewController: ButtonBarPagerTabStripViewController {
             readMoreButton.setTitle("less", for: .normal)
             isLabelAtMaxHeight = true
             eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
-            containerViewTop.constant  = 532+TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
-            barButtonTop.constant      = 532+TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
+            containerViewTop.constant       = 532+TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
+            barButtonTop.constant           = 532+TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
             
         }
         
