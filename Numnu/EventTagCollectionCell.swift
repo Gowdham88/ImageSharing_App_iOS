@@ -10,7 +10,6 @@ import UIKit
 
 class EventTagCollectionCell: UICollectionViewCell {
   
-   
     @IBOutlet weak var tagnamelabel: UILabel!
     
     func setLabelSize(size : CGSize) {

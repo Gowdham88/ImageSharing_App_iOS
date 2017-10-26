@@ -15,7 +15,7 @@ class EventMapViewController: UIViewController {
     var locationManager = CLLocationManager()
     var currentLocation: CLLocation?
     var mapView: GMSMapView!
-    var zoomLevel: Float = 15.0
+    var zoomLevel: Float = 6.0
     @IBOutlet weak var navigationItemList: UINavigationItem!
     
     override func viewDidLoad() {
@@ -48,7 +48,7 @@ class EventMapViewController: UIViewController {
     
     func setMap() {
       
-        let camera = GMSCameraPosition.camera(withLatitude: 45.5017, longitude: 73.5673, zoom: zoomLevel)
+        let camera = GMSCameraPosition.camera(withLatitude: 45.5017, longitude: -73.5673, zoom: zoomLevel)
         mapView = GMSMapView.map(withFrame: view.bounds, camera: camera)
         mapView.settings.myLocationButton = true
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -60,7 +60,7 @@ class EventMapViewController: UIViewController {
         
         // Creates a marker in the center of the map.
         let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: 45.5017, longitude: 73.5673)
+        marker.position = CLLocationCoordinate2D(latitude: 45.5017, longitude: -73.5673)
         marker.title = "Montreal"
         marker.snippet = "Canada"
         marker.map = mapView

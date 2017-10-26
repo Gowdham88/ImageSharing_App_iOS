@@ -15,15 +15,15 @@ class PostTabController: UIViewController,IndicatorInfoProvider {
     
     @IBOutlet weak var postEventTableView: UITableView!
     
-     var tagarray = ["Festival","Wine","Party","Rum","Barbaque","Pasta","Sandwich","Burger"]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        postEventTableView.delegate   = self
-//        postEventTableView.dataSource = self
+        postEventTableView.delegate   = self
+        postEventTableView.dataSource = self
 
-        // Do any additional setup after loading the view.
+       
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,4 +38,28 @@ class PostTabController: UIViewController,IndicatorInfoProvider {
 
 }
 
+extension PostTabController : UITableViewDelegate,UITableViewDataSource {
+    
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return 6
+        
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "postEventCell", for: indexPath) as! PostEventTableViewCell
+        
+        return cell
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+    
+    
+}
 

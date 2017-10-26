@@ -20,93 +20,298 @@
             <objects>
                 <viewController storyboardIdentifier="PostTab" id="niz-yc-Unm" customClass="PostTabController" customModule="Numnu" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JRX-on-64K">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="700"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="145" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EeY-kM-yD6">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="488" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="L37-PV-XPo">
+                                <rect key="frame" x="0.0" y="64" width="320" height="636"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="posteventcell" id="ORs-tN-Cs9" customClass="PostEventTableViewCell" customModule="Numnu" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="145"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="postEventCell" rowHeight="488" id="bU4-xJ-OW6" customClass="PostEventTableViewCell" customModule="Numnu" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="488"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ORs-tN-Cs9" id="xa0-Ab-g3b">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="145"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bU4-xJ-OW6" id="knx-Xh-pq7">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="488"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hvb-3B-JIM">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZI8-aE-zbG">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="483"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="onboardbg" translatesAutoresizingMaskIntoConstraints="NO" id="EXj-RV-Ymz" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
-                                                            <rect key="frame" x="8" y="10" width="120" height="120"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="foodie" translatesAutoresizingMaskIntoConstraints="NO" id="rcX-fo-rer" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                                            <rect key="frame" x="10" y="142" width="300" height="200"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="200" id="Nmy-o9-jFS"/>
+                                                            </constraints>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                    <real key="value" value="12"/>
+                                                                    <real key="value" value="10"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Morniquo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aEB-Kn-Sou">
-                                                            <rect key="frame" x="136" y="25" width="176" height="30"/>
-                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Numnu_appicon" translatesAutoresizingMaskIntoConstraints="NO" id="hWB-yN-joN" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                                            <rect key="frame" x="8" y="17" width="40" height="40"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="40" id="RIu-cF-tuW"/>
+                                                                <constraint firstAttribute="height" constant="40" id="RTB-o7-L02"/>
+                                                            </constraints>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                    <real key="value" value="20"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Suraj Balachandran" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhe-HM-EX5">
+                                                            <rect key="frame" x="56" y="18" width="254" height="30"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="30" id="6xa-hw-ofA"/>
+                                                            </constraints>
                                                             <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="17"/>
-                                                            <color key="textColor" red="0.15291979908943176" green="0.15295344591140747" blue="0.15291768312454224" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="C7d-5R-EDp">
-                                                            <rect key="frame" x="136" y="70" width="176" height="30"/>
-                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chennai" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mjP-Cg-NX6">
+                                                            <rect key="frame" x="56" y="48" width="165" height="25"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="25" id="CEW-Xt-1W8"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
+                                                            <color key="textColor" red="0.44705882349999998" green="0.45098039220000002" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 hrs" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3YL-aj-g84">
+                                                            <rect key="frame" x="230" y="48" width="82" height="25"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="82" id="jQ4-1O-5pG"/>
+                                                                <constraint firstAttribute="height" constant="25" id="rlg-mP-BVg"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
+                                                            <color key="textColor" red="0.44705882349999998" green="0.45098039220000002" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="love_ico" translatesAutoresizingMaskIntoConstraints="NO" id="DYR-A4-5A7" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                                            <rect key="frame" x="236" y="350" width="30" height="30"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="30" id="QZp-DK-i1k"/>
+                                                                <constraint firstAttribute="height" constant="30" id="gFM-e0-EZJ"/>
+                                                            </constraints>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                    <real key="value" value="0.0"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </imageView>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IBp-m0-fXT">
+                                                            <rect key="frame" x="10" y="390" width="300" height="30"/>
+                                                            <subviews>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="restaurant_ico" translatesAutoresizingMaskIntoConstraints="NO" id="Pe8-QC-U6l" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                                                    <rect key="frame" x="5" y="4" width="22" height="22"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="22" id="jR0-81-B9x"/>
+                                                                        <constraint firstAttribute="width" constant="22" id="tDp-Ro-F5g"/>
+                                                                    </constraints>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                            <real key="value" value="0.0"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </imageView>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cottage house" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oWe-VH-aDd">
+                                                                    <rect key="frame" x="35" y="5" width="95" height="20"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="20" id="iwR-4i-Hzy"/>
+                                                                        <constraint firstAttribute="width" constant="95" id="rkX-9K-oYx"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                    <color key="textColor" red="0.44705882349999998" green="0.45098039220000002" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dish_ico" translatesAutoresizingMaskIntoConstraints="NO" id="u0v-zL-Ecg" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                                                    <rect key="frame" x="153" y="4" width="22" height="22"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="22" id="LfQ-1o-GQu"/>
+                                                                        <constraint firstAttribute="height" constant="22" id="QlH-4J-jhs"/>
+                                                                    </constraints>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                            <real key="value" value="0.0"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </imageView>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BarBaquee side plater" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JC2-ou-vUD">
+                                                                    <rect key="frame" x="183" y="5" width="110" height="20"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="110" id="2aC-AJ-GXG"/>
+                                                                        <constraint firstAttribute="height" constant="20" id="tVT-b2-Vsi"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="14"/>
+                                                                    <color key="textColor" red="0.44705882349999998" green="0.45098039220000002" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="u2G-nn-Qag">
-                                                                <size key="itemSize" width="63" height="30"/>
-                                                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                            </collectionViewFlowLayout>
-                                                            <cells>
-                                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="tageventcell" id="hue-ry-l8J">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="63" height="30"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="63" height="30"/>
-                                                                        <autoresizingMask key="autoresizingMask"/>
-                                                                        <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Kr-gd-cMv">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="60" height="30"/>
-                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                                <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="17"/>
-                                                                                <nil key="textColor"/>
-                                                                                <nil key="highlightedColor"/>
-                                                                            </label>
-                                                                        </subviews>
-                                                                    </view>
-                                                                </collectionViewCell>
-                                                            </cells>
-                                                        </collectionView>
+                                                            <constraints>
+                                                                <constraint firstAttribute="bottom" secondItem="JC2-ou-vUD" secondAttribute="bottom" constant="5" id="29e-ly-Q77"/>
+                                                                <constraint firstItem="oWe-VH-aDd" firstAttribute="leading" secondItem="Pe8-QC-U6l" secondAttribute="trailing" constant="8" id="HMQ-vN-OwU"/>
+                                                                <constraint firstItem="JC2-ou-vUD" firstAttribute="leading" secondItem="u0v-zL-Ecg" secondAttribute="trailing" constant="8" id="PpI-OY-8eH"/>
+                                                                <constraint firstItem="u0v-zL-Ecg" firstAttribute="leading" secondItem="IBp-m0-fXT" secondAttribute="leading" constant="153" id="RW1-td-1lU"/>
+                                                                <constraint firstItem="oWe-VH-aDd" firstAttribute="leading" secondItem="Pe8-QC-U6l" secondAttribute="trailing" constant="8" id="VVS-0P-PfW"/>
+                                                                <constraint firstItem="Pe8-QC-U6l" firstAttribute="top" secondItem="IBp-m0-fXT" secondAttribute="top" constant="4" id="WQI-5C-Yfy"/>
+                                                                <constraint firstItem="u0v-zL-Ecg" firstAttribute="top" secondItem="IBp-m0-fXT" secondAttribute="top" constant="4" id="c2k-yw-pUh"/>
+                                                                <constraint firstItem="JC2-ou-vUD" firstAttribute="top" secondItem="IBp-m0-fXT" secondAttribute="top" constant="5" id="jka-eu-VMS"/>
+                                                                <constraint firstAttribute="bottom" secondItem="u0v-zL-Ecg" secondAttribute="bottom" constant="4" id="mag-hy-BuA"/>
+                                                                <constraint firstAttribute="height" constant="30" id="mcv-QO-ykf"/>
+                                                                <constraint firstAttribute="bottom" secondItem="oWe-VH-aDd" secondAttribute="bottom" constant="5" id="n26-xU-sKI"/>
+                                                                <constraint firstItem="Pe8-QC-U6l" firstAttribute="leading" secondItem="IBp-m0-fXT" secondAttribute="leading" constant="5" id="rdH-6y-y3Q"/>
+                                                                <constraint firstAttribute="bottom" secondItem="Pe8-QC-U6l" secondAttribute="bottom" constant="4" id="wpg-gd-jyA"/>
+                                                                <constraint firstItem="oWe-VH-aDd" firstAttribute="top" secondItem="IBp-m0-fXT" secondAttribute="top" constant="5" id="x5Q-1l-m00"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NEG-BI-0Xz">
+                                                            <rect key="frame" x="10" y="430" width="300" height="40"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BarBados food and rum festival" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s0y-Ht-mrM">
+                                                                    <rect key="frame" x="37" y="5" width="263" height="30"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="30" id="bxA-Rq-nRp"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="event_ico" translatesAutoresizingMaskIntoConstraints="NO" id="bnP-Op-ceC" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                                                    <rect key="frame" x="5" y="8" width="24" height="24"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="24" id="ef0-MX-a1S"/>
+                                                                        <constraint firstAttribute="height" constant="24" id="t5P-bm-m3f"/>
+                                                                    </constraints>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                            <real key="value" value="0.0"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </imageView>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <constraints>
+                                                                <constraint firstItem="s0y-Ht-mrM" firstAttribute="leading" secondItem="bnP-Op-ceC" secondAttribute="trailing" constant="8" id="1l1-st-J4Z"/>
+                                                                <constraint firstItem="bnP-Op-ceC" firstAttribute="leading" secondItem="NEG-BI-0Xz" secondAttribute="leading" constant="5" id="9NX-hI-Vxx"/>
+                                                                <constraint firstItem="s0y-Ht-mrM" firstAttribute="top" secondItem="NEG-BI-0Xz" secondAttribute="top" constant="5" id="AWo-Z7-uRe"/>
+                                                                <constraint firstAttribute="trailing" secondItem="s0y-Ht-mrM" secondAttribute="trailing" id="Qrm-OD-X2Q"/>
+                                                                <constraint firstItem="bnP-Op-ceC" firstAttribute="top" secondItem="NEG-BI-0Xz" secondAttribute="top" constant="8" id="WHc-jW-Isq"/>
+                                                                <constraint firstAttribute="height" constant="40" id="c2f-tg-rwz"/>
+                                                                <constraint firstAttribute="bottom" secondItem="bnP-Op-ceC" secondAttribute="bottom" constant="8" id="q13-pU-4Er"/>
+                                                                <constraint firstAttribute="bottom" secondItem="s0y-Ht-mrM" secondAttribute="bottom" constant="5" id="yUM-lL-IX3"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cvq-Uq-Fvo">
+                                                            <rect key="frame" x="280" y="350" width="30" height="30"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="30" id="1J7-r9-KnA"/>
+                                                                <constraint firstAttribute="width" constant="30" id="3ga-rv-6JT"/>
+                                                            </constraints>
+                                                            <state key="normal" title="...">
+                                                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="ButtonBookmark:" destination="bU4-xJ-OW6" eventType="touchUpInside" id="ODF-7d-EoM"/>
+                                                            </connections>
+                                                        </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="It was Amazing festival!.Great food and party." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zbU-jC-mZV">
+                                                            <rect key="frame" x="10" y="85" width="300" height="45"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="45" id="P77-q7-wCd"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rA7-Ii-I5H">
+                                                            <rect key="frame" x="10" y="472" width="300" height="1"/>
+                                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="1" id="3bZ-H9-S0I"/>
+                                                            </constraints>
+                                                        </view>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="zbU-jC-mZV" firstAttribute="top" secondItem="mjP-Cg-NX6" secondAttribute="bottom" constant="12" id="442-V8-WPj"/>
+                                                        <constraint firstItem="3YL-aj-g84" firstAttribute="leading" secondItem="mjP-Cg-NX6" secondAttribute="trailing" constant="9" id="4qW-pV-iaq"/>
+                                                        <constraint firstItem="xhe-HM-EX5" firstAttribute="leading" secondItem="hWB-yN-joN" secondAttribute="trailing" constant="8" id="5eu-TP-dOS"/>
+                                                        <constraint firstItem="xhe-HM-EX5" firstAttribute="top" secondItem="ZI8-aE-zbG" secondAttribute="top" constant="18" id="6m2-kP-0hN"/>
+                                                        <constraint firstItem="cvq-Uq-Fvo" firstAttribute="top" secondItem="rcX-fo-rer" secondAttribute="bottom" constant="8" id="9Dv-L9-dS6"/>
+                                                        <constraint firstItem="mjP-Cg-NX6" firstAttribute="top" secondItem="xhe-HM-EX5" secondAttribute="bottom" id="DPW-m5-zwW"/>
+                                                        <constraint firstItem="xhe-HM-EX5" firstAttribute="leading" secondItem="hWB-yN-joN" secondAttribute="trailing" constant="8" id="FR1-Cy-dmv"/>
+                                                        <constraint firstAttribute="trailing" secondItem="zbU-jC-mZV" secondAttribute="trailing" constant="10" id="HS6-b1-GMB"/>
+                                                        <constraint firstItem="rcX-fo-rer" firstAttribute="leading" secondItem="ZI8-aE-zbG" secondAttribute="leading" constant="10" id="JuQ-6b-ILl"/>
+                                                        <constraint firstItem="3YL-aj-g84" firstAttribute="top" secondItem="xhe-HM-EX5" secondAttribute="bottom" id="L0Y-Rb-ev3"/>
+                                                        <constraint firstItem="hWB-yN-joN" firstAttribute="leading" secondItem="ZI8-aE-zbG" secondAttribute="leading" constant="8" id="LEQ-Iy-2PZ"/>
+                                                        <constraint firstAttribute="bottom" secondItem="NEG-BI-0Xz" secondAttribute="bottom" constant="13" id="NHY-dg-S97"/>
+                                                        <constraint firstAttribute="trailing" secondItem="rA7-Ii-I5H" secondAttribute="trailing" constant="10" id="UVq-5R-KSU"/>
+                                                        <constraint firstAttribute="trailing" secondItem="rcX-fo-rer" secondAttribute="trailing" constant="10" id="Vf2-Jb-ity"/>
+                                                        <constraint firstAttribute="trailing" secondItem="IBp-m0-fXT" secondAttribute="trailing" constant="10" id="WS8-CN-oft"/>
+                                                        <constraint firstItem="IBp-m0-fXT" firstAttribute="leading" secondItem="ZI8-aE-zbG" secondAttribute="leading" constant="10" id="dAA-iP-Zpq"/>
+                                                        <constraint firstItem="NEG-BI-0Xz" firstAttribute="top" secondItem="IBp-m0-fXT" secondAttribute="bottom" constant="10" id="g1y-V9-u19"/>
+                                                        <constraint firstAttribute="trailing" secondItem="xhe-HM-EX5" secondAttribute="trailing" constant="10" id="ge4-aY-SJq"/>
+                                                        <constraint firstAttribute="trailing" secondItem="NEG-BI-0Xz" secondAttribute="trailing" constant="10" id="hIr-wo-SSg"/>
+                                                        <constraint firstItem="zbU-jC-mZV" firstAttribute="top" secondItem="3YL-aj-g84" secondAttribute="bottom" constant="12" id="iTR-fQ-9Rp"/>
+                                                        <constraint firstAttribute="trailing" secondItem="3YL-aj-g84" secondAttribute="trailing" constant="8" id="ioP-bt-IaT"/>
+                                                        <constraint firstItem="DYR-A4-5A7" firstAttribute="top" secondItem="rcX-fo-rer" secondAttribute="bottom" constant="8" id="j2z-ue-YOY"/>
+                                                        <constraint firstItem="rcX-fo-rer" firstAttribute="top" secondItem="zbU-jC-mZV" secondAttribute="bottom" constant="12" id="o64-S6-tub"/>
+                                                        <constraint firstItem="rA7-Ii-I5H" firstAttribute="top" secondItem="NEG-BI-0Xz" secondAttribute="bottom" constant="2" id="qnN-03-bfM"/>
+                                                        <constraint firstItem="cvq-Uq-Fvo" firstAttribute="leading" secondItem="DYR-A4-5A7" secondAttribute="trailing" constant="14" id="tCe-7Y-CxK"/>
+                                                        <constraint firstAttribute="trailing" secondItem="cvq-Uq-Fvo" secondAttribute="trailing" constant="10" id="uMW-yf-iKx"/>
+                                                        <constraint firstItem="NEG-BI-0Xz" firstAttribute="leading" secondItem="ZI8-aE-zbG" secondAttribute="leading" constant="10" id="uaC-hO-byj"/>
+                                                        <constraint firstItem="zbU-jC-mZV" firstAttribute="leading" secondItem="ZI8-aE-zbG" secondAttribute="leading" constant="10" id="v7K-N3-ngn"/>
+                                                        <constraint firstItem="IBp-m0-fXT" firstAttribute="top" secondItem="rcX-fo-rer" secondAttribute="bottom" constant="48" id="vzz-oH-rZi"/>
+                                                        <constraint firstItem="hWB-yN-joN" firstAttribute="top" secondItem="ZI8-aE-zbG" secondAttribute="top" constant="17" id="w5v-2b-TTa"/>
+                                                        <constraint firstItem="rA7-Ii-I5H" firstAttribute="leading" secondItem="ZI8-aE-zbG" secondAttribute="leading" constant="10" id="wfx-OM-Bjh"/>
+                                                        <constraint firstAttribute="bottom" secondItem="rA7-Ii-I5H" secondAttribute="bottom" constant="10" id="xGl-49-MKH"/>
+                                                        <constraint firstItem="mjP-Cg-NX6" firstAttribute="leading" secondItem="ZI8-aE-zbG" secondAttribute="leading" constant="56" id="zMT-SB-aHN"/>
+                                                    </constraints>
                                                 </view>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="ZI8-aE-zbG" secondAttribute="trailing" id="9B0-dN-rN9"/>
+                                                <constraint firstItem="ZI8-aE-zbG" firstAttribute="top" secondItem="knx-Xh-pq7" secondAttribute="top" id="9J7-NL-9hq"/>
+                                                <constraint firstAttribute="bottom" secondItem="ZI8-aE-zbG" secondAttribute="bottom" constant="5" id="K4x-n8-e0R"/>
+                                                <constraint firstItem="ZI8-aE-zbG" firstAttribute="leading" secondItem="knx-Xh-pq7" secondAttribute="leading" id="gQ4-db-XHi"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="postEventImage" destination="EXj-RV-Ymz" id="o2G-v8-Nu5"/>
-                                            <outlet property="postEventLabel" destination="aEB-Kn-Sou" id="hsW-tx-7dk"/>
+                                            <outlet property="dishRightLayoutConstraint" destination="RW1-td-1lU" id="CKP-qD-mLy"/>
+                                            <outlet property="dishwidthConstaint" destination="2aC-AJ-GXG" id="4N4-LW-Yng"/>
+                                            <outlet property="placeWidthConstraint" destination="rkX-9K-oYx" id="X2N-Kx-nWh"/>
+                                            <outlet property="postCommentLabel" destination="zbU-jC-mZV" id="shG-kM-UDJ"/>
+                                            <outlet property="postEventDishLabel" destination="JC2-ou-vUD" id="FcH-6V-iFU"/>
+                                            <outlet property="postEventImage" destination="rcX-fo-rer" id="Qn9-YL-Wgm"/>
+                                            <outlet property="postEventName" destination="s0y-Ht-mrM" id="W3N-qp-usW"/>
+                                            <outlet property="postEventPlace" destination="oWe-VH-aDd" id="v46-ak-zEg"/>
+                                            <outlet property="postLikeImage" destination="DYR-A4-5A7" id="vYW-qr-uEx"/>
+                                            <outlet property="postUserImage" destination="hWB-yN-joN" id="JOQ-WD-4Qw"/>
+                                            <outlet property="postUserTime" destination="3YL-aj-g84" id="gOe-3M-9Jm"/>
+                                            <outlet property="postUsernameLabel" destination="xhe-HM-EX5" id="eNh-hJ-FeD"/>
+                                            <outlet property="postUserplaceLabbel" destination="mjP-Cg-NX6" id="puc-xg-nAW"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="niz-yc-Unm" id="L5a-jC-a6S"/>
+                                    <outlet property="delegate" destination="niz-yc-Unm" id="Qew-Hw-Ar2"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="gEH-3c-8by"/>
                     </view>
+                    <size key="freeformSize" width="320" height="700"/>
                     <connections>
-                        <outlet property="postEventTableView" destination="EeY-kM-yD6" id="hjf-BI-ipM"/>
+                        <outlet property="postEventTableView" destination="L37-PV-XPo" id="R9S-Kb-7oB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jhn-Y9-tGm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-260.625" y="58.098591549295776"/>
+            <point key="canvasLocation" x="-263" y="121"/>
         </scene>
         <!--User Tab Controller-->
         <scene sceneID="Qeq-Ym-ebW">
@@ -129,9 +334,101 @@
                     <view key="view" contentMode="scaleToFill" id="TWQ-dh-PlC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="145" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fht-WI-S3A">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="businesseventcell" id="tqf-wk-poE" customClass="BusinessTableViewCell" customModule="Numnu" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="145"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tqf-wk-poE" id="MKl-OW-Cyq">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="145"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E4b-dH-26W">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="foodie" translatesAutoresizingMaskIntoConstraints="NO" id="OJJ-cT-mgd" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                                            <rect key="frame" x="8" y="10" width="120" height="120"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                    <real key="value" value="12"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Flatron" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JMH-KR-CYy">
+                                                            <rect key="frame" x="136" y="20" width="176" height="30"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="17"/>
+                                                            <color key="textColor" red="0.1529197991" green="0.15295344590000001" blue="0.15291768310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="THf-9n-WXD">
+                                                            <rect key="frame" x="136" y="58" width="176" height="30"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yhx-jM-TaL">
+                                                                <size key="itemSize" width="63" height="35"/>
+                                                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                            </collectionViewFlowLayout>
+                                                            <cells>
+                                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="businesstagcell" id="Q4T-6x-OCL" customClass="EventTagCollectionCell" customModule="Numnu" customModuleProvider="target">
+                                                                    <rect key="frame" x="0.0" y="-2.5" width="63" height="35"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="63" height="35"/>
+                                                                        <autoresizingMask key="autoresizingMask"/>
+                                                                        <subviews>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YSf-ue-Xsm">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="60" height="35"/>
+                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                                <color key="backgroundColor" red="0.60000002379999995" green="0.40000000600000002" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="17"/>
+                                                                                <nil key="textColor"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                        </subviews>
+                                                                    </view>
+                                                                    <connections>
+                                                                        <outlet property="tagnamelabel" destination="YSf-ue-Xsm" id="Zt6-bK-Gz2"/>
+                                                                    </connections>
+                                                                </collectionViewCell>
+                                                            </cells>
+                                                        </collectionView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="August 30,Montreal" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nwy-Nx-Cw1">
+                                                            <rect key="frame" x="136" y="96" width="176" height="28"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="16"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="businessDateLabel" destination="Nwy-Nx-Cw1" id="FeY-eL-C5n"/>
+                                            <outlet property="businessImageView" destination="OJJ-cT-mgd" id="QrT-Ek-SSI"/>
+                                            <outlet property="businessNameLabel" destination="JMH-KR-CYy" id="x4n-mI-XtD"/>
+                                            <outlet property="businessTagCollectionView" destination="THf-9n-WXD" id="wtt-9F-z37"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="ik1-dW-7FP"/>
                     </view>
+                    <connections>
+                        <outlet property="businessTableView" destination="fht-WI-S3A" id="8S3-ol-9dt"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gaz-du-bRA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -176,12 +473,12 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="onboardbg" translatesAutoresizingMaskIntoConstraints="NO" id="8Bl-27-3IN" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="foodie" translatesAutoresizingMaskIntoConstraints="NO" id="8Bl-27-3IN" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
                                                             <rect key="frame" x="8" y="10" width="120" height="120"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                    <real key="value" value="12"/>
+                                                                    <real key="value" value="5"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
@@ -448,12 +745,12 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="onboardbg" translatesAutoresizingMaskIntoConstraints="NO" id="2rW-U3-DAu" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="foodie" translatesAutoresizingMaskIntoConstraints="NO" id="2rW-U3-DAu" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
                                                             <rect key="frame" x="8" y="10" width="120" height="120"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                    <real key="value" value="12"/>
+                                                                    <real key="value" value="10"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
@@ -550,7 +847,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="349"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current and Upcoming Events " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G0M-Ai-a8P">
-                                        <rect key="frame" x="10" y="0.0" width="234.5" height="30"/>
+                                        <rect key="frame" x="10" y="0.0" width="228" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="hPV-3r-n9M"/>
                                         </constraints>
@@ -586,7 +883,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="125" height="125"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="onboardbg" translatesAutoresizingMaskIntoConstraints="NO" id="bxG-ig-0KU" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="foodie" translatesAutoresizingMaskIntoConstraints="NO" id="bxG-ig-0KU" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="125" height="95"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                             <userDefinedRuntimeAttributes>
@@ -612,7 +909,7 @@
                                         </cells>
                                     </collectionView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Past Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="103-ut-mdO">
-                                        <rect key="frame" x="10" y="175" width="90.5" height="30"/>
+                                        <rect key="frame" x="10" y="175" width="86" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="bkp-e5-x09"/>
                                         </constraints>
@@ -648,7 +945,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="125" height="125"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="onboardbg" translatesAutoresizingMaskIntoConstraints="NO" id="2qX-1i-jAi" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="foodie" translatesAutoresizingMaskIntoConstraints="NO" id="2qX-1i-jAi" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="125" height="95"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                             <userDefinedRuntimeAttributes>
@@ -718,12 +1015,18 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Numnu_appicon" width="122" height="122"/>
         <image name="arrow" width="18" height="10"/>
+        <image name="dish_ico" width="22" height="23"/>
         <image name="edit" width="11" height="11"/>
+        <image name="event_ico" width="25" height="27"/>
+        <image name="foodie" width="640" height="480"/>
         <image name="ic_chat_bubble_outline" width="12" height="11"/>
         <image name="in-love" width="24" height="22"/>
+        <image name="love_ico" width="32" height="29"/>
         <image name="onboard" width="375" height="667"/>
         <image name="onboardbg" width="2225" height="1348"/>
         <image name="profile" width="20" height="20"/>
+        <image name="restaurant_ico" width="26" height="26"/>
     </resources>
 </document>

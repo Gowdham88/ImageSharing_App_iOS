@@ -51,7 +51,6 @@ class EventTabController: UIViewController,IndicatorInfoProvider {
     */
 
 }
-
 extension EventTabController : UITableViewDelegate,UITableViewDataSource {
     
     
