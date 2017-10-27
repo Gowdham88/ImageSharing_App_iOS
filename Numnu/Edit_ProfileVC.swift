@@ -14,6 +14,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var nameTextfield: UITextField!
     @IBOutlet weak var emailaddress: UITextField!
     
+    @IBOutlet var myscrollView: UIScrollView!
     @IBAction func editPicture(_ sender: Any) {
         
     }
@@ -24,6 +25,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate {
         nameTextfield.useUnderline()
         emailaddress.useUnderline()
         
+        myscrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height+100)
         // Do any additional setup after loading the view.
     }
 
