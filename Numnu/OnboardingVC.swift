@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMaps
 
 class OnboardingVC: UIViewController {
    
@@ -14,6 +15,8 @@ class OnboardingVC: UIViewController {
     @IBOutlet var notificationsAlert: ViewExtender!
     @IBOutlet var onboardingText: UILabel!
     var window : UIWindow?
+    
+    var locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +62,7 @@ class OnboardingVC: UIViewController {
         let transition = CATransition()
         transition.duration = 0.5
         transition.type     = kCATransitionPush
-        transition.subtype  = kCATransitionFromBottom
+        transition.subtype  = kCATransitionFromTop
         self.view.window!.layer.add(transition, forKey: kCATransition)
         let storyboard                  = UIStoryboard(name: name, bundle: nil)
         let initialViewController       = storyboard.instantiateViewController(withIdentifier: id)

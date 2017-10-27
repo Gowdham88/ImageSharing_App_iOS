@@ -13,6 +13,8 @@ import UserNotifications
 import SystemConfiguration
 import FBSDKCoreKit
 import FBSDKLoginKit
+import GoogleMaps
+import GooglePlaces
  
  
 @UIApplicationMain
@@ -25,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        GMSServices.provideAPIKey(Constants.MapApiKey)
+        GMSPlacesClient.provideAPIKey(Constants.MapApiKey)
         Thread.sleep(forTimeInterval: 3.0)
         
         /*****Screen opening function******/
@@ -71,8 +75,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DispatchQueue.main.asyncAfter(deadline: when) {
             
             self.window    = UIWindow(frame: UIScreen.main.bounds)
-            let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
-            let initialViewController = storyboard.instantiateViewController(withIdentifier: Constants.TabStoryId)
+            let storyboard = UIStoryboard(name: Constants.Auth, bundle: nil)
+            let initialViewController = storyboard.instantiateViewController(withIdentifier: Constants.LoginStoryId)
             self.window?.rootViewController = initialViewController
             self.window?.makeKeyAndVisible()
             

@@ -22,7 +22,7 @@
         <!--Login MainVC-->
         <scene sceneID="zdG-hI-0B1">
             <objects>
-                <viewController id="Zpp-RP-GwK" customClass="loginMainVC" customModule="Numnu" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="signupvc" id="Zpp-RP-GwK" customClass="loginMainVC" customModule="Numnu" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7wn-r0-r4H">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

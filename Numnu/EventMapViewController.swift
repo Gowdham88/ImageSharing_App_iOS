@@ -15,13 +15,11 @@ class EventMapViewController: UIViewController {
     var locationManager = CLLocationManager()
     var currentLocation: CLLocation?
     var mapView: GMSMapView!
-    var zoomLevel: Float = 6.0
+    var zoomLevel: Float = 15.0
     @IBOutlet weak var navigationItemList: UINavigationItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        GMSServices.provideAPIKey(Constants.MapApiKey)
         
         setNavBar()
         setMap()
@@ -29,11 +27,22 @@ class EventMapViewController: UIViewController {
         locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
-        locationManager.distanceFilter = 50
-        locationManager.startUpdatingLocation()
-        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled()
+            
+        {
+            locationManager.distanceFilter = 50
+            locationManager.startUpdatingLocation()
+            locationManager.delegate = self
+        
+        }
+        
+       
         
         self.tabBarController?.tabBar.isHidden = true
+        
+        
      
 
         // Do any additional setup after loading the view.
@@ -52,18 +61,13 @@ class EventMapViewController: UIViewController {
         mapView = GMSMapView.map(withFrame: view.bounds, camera: camera)
         mapView.settings.myLocationButton = true
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        //mapView.isMyLocationEnabled = true
+        mapView.isMyLocationEnabled = true
         
         // Add the map to the view, hide it until we've got a location update.
         view.addSubview(mapView)
 //        mapView.isHidden = true
         
-        // Creates a marker in the center of the map.
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: 45.5017, longitude: -73.5673)
-        marker.title = "Montreal"
-        marker.snippet = "Canada"
-        marker.map = mapView
+        
         
     }
     
@@ -108,16 +112,28 @@ extension EventMapViewController: CLLocationManagerDelegate {
         let location: CLLocation = locations.last!
         print("Location: \(location)")
         
-        let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
-                                              longitude: location.coordinate.longitude,
-                                              zoom: zoomLevel)
-        
-        if mapView.isHidden {
-            mapView.isHidden = false
-            mapView.camera = camera
-        } else {
-            mapView.animate(to: camera)
+        DispatchQueue.main.async {
+            
+            let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
+                                                  longitude: location.coordinate.longitude,
+                                                  zoom: self.zoomLevel)
+            let marker = GMSMarker()
+            marker.position = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+            marker.appearAnimation = .pop
+            marker.title = "Current location"
+            marker.snippet = ""
+            marker.map = self.mapView
+            
+            if self.mapView.isHidden {
+                self.mapView.isHidden = false
+                self.mapView.camera = camera
+            } else {
+                self.mapView.animate(to: camera)
+            }
+            
         }
+        
+        
         
        
     }
@@ -130,7 +146,7 @@ extension EventMapViewController: CLLocationManagerDelegate {
         case .denied:
             print("User denied access to location.")
             // Display the map using the default location.
-            mapView.isHidden = false
+           
         case .notDetermined:
             print("Location status not determined.")
         case .authorizedAlways: fallthrough

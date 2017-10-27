@@ -14,6 +14,7 @@ import XLPagerTabStrip
 class PostTabController: UIViewController,IndicatorInfoProvider {
     
     @IBOutlet weak var postEventTableView: UITableView!
+    var window : UIWindow?
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,6 +96,12 @@ extension PostTabController : PostEventTableViewCellDelegate {
         let Bookmark = UIAlertAction(title: "Bookmark", style: .default, handler: {
             
             (alert : UIAlertAction!) -> Void in
+            
+            self.window    = UIWindow(frame: UIScreen.main.bounds)
+            let storyboard = UIStoryboard(name: Constants.Auth, bundle: nil)
+            let initialViewController = storyboard.instantiateViewController(withIdentifier: "signupvc")
+            self.window?.rootViewController = initialViewController
+            self.window?.makeKeyAndVisible()
             
         })
         

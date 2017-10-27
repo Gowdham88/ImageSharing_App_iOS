@@ -43,6 +43,11 @@ PODS:
   - GoogleMaps/Base (2.3.0)
   - GoogleMaps/Maps (2.3.0):
     - GoogleMaps/Base
+  - GooglePlacePicker (2.3.0):
+    - GoogleMaps (= 2.3.0)
+    - GooglePlaces (= 2.3.0)
+  - GooglePlaces (2.3.0):
+    - GoogleMaps/Base (= 2.3.0)
   - GoogleToolboxForMac/DebugUtils (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
   - GoogleToolboxForMac/Defines (2.1.1)
@@ -75,6 +80,8 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - GoogleMaps
+  - GooglePlacePicker
+  - GooglePlaces
   - GSMessages
   - Nuke (~> 4.0)
   - PKHUD (~> 4.0)
@@ -92,6 +99,8 @@ SPEC CHECKSUMS:
   FirebaseDatabase: 94c38c783d23dc6679441050772d42e801d06e9e
   FirebaseInstanceID: 0500e3cb54a1a4e01a8cffcc09323b8bb8fc7e1e
   GoogleMaps: 340a6a0bebd17c2db8abcd3921976c7c53c86cb8
+  GooglePlacePicker: 80a6719aa4d06c63524a231d0ecd8f87e87d98c2
+  GooglePlaces: 74d322c74184ea4576184089b496d291cf0dcd38
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GSMessages: 306eaef0ff836a9240e50a9c78a32d173d7588a6
   GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
@@ -102,6 +111,6 @@ SPEC CHECKSUMS:
   Toucan: 47485bbc9cb4541ef6318d6886103e6eaf16e919
   XLPagerTabStrip: d1ab378af0923320ec0b5eab11d7b2f803d31261
 
-PODFILE CHECKSUM: 803c7ecbe92e4046c2a4743d5ec1e65f65ee7487
+PODFILE CHECKSUM: aac84d68ac39e2260abe43e0b8528487330ba74d
 
 COCOAPODS: 1.2.1

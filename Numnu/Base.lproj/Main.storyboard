@@ -28,13 +28,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="URa-Ng-1u2">
-                                <rect key="frame" x="0.0" y="210" width="320" height="309"/>
+                                <rect key="frame" x="0.0" y="170" width="320" height="349"/>
                             </containerView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sfO-qW-Atc">
-                                <rect key="frame" x="0.0" y="210" width="320" height="309"/>
+                                <rect key="frame" x="0.0" y="170" width="320" height="349"/>
                             </scrollView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lyo-UJ-qpi" customClass="ButtonBarView" customModule="XLPagerTabStrip">
-                                <rect key="frame" x="0.0" y="210" width="320" height="64"/>
+                                <rect key="frame" x="0.0" y="170" width="320" height="64"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="rWR-xN-anh"/>
@@ -48,7 +48,7 @@
                                 <cells/>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ilc-xn-VB5">
-                                <rect key="frame" x="0.0" y="104" width="320" height="106"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="106"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search by location" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="GjQ-bI-QVw">
                                         <rect key="frame" x="82" y="61" width="221" height="30"/>
@@ -634,6 +634,10 @@
         <scene sceneID="r0y-3X-yNV">
             <objects>
                 <viewController id="gxf-hf-i2f" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Mbh-gV-4cI"/>
+                        <viewControllerLayoutGuide type="bottom" id="7C0-4f-ZTQ"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="j7B-0m-YVv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -642,7 +646,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z2B-Ny-oRS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1463" y="-140"/>
+            <point key="canvasLocation" x="1941" y="-165"/>
         </scene>
     </scenes>
     <resources>
