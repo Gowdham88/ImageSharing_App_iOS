@@ -332,6 +332,10 @@ SOFTWARE.
    limitations under the License.
 
 
+## GoogleMaps
+
+Copyright 2017 Google
+
 ## GoogleToolboxForMac
 
 

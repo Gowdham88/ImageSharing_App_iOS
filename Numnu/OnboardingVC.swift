@@ -18,7 +18,6 @@ class OnboardingVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         self.notificationsAlert.frame.origin.y += self.view.frame.height
         
     }
@@ -26,10 +25,8 @@ class OnboardingVC: UIViewController {
     @IBAction func okPressed(_ sender: Any) {
         
         notificationsAlert.isHidden = true
-        
         self.openStoryBoard(name: Constants.Main, id: Constants.TabStoryId)
-       
-        
+    
     }
     
     @IBAction func ignorePressed(_ sender: Any) {
@@ -58,11 +55,15 @@ class OnboardingVC: UIViewController {
     
     func openStoryBoard(name: String,id : String) {
         
-        window                          = UIWindow(frame: UIScreen.main.bounds)
+        window         = UIWindow(frame: UIScreen.main.bounds)
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.type     = kCATransitionPush
+        transition.subtype  = kCATransitionFromRight
+        self.view.window!.layer.add(transition, forKey: kCATransition)
         let storyboard                  = UIStoryboard(name: name, bundle: nil)
         let initialViewController       = storyboard.instantiateViewController(withIdentifier: id)
-        window?.rootViewController = initialViewController
-        window?.makeKeyAndVisible()
+        self.present(initialViewController, animated: false, completion: nil)
         
     }
     

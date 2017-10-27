@@ -69,6 +69,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
             
         }
         
+        
         /**********************set Nav bar****************************/
         
         setNavBar()
@@ -113,11 +114,17 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
-        let child_1 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1)
-        let child_2 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid2)
-        let child_3 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid4)
+        let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid1)
+        let child_2 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid2)
+        let child_3 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3)
         return [child_1, child_2,child_3]
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+        self.tabBarController?.tabBar.isHidden = false
     }
     
 
@@ -136,8 +143,8 @@ class EventViewController: ButtonBarPagerTabStripViewController {
             readMoreButton.setTitle("less", for: .normal)
             isLabelAtMaxHeight = true
             eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
-            containerViewTop.constant  = 532+TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
-            barButtonTop.constant      = 532+TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
+            containerViewTop.constant       = 532+TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
+            barButtonTop.constant           = 532+TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
             
         }
         
@@ -171,20 +178,26 @@ extension EventViewController {
         
     }
     
-    func webLink1(sender:UITapGestureRecognizer){
+    func webLink1(sender:UITapGestureRecognizer) {
+      
+        openWebBoard(url: "http://czsm.co.in/")
+    }
+    
+    func webLink2(sender:UITapGestureRecognizer) {
+        
+        openWebBoard(url: "http://czsm.co.in/")
         
     }
     
-    func webLink2(sender:UITapGestureRecognizer){
+    func webLink3(sender:UITapGestureRecognizer) {
+        
+        openWebBoard(url: "http://czsm.co.in/")
         
     }
     
-    func webLink3(sender:UITapGestureRecognizer){
+    func mapRedirect(sender:UITapGestureRecognizer) {
         
-    }
-    
-    func mapRedirect(sender:UITapGestureRecognizer){
-        
+        openMapBoard()
     }
     
     /*************************Tag view updating************************************/
@@ -246,7 +259,7 @@ extension EventViewController {
         let rightButton = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         
         // Create two buttons for the navigation item
-        navigationItemList.leftBarButtonItem = leftButton
+        navigationItemList.leftBarButtonItem  = leftButton
         navigationItemList.rightBarButtonItem = rightButton
  
         
@@ -255,6 +268,23 @@ extension EventViewController {
     func backButtonClicked() {
         
         _ = self.navigationController?.popToRootViewController(animated: true)
+        
+    }
+    
+    func openWebBoard (url: String) {
+      
+        let storyboard      = UIStoryboard(name: Constants.Event, bundle: nil)
+        let vc              = storyboard.instantiateViewController(withIdentifier: Constants.WebViewStoryId) as! WebViewController
+        vc.url_str          = url
+        self.navigationController!.pushViewController(vc, animated: true)
+        
+    }
+    
+    func openMapBoard () {
+        
+        let storyboard      = UIStoryboard(name: Constants.Event, bundle: nil)
+        let vc              = storyboard.instantiateViewController(withIdentifier: Constants.MapStoryId) as! EventMapViewController
+        self.navigationController!.pushViewController(vc, animated: true)
         
     }
     

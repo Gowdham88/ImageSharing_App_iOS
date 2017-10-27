@@ -17,6 +17,6 @@ target 'Numnu' do
   pod 'Bolts'
   pod 'FBSDKCoreKit'
   pod 'FBSDKLoginKit'
-
+  pod 'GoogleMaps'
 end
 

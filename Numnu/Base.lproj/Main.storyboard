@@ -27,6 +27,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="URa-Ng-1u2">
+                                <rect key="frame" x="0.0" y="210" width="320" height="309"/>
+                            </containerView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sfO-qW-Atc">
                                 <rect key="frame" x="0.0" y="210" width="320" height="309"/>
                             </scrollView>
@@ -107,12 +110,16 @@
                             <constraint firstAttribute="trailing" secondItem="lyo-UJ-qpi" secondAttribute="trailing" id="22b-Lh-TG4"/>
                             <constraint firstItem="lyo-UJ-qpi" firstAttribute="leading" secondItem="LzB-eL-Xhu" secondAttribute="leading" id="98e-Sw-mCg"/>
                             <constraint firstAttribute="trailing" secondItem="sfO-qW-Atc" secondAttribute="trailing" id="9QT-h2-nSg"/>
+                            <constraint firstItem="URa-Ng-1u2" firstAttribute="leading" secondItem="LzB-eL-Xhu" secondAttribute="leading" id="BSV-z7-r2D"/>
+                            <constraint firstAttribute="trailing" secondItem="URa-Ng-1u2" secondAttribute="trailing" id="Lts-yh-6zo"/>
                             <constraint firstAttribute="trailing" secondItem="ilc-xn-VB5" secondAttribute="trailing" id="R4D-zo-K9U"/>
                             <constraint firstItem="ilc-xn-VB5" firstAttribute="leading" secondItem="LzB-eL-Xhu" secondAttribute="leading" id="VZn-zs-dO2"/>
                             <constraint firstItem="ilc-xn-VB5" firstAttribute="top" secondItem="LjE-up-1oV" secondAttribute="bottom" id="d07-ho-EwC"/>
                             <constraint firstItem="S5t-uM-QBn" firstAttribute="top" secondItem="sfO-qW-Atc" secondAttribute="bottom" id="dhI-ne-Dxh"/>
+                            <constraint firstItem="URa-Ng-1u2" firstAttribute="top" secondItem="ilc-xn-VB5" secondAttribute="bottom" id="fLV-Ok-Ota"/>
                             <constraint firstItem="lyo-UJ-qpi" firstAttribute="top" secondItem="ilc-xn-VB5" secondAttribute="bottom" id="fxA-T3-9BY"/>
                             <constraint firstItem="sfO-qW-Atc" firstAttribute="leading" secondItem="LzB-eL-Xhu" secondAttribute="leading" id="gNm-ZK-clm"/>
+                            <constraint firstItem="S5t-uM-QBn" firstAttribute="top" secondItem="URa-Ng-1u2" secondAttribute="bottom" id="mAF-Dw-dui"/>
                             <constraint firstItem="sfO-qW-Atc" firstAttribute="top" secondItem="ilc-xn-VB5" secondAttribute="bottom" id="nCr-66-OhF"/>
                         </constraints>
                     </view>
@@ -122,6 +129,7 @@
                     <connections>
                         <outlet property="buttonBarView" destination="lyo-UJ-qpi" id="XpE-bC-pid"/>
                         <outlet property="buttonTabBarView" destination="lyo-UJ-qpi" id="yyh-GC-Zgb"/>
+                        <outlet property="collectionContainerView" destination="URa-Ng-1u2" id="PqC-I7-Kef"/>
                         <outlet property="containerView" destination="sfO-qW-Atc" id="MVf-uM-kgs"/>
                         <outlet property="editsearchbyItem" destination="pKU-lp-6b3" id="zf5-tE-o1x"/>
                         <outlet property="editsearchbyLocation" destination="GjQ-bI-QVw" id="EFy-pa-KLk"/>
@@ -621,6 +629,20 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R7v-W7-yc7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="180" y="-661.26760563380287"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="r0y-3X-yNV">
+            <objects>
+                <viewController id="gxf-hf-i2f" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="j7B-0m-YVv">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z2B-Ny-oRS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1463" y="-140"/>
         </scene>
     </scenes>
     <resources>

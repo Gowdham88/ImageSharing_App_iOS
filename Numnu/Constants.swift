@@ -20,12 +20,20 @@ class Constants {
     static let Auth  = "Auth"
     static let Main  = "Main"
     static let Event = "Event"
+    static let EventDetail = "EventDetailTab"
+    static let PostDetail  = "PostDetail"
     
     // Storyboards id
     
     static let TabStoryId   = "tabcontrollerid"
     static let EventStoryId = "eventstoryid"
     static let LoginStoryId = "loginStoryId"
+    static let PostDetailId = "postdetailid"
+    
+    // Event story id
+    
+    static let WebViewStoryId = "webstroyId"
+    static let MapStoryId     = "mapstoryboardid"
     
     // Home Tab name
     
@@ -45,6 +53,17 @@ class Constants {
     static let Tabid6  = "ListTab"
     static let DefaultTab = "DefaultTab"
     
+    // Event Detail Tab name
+    
+    static let EventTab1  = "Businesses"
+    static let EventTab2  = "Menu Items"
+    static let EventTab3  = "Post"
+    
+    // Event Detail Tab id
+    static let EventTabid1  = "BusinessesTab"
+    static let EventTabid2  = "MenuTab"
+    static let EventTabid3  = "ReviewTab"
+   
     static let dummy   = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolfdfdfdfdfdfdfdfdfdfdfdf fdfdfddsdsdsdsdsds djhdjs dsjhdjhsjdhsjhdhs dsjhd Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolfdfdfdfdfdfdfdfdfdfdfdf fdfdfddsdsdsdsdsds djhdjs dsjhdjhsjdhsjhdhs dsjhd Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolfdfdfdfdfdfdfdfdfdfdfdf fdfdfddsdsdsdsdsds djhdjs dsjhdjhsjdhsjhdhs dsjhd"
     
     // Authentication Label
@@ -52,4 +71,8 @@ class Constants {
     static let Emailpasserror = "Enter email address and password."
     static let Passworderror  = "Enter valid password with 8 characters & a special character."
     static let Emailerror     = "Enter valid email address."
+    
+    // Map Api key
+    
+    static let MapApiKey      = "AIzaSyAuKzAZP8SLYJf_jfVUsxdcjChIU00FmDQ"
 }
