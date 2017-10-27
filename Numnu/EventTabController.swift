@@ -14,7 +14,9 @@ class EventTabController: UIViewController,IndicatorInfoProvider {
     @IBOutlet weak var eventTableView: UITableView!
     var window : UIWindow?
     
-     var tagarray = ["Festival","Wine","Party","Rum","Barbaque","Pasta","Sandwich","Burger"]
+    var tagarray = ["Festival","Wine","Party","Rum","Barbaque","Pasta","Sandwich","Burger"]
+    var showNavBar : Bool = false
+    @IBOutlet weak var navigationItemList: UINavigationItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +25,14 @@ class EventTabController: UIViewController,IndicatorInfoProvider {
         
         eventTableView.delegate   = self
         eventTableView.dataSource = self
+        
+        if showNavBar {
+         
+            setNavBar()
+            
+        }
+        
+       
         
     }
 
@@ -107,6 +117,43 @@ extension EventTabController : UICollectionViewDelegate,UICollectionViewDataSour
         return CGSize(width: textSize.width+20, height: 30)
     }
     
+    
+    
+}
+
+extension EventTabController {
+    
+    /******************Set navigation bar**************************/
+    
+    func setNavBar() {
+        
+        navigationItemList.title = "Event"
+        
+        let button: UIButton = UIButton(type: UIButtonType.custom)
+        //set image for button
+        button.setImage(UIImage(named: "ic_arrow_back"), for: UIControlState.normal)
+        //add function for button
+        button.addTarget(self, action: #selector(EventViewController.backButtonClicked), for: UIControlEvents.touchUpInside)
+        //set frame
+        button.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
+        
+        // Create left and right button for navigation item
+        let leftButton =  UIBarButtonItem(customView: button)
+        
+        let rightButton = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        
+        // Create two buttons for the navigation item
+        navigationItemList.leftBarButtonItem  = leftButton
+        navigationItemList.rightBarButtonItem = rightButton
+        
+        
+    }
+    
+    func backButtonClicked() {
+        
+        _ = self.navigationController?.popToRootViewController(animated: true)
+        
+    }
     
     
 }

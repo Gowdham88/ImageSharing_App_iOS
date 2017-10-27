@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="ProximaNova-Regular.otf">
+            <string>ProximaNova-Regular</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Title-->
+        <scene sceneID="9Dr-aj-aLb">
+            <objects>
+                <viewController id="mJ8-fd-Pyf" customClass="PostDetailViewController" customModule="Numnu" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VZe-Pp-pve">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="emq-kw-nq5">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="foodie" translatesAutoresizingMaskIntoConstraints="NO" id="r9a-im-5f4" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                        <rect key="frame" x="10" y="142" width="300" height="200"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="kYN-IE-0Kv"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Numnu_appicon" translatesAutoresizingMaskIntoConstraints="NO" id="vE2-yh-Yq6" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="17" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="6k1-fN-QDe"/>
+                                            <constraint firstAttribute="width" constant="40" id="Uoi-HM-ufC"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Suraj Balachandran" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o8O-Eg-dsa">
+                                        <rect key="frame" x="56" y="18" width="254" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="mrC-Jz-dNf"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chennai" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sab-nU-cTw">
+                                        <rect key="frame" x="56" y="48" width="165" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="WSL-Sg-Mwi"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
+                                        <color key="textColor" red="0.44705882349999998" green="0.45098039220000002" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 hrs" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2HT-QO-BFJ">
+                                        <rect key="frame" x="230" y="48" width="82" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="3DI-Lr-mgT"/>
+                                            <constraint firstAttribute="width" constant="82" id="ryb-NZ-FUB"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
+                                        <color key="textColor" red="0.44705882349999998" green="0.45098039220000002" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="love_ico" translatesAutoresizingMaskIntoConstraints="NO" id="GiX-XL-MSl" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                        <rect key="frame" x="236" y="350" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="1p9-tI-Avf"/>
+                                            <constraint firstAttribute="height" constant="30" id="i4Z-US-XQ8"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tsX-Qz-gHl">
+                                        <rect key="frame" x="10" y="390" width="300" height="30"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="restaurant_ico" translatesAutoresizingMaskIntoConstraints="NO" id="aYw-38-4Gt" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                                <rect key="frame" x="5" y="4" width="22" height="22"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="22" id="eME-Ix-NKZ"/>
+                                                    <constraint firstAttribute="height" constant="22" id="ldR-Px-CjR"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cottage house" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c2D-wh-xbf">
+                                                <rect key="frame" x="35" y="5" width="110" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20" id="54m-ON-5Pm"/>
+                                                    <constraint firstAttribute="width" constant="110" id="FbF-7u-rIS"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" red="0.44705882349999998" green="0.45098039220000002" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dish_ico" translatesAutoresizingMaskIntoConstraints="NO" id="oV0-rk-VyD" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                                <rect key="frame" x="153" y="4" width="22" height="22"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="22" id="3NU-2d-Geg"/>
+                                                    <constraint firstAttribute="height" constant="22" id="QUg-nR-EVq"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BarBaquee side plater" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xbv-gh-5O6">
+                                                <rect key="frame" x="183" y="5" width="110" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="110" id="dB3-Ck-1fC"/>
+                                                    <constraint firstAttribute="height" constant="20" id="lDf-jZ-zwF"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="14"/>
+                                                <color key="textColor" red="0.44705882349999998" green="0.45098039220000002" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="c2D-wh-xbf" firstAttribute="top" secondItem="tsX-Qz-gHl" secondAttribute="top" constant="5" id="4Fd-UB-uni"/>
+                                            <constraint firstItem="Xbv-gh-5O6" firstAttribute="top" secondItem="tsX-Qz-gHl" secondAttribute="top" constant="5" id="ELI-bd-rvX"/>
+                                            <constraint firstItem="oV0-rk-VyD" firstAttribute="top" secondItem="tsX-Qz-gHl" secondAttribute="top" constant="4" id="HAc-0u-l7l"/>
+                                            <constraint firstAttribute="bottom" secondItem="oV0-rk-VyD" secondAttribute="bottom" constant="4" id="HHq-k5-wni"/>
+                                            <constraint firstItem="oV0-rk-VyD" firstAttribute="leading" secondItem="tsX-Qz-gHl" secondAttribute="leading" constant="153" id="HOA-84-EUk"/>
+                                            <constraint firstItem="aYw-38-4Gt" firstAttribute="top" secondItem="tsX-Qz-gHl" secondAttribute="top" constant="4" id="IVO-Lk-CAl"/>
+                                            <constraint firstAttribute="bottom" secondItem="Xbv-gh-5O6" secondAttribute="bottom" constant="5" id="eS6-eM-OYs"/>
+                                            <constraint firstAttribute="height" constant="30" id="gec-cK-yp7"/>
+                                            <constraint firstAttribute="bottom" secondItem="c2D-wh-xbf" secondAttribute="bottom" constant="5" id="hjs-lT-Fbc"/>
+                                            <constraint firstItem="c2D-wh-xbf" firstAttribute="leading" secondItem="aYw-38-4Gt" secondAttribute="trailing" constant="8" id="pGO-qV-K7t"/>
+                                            <constraint firstItem="Xbv-gh-5O6" firstAttribute="leading" secondItem="oV0-rk-VyD" secondAttribute="trailing" constant="8" id="tMe-X0-w7e"/>
+                                            <constraint firstAttribute="bottom" secondItem="aYw-38-4Gt" secondAttribute="bottom" constant="4" id="xqG-1u-IQN"/>
+                                            <constraint firstItem="aYw-38-4Gt" firstAttribute="leading" secondItem="tsX-Qz-gHl" secondAttribute="leading" constant="5" id="z9b-1I-vvq"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bX9-hh-DdA">
+                                        <rect key="frame" x="10" y="430" width="300" height="40"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BarBados food and rum festival" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ubE-a4-hnC">
+                                                <rect key="frame" x="37" y="5" width="263" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="djn-F3-yO7"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="event_ico" translatesAutoresizingMaskIntoConstraints="NO" id="S8b-G0-oRa" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                                <rect key="frame" x="5" y="8" width="24" height="24"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="24" id="4qU-fv-wIZ"/>
+                                                    <constraint firstAttribute="width" constant="24" id="ypK-bC-Kwb"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="S8b-G0-oRa" secondAttribute="bottom" constant="8" id="5ZL-Xn-pKk"/>
+                                            <constraint firstItem="ubE-a4-hnC" firstAttribute="leading" secondItem="S8b-G0-oRa" secondAttribute="trailing" constant="8" id="CMJ-2b-T53"/>
+                                            <constraint firstAttribute="trailing" secondItem="ubE-a4-hnC" secondAttribute="trailing" id="LNN-nx-uUP"/>
+                                            <constraint firstItem="S8b-G0-oRa" firstAttribute="top" secondItem="bX9-hh-DdA" secondAttribute="top" constant="8" id="WjM-Vc-0gu"/>
+                                            <constraint firstAttribute="height" constant="40" id="eAf-rd-0cM"/>
+                                            <constraint firstAttribute="bottom" secondItem="ubE-a4-hnC" secondAttribute="bottom" constant="5" id="lDo-2c-OwQ"/>
+                                            <constraint firstItem="ubE-a4-hnC" firstAttribute="top" secondItem="bX9-hh-DdA" secondAttribute="top" constant="5" id="pW0-el-anQ"/>
+                                            <constraint firstItem="S8b-G0-oRa" firstAttribute="leading" secondItem="bX9-hh-DdA" secondAttribute="leading" constant="5" id="vgD-3k-XWB"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wf4-FV-Y9d">
+                                        <rect key="frame" x="280" y="350" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="FQ8-Db-aO4"/>
+                                            <constraint firstAttribute="width" constant="30" id="nR6-vg-3iZ"/>
+                                        </constraints>
+                                        <state key="normal" title="...">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="ButtonBokkMark:" destination="mJ8-fd-Pyf" eventType="touchUpInside" id="BaI-dj-ElT"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="It was Amazing festival!.Great food and party." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MzI-xt-bC5">
+                                        <rect key="frame" x="10" y="85" width="300" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="96f-Tg-Bjr"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RM3-2w-pIx">
+                                        <rect key="frame" x="10" y="472" width="300" height="1"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="IEZ-UQ-I90"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="vE2-yh-Yq6" firstAttribute="leading" secondItem="emq-kw-nq5" secondAttribute="leading" constant="8" id="11h-1H-6RT"/>
+                                    <constraint firstItem="MzI-xt-bC5" firstAttribute="top" secondItem="sab-nU-cTw" secondAttribute="bottom" constant="12" id="1BV-No-Fcu"/>
+                                    <constraint firstAttribute="trailing" secondItem="2HT-QO-BFJ" secondAttribute="trailing" constant="8" id="4zO-nx-n6z"/>
+                                    <constraint firstItem="RM3-2w-pIx" firstAttribute="top" secondItem="bX9-hh-DdA" secondAttribute="bottom" constant="2" id="5RJ-lr-Y2j"/>
+                                    <constraint firstAttribute="trailing" secondItem="r9a-im-5f4" secondAttribute="trailing" constant="10" id="5SF-oe-cmC"/>
+                                    <constraint firstItem="Wf4-FV-Y9d" firstAttribute="leading" secondItem="GiX-XL-MSl" secondAttribute="trailing" constant="14" id="7YA-7B-YeM"/>
+                                    <constraint firstItem="bX9-hh-DdA" firstAttribute="top" secondItem="tsX-Qz-gHl" secondAttribute="bottom" constant="10" id="9RX-1T-2d1"/>
+                                    <constraint firstItem="sab-nU-cTw" firstAttribute="leading" secondItem="vE2-yh-Yq6" secondAttribute="trailing" constant="8" id="9Uf-zU-J8A"/>
+                                    <constraint firstAttribute="trailing" secondItem="Wf4-FV-Y9d" secondAttribute="trailing" constant="10" id="BFk-L7-Oc4"/>
+                                    <constraint firstItem="tsX-Qz-gHl" firstAttribute="top" secondItem="GiX-XL-MSl" secondAttribute="bottom" constant="10" id="EWz-91-7QI"/>
+                                    <constraint firstItem="tsX-Qz-gHl" firstAttribute="top" secondItem="Wf4-FV-Y9d" secondAttribute="bottom" constant="10" id="H2G-gf-T75"/>
+                                    <constraint firstAttribute="height" constant="504" id="HmS-Va-1Xj"/>
+                                    <constraint firstItem="o8O-Eg-dsa" firstAttribute="leading" secondItem="vE2-yh-Yq6" secondAttribute="trailing" constant="8" id="MBW-sE-1KW"/>
+                                    <constraint firstItem="tsX-Qz-gHl" firstAttribute="leading" secondItem="emq-kw-nq5" secondAttribute="leading" constant="10" id="Okl-EJ-3PU"/>
+                                    <constraint firstItem="MzI-xt-bC5" firstAttribute="top" secondItem="2HT-QO-BFJ" secondAttribute="bottom" constant="12" id="Pax-iI-xrt"/>
+                                    <constraint firstItem="r9a-im-5f4" firstAttribute="top" secondItem="MzI-xt-bC5" secondAttribute="bottom" constant="12" id="REL-qq-9Zl"/>
+                                    <constraint firstItem="GiX-XL-MSl" firstAttribute="top" secondItem="r9a-im-5f4" secondAttribute="bottom" constant="8" id="ROX-3d-FCu"/>
+                                    <constraint firstItem="RM3-2w-pIx" firstAttribute="top" secondItem="bX9-hh-DdA" secondAttribute="bottom" constant="2" id="Ta5-am-Lyb"/>
+                                    <constraint firstAttribute="trailing" secondItem="RM3-2w-pIx" secondAttribute="trailing" constant="10" id="U8N-hp-Ovk"/>
+                                    <constraint firstItem="bX9-hh-DdA" firstAttribute="top" secondItem="tsX-Qz-gHl" secondAttribute="bottom" constant="10" id="Uxq-vT-1VV"/>
+                                    <constraint firstItem="tsX-Qz-gHl" firstAttribute="top" secondItem="GiX-XL-MSl" secondAttribute="bottom" constant="10" id="VR7-UP-RbI"/>
+                                    <constraint firstItem="sab-nU-cTw" firstAttribute="top" secondItem="o8O-Eg-dsa" secondAttribute="bottom" id="Yfh-iS-loY"/>
+                                    <constraint firstItem="GiX-XL-MSl" firstAttribute="top" secondItem="r9a-im-5f4" secondAttribute="bottom" constant="8" id="ZPI-IL-ZQR"/>
+                                    <constraint firstAttribute="trailing" secondItem="MzI-xt-bC5" secondAttribute="trailing" constant="10" id="aoC-Lv-Xzn"/>
+                                    <constraint firstItem="RM3-2w-pIx" firstAttribute="leading" secondItem="emq-kw-nq5" secondAttribute="leading" constant="10" id="bbC-di-tSw"/>
+                                    <constraint firstItem="vE2-yh-Yq6" firstAttribute="top" secondItem="emq-kw-nq5" secondAttribute="top" constant="17" id="cVT-YJ-3cF"/>
+                                    <constraint firstAttribute="trailing" secondItem="tsX-Qz-gHl" secondAttribute="trailing" constant="10" id="fnO-Ca-omF"/>
+                                    <constraint firstItem="sab-nU-cTw" firstAttribute="top" secondItem="o8O-Eg-dsa" secondAttribute="bottom" id="gIe-hi-C8s"/>
+                                    <constraint firstAttribute="trailing" secondItem="o8O-Eg-dsa" secondAttribute="trailing" constant="10" id="gJd-aA-946"/>
+                                    <constraint firstItem="2HT-QO-BFJ" firstAttribute="top" secondItem="o8O-Eg-dsa" secondAttribute="bottom" id="gws-6O-zCo"/>
+                                    <constraint firstAttribute="trailing" secondItem="bX9-hh-DdA" secondAttribute="trailing" constant="10" id="jFq-h5-qCv"/>
+                                    <constraint firstItem="o8O-Eg-dsa" firstAttribute="top" secondItem="emq-kw-nq5" secondAttribute="top" constant="18" id="kEo-DN-OIs"/>
+                                    <constraint firstItem="2HT-QO-BFJ" firstAttribute="leading" secondItem="sab-nU-cTw" secondAttribute="trailing" constant="9" id="lQT-hN-xhl"/>
+                                    <constraint firstItem="Wf4-FV-Y9d" firstAttribute="top" secondItem="r9a-im-5f4" secondAttribute="bottom" constant="8" id="lcc-FQ-Fgv"/>
+                                    <constraint firstItem="MzI-xt-bC5" firstAttribute="top" secondItem="vE2-yh-Yq6" secondAttribute="bottom" constant="28" id="nPh-yC-j0J"/>
+                                    <constraint firstItem="MzI-xt-bC5" firstAttribute="leading" secondItem="emq-kw-nq5" secondAttribute="leading" constant="10" id="sYz-mg-abx"/>
+                                    <constraint firstItem="bX9-hh-DdA" firstAttribute="leading" secondItem="emq-kw-nq5" secondAttribute="leading" constant="10" id="wqW-la-LYy"/>
+                                    <constraint firstItem="r9a-im-5f4" firstAttribute="leading" secondItem="emq-kw-nq5" secondAttribute="leading" constant="10" id="yF1-5W-gWX"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="emq-kw-nq5" firstAttribute="top" secondItem="6XG-8y-mSG" secondAttribute="top" constant="44" id="3LI-sx-JrH"/>
+                            <constraint firstItem="emq-kw-nq5" firstAttribute="bottom" secondItem="6XG-8y-mSG" secondAttribute="bottom" id="5Xo-Tn-JaK"/>
+                            <constraint firstItem="emq-kw-nq5" firstAttribute="leading" secondItem="6XG-8y-mSG" secondAttribute="leading" id="SJI-VY-zmA"/>
+                            <constraint firstItem="emq-kw-nq5" firstAttribute="trailing" secondItem="6XG-8y-mSG" secondAttribute="trailing" id="lpN-fA-RIw"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6XG-8y-mSG"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="hq0-4z-tGK"/>
+                    <connections>
+                        <outlet property="dishRightDLayoutConstraint" destination="HOA-84-EUk" id="4Yn-X0-pRp"/>
+                        <outlet property="dishwidthDConstaint" destination="dB3-Ck-1fC" id="09H-eT-cbo"/>
+                        <outlet property="navigationItemList" destination="hq0-4z-tGK" id="Btt-To-RpV"/>
+                        <outlet property="placeWidthDConstraint" destination="FbF-7u-rIS" id="66i-Lx-0dO"/>
+                        <outlet property="postDCommentLabel" destination="MzI-xt-bC5" id="XF4-rW-vOC"/>
+                        <outlet property="postDEventDishLabel" destination="Xbv-gh-5O6" id="vZS-r4-vrS"/>
+                        <outlet property="postDEventImage" destination="r9a-im-5f4" id="Lca-cF-GV1"/>
+                        <outlet property="postDEventName" destination="ubE-a4-hnC" id="tbG-Ok-39B"/>
+                        <outlet property="postDEventPlace" destination="c2D-wh-xbf" id="D6H-Fj-TeS"/>
+                        <outlet property="postDLikeImage" destination="GiX-XL-MSl" id="unp-39-aV0"/>
+                        <outlet property="postDUserImage" destination="vE2-yh-Yq6" id="FFc-DC-bNB"/>
+                        <outlet property="postDUserTime" destination="2HT-QO-BFJ" id="rxF-2X-Mcp"/>
+                        <outlet property="postDUsernameLabel" destination="o8O-Eg-dsa" id="GG0-iJ-GYr"/>
+                        <outlet property="postDUserplaceLabbel" destination="sab-nU-cTw" id="SEb-xg-i4u"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l2N-MO-vj6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-200.625" y="133.09859154929578"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Numnu_appicon" width="122" height="122"/>
+        <image name="dish_ico" width="22" height="23"/>
+        <image name="event_ico" width="25" height="27"/>
+        <image name="foodie" width="640" height="480"/>
+        <image name="love_ico" width="32" height="29"/>
+        <image name="restaurant_ico" width="26" height="26"/>
+    </resources>
+</document>

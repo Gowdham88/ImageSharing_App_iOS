@@ -42,6 +42,20 @@ class DefaultTabController: UIViewController,IndicatorInfoProvider {
         return IndicatorInfo(title: Constants.Tab1)
     }
     
+    
+    @IBAction func ButtonCurrentEvents(_ sender: UIButton) {
+        
+        openStoryBoard(name: Constants.Tab, id: Constants.Tabid1)
+        
+    }
+    
+    
+    @IBAction func ButtonPastEvents(_ sender: UIButton) {
+        
+        openStoryBoard(name: Constants.Tab, id: Constants.Tabid1)
+    }
+    
+    
 }
 
 
@@ -136,9 +150,19 @@ extension DefaultTabController: UICollectionViewDataSource,UICollectionViewDeleg
         
         window                          = UIWindow(frame: UIScreen.main.bounds)
         let storyboard                  = UIStoryboard(name: name, bundle: nil)
-        let initialViewController       = storyboard.instantiateViewController(withIdentifier: id)
-        self.navigationController!.pushViewController(initialViewController, animated: true)
-        
+        if id == Constants.Tabid1 {
+            
+            let eventVc        = storyboard.instantiateViewController(withIdentifier: id) as! EventTabController
+            eventVc.showNavBar = true
+            self.navigationController!.pushViewController(eventVc, animated: true)
+            
+        } else {
+            
+            let initialViewController       = storyboard.instantiateViewController(withIdentifier: id)
+            self.navigationController!.pushViewController(initialViewController, animated: true)
+            
+        }
+    
     }
 
     

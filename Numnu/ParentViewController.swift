@@ -24,6 +24,7 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
    
     @IBOutlet weak var tabScrollView: UIScrollView!
     
+    @IBOutlet weak var collectionContainerView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
         // change selected bar color
@@ -50,8 +51,9 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
         buttonTabBarView.isHidden = true
         
         hideNavBar()
-   
+        addCollectionContainer()
         
+     
     }
 
     override func didReceiveMemoryWarning() {
@@ -81,8 +83,6 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
 
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
-        if searchClick {
-            
             let child_1 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1)
             let child_2 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid2)
             let child_3 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid3)
@@ -90,13 +90,7 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
             let child_5 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid5)
             let child_6 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid6)
             return [child_1, child_2,child_3,child_4,child_5,child_6]
-            
-        } else {
-            
-            let child_1 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.DefaultTab)
-            return [child_1]
-        }
-        
+    
        
     }
   
@@ -138,9 +132,11 @@ extension ParentViewController {
     func setNavBar() {
         
         searchClick = true
-        reloadPagerTabStripView()
-        buttonTabBarView.isHidden = false
+       
+        buttonTabBarView.isHidden     = false
         tabScrollView.isScrollEnabled = true
+        collectionContainerView.isHidden = true
+        tabScrollView.isHidden           = false
         
         navigationItemList.title = "Explore"
         
@@ -176,14 +172,31 @@ extension ParentViewController {
         
         searchClick = false
         reloadPagerTabStripView()
-        buttonTabBarView.isHidden = true
-        tabScrollView.isScrollEnabled = false
+        buttonTabBarView.reloadData()
+        buttonTabBarView.isHidden        = true
+        tabScrollView.isScrollEnabled    = false
+        collectionContainerView.isHidden = false
+        tabScrollView.isHidden           = true
         
         let leftButton =  UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         leftButton.isEnabled = false
         navigationItemList.leftBarButtonItem = leftButton
         
     }
+    
+    func addCollectionContainer(){
+        
+        let storyboard        = UIStoryboard(name: Constants.Tab, bundle: nil)
+        let controller        = storyboard.instantiateViewController(withIdentifier: Constants.DefaultTab)
+        controller.view.frame = self.collectionContainerView.bounds;
+        controller.willMove(toParentViewController: self)
+        self.collectionContainerView.addSubview(controller.view)
+        self.addChildViewController(controller)
+        controller.didMove(toParentViewController: self)
+        
+        
+    }
+    
     
 }
 

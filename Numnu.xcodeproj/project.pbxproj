@@ -46,6 +46,8 @@
 		B45CD86E1F9C8CC5009262B8 /* TextSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CD86D1F9C8CC5009262B8 /* TextSize.swift */; };
 		B45CD8701F9C940C009262B8 /* EventTagCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CD86F1F9C940C009262B8 /* EventTagCollectionCell.swift */; };
 		B45CD8721F9CDA99009262B8 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CD8711F9CDA99009262B8 /* UILabel.swift */; };
+		B46310221FA32073009F6F0E /* PostDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B46310211FA32073009F6F0E /* PostDetail.storyboard */; };
+		B46310241FA323E2009F6F0E /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46310231FA323E2009F6F0E /* PostDetailViewController.swift */; };
 		B464D78D1F8D0FEC002A1FDC /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B464D78C1F8D0FEC002A1FDC /* UIColor.swift */; };
 		B464D78F1F8D1F3E002A1FDC /* EventCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B464D78E1F8D1F3E002A1FDC /* EventCollectionCell.swift */; };
 		B474C5481FA070BB00201B6A /* EventDetailTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B474C5471FA070BB00201B6A /* EventDetailTab.storyboard */; };
@@ -137,6 +139,8 @@
 		B45CD86D1F9C8CC5009262B8 /* TextSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSize.swift; sourceTree = "<group>"; };
 		B45CD86F1F9C940C009262B8 /* EventTagCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTagCollectionCell.swift; sourceTree = "<group>"; };
 		B45CD8711F9CDA99009262B8 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
+		B46310211FA32073009F6F0E /* PostDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PostDetail.storyboard; sourceTree = "<group>"; };
+		B46310231FA323E2009F6F0E /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
 		B464D78C1F8D0FEC002A1FDC /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		B464D78E1F8D1F3E002A1FDC /* EventCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionCell.swift; sourceTree = "<group>"; };
 		B474C5471FA070BB00201B6A /* EventDetailTab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EventDetailTab.storyboard; sourceTree = "<group>"; };
@@ -333,6 +337,7 @@
 				B415308F1F8BBC39000FB369 /* Tab.storyboard */,
 				B410DF9B1F94CDF900858E4E /* Event.storyboard */,
 				B474C5471FA070BB00201B6A /* EventDetailTab.storyboard */,
+				B46310211FA32073009F6F0E /* PostDetail.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -348,6 +353,7 @@
 				B41842381F8FCBF100CBBA57 /* Edit_ProfileVC.swift */,
 				B418423E1F8FD1B000CBBA57 /* NotificationsVC.swift */,
 				B426C68D1F9E0A6B008D586B /* SplashViewController.swift */,
+				B46310231FA323E2009F6F0E /* PostDetailViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -592,6 +598,7 @@
 				B47BD4011F8A26A30099061C /* GoogleService-Info.plist in Resources */,
 				3FC6CEC41F6F744700DF2A12 /* LaunchScreen.storyboard in Resources */,
 				3FC6CEC11F6F744700DF2A12 /* Assets.xcassets in Resources */,
+				B46310221FA32073009F6F0E /* PostDetail.storyboard in Resources */,
 				B474C5481FA070BB00201B6A /* EventDetailTab.storyboard in Resources */,
 				B41530901F8BBC39000FB369 /* Tab.storyboard in Resources */,
 				B410DF9C1F94CDF900858E4E /* Event.storyboard in Resources */,
@@ -743,6 +750,7 @@
 				B44E1D4C1FA1B21D001F754E /* BusinessEventViewController.swift in Sources */,
 				B47F63A81F88E7B6001D7A18 /* ButtonExtender.swift in Sources */,
 				B415308D1F8BB78C000FB369 /* ParentViewController.swift in Sources */,
+				B46310241FA323E2009F6F0E /* PostDetailViewController.swift in Sources */,
 				601D46771F8D205E00832BDD /* signInVC.swift in Sources */,
 				B47F63A61F88E2BC001D7A18 /* ViewExtender.swift in Sources */,
 			);
