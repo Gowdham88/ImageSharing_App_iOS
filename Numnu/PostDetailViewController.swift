@@ -31,6 +31,8 @@ class PostDetailViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setNavBar()
 
         // Do any additional setup after loading the view.
     }
@@ -42,7 +44,7 @@ class PostDetailViewController : UIViewController {
   
     @IBAction func ButtonBokkMark(_ sender: UIButton) {
         
-        
+        share()
     }
     
     
@@ -85,7 +87,7 @@ extension PostDetailViewController {
         
     }
     
-    func share(code : String) {
+    func share() {
         
         let optionMenu = UIAlertController(title:"Post", message: "", preferredStyle: .actionSheet)
         

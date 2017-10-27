@@ -14,16 +14,13 @@ import XLPagerTabStrip
 class PostTabController: UIViewController,IndicatorInfoProvider {
     
     @IBOutlet weak var postEventTableView: UITableView!
-    
-    
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         
         postEventTableView.delegate   = self
         postEventTableView.dataSource = self
 
-       
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,14 +49,77 @@ extension PostTabController : UITableViewDelegate,UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "postEventCell", for: indexPath) as! PostEventTableViewCell
         
+        cell.delegate = self
+        cell.postEventBookMark.tag = indexPath.row
+        
         return cell
         
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        openStoryBoard()
     }
     
     
 }
+
+extension PostTabController {
+    
+    
+    func  openStoryBoard() {
+        
+        let storyboard = UIStoryboard(name: Constants.PostDetail, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.PostDetailId)
+        self.navigationController!.pushViewController(vc, animated: true)
+        
+    }
+    
+    
+}
+
+/**************custom delegate******************/
+
+extension PostTabController : PostEventTableViewCellDelegate {
+    
+    func bookmarkPost(tag: Int) {
+    
+        share()
+    
+    }
+    
+    func share() {
+        
+        let optionMenu = UIAlertController(title:"Post", message: "", preferredStyle: .actionSheet)
+        
+        let Bookmark = UIAlertAction(title: "Bookmark", style: .default, handler: {
+            
+            (alert : UIAlertAction!) -> Void in
+            
+        })
+        
+        let Share = UIAlertAction(title: "Share", style: .default, handler: {
+            
+            (alert : UIAlertAction!) -> Void in
+            
+        })
+        
+        let Cancel = UIAlertAction(title: "Cancel", style: .default, handler: {
+            
+            (alert: UIAlertAction!) -> Void in
+            
+        })
+    
+        optionMenu.addAction(Bookmark)
+        optionMenu.addAction(Share)
+        optionMenu.addAction(Cancel)
+       
+        optionMenu.popoverPresentationController?.sourceView = self.view
+        optionMenu.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
+        
+        self.present(optionMenu, animated: true, completion: nil)
+    
+    }
+}
+
 

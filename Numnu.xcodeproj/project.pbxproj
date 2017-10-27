@@ -141,6 +141,7 @@
 		B45CD8711F9CDA99009262B8 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		B46310211FA32073009F6F0E /* PostDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PostDetail.storyboard; sourceTree = "<group>"; };
 		B46310231FA323E2009F6F0E /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
+		B46310251FA341B3009F6F0E /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.otf"; sourceTree = "<group>"; };
 		B464D78C1F8D0FEC002A1FDC /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		B464D78E1F8D1F3E002A1FDC /* EventCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionCell.swift; sourceTree = "<group>"; };
 		B474C5471FA070BB00201B6A /* EventDetailTab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EventDetailTab.storyboard; sourceTree = "<group>"; };
@@ -150,7 +151,6 @@
 		B47BD4061F8A75FA0099061C /* signupwithEmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signupwithEmailVC.swift; sourceTree = "<group>"; };
 		B47BD4081F8A836D0099061C /* ForgotpasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotpasswordVC.swift; sourceTree = "<group>"; };
 		B47F63A01F88DA8A001D7A18 /* Proxima Nova Alt Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Proxima Nova Alt Regular.otf"; sourceTree = "<group>"; };
-		B47F63A11F88DDD7001D7A18 /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.otf"; sourceTree = "<group>"; };
 		B47F63A21F88DDEF001D7A18 /* Proxima Nova ScOsf Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Proxima Nova ScOsf Regular.otf"; sourceTree = "<group>"; };
 		B47F63A31F88DDFF001D7A18 /* Proxima Nova ScOsf Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Proxima Nova ScOsf Bold.otf"; sourceTree = "<group>"; };
 		B47F63A41F88DF23001D7A18 /* Proxima Nova Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Proxima Nova Bold.otf"; sourceTree = "<group>"; };
@@ -319,10 +319,10 @@
 		B47F639F1F88D697001D7A18 /* CustomFont */ = {
 			isa = PBXGroup;
 			children = (
+				B46310251FA341B3009F6F0E /* ProximaNova-Regular.otf */,
 				B47F63A41F88DF23001D7A18 /* Proxima Nova Bold.otf */,
 				B47F63A31F88DDFF001D7A18 /* Proxima Nova ScOsf Bold.otf */,
 				B47F63A21F88DDEF001D7A18 /* Proxima Nova ScOsf Regular.otf */,
-				B47F63A11F88DDD7001D7A18 /* ProximaNova-Regular.otf */,
 				B47F63A01F88DA8A001D7A18 /* Proxima Nova Alt Regular.otf */,
 			);
 			name = CustomFont;

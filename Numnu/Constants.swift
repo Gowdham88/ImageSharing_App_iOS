@@ -21,13 +21,14 @@ class Constants {
     static let Main  = "Main"
     static let Event = "Event"
     static let EventDetail = "EventDetailTab"
+    static let PostDetail  = "PostDetail"
     
     // Storyboards id
     
     static let TabStoryId   = "tabcontrollerid"
     static let EventStoryId = "eventstoryid"
     static let LoginStoryId = "loginStoryId"
-    
+    static let PostDetailId = "postdetailid"
     
     // Event story id
     
@@ -56,15 +57,13 @@ class Constants {
     
     static let EventTab1  = "Businesses"
     static let EventTab2  = "Menu Items"
-    static let EventTab3  = "Reviews"
+    static let EventTab3  = "Post"
     
     // Event Detail Tab id
     static let EventTabid1  = "BusinessesTab"
     static let EventTabid2  = "MenuTab"
     static let EventTabid3  = "ReviewTab"
-    
-    
-    
+   
     static let dummy   = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolfdfdfdfdfdfdfdfdfdfdfdf fdfdfddsdsdsdsdsds djhdjs dsjhdjhsjdhsjhdhs dsjhd Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolfdfdfdfdfdfdfdfdfdfdfdf fdfdfddsdsdsdsdsds djhdjs dsjhdjhsjdhsjhdhs dsjhd Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolfdfdfdfdfdfdfdfdfdfdfdf fdfdfddsdsdsdsdsds djhdjs dsjhdjhsjdhsjhdhs dsjhd"
     
     // Authentication Label

@@ -18,13 +18,13 @@
         <!--Title-->
         <scene sceneID="9Dr-aj-aLb">
             <objects>
-                <viewController id="mJ8-fd-Pyf" customClass="PostDetailViewController" customModule="Numnu" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="postdetailid" id="mJ8-fd-Pyf" customClass="PostDetailViewController" customModule="Numnu" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VZe-Pp-pve">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="emq-kw-nq5">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="504"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="foodie" translatesAutoresizingMaskIntoConstraints="NO" id="r9a-im-5f4" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
                                         <rect key="frame" x="10" y="142" width="300" height="200"/>
@@ -266,8 +266,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="emq-kw-nq5" firstAttribute="top" secondItem="6XG-8y-mSG" secondAttribute="top" constant="44" id="3LI-sx-JrH"/>
-                            <constraint firstItem="emq-kw-nq5" firstAttribute="bottom" secondItem="6XG-8y-mSG" secondAttribute="bottom" id="5Xo-Tn-JaK"/>
+                            <constraint firstItem="emq-kw-nq5" firstAttribute="top" secondItem="6XG-8y-mSG" secondAttribute="top" id="3LI-sx-JrH"/>
                             <constraint firstItem="emq-kw-nq5" firstAttribute="leading" secondItem="6XG-8y-mSG" secondAttribute="leading" id="SJI-VY-zmA"/>
                             <constraint firstItem="emq-kw-nq5" firstAttribute="trailing" secondItem="6XG-8y-mSG" secondAttribute="trailing" id="lpN-fA-RIw"/>
                         </constraints>
