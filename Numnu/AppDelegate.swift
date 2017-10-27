@@ -71,8 +71,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DispatchQueue.main.asyncAfter(deadline: when) {
             
             self.window    = UIWindow(frame: UIScreen.main.bounds)
-            let storyboard = UIStoryboard(name: Constants.Auth, bundle: nil)
-            let initialViewController = storyboard.instantiateViewController(withIdentifier: Constants.LoginStoryId)
+            let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
+            let initialViewController = storyboard.instantiateViewController(withIdentifier: Constants.TabStoryId)
             self.window?.rootViewController = initialViewController
             self.window?.makeKeyAndVisible()
             

@@ -104,7 +104,6 @@ class EventViewController: ButtonBarPagerTabStripViewController {
             mainContainerViewBottom.constant = 0
             
         }
-      
         
     }
 
