@@ -57,9 +57,9 @@ class OnboardingVC: UIViewController {
         
         window         = UIWindow(frame: UIScreen.main.bounds)
         let transition = CATransition()
-        transition.duration = 0.3
+        transition.duration = 0.5
         transition.type     = kCATransitionPush
-        transition.subtype  = kCATransitionFromRight
+        transition.subtype  = kCATransitionFromBottom
         self.view.window!.layer.add(transition, forKey: kCATransition)
         let storyboard                  = UIStoryboard(name: name, bundle: nil)
         let initialViewController       = storyboard.instantiateViewController(withIdentifier: id)
