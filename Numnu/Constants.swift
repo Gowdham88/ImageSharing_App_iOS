@@ -22,6 +22,8 @@ class Constants {
     static let Event = "Event"
     static let EventDetail = "EventDetailTab"
     static let PostDetail  = "PostDetail"
+    static let BusinessDetail = "BussinessDetail"
+    static let BusinessDetailTab = "BussinessDetailTab"
     
     // Storyboards id
     
@@ -29,6 +31,7 @@ class Constants {
     static let EventStoryId = "eventstoryid"
     static let LoginStoryId = "loginStoryId"
     static let PostDetailId = "postdetailid"
+    static let BusinessDetailId = "businessDetailId"
     
     // Event story id
     
@@ -63,6 +66,16 @@ class Constants {
     static let EventTabid1  = "BusinessesTab"
     static let EventTabid2  = "MenuTab"
     static let EventTabid3  = "ReviewTab"
+    
+    // Menu Detail Tab name
+    
+    static let BusinessTab1 = "Menu Items"
+    static let BusinessTab2 = "Post"
+    
+    // Menu Detail Tab id
+    
+    static let BusinessTabid1 = "MenuTab"
+    static let BusinessTabid2 = "PostTab"
    
     static let dummy   = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolfdfdfdfdfdfdfdfdfdfdfdf fdfdfddsdsdsdsdsds djhdjs dsjhdjhsjdhsjhdhs dsjhd Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolfdfdfdfdfdfdfdfdfdfdfdf fdfdfddsdsdsdsdsds djhdjs dsjhdjhsjdhsjhdhs dsjhd Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolfdfdfdfdfdfdfdfdfdfdfdf fdfdfddsdsdsdsdsds djhdjs dsjhdjhsjdhsjhdhs dsjhd"
     
