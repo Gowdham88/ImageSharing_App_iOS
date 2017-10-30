@@ -37,14 +37,9 @@ class EventMapViewController: UIViewController {
             locationManager.delegate = self
         
         }
-        
-       
-        
+    
         self.tabBarController?.tabBar.isHidden = true
-        
-        
      
-
         // Do any additional setup after loading the view.
     }
 
