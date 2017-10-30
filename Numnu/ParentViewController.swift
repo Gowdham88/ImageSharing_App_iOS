@@ -8,6 +8,7 @@
 
 import UIKit
 import XLPagerTabStrip
+import GooglePlaces
 
 class ParentViewController: ButtonBarPagerTabStripViewController {
     
@@ -76,8 +77,9 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
     }
     @IBAction func ButtonLocation(_ sender: UIButton) {
         
-        dismissKeyboard()
-        setNavBar()
+        let autocompleteController = GMSAutocompleteViewController()
+        autocompleteController.delegate = self
+        present(autocompleteController, animated: true, completion: nil)
     }
     // Tab controllers switch func
 
@@ -111,6 +113,12 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
 }
 
 extension ParentViewController : UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        
+        
+    }
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -200,5 +208,47 @@ extension ParentViewController {
     
 }
 
+/*************************Google place autocomplete*******************************************/
+
+extension ParentViewController: GMSAutocompleteViewControllerDelegate {
+    
+    // Handle the user's selection.
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        
+        print("Place name: \(place.name)")
+        
+        editsearchbyLocation.text = place.name
+        
+        
+        if let placeName = place.formattedAddress {
+            
+            print("Place address: \(placeName)")
+        }
+        
+        
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        // TODO: handle the error.
+        print("Error: ", error.localizedDescription)
+    }
+    
+    // User canceled the operation.
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    // Turn the network activity indicator on and off again.
+    func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    }
+    
+    func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    }
+    
+}
 
 

@@ -48,6 +48,7 @@
 		B45CD8721F9CDA99009262B8 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CD8711F9CDA99009262B8 /* UILabel.swift */; };
 		B46310221FA32073009F6F0E /* PostDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B46310211FA32073009F6F0E /* PostDetail.storyboard */; };
 		B46310241FA323E2009F6F0E /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46310231FA323E2009F6F0E /* PostDetailViewController.swift */; };
+		B46310271FA347B6009F6F0E /* postEventDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46310261FA347B6009F6F0E /* postEventDetailTableViewCell.swift */; };
 		B464D78D1F8D0FEC002A1FDC /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B464D78C1F8D0FEC002A1FDC /* UIColor.swift */; };
 		B464D78F1F8D1F3E002A1FDC /* EventCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B464D78E1F8D1F3E002A1FDC /* EventCollectionCell.swift */; };
 		B474C5481FA070BB00201B6A /* EventDetailTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B474C5471FA070BB00201B6A /* EventDetailTab.storyboard */; };
@@ -142,6 +143,7 @@
 		B46310211FA32073009F6F0E /* PostDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PostDetail.storyboard; sourceTree = "<group>"; };
 		B46310231FA323E2009F6F0E /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
 		B46310251FA341B3009F6F0E /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.otf"; sourceTree = "<group>"; };
+		B46310261FA347B6009F6F0E /* postEventDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = postEventDetailTableViewCell.swift; sourceTree = "<group>"; };
 		B464D78C1F8D0FEC002A1FDC /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		B464D78E1F8D1F3E002A1FDC /* EventCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionCell.swift; sourceTree = "<group>"; };
 		B474C5471FA070BB00201B6A /* EventDetailTab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EventDetailTab.storyboard; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 			children = (
 				B44E1D501FA1B3ED001F754E /* businessEventTableViewCell.swift */,
 				B44E1D541FA1CF00001F754E /* BusinessCategoryEventViewCellTableViewCell.swift */,
+				B46310261FA347B6009F6F0E /* postEventDetailTableViewCell.swift */,
 			);
 			name = EventTabViewCell;
 			sourceTree = "<group>";
@@ -711,6 +714,7 @@
 				B426C68E1F9E0A6B008D586B /* SplashViewController.swift in Sources */,
 				B4BD9EF91F6FB3E700C43182 /* PostViewModel.swift in Sources */,
 				B4C5158A1FA085D100348E2A /* BusinessTabController.swift in Sources */,
+				B46310271FA347B6009F6F0E /* postEventDetailTableViewCell.swift in Sources */,
 				B41530981F8BBD27000FB369 /* MenuTabController.swift in Sources */,
 				B47BD4031F8A48010099061C /* OnboardingVC.swift in Sources */,
 				B410DF9E1F94E01400858E4E /* EventViewController.swift in Sources */,

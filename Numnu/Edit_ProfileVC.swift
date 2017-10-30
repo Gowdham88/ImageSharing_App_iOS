@@ -27,6 +27,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate {
         
         myscrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height+100)
         // Do any additional setup after loading the view.
+        
+        addCollectionContainer()
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,6 +55,21 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate {
         
         return true
     }
+    
+    func addCollectionContainer(){
+        
+        let storyboard        = UIStoryboard(name: Constants.Auth, bundle: nil)
+        let controller        = storyboard.instantiateViewController(withIdentifier: "signupvc")
+        controller.view.frame = self.view.bounds;
+        controller.willMove(toParentViewController: self)
+        self.view.addSubview(controller.view)
+        self.addChildViewController(controller)
+        controller.didMove(toParentViewController: self)
+        
+        
+    }
+    
+    
     /*
     // MARK: - Navigation
 

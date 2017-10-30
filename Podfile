@@ -18,5 +18,8 @@ target 'Numnu' do
   pod 'FBSDKCoreKit'
   pod 'FBSDKLoginKit'
   pod 'GoogleMaps'
+  pod 'GooglePlaces'
+  pod 'GooglePlacePicker'
+  
 end
 

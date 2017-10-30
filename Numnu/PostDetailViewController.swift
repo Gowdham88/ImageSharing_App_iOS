@@ -27,7 +27,7 @@ class PostDetailViewController : UIViewController {
     @IBOutlet weak var dishRightDLayoutConstraint: NSLayoutConstraint!
 
     @IBOutlet weak var navigationItemList: UINavigationItem!
-    
+    var window : UIWindow?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,6 +94,12 @@ extension PostDetailViewController {
         let Bookmark = UIAlertAction(title: "Bookmark", style: .default, handler: {
           
             (alert : UIAlertAction!) -> Void in
+            
+            self.window    = UIWindow(frame: UIScreen.main.bounds)
+            let storyboard = UIStoryboard(name: Constants.Auth, bundle: nil)
+            let initialViewController = storyboard.instantiateViewController(withIdentifier: "signupvc")
+            self.window?.rootViewController = initialViewController
+            self.window?.makeKeyAndVisible()
 
         })
         

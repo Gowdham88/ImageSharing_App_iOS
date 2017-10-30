@@ -57,6 +57,7 @@ class loginMainVC: UIViewController, UIWebViewDelegate {
         
         self.performSegue(withIdentifier: "signIn", sender: self)
     }
+    
     @IBAction func facebookLoginPressed(_ sender: Any) {
         let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
         fbLoginManager.logIn(withReadPermissions: ["public_profile", "email"], from: self) { (result, error) in

@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Numnu wants to enable your location</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Numnu wants to enable your location</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -15,7 +19,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.1.3</string>
+	<string>1.1.4</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -26,7 +30,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>1</string>
 	<key>FacebookAppID</key>
 	<string>2170111179882504</string>
 	<key>FacebookDisplayName</key>
@@ -47,8 +51,8 @@
 		<string>fb-messenger-api</string>
 		<string>fbauth2</string>
 		<string>fbshareextension</string>
-        <string>googlechromes</string>
-        <string>comgooglemaps</string>
+		<string>googlechromes</string>
+		<string>comgooglemaps</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

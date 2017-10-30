@@ -22,7 +22,7 @@
         <!--Login MainVC-->
         <scene sceneID="zdG-hI-0B1">
             <objects>
-                <viewController id="Zpp-RP-GwK" customClass="loginMainVC" customModule="Numnu" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="signupvc" id="Zpp-RP-GwK" customClass="loginMainVC" customModule="Numnu" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7wn-r0-r4H">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -785,7 +785,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="please check the password" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ISg-wM-MbH">
-                                <rect key="frame" x="20" y="330" width="144" height="40"/>
+                                <rect key="frame" x="20" y="330" width="147" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="VUz-Ha-4Fd"/>
                                 </constraints>
