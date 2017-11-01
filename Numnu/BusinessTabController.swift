@@ -61,6 +61,18 @@ extension BusinessTabController : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        let cell : BusinessTableViewCell = tableView.cellForRow(at: indexPath) as! BusinessTableViewCell
+        cell.contentView.backgroundColor = UIColor.white
+        openStoryBoard()
+        
+    }
+    
+    func  openStoryBoard() {
+        
+        let storyboard = UIStoryboard(name: Constants.BusinessDetail, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.BusinessDetailId)
+        self.navigationController!.pushViewController(vc, animated: true)
+        
     }
     
     

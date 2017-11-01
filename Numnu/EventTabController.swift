@@ -83,6 +83,10 @@ extension EventTabController : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        let cell : EventTableViewCell = tableView.cellForRow(at: indexPath) as! EventTableViewCell
+        cell.contentView.backgroundColor = UIColor.white
+        openStoryBoard()
+        
     }
     
     
@@ -152,6 +156,14 @@ extension EventTabController {
     func backButtonClicked() {
         
         _ = self.navigationController?.popToRootViewController(animated: true)
+        
+    }
+    
+    func  openStoryBoard() {
+        
+        let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)
+        self.navigationController!.pushViewController(vc, animated: true)
         
     }
     

@@ -59,7 +59,7 @@ extension MenuTabController : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "menueventcell", for: indexPath) as! MenuEventTableViewCell
-        
+       
         cell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.row)
         
         return cell
@@ -67,6 +67,18 @@ extension MenuTabController : UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let cell : MenuEventTableViewCell = tableView.cellForRow(at: indexPath) as! MenuEventTableViewCell
+        cell.contentView.backgroundColor = UIColor.white
+        openStoryBoard()
+        
+    }
+    
+    func  openStoryBoard() {
+        
+        let storyboard = UIStoryboard(name: Constants.ItemDetail, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId)
+        self.navigationController!.pushViewController(vc, animated: true)
         
     }
     
@@ -86,11 +98,10 @@ extension MenuTabController : UICollectionViewDelegate,UICollectionViewDataSourc
         
         let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagarray[indexPath.row], fontname: "AvenirNext-Regular", size: 15)
         
-        cell.tagnamelabel.text = tagarray[indexPath.row]
+        cell.tagnamelabel.text  = tagarray[indexPath.row]
         
         cell.setLabelSize(size: textSize)
-        
-        
+       
         return cell
         
     }

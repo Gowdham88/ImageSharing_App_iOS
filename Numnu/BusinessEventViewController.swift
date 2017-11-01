@@ -37,6 +37,14 @@ class BusinessEventViewController: UIViewController,IndicatorInfoProvider {
         return IndicatorInfo(title: Constants.EventTab1)
     }
     
+    func openStoryBoard () {
+        
+        let storyboard      = UIStoryboard(name: Constants.BusinessDetail, bundle: nil)
+        let vc              = storyboard.instantiateViewController(withIdentifier: Constants.BusinessDetailId) 
+        self.navigationController!.pushViewController(vc, animated: true)
+        
+    }
+    
 
 }
 
@@ -84,10 +92,12 @@ extension BusinessEventViewController : UITableViewDelegate,UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.contentView.backgroundColor = UIColor.white
+        
          if tableView == businessEventTableView {
             
-            businessEventTableView.isHidden    = true
-            businessCategoryTableView.isHidden = false
+            openStoryBoard()
             
          } else {
             

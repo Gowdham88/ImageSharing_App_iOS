@@ -22,6 +22,10 @@ class Constants {
     static let Event = "Event"
     static let EventDetail = "EventDetailTab"
     static let PostDetail  = "PostDetail"
+    static let BusinessDetail = "BussinessDetail"
+    static let BusinessDetailTab = "BussinessDetailTab"
+    static let ItemDetail        = "ItemDetails"
+    static let LocationDetail    = "LocationDetail"
     
     // Storyboards id
     
@@ -29,6 +33,10 @@ class Constants {
     static let EventStoryId = "eventstoryid"
     static let LoginStoryId = "loginStoryId"
     static let PostDetailId = "postdetailid"
+    static let BusinessDetailId = "businessDetailId"
+    static let BusinessCompleteId = "businessCompleteid"
+    static let ItemDetailId       = "itemCompleteid"
+    static let LocationDetailId   = "locationDetailid"
     
     // Event story id
     
@@ -39,10 +47,11 @@ class Constants {
     
     static let Tab1  = "Events"
     static let Tab2  = "Businesses"
-    static let Tab3  = "Menu Items"
+    static let Tab3  = "Items"
     static let Tab4  = "Posts"
     static let Tab5  = "Users"
     static let Tab6  = "Lists"
+    static let Tab7  = "Location"
     
     // Home Tab id
     static let Tabid1  = "EventTab"
@@ -51,18 +60,31 @@ class Constants {
     static let Tabid4  = "PostTab"
     static let Tabid5  = "UserTab"
     static let Tabid6  = "ListTab"
+    static let Tabid7  = "LocationTab"
     static let DefaultTab = "DefaultTab"
     
     // Event Detail Tab name
     
     static let EventTab1  = "Businesses"
-    static let EventTab2  = "Menu Items"
+    static let EventTab2  = "Items"
     static let EventTab3  = "Post"
     
     // Event Detail Tab id
     static let EventTabid1  = "BusinessesTab"
     static let EventTabid2  = "MenuTab"
     static let EventTabid3  = "ReviewTab"
+    
+    // Menu Detail Tab name
+    
+    static let BusinessTab1 = "Items"
+    static let BusinessTab2 = "Post"
+    static let BusinessTab3 = "Event"
+    
+    // Menu Detail Tab id
+    
+    static let BusinessTabid1 = "MenuTab"
+    static let BusinessTabid2 = "ReviewTab"
+    static let BusinessTabid3 = "EventTab"
    
     static let dummy   = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolfdfdfdfdfdfdfdfdfdfdfdf fdfdfddsdsdsdsdsds djhdjs dsjhdjhsjdhsjhdhs dsjhd Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolfdfdfdfdfdfdfdfdfdfdfdf fdfdfddsdsdsdsdsds djhdjs dsjhdjhsjdhsjhdhs dsjhd Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolfdfdfdfdfdfdfdfdfdfdfdf fdfdfddsdsdsdsdsds djhdjs dsjhdjhsjdhsjhdhs dsjhd"
     

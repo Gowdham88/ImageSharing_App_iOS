@@ -48,18 +48,20 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     var isLabelAtMaxHeight = false
     
     override func viewDidLoad() {
+        settings.style.selectedBarHeight = 2.0
         super.viewDidLoad()
         
         settings.style.buttonBarBackgroundColor = .white
         settings.style.buttonBarItemBackgroundColor = .white
         settings.style.selectedBarBackgroundColor = UIColor.appBlackColor()
         settings.style.buttonBarItemFont = .boldSystemFont(ofSize: 14)
-        settings.style.selectedBarHeight = 2.0
+        
         settings.style.buttonBarMinimumLineSpacing = 0
         settings.style.buttonBarItemTitleColor = .black
         settings.style.buttonBarItemsShouldFillAvailiableWidth = true
         settings.style.buttonBarLeftContentInset = 0
         settings.style.buttonBarRightContentInset = 0
+        settings.style.buttonBarHeight = 1
         buttonBarView.selectedBar.backgroundColor = UIColor.appThemeColor()
         
         changeCurrentIndexProgressive = { [weak self] (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
@@ -243,7 +245,7 @@ extension EventViewController {
     
     func setNavBar() {
 
-        navigationItemList.title = "Event Detail"
+        navigationItemList.title = "Event"
         
         let button: UIButton = UIButton(type: UIButtonType.custom)
         //set image for button
