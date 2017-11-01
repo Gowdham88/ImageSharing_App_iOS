@@ -22,6 +22,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     @IBOutlet var foodTextfield: UITextField!
     
+    var show : Bool = false
     
     @IBOutlet var myscrollView: UIScrollView!
    
@@ -57,7 +58,13 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
 
         // Do any additional setup after loading the view.
         
-//        addCollectionContainer()
+        if show == false {
+            
+            addCollectionContainer()
+            
+        }
+        
+        
     }
     
     // Validation func //
@@ -148,6 +155,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 let Alert = UIAlertController(title: "Success", message: "Profile saved", preferredStyle: UIAlertControllerStyle.alert)
                 
                 let OkAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { _ in
+                    
+                    self.dismiss(animated: true, completion: nil)
                 }
                 
                 Alert.addAction(OkAction)

@@ -99,7 +99,8 @@ class loginMainVC: UIViewController, UIWebViewDelegate {
         
         window                          = UIWindow(frame: UIScreen.main.bounds)
         let storyboard                  = UIStoryboard(name: name, bundle: nil)
-        let initialViewController       = storyboard.instantiateViewController(withIdentifier: id)
+        let initialViewController       = storyboard.instantiateViewController(withIdentifier: "profileid") as! Edit_ProfileVC
+        initialViewController.show      = true
         window?.rootViewController = initialViewController
         window?.makeKeyAndVisible()
         
