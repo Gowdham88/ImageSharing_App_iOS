@@ -61,8 +61,8 @@ extension LocationTabController : UITableViewDelegate,UITableViewDataSource {
     
     func  openStoryBoard() {
         
-        let storyboard = UIStoryboard(name: Constants.BusinessDetail, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.BusinessDetailId)
+        let storyboard = UIStoryboard(name: Constants.LocationDetail, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.LocationDetailId)
         self.navigationController!.pushViewController(vc, animated: true)
         
     }

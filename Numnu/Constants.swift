@@ -25,6 +25,7 @@ class Constants {
     static let BusinessDetail = "BussinessDetail"
     static let BusinessDetailTab = "BussinessDetailTab"
     static let ItemDetail        = "ItemDetails"
+    static let LocationDetail    = "LocationDetail"
     
     // Storyboards id
     
@@ -35,6 +36,7 @@ class Constants {
     static let BusinessDetailId = "businessDetailId"
     static let BusinessCompleteId = "businessCompleteid"
     static let ItemDetailId       = "itemCompleteid"
+    static let LocationDetailId   = "locationDetailid"
     
     // Event story id
     

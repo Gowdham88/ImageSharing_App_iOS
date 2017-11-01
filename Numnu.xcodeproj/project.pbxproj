@@ -45,6 +45,7 @@
 		B42201B21F8E661E0058A4ED /* ImageExtender.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42201B11F8E661E0058A4ED /* ImageExtender.swift */; };
 		B42201B41F8E70DA0058A4ED /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42201B31F8E70DA0058A4ED /* EventTableViewCell.swift */; };
 		B426C68E1F9E0A6B008D586B /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B426C68D1F9E0A6B008D586B /* SplashViewController.swift */; };
+		B42F2A261FA9EA96002419AB /* LocationDetailcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42F2A251FA9EA96002419AB /* LocationDetailcontroller.swift */; };
 		B44E1D4C1FA1B21D001F754E /* BusinessEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44E1D4B1FA1B21D001F754E /* BusinessEventViewController.swift */; };
 		B44E1D4E1FA1B249001F754E /* MenuEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44E1D4D1FA1B249001F754E /* MenuEventViewController.swift */; };
 		B44E1D511FA1B3ED001F754E /* businessEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44E1D501FA1B3ED001F754E /* businessEventTableViewCell.swift */; };
@@ -154,6 +155,7 @@
 		B42201B11F8E661E0058A4ED /* ImageExtender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtender.swift; sourceTree = "<group>"; };
 		B42201B31F8E70DA0058A4ED /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		B426C68D1F9E0A6B008D586B /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		B42F2A251FA9EA96002419AB /* LocationDetailcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailcontroller.swift; sourceTree = "<group>"; };
 		B44E1D4B1FA1B21D001F754E /* BusinessEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessEventViewController.swift; sourceTree = "<group>"; };
 		B44E1D4D1FA1B249001F754E /* MenuEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuEventViewController.swift; sourceTree = "<group>"; };
 		B44E1D501FA1B3ED001F754E /* businessEventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = businessEventTableViewCell.swift; sourceTree = "<group>"; };
@@ -347,6 +349,14 @@
 			name = TabControllers;
 			sourceTree = "<group>";
 		};
+		B42F2A241FA9EA6B002419AB /* LocationDetailController */ = {
+			isa = PBXGroup;
+			children = (
+				B42F2A251FA9EA96002419AB /* LocationDetailcontroller.swift */,
+			);
+			name = LocationDetailController;
+			sourceTree = "<group>";
+		};
 		B44E1D4A1FA1B1DF001F754E /* EventTabControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -412,6 +422,7 @@
 		B4BD9EE91F6FA4AF00C43182 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B42F2A241FA9EA6B002419AB /* LocationDetailController */,
 				B4C5158B1FA085ED00348E2A /* AuthControllers */,
 				B4C5158C1FA0864100348E2A /* HomeTabControllers */,
 				B4C5158D1FA0867800348E2A /* EventDetailController */,
@@ -809,6 +820,7 @@
 				B41530941F8BBCD9000FB369 /* EventTabController.swift in Sources */,
 				B44E1D4E1FA1B249001F754E /* MenuEventViewController.swift in Sources */,
 				B44E1D531FA1BECE001F754E /* ReviewEventViewController.swift in Sources */,
+				B42F2A261FA9EA96002419AB /* LocationDetailcontroller.swift in Sources */,
 				B4C515881FA085BB00348E2A /* ListTabController.swift in Sources */,
 				601D46791F8F3B1C00832BDD /* UserList.swift in Sources */,
 				B49ABD8C1F9F28690091C5D1 /* EventDefaulCollectionCell2.swift in Sources */,
