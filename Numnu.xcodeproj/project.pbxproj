@@ -55,6 +55,8 @@
 		B45CBCEC1FA9BA13004B6E66 /* ItemDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B45CBCEB1FA9BA13004B6E66 /* ItemDetails.storyboard */; };
 		B45CBCEE1FA9BA4B004B6E66 /* LocationDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B45CBCED1FA9BA4B004B6E66 /* LocationDetail.storyboard */; };
 		B45CBCF11FA9BD66004B6E66 /* ItemDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CBCF01FA9BD66004B6E66 /* ItemDetailController.swift */; };
+		B45CBCF31FA9D5B1004B6E66 /* LocationTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CBCF21FA9D5B1004B6E66 /* LocationTabController.swift */; };
+		B45CBCF51FA9D60A004B6E66 /* Locationtableviewcell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CBCF41FA9D60A004B6E66 /* Locationtableviewcell.swift */; };
 		B45CD86E1F9C8CC5009262B8 /* TextSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CD86D1F9C8CC5009262B8 /* TextSize.swift */; };
 		B45CD8701F9C940C009262B8 /* EventTagCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CD86F1F9C940C009262B8 /* EventTagCollectionCell.swift */; };
 		B45CD8721F9CDA99009262B8 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CD8711F9CDA99009262B8 /* UILabel.swift */; };
@@ -162,6 +164,8 @@
 		B45CBCEB1FA9BA13004B6E66 /* ItemDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ItemDetails.storyboard; sourceTree = "<group>"; };
 		B45CBCED1FA9BA4B004B6E66 /* LocationDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationDetail.storyboard; sourceTree = "<group>"; };
 		B45CBCF01FA9BD66004B6E66 /* ItemDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailController.swift; sourceTree = "<group>"; };
+		B45CBCF21FA9D5B1004B6E66 /* LocationTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTabController.swift; sourceTree = "<group>"; };
+		B45CBCF41FA9D60A004B6E66 /* Locationtableviewcell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Locationtableviewcell.swift; sourceTree = "<group>"; };
 		B45CD86D1F9C8CC5009262B8 /* TextSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSize.swift; sourceTree = "<group>"; };
 		B45CD86F1F9C940C009262B8 /* EventTagCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTagCollectionCell.swift; sourceTree = "<group>"; };
 		B45CD8711F9CDA99009262B8 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
@@ -370,6 +374,7 @@
 			isa = PBXGroup;
 			children = (
 				B45CBCF01FA9BD66004B6E66 /* ItemDetailController.swift */,
+				B45CBCF21FA9D5B1004B6E66 /* LocationTabController.swift */,
 			);
 			name = ItemDetailController;
 			sourceTree = "<group>";
@@ -431,6 +436,7 @@
 				B464D78E1F8D1F3E002A1FDC /* EventCollectionCell.swift */,
 				B41842401F8FD28500CBBA57 /* NotificationsTableViewCell.swift */,
 				B45CD86F1F9C940C009262B8 /* EventTagCollectionCell.swift */,
+				B45CBCF41FA9D60A004B6E66 /* Locationtableviewcell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -787,6 +793,7 @@
 				B41530981F8BBD27000FB369 /* MenuTabController.swift in Sources */,
 				B45CBCEA1FA9A212004B6E66 /* DefaultHomeController.swift in Sources */,
 				B47BD4031F8A48010099061C /* OnboardingVC.swift in Sources */,
+				B45CBCF51FA9D60A004B6E66 /* Locationtableviewcell.swift in Sources */,
 				B410DF9E1F94E01400858E4E /* EventViewController.swift in Sources */,
 				B45CBCE81FA9A166004B6E66 /* DefaultHomeTableViewCell.swift in Sources */,
 				3FC6CEBC1F6F744700DF2A12 /* ViewController.swift in Sources */,
@@ -809,6 +816,7 @@
 				3FC6CEBA1F6F744700DF2A12 /* AppDelegate.swift in Sources */,
 				B464D78F1F8D1F3E002A1FDC /* EventCollectionCell.swift in Sources */,
 				B406DE211FA713C00092E2B4 /* MenuCategoryItemCell.swift in Sources */,
+				B45CBCF31FA9D5B1004B6E66 /* LocationTabController.swift in Sources */,
 				B45CD86E1F9C8CC5009262B8 /* TextSize.swift in Sources */,
 				B4C515911FA0AC1700348E2A /* WebViewController.swift in Sources */,
 				B4BD9EF71F6FB14200C43182 /* Constants.swift in Sources */,
