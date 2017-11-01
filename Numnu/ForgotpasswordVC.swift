@@ -25,9 +25,9 @@ class ForgotpasswordVC: UIViewController {
     }
 
     @IBAction func resetPassword(_ sender: UIButton) {
-        
-        if let email = forgotpassEmail.text, email != "" {
-            
+               self.view.endEditing(true)
+          if let email = forgotpassEmail.text, email != "" {
+         
           Auth.auth().sendPasswordReset(withEmail: email) { error in
             
                 if let error = error {
@@ -39,9 +39,8 @@ class ForgotpasswordVC: UIViewController {
                  self.showAlertMessagepop(title: "Password reset email sent")
                  sender.isEnabled = false
                  self.dismiss(animated: true, completion: nil)
-                
+                }
             }
-        }
             
         } else {
             

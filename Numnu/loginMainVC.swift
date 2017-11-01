@@ -72,6 +72,7 @@ class loginMainVC: UIViewController, UIWebViewDelegate {
                 return
             }
 
+            
             let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
 
             // Perform login by calling Firebase APIs
@@ -87,9 +88,8 @@ class loginMainVC: UIViewController, UIWebViewDelegate {
                 }
 
 //                 Present the main view
-                  self.openStoryBoard(name: Constants.Main, id: Constants.TabStoryId)
-
-            })
+                    self.openStoryBoard(name: Constants.Main, id: Constants.TabStoryId)
+                })
 
         }
 

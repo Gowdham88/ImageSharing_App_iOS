@@ -67,7 +67,5 @@ class OnboardingVC: UIViewController {
     }
     
 
-    
-
-}
+}//class
 
