@@ -61,6 +61,9 @@ extension BusinessTabController : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        let cell : BusinessTableViewCell = tableView.cellForRow(at: indexPath) as! BusinessTableViewCell
+        cell.contentView.backgroundColor = UIColor.white
+        
     }
     
     

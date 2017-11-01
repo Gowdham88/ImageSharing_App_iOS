@@ -97,6 +97,19 @@ extension DefaultTabController: UICollectionViewDataSource,UICollectionViewDeleg
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        if collectionView == eventCollectionView1 {
+            
+            let cell : EventDefaulCollectionCell = collectionView.cellForItem(at: indexPath) as! EventDefaulCollectionCell
+            cell.backgroundColor = UIColor.white
+            
+            
+        } else {
+            
+            let cell : EventDefaulCollectionCell2 = collectionView.cellForItem(at: indexPath) as! EventDefaulCollectionCell2
+            cell.backgroundColor = UIColor.white
+            
+        }
+        
         openStoryBoard(name: Constants.Event, id: Constants.EventStoryId)
         
     }

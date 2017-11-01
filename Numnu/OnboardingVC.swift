@@ -59,11 +59,7 @@ class OnboardingVC: UIViewController {
     func openStoryBoard(name: String,id : String) {
         
         window         = UIWindow(frame: UIScreen.main.bounds)
-        let transition = CATransition()
-        transition.duration = 0.5
-        transition.type     = kCATransitionPush
-        transition.subtype  = kCATransitionFromTop
-        self.view.window!.layer.add(transition, forKey: kCATransition)
+       
         let storyboard                  = UIStoryboard(name: name, bundle: nil)
         let initialViewController       = storyboard.instantiateViewController(withIdentifier: id)
         self.present(initialViewController, animated: false, completion: nil)
