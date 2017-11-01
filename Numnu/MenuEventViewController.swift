@@ -84,6 +84,9 @@ extension MenuEventViewController : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.contentView.backgroundColor = UIColor.white
+        
         if tableView == menuEventTableview {
             
             menuEventTableview.isHidden    = true

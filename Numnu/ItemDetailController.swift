@@ -1,21 +1,21 @@
 //
-//  BusinessDetailViewController.swift
+//  ItemDetailController.swift
 //  Numnu
 //
-//  Created by CZ Ltd on 10/30/17.
+//  Created by CZ Ltd on 11/1/17.
 //  Copyright © 2017 czsm. All rights reserved.
 //
 
 import UIKit
 import XLPagerTabStrip
 
-class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
+class ItemDetailController : ButtonBarPagerTabStripViewController {
     
-    @IBOutlet weak var busImageView: ImageExtender!
-    @IBOutlet weak var busTitleLabel: UILabel!
-    @IBOutlet weak var buseventLabel: UILabel!
-   
-    @IBOutlet weak var eventDescriptionLabel: UILabel!
+    @IBOutlet weak var ItImageView: ImageExtender!
+    @IBOutlet weak var ItTitleLabel: UILabel!
+    
+    
+    @IBOutlet weak var ItDescriptionLabel: UILabel!
     @IBOutlet weak var readMoreButton: UIButton!
     
     
@@ -27,35 +27,25 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
     
     @IBOutlet weak var mainContainerViewBottom: NSLayoutConstraint!
     @IBOutlet weak var mainContainerView: NSLayoutConstraint!
-    
-    var tagarray = ["Festival","Wine","Party","Rum","Barbaque","Pasta","Sandwich","Burger"]
+    var tagarray = ["Festival","Wine","Party"]
     
     /***************contraints***********************/
     
-    @IBOutlet weak var busDescriptionHeight: NSLayoutConstraint!
-    @IBOutlet weak var containerViewTop: NSLayoutConstraint!
-    @IBOutlet weak var barButtonTop: NSLayoutConstraint!
+    @IBOutlet weak var eventDescriptionHeight : NSLayoutConstraint!
+    @IBOutlet weak var containerViewTop : NSLayoutConstraint!
+    @IBOutlet weak var barButtonTop : NSLayoutConstraint!
     
-    @IBOutlet weak var completeViewMenu: UIView!
+    @IBOutlet weak var businessEntityView : UIView!
+    @IBOutlet weak var businessEntityNameLabel: UILabel!
+    @IBOutlet weak var businessEntityScrollview : UIScrollView!
     /***************Read more variable*********************/
     
     var isLabelAtMaxHeight = false
-    
 
     override func viewDidLoad() {
         settings.style.selectedBarHeight = 3.0
         super.viewDidLoad()
         
-        settings.style.buttonBarBackgroundColor = .white
-        settings.style.buttonBarItemBackgroundColor = .white
-        settings.style.selectedBarBackgroundColor = UIColor.appBlackColor()
-        settings.style.buttonBarItemFont = .boldSystemFont(ofSize: 14)
-       
-        settings.style.buttonBarMinimumLineSpacing = 0
-        settings.style.buttonBarItemTitleColor = .black
-        settings.style.buttonBarItemsShouldFillAvailiableWidth = true
-        settings.style.buttonBarLeftContentInset = 0
-        settings.style.buttonBarRightContentInset = 0
         buttonBarView.selectedBar.backgroundColor = UIColor.appThemeColor()
         
         changeCurrentIndexProgressive = { [weak self] (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
@@ -65,65 +55,44 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
             
         }
         
+        
         /**********************set Nav bar****************************/
         
         setNavBar()
         
-        /**********************Tap registration****************************/
+        /****************event label tap function************************/
         
         tapRegistration()
         
         tagViewUpdate()
+        entitytagUpdate()
         
-        eventDescriptionLabel.text = Constants.dummy
+        ItDescriptionLabel.text = Constants.dummy
         
         /****************Checking number of lines************************/
         
-        if (eventDescriptionLabel.numberOfVisibleLines > 4) {
+        if (ItDescriptionLabel.numberOfVisibleLines > 4) {
             
             readMoreButton.isHidden = false
             
         } else {
             
-            readMoreButton.isHidden = true
-            busDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
-            containerViewTop.constant  = 290
-            barButtonTop.constant      = 290
+            readMoreButton.isHidden         = true
+            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: ItDescriptionLabel.frame.width, font: ItDescriptionLabel.font)
+            containerViewTop.constant  = 398
+            barButtonTop.constant      = 398
         }
         
         /******************checking iphone device****************************/
         
         if self.view.frame.height <= 568 {
             
-            mainContainerView.constant = 750
+            mainContainerView.constant       = 650
             mainContainerViewBottom.constant = 0
             
         }
 
-        
-    }
-    
-    @IBAction func ButtonReadMore(_ sender: UIButton) {
-        
-        if isLabelAtMaxHeight {
-            
-            readMoreButton.setTitle("more", for: .normal)
-            isLabelAtMaxHeight = false
-            busDescriptionHeight.constant = 85
-            containerViewTop.constant  = 320
-            barButtonTop.constant      = 320
-            
-        } else {
-            
-            readMoreButton.setTitle("less", for: .normal)
-            isLabelAtMaxHeight = true
-            busDescriptionHeight.constant   = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
-            containerViewTop.constant       = 235+TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
-            barButtonTop.constant           = 235+TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
-            
-        }
-        
-        
+        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -135,19 +104,56 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
         
         let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid2)
         let child_2 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3)
-        return [child_1, child_2]
+        let child_3 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1)
+        return [child_1,child_2,child_3]
         
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        
-        self.tabBarController?.tabBar.isHidden = false
     }
     
+    @IBAction func ButtonReadMore(_ sender: UIButton) {
+        
+        if isLabelAtMaxHeight {
+            
+            readMoreButton.setTitle("more", for: .normal)
+            isLabelAtMaxHeight = false
+            eventDescriptionHeight.constant = 85
+            containerViewTop.constant  = 428
+            barButtonTop.constant      = 428
+            
+        } else {
+            
+            readMoreButton.setTitle("less", for: .normal)
+            isLabelAtMaxHeight = true
+            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: ItDescriptionLabel.frame.width, font: ItDescriptionLabel.font)
+            containerViewTop.constant       = 343+TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: ItDescriptionLabel.frame.width, font: ItDescriptionLabel.font)
+            barButtonTop.constant           = 343+TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: ItDescriptionLabel.frame.width, font: ItDescriptionLabel.font)
+            
+        }
+        
+        
+    }
+   
+
 }
 
-extension BusinessDetailViewController {
+extension ItemDetailController {
+    
+    /****************event label tap function************************/
+    
+    func tapRegistration() {
+        
+        let completemenuTap = UITapGestureRecognizer(target: self, action: #selector(BusinessDetailViewController.openCompleteMenu(sender:)))
+        businessEntityView.isUserInteractionEnabled = true
+        businessEntityView.addGestureRecognizer(completemenuTap)
+        
+    }
+    
+    func openCompleteMenu(sender:UITapGestureRecognizer) {
+        
+        openStoryBoard()
+        
+    }
+    
+    
     
     /*************************Tag view updating************************************/
     
@@ -188,11 +194,48 @@ extension BusinessDetailViewController {
         
     }
     
+    func entitytagUpdate() {
+        
+        var expandableWidth : CGFloat = 0
+        
+        for (i,text) in tagarray.enumerated() {
+            
+            let textLabel : UILabel = UILabel()
+            let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: text, fontname: "AvenirNext-Regular", size: 15)
+            textLabel.font = UIFont(name: "AvenirNext-Regular", size: 15)
+            textLabel.text = text
+            textLabel.backgroundColor  = UIColor.tagBgColor()
+            textLabel.textColor        = UIColor.tagTextColor()
+            textLabel.layer.cornerRadius = 10
+            textLabel.layer.masksToBounds = true
+            textLabel.textAlignment = .center
+            
+            if i == 0 {
+                
+                textLabel.frame = CGRect(x: 0, y: 0, width: textSize.width+20, height: 30)
+                
+            } else {
+                
+                textLabel.frame = CGRect(x: expandableWidth, y: 0, width: textSize.width+20, height: 30)
+                
+            }
+            
+            expandableWidth += textSize.width+30
+            businessEntityScrollview.addSubview(textLabel)
+            
+        }
+        
+        businessEntityScrollview.contentSize = CGSize(width: expandableWidth, height: 0)
+        businessEntityScrollview.isScrollEnabled = true
+        
+        
+    }
+    
     /******************Set navigation bar**************************/
     
     func setNavBar() {
         
-        navigationItemList.title = "Business"
+        navigationItemList.title = "Item"
         
         let button: UIButton = UIButton(type: UIButtonType.custom)
         //set image for button
@@ -219,35 +262,7 @@ extension BusinessDetailViewController {
         _ = self.navigationController?.popToRootViewController(animated: true)
         
     }
-   
-    func openMapBoard () {
-        
-        let storyboard      = UIStoryboard(name: Constants.Event, bundle: nil)
-        let vc              = storyboard.instantiateViewController(withIdentifier: Constants.MapStoryId) as! EventMapViewController
-        self.navigationController!.pushViewController(vc, animated: true)
-        
-    }
-    
-}
-
-extension BusinessDetailViewController {
-    
-    
-    /****************event label tap function************************/
-    
-    func tapRegistration() {
-        
-        let completemenuTap = UITapGestureRecognizer(target: self, action: #selector(BusinessDetailViewController.openCompleteMenu(sender:)))
-        completeViewMenu.isUserInteractionEnabled = true
-        completeViewMenu.addGestureRecognizer(completemenuTap)
-    
-    }
-    
-    func openCompleteMenu(sender:UITapGestureRecognizer) {
-        
-        openStoryBoard()
-        
-    }
+  
     
     func openStoryBoard () {
         
