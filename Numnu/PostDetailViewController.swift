@@ -10,6 +10,8 @@ import UIKit
 
 class PostDetailViewController : UIViewController {
     
+    
+    
     @IBOutlet weak var postDUsernameLabel: UILabel!
     @IBOutlet weak var postDUserImage: ImageExtender!
     @IBOutlet weak var postDUserplaceLabbel: UILabel!
@@ -26,13 +28,21 @@ class PostDetailViewController : UIViewController {
     @IBOutlet weak var placeWidthDConstraint: NSLayoutConstraint!
     @IBOutlet weak var dishRightDLayoutConstraint: NSLayoutConstraint!
 
+    @IBOutlet weak var alertViewHide: UIView!
+    @IBOutlet weak var mainPostView: UIView!
+    @IBOutlet weak var alertView: UIView!
     @IBOutlet weak var navigationItemList: UINavigationItem!
     var window : UIWindow?
     
+    @IBOutlet weak var alertviewBottomConstraints: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setNavBar()
+        
+        alertviewBottomConstraints.constant = self.view.frame.height + 600
+        alertViewHide.alpha = 0
+        alertTapRegister()
 
         // Do any additional setup after loading the view.
     }
@@ -44,7 +54,7 @@ class PostDetailViewController : UIViewController {
   
     @IBAction func ButtonBokkMark(_ sender: UIButton) {
         
-        share()
+        openPopup()
     }
     
     
@@ -128,6 +138,42 @@ extension PostDetailViewController {
         self.present(optionMenu, animated: true, completion: nil)
         
         
+    }
+    
+    func alertTapRegister(){
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.closePopup(sender:)))
+        self.view.addGestureRecognizer(tap)
+        
+    }
+    
+    func closePopup(sender : UITapGestureRecognizer) {
+        
+        self.alertViewHide.alpha                 = 0
+        
+        UIView.animate(withDuration: 2, animations: {
+            
+            self.alertviewBottomConstraints.constant = self.view.frame.height + 600
+            
+            
+        }, completion: nil)
+        
+       
+        
+    }
+    
+    func openPopup() {
+        
+         self.alertViewHide.alpha   = 1
+        
+        UIView.animate(withDuration: 2, animations: {
+            
+            self.alertviewBottomConstraints.constant  = 0
+           
+            
+        }, completion: nil)
+        
+       
     }
     
     

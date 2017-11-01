@@ -83,6 +83,9 @@ extension EventTabController : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        let cell : EventTableViewCell = tableView.cellForRow(at: indexPath) as! EventTableViewCell
+        cell.contentView.backgroundColor = UIColor.white
+        
     }
     
     

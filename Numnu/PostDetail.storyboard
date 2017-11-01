@@ -10,6 +10,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Avenir.ttc">
+            <string>Avenir-Heavy</string>
+        </array>
         <array key="ProximaNova-Regular.otf">
             <string>ProximaNova-Regular</string>
         </array>
@@ -263,19 +266,82 @@
                                     <constraint firstItem="r9a-im-5f4" firstAttribute="leading" secondItem="emq-kw-nq5" secondAttribute="leading" constant="10" id="yF1-5W-gWX"/>
                                 </constraints>
                             </view>
+                            <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tM9-9p-dVI">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mTc-GP-fFl">
+                                <rect key="frame" x="0.0" y="438" width="320" height="130"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share" translatesAutoresizingMaskIntoConstraints="NO" id="DwB-ib-Bbr">
+                                        <rect key="frame" x="25" y="18" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="2De-qB-C5k"/>
+                                            <constraint firstAttribute="width" constant="30" id="Klp-RS-mp1"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bookmark" translatesAutoresizingMaskIntoConstraints="NO" id="Qg6-VH-Ymz">
+                                        <rect key="frame" x="25" y="74" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="36l-dE-7tB"/>
+                                            <constraint firstAttribute="width" constant="30" id="i2V-KH-KdB"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h2F-Mg-a2g">
+                                        <rect key="frame" x="78" y="18" width="234" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="1e1-KQ-8W6"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bookmark" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2qF-xS-C5e">
+                                        <rect key="frame" x="78" y="74" width="234" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="E3y-OB-RxA"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="h2F-Mg-a2g" firstAttribute="leading" secondItem="DwB-ib-Bbr" secondAttribute="trailing" constant="23" id="1qj-qI-rcn"/>
+                                    <constraint firstItem="DwB-ib-Bbr" firstAttribute="leading" secondItem="mTc-GP-fFl" secondAttribute="leading" constant="25" id="7Xc-WS-fqK"/>
+                                    <constraint firstAttribute="height" constant="130" id="WAR-yW-Zg3"/>
+                                    <constraint firstItem="DwB-ib-Bbr" firstAttribute="top" secondItem="mTc-GP-fFl" secondAttribute="top" constant="18" id="bPj-M2-qiq"/>
+                                    <constraint firstAttribute="bottom" secondItem="2qF-xS-C5e" secondAttribute="bottom" constant="26" id="ewX-WA-P7K"/>
+                                    <constraint firstAttribute="bottom" secondItem="Qg6-VH-Ymz" secondAttribute="bottom" constant="26" id="f4q-ZM-4Ra"/>
+                                    <constraint firstAttribute="trailing" secondItem="2qF-xS-C5e" secondAttribute="trailing" constant="8" id="fN6-3l-RIC"/>
+                                    <constraint firstItem="2qF-xS-C5e" firstAttribute="leading" secondItem="Qg6-VH-Ymz" secondAttribute="trailing" constant="23" id="lKQ-ys-bHC"/>
+                                    <constraint firstAttribute="trailing" secondItem="h2F-Mg-a2g" secondAttribute="trailing" constant="8" id="nlX-WH-xxd"/>
+                                    <constraint firstItem="Qg6-VH-Ymz" firstAttribute="leading" secondItem="mTc-GP-fFl" secondAttribute="leading" constant="25" id="qld-q3-jHd"/>
+                                    <constraint firstItem="h2F-Mg-a2g" firstAttribute="top" secondItem="mTc-GP-fFl" secondAttribute="top" constant="18" id="z00-kc-fCV"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="emq-kw-nq5" firstAttribute="top" secondItem="6XG-8y-mSG" secondAttribute="top" id="3LI-sx-JrH"/>
+                            <constraint firstItem="mTc-GP-fFl" firstAttribute="trailing" secondItem="6XG-8y-mSG" secondAttribute="trailing" id="Fzd-fU-u64"/>
+                            <constraint firstItem="mTc-GP-fFl" firstAttribute="leading" secondItem="6XG-8y-mSG" secondAttribute="leading" id="QcY-2t-aVW"/>
                             <constraint firstItem="emq-kw-nq5" firstAttribute="leading" secondItem="6XG-8y-mSG" secondAttribute="leading" id="SJI-VY-zmA"/>
                             <constraint firstItem="emq-kw-nq5" firstAttribute="trailing" secondItem="6XG-8y-mSG" secondAttribute="trailing" id="lpN-fA-RIw"/>
+                            <constraint firstItem="mTc-GP-fFl" firstAttribute="bottom" secondItem="6XG-8y-mSG" secondAttribute="bottom" id="rcv-Jf-mfa"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6XG-8y-mSG"/>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="hq0-4z-tGK"/>
                     <connections>
+                        <outlet property="alertView" destination="mTc-GP-fFl" id="j7g-bf-v4D"/>
+                        <outlet property="alertViewHide" destination="tM9-9p-dVI" id="00h-Ps-a55"/>
+                        <outlet property="alertviewBottomConstraints" destination="rcv-Jf-mfa" id="MuW-ig-wMy"/>
                         <outlet property="dishRightDLayoutConstraint" destination="HOA-84-EUk" id="4Yn-X0-pRp"/>
                         <outlet property="dishwidthDConstaint" destination="dB3-Ck-1fC" id="09H-eT-cbo"/>
+                        <outlet property="mainPostView" destination="emq-kw-nq5" id="d7n-XF-mwr"/>
                         <outlet property="navigationItemList" destination="hq0-4z-tGK" id="Btt-To-RpV"/>
                         <outlet property="placeWidthDConstraint" destination="FbF-7u-rIS" id="66i-Lx-0dO"/>
                         <outlet property="postDCommentLabel" destination="MzI-xt-bC5" id="XF4-rW-vOC"/>
@@ -296,11 +362,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Bookmark" width="14" height="24"/>
         <image name="Numnu_appicon" width="122" height="122"/>
         <image name="dish_ico" width="22" height="23"/>
         <image name="event_ico" width="25" height="27"/>
         <image name="foodie" width="640" height="480"/>
         <image name="love_ico" width="32" height="29"/>
         <image name="restaurant_ico" width="26" height="26"/>
+        <image name="share" width="24" height="24"/>
     </resources>
 </document>
