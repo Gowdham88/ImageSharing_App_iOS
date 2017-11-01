@@ -850,7 +850,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="349"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current and Upcoming Events " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G0M-Ai-a8P">
-                                        <rect key="frame" x="10" y="0.0" width="234.5" height="30"/>
+                                        <rect key="frame" x="10" y="0.0" width="228.5" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="hPV-3r-n9M"/>
                                         </constraints>
@@ -915,7 +915,7 @@
                                         </cells>
                                     </collectionView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Past Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="103-ut-mdO">
-                                        <rect key="frame" x="10" y="175" width="90.5" height="30"/>
+                                        <rect key="frame" x="10" y="175" width="86" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="bkp-e5-x09"/>
                                         </constraints>
