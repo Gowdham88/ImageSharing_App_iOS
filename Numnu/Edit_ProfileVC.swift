@@ -22,6 +22,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     @IBOutlet var foodTextfield: UITextField!
     
+    @IBOutlet weak var navigationItemList: UINavigationItem!
     var show : Bool = false
     
     @IBOutlet var myscrollView: UIScrollView!
@@ -43,6 +44,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
 //        cityTextfield.useUnderline()
 //        birthTextfield.useUnderline()
 //        foodTextfield.useUnderline()
+        
+        setNavBar()
         
         myscrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height+100)
         
@@ -198,14 +201,38 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         dismiss(animated: true, completion: nil)
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func setNavBar() {
+        
+       
+        
+        navigationItemList.title = "Profile"
+        
+        let button: UIButton = UIButton(type: UIButtonType.custom)
+        //set image for button
+        button.setImage(UIImage(named: "ic_arrow_back"), for: UIControlState.normal)
+        //add function for button
+        button.addTarget(self, action: #selector(EventViewController.backButtonClicked), for: UIControlEvents.touchUpInside)
+        //set frame
+        button.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
+        
+        // Create left and right button for navigation item
+        let leftButton =  UIBarButtonItem(customView: button)
+        leftButton.isEnabled = true
+        
+        let rightButton = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        
+        // Create two buttons for the navigation item
+        navigationItemList.leftBarButtonItem = leftButton
+        navigationItemList.rightBarButtonItem = rightButton
+        
+        
     }
-    */
+    
+    func backButtonClicked() {
+        
+        _ = self.navigationController?.popToRootViewController(animated: true)
+        
+    }
 
 }

@@ -689,6 +689,7 @@
                         <outlet property="genderTextfield" destination="AUd-8j-FZA" id="pWP-Q3-LmO"/>
                         <outlet property="myscrollView" destination="VH4-X6-Kdb" id="Xpw-ih-zs0"/>
                         <outlet property="nameTextfield" destination="bhv-SE-Hcy" id="GFP-gK-dt8"/>
+                        <outlet property="navigationItemList" destination="FPt-lc-Be3" id="PvS-5n-JmT"/>
                         <outlet property="profileImage" destination="LJ0-Io-Clr" id="S1d-lI-CxI"/>
                         <outlet property="saveButton" destination="kxV-ix-rTc" id="2kD-nU-Jh2"/>
                         <outlet property="usernameTextfield" destination="rhZ-Tq-Vh5" id="hPS-YD-Zmi"/>

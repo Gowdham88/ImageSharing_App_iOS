@@ -178,8 +178,9 @@ class signInVC: UIViewController, UITextFieldDelegate {
         let storyboard                  = UIStoryboard(name: name, bundle: nil)
         let initialViewController       = storyboard.instantiateViewController(withIdentifier: "profileid") as! Edit_ProfileVC
         initialViewController.show      = true
-        window?.rootViewController = initialViewController
-        window?.makeKeyAndVisible()
+        self.navigationController!.pushViewController(initialViewController, animated: true)
+//        window?.rootViewController = initialViewController
+//        window?.makeKeyAndVisible()
         
     }
     

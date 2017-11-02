@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Numnu wants to enable your location</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Numnu wants to enable your location</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -19,7 +15,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.1.4</string>
+	<string>1.1.5</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -30,7 +26,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>FacebookAppID</key>
 	<string>2170111179882504</string>
 	<key>FacebookDisplayName</key>
@@ -159,6 +155,14 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>$(PRODUCT_NAME) app requires access to the camera</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Numnu wants to enable your location</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Numnu wants to enable your location</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>$(PRODUCT_NAME) app requires access to the photo library</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string></string>
