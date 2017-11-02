@@ -36,6 +36,7 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
     @IBOutlet weak var barButtonTop : NSLayoutConstraint!
     
     @IBOutlet weak var businessEntityView : UIView!
+    @IBOutlet weak var businessEntityImage: ImageExtender!
     @IBOutlet weak var businessEntityNameLabel: UILabel!
     @IBOutlet weak var businessEntityScrollview : UIScrollView!
     /***************Read more variable*********************/
@@ -46,6 +47,16 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
         settings.style.selectedBarHeight = 3.0
         super.viewDidLoad()
         
+        settings.style.buttonBarBackgroundColor = .white
+        settings.style.buttonBarItemBackgroundColor = .white
+        settings.style.selectedBarBackgroundColor = UIColor.appBlackColor()
+        settings.style.buttonBarItemFont = .boldSystemFont(ofSize: 14)
+        
+        settings.style.buttonBarMinimumLineSpacing = 0
+        settings.style.buttonBarItemTitleColor = .black
+        settings.style.buttonBarItemsShouldFillAvailiableWidth = true
+        settings.style.buttonBarLeftContentInset = 0
+        settings.style.buttonBarRightContentInset = 0
         buttonBarView.selectedBar.backgroundColor = UIColor.appThemeColor()
         
         changeCurrentIndexProgressive = { [weak self] (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
@@ -79,15 +90,15 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
             
             readMoreButton.isHidden         = true
             eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: ItDescriptionLabel.frame.width, font: ItDescriptionLabel.font)
-            containerViewTop.constant  = 398
-            barButtonTop.constant      = 398
+            containerViewTop.constant  = 546
+            barButtonTop.constant      = 546
         }
         
         /******************checking iphone device****************************/
         
         if self.view.frame.height <= 568 {
             
-            mainContainerView.constant       = 650
+            mainContainerView.constant       = 850
             mainContainerViewBottom.constant = 0
             
         }
@@ -102,8 +113,8 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
-        let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid2)
-        let child_2 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3)
+        let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3)
+        let child_2 = UIStoryboard(name: Constants.ItemDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid7)
         let child_3 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1)
         return [child_1,child_2,child_3]
         
@@ -116,16 +127,16 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
             readMoreButton.setTitle("more", for: .normal)
             isLabelAtMaxHeight = false
             eventDescriptionHeight.constant = 85
-            containerViewTop.constant  = 428
-            barButtonTop.constant      = 428
+            containerViewTop.constant  = 576
+            barButtonTop.constant      = 576
             
         } else {
             
             readMoreButton.setTitle("less", for: .normal)
             isLabelAtMaxHeight = true
             eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: ItDescriptionLabel.frame.width, font: ItDescriptionLabel.font)
-            containerViewTop.constant       = 343+TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: ItDescriptionLabel.frame.width, font: ItDescriptionLabel.font)
-            barButtonTop.constant           = 343+TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: ItDescriptionLabel.frame.width, font: ItDescriptionLabel.font)
+            containerViewTop.constant       = 491+TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: ItDescriptionLabel.frame.width, font: ItDescriptionLabel.font)
+            barButtonTop.constant           = 491+TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: ItDescriptionLabel.frame.width, font: ItDescriptionLabel.font)
             
         }
         

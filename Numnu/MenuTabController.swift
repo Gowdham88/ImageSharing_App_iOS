@@ -70,7 +70,15 @@ extension MenuTabController : UITableViewDelegate,UITableViewDataSource {
         
         let cell : MenuEventTableViewCell = tableView.cellForRow(at: indexPath) as! MenuEventTableViewCell
         cell.contentView.backgroundColor = UIColor.white
+        openStoryBoard()
         
+    }
+    
+    func  openStoryBoard() {
+        
+        let storyboard = UIStoryboard(name: Constants.ItemDetail, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId)
+        self.navigationController!.pushViewController(vc, animated: true)
         
     }
     

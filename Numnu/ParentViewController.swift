@@ -131,8 +131,6 @@ extension ParentViewController : UITextFieldDelegate {
         return true
     }
     
-    
-    
 }
 
 extension ParentViewController {
@@ -194,7 +192,7 @@ extension ParentViewController {
         
     }
     
-    func addCollectionContainer(){
+    func addCollectionContainer() {
         
         let storyboard        = UIStoryboard(name: Constants.Tab, bundle: nil)
         let controller        = storyboard.instantiateViewController(withIdentifier: Constants.DefaultTab)

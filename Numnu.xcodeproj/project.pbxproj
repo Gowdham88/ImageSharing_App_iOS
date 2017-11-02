@@ -45,6 +45,7 @@
 		B42201B21F8E661E0058A4ED /* ImageExtender.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42201B11F8E661E0058A4ED /* ImageExtender.swift */; };
 		B42201B41F8E70DA0058A4ED /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42201B31F8E70DA0058A4ED /* EventTableViewCell.swift */; };
 		B426C68E1F9E0A6B008D586B /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B426C68D1F9E0A6B008D586B /* SplashViewController.swift */; };
+		B42F2A261FA9EA96002419AB /* LocationDetailcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42F2A251FA9EA96002419AB /* LocationDetailcontroller.swift */; };
 		B44E1D4C1FA1B21D001F754E /* BusinessEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44E1D4B1FA1B21D001F754E /* BusinessEventViewController.swift */; };
 		B44E1D4E1FA1B249001F754E /* MenuEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44E1D4D1FA1B249001F754E /* MenuEventViewController.swift */; };
 		B44E1D511FA1B3ED001F754E /* businessEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44E1D501FA1B3ED001F754E /* businessEventTableViewCell.swift */; };
@@ -55,6 +56,8 @@
 		B45CBCEC1FA9BA13004B6E66 /* ItemDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B45CBCEB1FA9BA13004B6E66 /* ItemDetails.storyboard */; };
 		B45CBCEE1FA9BA4B004B6E66 /* LocationDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B45CBCED1FA9BA4B004B6E66 /* LocationDetail.storyboard */; };
 		B45CBCF11FA9BD66004B6E66 /* ItemDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CBCF01FA9BD66004B6E66 /* ItemDetailController.swift */; };
+		B45CBCF31FA9D5B1004B6E66 /* LocationTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CBCF21FA9D5B1004B6E66 /* LocationTabController.swift */; };
+		B45CBCF51FA9D60A004B6E66 /* Locationtableviewcell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CBCF41FA9D60A004B6E66 /* Locationtableviewcell.swift */; };
 		B45CD86E1F9C8CC5009262B8 /* TextSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CD86D1F9C8CC5009262B8 /* TextSize.swift */; };
 		B45CD8701F9C940C009262B8 /* EventTagCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CD86F1F9C940C009262B8 /* EventTagCollectionCell.swift */; };
 		B45CD8721F9CDA99009262B8 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CD8711F9CDA99009262B8 /* UILabel.swift */; };
@@ -152,6 +155,7 @@
 		B42201B11F8E661E0058A4ED /* ImageExtender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtender.swift; sourceTree = "<group>"; };
 		B42201B31F8E70DA0058A4ED /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		B426C68D1F9E0A6B008D586B /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		B42F2A251FA9EA96002419AB /* LocationDetailcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailcontroller.swift; sourceTree = "<group>"; };
 		B44E1D4B1FA1B21D001F754E /* BusinessEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessEventViewController.swift; sourceTree = "<group>"; };
 		B44E1D4D1FA1B249001F754E /* MenuEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuEventViewController.swift; sourceTree = "<group>"; };
 		B44E1D501FA1B3ED001F754E /* businessEventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = businessEventTableViewCell.swift; sourceTree = "<group>"; };
@@ -162,6 +166,8 @@
 		B45CBCEB1FA9BA13004B6E66 /* ItemDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ItemDetails.storyboard; sourceTree = "<group>"; };
 		B45CBCED1FA9BA4B004B6E66 /* LocationDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationDetail.storyboard; sourceTree = "<group>"; };
 		B45CBCF01FA9BD66004B6E66 /* ItemDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailController.swift; sourceTree = "<group>"; };
+		B45CBCF21FA9D5B1004B6E66 /* LocationTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTabController.swift; sourceTree = "<group>"; };
+		B45CBCF41FA9D60A004B6E66 /* Locationtableviewcell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Locationtableviewcell.swift; sourceTree = "<group>"; };
 		B45CD86D1F9C8CC5009262B8 /* TextSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSize.swift; sourceTree = "<group>"; };
 		B45CD86F1F9C940C009262B8 /* EventTagCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTagCollectionCell.swift; sourceTree = "<group>"; };
 		B45CD8711F9CDA99009262B8 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
@@ -343,6 +349,14 @@
 			name = TabControllers;
 			sourceTree = "<group>";
 		};
+		B42F2A241FA9EA6B002419AB /* LocationDetailController */ = {
+			isa = PBXGroup;
+			children = (
+				B42F2A251FA9EA96002419AB /* LocationDetailcontroller.swift */,
+			);
+			name = LocationDetailController;
+			sourceTree = "<group>";
+		};
 		B44E1D4A1FA1B1DF001F754E /* EventTabControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -370,6 +384,7 @@
 			isa = PBXGroup;
 			children = (
 				B45CBCF01FA9BD66004B6E66 /* ItemDetailController.swift */,
+				B45CBCF21FA9D5B1004B6E66 /* LocationTabController.swift */,
 			);
 			name = ItemDetailController;
 			sourceTree = "<group>";
@@ -407,6 +422,7 @@
 		B4BD9EE91F6FA4AF00C43182 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B42F2A241FA9EA6B002419AB /* LocationDetailController */,
 				B4C5158B1FA085ED00348E2A /* AuthControllers */,
 				B4C5158C1FA0864100348E2A /* HomeTabControllers */,
 				B4C5158D1FA0867800348E2A /* EventDetailController */,
@@ -431,6 +447,7 @@
 				B464D78E1F8D1F3E002A1FDC /* EventCollectionCell.swift */,
 				B41842401F8FD28500CBBA57 /* NotificationsTableViewCell.swift */,
 				B45CD86F1F9C940C009262B8 /* EventTagCollectionCell.swift */,
+				B45CBCF41FA9D60A004B6E66 /* Locationtableviewcell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -787,6 +804,7 @@
 				B41530981F8BBD27000FB369 /* MenuTabController.swift in Sources */,
 				B45CBCEA1FA9A212004B6E66 /* DefaultHomeController.swift in Sources */,
 				B47BD4031F8A48010099061C /* OnboardingVC.swift in Sources */,
+				B45CBCF51FA9D60A004B6E66 /* Locationtableviewcell.swift in Sources */,
 				B410DF9E1F94E01400858E4E /* EventViewController.swift in Sources */,
 				B45CBCE81FA9A166004B6E66 /* DefaultHomeTableViewCell.swift in Sources */,
 				3FC6CEBC1F6F744700DF2A12 /* ViewController.swift in Sources */,
@@ -802,6 +820,7 @@
 				B41530941F8BBCD9000FB369 /* EventTabController.swift in Sources */,
 				B44E1D4E1FA1B249001F754E /* MenuEventViewController.swift in Sources */,
 				B44E1D531FA1BECE001F754E /* ReviewEventViewController.swift in Sources */,
+				B42F2A261FA9EA96002419AB /* LocationDetailcontroller.swift in Sources */,
 				B4C515881FA085BB00348E2A /* ListTabController.swift in Sources */,
 				601D46791F8F3B1C00832BDD /* UserList.swift in Sources */,
 				B49ABD8C1F9F28690091C5D1 /* EventDefaulCollectionCell2.swift in Sources */,
@@ -809,6 +828,7 @@
 				3FC6CEBA1F6F744700DF2A12 /* AppDelegate.swift in Sources */,
 				B464D78F1F8D1F3E002A1FDC /* EventCollectionCell.swift in Sources */,
 				B406DE211FA713C00092E2B4 /* MenuCategoryItemCell.swift in Sources */,
+				B45CBCF31FA9D5B1004B6E66 /* LocationTabController.swift in Sources */,
 				B45CD86E1F9C8CC5009262B8 /* TextSize.swift in Sources */,
 				B4C515911FA0AC1700348E2A /* WebViewController.swift in Sources */,
 				B4BD9EF71F6FB14200C43182 /* Constants.swift in Sources */,
