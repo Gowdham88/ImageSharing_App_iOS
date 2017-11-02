@@ -18,6 +18,9 @@
 		3FC6CEEA1F6FA25600DF2A12 /* feedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6CEE91F6FA25600DF2A12 /* feedTableViewCell.swift */; };
 		601D46771F8D205E00832BDD /* signInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601D46761F8D205E00832BDD /* signInVC.swift */; };
 		601D46791F8F3B1C00832BDD /* UserList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601D46781F8F3B1C00832BDD /* UserList.swift */; };
+		60B4EA401FAAEA7600C1A6C9 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B4EA3F1FAAEA7600C1A6C9 /* SettingsVC.swift */; };
+		60B4EA421FAAFB9300C1A6C9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B4EA411FAAFB9300C1A6C9 /* SettingsViewController.swift */; };
+		60B4EA441FAB190300C1A6C9 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B4EA431FAB190300C1A6C9 /* SettingsTableViewCell.swift */; };
 		6F44F25D1F9365F200AF45F2 /* CoreAudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F44F2591F9365F100AF45F2 /* CoreAudioKit.framework */; };
 		6F44F25E1F9365F200AF45F2 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F44F25A1F9365F200AF45F2 /* CoreBluetooth.framework */; };
 		6F44F25F1F9365F200AF45F2 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F44F25B1F9365F200AF45F2 /* CoreFoundation.framework */; };
@@ -129,6 +132,9 @@
 		601D46761F8D205E00832BDD /* signInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signInVC.swift; sourceTree = "<group>"; };
 		601D46781F8F3B1C00832BDD /* UserList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserList.swift; sourceTree = "<group>"; };
 		601D467A1F8FAF4B00832BDD /* Numnu.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Numnu.entitlements; sourceTree = "<group>"; };
+		60B4EA3F1FAAEA7600C1A6C9 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		60B4EA411FAAFB9300C1A6C9 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		60B4EA431FAB190300C1A6C9 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		6F44F2591F9365F100AF45F2 /* CoreAudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudioKit.framework; path = System/Library/Frameworks/CoreAudioKit.framework; sourceTree = SDKROOT; };
 		6F44F25A1F9365F200AF45F2 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		6F44F25B1F9365F200AF45F2 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -422,6 +428,7 @@
 		B4BD9EE91F6FA4AF00C43182 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				60B4EA3F1FAAEA7600C1A6C9 /* SettingsVC.swift */,
 				B42F2A241FA9EA6B002419AB /* LocationDetailController */,
 				B4C5158B1FA085ED00348E2A /* AuthControllers */,
 				B4C5158C1FA0864100348E2A /* HomeTabControllers */,
@@ -432,6 +439,7 @@
 				3FC6CEE71F6FA17300DF2A12 /* HomeViewController.swift */,
 				B41842381F8FCBF100CBBA57 /* Edit_ProfileVC.swift */,
 				B418423E1F8FD1B000CBBA57 /* NotificationsVC.swift */,
+				60B4EA411FAAFB9300C1A6C9 /* SettingsViewController.swift */,
 				B426C68D1F9E0A6B008D586B /* SplashViewController.swift */,
 				B46310231FA323E2009F6F0E /* PostDetailViewController.swift */,
 			);
@@ -441,6 +449,7 @@
 		B4BD9EEA1F6FA4E500C43182 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				60B4EA431FAB190300C1A6C9 /* SettingsTableViewCell.swift */,
 				B406DE291FA762510092E2B4 /* BusinessTableViewCell */,
 				B44E1D4F1FA1B394001F754E /* EventTabViewCell */,
 				B4C5158F1FA086BA00348E2A /* HomeTabViewCell */,
@@ -813,6 +822,7 @@
 				B406DE2D1FA762D30092E2B4 /* busDetPostTableviewcell.swift in Sources */,
 				B44E1D511FA1B3ED001F754E /* businessEventTableViewCell.swift in Sources */,
 				B41842411F8FD28500CBBA57 /* NotificationsTableViewCell.swift in Sources */,
+				60B4EA421FAAFB9300C1A6C9 /* SettingsViewController.swift in Sources */,
 				B4BD9EF01F6FA57300C43182 /* PostList.swift in Sources */,
 				3FC6CEEA1F6FA25600DF2A12 /* feedTableViewCell.swift in Sources */,
 				B42201B41F8E70DA0058A4ED /* EventTableViewCell.swift in Sources */,
@@ -827,6 +837,7 @@
 				B41842391F8FCBF100CBBA57 /* Edit_ProfileVC.swift in Sources */,
 				3FC6CEBA1F6F744700DF2A12 /* AppDelegate.swift in Sources */,
 				B464D78F1F8D1F3E002A1FDC /* EventCollectionCell.swift in Sources */,
+				60B4EA401FAAEA7600C1A6C9 /* SettingsVC.swift in Sources */,
 				B406DE211FA713C00092E2B4 /* MenuCategoryItemCell.swift in Sources */,
 				B45CBCF31FA9D5B1004B6E66 /* LocationTabController.swift in Sources */,
 				B45CD86E1F9C8CC5009262B8 /* TextSize.swift in Sources */,
@@ -838,6 +849,7 @@
 				B47BD4051F8A615C0099061C /* loginMainVC.swift in Sources */,
 				B47BD4071F8A75FA0099061C /* signupwithEmailVC.swift in Sources */,
 				B41530961F8BBCF1000FB369 /* UserTabController.swift in Sources */,
+				60B4EA441FAB190300C1A6C9 /* SettingsTableViewCell.swift in Sources */,
 				B40CF89F1FA21A77002DC7E8 /* BusinessTableViewCell.swift in Sources */,
 				B418423F1F8FD1B000CBBA57 /* NotificationsVC.swift in Sources */,
 				B44E1D551FA1CF00001F754E /* BusinessCategoryEventViewCellTableViewCell.swift in Sources */,
