@@ -22,6 +22,9 @@ class PostTabController: UIViewController,IndicatorInfoProvider {
         postEventTableView.delegate   = self
         postEventTableView.dataSource = self
 
+//        postEventTableView.sizeToFit()
+        postEventTableView.estimatedRowHeight = 388
+        postEventTableView.rowHeight = UITableViewAutomaticDimension
     }
 
     override func didReceiveMemoryWarning() {
@@ -65,6 +68,12 @@ extension PostTabController : UITableViewDelegate,UITableViewDataSource {
         openStoryBoard()
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+
+
+
+        return UITableViewAutomaticDimension;
+    }
     
 }
 
