@@ -32,7 +32,7 @@
         <!--Login MainVC-->
         <scene sceneID="zdG-hI-0B1">
             <objects>
-                <viewController storyboardIdentifier="signupvc" id="Zpp-RP-GwK" customClass="loginMainVC" customModule="Numnu" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Zpp-RP-GwK" customClass="loginMainVC" customModule="Numnu" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7wn-r0-r4H">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -137,10 +137,6 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pAw-uh-uwR"/>
                     </view>
-                    <connections>
-                        <segue destination="URX-2s-g1Q" kind="show" identifier="signupwithEmail" id="DdQ-kZ-bYZ"/>
-                        <segue destination="WUv-D2-SgJ" kind="show" identifier="signIn" id="LCt-mh-mi6"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Phf-fx-d1z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -149,7 +145,7 @@
         <!--Signupwith EmailVC-->
         <scene sceneID="uEb-i7-iI0">
             <objects>
-                <viewController id="URX-2s-g1Q" customClass="signupwithEmailVC" customModule="Numnu" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="signupvc" id="URX-2s-g1Q" customClass="signupwithEmailVC" customModule="Numnu" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3BE-Pg-9hU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -395,6 +391,7 @@
                     <connections>
                         <outlet property="emailTextfield" destination="h6X-V3-3ha" id="WR6-X0-eV7"/>
                         <outlet property="passwordTextfield" destination="gt3-3P-gNM" id="xAZ-1i-2Xx"/>
+                        <segue destination="WUv-D2-SgJ" kind="show" identifier="loginVc" id="Kre-79-iij"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iac-mD-4Rf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -625,7 +622,7 @@
                         <outlet property="letmeinButtonoutlet" destination="Zpv-5q-vSh" id="hsH-pb-kt3"/>
                         <outlet property="notificationsAlert" destination="hpc-x7-f8x" id="5Me-kk-OTP"/>
                         <outlet property="onboardingText" destination="zMO-xg-2eT" id="gad-Cd-gFG"/>
-                        <segue destination="Zpp-RP-GwK" kind="show" identifier="letmein" id="3s5-Xx-b2L"/>
+                        <segue destination="URX-2s-g1Q" kind="show" identifier="letmein" id="rbg-7P-Xvc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IQ7-nA-o41" userLabel="First Responder" sceneMemberID="firstResponder"/>
