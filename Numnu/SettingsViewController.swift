@@ -15,8 +15,7 @@ var itemArray2 = [String]()
 
 class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
-    @IBAction func didTappedEdit(_ sender: Any) {
-    }
+   
     
     @IBOutlet var editButton: UIButton!
     @IBOutlet var profileImageview: UIImageView!
@@ -92,7 +91,16 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         // Dispose of any resources that can be recreated.
     }
     
-
+    // Edit button Navigation //
+    
+    @IBAction func didTappedEdit(_ sender: Any) {
+        
+        let storyBoard : UIStoryboard = UIStoryboard(name: Constants.Main, bundle:nil)
+        let editProfile = storyBoard.instantiateViewController(withIdentifier: "profileid") as! Edit_ProfileVC
+//        self.present(editProfile, animated:true, completion:nil)
+        self.navigationController?.pushViewController(editProfile, animated: true)
+        
+    }
     /*
     // MARK: - Navigation
 

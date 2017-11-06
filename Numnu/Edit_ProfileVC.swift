@@ -7,9 +7,15 @@
 //
 
 import UIKit
+var dropdownArray = [String] ()
+var dropdownString = String ()
+var tagArray = [String] ()
 
-class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource{
 
+    @IBOutlet var dropdownTableView: UITableView!
+    
+    @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var editButton: UIButton!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var nameTextfield: UITextField!
@@ -46,7 +52,13 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
 //        birthTextfield.useUnderline()
 //        foodTextfield.useUnderline()
         
+        foodTextfield.addTarget(self, action: #selector(textFieldActive), for: UIControlEvents.touchDown)
+
+        dropdownArray = ["chicken","Pizza","Burger","Sandwich","Mutton","Prawn","Gobi chilli","Panneer"]
+        
         setNavBar()
+        
+        dropdownTableView.isHidden = true
         
         myscrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height+100)
         
@@ -61,19 +73,22 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         
         self.navigationController?.navigationBar.titleTextAttributes =
             [NSForegroundColorAttributeName: UIColor.black,
-             NSFontAttributeName: UIFont(name: "Avenir-Medium", size: 21)!]
+             NSFontAttributeName: UIFont(name: "Avenir-Medium", size: 19)!]
 
         // Do any additional setup after loading the view.
         
         if show == false {
             
-            addCollectionContainer()
+           // addCollectionContainer()
             
         }
         
-        
     }
     
+    func textFieldActive() {
+        
+        dropdownTableView.isHidden = false
+    }
     // Validation func //
     
     public var emailRegEx = "[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}"
@@ -106,36 +121,36 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         self.view.endEditing(true)
+        
+//        if genderTextfield == true {
+//            let Alert = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.actionSheet)
+//
+//            let MaleAction = UIAlertAction(title: "MALE", style: UIAlertActionStyle.default) { _ in
+//
+//            }
+//            let femaleAction = UIAlertAction(title: "FEMALE", style: UIAlertActionStyle.default) { _ in
+//            }
+//            Alert.addAction(MaleAction)
+//            Alert.addAction(femaleAction)
+//
+//            self.present(Alert, animated: true, completion: nil)
+//
+//        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         textField.resignFirstResponder()
         
-        if textField == genderTextfield {
-            let Alert = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.actionSheet)
-            
-            let MaleAction = UIAlertAction(title: "MALE", style: UIAlertActionStyle.default) { _ in
-                
-            }
-            let femaleAction = UIAlertAction(title: "FEMALE", style: UIAlertActionStyle.default) { _ in
-            }
-            Alert.addAction(MaleAction)
-            Alert.addAction(femaleAction)
-                
-            self.present(Alert, animated: true, completion: nil)
-
-        }
-        
         return true
     }
     
     func addCollectionContainer(){
         
-//        let storyboard        = UIStoryboard(name: Constants.Auth, bundle: nil)
-//        let controller        = storyboard.instantiateViewController(withIdentifier: "signupvc")
-        let storyboard        = UIStoryboard(name: Constants.Main, bundle: nil)
-        let controller        = storyboard.instantiateViewController(withIdentifier: "SettingsVC")
+        let storyboard        = UIStoryboard(name: Constants.Auth, bundle: nil)
+        let controller        = storyboard.instantiateViewController(withIdentifier: "signupvc")
+//        let storyboard        = UIStoryboard(name: Constants.Main, bundle: nil)
+//        let controller        = storyboard.instantiateViewController(withIdentifier: "SettingsVC")
         controller.view.frame = self.view.bounds;
         controller.willMove(toParentViewController: self)
         self.view.addSubview(controller.view)
@@ -159,9 +174,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             present(Alert, animated: true, completion: nil)
         } else {
            
-            
             if isValidEmail(testStr: Email as String) == true {
-                let Alert = UIAlertController(title: "Success", message: "Profile saved", preferredStyle: UIAlertControllerStyle.alert)
+              let Alert = UIAlertController(title: "Success", message: "Profile saved", preferredStyle: UIAlertControllerStyle.alert)
                 
                 let OkAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { _ in
                     
@@ -170,7 +184,12 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 
                 Alert.addAction(OkAction)
                 present(Alert, animated: true, completion: nil)
-            
+                 
+ 
+//                let storyboard        = UIStoryboard(name: Constants.Auth, bundle: nil)
+//                let controller        = storyboard.instantiateViewController(withIdentifier: "SettingsVC") as!SettingsViewController
+//                self.navigationController?.pushViewController(controller, animated: true)
+                
             }else {
                 let Alert = UIAlertController(title: "Oops", message: "Please Enter valid mail ID", preferredStyle: UIAlertControllerStyle.alert)
                 
@@ -240,5 +259,70 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         _ = self.navigationController?.popToRootViewController(animated: true)
         
     }
+    
+/// collectionView for food preferences ///
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return tagArray.count
+    }
+    
+   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cvcell", for: indexPath as IndexPath) as! FoodPreferenceCollectionViewCell
+        cell.foodtagLabel.text = tagArray[indexPath.row]
+    
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    // Food Textfield action ///
+    
+    @IBAction func didTappedFoodtext(_ sender: Any) {
+        
+        dropdownTableView.isHidden = false
 
+    }
+    
+    /// TableView Delegates and Datasources ///
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dropdownArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = dropdownTableView.dequeueReusableCell(withIdentifier: "cell")
+//        var cell : UITableViewCell? = (dropdownTableView.dequeueReusableCell(withIdentifier: "cell") as! UITableViewCell)
+        
+        var cell : UITableViewCell? = dropdownTableView.dequeueReusableCell(withIdentifier: "cell")
+
+        
+        if(cell == nil)
+        {
+            cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
+        }
+        
+        cell?.textLabel?.text = dropdownArray[indexPath.row]
+        return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let indexPath = dropdownTableView.indexPathForSelectedRow //optional, to get from any UIButton for example
+        
+        let currentCell = dropdownTableView.cellForRow(at: indexPath!) as! UITableViewCell
+        
+        print(currentCell.textLabel!.text!)
+        dropdownString = (currentCell.textLabel?.text)!
+//        tagArray.append(dropdownString)
+        if tagArray.contains(dropdownString) {
+            print("already exist")
+        }else{
+            tagArray.append(dropdownString)
+        }
+        collectionView.reloadData()
+        
+        dropdownTableView.isHidden = true
+        
+    }
 }
