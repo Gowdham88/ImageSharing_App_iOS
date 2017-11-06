@@ -25,6 +25,9 @@ class MenuEventViewController: UIViewController,IndicatorInfoProvider {
         
         menuCategoryTableview.delegate   = self
         menuCategoryTableview.dataSource = self
+        
+        menuCategoryTableview.isHidden = false
+        menuEventTableview.isHidden    = true
 
         // Do any additional setup after loading the view.
     }
@@ -91,6 +94,7 @@ extension MenuEventViewController : UITableViewDelegate,UITableViewDataSource {
             
             menuEventTableview.isHidden    = true
             menuCategoryTableview.isHidden = false
+            openStoryBoard()
             
         } else {
             
@@ -98,6 +102,14 @@ extension MenuEventViewController : UITableViewDelegate,UITableViewDataSource {
             menuCategoryTableview.isHidden = true
             
         }
+        
+    }
+    
+    func  openStoryBoard() {
+        
+        let storyboard = UIStoryboard(name: Constants.ItemDetail, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId)
+        self.navigationController!.pushViewController(vc, animated: true)
         
     }
     

@@ -37,7 +37,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
    
     @IBAction func dismissPressed(_ sender: Any) {
         
-        dismiss(animated: true, completion: nil)
+        _ = self.navigationController?.popViewController(animated: true)
         
     }
     
@@ -137,9 +137,6 @@ class signInVC: UIViewController, UITextFieldDelegate {
     
     @IBAction func signupPressed(_ sender: Any) {
      
-        closed = "signUp"
-        dismiss(animated: true, completion: nil)
-
     }
     
     override func didReceiveMemoryWarning() {
@@ -182,6 +179,20 @@ class signInVC: UIViewController, UITextFieldDelegate {
 //        window?.rootViewController = initialViewController
 //        window?.makeKeyAndVisible()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Hide the navigation bar on the this view controller
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // Show the navigation bar on other view controllers
+//        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
    

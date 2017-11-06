@@ -326,6 +326,7 @@
                                         </state>
                                         <connections>
                                             <action selector="signinPressed:" destination="URX-2s-g1Q" eventType="touchUpInside" id="aI2-Jx-tQE"/>
+                                            <segue destination="WUv-D2-SgJ" kind="show" id="Dpf-Lz-wty"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -778,6 +779,7 @@
                                         </state>
                                         <connections>
                                             <action selector="signupPressed:" destination="WUv-D2-SgJ" eventType="touchUpInside" id="Ols-xq-oyP"/>
+                                            <segue destination="URX-2s-g1Q" kind="show" id="ewQ-Ok-PgC"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Don't have an account? " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V7j-g7-VVD">
@@ -869,4 +871,8 @@
         <image name="onboardbg" width="2225" height="1348"/>
         <image name="signUp" width="327" height="52"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Dpf-Lz-wty"/>
+        <segue reference="ewQ-Ok-PgC"/>
+    </inferredMetricsTieBreakers>
 </document>
