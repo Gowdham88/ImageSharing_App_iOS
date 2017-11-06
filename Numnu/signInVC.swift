@@ -22,6 +22,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
     var userprofileimage : String = ""
 
     
+    @IBOutlet var orLbl: UILabel!
     @IBOutlet weak var emailAddressTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
     
@@ -196,4 +197,8 @@ class signInVC: UIViewController, UITextFieldDelegate {
     }
     
    
+    @IBAction func fbLogin(_ sender: Any) {
+        //facebook SignIn
+    }
+    
 }

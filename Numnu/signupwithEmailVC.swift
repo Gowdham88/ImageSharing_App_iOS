@@ -22,12 +22,12 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
-    @IBOutlet var labelcredentials: UILabel!
+        //    @IBOutlet var labelcredentials: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
   
-        labelcredentials.isHidden = true
+        //        labelcredentials.isHidden = true
         
       
     }
@@ -52,7 +52,6 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     
     @IBAction func signinPressed(_ sender: Any) {
         
-        
 
         
     }
@@ -71,7 +70,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        labelcredentials.isHidden = true
+//        labelcredentials.isHidden = true
     }
     
     @IBAction func signupPressed(_ sender: Any) {
@@ -93,7 +92,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
             
             if passwordvalid ==  true {
                 
-            labelcredentials.isHidden = true
+//            labelcredentials.isHidden = true
                 
             HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
             
@@ -102,7 +101,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                 
                 if user == nil {
                     
-                self.labelcredentials.isHidden = false
+//                self.labelcredentials.isHidden = false
                     
                     HUD.hide()
                     
@@ -110,9 +109,9 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                     animation.duration = 0.07
                     animation.repeatCount = 4
                     animation.autoreverses = true
-                    animation.fromValue = NSValue(cgPoint: CGPoint(x: self.labelcredentials.center.x - 10, y: self.labelcredentials.center.y))
-                    animation.toValue = NSValue(cgPoint: CGPoint(x: self.labelcredentials.center.x + 10, y: self.labelcredentials.center.y))
-                    self.labelcredentials.layer.add(animation, forKey: "position")
+//                    animation.fromValue = NSValue(cgPoint: CGPoint(x: self.labelcredentials.center.x - 10, y: self.labelcredentials.center.y))
+//                    animation.toValue = NSValue(cgPoint: CGPoint(x: self.labelcredentials.center.x + 10, y: self.labelcredentials.center.y))
+//                    self.labelcredentials.layer.add(animation, forKey: "position")
                     
                     return
                     
@@ -155,16 +154,16 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     
     func authenticationError(error : String){
         
-        labelcredentials.text     = error
-        labelcredentials.isHidden = false
+//        labelcredentials.text     = error
+//        labelcredentials.isHidden = false
         
         let animation = CABasicAnimation(keyPath: "position")
         animation.duration = 0.07
         animation.repeatCount = 4
         animation.autoreverses = true
-        animation.fromValue = NSValue(cgPoint: CGPoint(x: self.labelcredentials.center.x - 10, y: self.labelcredentials.center.y))
-        animation.toValue = NSValue(cgPoint: CGPoint(x: self.labelcredentials.center.x + 10, y: self.labelcredentials.center.y))
-        self.labelcredentials.layer.add(animation, forKey: "position")
+//        animation.fromValue = NSValue(cgPoint: CGPoint(x: self.labelcredentials.center.x - 10, y: self.labelcredentials.center.y))
+//        animation.toValue = NSValue(cgPoint: CGPoint(x: self.labelcredentials.center.x + 10, y: self.labelcredentials.center.y))
+//        self.labelcredentials.layer.add(animation, forKey: "position")
         HUD.hide()
         
     }
