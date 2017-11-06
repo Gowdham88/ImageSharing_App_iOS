@@ -10,6 +10,7 @@ import UIKit
 
 class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
 
+    @IBOutlet var editButton: UIButton!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var nameTextfield: UITextField!
     @IBOutlet weak var emailaddress: UITextField!
@@ -54,6 +55,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         
         profileImage.layer.cornerRadius = self.profileImage.frame.size.height/2
         profileImage.clipsToBounds = true
+        
+        self.editButton.layer.cornerRadius =  self.editButton.frame.size.height/2
+        self.editButton.clipsToBounds = true
         
         self.navigationController?.navigationBar.titleTextAttributes =
             [NSForegroundColorAttributeName: UIColor.black,
@@ -128,22 +132,24 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     func addCollectionContainer(){
         
-        let storyboard        = UIStoryboard(name: Constants.Auth, bundle: nil)
-        let controller        = storyboard.instantiateViewController(withIdentifier: "signupvc")
+//        let storyboard        = UIStoryboard(name: Constants.Auth, bundle: nil)
+//        let controller        = storyboard.instantiateViewController(withIdentifier: "signupvc")
+        let storyboard        = UIStoryboard(name: Constants.Main, bundle: nil)
+        let controller        = storyboard.instantiateViewController(withIdentifier: "SettingsVC")
         controller.view.frame = self.view.bounds;
         controller.willMove(toParentViewController: self)
         self.view.addSubview(controller.view)
         self.addChildViewController(controller)
         controller.didMove(toParentViewController: self)
         
-        
+      
     }
     
     @IBAction func didTappedSave(_ sender: Any) {
         let Email:NSString = emailaddress.text! as NSString
 
         if nameTextfield.text == "" || emailaddress.text == "" || usernameTextfield.text == "" || cityTextfield.text == "" || genderTextfield.text == "" || foodTextfield.text == "" || birthTextfield.text == "" {
-            let Alert = UIAlertController(title: "Oops", message: "Enter Username", preferredStyle: UIAlertControllerStyle.alert)
+            let Alert = UIAlertController(title: "Oops", message: "Fields Cannot be empty", preferredStyle: UIAlertControllerStyle.alert)
             
             let OkAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { _ in
             
