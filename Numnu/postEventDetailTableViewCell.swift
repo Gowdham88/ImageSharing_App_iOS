@@ -28,6 +28,7 @@ class postEventDetailTableViewCell : UITableViewCell {
     @IBOutlet weak var postDtEventDishLabel: UILabel!
     @IBOutlet weak var postDtEventBookMark: UIButton!
     
+    @IBOutlet weak var mainDtContentview: UIView!
     @IBOutlet weak var postDtdishwidthConstaint: NSLayoutConstraint!
     @IBOutlet weak var DtplaceWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var DtdishRightLayoutConstraint: NSLayoutConstraint!
