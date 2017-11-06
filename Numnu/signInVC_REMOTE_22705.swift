@@ -38,7 +38,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
    
     @IBAction func dismissPressed(_ sender: Any) {
         
-        _ = self.navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
         
     }
     
@@ -138,7 +138,8 @@ class signInVC: UIViewController, UITextFieldDelegate {
     
     @IBAction func signupPressed(_ sender: Any) {
      
-
+        self.performSegue(withIdentifier: "loginVc", sender: self)
+        dismiss(animated: true, completion: nil)
 
     }
     
@@ -184,22 +185,8 @@ class signInVC: UIViewController, UITextFieldDelegate {
         
     }
     
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        // Hide the navigation bar on the this view controller
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    @IBAction func fbLogin(_ sender: Any) {
+        //facebook SignIn
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        // Show the navigation bar on other view controllers
-//        self.navigationController?.setNavigationBarHidden(false, animated: animated)
-    }
-    
-   
-
-   
 }

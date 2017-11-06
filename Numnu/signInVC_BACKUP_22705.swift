@@ -138,8 +138,12 @@ class signInVC: UIViewController, UITextFieldDelegate {
     
     @IBAction func signupPressed(_ sender: Any) {
      
+<<<<<<< HEAD
+=======
+        self.performSegue(withIdentifier: "loginVc", sender: self)
+        dismiss(animated: true, completion: nil)
 
-
+>>>>>>> a3b2a695ed737b8e8396ecd4dc3f4200cd497f02
     }
     
     override func didReceiveMemoryWarning() {
@@ -184,7 +188,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
         
     }
     
-
+<<<<<<< HEAD
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -200,6 +204,10 @@ class signInVC: UIViewController, UITextFieldDelegate {
     }
     
    
-
-   
+=======
+    @IBAction func fbLogin(_ sender: Any) {
+        //facebook SignIn
+    }
+    
+>>>>>>> a3b2a695ed737b8e8396ecd4dc3f4200cd497f02
 }

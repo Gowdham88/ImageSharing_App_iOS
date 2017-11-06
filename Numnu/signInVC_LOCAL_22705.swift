@@ -22,7 +22,6 @@ class signInVC: UIViewController, UITextFieldDelegate {
     var userprofileimage : String = ""
 
     
-    @IBOutlet var orLbl: UILabel!
     @IBOutlet weak var emailAddressTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
     
@@ -138,8 +137,6 @@ class signInVC: UIViewController, UITextFieldDelegate {
     
     @IBAction func signupPressed(_ sender: Any) {
      
-
-
     }
     
     override func didReceiveMemoryWarning() {
@@ -184,7 +181,6 @@ class signInVC: UIViewController, UITextFieldDelegate {
         
     }
     
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -199,7 +195,5 @@ class signInVC: UIViewController, UITextFieldDelegate {
 //        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
-   
-
    
 }
