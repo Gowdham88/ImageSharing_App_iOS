@@ -22,9 +22,9 @@ class PostTabController: UIViewController,IndicatorInfoProvider {
         postEventTableView.delegate   = self
         postEventTableView.dataSource = self
 
-//        postEventTableView.sizeToFit()
-        postEventTableView.estimatedRowHeight = 388
-        postEventTableView.rowHeight = UITableViewAutomaticDimension
+////        postEventTableView.sizeToFit()
+//        postEventTableView.estimatedRowHeight = 388
+//        postEventTableView.rowHeight = UITableViewAutomaticDimension
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,7 +55,7 @@ extension PostTabController : UITableViewDelegate,UITableViewDataSource {
         
         cell.delegate = self
         cell.postEventBookMark.tag = indexPath.row
-        
+       
         return cell
         
     }
@@ -70,9 +70,15 @@ extension PostTabController : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
-
-
-        return UITableViewAutomaticDimension;
+        if TextSize.sharedinstance.getNumberoflines(text: Constants.dummy, width: tableView.frame.width, font: UIFont(name: "Avenir-Book", size: 16)!) > 1 {
+            
+            return 428
+            
+        } else {
+            
+            return 402
+        }
+        
     }
     
 }

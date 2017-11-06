@@ -61,6 +61,18 @@ extension ReviewEventViewController : UITableViewDelegate,UITableViewDataSource 
         openStoryBoard()
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if TextSize.sharedinstance.getNumberoflines(text: Constants.dummy, width: tableView.frame.width, font: UIFont(name: "Avenir-Book", size: 16)!) > 1 {
+            
+            return 428
+            
+        } else {
+            
+            return 402
+        }
+        
+    }
    
     
     

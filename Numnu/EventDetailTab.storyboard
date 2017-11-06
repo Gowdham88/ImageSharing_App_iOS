@@ -110,7 +110,7 @@
                                     <outlet property="delegate" destination="kun-Hg-YeN" id="9J1-SM-1Mi"/>
                                 </connections>
                             </tableView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="avl-rL-Zmp">
+                            <tableView clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="avl-rL-Zmp">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -528,6 +528,7 @@
                                                 </view>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="ahw-4s-BUN" firstAttribute="top" secondItem="PLY-Kp-JrL" secondAttribute="top" id="Ccl-H6-cMP"/>
                                                 <constraint firstItem="ahw-4s-BUN" firstAttribute="leading" secondItem="PLY-Kp-JrL" secondAttribute="leading" id="N88-X3-HQO"/>
                                                 <constraint firstAttribute="trailing" secondItem="ahw-4s-BUN" secondAttribute="trailing" id="QBU-co-wT2"/>
                                                 <constraint firstAttribute="bottom" secondItem="ahw-4s-BUN" secondAttribute="bottom" constant="5" id="rRn-Ju-QaX"/>

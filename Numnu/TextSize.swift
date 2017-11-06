@@ -43,5 +43,15 @@ struct TextSize{
         return size.width
     }
     
+    func getNumberoflines(text: String, width: CGFloat, font: UIFont)-> Int {
+        
+        let lbl = UILabel(frame: .zero)
+        lbl.frame.size.width = width
+        lbl.frame.size.height = 44
+        lbl.font = font
+        lbl.text = text
+        return lbl.numberOfVisibleLines
+        
+    }
     
 }
