@@ -93,7 +93,7 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
         
         if self.view.frame.height <= 568 {
             
-            mainContainerView.constant       = 650
+            mainContainerView.constant       = 550
             mainContainerViewBottom.constant = 0
             
         }
