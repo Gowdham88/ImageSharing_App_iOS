@@ -10,10 +10,13 @@ import UIKit
 var dropdownArray = [String] ()
 var dropdownString = String ()
 var tagArray = [String] ()
+//var selectedIndex = integer_t()
+var selectedIndex = Int()
 
 class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource{
 
     @IBOutlet var dropdownTableView: UITableView!
+  
     
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var editButton: UIButton!
@@ -44,17 +47,19 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         imagePicker.delegate = self
         profileImage.isUserInteractionEnabled = true
 
-//        nameTextfield.useUnderline()
-//        emailaddress.useUnderline()
-//        usernameTextfield.useUnderline()
-//        genderTextfield.useUnderline()
-//        cityTextfield.useUnderline()
-//        birthTextfield.useUnderline()
-//        foodTextfield.useUnderline()
+        nameTextfield.useUnderline()
+        emailaddress.useUnderline()
+        usernameTextfield.useUnderline()
+        genderTextfield.useUnderline()
+        cityTextfield.useUnderline()
+        birthTextfield.useUnderline()
+        foodTextfield.useUnderline()
         
-        foodTextfield.addTarget(self, action: #selector(textFieldActive), for: UIControlEvents.touchDown)
+        
+        
+        foodTextfield.addTarget(self, action: #selector(textFieldActive), for: UIControlEvents.allTouchEvents)
 
-        dropdownArray = ["chicken","Pizza","Burger","Sandwich","Mutton","Prawn","Gobi chilli","Panneer"]
+        dropdownArray = ["Chicken","Pizza","Burger","Sandwich","Mutton","Prawn","Gobi chilli","Panneer"]
         
         setNavBar()
         
@@ -175,16 +180,22 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         } else {
            
             if isValidEmail(testStr: Email as String) == true {
-              let Alert = UIAlertController(title: "Success", message: "Profile saved", preferredStyle: UIAlertControllerStyle.alert)
+//              let Alert = UIAlertController(title: "Success", message: "Profile saved", preferredStyle: UIAlertControllerStyle.alert)
+//
+//                let OkAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { _ in
+//
+//                    self.dismiss(animated: true, completion: nil)
+//                }
+//
+//                Alert.addAction(OkAction)
+//                present(Alert, animated: true, completion: nil)
                 
-                let OkAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { _ in
-                    
-                    self.dismiss(animated: true, completion: nil)
-                }
                 
-                Alert.addAction(OkAction)
-                present(Alert, animated: true, completion: nil)
-                 
+                let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
+                let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController")
+                self.navigationController!.pushViewController(vc, animated: true)
+                
+               
  
 //                let storyboard        = UIStoryboard(name: Constants.Auth, bundle: nil)
 //                let controller        = storyboard.instantiateViewController(withIdentifier: "SettingsVC") as!SettingsViewController
@@ -277,6 +288,17 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         return true
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//    let indexPath = collectionView.indexPathsForSelectedItems
+//print("selected item index is",indexPath)
+        let indexPath = collectionView.indexPathsForSelectedItems?.first
+        let cell = collectionView.cellForItem(at: indexPath!) as? FoodPreferenceCollectionViewCell
+        selectedIndex = (indexPath?.item)!
+
+
+        print("selected index::::",selectedIndex)
+    }
+    
     // Food Textfield action ///
     
     @IBAction func didTappedFoodtext(_ sender: Any) {
@@ -324,5 +346,13 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         
         dropdownTableView.isHidden = true
         
+    }
+    
+    @IBAction func deleteTagButton(_ sender: Any) {
+//        let index = tagArray.index(of: dropdownString)
+//        tagArray.remove(at: index)
+        tagArray.remove(at: selectedIndex)
+        print("removed object is::::::",selectedIndex)
+        collectionView.reloadData()
     }
 }

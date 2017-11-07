@@ -16,12 +16,14 @@ var itemArray2 = [String]()
 class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
    
+    @IBOutlet var navigationItemList: UINavigationItem!
     
     @IBOutlet var editButton: UIButton!
     @IBOutlet var profileImageview: UIImageView!
     @IBOutlet var settingsTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+       setNavBar()
         self.navigationController?.navigationBar.titleTextAttributes =
             [NSForegroundColorAttributeName: UIColor.black,
              NSFontAttributeName: UIFont(name: "Avenir-Medium", size: 21)!]
@@ -90,15 +92,48 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    func setNavBar() {
     
+        navigationItemList.title = "Settings"
+        
+        let button: UIButton = UIButton(type: UIButtonType.custom)
+        //set image for button
+        button.setImage(UIImage(named: "ic_arrow_back"), for: UIControlState.normal)
+        //add function for button
+        button.addTarget(self, action: #selector(EventViewController.backButtonClicked), for: UIControlEvents.touchUpInside)
+        //set frame
+        button.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
+        
+        // Create left and right button for navigation item
+        let leftButton =  UIBarButtonItem(customView: button)
+        leftButton.isEnabled = true
+        
+        let rightButton = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        
+        // Create two buttons for the navigation item
+        navigationItemList.leftBarButtonItem = leftButton
+        navigationItemList.rightBarButtonItem = rightButton
+        
+        
+    }
+    
+    func backButtonClicked() {
+        
+        _ = self.navigationController?.popViewController(animated: true)
+        
+    }
     // Edit button Navigation //
     
     @IBAction func didTappedEdit(_ sender: Any) {
         
-        let storyBoard : UIStoryboard = UIStoryboard(name: Constants.Main, bundle:nil)
-        let editProfile = storyBoard.instantiateViewController(withIdentifier: "profileid") as! Edit_ProfileVC
-//        self.present(editProfile, animated:true, completion:nil)
-        self.navigationController?.pushViewController(editProfile, animated: true)
+//        let storyBoard : UIStoryboard = UIStoryboard(name: Constants.Main, bundle:nil)
+//        let editProfile = storyBoard.instantiateViewController(withIdentifier: "profileid") as! Edit_ProfileVC
+////        self.present(editProfile, animated:true, completion:nil)
+//        self.navigationController?.pushViewController(editProfile, animated: true)
+        
+        let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: "profileid")
+        self.navigationController!.pushViewController(vc, animated: true)
         
     }
     /*
