@@ -31,13 +31,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="URa-Ng-1u2">
-                                <rect key="frame" x="0.0" y="210" width="320" height="309"/>
+                                <rect key="frame" x="0.0" y="170" width="320" height="349"/>
                             </containerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YR2-5a-JBJ">
+                                <rect key="frame" x="0.0" y="170" width="320" height="349"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ozr-XL-zKS">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="349"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sfO-qW-Atc">
-                                <rect key="frame" x="0.0" y="210" width="320" height="309"/>
+                                <rect key="frame" x="0.0" y="170" width="320" height="349"/>
                             </scrollView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lyo-UJ-qpi" customClass="ButtonBarView" customModule="XLPagerTabStrip">
-                                <rect key="frame" x="0.0" y="210" width="320" height="64"/>
+                                <rect key="frame" x="0.0" y="170" width="320" height="64"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="rWR-xN-anh"/>
@@ -51,7 +62,7 @@
                                 <cells/>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ilc-xn-VB5">
-                                <rect key="frame" x="0.0" y="104" width="320" height="106"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="106"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fgK-KH-pgZ" customClass="ButtonExtender" customModule="Numnu" customModuleProvider="target">
                                         <rect key="frame" x="20" y="61" width="45" height="30"/>
@@ -110,11 +121,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="YR2-5a-JBJ" firstAttribute="top" secondItem="ilc-xn-VB5" secondAttribute="bottom" id="05G-RW-TTX"/>
                             <constraint firstAttribute="trailing" secondItem="lyo-UJ-qpi" secondAttribute="trailing" id="22b-Lh-TG4"/>
+                            <constraint firstItem="S5t-uM-QBn" firstAttribute="top" secondItem="YR2-5a-JBJ" secondAttribute="bottom" id="3iO-Ao-yTN"/>
                             <constraint firstItem="lyo-UJ-qpi" firstAttribute="leading" secondItem="LzB-eL-Xhu" secondAttribute="leading" id="98e-Sw-mCg"/>
                             <constraint firstAttribute="trailing" secondItem="sfO-qW-Atc" secondAttribute="trailing" id="9QT-h2-nSg"/>
                             <constraint firstItem="URa-Ng-1u2" firstAttribute="leading" secondItem="LzB-eL-Xhu" secondAttribute="leading" id="BSV-z7-r2D"/>
                             <constraint firstAttribute="trailing" secondItem="URa-Ng-1u2" secondAttribute="trailing" id="Lts-yh-6zo"/>
+                            <constraint firstAttribute="trailing" secondItem="YR2-5a-JBJ" secondAttribute="trailing" id="NFp-Eh-aUI"/>
                             <constraint firstAttribute="trailing" secondItem="ilc-xn-VB5" secondAttribute="trailing" id="R4D-zo-K9U"/>
                             <constraint firstItem="ilc-xn-VB5" firstAttribute="leading" secondItem="LzB-eL-Xhu" secondAttribute="leading" id="VZn-zs-dO2"/>
                             <constraint firstItem="ilc-xn-VB5" firstAttribute="top" secondItem="LjE-up-1oV" secondAttribute="bottom" id="d07-ho-EwC"/>
@@ -124,6 +138,7 @@
                             <constraint firstItem="sfO-qW-Atc" firstAttribute="leading" secondItem="LzB-eL-Xhu" secondAttribute="leading" id="gNm-ZK-clm"/>
                             <constraint firstItem="S5t-uM-QBn" firstAttribute="top" secondItem="URa-Ng-1u2" secondAttribute="bottom" id="mAF-Dw-dui"/>
                             <constraint firstItem="sfO-qW-Atc" firstAttribute="top" secondItem="ilc-xn-VB5" secondAttribute="bottom" id="nCr-66-OhF"/>
+                            <constraint firstItem="YR2-5a-JBJ" firstAttribute="leading" secondItem="LzB-eL-Xhu" secondAttribute="leading" id="sFQ-1O-hh8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Explore" id="VQ0-pp-ENm">
@@ -136,6 +151,7 @@
                         <outlet property="containerView" destination="sfO-qW-Atc" id="MVf-uM-kgs"/>
                         <outlet property="editsearchbyItem" destination="pKU-lp-6b3" id="zf5-tE-o1x"/>
                         <outlet property="editsearchbyLocation" destination="GjQ-bI-QVw" id="EFy-pa-KLk"/>
+                        <outlet property="filtertableView" destination="sfO-qW-Atc" id="xVq-p8-ZhP"/>
                         <outlet property="navigationItemList" destination="VQ0-pp-ENm" id="UWO-um-4dz"/>
                         <outlet property="tabScrollView" destination="sfO-qW-Atc" id="ifN-R3-Hme"/>
                     </connections>

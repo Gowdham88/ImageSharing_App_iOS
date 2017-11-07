@@ -20,6 +20,7 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
 
     @IBOutlet weak var navigationItemList: UINavigationItem!
     
+    @IBOutlet var filtertableView: UIScrollView!
     @IBOutlet weak var buttonTabBarView: ButtonBarView!
     var searchClick : Bool = false
    
