@@ -23,6 +23,7 @@
 		60B4EA401FAAEA7600C1A6C9 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B4EA3F1FAAEA7600C1A6C9 /* SettingsVC.swift */; };
 		60B4EA421FAAFB9300C1A6C9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B4EA411FAAFB9300C1A6C9 /* SettingsViewController.swift */; };
 		60B4EA441FAB190300C1A6C9 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B4EA431FAB190300C1A6C9 /* SettingsTableViewCell.swift */; };
+		6F24289A1FB34568003AD3AF /* ItemCompleteviewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2428991FB34568003AD3AF /* ItemCompleteviewcontroller.swift */; };
 		6F44F25D1F9365F200AF45F2 /* CoreAudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F44F2591F9365F100AF45F2 /* CoreAudioKit.framework */; };
 		6F44F25E1F9365F200AF45F2 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F44F25A1F9365F200AF45F2 /* CoreBluetooth.framework */; };
 		6F44F25F1F9365F200AF45F2 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F44F25B1F9365F200AF45F2 /* CoreFoundation.framework */; };
@@ -140,6 +141,7 @@
 		60B4EA3F1FAAEA7600C1A6C9 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		60B4EA411FAAFB9300C1A6C9 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		60B4EA431FAB190300C1A6C9 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
+		6F2428991FB34568003AD3AF /* ItemCompleteviewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCompleteviewcontroller.swift; sourceTree = "<group>"; };
 		6F44F2591F9365F100AF45F2 /* CoreAudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudioKit.framework; path = System/Library/Frameworks/CoreAudioKit.framework; sourceTree = SDKROOT; };
 		6F44F25A1F9365F200AF45F2 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		6F44F25B1F9365F200AF45F2 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -397,6 +399,7 @@
 			children = (
 				B45CBCF01FA9BD66004B6E66 /* ItemDetailController.swift */,
 				B45CBCF21FA9D5B1004B6E66 /* LocationTabController.swift */,
+				6F2428991FB34568003AD3AF /* ItemCompleteviewcontroller.swift */,
 			);
 			name = ItemDetailController;
 			sourceTree = "<group>";
@@ -857,6 +860,7 @@
 				B41842391F8FCBF100CBBA57 /* Edit_ProfileVC.swift in Sources */,
 				3FC6CEBA1F6F744700DF2A12 /* AppDelegate.swift in Sources */,
 				B464D78F1F8D1F3E002A1FDC /* EventCollectionCell.swift in Sources */,
+				6F24289A1FB34568003AD3AF /* ItemCompleteviewcontroller.swift in Sources */,
 				60B4EA401FAAEA7600C1A6C9 /* SettingsVC.swift in Sources */,
 				B406DE211FA713C00092E2B4 /* MenuCategoryItemCell.swift in Sources */,
 				B45CBCF31FA9D5B1004B6E66 /* LocationTabController.swift in Sources */,

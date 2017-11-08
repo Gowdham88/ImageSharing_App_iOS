@@ -80,7 +80,6 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(true)
     
-         getPlaceApi(place_Str: "Paris")
         
     }
     
@@ -93,8 +92,11 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
     }
     @IBAction func ButtonLocation(_ sender: UIButton) {
         
+        let top = CGAffineTransform(translationX: 0, y: 0)
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            self.filtertableView.transform = top
+        }, completion: nil)
        
-        
     }
     // Tab controllers switch func
 
@@ -130,14 +132,7 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
 extension ParentViewController : UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        
-            let top = CGAffineTransform(translationX: 0, y: 0)
-            
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                self.filtertableView.transform = top
-            }, completion: nil)
       
-        
     }
     
     
@@ -146,6 +141,17 @@ extension ParentViewController : UITextFieldDelegate {
         dismissKeyboard()
         setNavBar()
         print(textField.text!)
+        if let place = textField.text {
+            
+            getPlaceApi(place_Str: place)
+            
+        }
+        
+        let top = CGAffineTransform(translationX: 0, y: 0)
+        
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            self.filtertableView.transform = top
+        }, completion: nil)
     
         return true
     }
@@ -158,16 +164,20 @@ extension ParentViewController : UITextFieldDelegate {
             self.filtertableView.transform = top
         }, completion: nil)
         
+        dismissKeyboard()
+        
         return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        dismissKeyboard()
+        
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        if let place = textField.text {
-            
-            getPlaceApi(place_Str: place)
-            
-        }
+        
         
         return true
     }

@@ -90,8 +90,7 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
             
             readMoreButton.isHidden         = true
             eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: ItDescriptionLabel.frame.width, font: ItDescriptionLabel.font)
-            containerViewTop.constant  = 546
-            barButtonTop.constant      = 546
+         
         }
         
         /******************checking iphone device****************************/
@@ -127,17 +126,13 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
             readMoreButton.setTitle("more", for: .normal)
             isLabelAtMaxHeight = false
             eventDescriptionHeight.constant = 85
-            containerViewTop.constant  = 576
-            barButtonTop.constant      = 576
             
         } else {
             
             readMoreButton.setTitle("less", for: .normal)
             isLabelAtMaxHeight = true
             eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: ItDescriptionLabel.frame.width, font: ItDescriptionLabel.font)
-            containerViewTop.constant       = 491+TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: ItDescriptionLabel.frame.width, font: ItDescriptionLabel.font)
-            barButtonTop.constant           = 491+TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: ItDescriptionLabel.frame.width, font: ItDescriptionLabel.font)
-            
+           
         }
         
         

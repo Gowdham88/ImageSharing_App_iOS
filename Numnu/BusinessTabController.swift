@@ -69,8 +69,8 @@ extension BusinessTabController : UITableViewDelegate,UITableViewDataSource {
     
     func  openStoryBoard() {
         
-        let storyboard = UIStoryboard(name: Constants.BusinessDetail, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.BusinessDetailId)
+        let storyboard = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId)
         self.navigationController!.pushViewController(vc, animated: true)
         
     }

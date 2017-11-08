@@ -1,25 +1,27 @@
 //
-//  LocationDetailcontroller.swift
+//  ItemCompleteviewcontroller.swift
 //  Numnu
 //
-//  Created by CZ Ltd on 11/1/17.
+//  Created by Suraj B on 11/8/17.
 //  Copyright © 2017 czsm. All rights reserved.
 //
 
 import UIKit
 import XLPagerTabStrip
-import GoogleMaps
 
-class LocationDetailcontroller: ButtonBarPagerTabStripViewController {
+class ItemCompleteviewcontroller : ButtonBarPagerTabStripViewController {
     
-    @IBOutlet weak var LocImageView: ImageExtender!
-    @IBOutlet weak var LocTitleLabel: UILabel!
+    @IBOutlet weak var ItImageView: ImageExtender!
+    @IBOutlet weak var ItTitleLabel: UILabel!
     
-    @IBOutlet weak var LocAddressLabel: UILabel!
+    
+    @IBOutlet weak var ItDescriptionLabel: UILabel!
+    @IBOutlet weak var readMoreButton: UIButton!
+    
     
     @IBOutlet weak var TabBarView: ButtonBarView!
     @IBOutlet weak var pagerView: UIScrollView!
-    
+    @IBOutlet weak var tagScrollView: UIScrollView!
     
     @IBOutlet weak var navigationItemList: UINavigationItem!
     
@@ -27,19 +29,13 @@ class LocationDetailcontroller: ButtonBarPagerTabStripViewController {
     @IBOutlet weak var mainContainerView: NSLayoutConstraint!
     var tagarray = ["Festival","Wine","Party"]
     
-   /***************Map and business view*********************/
+    @IBOutlet var completemainview: UIView!
+    /***************contraints***********************/
     
-    @IBOutlet weak var businessEntityImage: ImageExtender!
-    @IBOutlet weak var mapview : UIView!
-    @IBOutlet weak var businessEntityView : UIView!
-    @IBOutlet weak var businessEntityNameLabel: UILabel!
-    @IBOutlet weak var businessEntityScrollview : UIScrollView!
+    @IBOutlet weak var eventDescriptionHeight : NSLayoutConstraint!
     
-    /**********************Location cordinates***********************************/
-    var locationManager = CLLocationManager()
-    var currentLocation: CLLocation?
-    var mapView: GMSMapView!
-    var zoomLevel: Float = 15.0
+    
+    var isLabelAtMaxHeight = false
     
     override func viewDidLoad() {
         settings.style.selectedBarHeight = 3.0
@@ -63,62 +59,85 @@ class LocationDetailcontroller: ButtonBarPagerTabStripViewController {
             newCell?.label.textColor = UIColor.appBlackColor()
             
         }
-        /**********************Location cordinates***********************************/
-        
-        locationManager = CLLocationManager()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestAlwaysAuthorization()
-        locationManager.requestWhenInUseAuthorization()
-        
-        if CLLocationManager.locationServicesEnabled()
-            
-        {
-            locationManager.distanceFilter = 50
-            locationManager.startUpdatingLocation()
-            locationManager.delegate = self
-            
-        }
         
         
         /**********************set Nav bar****************************/
         
         setNavBar()
         
-        entitytagUpdate()
-        
         /****************event label tap function************************/
         
         tapRegistration()
-       
-        setMap()
         
+        tagViewUpdate()
+        
+        
+        ItDescriptionLabel.text = Constants.dummy
+        
+        /****************Checking number of lines************************/
+        
+        if (ItDescriptionLabel.numberOfVisibleLines > 4) {
+            
+            readMoreButton.isHidden = false
+            
+        } else {
+            
+            readMoreButton.isHidden         = true
+            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: ItDescriptionLabel.frame.width, font: ItDescriptionLabel.font)
+            
+        }
+        
+        
+        
+        // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        
         // Dispose of any resources that can be recreated.
     }
+    
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
         let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3)
         let child_2 = UIStoryboard(name: Constants.ItemDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid7)
-        return [child_1,child_2]
+        let child_3 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1)
+        return [child_1,child_2,child_3]
+        
+    }
+    
+    @IBAction func ButtonReadMore(_ sender: UIButton) {
+        
+        if isLabelAtMaxHeight {
+            
+            readMoreButton.setTitle("more", for: .normal)
+            isLabelAtMaxHeight = false
+            eventDescriptionHeight.constant = 85
+            
+            
+        } else {
+            
+            readMoreButton.setTitle("less", for: .normal)
+            isLabelAtMaxHeight = true
+            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: ItDescriptionLabel.frame.width, font: ItDescriptionLabel.font)
+         
+        }
+     
         
     }
     
     
 }
 
-extension LocationDetailcontroller {
+extension ItemCompleteviewcontroller {
     
-    /****************etap function************************/
+    /****************event label tap function************************/
     
     func tapRegistration() {
         
-        let completemenuTap = UITapGestureRecognizer(target: self, action: #selector(BusinessDetailViewController.openCompleteMenu(sender:)))
-        businessEntityView.isUserInteractionEnabled = true
-        businessEntityView.addGestureRecognizer(completemenuTap)
+        let completemenuTap = UITapGestureRecognizer(target: self, action: #selector(ItemCompleteviewcontroller.openCompleteMenu(sender:)))
+        completemainview.isUserInteractionEnabled = true
+        completemainview.addGestureRecognizer(completemenuTap)
         
     }
     
@@ -128,7 +147,11 @@ extension LocationDetailcontroller {
         
     }
     
-    func entitytagUpdate() {
+    
+    
+    /*************************Tag view updating************************************/
+    
+    func tagViewUpdate() {
         
         var expandableWidth : CGFloat = 0
         
@@ -155,21 +178,23 @@ extension LocationDetailcontroller {
             }
             
             expandableWidth += textSize.width+30
-            businessEntityScrollview.addSubview(textLabel)
+            tagScrollView.addSubview(textLabel)
             
         }
         
-        businessEntityScrollview.contentSize = CGSize(width: expandableWidth, height: 0)
-        businessEntityScrollview.isScrollEnabled = true
+        tagScrollView.contentSize = CGSize(width: expandableWidth, height: 0)
+        tagScrollView.isScrollEnabled = true
         
         
     }
+    
+    
     
     /******************Set navigation bar**************************/
     
     func setNavBar() {
         
-        navigationItemList.title = "Location"
+        navigationItemList.title = "Item"
         
         let button: UIButton = UIButton(type: UIButtonType.custom)
         //set image for button
@@ -191,25 +216,9 @@ extension LocationDetailcontroller {
         
     }
     
-    func setMap() {
-        
-        let camera = GMSCameraPosition.camera(withLatitude: 45.5017, longitude: -73.5673, zoom: zoomLevel)
-        mapView = GMSMapView.map(withFrame: view.bounds, camera: camera)
-        mapView.settings.myLocationButton = true
-        mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        mapView.isMyLocationEnabled = true
-        
-        // Add the map to the view, hide it until we've got a location update.
-        mapview.addSubview(mapView)
-        //        mapView.isHidden = true
-        
-        
-        
-    }
-    
     func backButtonClicked() {
         
-        _ = self.navigationController?.popViewController(animated: true)
+        _ = self.navigationController?.popToRootViewController(animated: true)
         
     }
     
@@ -222,61 +231,4 @@ extension LocationDetailcontroller {
         
     }
     
-}
-
-extension LocationDetailcontroller : CLLocationManagerDelegate {
-    
-    // Handle incoming location events.
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location: CLLocation = locations.last!
-        print("Location: \(location)")
-        
-        DispatchQueue.main.async {
-            
-            let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
-                                                  longitude: location.coordinate.longitude,
-                                                  zoom: self.zoomLevel)
-            let marker = GMSMarker()
-            marker.position = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-            marker.appearAnimation = .pop
-            marker.title = "Current location"
-            marker.snippet = ""
-            marker.map = self.mapView
-            
-            if self.mapView.isHidden {
-                self.mapView.isHidden = false
-                self.mapView.camera = camera
-            } else {
-                self.mapView.animate(to: camera)
-            }
-            
-        }
-        
-        
-        
-        
-    }
-    
-    // Handle authorization for the location manager.
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        switch status {
-        case .restricted:
-            print("Location access was restricted.")
-        case .denied:
-            print("User denied access to location.")
-            // Display the map using the default location.
-            
-        case .notDetermined:
-            print("Location status not determined.")
-        case .authorizedAlways: fallthrough
-        case .authorizedWhenInUse:
-            print("Location status is OK.")
-        }
-    }
-    
-    // Handle location manager errors.
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        locationManager.stopUpdatingLocation()
-        print("Error: \(error)")
-    }
 }
