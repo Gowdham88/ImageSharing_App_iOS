@@ -17,6 +17,9 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
 
         // Do any additional setup after loading the view.
         setNavBar()
+        self.navigationController?.navigationBar.titleTextAttributes =
+            [NSForegroundColorAttributeName: UIColor.black,
+             NSFontAttributeName: UIFont(name: "Avenir-Medium", size: 19)!]
     }
 
     func setNavBar() {
