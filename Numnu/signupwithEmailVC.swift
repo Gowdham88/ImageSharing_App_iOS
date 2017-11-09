@@ -9,6 +9,8 @@
 import UIKit
 import FirebaseAuth
 import Firebase
+import FBSDKCoreKit
+import FBSDKLoginKit
 import PKHUD
 
 class signupwithEmailVC: UIViewController, UITextFieldDelegate {
@@ -20,6 +22,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     var userprofileimage : String = ""
 
     
+    @IBOutlet weak var orLbl: UILabel!
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
         //    @IBOutlet var labelcredentials: UILabel!
@@ -194,6 +197,42 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
 //        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
+    @IBAction func fbSignup(_ sender: Any) {
+        let fbLoginmanager : FBSDKLoginManager = FBSDKLoginManager()
+        fbLoginManager.logIn(withReadPermissions: ["public_profile", "email"], from: self) { (result, error) in
+            if let error = error {
+                print("Failed to login: \(error.localizedDescription)")
+                return
+            }
+            
+            
+            guard let accessToken = FBSDKAccessToken.current() else {
+                print("Failed to get access token")
+                return
+            }
+            
+            
+            let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
+            
+            // Perform login by calling Firebase APIs
+            Auth.auth().signIn(with: credential, completion: { (user, error) in
+                if let error = error {
+                    print("Login error: \(error.localizedDescription)")
+                    let alertController = UIAlertController(title: "Login Error", message: error.localizedDescription, preferredStyle: .alert)
+                    let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                    alertController.addAction(okayAction)
+                    self.present(alertController, animated: true, completion: nil)
+                    
+                    return
+                }
+                
+                //                 Present the main view
+                self.openStoryBoard(name: Constants.Main, id: Constants.TabStoryId)
+            })
+            
+        }
+
+    }
 }
 
 extension UITextField {
@@ -211,3 +250,4 @@ extension UITextField {
         self.layer.masksToBounds = true
     }
 }
+
