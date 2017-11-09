@@ -10,6 +10,7 @@ import UIKit
 import FirebaseAuth
 import Firebase
 import PKHUD
+import FBSDKLoginKit
 
 var closed = String()
 

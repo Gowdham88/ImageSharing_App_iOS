@@ -22,6 +22,8 @@ target 'Numnu' do
   pod 'GooglePlacePicker'
   pod 'Alamofire', '~> 4.5'
   pod 'SwiftyJSON'
+  pod 'IQKeyboardManagerSwift'
+
 
 end
 

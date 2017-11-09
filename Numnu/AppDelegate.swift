@@ -15,6 +15,8 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import GoogleMaps
 import GooglePlaces
+import IQKeyboardManagerSwift
+
  
  
 @UIApplicationMain
@@ -33,7 +35,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         /*****Screen opening function******/
         openFirstScreen()
-        
+        IQKeyboardManager.sharedManager().enable = true
+
         return true
   }
     
@@ -90,37 +93,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func showAlertMessage() {
 
-        self.showMessage("Oops! It seems you are not connected to internet.", type: .warning,options: [
-            .animation(.slide),
-            .animationDuration(0.3),
-            .autoHide(true),
-            .autoHideDelay(3.0),
-            .height(44.0),
-            .hideOnTap(true),
-            .position(.bottom),
-            .textAlignment(.center),
-            .textColor(UIColor.white),
-            .textNumberOfLines(1),
-            .textPadding(30.0)
-            ])
+//        self.showMessage("Oops! It seems you are not connected to internet.", type: .warning,options: [
+//            .animation(.slide),
+//            .animationDuration(0.3),
+//            .autoHide(true),
+//            .autoHideDelay(3.0),
+//            .height(44.0),
+//            .hideOnTap(true),
+//            .position(.bottom),
+//            .textAlignment(.center),
+//            .textColor(UIColor.white),
+//            .textNumberOfLines(1),
+//            .textPadding(30.0)
+//            ])
 
     }
 
     func showAlertMessagepop(title : String) {
 
-        self.showMessage(title, type: .warning,options: [
-            .animation(.slide),
-            .animationDuration(0.3),
-            .autoHide(true),
-            .autoHideDelay(3.0),
-            .height(44.0),
-            .hideOnTap(true),
-            .position(.bottom),
-            .textAlignment(.center),
-            .textColor(UIColor.white),
-            .textNumberOfLines(1),
-            .textPadding(30.0)
-            ])
+//        self.showMessage(title, type: .warning,options: [
+//            .animation(.slide),
+//            .animationDuration(0.3),
+//            .autoHide(true),
+//            .autoHideDelay(3.0),
+//            .height(44.0),
+//            .hideOnTap(true),
+//            .position(.bottom),
+//            .textAlignment(.center),
+//            .textColor(UIColor.white),
+//            .textNumberOfLines(1),
+//            .textPadding(30.0)
+//            ])
 
     }
     
