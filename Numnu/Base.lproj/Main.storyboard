@@ -18,7 +18,7 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Explore-->
+        <!--Numnu-->
         <scene sceneID="KSY-vs-z1l">
             <objects>
                 <viewController storyboardIdentifier="ParentViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="OQc-D9-1pk" customClass="ParentViewController" customModule="Numnu" customModuleProvider="target" sceneMemberID="viewController">
@@ -50,6 +50,51 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YR2-5a-JBJ">
+                                <rect key="frame" x="0.0" y="210" width="320" height="309"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Ozr-XL-zKS">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="309"/>
+                                        <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="placecell" rowHeight="50" id="Rzz-6g-qYc" customClass="PlaceTableviewcellTableViewCell" customModule="Numnu" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="320" height="50"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Rzz-6g-qYc" id="eMp-x8-6b9">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="jjhjh" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E3R-1h-uZT">
+                                                            <rect key="frame" x="10" y="5" width="300" height="40"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="placename" destination="E3R-1h-uZT" id="XYQ-4i-oA8"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
+                                    </tableView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="powered by Google" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WDQ-ZL-H75">
+                                        <rect key="frame" x="0.0" y="265" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.60000002384185791" green="0.40000000596046448" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Ozr-XL-zKS" secondAttribute="bottom" id="Ly1-Xd-vhx"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ozr-XL-zKS" secondAttribute="trailing" id="NpG-60-ybx"/>
+                                    <constraint firstItem="Ozr-XL-zKS" firstAttribute="leading" secondItem="YR2-5a-JBJ" secondAttribute="leading" id="dmj-hw-e1A"/>
+                                    <constraint firstItem="Ozr-XL-zKS" firstAttribute="top" secondItem="YR2-5a-JBJ" secondAttribute="top" id="u7f-oM-hAk"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ilc-xn-VB5">
                                 <rect key="frame" x="0.0" y="104" width="320" height="106"/>
                                 <subviews>
@@ -111,22 +156,26 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="lyo-UJ-qpi" secondAttribute="trailing" id="22b-Lh-TG4"/>
+                            <constraint firstItem="YR2-5a-JBJ" firstAttribute="top" secondItem="ilc-xn-VB5" secondAttribute="bottom" id="2gV-n0-B51"/>
                             <constraint firstItem="lyo-UJ-qpi" firstAttribute="leading" secondItem="LzB-eL-Xhu" secondAttribute="leading" id="98e-Sw-mCg"/>
                             <constraint firstAttribute="trailing" secondItem="sfO-qW-Atc" secondAttribute="trailing" id="9QT-h2-nSg"/>
                             <constraint firstItem="URa-Ng-1u2" firstAttribute="leading" secondItem="LzB-eL-Xhu" secondAttribute="leading" id="BSV-z7-r2D"/>
                             <constraint firstAttribute="trailing" secondItem="URa-Ng-1u2" secondAttribute="trailing" id="Lts-yh-6zo"/>
+                            <constraint firstItem="S5t-uM-QBn" firstAttribute="top" secondItem="YR2-5a-JBJ" secondAttribute="bottom" id="O3f-19-EES"/>
                             <constraint firstAttribute="trailing" secondItem="ilc-xn-VB5" secondAttribute="trailing" id="R4D-zo-K9U"/>
                             <constraint firstItem="ilc-xn-VB5" firstAttribute="leading" secondItem="LzB-eL-Xhu" secondAttribute="leading" id="VZn-zs-dO2"/>
                             <constraint firstItem="ilc-xn-VB5" firstAttribute="top" secondItem="LjE-up-1oV" secondAttribute="bottom" id="d07-ho-EwC"/>
+                            <constraint firstAttribute="trailing" secondItem="YR2-5a-JBJ" secondAttribute="trailing" id="dgO-rQ-Gtu"/>
                             <constraint firstItem="S5t-uM-QBn" firstAttribute="top" secondItem="sfO-qW-Atc" secondAttribute="bottom" id="dhI-ne-Dxh"/>
                             <constraint firstItem="URa-Ng-1u2" firstAttribute="top" secondItem="ilc-xn-VB5" secondAttribute="bottom" id="fLV-Ok-Ota"/>
                             <constraint firstItem="lyo-UJ-qpi" firstAttribute="top" secondItem="ilc-xn-VB5" secondAttribute="bottom" id="fxA-T3-9BY"/>
                             <constraint firstItem="sfO-qW-Atc" firstAttribute="leading" secondItem="LzB-eL-Xhu" secondAttribute="leading" id="gNm-ZK-clm"/>
                             <constraint firstItem="S5t-uM-QBn" firstAttribute="top" secondItem="URa-Ng-1u2" secondAttribute="bottom" id="mAF-Dw-dui"/>
                             <constraint firstItem="sfO-qW-Atc" firstAttribute="top" secondItem="ilc-xn-VB5" secondAttribute="bottom" id="nCr-66-OhF"/>
+                            <constraint firstItem="YR2-5a-JBJ" firstAttribute="leading" secondItem="LzB-eL-Xhu" secondAttribute="leading" id="rgc-hW-yPZ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Explore" id="VQ0-pp-ENm">
+                    <navigationItem key="navigationItem" title="Numnu" id="VQ0-pp-ENm">
                         <barButtonItem key="leftBarButtonItem" title="Item" id="h76-Y3-0Hg"/>
                     </navigationItem>
                     <connections>
@@ -136,6 +185,8 @@
                         <outlet property="containerView" destination="sfO-qW-Atc" id="MVf-uM-kgs"/>
                         <outlet property="editsearchbyItem" destination="pKU-lp-6b3" id="zf5-tE-o1x"/>
                         <outlet property="editsearchbyLocation" destination="GjQ-bI-QVw" id="EFy-pa-KLk"/>
+                        <outlet property="filtertable" destination="Ozr-XL-zKS" id="xNd-06-StL"/>
+                        <outlet property="filtertableView" destination="YR2-5a-JBJ" id="IJh-mC-LcL"/>
                         <outlet property="navigationItemList" destination="VQ0-pp-ENm" id="UWO-um-4dz"/>
                         <outlet property="tabScrollView" destination="sfO-qW-Atc" id="ifN-R3-Hme"/>
                     </connections>

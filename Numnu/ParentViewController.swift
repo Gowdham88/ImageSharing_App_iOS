@@ -9,6 +9,8 @@
 import UIKit
 import XLPagerTabStrip
 import GooglePlaces
+import SwiftyJSON
+import Alamofire
 
 class ParentViewController: ButtonBarPagerTabStripViewController {
     
@@ -20,16 +22,16 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
 
     @IBOutlet weak var navigationItemList: UINavigationItem!
     
+    @IBOutlet var filtertable: UITableView!
+    @IBOutlet var filtertableView: UIView!
     @IBOutlet weak var buttonTabBarView: ButtonBarView!
     var searchClick : Bool = false
    
     @IBOutlet weak var tabScrollView: UIScrollView!
     
-    var resultsViewController: GMSAutocompleteResultsViewController?
-    var searchController: UISearchController?
-    var resultView: UITableView?
+    /*******************place api*************************/
+    var autocompleteplaceArray = [String]()
     
-    var tableDataSource: GMSAutocompleteTableDataSource?
     
     @IBOutlet weak var collectionContainerView: UIView!
     override func viewDidLoad() {
@@ -62,40 +64,11 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
         hideNavBar()
         addCollectionContainer()
         
-//        resultsViewController = GMSAutocompleteResultsViewController()
-//        resultsViewController?.delegate = self
-//
-//        searchController = UISearchController(searchResultsController: resultsViewController)
-//        searchController?.searchResultsUpdater = resultsViewController
-////
-////        // Put the search bar in the navigation bar.
-////
-////        let subView = UIView(frame: editsearchbyLocation.frame)
-////
-////        subView.addSubview((searchController?.searchBar)!)
-////        view.addSubview(subView)
-////        searchController?.searchBar.sizeToFit()
-////        searchController?.hidesNavigationBarDuringPresentation = false
-////        searchController?.searchBar.sizeToFit()
-//
-//
-//
-//        searchController?.view.frame = self.view.frame;
-//        searchController?.willMove(toParentViewController: self)
-//        self.collectionContainerView.addSubview((searchController?.view)!)
-//        self.addChildViewController(searchController!)
-//        searchController?.didMove(toParentViewController: self)
-//        searchController?.isActive = true
-     
+        /*********FILTER VIEW*********/
+        filtertableView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.height)
+        filtertable.delegate   = self
+        filtertable.dataSource = self
         
-//        tableDataSource = GMSAutocompleteTableDataSource()
-//        tableDataSource?.delegate = self
-//
-//        resultView = UITableView(frame: self.tabScrollView.frame)
-//        resultView?.delegate   = tableDataSource
-//        resultView?.dataSource = tableDataSource
-//        self.view.addSubview(resultView!)
-     
     }
 
     override func didReceiveMemoryWarning() {
@@ -106,8 +79,8 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+    
         
-       
     }
     
     @IBAction func ButtonSearach(_ sender: UIButton) {
@@ -115,12 +88,15 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
         dismissKeyboard()
         setNavBar()
         
+        
     }
     @IBAction func ButtonLocation(_ sender: UIButton) {
         
-        let autocompleteController = GMSAutocompleteViewController()
-        autocompleteController.delegate = self
-        present(autocompleteController, animated: true, completion: nil)
+        let top = CGAffineTransform(translationX: 0, y: 0)
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            self.filtertableView.transform = top
+        }, completion: nil)
+       
     }
     // Tab controllers switch func
 
@@ -156,9 +132,7 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
 extension ParentViewController : UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        
-        
-        
+      
     }
     
     
@@ -167,8 +141,43 @@ extension ParentViewController : UITextFieldDelegate {
         dismissKeyboard()
         setNavBar()
         print(textField.text!)
-        tableDataSource?.sourceTextHasChanged(textField.text!)
-        searchController?.searchBar.text = textField.text!
+        if let place = textField.text {
+            
+            getPlaceApi(place_Str: place)
+            
+        }
+        
+        let top = CGAffineTransform(translationX: 0, y: 0)
+        
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            self.filtertableView.transform = top
+        }, completion: nil)
+    
+        return true
+    }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        
+        let top = CGAffineTransform(translationX: 0, y: -self.view.frame.height)
+        
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            self.filtertableView.transform = top
+        }, completion: nil)
+        
+        dismissKeyboard()
+        
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        dismissKeyboard()
+        
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        
         
         return true
     }
@@ -285,70 +294,101 @@ extension ParentViewController: GMSAutocompleteViewControllerDelegate {
     // Turn the network activity indicator on and off again.
     func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        
-        resultView?.reloadData()
+     
     }
     
     func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
-        resultView?.reloadData()
+      
     }
     
 }
 
-// Handle the user's selection.
-extension ParentViewController: GMSAutocompleteResultsViewControllerDelegate {
-    func resultsController(_ resultsController: GMSAutocompleteResultsViewController,
-                           didAutocompleteWith place: GMSPlace) {
-        searchController?.isActive = false
-        // Do something with the selected place.
-        print("Place name: \(place.name)")
-        print("Place address: \(place.formattedAddress)")
-        print("Place attributions: \(place.attributions)")
+extension ParentViewController : UITableViewDataSource,UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return autocompleteplaceArray.count
     }
     
-    func resultsController(_ resultsController: GMSAutocompleteResultsViewController,
-                           didFailAutocompleteWithError error: Error){
-        // TODO: handle the error.
-        print("Error: ", error.localizedDescription)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "placecell", for: indexPath) as! PlaceTableviewcellTableViewCell
+        
+        cell.placename.text = autocompleteplaceArray[indexPath.row]
+        
+        return cell
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        editsearchbyLocation.text = autocompleteplaceArray[indexPath.row]
+        editsearchbyItem.text     = autocompleteplaceArray[indexPath.row]
+        
+        let top = CGAffineTransform(translationX: 0, y: -self.filtertableView.frame.height)
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            self.filtertableView.transform = top
+        }, completion: nil)
+   
+    }
+    
+    func getPlaceApi(place_Str:String) {
+        
+        autocompleteplaceArray.removeAll()
+        
+        let parameters: Parameters = ["input": place_Str ,"types" : "geocode" , "key" : "AIzaSyDmfYE1gIA6UfjrmOUkflK9kw0nLZf0nYw"]
+        
+        Alamofire.request(Constants.PlaceApiUrl, parameters: parameters).validate().responseJSON { response in
+            
+            print(response.request)
+            
+            switch response.result {
+            case .success:
+                if let value = response.result.value {
+                    let json = JSON(value)
+                    if let status = json["status"].string {
+                        print(status)
+                        if let place_dic = json["predictions"].array {
+                            
+                            for item in place_dic {
+                                
+                                let placeName = item["description"].string ?? "empty"
+                                self.autocompleteplaceArray.append(placeName)
+                                
+                            }
+                            
+                            DispatchQueue.main.async {
+                                
+                                self.filtertable.reloadData()
+                                
+                            }
+                            
+                        }
+
+                    }
+                    
+                }
+                
+            case .failure(let error):
+                print(error)
+
+                DispatchQueue.main.async {
+                    
+                    self.filtertable.reloadData()
+                    
+                }
+                
+            }
+         
+        }
+      
     }
     
     
 }
 
-extension ParentViewController: GMSAutocompleteTableDataSourceDelegate {
-    func tableDataSource(_ tableDataSource: GMSAutocompleteTableDataSource, didAutocompleteWith place: GMSPlace) {
-        
-        // Do something with the selected place.
-        print("Place name: \(place.name)")
-        print("Place address: \(place.formattedAddress)")
-        print("Place attributions: \(place.attributions)")
-    }
-    
-  
-    
-    func tableDataSource(_ tableDataSource: GMSAutocompleteTableDataSource, didFailAutocompleteWithError error: Error) {
-        // TODO: Handle the error.
-        print("Error: \(error.localizedDescription)")
-    }
-    
-    func tableDataSource(_ tableDataSource: GMSAutocompleteTableDataSource, didSelect prediction: GMSAutocompletePrediction) -> Bool {
-        return true
-    }
-    
-    func didUpdateAutocompletePredictionsForTableDataSource(tableDataSource: GMSAutocompleteTableDataSource) {
-        // Turn the network activity indicator off.
-        
-        // Reload table data.
-        resultView?.reloadData()
-    }
-    
-    func didRequestAutocompletePredictionsForTableDataSource(tableDataSource: GMSAutocompleteTableDataSource) {
-        // Turn the network activity indicator on.
-        
-        // Reload table data.
-        resultView?.reloadData()
-    }
 
-}
+
+
 

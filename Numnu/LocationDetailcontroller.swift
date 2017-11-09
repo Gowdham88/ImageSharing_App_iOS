@@ -89,16 +89,7 @@ class LocationDetailcontroller: ButtonBarPagerTabStripViewController {
         /****************event label tap function************************/
         
         tapRegistration()
-        
-        /******************checking iphone device****************************/
-        
-        if self.view.frame.height <= 568 {
-            
-            mainContainerView.constant       = 850
-            mainContainerViewBottom.constant = 0
-            
-        }
-        
+       
         setMap()
         
     }

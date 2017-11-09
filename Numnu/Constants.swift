@@ -13,7 +13,6 @@ class Constants {
     
     static let POST = "PostList";
     
-    
     // Storyboards name
     
     static let Tab   = "Tab"
@@ -36,6 +35,7 @@ class Constants {
     static let BusinessDetailId = "businessDetailId"
     static let BusinessCompleteId = "businessCompleteid"
     static let ItemDetailId       = "itemCompleteid"
+    static let ItemCompleteId     = "itemDetailId"
     static let LocationDetailId   = "locationDetailid"
     
     // Event story id
@@ -97,4 +97,8 @@ class Constants {
     // Map Api key
     
     static let MapApiKey      = "AIzaSyAuKzAZP8SLYJf_jfVUsxdcjChIU00FmDQ"
+    
+    // Web Api key
+    
+    static let PlaceApiUrl = "https://maps.googleapis.com/maps/api/place/autocomplete/json"
 }

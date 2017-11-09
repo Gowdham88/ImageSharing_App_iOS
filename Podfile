@@ -20,6 +20,8 @@ target 'Numnu' do
   pod 'GoogleMaps'
   pod 'GooglePlaces'
   pod 'GooglePlacePicker'
-  
+  pod 'Alamofire', '~> 4.5'
+  pod 'SwiftyJSON'
+
 end
 

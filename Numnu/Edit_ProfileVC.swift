@@ -11,7 +11,7 @@ var dropdownArray = [String] ()
 var dropdownString = String ()
 var tagArray = [String] ()
 
-class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource{
+class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource {
 
     @IBOutlet var dropdownTableView: UITableView!
     

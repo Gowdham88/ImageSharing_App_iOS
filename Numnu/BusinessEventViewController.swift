@@ -16,6 +16,8 @@ class BusinessEventViewController: UIViewController,IndicatorInfoProvider {
     @IBOutlet weak var businessEventTableView: UITableView!
     @IBOutlet weak var businessCategoryTableView : UITableView!
     
+    var showentity : Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,13 +39,14 @@ class BusinessEventViewController: UIViewController,IndicatorInfoProvider {
         return IndicatorInfo(title: Constants.EventTab1)
     }
     
-    func openStoryBoard () {
+    func openStoryBoard (name : String,id : String) {
         
-        let storyboard      = UIStoryboard(name: Constants.BusinessDetail, bundle: nil)
-        let vc              = storyboard.instantiateViewController(withIdentifier: Constants.BusinessDetailId) 
+        let storyboard      = UIStoryboard(name: name, bundle: nil)
+        let vc              = storyboard.instantiateViewController(withIdentifier: id)
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
+    
     
 
 }
@@ -97,7 +100,17 @@ extension BusinessEventViewController : UITableViewDelegate,UITableViewDataSourc
         
          if tableView == businessEventTableView {
             
-            openStoryBoard()
+            if showentity {
+                
+                openStoryBoard(name: Constants.BusinessDetail, id: Constants.BusinessDetailId)
+                
+            } else {
+                
+                openStoryBoard(name: Constants.BusinessDetailTab, id: Constants.BusinessCompleteId)
+                
+            }
+            
+            
             
          } else {
             

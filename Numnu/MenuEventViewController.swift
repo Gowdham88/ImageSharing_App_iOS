@@ -13,9 +13,9 @@ class MenuEventViewController: UIViewController,IndicatorInfoProvider {
     
     var tagarray = ["Festival","Wine","Party","Rum","Barbaque","Pasta","Sandwich","Burger"]
     
-    
     @IBOutlet weak var menuEventTableview: UITableView!
     @IBOutlet weak var menuCategoryTableview: UITableView!
+    var showentity : Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,7 +94,16 @@ extension MenuEventViewController : UITableViewDelegate,UITableViewDataSource {
             
             menuEventTableview.isHidden    = true
             menuCategoryTableview.isHidden = false
-            openStoryBoard()
+            if showentity {
+                
+                openStoryBoard(name: Constants.ItemDetail, id: Constants.ItemCompleteId)
+                
+            } else {
+                
+                openStoryBoard(name: Constants.ItemDetail, id: Constants.ItemDetailId)
+                
+            }
+            
             
         } else {
             
@@ -105,10 +114,10 @@ extension MenuEventViewController : UITableViewDelegate,UITableViewDataSource {
         
     }
     
-    func  openStoryBoard() {
+    func openStoryBoard (name : String,id : String) {
         
-        let storyboard = UIStoryboard(name: Constants.ItemDetail, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId)
+        let storyboard      = UIStoryboard(name: name, bundle: nil)
+        let vc              = storyboard.instantiateViewController(withIdentifier: id)
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
