@@ -73,18 +73,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  /********************opening onboard screen***********************/
   
     func openFirstScreen() {
-        
+
         let when = DispatchTime.now() + 0
         DispatchQueue.main.asyncAfter(deadline: when) {
-            
+
             self.window    = UIWindow(frame: UIScreen.main.bounds)
             let storyboard = UIStoryboard(name: Constants.Auth, bundle: nil)
             let initialViewController = storyboard.instantiateViewController(withIdentifier: Constants.LoginStoryId)
             self.window?.rootViewController = initialViewController
             self.window?.makeKeyAndVisible()
-            
+
         }
-       
+
     }
 
  }

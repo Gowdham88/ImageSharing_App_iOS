@@ -159,6 +159,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         
         if show == false {
             
+
 //            addCollectionContainer()
             
         }
