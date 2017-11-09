@@ -22,7 +22,8 @@ class signInVC: UIViewController, UITextFieldDelegate {
     var userprofileimage : String = ""
 
     
-    @IBOutlet var orLbl: UILabel!
+    
+    @IBOutlet weak var lbl: UILabel!
     @IBOutlet weak var emailAddressTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
     
@@ -194,11 +195,47 @@ class signInVC: UIViewController, UITextFieldDelegate {
         
         // Show the navigation bar on other view controllers
 //        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+
     }
     
-   
     @IBAction func fbLogin(_ sender: Any) {
-        //facebook SignIn
-    }
+        let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
+        fbLoginManager.logIn(withReadPermissions: ["public_profile", "email"], from: self) { (result, error) in
+            if let error = error {
+                print("Failed to login: \(error.localizedDescription)")
+                return
+            }
+            
+            
+            guard let accessToken = FBSDKAccessToken.current() else {
+                print("Failed to get access token")
+                return
+            }
+            
+            
+            let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
+            
+            // Perform login by calling Firebase APIs
+            Auth.auth().signIn(with: credential, completion: { (user, error) in
+                if let error = error {
+                    print("Login error: \(error.localizedDescription)")
+                    let alertController = UIAlertController(title: "Login Error", message: error.localizedDescription, preferredStyle: .alert)
+                    let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                    alertController.addAction(okayAction)
+                    self.present(alertController, animated: true, completion: nil)
+                    
+                    return
+                }
+                
+                //                 Present the main view
+                self.openStoryBoard(name: Constants.Main, id: Constants.TabStoryId)
+            })
+            
+        }
+
     
-}
+    }//fb login
+    
+    
+    
+}//class
