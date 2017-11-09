@@ -10,10 +10,13 @@ import UIKit
 var dropdownArray = [String] ()
 var dropdownString = String ()
 var tagArray = [String] ()
+//var selectedIndex = integer_t()
+var selectedIndex = Int()
 
 class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource {
 
     @IBOutlet var dropdownTableView: UITableView!
+  
     
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var editButton: UIButton!
@@ -23,7 +26,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     @IBOutlet var cityTextfield: UITextField!
     @IBOutlet var genderTextfield: UITextField!
-    @IBOutlet var usernameTextfield: UITextField!
+//    @IBOutlet var usernameTextfield: UITextField!
     
     @IBOutlet var birthTextfield: UITextField!
     
@@ -43,7 +46,15 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         super.viewDidLoad()
         imagePicker.delegate = self
         profileImage.isUserInteractionEnabled = true
+        
+        nameTextfield.delegate = self
+        emailaddress.delegate = self
+        genderTextfield.delegate = self
+        cityTextfield.delegate = self
+        birthTextfield.delegate = self
+        foodTextfield.delegate = self
 
+        
 //        nameTextfield.useUnderline()
 //        emailaddress.useUnderline()
 //        usernameTextfield.useUnderline()
@@ -52,9 +63,71 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
 //        birthTextfield.useUnderline()
 //        foodTextfield.useUnderline()
         
-        foodTextfield.addTarget(self, action: #selector(textFieldActive), for: UIControlEvents.touchDown)
+   // bottom border for textfields //
+        let border = CALayer()
+        let width = CGFloat(1.0)
+        border.borderColor = UIColor(red: 232/255.0, green: 233/255.0, blue: 247/255.0, alpha: 1.0).cgColor
+        border.frame = CGRect(x: 0, y: nameTextfield.frame.size.height - width, width:  nameTextfield.frame.size.width, height: nameTextfield.frame.size.height)
+        border.borderWidth = width
+        nameTextfield.layer.addSublayer(border)
+        nameTextfield.layer.masksToBounds = true
 
-        dropdownArray = ["chicken","Pizza","Burger","Sandwich","Mutton","Prawn","Gobi chilli","Panneer"]
+        
+        let border2 = CALayer()
+        let width2 = CGFloat(1.0)
+        border2.borderColor = UIColor(red: 232/255.0, green: 233/255.0, blue: 247/255.0, alpha: 1.0).cgColor
+        border2.frame = CGRect(x: 0, y: emailaddress.frame.size.height - width2, width:  emailaddress.frame.size.width, height: emailaddress.frame.size.height)
+        border2.borderWidth = width2
+        emailaddress.layer.addSublayer(border2)
+        emailaddress.layer.masksToBounds = true
+        
+//        let border3 = CALayer()
+//        let width3 = CGFloat(1.0)
+//        border3.borderColor = UIColor(red: 232/255.0, green: 233/255.0, blue: 247/255.0, alpha: 1.0).cgColor
+//        border3.frame = CGRect(x: 0, y: usernameTextfield.frame.size.height - width3, width:  usernameTextfield.frame.size.width, height: usernameTextfield.frame.size.height)
+//        border3.borderWidth = width3
+//        usernameTextfield.layer.addSublayer(border3)
+//        usernameTextfield.layer.masksToBounds = true
+//
+        
+        let border4 = CALayer()
+        let width4 = CGFloat(1.0)
+        border4.borderColor = UIColor(red: 232/255.0, green: 233/255.0, blue: 247/255.0, alpha: 1.0).cgColor
+        border4.frame = CGRect(x: 0, y: genderTextfield.frame.size.height - width4, width:  genderTextfield.frame.size.width, height: genderTextfield.frame.size.height)
+        border4.borderWidth = width4
+        genderTextfield.layer.addSublayer(border4)
+        genderTextfield.layer.masksToBounds = true
+        
+        let border5 = CALayer()
+        let width5 = CGFloat(1.0)
+        border5.borderColor = UIColor(red: 232/255.0, green: 233/255.0, blue: 247/255.0, alpha: 1.0).cgColor
+        border5.frame = CGRect(x: 0, y: cityTextfield.frame.size.height - width5, width:  cityTextfield.frame.size.width, height: cityTextfield.frame.size.height)
+        border5.borderWidth = width5
+        cityTextfield.layer.addSublayer(border5)
+        cityTextfield.layer.masksToBounds = true
+        
+        let border6 = CALayer()
+        let width6 = CGFloat(1.0)
+        border6.borderColor = UIColor(red: 232/255.0, green: 233/255.0, blue: 247/255.0, alpha: 1.0).cgColor
+        border6.frame = CGRect(x: 0, y: foodTextfield.frame.size.height - width6, width:  foodTextfield.frame.size.width, height: foodTextfield.frame.size.height)
+        border6.borderWidth = width6
+        foodTextfield.layer.addSublayer(border6)
+        foodTextfield.layer.masksToBounds = true
+        
+        
+        let border7 = CALayer()
+        let width7 = CGFloat(1.0)
+        border7.borderColor = UIColor(red: 232/255.0, green: 233/255.0, blue: 247/255.0, alpha: 1.0).cgColor
+        border7.frame = CGRect(x: 0, y: birthTextfield.frame.size.height - width7, width:  birthTextfield.frame.size.width, height: birthTextfield.frame.size.height)
+        border7.borderWidth = width7
+        birthTextfield.layer.addSublayer(border7)
+        birthTextfield.layer.masksToBounds = true
+        
+        
+        
+        foodTextfield.addTarget(self, action: #selector(textFieldActive), for: UIControlEvents.allTouchEvents)
+
+        dropdownArray = ["Chicken","Pizza","Burger","Sandwich","Mutton","Prawn","Gobi chilli","Panneer"]
         
         setNavBar()
         
@@ -62,7 +135,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         
         myscrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height+100)
         
-        saveButton.layer.cornerRadius = 30.0
+        saveButton.layer.cornerRadius = 20.0
         saveButton.clipsToBounds = true
         
         profileImage.layer.cornerRadius = self.profileImage.frame.size.height/2
@@ -87,7 +160,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     func textFieldActive() {
         
-        dropdownTableView.isHidden = false
+//        dropdownTableView.isHidden = false
     }
     // Validation func //
     
@@ -138,11 +211,49 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
 //        }
     }
     
+    
+    /// TextField delegates ///
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
+//        self.view.endEditing(true)
+
         textField.resignFirstResponder()
-        
         return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == foodTextfield {
+            dropdownTableView.isHidden = false
+
+        }else{
+            dropdownTableView.isHidden = true
+        }
+        
+        if textField == genderTextfield {
+            let Alert = UIAlertController(title: "Select Gender", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+            
+            let MaleAction = UIAlertAction(title: "Male", style: UIAlertActionStyle.default) { _ in
+                self.genderTextfield.text = "Male"
+                self.genderTextfield.resignFirstResponder()
+            }
+            let FemaleAction = UIAlertAction(title: "Female", style: UIAlertActionStyle.default) { _ in
+                self.genderTextfield.text = "Female"
+                self.genderTextfield.resignFirstResponder()
+            }
+            
+            Alert.addAction(MaleAction)
+            Alert.addAction(FemaleAction)
+
+            present(Alert, animated: true, completion: nil)
+        }else{
+            
+        }
+       
+    }
+    
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+      
     }
     
     func addCollectionContainer(){
@@ -163,7 +274,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     @IBAction func didTappedSave(_ sender: Any) {
         let Email:NSString = emailaddress.text! as NSString
 
-        if nameTextfield.text == "" || emailaddress.text == "" || usernameTextfield.text == "" || cityTextfield.text == "" || genderTextfield.text == "" || foodTextfield.text == "" || birthTextfield.text == "" {
+        if nameTextfield.text == "" || emailaddress.text == ""  || cityTextfield.text == "" || genderTextfield.text == "" || foodTextfield.text == "" || birthTextfield.text == "" {
             let Alert = UIAlertController(title: "Oops", message: "Fields Cannot be empty", preferredStyle: UIAlertControllerStyle.alert)
             
             let OkAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { _ in
@@ -175,16 +286,22 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         } else {
            
             if isValidEmail(testStr: Email as String) == true {
-              let Alert = UIAlertController(title: "Success", message: "Profile saved", preferredStyle: UIAlertControllerStyle.alert)
+//              let Alert = UIAlertController(title: "Success", message: "Profile saved", preferredStyle: UIAlertControllerStyle.alert)
+//
+//                let OkAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { _ in
+//
+//                    self.dismiss(animated: true, completion: nil)
+//                }
+//
+//                Alert.addAction(OkAction)
+//                present(Alert, animated: true, completion: nil)
                 
-                let OkAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { _ in
-                    
-                    self.dismiss(animated: true, completion: nil)
-                }
                 
-                Alert.addAction(OkAction)
-                present(Alert, animated: true, completion: nil)
-                 
+                let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
+                let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController")
+                self.navigationController!.pushViewController(vc, animated: true)
+                
+               
  
 //                let storyboard        = UIStoryboard(name: Constants.Auth, bundle: nil)
 //                let controller        = storyboard.instantiateViewController(withIdentifier: "SettingsVC") as!SettingsViewController
@@ -208,7 +325,45 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     @IBAction func editPicture(_ sender: Any) {
         imagePicker.allowsEditing = true
-        imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        
+        let Alert = UIAlertController(title: "Select Source Type", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        
+        let CameraAction = UIAlertAction(title: "Camera", style: UIAlertActionStyle.default) { ACTION in
+            
+//            self.imagePicker.sourceType = .camera
+//            self.present(self.imagePicker, animated: true, completion: nil)
+            
+            if !UIImagePickerController.isSourceTypeAvailable(.camera){
+                
+                let alertController = UIAlertController.init(title: nil, message: "Device has no camera.", preferredStyle: .alert)
+                
+                let okAction = UIAlertAction.init(title: "Alright", style: .default, handler: {(alert: UIAlertAction!) in
+                })
+                
+                alertController.addAction(okAction)
+                self.present(alertController, animated: true, completion: nil)
+                
+            }
+            else{
+                self.imagePicker.sourceType = .camera
+                            self.present(self.imagePicker, animated: true, completion: nil)
+                
+            }
+            
+        }
+        
+        let GalleryAction = UIAlertAction(title: "Gallery", style: UIAlertActionStyle.default) { ACTION in
+       
+            self.imagePicker.sourceType = .photoLibrary
+            self.present(self.imagePicker, animated: true, completion: nil)
+        }
+        
+        Alert.addAction(CameraAction)
+        Alert.addAction(GalleryAction)
+        present(Alert, animated: true, completion: nil)
+        
+        
+//        imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
         
         
         present(imagePicker, animated: true, completion: nil)
@@ -228,9 +383,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     
     func setNavBar() {
-        
-       
-        
+                
         navigationItemList.title = "Profile"
         
         let button: UIButton = UIButton(type: UIButtonType.custom)
@@ -269,6 +422,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cvcell", for: indexPath as IndexPath) as! FoodPreferenceCollectionViewCell
         cell.foodtagLabel.text = tagArray[indexPath.row]
+        cell.removetagButton.tag = indexPath.row
+        cell.removetagButton.addTarget(self, action: #selector(buttonClicked(sender:)), for: .touchUpInside)
     
         return cell
     }
@@ -277,6 +432,21 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         return true
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//    let indexPath = collectionView.indexPathsForSelectedItems
+//print("selected item index is",indexPath)
+        let indexPath = collectionView.indexPathsForSelectedItems?.first
+        let cell = collectionView.cellForItem(at: indexPath!) as? FoodPreferenceCollectionViewCell
+  //      selectedIndex = (indexPath?.item)!
+ //       print("selected index::::",selectedIndex)
+    }
+    func buttonClicked(sender: Any){
+        let tag = (sender as AnyObject).tag
+        tagArray.remove(at: tag!)
+        collectionView.reloadData()
+        print("selceted tag is:::::",tag!)
+
+    }
     // Food Textfield action ///
     
     @IBAction func didTappedFoodtext(_ sender: Any) {
@@ -323,6 +493,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         collectionView.reloadData()
         
         dropdownTableView.isHidden = true
-        
+        foodTextfield.resignFirstResponder()
+
     }
+  
 }

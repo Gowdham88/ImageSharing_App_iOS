@@ -20,6 +20,7 @@
 		601D46791F8F3B1C00832BDD /* UserList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601D46781F8F3B1C00832BDD /* UserList.swift */; };
 		6043865C1FB052860049F971 /* FoodPreferenceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6043865B1FB052860049F971 /* FoodPreferenceCollectionViewCell.swift */; };
 		6043865E1FB09E970049F971 /* Profile_PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6043865D1FB09E970049F971 /* Profile_PostViewController.swift */; };
+		604386601FB0A9480049F971 /* Profile_postTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6043865F1FB0A9480049F971 /* Profile_postTableViewCell.swift */; };
 		60B4EA401FAAEA7600C1A6C9 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B4EA3F1FAAEA7600C1A6C9 /* SettingsVC.swift */; };
 		60B4EA421FAAFB9300C1A6C9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B4EA411FAAFB9300C1A6C9 /* SettingsViewController.swift */; };
 		60B4EA441FAB190300C1A6C9 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B4EA431FAB190300C1A6C9 /* SettingsTableViewCell.swift */; };
@@ -138,6 +139,7 @@
 		601D467A1F8FAF4B00832BDD /* Numnu.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Numnu.entitlements; sourceTree = "<group>"; };
 		6043865B1FB052860049F971 /* FoodPreferenceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodPreferenceCollectionViewCell.swift; sourceTree = "<group>"; };
 		6043865D1FB09E970049F971 /* Profile_PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile_PostViewController.swift; sourceTree = "<group>"; };
+		6043865F1FB0A9480049F971 /* Profile_postTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile_postTableViewCell.swift; sourceTree = "<group>"; };
 		60B4EA3F1FAAEA7600C1A6C9 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		60B4EA411FAAFB9300C1A6C9 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		60B4EA431FAB190300C1A6C9 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
@@ -459,6 +461,7 @@
 		B4BD9EEA1F6FA4E500C43182 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6043865F1FB0A9480049F971 /* Profile_postTableViewCell.swift */,
 				6043865B1FB052860049F971 /* FoodPreferenceCollectionViewCell.swift */,
 				60B4EA431FAB190300C1A6C9 /* SettingsTableViewCell.swift */,
 				B406DE291FA762510092E2B4 /* BusinessTableViewCell */,
@@ -853,6 +856,7 @@
 				B41530941F8BBCD9000FB369 /* EventTabController.swift in Sources */,
 				B44E1D4E1FA1B249001F754E /* MenuEventViewController.swift in Sources */,
 				B44E1D531FA1BECE001F754E /* ReviewEventViewController.swift in Sources */,
+				604386601FB0A9480049F971 /* Profile_postTableViewCell.swift in Sources */,
 				B42F2A261FA9EA96002419AB /* LocationDetailcontroller.swift in Sources */,
 				B4C515881FA085BB00348E2A /* ListTabController.swift in Sources */,
 				601D46791F8F3B1C00832BDD /* UserList.swift in Sources */,

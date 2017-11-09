@@ -19,7 +19,7 @@ class NotificationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         self.navigationController?.navigationBar.titleTextAttributes =
             [NSForegroundColorAttributeName: UIColor.black,
-             NSFontAttributeName: UIFont(name: "Avenir-Medium", size: 21)!]
+             NSFontAttributeName: UIFont(name: "Avenir-Medium", size: 19)!]
     }
 
     override func didReceiveMemoryWarning() {

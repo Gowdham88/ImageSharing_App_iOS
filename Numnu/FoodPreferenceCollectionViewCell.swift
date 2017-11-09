@@ -11,6 +11,7 @@ import UIKit
 class FoodPreferenceCollectionViewCell: UICollectionViewCell {
     @IBOutlet var foodtagLabel: UILabel!
 
+    @IBOutlet var removetagButton: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
