@@ -15,8 +15,14 @@ var selectedIndex = Int()
 
 class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource {
 
+    @IBOutlet var genderdropButton: UIButton!
     @IBOutlet var dropdownTableView: UITableView!
   
+    @IBOutlet var datePicker: UIDatePicker!
+    @IBOutlet var yearLabel: UILabel!
+    @IBOutlet var dateLabel: UILabel!
+    @IBOutlet var monthLabel: UILabel!
+    @IBOutlet var bottomConstraint: NSLayoutConstraint!
     
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var editButton: UIButton!
@@ -46,6 +52,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         super.viewDidLoad()
         imagePicker.delegate = self
         profileImage.isUserInteractionEnabled = true
+        datePicker.isHidden = true
+
         
         nameTextfield.delegate = self
         emailaddress.delegate = self
@@ -54,14 +62,12 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         birthTextfield.delegate = self
         foodTextfield.delegate = self
 
+        NotificationCenter.default.addObserver(self, selector: #selector(Edit_ProfileVC.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
-//        nameTextfield.useUnderline()
-//        emailaddress.useUnderline()
-//        usernameTextfield.useUnderline()
-//        genderTextfield.useUnderline()
-//        cityTextfield.useUnderline()
-//        birthTextfield.useUnderline()
-//        foodTextfield.useUnderline()
+        NotificationCenter.default.addObserver(self, selector: #selector(Edit_ProfileVC.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        
+        genderdropButton.addTarget(self, action: #selector(genderClicked), for: UIControlEvents.allTouchEvents)
         
    // bottom border for textfields //
         let border = CALayer()
@@ -137,6 +143,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         
         saveButton.layer.cornerRadius = 20.0
         saveButton.clipsToBounds = true
+        view.superview?.addSubview(saveButton)
         
         profileImage.layer.cornerRadius = self.profileImage.frame.size.height/2
         profileImage.clipsToBounds = true
@@ -152,10 +159,70 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         
         if show == false {
             
-            addCollectionContainer()
+
+//            addCollectionContainer()
             
         }
         
+    }
+    func genderClicked(){
+        let Alert = UIAlertController(title: "Select Gender", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        
+        let MaleAction = UIAlertAction(title: "Male", style: UIAlertActionStyle.default) { _ in
+            self.genderTextfield.text = "Male"
+            self.genderTextfield.resignFirstResponder()
+        }
+        let FemaleAction = UIAlertAction(title: "Female", style: UIAlertActionStyle.default) { _ in
+            self.genderTextfield.text = "Female"
+            self.genderTextfield.resignFirstResponder()
+        }
+        
+        Alert.addAction(MaleAction)
+        Alert.addAction(FemaleAction)
+        
+        present(Alert, animated: true, completion: nil)
+
+    }
+    
+    func keyboardWillShow(notification:NSNotification) {
+        adjustingHeight(show: true, notification: notification)
+
+    }
+    
+    func keyboardWillHide(notification:NSNotification) {
+        adjustingHeight(show: false, notification: notification)
+
+    }
+    func adjustingHeight(show:Bool, notification:NSNotification) {
+        // 1
+//        var userInfo = notification.userInfo!
+//        // 2
+//        let keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+//        // 3
+//        let animationDurarion = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval
+//        // 4
+//        let changeInHeight = (CGRectGetHeight(keyboardFrame) + 40) * (show ? 1 : -1)
+//        //5
+//        UIView.animate(withDuration: animationDurarion, animations: { () -> Void in
+//            self.bottomConstraint.constant += changeInHeight
+//        })
+
+//        self.myscrollView.isScrollEnabled = true
+//        var info = notification.userInfo!
+//        let keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
+//        let contentInsets : UIEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize!.height, 0.0)
+//
+//        self.myscrollView.contentInset = contentInsets
+//        self.myscrollView.scrollIndicatorInsets = contentInsets
+//
+//        var aRect : CGRect = self.view.frame
+//        aRect.size.height -= keyboardSize!.height
+//        if let activeField = self.foodTextfield {
+//            if (!aRect.contains(activeField.frame.origin)){
+//                self.myscrollView.scrollRectToVisible(activeField.frame, animated: true)
+//            }
+//        }
+    
     }
     
     func textFieldActive() {
@@ -222,6 +289,22 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+//        if textField == foodTextfield || textField == birthTextfield {
+//            animateViewMoving(up: true, moveValue: 100)
+//        }
+//        if textField == genderTextfield {
+//            genderTextfield.resignFirstResponder()
+//        }
+        
+        
+        if textField == birthTextfield {
+            showDatePicker()
+            birthTextfield.resignFirstResponder()
+            dismissKeyboard()
+            datePicker.isHidden = false
+        }
+        
         if textField == foodTextfield {
             dropdownTableView.isHidden = false
 
@@ -230,15 +313,18 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         }
         
         if textField == genderTextfield {
+        dismissKeyboard()
             let Alert = UIAlertController(title: "Select Gender", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
             
             let MaleAction = UIAlertAction(title: "Male", style: UIAlertActionStyle.default) { _ in
                 self.genderTextfield.text = "Male"
                 self.genderTextfield.resignFirstResponder()
+
             }
             let FemaleAction = UIAlertAction(title: "Female", style: UIAlertActionStyle.default) { _ in
                 self.genderTextfield.text = "Female"
                 self.genderTextfield.resignFirstResponder()
+
             }
             
             Alert.addAction(MaleAction)
@@ -251,9 +337,44 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
        
     }
     
-    
     func textFieldDidEndEditing(_ textField: UITextField) {
-      
+        if textField == foodTextfield || textField == birthTextfield {
+            animateViewMoving(up: false, moveValue: 100)
+        }
+       
+    }
+   
+    func animateViewMoving (up:Bool, moveValue :CGFloat){
+    
+        let movementDuration:TimeInterval = 0.3
+        let movement:CGFloat = ( up ? -moveValue : moveValue)
+        
+        UIView.beginAnimations("animateView", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(movementDuration)
+        
+        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+
+//        self.view.frame = offsetBy(self.view.frame, 0, movement)
+        
+        UIView.commitAnimations()
+    }
+    
+    func showDatePicker(){
+        datePicker.datePickerMode = UIDatePickerMode.date
+        datePicker.addTarget(self, action: #selector(Edit_ProfileVC.datePickerValueChanged), for: UIControlEvents.valueChanged)
+    }
+    func datePickerValueChanged(sender:UIDatePicker) {
+        
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.dateStyle = DateFormatter.Style.medium
+        
+        dateFormatter.timeStyle = DateFormatter.Style.none
+//        let dateValue = dateFormatter.string(from: datePicker.date)
+//        dateLabel.text = dateValue
+        dateLabel.text = dateFormatter.string(from: sender.date)
+        
     }
     
     func addCollectionContainer(){

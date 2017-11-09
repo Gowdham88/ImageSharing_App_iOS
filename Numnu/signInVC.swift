@@ -12,6 +12,7 @@ import Firebase
 import FBSDKLoginKit
 import FBSDKCoreKit
 import PKHUD
+import FBSDKLoginKit
 
 var closed = String()
 
