@@ -380,7 +380,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     func addCollectionContainer(){
         
         let storyboard        = UIStoryboard(name: Constants.Auth, bundle: nil)
-        let controller        = storyboard.instantiateViewController(withIdentifier: "signupvc")
+        let controller        = storyboard.instantiateViewController(withIdentifier: "signupwithEmailVC")
 //        let storyboard        = UIStoryboard(name: Constants.Main, bundle: nil)
 //        let controller        = storyboard.instantiateViewController(withIdentifier: "SettingsVC")
         controller.view.frame = self.view.bounds;
