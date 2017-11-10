@@ -380,7 +380,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         self.view.endEditing(true)
         superVieww.isHidden = true
         datePicker.isHidden = true
- 
     }
   
 
