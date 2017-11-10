@@ -31,9 +31,7 @@ class ForgotpasswordVC: UIViewController {
           Auth.auth().sendPasswordReset(withEmail: email) { error in
             
                 if let error = error {
-                
-                    self.showAlertMessagepop(title: "Password reset failed \(error)")
-                
+    
                 } else {
                 
                  self.showAlertMessagepop(title: "Password reset email sent")
