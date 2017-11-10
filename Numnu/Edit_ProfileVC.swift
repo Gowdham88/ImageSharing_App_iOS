@@ -15,6 +15,7 @@ var selectedIndex = Int()
 
 class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource {
 
+    @IBOutlet var superVieww: UIView!
     @IBOutlet var genderdropButton: UIButton!
     @IBOutlet var dropdownTableView: UITableView!
   
@@ -53,7 +54,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         imagePicker.delegate = self
         profileImage.isUserInteractionEnabled = true
         datePicker.isHidden = true
-
+        superVieww.isHidden = true
+//        superVieww.addSubview(datePicker)
         
         nameTextfield.delegate = self
         emailaddress.delegate = self
@@ -227,7 +229,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     func textFieldActive() {
         
-//        dropdownTableView.isHidden = false
     }
     // Validation func //
     
@@ -261,23 +262,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         self.view.endEditing(true)
-        
-//        if genderTextfield == true {
-//            let Alert = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.actionSheet)
-//
-//            let MaleAction = UIAlertAction(title: "MALE", style: UIAlertActionStyle.default) { _ in
-//
-//            }
-//            let femaleAction = UIAlertAction(title: "FEMALE", style: UIAlertActionStyle.default) { _ in
-//            }
-//            Alert.addAction(MaleAction)
-//            Alert.addAction(femaleAction)
-//
-//            self.present(Alert, animated: true, completion: nil)
-//
-//        }
-    }
     
+    }
     
     /// TextField delegates ///
     
@@ -301,8 +287,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         if textField == birthTextfield {
             showDatePicker()
             birthTextfield.resignFirstResponder()
-            dismissKeyboard()
             datePicker.isHidden = false
+            superVieww.isHidden = false
         }
         
         if textField == foodTextfield {
@@ -313,7 +299,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         }
         
         if textField == genderTextfield {
-        dismissKeyboard()
             let Alert = UIAlertController(title: "Select Gender", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
             
             let MaleAction = UIAlertAction(title: "Male", style: UIAlertActionStyle.default) { _ in
@@ -339,7 +324,13 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == foodTextfield || textField == birthTextfield {
-            animateViewMoving(up: false, moveValue: 100)
+            animateViewMoving(up: false, moveValue: 0)
+        }
+        if textField == birthTextfield {
+            
+            self.datePickerValueChanged(sender: datePicker)
+            datePicker.isHidden = true
+            superVieww.isHidden = true
         }
        
     }
@@ -362,25 +353,66 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     func showDatePicker(){
         datePicker.datePickerMode = UIDatePickerMode.date
+        birthTextfield.tintColor = UIColor.clear
+        datePicker.isHidden = false
+        superVieww.isHidden = false
+        // Creates the toolbar
+        let toolBar = UIToolbar()
+        toolBar.barStyle = .default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = UIColor.blue
+        toolBar.sizeToFit()
+        
+        // Adds the buttons
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(Edit_ProfileVC.doneClick)) //check selector action for barbutton
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+
+        toolBar.setItems([ spaceButton, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+//        birthTextfield.inputView = datePicker
+//        birthTextfield.inputAccessoryView = toolBar
+        self.datePicker.addSubview(toolBar)
+        
         datePicker.addTarget(self, action: #selector(Edit_ProfileVC.datePickerValueChanged), for: UIControlEvents.valueChanged)
     }
+    func doneClick() {
+        birthTextfield.resignFirstResponder()
+        self.view.endEditing(true)
+        superVieww.isHidden = true
+        datePicker.isHidden = true
+ 
+    }
+  
+
     func datePickerValueChanged(sender:UIDatePicker) {
-        
         let dateFormatter = DateFormatter()
         
-        dateFormatter.dateStyle = DateFormatter.Style.medium
+        dateFormatter.dateFormat = "yyyy"
         
-        dateFormatter.timeStyle = DateFormatter.Style.none
-//        let dateValue = dateFormatter.string(from: datePicker.date)
-//        dateLabel.text = dateValue
-        dateLabel.text = dateFormatter.string(from: sender.date)
+        let year: String = dateFormatter.string(from: self.datePicker.date)
         
-    }
+        dateFormatter.dateFormat = "MM"
+        
+        let month: String = dateFormatter.string(from: self.datePicker.date)
+        
+        dateFormatter.dateFormat = "dd"
+        
+        let day: String = dateFormatter.string(from: self.datePicker.date)
+        
+        dateLabel.text = day
+        
+        monthLabel.text = month
+        
+        yearLabel.text = year
+        
+}
     
     func addCollectionContainer(){
         
         let storyboard        = UIStoryboard(name: Constants.Auth, bundle: nil)
         let controller        = storyboard.instantiateViewController(withIdentifier: "signupvc")
+//        let controller        = storyboard.instantiateViewController(withIdentifier: "signupwithEmailVC")
+
 //        let storyboard        = UIStoryboard(name: Constants.Main, bundle: nil)
 //        let controller        = storyboard.instantiateViewController(withIdentifier: "SettingsVC")
         controller.view.frame = self.view.bounds;
@@ -389,7 +421,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         self.addChildViewController(controller)
         controller.didMove(toParentViewController: self)
         
-      
     }
     
     @IBAction func didTappedSave(_ sender: Any) {
@@ -407,26 +438,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         } else {
            
             if isValidEmail(testStr: Email as String) == true {
-//              let Alert = UIAlertController(title: "Success", message: "Profile saved", preferredStyle: UIAlertControllerStyle.alert)
-//
-//                let OkAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { _ in
-//
-//                    self.dismiss(animated: true, completion: nil)
-//                }
-//
-//                Alert.addAction(OkAction)
-//                present(Alert, animated: true, completion: nil)
-                
-                
                 let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
                 let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController")
                 self.navigationController!.pushViewController(vc, animated: true)
-                
-               
- 
-//                let storyboard        = UIStoryboard(name: Constants.Auth, bundle: nil)
-//                let controller        = storyboard.instantiateViewController(withIdentifier: "SettingsVC") as!SettingsViewController
-//                self.navigationController?.pushViewController(controller, animated: true)
                 
             }else {
                 let Alert = UIAlertController(title: "Oops", message: "Please Enter valid mail ID", preferredStyle: UIAlertControllerStyle.alert)
