@@ -12,6 +12,7 @@ var dropdownString = String ()
 var tagArray = [String] ()
 //var selectedIndex = integer_t()
 var selectedIndex = Int()
+var autocompleteUrls = [String]()
 
 class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource {
 
@@ -56,7 +57,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         datePicker.isHidden = true
         superVieww.isHidden = true
 //        superVieww.addSubview(datePicker)
-        
         nameTextfield.delegate = self
         emailaddress.delegate = self
         genderTextfield.delegate = self
@@ -274,6 +274,51 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         return true
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        dropdownTableView.isHidden = false
+        let substring = (foodTextfield.text! as NSString).replacingCharacters(in: range, with: string)
+        print(substring)
+        
+        searchAutocompleteEntriesWithSubstring(substring: substring)
+        return true     // not sure about this - cou
+    }
+    
+//    func searchAutocompleteEntriesWithSubstring(substring: String)
+//    {
+//        autocompleteUrls.removeAll(keepingCapacity: false)
+//        var indexOfPastUrls = 0
+//
+//        for curString in dropdownArray
+//        {
+//            let substringRange = curString.range(of: curString)
+//
+//            if (indexOfPastUrls  == 0)
+//            {
+//                autocompleteUrls.append(curString)
+//            }
+//            indexOfPastUrls = indexOfPastUrls + 1
+//        }
+//        dropdownTableView.reloadData()
+//    }
+
+    func searchAutocompleteEntriesWithSubstring(substring: String)
+    {
+        autocompleteUrls.removeAll(keepingCapacity: false)
+        
+        for curString in dropdownArray
+        {
+            let myString:NSString! = curString as NSString
+            
+            let substringRange :NSRange! = myString.range(of: substring)
+            
+            if (substringRange.location  == 0)
+            {
+                autocompleteUrls.append(curString)
+            }
+        }
+        
+        dropdownTableView.reloadData()
+    }
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
 //        if textField == foodTextfield || textField == birthTextfield {
@@ -592,7 +637,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     /// TableView Delegates and Datasources ///
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dropdownArray.count
+        return autocompleteUrls.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -607,7 +652,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
         }
         
-        cell?.textLabel?.text = dropdownArray[indexPath.row]
+        cell?.textLabel?.text = autocompleteUrls[indexPath.row]
         return cell!
     }
     
