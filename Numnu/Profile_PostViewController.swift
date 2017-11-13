@@ -21,7 +21,12 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
             [NSForegroundColorAttributeName: UIColor.black,
              NSFontAttributeName: UIFont(name: "Avenir-Medium", size: 19)!]
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Hide the navigation bar on the this view controller
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
     func setNavBar() {
         
         navigationItemList.title = "Post"
@@ -59,7 +64,7 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         
         
     }
-    
+  
     func backButtonClicked() {
         
         _ = self.navigationController?.popToRootViewController(animated: true)
