@@ -29,6 +29,7 @@ class ItemCompleteviewcontroller : ButtonBarPagerTabStripViewController {
     @IBOutlet weak var mainContainerView: NSLayoutConstraint!
     var tagarray = ["Festival","Wine","Party"]
     
+    @IBOutlet weak var shareView: UIView!
     @IBOutlet var completemainview: UIView!
     /***************contraints***********************/
     
@@ -68,6 +69,7 @@ class ItemCompleteviewcontroller : ButtonBarPagerTabStripViewController {
         /****************event label tap function************************/
         
         tapRegistration()
+        alertTapRegister()
         
         tagViewUpdate()
         
@@ -99,7 +101,8 @@ class ItemCompleteviewcontroller : ButtonBarPagerTabStripViewController {
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
-        let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3)
+        let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3) as! ReviewEventViewController
+        child_1.popdelegate = self
         let child_2 = UIStoryboard(name: Constants.ItemDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid7)
         let child_3 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1)
         return [child_1,child_2,child_3]
@@ -208,7 +211,7 @@ extension ItemCompleteviewcontroller {
         //set image for button
         button2.setImage(UIImage(named: "eventDots"), for: UIControlState.normal)
         //add function for button
-        button2.addTarget(self, action: #selector(EventViewController.backButtonClicked), for: UIControlEvents.touchUpInside)
+        button2.addTarget(self, action: #selector(EventViewController.openPopup), for: UIControlEvents.touchUpInside)
         //set frame
         button2.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
         
@@ -238,4 +241,45 @@ extension ItemCompleteviewcontroller {
         
     }
     
+    func alertTapRegister(){
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.closePopup(sender:)))
+        self.shareView.addGestureRecognizer(tap)
+        
+    }
+    
+    func closePopup(sender : UITapGestureRecognizer) {
+        
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            
+            self.shareView.alpha                 = 0
+            
+        }, completion: nil)
+        
+    }
+    
+    func openPopup() {
+        
+        self.shareView.alpha   = 1
+        
+        let top = CGAffineTransform(translationX: 0, y: 0)
+        
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            self.shareView.isHidden = false
+            self.shareView.transform = top
+            
+        }, completion: nil)
+        
+        
+    }
+    
 }
+
+extension ItemCompleteviewcontroller : ReviewEventViewControllerDelegate {
+    
+    func popupClick() {
+        
+        openPopup()
+    }
+}
+

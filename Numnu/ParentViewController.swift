@@ -32,7 +32,7 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
     
     /*******************place api*************************/
     var autocompleteplaceArray = [String]()
-    
+    @IBOutlet weak var shareView : UIView!
     
     @IBOutlet weak var collectionContainerView: UIView!
     override func viewDidLoad() {
@@ -65,6 +65,7 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
         
         hideNavBar()
         addCollectionContainer()
+        alertTapRegister()
         
         /*********FILTER VIEW*********/
         filtertableView.isHidden = true
@@ -111,7 +112,8 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
             let child_1 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1)
             let child_2 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid2)
             let child_3 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid3)
-            let child_4 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid4)
+            let child_4 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid4) as! PostTabController
+            child_4.popdelegate = self
             let child_5 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid5)
             let child_6 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid6)
             return [child_1, child_2,child_3,child_4,child_5,child_6]
@@ -399,6 +401,47 @@ extension ParentViewController : UITableViewDataSource,UITableViewDelegate {
     }
     
     
+}
+
+extension ParentViewController : PostTabControllerDelegate {
+    
+    func popupClick() {
+        
+        openPopup()
+        
+    }
+    
+    func alertTapRegister() {
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.closePopup(sender:)))
+        self.shareView.addGestureRecognizer(tap)
+        
+    }
+    
+    func closePopup(sender : UITapGestureRecognizer) {
+        
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            
+            self.shareView.alpha                 = 0
+            
+        }, completion: nil)
+        
+    }
+    
+    func openPopup() {
+        
+        self.shareView.alpha   = 1
+        
+        let top = CGAffineTransform(translationX: 0, y: 0)
+        
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            self.shareView.isHidden = false
+            self.shareView.transform = top
+            
+        }, completion: nil)
+        
+        
+    }
 }
 
 

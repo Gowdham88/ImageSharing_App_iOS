@@ -24,11 +24,11 @@
             <objects>
                 <viewController storyboardIdentifier="eventstoryid" id="EYG-gd-lNw" customClass="EventViewController" customModule="Numnu" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ad1-wc-lAy">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="1100"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IhJ-Hd-al3">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="1080"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g0V-rF-TMW">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="1150"/>
@@ -282,52 +282,65 @@
                                     <constraint firstAttribute="bottom" secondItem="g0V-rF-TMW" secondAttribute="bottom" id="yqZ-my-MC5"/>
                                 </constraints>
                             </scrollView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Uq-Cf-kwz">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mZM-lC-WLs">
-                                <rect key="frame" x="0.0" y="485" width="320" height="130"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Uq-Cf-kwz">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="1100"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="share" translatesAutoresizingMaskIntoConstraints="NO" id="5em-le-YNB">
-                                        <rect key="frame" x="25" y="18" width="30" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Bookmark" translatesAutoresizingMaskIntoConstraints="NO" id="1rl-Ca-KTa">
-                                        <rect key="frame" x="25" y="74" width="30" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Share" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UFg-gV-D71">
-                                        <rect key="frame" x="78" y="18" width="234" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bookmark" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LdM-5E-8L1">
-                                        <rect key="frame" x="78" y="74" width="234" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mZM-lC-WLs">
+                                        <rect key="frame" x="0.0" y="970" width="320" height="130"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="share" translatesAutoresizingMaskIntoConstraints="NO" id="5em-le-YNB">
+                                                <rect key="frame" x="25" y="18" width="30" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Bookmark" translatesAutoresizingMaskIntoConstraints="NO" id="1rl-Ca-KTa">
+                                                <rect key="frame" x="25" y="74" width="30" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Share" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UFg-gV-D71">
+                                                <rect key="frame" x="78" y="18" width="234" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bookmark" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LdM-5E-8L1">
+                                                <rect key="frame" x="78" y="74" width="234" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="130" id="LjX-Sr-smt"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="mZM-lC-WLs" firstAttribute="leading" secondItem="2Uq-Cf-kwz" secondAttribute="leading" id="Weq-jo-jH0"/>
+                                    <constraint firstAttribute="bottom" secondItem="mZM-lC-WLs" secondAttribute="bottom" id="Zh6-C3-bMl"/>
+                                    <constraint firstAttribute="trailing" secondItem="mZM-lC-WLs" secondAttribute="trailing" id="q3g-Ag-NrU"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="IhJ-Hd-al3" firstAttribute="leading" secondItem="vea-n3-XxA" secondAttribute="leading" id="47x-3q-QWg"/>
                             <constraint firstItem="g0V-rF-TMW" firstAttribute="width" secondItem="Ad1-wc-lAy" secondAttribute="width" id="6Ak-yp-eYF"/>
+                            <constraint firstItem="2Uq-Cf-kwz" firstAttribute="trailing" secondItem="vea-n3-XxA" secondAttribute="trailing" id="Agc-Th-kIm"/>
                             <constraint firstItem="vea-n3-XxA" firstAttribute="bottom" secondItem="IhJ-Hd-al3" secondAttribute="bottom" id="Lx4-MZ-wwq"/>
+                            <constraint firstItem="2Uq-Cf-kwz" firstAttribute="bottom" secondItem="vea-n3-XxA" secondAttribute="bottom" id="PcR-5E-1hd"/>
+                            <constraint firstItem="2Uq-Cf-kwz" firstAttribute="leading" secondItem="vea-n3-XxA" secondAttribute="leading" id="UeM-qW-5R3"/>
+                            <constraint firstItem="2Uq-Cf-kwz" firstAttribute="top" secondItem="Ad1-wc-lAy" secondAttribute="top" id="ZjJ-bM-TAv"/>
                             <constraint firstItem="vea-n3-XxA" firstAttribute="trailing" secondItem="IhJ-Hd-al3" secondAttribute="trailing" id="vDX-2d-Rvg"/>
                             <constraint firstItem="IhJ-Hd-al3" firstAttribute="top" secondItem="vea-n3-XxA" secondAttribute="top" id="y9X-PC-1SW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vea-n3-XxA"/>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="Xtw-y6-M2U"/>
+                    <size key="freeformSize" width="320" height="1100"/>
                     <connections>
                         <outlet property="EventLinkLabel1" destination="gAt-qt-Cww" id="tVB-hZ-S7v"/>
                         <outlet property="TabBarView" destination="Qgo-S0-0CV" id="4j6-ho-BhH"/>
@@ -347,6 +360,7 @@
                         <outlet property="navigationItemList" destination="Xtw-y6-M2U" id="ZFh-MY-6XS"/>
                         <outlet property="pagerView" destination="cgp-wT-7F1" id="TOd-BD-B2D"/>
                         <outlet property="readMoreButton" destination="WMp-Up-FUj" id="e5W-aV-pPD"/>
+                        <outlet property="shareView" destination="2Uq-Cf-kwz" id="6sE-Lb-UlP"/>
                         <outlet property="tagScrollView" destination="Aos-pn-hej" id="lvl-QS-oRw"/>
                     </connections>
                 </viewController>

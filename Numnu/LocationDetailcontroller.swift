@@ -27,7 +27,8 @@ class LocationDetailcontroller: ButtonBarPagerTabStripViewController {
     @IBOutlet weak var mainContainerView: NSLayoutConstraint!
     var tagarray = ["Festival","Wine","Party"]
     
-   /***************Map and business view*********************/
+    @IBOutlet weak var shareView: UIView!
+    /***************Map and business view*********************/
     
     @IBOutlet weak var businessEntityImage: ImageExtender!
     @IBOutlet weak var mapview : UIView!
@@ -90,6 +91,7 @@ class LocationDetailcontroller: ButtonBarPagerTabStripViewController {
         /****************event label tap function************************/
         
         tapRegistration()
+        alertTapRegister()
        
         setMap()
         
@@ -102,7 +104,8 @@ class LocationDetailcontroller: ButtonBarPagerTabStripViewController {
     }
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
-        let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3)
+        let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3) as! ReviewEventViewController
+        child_1.popdelegate = self
         let child_2 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid2)
         return [child_1,child_2]
         
@@ -184,7 +187,7 @@ extension LocationDetailcontroller {
         //set image for button
         button2.setImage(UIImage(named: "eventDots"), for: UIControlState.normal)
         //add function for button
-        button2.addTarget(self, action: #selector(EventViewController.backButtonClicked), for: UIControlEvents.touchUpInside)
+        button2.addTarget(self, action: #selector(EventViewController.openPopup), for: UIControlEvents.touchUpInside)
         //set frame
         button2.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
         
@@ -227,6 +230,38 @@ extension LocationDetailcontroller {
         let storyboard      = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
         let vc              = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId)
         self.navigationController!.pushViewController(vc, animated: true)
+        
+    }
+    
+    func alertTapRegister(){
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.closePopup(sender:)))
+        self.shareView.addGestureRecognizer(tap)
+        
+    }
+    
+    func closePopup(sender : UITapGestureRecognizer) {
+        
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            
+            self.shareView.alpha                 = 0
+            
+        }, completion: nil)
+        
+    }
+    
+    func openPopup() {
+        
+        self.shareView.alpha   = 1
+        
+        let top = CGAffineTransform(translationX: 0, y: 0)
+        
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            self.shareView.isHidden = false
+            self.shareView.transform = top
+            
+        }, completion: nil)
+        
         
     }
     
@@ -288,3 +323,12 @@ extension LocationDetailcontroller : CLLocationManagerDelegate {
         print("Error: \(error)")
     }
 }
+
+extension LocationDetailcontroller : ReviewEventViewControllerDelegate {
+    
+    func popupClick() {
+        
+        openPopup()
+    }
+}
+

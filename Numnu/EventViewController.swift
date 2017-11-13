@@ -36,7 +36,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     @IBOutlet weak var mainContainerViewBottom: NSLayoutConstraint!
     @IBOutlet weak var mainContainerView: NSLayoutConstraint!
     var tagarray = ["Festival","Wine","Party","Rum","Barbaque","Pasta","Sandwich","Burger"]
-    
+    @IBOutlet weak var shareView: UIView!
     /***************contraints***********************/
     
     @IBOutlet weak var eventDescriptionHeight: NSLayoutConstraint!
@@ -75,6 +75,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
         /**********************set Nav bar****************************/
         
         setNavBar()
+        alertTapRegister()
 
         /****************event label tap function************************/
         
@@ -119,7 +120,8 @@ class EventViewController: ButtonBarPagerTabStripViewController {
         child_1.showentity = true
         let child_2 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid2) as! MenuEventViewController
         child_2.showentity = true
-        let child_3 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3)
+        let child_3 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3) as! ReviewEventViewController
+        child_3.popdelegate = self
         return [child_1, child_2,child_3]
         
     }
@@ -257,7 +259,7 @@ extension EventViewController {
         //set image for button
         button2.setImage(UIImage(named: "eventDots"), for: UIControlState.normal)
         //add function for button
-        button2.addTarget(self, action: #selector(EventViewController.backButtonClicked), for: UIControlEvents.touchUpInside)
+        button2.addTarget(self, action: #selector(EventViewController.openPopup), for: UIControlEvents.touchUpInside)
         //set frame
         button2.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
         
@@ -295,6 +297,46 @@ extension EventViewController {
         
     }
     
+    func alertTapRegister(){
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.closePopup(sender:)))
+        self.shareView.addGestureRecognizer(tap)
+        
+    }
+    
+    func closePopup(sender : UITapGestureRecognizer) {
+        
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+           
+            self.shareView.alpha                 = 0
+            
+        }, completion: nil)
+     
+    }
+    
+    func openPopup() {
+        
+        self.shareView.alpha   = 1
+        
+        let top = CGAffineTransform(translationX: 0, y: 0)
+        
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            self.shareView.isHidden = false
+            self.shareView.transform = top
+            
+        }, completion: nil)
+        
+        
+    }
+    
+}
+
+extension EventViewController : ReviewEventViewControllerDelegate {
+    
+    func popupClick() {
+        
+        openPopup()
+    }
 }
 
 
