@@ -15,6 +15,9 @@ var selectedIndex = Int()
 
 class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource {
 
+    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var doneButotn: UIButton!
+    @IBOutlet weak var doneView: UIView!
     @IBOutlet var superVieww: UIView!
     @IBOutlet var genderdropButton: UIButton!
     @IBOutlet var dropdownTableView: UITableView!
@@ -55,6 +58,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         profileImage.isUserInteractionEnabled = true
         datePicker.isHidden = true
         superVieww.isHidden = true
+        doneView.isHidden = true
 //        superVieww.addSubview(datePicker)
         
         nameTextfield.delegate = self
@@ -70,7 +74,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         
         
         genderdropButton.addTarget(self, action: #selector(genderClicked), for: UIControlEvents.allTouchEvents)
-        
+        doneButotn.addTarget(self, action: #selector(doneClick), for: UIControlEvents.allTouchEvents)
+        addButton.addTarget(self, action: #selector(addClicked), for: UIControlEvents.allTouchEvents)
+
    // bottom border for textfields //
         let border = CALayer()
         let width = CGFloat(1.0)
@@ -161,13 +167,33 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         
         if show == false {
             
+    addCollectionContainer()
 
-//            addCollectionContainer()
-            
         }
         
     }
+    
+    func addClicked() {
+        if foodTextfield.text == "" {
+          print("could not add empty fields")
+        }else{
+            tagArray.append(foodTextfield.text!)
+            print("the appended item is:::::",foodTextfield.text!)
+            //        tagArray.remove(at: 1)
+            if let index = tagArray.index(of:"") {
+                tagArray.remove(at: index)
+            }
+            //        let nonOptionals = tagArray.flatMap{$0}
+            //        print(nonOptionals)
+            collectionView.reloadData()
+            foodTextfield.resignFirstResponder()
+        }
+      
+        
+    }
+    
     func genderClicked(){
+        genderTextfield.resignFirstResponder()
         let Alert = UIAlertController(title: "Select Gender", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
         
         let MaleAction = UIAlertAction(title: "Male", style: UIAlertActionStyle.default) { _ in
@@ -289,6 +315,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             birthTextfield.resignFirstResponder()
             datePicker.isHidden = false
             superVieww.isHidden = false
+            doneView.isHidden = false
         }
         
         if textField == foodTextfield {
@@ -299,6 +326,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         }
         
         if textField == genderTextfield {
+            genderTextfield.resignFirstResponder()
+
             let Alert = UIAlertController(title: "Select Gender", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
             
             let MaleAction = UIAlertAction(title: "Male", style: UIAlertActionStyle.default) { _ in
@@ -324,6 +353,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == foodTextfield || textField == birthTextfield {
+            foodTextfield.text = ""
+            dropdownTableView.isHidden = true
             animateViewMoving(up: false, moveValue: 0)
         }
         if textField == birthTextfield {
@@ -331,6 +362,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             self.datePickerValueChanged(sender: datePicker)
             datePicker.isHidden = true
             superVieww.isHidden = true
+            doneView.isHidden = true
         }
        
     }
@@ -356,6 +388,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         birthTextfield.tintColor = UIColor.clear
         datePicker.isHidden = false
         superVieww.isHidden = false
+        doneView.isHidden = false
         // Creates the toolbar
         let toolBar = UIToolbar()
         toolBar.barStyle = .default
@@ -363,15 +396,16 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         toolBar.tintColor = UIColor.blue
         toolBar.sizeToFit()
         
-        // Adds the buttons
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(Edit_ProfileVC.doneClick)) //check selector action for barbutton
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-
-        toolBar.setItems([ spaceButton, doneButton], animated: false)
-        toolBar.isUserInteractionEnabled = true
-//        birthTextfield.inputView = datePicker
-//        birthTextfield.inputAccessoryView = toolBar
-        self.datePicker.addSubview(toolBar)
+//        // Adds the buttons
+//        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(Edit_ProfileVC.doneClick)) //check selector action for barbutton
+//        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+//
+//        toolBar.setItems([ spaceButton, doneButton], animated: false)
+//        toolBar.isUserInteractionEnabled = true
+////        birthTextfield.inputView = datePicker
+////        birthTextfield.inputAccessoryView = toolBar
+//        self.superVieww.insertSubview(datePicker, aboveSubview: toolBar)
+        
         
         datePicker.addTarget(self, action: #selector(Edit_ProfileVC.datePickerValueChanged), for: UIControlEvents.valueChanged)
     }
@@ -380,6 +414,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         self.view.endEditing(true)
         superVieww.isHidden = true
         datePicker.isHidden = true
+        doneView.isHidden = true
     }
   
 
@@ -407,10 +442,10 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
 }
     
     func addCollectionContainer(){
-        
+
         let storyboard        = UIStoryboard(name: Constants.Auth, bundle: nil)
-        let controller        = storyboard.instantiateViewController(withIdentifier: "signupvc")
-//        let controller        = storyboard.instantiateViewController(withIdentifier: "signupwithEmailVC")
+//        let controller        = storyboard.instantiateViewController(withIdentifier: "signupvc")
+        let controller        = storyboard.instantiateViewController(withIdentifier: "signupwithEmailVC")
 
 //        let storyboard        = UIStoryboard(name: Constants.Main, bundle: nil)
 //        let controller        = storyboard.instantiateViewController(withIdentifier: "SettingsVC")
@@ -425,7 +460,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     @IBAction func didTappedSave(_ sender: Any) {
         let Email:NSString = emailaddress.text! as NSString
 
-        if nameTextfield.text == "" || emailaddress.text == ""  || cityTextfield.text == "" || genderTextfield.text == "" || foodTextfield.text == "" || birthTextfield.text == "" {
+        if nameTextfield.text == "" || emailaddress.text == ""  || cityTextfield.text == "" || genderTextfield.text == ""   {
             let Alert = UIAlertController(title: "Oops", message: "Fields Cannot be empty", preferredStyle: UIAlertControllerStyle.alert)
             
             let OkAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { _ in
@@ -440,6 +475,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
                 let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController")
                 self.navigationController!.pushViewController(vc, animated: true)
+//                self.navigationController?.present(vc, animated: true, completion: nil)
                 
             }else {
                 let Alert = UIAlertController(title: "Oops", message: "Please Enter valid mail ID", preferredStyle: UIAlertControllerStyle.alert)
@@ -491,9 +527,14 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             self.imagePicker.sourceType = .photoLibrary
             self.present(self.imagePicker, animated: true, completion: nil)
         }
-        
+        let CancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) {_ in
+            
+            
+        }
+
         Alert.addAction(CameraAction)
         Alert.addAction(GalleryAction)
+        Alert.addAction(CancelAction)
         present(Alert, animated: true, completion: nil)
         
         
@@ -540,7 +581,11 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         
         
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Hide the navigation bar on the this view controller
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
     func backButtonClicked() {
         
         _ = self.navigationController?.popToRootViewController(animated: true)
@@ -575,6 +620,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
  //       print("selected index::::",selectedIndex)
     }
     func buttonClicked(sender: Any){
+        
         let tag = (sender as AnyObject).tag
         tagArray.remove(at: tag!)
         collectionView.reloadData()
