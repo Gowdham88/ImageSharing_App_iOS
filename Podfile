@@ -11,6 +11,7 @@ target 'Numnu' do
   pod 'Firebase/Database'
   pod 'Nuke', '~> 4.0'
   pod 'Toucan'
+  pod 'GSMessages'
   pod 'PKHUD', '~> 4.0’
   pod 'XLPagerTabStrip', '~> 8.0'
   pod 'Bolts'

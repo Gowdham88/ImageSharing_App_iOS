@@ -30,7 +30,7 @@
 		6F44F25F1F9365F200AF45F2 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F44F25B1F9365F200AF45F2 /* CoreFoundation.framework */; };
 		6F44F2601F9365F200AF45F2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F44F25C1F9365F200AF45F2 /* CoreData.framework */; };
 		6F542A931FB1BD9B0024AC7D /* PlaceTableviewcellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F542A921FB1BD9B0024AC7D /* PlaceTableviewcellTableViewCell.swift */; };
-		7C4C8D186BC220FE97555724 /* Pods_Numnu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A17A7CA4090D71EEFC9A7AA /* Pods_Numnu.framework */; };
+		8023269D710766514ACD6769 /* Pods_Numnu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5498D158AA5E7ED296B4F8AE /* Pods_Numnu.framework */; };
 		B406DE1F1FA713A50092E2B4 /* MenuItemEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B406DE1E1FA713A50092E2B4 /* MenuItemEventCell.swift */; };
 		B406DE211FA713C00092E2B4 /* MenuCategoryItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B406DE201FA713C00092E2B4 /* MenuCategoryItemCell.swift */; };
 		B406DE231FA724B90092E2B4 /* BussinessDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B406DE221FA724B90092E2B4 /* BussinessDetail.storyboard */; };
@@ -118,7 +118,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0B6B985547DF31D41C1E8C81 /* Pods-Numnu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Numnu.release.xcconfig"; path = "Pods/Target Support Files/Pods-Numnu/Pods-Numnu.release.xcconfig"; sourceTree = "<group>"; };
 		3FC6CEB61F6F744700DF2A12 /* Numnu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Numnu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FC6CEB91F6F744700DF2A12 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FC6CEBB1F6F744700DF2A12 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -134,7 +133,7 @@
 		3FC6CEDB1F6F744700DF2A12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FC6CEE71F6FA17300DF2A12 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		3FC6CEE91F6FA25600DF2A12 /* feedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = feedTableViewCell.swift; sourceTree = "<group>"; };
-		43DF957A5A826B5E586677EC /* Pods-Numnu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Numnu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Numnu/Pods-Numnu.debug.xcconfig"; sourceTree = "<group>"; };
+		5498D158AA5E7ED296B4F8AE /* Pods_Numnu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Numnu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		601D46761F8D205E00832BDD /* signInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signInVC.swift; sourceTree = "<group>"; };
 		601D46781F8F3B1C00832BDD /* UserList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserList.swift; sourceTree = "<group>"; };
 		601D467A1F8FAF4B00832BDD /* Numnu.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Numnu.entitlements; sourceTree = "<group>"; };
@@ -150,7 +149,6 @@
 		6F44F25B1F9365F200AF45F2 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		6F44F25C1F9365F200AF45F2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		6F542A921FB1BD9B0024AC7D /* PlaceTableviewcellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceTableviewcellTableViewCell.swift; sourceTree = "<group>"; };
-		9A17A7CA4090D71EEFC9A7AA /* Pods_Numnu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Numnu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B406DE1E1FA713A50092E2B4 /* MenuItemEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemEventCell.swift; sourceTree = "<group>"; };
 		B406DE201FA713C00092E2B4 /* MenuCategoryItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCategoryItemCell.swift; sourceTree = "<group>"; };
 		B406DE221FA724B90092E2B4 /* BussinessDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BussinessDetail.storyboard; sourceTree = "<group>"; };
@@ -223,6 +221,8 @@
 		B4C515891FA085D100348E2A /* BusinessTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessTabController.swift; sourceTree = "<group>"; };
 		B4C515901FA0AC1600348E2A /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		B4C7BCEA1F9F74E500B2BEC4 /* PostEventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEventTableViewCell.swift; sourceTree = "<group>"; };
+		C488392BD62ED69D8D4F143A /* Pods-Numnu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Numnu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Numnu/Pods-Numnu.debug.xcconfig"; sourceTree = "<group>"; };
+		D0B6B3214A0EA9A12E275CB5 /* Pods-Numnu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Numnu.release.xcconfig"; path = "Pods/Target Support Files/Pods-Numnu/Pods-Numnu.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,7 +234,7 @@
 				6F44F25E1F9365F200AF45F2 /* CoreBluetooth.framework in Frameworks */,
 				6F44F25F1F9365F200AF45F2 /* CoreFoundation.framework in Frameworks */,
 				6F44F2601F9365F200AF45F2 /* CoreData.framework in Frameworks */,
-				7C4C8D186BC220FE97555724 /* Pods_Numnu.framework in Frameworks */,
+				8023269D710766514ACD6769 /* Pods_Numnu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,8 +262,8 @@
 				3FC6CECD1F6F744700DF2A12 /* NumnuTests */,
 				3FC6CED81F6F744700DF2A12 /* NumnuUITests */,
 				3FC6CEB71F6F744700DF2A12 /* Products */,
+				707410A8190E3AB69F4CEA57 /* Pods */,
 				7AE04205F6DDC47253BF8816 /* Frameworks */,
-				58EAAE8627DEB4C0DE54F300 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -317,11 +317,11 @@
 			path = NumnuUITests;
 			sourceTree = "<group>";
 		};
-		58EAAE8627DEB4C0DE54F300 /* Pods */ = {
+		707410A8190E3AB69F4CEA57 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				43DF957A5A826B5E586677EC /* Pods-Numnu.debug.xcconfig */,
-				0B6B985547DF31D41C1E8C81 /* Pods-Numnu.release.xcconfig */,
+				C488392BD62ED69D8D4F143A /* Pods-Numnu.debug.xcconfig */,
+				D0B6B3214A0EA9A12E275CB5 /* Pods-Numnu.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -333,7 +333,7 @@
 				6F44F25A1F9365F200AF45F2 /* CoreBluetooth.framework */,
 				6F44F25C1F9365F200AF45F2 /* CoreData.framework */,
 				6F44F25B1F9365F200AF45F2 /* CoreFoundation.framework */,
-				9A17A7CA4090D71EEFC9A7AA /* Pods_Numnu.framework */,
+				5498D158AA5E7ED296B4F8AE /* Pods_Numnu.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -589,12 +589,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3FC6CEDE1F6F744700DF2A12 /* Build configuration list for PBXNativeTarget "Numnu" */;
 			buildPhases = (
-				C33073A120E32B55209DBB9A /* [CP] Check Pods Manifest.lock */,
+				A240B9B0B1958403FE235136 /* [CP] Check Pods Manifest.lock */,
 				3FC6CEB21F6F744600DF2A12 /* Sources */,
 				3FC6CEB31F6F744600DF2A12 /* Frameworks */,
 				3FC6CEB41F6F744600DF2A12 /* Resources */,
-				CA739778615B45D0CAA46117 /* [CP] Embed Pods Frameworks */,
-				294F458282C6197637DC713C /* [CP] Copy Pods Resources */,
+				B487976E5ED1EF7219BB5C96 /* [CP] Embed Pods Frameworks */,
+				EE7B1306210A14F63A581530 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -734,27 +734,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		294F458282C6197637DC713C /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Numnu/Pods-Numnu-resources.sh",
-				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
-				"${PODS_ROOT}/GooglePlacePicker/Frameworks/GooglePlacePicker.framework/Resources/GooglePlacePicker.bundle",
-				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Numnu/Pods-Numnu-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C33073A120E32B55209DBB9A /* [CP] Check Pods Manifest.lock */ = {
+		A240B9B0B1958403FE235136 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -769,10 +749,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		CA739778615B45D0CAA46117 /* [CP] Embed Pods Frameworks */ = {
+		B487976E5ED1EF7219BB5C96 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -783,9 +763,9 @@
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/GSMessages/GSMessages.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
 				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -800,9 +780,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GSMessages.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nuke.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -814,6 +794,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Numnu/Pods-Numnu-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EE7B1306210A14F63A581530 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Numnu/Pods-Numnu-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlacePicker/Frameworks/GooglePlacePicker.framework/Versions/A/Resources/GooglePlacePicker.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Versions/A/Resources/GooglePlaces.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Numnu/Pods-Numnu-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1045,7 +1045,7 @@
 		};
 		3FC6CEDF1F6F744700DF2A12 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 43DF957A5A826B5E586677EC /* Pods-Numnu.debug.xcconfig */;
+			baseConfigurationReference = C488392BD62ED69D8D4F143A /* Pods-Numnu.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Numnu/Numnu.entitlements;
@@ -1061,7 +1061,7 @@
 		};
 		3FC6CEE01F6F744700DF2A12 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0B6B985547DF31D41C1E8C81 /* Pods-Numnu.release.xcconfig */;
+			baseConfigurationReference = D0B6B3214A0EA9A12E275CB5 /* Pods-Numnu.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Numnu/Numnu.entitlements;
