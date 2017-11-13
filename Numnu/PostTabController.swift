@@ -22,7 +22,7 @@ class PostTabController: UIViewController,IndicatorInfoProvider {
         postEventTableView.delegate   = self
         postEventTableView.dataSource = self
 
-////        postEventTableView.sizeToFit()
+//        postEventTableView.sizeToFit()
 //        postEventTableView.estimatedRowHeight = 388
 //        postEventTableView.rowHeight = UITableViewAutomaticDimension
     }
