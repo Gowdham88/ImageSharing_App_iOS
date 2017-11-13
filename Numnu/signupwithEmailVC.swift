@@ -82,8 +82,10 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     }
     
     func isPasswordValid(_ password : String) -> Bool{
-        let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{8,}")
-        return passwordTest.evaluate(with: password)
+//        let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{2,}")
+        //        let passwordTest = NSPredicate(format: "SELF MATCHES %@", "")
+        return true
+//        return passwordTest.evaluate(with: password)
     }
     
     func Login() {
@@ -115,14 +117,16 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
 //                    animation.fromValue = NSValue(cgPoint: CGPoint(x: self.labelcredentials.center.x - 10, y: self.labelcredentials.center.y))
 //                    animation.toValue = NSValue(cgPoint: CGPoint(x: self.labelcredentials.center.x + 10, y: self.labelcredentials.center.y))
 //                    self.labelcredentials.layer.add(animation, forKey: "position")
-                    
+                    // added by siva
+                    self.openStoryBoard(name: Constants.Main, id: Constants.TabStoryId)
+
                     return
                     
                 }
                
                 HUD.hide()
                 
-                self.openStoryBoard(name: Constants.Main, id: Constants.TabStoryId)
+//                self.openStoryBoard(name: Constants.Main, id: Constants.TabStoryId)
                 
                 
                 self.idprim.removeAll()
@@ -173,13 +177,21 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     
     func openStoryBoard(name: String,id : String) {
         
-        window                          = UIWindow(frame: UIScreen.main.bounds)
+//        window                          = UIWindow(frame: UIScreen.main.bounds)
+//        let storyboard                  = UIStoryboard(name: name, bundle: nil)
+//        let initialViewController       = storyboard.instantiateViewController(withIdentifier: "profileid") as! Edit_ProfileVC
+//        initialViewController.show      = true
+//        self.navigationController!.pushViewController(initialViewController, animated: true)
+//        window?.rootViewController = initialViewController
+//        window?.makeKeyAndVisible()
+        
+        
+//        window                          = UIWindow(frame: UIScreen.main.bounds)
         let storyboard                  = UIStoryboard(name: name, bundle: nil)
         let initialViewController       = storyboard.instantiateViewController(withIdentifier: "profileid") as! Edit_ProfileVC
         initialViewController.show      = true
         self.navigationController!.pushViewController(initialViewController, animated: true)
-//        window?.rootViewController = initialViewController
-//        window?.makeKeyAndVisible()
+        
         
     }
     

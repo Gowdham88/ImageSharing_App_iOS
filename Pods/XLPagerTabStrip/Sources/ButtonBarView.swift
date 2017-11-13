@@ -124,7 +124,6 @@ open class ButtonBarView: UICollectionView {
 
         selectedBarFrame.size.width = selectedCellFrame.size.width
         selectedBarFrame.origin.x = selectedCellFrame.origin.x
-       
 
         if animated {
             UIView.animate(withDuration: 0.3, animations: { [weak self] in
@@ -181,7 +180,6 @@ open class ButtonBarView: UICollectionView {
             selectedBarFrame.origin.y = frame.size.height - selectedBarHeight
         }
 
-        print(selectedBarHeight)
         selectedBarFrame.size.height = selectedBarHeight
         selectedBar.frame = selectedBarFrame
     }

@@ -8,7 +8,7 @@
 
 import UIKit
 import Firebase
-import GSMessages
+//import GSMessages
 import UserNotifications
 import SystemConfiguration
 import FBSDKCoreKit
