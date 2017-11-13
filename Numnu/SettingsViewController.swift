@@ -123,18 +123,31 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         
     }
     // Edit button Navigation //
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Hide the navigation bar on the this view controller
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
     @IBAction func didTappedEdit(_ sender: Any) {
         
-//        let storyBoard : UIStoryboard = UIStoryboard(name: Constants.Main, bundle:nil)
-//        let editProfile = storyBoard.instantiateViewController(withIdentifier: "profileid") as! Edit_ProfileVC
-////        self.present(editProfile, animated:true, completion:nil)
+        let storyBoard : UIStoryboard = UIStoryboard(name: Constants.Main, bundle:nil)
+        let editProfile = storyBoard.instantiateViewController(withIdentifier: "profileid") as! Edit_ProfileVC
+//        self.present(editProfile, animated:true, completion:nil)
 //        self.navigationController?.pushViewController(editProfile, animated: true)
+        self.navigationController?.present(editProfile, animated: true, completion: nil)
         
-        let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: "profileid")
-        self.navigationController!.pushViewController(vc, animated: true)
         
+//        let storyboard        = UIStoryboard(name: Constants.Main, bundle: nil)
+//        //        let controller        = storyboard.instantiateViewController(withIdentifier: "signupvc")
+//        let controller        = storyboard.instantiateViewController(withIdentifier: "profileid")
+//
+//        //        let storyboard        = UIStoryboard(name: Constants.Main, bundle: nil)
+//        //        let controller        = storyboard.instantiateViewController(withIdentifier: "SettingsVC")
+//        controller.view.frame = self.view.bounds;
+//        controller.willMove(toParentViewController: self)
+//        self.view.addSubview(controller.view)
+//        self.addChildViewController(controller)
+//        controller.didMove(toParentViewController: self)
     }
     /*
     // MARK: - Navigation
