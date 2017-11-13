@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import MapKit
+import CoreLocation
+import GooglePlaces
 var dropdownArray = [String] ()
 var dropdownString = String ()
 var tagArray = [String] ()
@@ -14,7 +17,7 @@ var tagArray = [String] ()
 var selectedIndex = Int()
 var autocompleteUrls = [String]()
 
-class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource {
+class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate {
 
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var doneButotn: UIButton!
@@ -49,12 +52,38 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     @IBOutlet var myscrollView: UIScrollView!
    
     @IBOutlet var saveButton: UIButton!
+    let locationManager = CLLocationManager()
+
     let imagePicker = UIImagePickerController()
 //    static private let regexEmail = "[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}"
 //    static private let regexMobNo = "^[0-9]{6,15}$"
 //    static private let regexNameType = "^[a-zA-Z]+$"
     override func viewDidLoad() {
         super.viewDidLoad()
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
+        let placesClient = GMSPlacesClient.shared()
+        self.view.superview?.addSubview(saveButton)
+        placesClient.currentPlace(callback: { (placeLikelihoods: GMSPlaceLikelihoodList?, error) -> Void in
+            if error != nil {
+                print("Current Place error: \(error!.localizedDescription)")
+                return
+            }
+            
+            for likelihood in placeLikelihoods!.likelihoods {
+                if let likelihood = likelihood as? GMSPlaceLikelihood {
+                    let place = likelihood.place
+                    print("Current Place name \(place.name) at likelihood \(likelihood.likelihood)")
+//                    print("Current Place address \(String(describing: place.formattedAddress))")
+//                    print("Current Place attributions \(String(describing: place.attributions))")
+//                    print("Current PlaceID \(place.placeID)")
+                    self.cityTextfield.text = place.name
+                    //Somehow work below code into here
+                    
+                }
+            }
+        })
+
         imagePicker.delegate = self
         profileImage.isUserInteractionEnabled = true
         datePicker.isHidden = true
@@ -141,7 +170,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         
         foodTextfield.addTarget(self, action: #selector(textFieldActive), for: UIControlEvents.allTouchEvents)
 
-        dropdownArray = ["Chicken","Pizza","Burger","Sandwich","Mutton","Prawn","Gobi chilli","Panneer"]
+        dropdownArray = ["Chicken","Chicken chilli","Chicken manjurian","Chicken 65","Chicken fried rice","Grill chicken","Pizza","Burger","Sandwich","Mutton","Mutton chukka","Mutton masala","Mutton fry","Prawn","Gobi chilli","Panneer","Noodles","Mutton soup","Fish fry","Dry fish"]
         
         setNavBar()
         
@@ -161,13 +190,13 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         
         self.navigationController?.navigationBar.titleTextAttributes =
             [NSForegroundColorAttributeName: UIColor.black,
-             NSFontAttributeName: UIFont(name: "Avenir-Medium", size: 19)!]
+             NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
 
         // Do any additional setup after loading the view.
         
         if show == false {
             
-    addCollectionContainer()
+//    addCollectionContainer()
 
         }
         
@@ -177,7 +206,12 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         if foodTextfield.text == "" {
           print("could not add empty fields")
         }else{
-            tagArray.append(foodTextfield.text!)
+            if tagArray.contains(foodTextfield.text!){
+                print("already added in collectionview")
+            }else{
+                tagArray.append(foodTextfield.text!)
+
+            }
             print("the appended item is:::::",foodTextfield.text!)
             //        tagArray.remove(at: 1)
             if let index = tagArray.index(of:"") {
@@ -302,58 +336,32 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         dropdownTableView.isHidden = false
-        let substring = (foodTextfield.text! as NSString).replacingCharacters(in: range, with: string)
-        print(substring)
+        let substring = (foodTextfield.text! as NSString).replacingCharacters(in: range, with: string )
+        print("the substrings are::::",substring)
         
         searchAutocompleteEntriesWithSubstring(substring: substring)
         return true     // not sure about this - cou
     }
     
-//    func searchAutocompleteEntriesWithSubstring(substring: String)
-//    {
-//        autocompleteUrls.removeAll(keepingCapacity: false)
-//        var indexOfPastUrls = 0
-//
-//        for curString in dropdownArray
-//        {
-//            let substringRange = curString.range(of: curString)
-//
-//            if (indexOfPastUrls  == 0)
-//            {
-//                autocompleteUrls.append(curString)
-//            }
-//            indexOfPastUrls = indexOfPastUrls + 1
-//        }
-//        dropdownTableView.reloadData()
-//    }
-
     func searchAutocompleteEntriesWithSubstring(substring: String)
     {
         autocompleteUrls.removeAll(keepingCapacity: false)
+        var indexOfPastUrls = 0
         
         for curString in dropdownArray
         {
-            let myString:NSString! = curString as NSString
-            
-            let substringRange :NSRange! = myString.range(of: substring)
-            
-            if (substringRange.location  == 0)
+            print(curString)
+            let myString: NSString! = curString as NSString
+            let substringRange: NSRange! = myString.range(of: substring , options : [.caseInsensitive])
+            if (substringRange.location == 0)
             {
                 autocompleteUrls.append(curString)
             }
         }
-        
         dropdownTableView.reloadData()
     }
+
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        
-//        if textField == foodTextfield || textField == birthTextfield {
-//            animateViewMoving(up: true, moveValue: 100)
-//        }
-//        if textField == genderTextfield {
-//            genderTextfield.resignFirstResponder()
-//        }
-        
         
         if textField == birthTextfield {
             showDatePicker()
@@ -684,6 +692,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return autocompleteUrls.count
+//        return 5
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -699,6 +709,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         }
         
         cell?.textLabel?.text = autocompleteUrls[indexPath.row]
+        print("dropdown items are:::::",autocompleteUrls)
         return cell!
     }
     

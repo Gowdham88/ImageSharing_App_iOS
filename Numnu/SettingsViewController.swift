@@ -26,7 +26,7 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
        setNavBar()
         self.navigationController?.navigationBar.titleTextAttributes =
             [NSForegroundColorAttributeName: UIColor.black,
-             NSFontAttributeName: UIFont(name: "Avenir-Medium", size: 19)!]
+             NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
         // Do any additional setup after loading the view.
         
         editButton.layer.cornerRadius = self.editButton.frame.size.height/2

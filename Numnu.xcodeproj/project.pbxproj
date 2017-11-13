@@ -97,6 +97,7 @@
 		B4C5158A1FA085D100348E2A /* BusinessTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C515891FA085D100348E2A /* BusinessTabController.swift */; };
 		B4C515911FA0AC1700348E2A /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C515901FA0AC1600348E2A /* WebViewController.swift */; };
 		B4C7BCEB1F9F74E500B2BEC4 /* PostEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C7BCEA1F9F74E500B2BEC4 /* PostEventTableViewCell.swift */; };
+		BE0D89DE1FB9A5EA00F18C65 /* PostdetailImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0D89DD1FB9A5EA00F18C65 /* PostdetailImageViewController.swift */; };
 		F5C5B07BAB5CCD6B5AA1BAB1 /* Pods_Numnu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B552C452BBFA76F91E99A07A /* Pods_Numnu.framework */; };
 /* End PBXBuildFile section */
 
@@ -223,6 +224,7 @@
 		B4C515901FA0AC1600348E2A /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		B4C7BCEA1F9F74E500B2BEC4 /* PostEventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEventTableViewCell.swift; sourceTree = "<group>"; };
 		B552C452BBFA76F91E99A07A /* Pods_Numnu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Numnu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE0D89DD1FB9A5EA00F18C65 /* PostdetailImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostdetailImageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -430,6 +432,7 @@
 		B4BD9EE91F6FA4AF00C43182 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				BE0D89DD1FB9A5EA00F18C65 /* PostdetailImageViewController.swift */,
 				60B4EA3F1FAAEA7600C1A6C9 /* SettingsVC.swift */,
 				B42F2A241FA9EA6B002419AB /* LocationDetailController */,
 				B4C5158B1FA085ED00348E2A /* AuthControllers */,
@@ -840,6 +843,7 @@
 				B47BD4031F8A48010099061C /* OnboardingVC.swift in Sources */,
 				B45CBCF51FA9D60A004B6E66 /* Locationtableviewcell.swift in Sources */,
 				B410DF9E1F94E01400858E4E /* EventViewController.swift in Sources */,
+				BE0D89DE1FB9A5EA00F18C65 /* PostdetailImageViewController.swift in Sources */,
 				B45CBCE81FA9A166004B6E66 /* DefaultHomeTableViewCell.swift in Sources */,
 				3FC6CEBC1F6F744700DF2A12 /* ViewController.swift in Sources */,
 				B4C515861FA0800000348E2A /* MenuEventTableViewCell.swift in Sources */,
