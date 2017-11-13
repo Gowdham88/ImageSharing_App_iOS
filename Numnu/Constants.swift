@@ -21,7 +21,7 @@ class Constants {
     static let Event = "Event"
     static let EventDetail = "EventDetailTab"
     static let PostDetail  = "PostDetail"
-    static let BusinessDetail = "BussinessDetail"
+    static let BusinessDetail    = "BussinessDetail"
     static let BusinessDetailTab = "BussinessDetailTab"
     static let ItemDetail        = "ItemDetails"
     static let LocationDetail    = "LocationDetail"
@@ -32,11 +32,12 @@ class Constants {
     static let EventStoryId = "eventstoryid"
     static let LoginStoryId = "loginStoryId"
     static let PostDetailId = "postdetailid"
-    static let BusinessDetailId = "businessDetailId"
+    static let BusinessDetailId   = "businessDetailId"
     static let BusinessCompleteId = "businessCompleteid"
     static let ItemDetailId       = "itemCompleteid"
     static let ItemCompleteId     = "itemDetailId"
     static let LocationDetailId   = "locationDetailid"
+    static let MenuItemId         = "menuItemstory"
     
     // Event story id
     
@@ -51,7 +52,7 @@ class Constants {
     static let Tab4  = "Posts"
     static let Tab5  = "Users"
     static let Tab6  = "Lists"
-    static let Tab7  = "Location"
+    static let Tab7  = "Locations"
     
     // Home Tab id
     static let Tabid1  = "EventTab"
@@ -67,7 +68,7 @@ class Constants {
     
     static let EventTab1  = "Businesses"
     static let EventTab2  = "Items"
-    static let EventTab3  = "Post"
+    static let EventTab3  = "Posts"
     
     // Event Detail Tab id
     static let EventTabid1  = "BusinessesTab"
@@ -77,8 +78,8 @@ class Constants {
     // Menu Detail Tab name
     
     static let BusinessTab1 = "Items"
-    static let BusinessTab2 = "Post"
-    static let BusinessTab3 = "Event"
+    static let BusinessTab2 = "Posts"
+    static let BusinessTab3 = "Events"
     
     // Menu Detail Tab id
     

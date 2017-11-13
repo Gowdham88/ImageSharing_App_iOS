@@ -103,7 +103,7 @@ extension ReviewEventViewController : postEventDetailTableViewCellDelegate {
     
     func share() {
         
-        let optionMenu = UIAlertController(title:"Post", message: "", preferredStyle: .actionSheet)
+        let optionMenu = UIAlertController(title:"Posts", message: "", preferredStyle: .actionSheet)
         
         let Bookmark = UIAlertAction(title: "Bookmark", style: .default, handler: {
             

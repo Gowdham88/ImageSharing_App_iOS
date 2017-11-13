@@ -89,28 +89,31 @@ extension MenuEventViewController : UITableViewDelegate,UITableViewDataSource {
         
         let cell = tableView.cellForRow(at: indexPath)
         cell?.contentView.backgroundColor = UIColor.white
+        openStoryBoard(name: Constants.EventDetail, id: Constants.MenuItemId)
         
-        if tableView == menuEventTableview {
-            
-            menuEventTableview.isHidden    = true
-            menuCategoryTableview.isHidden = false
-            if showentity {
-                
-                openStoryBoard(name: Constants.ItemDetail, id: Constants.ItemCompleteId)
-                
-            } else {
-                
-                openStoryBoard(name: Constants.ItemDetail, id: Constants.ItemDetailId)
-                
-            }
-            
-            
-        } else {
-            
-            menuEventTableview.isHidden    = false
-            menuCategoryTableview.isHidden = true
-            
-        }
+        
+//        if tableView == menuEventTableview {
+//
+//            menuEventTableview.isHidden    = true
+//            menuCategoryTableview.isHidden = false
+//            if showentity {
+//
+//
+//
+//            } else {
+//
+//                openStoryBoard(name: Constants.ItemDetail, id: Constants.ItemDetailId)
+//
+//            }
+//
+//
+//        } else {
+//
+//            menuEventTableview.isHidden    = false
+//            menuCategoryTableview.isHidden = true
+//
+//
+//        }
         
     }
     

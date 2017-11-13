@@ -26,6 +26,7 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
     @IBOutlet var filtertableView: UIView!
     @IBOutlet weak var buttonTabBarView: ButtonBarView!
     var searchClick : Bool = false
+    var hideDropdown : Bool = false
    
     @IBOutlet weak var tabScrollView: UIScrollView!
     
@@ -36,13 +37,14 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
     @IBOutlet weak var collectionContainerView: UIView!
     override func viewDidLoad() {
         settings.style.selectedBarHeight = 3.0
+        settings.style.buttonBarItemFont = UIFont(name: "Avenir-Book", size: 17)!
         super.viewDidLoad()
         // change selected bar color
         
         settings.style.buttonBarBackgroundColor = .white
         settings.style.buttonBarItemBackgroundColor = .white
         settings.style.selectedBarBackgroundColor = purpleInspireColor
-        settings.style.buttonBarItemFont = .boldSystemFont(ofSize: 14)
+        
         
         settings.style.buttonBarMinimumLineSpacing = 0
         settings.style.buttonBarItemTitleColor = .black
@@ -65,7 +67,7 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
         addCollectionContainer()
         
         /*********FILTER VIEW*********/
-        filtertableView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.height)
+        filtertableView.isHidden = true
         filtertable.delegate   = self
         filtertable.dataSource = self
         
@@ -85,8 +87,11 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
     
     @IBAction func ButtonSearach(_ sender: UIButton) {
         
-        dismissKeyboard()
-        setNavBar()
+        let top = CGAffineTransform(translationX: 0, y: 0)
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            self.filtertableView.transform = top
+            self.filtertableView.isHidden = false
+        }, completion: nil)
         
         
     }
@@ -95,6 +100,7 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
         let top = CGAffineTransform(translationX: 0, y: 0)
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
             self.filtertableView.transform = top
+            self.filtertableView.isHidden = false
         }, completion: nil)
        
     }
@@ -137,10 +143,7 @@ extension ParentViewController : UITextFieldDelegate {
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        dismissKeyboard()
-        setNavBar()
-        print(textField.text!)
+       
         if let place = textField.text {
             
             getPlaceApi(place_Str: place)
@@ -150,23 +153,32 @@ extension ParentViewController : UITextFieldDelegate {
         let top = CGAffineTransform(translationX: 0, y: 0)
         
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            self.filtertableView.isHidden = false
             self.filtertableView.transform = top
         }, completion: nil)
+        dismissKeyboard()
     
         return true
     }
     
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         
-        let top = CGAffineTransform(translationX: 0, y: -self.view.frame.height)
-        
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-            self.filtertableView.transform = top
+            self.filtertableView.isHidden = true
         }, completion: nil)
         
         dismissKeyboard()
         
-        return true
+        if textField == editsearchbyLocation {
+            
+            editsearchbyLocation.text = ""
+            
+        } else {
+            
+            editsearchbyItem.text = ""
+        }
+        
+        return false
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -326,6 +338,9 @@ extension ParentViewController : UITableViewDataSource,UITableViewDelegate {
         editsearchbyLocation.text = autocompleteplaceArray[indexPath.row]
         editsearchbyItem.text     = autocompleteplaceArray[indexPath.row]
         
+        dismissKeyboard()
+        setNavBar()
+        
         let top = CGAffineTransform(translationX: 0, y: -self.filtertableView.frame.height)
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
             self.filtertableView.transform = top
@@ -340,8 +355,6 @@ extension ParentViewController : UITableViewDataSource,UITableViewDelegate {
         let parameters: Parameters = ["input": place_Str ,"types" : "geocode" , "key" : "AIzaSyDmfYE1gIA6UfjrmOUkflK9kw0nLZf0nYw"]
         
         Alamofire.request(Constants.PlaceApiUrl, parameters: parameters).validate().responseJSON { response in
-            
-            print(response.request)
             
             switch response.result {
             case .success:

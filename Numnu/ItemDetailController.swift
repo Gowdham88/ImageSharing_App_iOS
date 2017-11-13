@@ -45,13 +45,13 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
 
     override func viewDidLoad() {
         settings.style.selectedBarHeight = 3.0
+        settings.style.buttonBarItemFont = UIFont(name: "Avenir-Book", size: 17)!
         super.viewDidLoad()
         
         settings.style.buttonBarBackgroundColor = .white
         settings.style.buttonBarItemBackgroundColor = .white
         settings.style.selectedBarBackgroundColor = UIColor.appBlackColor()
-        settings.style.buttonBarItemFont = .boldSystemFont(ofSize: 14)
-        
+         
         settings.style.buttonBarMinimumLineSpacing = 0
         settings.style.buttonBarItemTitleColor = .black
         settings.style.buttonBarItemsShouldFillAvailiableWidth = true
@@ -251,10 +251,17 @@ extension ItemDetailController {
         //set frame
         button.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
         
+        let button2 : UIButton = UIButton(type: UIButtonType.custom)
+        //set image for button
+        button2.setImage(UIImage(named: "eventDots"), for: UIControlState.normal)
+        //add function for button
+        button2.addTarget(self, action: #selector(EventViewController.backButtonClicked), for: UIControlEvents.touchUpInside)
+        //set frame
+        button2.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
+        
         // Create left and right button for navigation item
         let leftButton =  UIBarButtonItem(customView: button)
-        
-        let rightButton = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        let rightButton = UIBarButtonItem(customView: button2)
         
         // Create two buttons for the navigation item
         navigationItemList.leftBarButtonItem  = leftButton
