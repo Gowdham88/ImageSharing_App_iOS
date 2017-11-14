@@ -618,14 +618,60 @@
                                     <constraint firstItem="yiT-ll-IaZ" firstAttribute="top" secondItem="Bp9-5t-YNe" secondAttribute="top" id="pXa-HN-irl"/>
                                 </constraints>
                             </scrollView>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lwg-fG-j9c">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="1100"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9qa-Wy-m3S">
+                                        <rect key="frame" x="0.0" y="970" width="320" height="130"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="share" translatesAutoresizingMaskIntoConstraints="NO" id="9n5-jP-Qq7">
+                                                <rect key="frame" x="25" y="18" width="30" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Bookmark" translatesAutoresizingMaskIntoConstraints="NO" id="UMc-TM-pTO">
+                                                <rect key="frame" x="25" y="74" width="30" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Share" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eXF-gQ-Qin">
+                                                <rect key="frame" x="78" y="18" width="234" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bookmark" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hX4-sm-CNy">
+                                                <rect key="frame" x="78" y="74" width="234" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="130" id="Fvu-d7-Cko"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="9qa-Wy-m3S" secondAttribute="trailing" id="XXv-1n-eSE"/>
+                                    <constraint firstAttribute="bottom" secondItem="9qa-Wy-m3S" secondAttribute="bottom" id="nvm-8N-Py1"/>
+                                    <constraint firstItem="9qa-Wy-m3S" firstAttribute="leading" secondItem="lwg-fG-j9c" secondAttribute="leading" id="rlT-mH-YKI"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="lwg-fG-j9c" firstAttribute="leading" secondItem="O6n-Hf-Wzm" secondAttribute="leading" id="1ee-DJ-CXb"/>
                             <constraint firstItem="yiT-ll-IaZ" firstAttribute="width" secondItem="DAK-Wi-Mmi" secondAttribute="width" id="6Jg-Nu-gTT"/>
+                            <constraint firstItem="lwg-fG-j9c" firstAttribute="bottom" secondItem="O6n-Hf-Wzm" secondAttribute="bottom" id="DYr-up-kL0"/>
                             <constraint firstItem="O6n-Hf-Wzm" firstAttribute="bottom" secondItem="Bp9-5t-YNe" secondAttribute="bottom" id="Gqt-Wr-G7y"/>
                             <constraint firstItem="O6n-Hf-Wzm" firstAttribute="trailing" secondItem="Bp9-5t-YNe" secondAttribute="trailing" id="LIA-Pk-9Wd"/>
+                            <constraint firstItem="lwg-fG-j9c" firstAttribute="top" secondItem="DAK-Wi-Mmi" secondAttribute="top" id="VzP-3x-R8f"/>
                             <constraint firstItem="Bp9-5t-YNe" firstAttribute="leading" secondItem="O6n-Hf-Wzm" secondAttribute="leading" id="a1E-sZ-cXf"/>
                             <constraint firstItem="Bp9-5t-YNe" firstAttribute="top" secondItem="O6n-Hf-Wzm" secondAttribute="top" id="kRt-8w-tZM"/>
+                            <constraint firstItem="lwg-fG-j9c" firstAttribute="trailing" secondItem="O6n-Hf-Wzm" secondAttribute="trailing" id="tvZ-kq-18M"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="O6n-Hf-Wzm"/>
                     </view>
@@ -646,6 +692,7 @@
                         <outlet property="navigationItemList" destination="w1v-Ma-uZP" id="tyu-l1-YDA"/>
                         <outlet property="pagerView" destination="Ogp-uE-AMy" id="ozt-dq-0Oy"/>
                         <outlet property="readMoreButton" destination="zap-vb-pMv" id="P20-ib-uMx"/>
+                        <outlet property="shareView" destination="lwg-fG-j9c" id="zeU-uU-dBM"/>
                         <outlet property="tagScrollView" destination="jq6-W2-rl2" id="50z-Vd-MrJ"/>
                     </connections>
                 </viewController>
@@ -655,6 +702,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Bookmark" width="14" height="24"/>
         <image name="Numnu_appicon" width="122" height="122"/>
         <image name="arrow" width="18" height="10"/>
         <image name="date_time_ico" width="23" height="23"/>
@@ -667,5 +715,6 @@
         <image name="map_ico" width="25" height="25"/>
         <image name="onboardbg" width="2225" height="1348"/>
         <image name="restaurant_ico" width="26" height="26"/>
+        <image name="share" width="24" height="24"/>
     </resources>
 </document>

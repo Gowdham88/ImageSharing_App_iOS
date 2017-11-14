@@ -26,23 +26,25 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
     @IBOutlet var filtertableView: UIView!
     @IBOutlet weak var buttonTabBarView: ButtonBarView!
     var searchClick : Bool = false
+    var hideDropdown : Bool = false
    
     @IBOutlet weak var tabScrollView: UIScrollView!
     
     /*******************place api*************************/
     var autocompleteplaceArray = [String]()
-    
+    @IBOutlet weak var shareView : UIView!
     
     @IBOutlet weak var collectionContainerView: UIView!
     override func viewDidLoad() {
         settings.style.selectedBarHeight = 3.0
+        settings.style.buttonBarItemFont = UIFont(name: "Avenir-Book", size: 17)!
         super.viewDidLoad()
         // change selected bar color
         
         settings.style.buttonBarBackgroundColor = .white
         settings.style.buttonBarItemBackgroundColor = .white
         settings.style.selectedBarBackgroundColor = purpleInspireColor
-        settings.style.buttonBarItemFont = .boldSystemFont(ofSize: 14)
+        
         
         settings.style.buttonBarMinimumLineSpacing = 0
         settings.style.buttonBarItemTitleColor = .black
@@ -63,9 +65,10 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
         
         hideNavBar()
         addCollectionContainer()
+        alertTapRegister()
         
         /*********FILTER VIEW*********/
-        filtertableView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.height)
+        filtertableView.isHidden = true
         filtertable.delegate   = self
         filtertable.dataSource = self
         
@@ -85,8 +88,11 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
     
     @IBAction func ButtonSearach(_ sender: UIButton) {
         
-        dismissKeyboard()
-        setNavBar()
+        let top = CGAffineTransform(translationX: 0, y: 0)
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            self.filtertableView.transform = top
+            self.filtertableView.isHidden = false
+        }, completion: nil)
         
         
     }
@@ -95,6 +101,7 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
         let top = CGAffineTransform(translationX: 0, y: 0)
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
             self.filtertableView.transform = top
+            self.filtertableView.isHidden = false
         }, completion: nil)
        
     }
@@ -105,7 +112,8 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
             let child_1 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1)
             let child_2 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid2)
             let child_3 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid3)
-            let child_4 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid4)
+            let child_4 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid4) as! PostTabController
+            child_4.popdelegate = self
             let child_5 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid5)
             let child_6 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid6)
             return [child_1, child_2,child_3,child_4,child_5,child_6]
@@ -137,10 +145,7 @@ extension ParentViewController : UITextFieldDelegate {
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        dismissKeyboard()
-        setNavBar()
-        print(textField.text!)
+       
         if let place = textField.text {
             
             getPlaceApi(place_Str: place)
@@ -150,23 +155,32 @@ extension ParentViewController : UITextFieldDelegate {
         let top = CGAffineTransform(translationX: 0, y: 0)
         
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            self.filtertableView.isHidden = false
             self.filtertableView.transform = top
         }, completion: nil)
+        dismissKeyboard()
     
         return true
     }
     
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         
-        let top = CGAffineTransform(translationX: 0, y: -self.view.frame.height)
-        
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-            self.filtertableView.transform = top
+            self.filtertableView.isHidden = true
         }, completion: nil)
         
         dismissKeyboard()
         
-        return true
+        if textField == editsearchbyLocation {
+            
+            editsearchbyLocation.text = ""
+            
+        } else {
+            
+            editsearchbyItem.text = ""
+        }
+        
+        return false
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -326,6 +340,9 @@ extension ParentViewController : UITableViewDataSource,UITableViewDelegate {
         editsearchbyLocation.text = autocompleteplaceArray[indexPath.row]
         editsearchbyItem.text     = autocompleteplaceArray[indexPath.row]
         
+        dismissKeyboard()
+        setNavBar()
+        
         let top = CGAffineTransform(translationX: 0, y: -self.filtertableView.frame.height)
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
             self.filtertableView.transform = top
@@ -340,8 +357,6 @@ extension ParentViewController : UITableViewDataSource,UITableViewDelegate {
         let parameters: Parameters = ["input": place_Str ,"types" : "geocode" , "key" : "AIzaSyDmfYE1gIA6UfjrmOUkflK9kw0nLZf0nYw"]
         
         Alamofire.request(Constants.PlaceApiUrl, parameters: parameters).validate().responseJSON { response in
-            
-            print(response.request)
             
             switch response.result {
             case .success:
@@ -386,6 +401,47 @@ extension ParentViewController : UITableViewDataSource,UITableViewDelegate {
     }
     
     
+}
+
+extension ParentViewController : PostTabControllerDelegate {
+    
+    func popupClick() {
+        
+        openPopup()
+        
+    }
+    
+    func alertTapRegister() {
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.closePopup(sender:)))
+        self.shareView.addGestureRecognizer(tap)
+        
+    }
+    
+    func closePopup(sender : UITapGestureRecognizer) {
+        
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            
+            self.shareView.alpha                 = 0
+            
+        }, completion: nil)
+        
+    }
+    
+    func openPopup() {
+        
+        self.shareView.alpha   = 1
+        
+        let top = CGAffineTransform(translationX: 0, y: 0)
+        
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            self.shareView.isHidden = false
+            self.shareView.transform = top
+            
+        }, completion: nil)
+        
+        
+    }
 }
 
 

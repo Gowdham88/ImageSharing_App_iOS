@@ -34,6 +34,7 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
     @IBOutlet weak var eventDescriptionHeight : NSLayoutConstraint!
     @IBOutlet weak var containerViewTop : NSLayoutConstraint!
     @IBOutlet weak var barButtonTop : NSLayoutConstraint!
+    @IBOutlet weak var shareView: UIView!
     
     @IBOutlet weak var businessEntityView : UIView!
     @IBOutlet weak var businessEntityImage: ImageExtender!
@@ -45,13 +46,13 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
 
     override func viewDidLoad() {
         settings.style.selectedBarHeight = 3.0
+        settings.style.buttonBarItemFont = UIFont(name: "Avenir-Book", size: 17)!
         super.viewDidLoad()
         
         settings.style.buttonBarBackgroundColor = .white
         settings.style.buttonBarItemBackgroundColor = .white
         settings.style.selectedBarBackgroundColor = UIColor.appBlackColor()
-        settings.style.buttonBarItemFont = .boldSystemFont(ofSize: 14)
-        
+         
         settings.style.buttonBarMinimumLineSpacing = 0
         settings.style.buttonBarItemTitleColor = .black
         settings.style.buttonBarItemsShouldFillAvailiableWidth = true
@@ -74,7 +75,7 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
         /****************event label tap function************************/
         
         tapRegistration()
-        
+        alertTapRegister()
         tagViewUpdate()
         entitytagUpdate()
         
@@ -112,7 +113,8 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
-        let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3)
+        let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3) as! ReviewEventViewController
+        child_1.popdelegate = self
         let child_2 = UIStoryboard(name: Constants.ItemDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid7)
         let child_3 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1)
         return [child_1,child_2,child_3]
@@ -251,10 +253,17 @@ extension ItemDetailController {
         //set frame
         button.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
         
+        let button2 : UIButton = UIButton(type: UIButtonType.custom)
+        //set image for button
+        button2.setImage(UIImage(named: "eventDots"), for: UIControlState.normal)
+        //add function for button
+        button2.addTarget(self, action: #selector(EventViewController.openPopup), for: UIControlEvents.touchUpInside)
+        //set frame
+        button2.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
+        
         // Create left and right button for navigation item
         let leftButton =  UIBarButtonItem(customView: button)
-        
-        let rightButton = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        let rightButton = UIBarButtonItem(customView: button2)
         
         // Create two buttons for the navigation item
         navigationItemList.leftBarButtonItem  = leftButton
@@ -278,4 +287,45 @@ extension ItemDetailController {
         
     }
     
+    func alertTapRegister(){
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.closePopup(sender:)))
+        self.shareView.addGestureRecognizer(tap)
+        
+    }
+    
+    func closePopup(sender : UITapGestureRecognizer) {
+        
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            
+            self.shareView.alpha                 = 0
+            
+        }, completion: nil)
+        
+    }
+    
+    func openPopup() {
+        
+        self.shareView.alpha   = 1
+        
+        let top = CGAffineTransform(translationX: 0, y: 0)
+        
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            self.shareView.isHidden = false
+            self.shareView.transform = top
+            
+        }, completion: nil)
+        
+        
+    }
+    
 }
+
+extension ItemDetailController : ReviewEventViewControllerDelegate {
+    
+    func popupClick() {
+     
+        openPopup()
+    }
+}
+

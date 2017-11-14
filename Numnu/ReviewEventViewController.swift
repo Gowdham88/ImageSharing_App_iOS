@@ -9,11 +9,17 @@
 import UIKit
 import XLPagerTabStrip
 
+protocol  ReviewEventViewControllerDelegate{
+    
+    func popupClick()
+}
+
 class ReviewEventViewController: UIViewController,IndicatorInfoProvider {
     
     
     @IBOutlet weak var postEventTableview: UITableView!
     var window : UIWindow?
+    var popdelegate : ReviewEventViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,13 +103,13 @@ extension ReviewEventViewController : postEventDetailTableViewCellDelegate {
     
     func bookmarkPost(tag: Int) {
         
-        share()
+       popdelegate!.popupClick()
         
     }
     
     func share() {
         
-        let optionMenu = UIAlertController(title:"Post", message: "", preferredStyle: .actionSheet)
+        let optionMenu = UIAlertController(title:"Posts", message: "", preferredStyle: .actionSheet)
         
         let Bookmark = UIAlertAction(title: "Bookmark", style: .default, handler: {
             

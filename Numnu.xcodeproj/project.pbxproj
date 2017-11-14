@@ -51,6 +51,7 @@
 		B41842391F8FCBF100CBBA57 /* Edit_ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41842381F8FCBF100CBBA57 /* Edit_ProfileVC.swift */; };
 		B418423F1F8FD1B000CBBA57 /* NotificationsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B418423E1F8FD1B000CBBA57 /* NotificationsVC.swift */; };
 		B41842411F8FD28500CBBA57 /* NotificationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41842401F8FD28500CBBA57 /* NotificationsTableViewCell.swift */; };
+		B41BF3D71FB9A8480015C5E7 /* MenuItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41BF3D61FB9A8480015C5E7 /* MenuItemViewController.swift */; };
 		B42201B21F8E661E0058A4ED /* ImageExtender.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42201B11F8E661E0058A4ED /* ImageExtender.swift */; };
 		B42201B41F8E70DA0058A4ED /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42201B31F8E70DA0058A4ED /* EventTableViewCell.swift */; };
 		B426C68E1F9E0A6B008D586B /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B426C68D1F9E0A6B008D586B /* SplashViewController.swift */; };
@@ -173,6 +174,7 @@
 		B41842381F8FCBF100CBBA57 /* Edit_ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edit_ProfileVC.swift; sourceTree = "<group>"; };
 		B418423E1F8FD1B000CBBA57 /* NotificationsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsVC.swift; sourceTree = "<group>"; };
 		B41842401F8FD28500CBBA57 /* NotificationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewCell.swift; sourceTree = "<group>"; };
+		B41BF3D61FB9A8480015C5E7 /* MenuItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemViewController.swift; sourceTree = "<group>"; };
 		B42201B11F8E661E0058A4ED /* ImageExtender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtender.swift; sourceTree = "<group>"; };
 		B42201B31F8E70DA0058A4ED /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		B426C68D1F9E0A6B008D586B /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -385,6 +387,7 @@
 				B44E1D4B1FA1B21D001F754E /* BusinessEventViewController.swift */,
 				B44E1D4D1FA1B249001F754E /* MenuEventViewController.swift */,
 				B44E1D521FA1BECE001F754E /* ReviewEventViewController.swift */,
+				B41BF3D61FB9A8480015C5E7 /* MenuItemViewController.swift */,
 			);
 			name = EventTabControllers;
 			sourceTree = "<group>";
@@ -860,6 +863,7 @@
 				B4BD9EFB1F6FD08F00C43182 /* Processors.swift in Sources */,
 				B47BD4091F8A836D0099061C /* ForgotpasswordVC.swift in Sources */,
 				B44E1D4C1FA1B21D001F754E /* BusinessEventViewController.swift in Sources */,
+				B41BF3D71FB9A8480015C5E7 /* MenuItemViewController.swift in Sources */,
 				B47F63A81F88E7B6001D7A18 /* ButtonExtender.swift in Sources */,
 				B415308D1F8BB78C000FB369 /* ParentViewController.swift in Sources */,
 				B46310241FA323E2009F6F0E /* PostDetailViewController.swift in Sources */,
