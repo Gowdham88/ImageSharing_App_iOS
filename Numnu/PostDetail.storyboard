@@ -106,7 +106,7 @@
                                         <rect key="frame" x="40" y="336" width="75" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="35" id="A5G-VI-tzk"/>
-                                            <constraint firstAttribute="width" constant="75" id="Rsm-62-fT5"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="75" id="Rsm-62-fT5"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                         <color key="textColor" red="0.44705882349999998" green="0.45098039220000002" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -177,7 +177,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cottage house" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7EP-vb-NJn">
                                         <rect key="frame" x="151" y="336" width="75" height="35"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="75" id="Og4-Ou-x6C"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="75" id="Og4-Ou-x6C"/>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="35" id="ZfJ-yk-TKZ"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
@@ -198,6 +198,7 @@
                                     <constraint firstItem="sab-nU-cTw" firstAttribute="leading" secondItem="vE2-yh-Yq6" secondAttribute="trailing" constant="8" id="9Uf-zU-J8A"/>
                                     <constraint firstAttribute="trailing" secondItem="ubE-a4-hnC" secondAttribute="trailing" constant="18" id="9Ux-F7-0h4"/>
                                     <constraint firstItem="RM3-2w-pIx" firstAttribute="top" secondItem="ubE-a4-hnC" secondAttribute="bottom" constant="10" id="BoL-Zg-Aou"/>
+                                    <constraint firstItem="GiX-XL-MSl" firstAttribute="leading" secondItem="7EP-vb-NJn" secondAttribute="trailing" constant="10" id="CSb-9I-2qz"/>
                                     <constraint firstItem="S26-95-fXa" firstAttribute="top" secondItem="r9a-im-5f4" secondAttribute="bottom" constant="14" id="DGL-Om-Lws"/>
                                     <constraint firstItem="7EP-vb-NJn" firstAttribute="top" secondItem="r9a-im-5f4" secondAttribute="bottom" constant="8" id="Eg8-C5-xZg"/>
                                     <constraint firstItem="ubE-a4-hnC" firstAttribute="top" secondItem="7EP-vb-NJn" secondAttribute="bottom" constant="8" id="HVK-jh-wEz"/>
@@ -219,9 +220,8 @@
                                     <constraint firstAttribute="trailing" secondItem="r9a-im-5f4" secondAttribute="trailing" constant="10" id="iHR-PS-CSf"/>
                                     <constraint firstItem="o8O-Eg-dsa" firstAttribute="top" secondItem="emq-kw-nq5" secondAttribute="top" constant="15" id="kEo-DN-OIs"/>
                                     <constraint firstItem="2HT-QO-BFJ" firstAttribute="leading" secondItem="sab-nU-cTw" secondAttribute="trailing" constant="9" id="lQT-hN-xhl"/>
-                                    <constraint firstItem="S26-95-fXa" firstAttribute="leading" secondItem="c2D-wh-xbf" secondAttribute="trailing" constant="6" id="luh-QW-U8t"/>
+                                    <constraint firstItem="S26-95-fXa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="c2D-wh-xbf" secondAttribute="trailing" constant="6" id="luh-QW-U8t"/>
                                     <constraint firstAttribute="trailing" secondItem="MzI-xt-bC5" secondAttribute="trailing" constant="10" id="np4-dq-3Iq"/>
-                                    <constraint firstItem="S26-95-fXa" firstAttribute="leading" secondItem="c2D-wh-xbf" secondAttribute="trailing" constant="6" id="npL-Wb-8fo"/>
                                     <constraint firstItem="Wf4-FV-Y9d" firstAttribute="top" secondItem="r9a-im-5f4" secondAttribute="bottom" constant="8" id="oec-eR-MY5"/>
                                     <constraint firstItem="GiX-XL-MSl" firstAttribute="top" secondItem="r9a-im-5f4" secondAttribute="bottom" constant="8" id="ogv-Kk-PmM"/>
                                     <constraint firstItem="7EP-vb-NJn" firstAttribute="leading" secondItem="S26-95-fXa" secondAttribute="trailing" constant="8" id="rUX-8i-PF7"/>

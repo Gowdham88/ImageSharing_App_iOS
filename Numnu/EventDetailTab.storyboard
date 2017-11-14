@@ -480,10 +480,10 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Barbaque side platter" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DyA-3T-Ldh">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Barbaque side platter sfkkfh flkjldjlj dlfkjdkljf flkdjflkjd fdfd" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DyA-3T-Ldh">
                                                             <rect key="frame" x="40" y="327" width="75" height="35"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="75" id="pyx-Be-vsG"/>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="75" id="pyx-Be-vsG"/>
                                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="35" id="wtD-th-acY"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
@@ -552,10 +552,10 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cottage house" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bsw-NZ-JX4">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Barbaque side platter sfkkfh flkjldjlj dlfkjdkljf flkdjflkjd fdfd" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bsw-NZ-JX4">
                                                             <rect key="frame" x="151" y="327" width="75" height="35"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="75" id="UdS-kl-I4C"/>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="75" id="UdS-kl-I4C"/>
                                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="35" id="tg2-k3-aK3"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
@@ -577,9 +577,8 @@
                                                         <constraint firstItem="cag-38-Vy0" firstAttribute="leading" secondItem="Wf2-6R-umF" secondAttribute="trailing" constant="8" id="G7c-bj-8cJ"/>
                                                         <constraint firstItem="HLp-vk-Sqd" firstAttribute="top" secondItem="cag-38-Vy0" secondAttribute="bottom" constant="3" id="GDg-u2-CFY"/>
                                                         <constraint firstAttribute="trailing" secondItem="ohA-Yh-Joh" secondAttribute="trailing" constant="8" id="HuZ-6N-VfW"/>
-                                                        <constraint firstItem="PVJ-Oe-q0Y" firstAttribute="leading" secondItem="DyA-3T-Ldh" secondAttribute="trailing" constant="6" id="NeV-pT-UHH"/>
+                                                        <constraint firstItem="PVJ-Oe-q0Y" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DyA-3T-Ldh" secondAttribute="trailing" constant="6" id="NeV-pT-UHH"/>
                                                         <constraint firstItem="xcb-Yg-cY6" firstAttribute="leading" secondItem="ahw-4s-BUN" secondAttribute="leading" constant="10" id="Nxl-Lv-rpe"/>
-                                                        <constraint firstItem="PVJ-Oe-q0Y" firstAttribute="leading" secondItem="DyA-3T-Ldh" secondAttribute="trailing" constant="6" id="RO6-HU-QUG"/>
                                                         <constraint firstAttribute="trailing" secondItem="Kqb-Vn-QbE" secondAttribute="trailing" constant="10" id="WQG-BB-ZXi"/>
                                                         <constraint firstItem="ZHV-Ji-sMb" firstAttribute="top" secondItem="uKa-ja-Wj5" secondAttribute="bottom" constant="8" id="XOL-os-YW4"/>
                                                         <constraint firstAttribute="trailing" secondItem="uKa-ja-Wj5" secondAttribute="trailing" constant="10" id="YAt-IU-OUW"/>
@@ -600,6 +599,7 @@
                                                         <constraint firstItem="fh9-Yn-8dC" firstAttribute="top" secondItem="BNR-np-Yml" secondAttribute="bottom" constant="10" id="oNW-96-j7G"/>
                                                         <constraint firstItem="ohA-Yh-Joh" firstAttribute="top" secondItem="cag-38-Vy0" secondAttribute="bottom" constant="3" id="od1-Qw-HZP"/>
                                                         <constraint firstItem="BNR-np-Yml" firstAttribute="top" secondItem="bsw-NZ-JX4" secondAttribute="bottom" constant="8" id="peX-f6-LG0"/>
+                                                        <constraint firstItem="ZHV-Ji-sMb" firstAttribute="leading" secondItem="bsw-NZ-JX4" secondAttribute="trailing" constant="10" id="qYB-Xp-ea7"/>
                                                         <constraint firstItem="BNR-np-Yml" firstAttribute="top" secondItem="DyA-3T-Ldh" secondAttribute="bottom" constant="8" id="rru-YD-cYg"/>
                                                         <constraint firstItem="ohA-Yh-Joh" firstAttribute="leading" secondItem="HLp-vk-Sqd" secondAttribute="trailing" constant="9" id="s77-D8-RJo"/>
                                                         <constraint firstItem="BNR-np-Yml" firstAttribute="leading" secondItem="sW9-6b-dPe" secondAttribute="trailing" constant="7" id="sKf-cE-ijy"/>
@@ -649,7 +649,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="APA-Xi-1eW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1373" y="147"/>
+            <point key="canvasLocation" x="1372.5" y="146.83098591549296"/>
         </scene>
         <!--Title-->
         <scene sceneID="2Tj-fm-6az">

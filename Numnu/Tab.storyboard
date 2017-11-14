@@ -120,7 +120,7 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Barbaque side platter" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hhi-c2-Xbg">
                                                             <rect key="frame" x="40" y="327" width="74" height="35"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="74" id="97z-6J-QQM"/>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="74" id="97z-6J-QQM"/>
                                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="35" id="Flz-3Z-yjW"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
@@ -192,7 +192,7 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cottage house" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZgA-cj-b2R">
                                                             <rect key="frame" x="151" y="327" width="75" height="35"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="75" id="IIn-dz-KqO"/>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="75" id="IIn-dz-KqO"/>
                                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="35" id="j4i-NN-sai"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
@@ -231,11 +231,11 @@
                                                         <constraint firstAttribute="height" constant="427" id="egd-AT-tp1"/>
                                                         <constraint firstItem="TLs-Db-xH6" firstAttribute="leading" secondItem="LPR-Hf-e84" secondAttribute="leading" constant="8" id="en5-cw-wVm"/>
                                                         <constraint firstAttribute="trailing" secondItem="00N-mq-ROq" secondAttribute="trailing" constant="10" id="iL4-O7-2ba"/>
-                                                        <constraint firstItem="NNQ-iY-1H0" firstAttribute="leading" secondItem="hhi-c2-Xbg" secondAttribute="trailing" constant="7" id="jUe-Qd-xTd"/>
                                                         <constraint firstItem="Xgc-Zh-vj3" firstAttribute="top" secondItem="2ZJ-Fd-oY6" secondAttribute="bottom" constant="8" id="jzm-6s-J1N"/>
                                                         <constraint firstItem="00N-mq-ROq" firstAttribute="top" secondItem="2ZJ-Fd-oY6" secondAttribute="bottom" constant="8" id="oRx-k1-qjX"/>
                                                         <constraint firstItem="ZgA-cj-b2R" firstAttribute="leading" secondItem="NNQ-iY-1H0" secondAttribute="trailing" constant="8" id="okX-aY-nDl"/>
-                                                        <constraint firstItem="NNQ-iY-1H0" firstAttribute="leading" secondItem="hhi-c2-Xbg" secondAttribute="trailing" constant="7" id="p1s-vr-LjW"/>
+                                                        <constraint firstItem="NNQ-iY-1H0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hhi-c2-Xbg" secondAttribute="trailing" constant="7" id="p1s-vr-LjW"/>
+                                                        <constraint firstItem="Xgc-Zh-vj3" firstAttribute="leading" secondItem="ZgA-cj-b2R" secondAttribute="trailing" constant="10" id="p5R-xH-VlZ"/>
                                                         <constraint firstAttribute="trailing" secondItem="7sA-Fj-o0e" secondAttribute="trailing" constant="10" id="pOQ-vH-V7U"/>
                                                         <constraint firstItem="km4-CZ-vdl" firstAttribute="top" secondItem="hhi-c2-Xbg" secondAttribute="bottom" constant="17" id="pVh-jg-Usx"/>
                                                         <constraint firstItem="km4-CZ-vdl" firstAttribute="leading" secondItem="LPR-Hf-e84" secondAttribute="leading" constant="10" id="rKV-JR-grT"/>
@@ -983,7 +983,7 @@
                                         </cells>
                                     </collectionView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Past Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="103-ut-mdO">
-                                        <rect key="frame" x="10" y="175" width="90.5" height="30"/>
+                                        <rect key="frame" x="10" y="175" width="86" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="bkp-e5-x09"/>
                                         </constraints>
