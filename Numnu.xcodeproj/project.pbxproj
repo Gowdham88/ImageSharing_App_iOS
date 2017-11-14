@@ -30,6 +30,7 @@
 		6F44F25F1F9365F200AF45F2 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F44F25B1F9365F200AF45F2 /* CoreFoundation.framework */; };
 		6F44F2601F9365F200AF45F2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F44F25C1F9365F200AF45F2 /* CoreData.framework */; };
 		6F542A931FB1BD9B0024AC7D /* PlaceTableviewcellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F542A921FB1BD9B0024AC7D /* PlaceTableviewcellTableViewCell.swift */; };
+		6FF81B261FB9A5E400697D9A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FF81B241FB9A5E400697D9A /* Localizable.strings */; };
 		9DD243F29EDB64B4928ED81B /* Pods_Numnu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD87AF37876C16561F7CFD02 /* Pods_Numnu.framework */; };
 		B406DE1F1FA713A50092E2B4 /* MenuItemEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B406DE1E1FA713A50092E2B4 /* MenuItemEventCell.swift */; };
 		B406DE211FA713C00092E2B4 /* MenuCategoryItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B406DE201FA713C00092E2B4 /* MenuCategoryItemCell.swift */; };
@@ -149,6 +150,10 @@
 		6F44F25B1F9365F200AF45F2 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		6F44F25C1F9365F200AF45F2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		6F542A921FB1BD9B0024AC7D /* PlaceTableviewcellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceTableviewcellTableViewCell.swift; sourceTree = "<group>"; };
+		6FF81B221FB9A43D00697D9A /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
+		6FF81B231FB9A43D00697D9A /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		6FF81B251FB9A5E400697D9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Numnu/Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6FF81B281FB9A66500697D9A /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Numnu/fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7873B7DDA3204181855DB800 /* Pods-Numnu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Numnu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Numnu/Pods-Numnu.debug.xcconfig"; sourceTree = "<group>"; };
 		B406DE1E1FA713A50092E2B4 /* MenuItemEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemEventCell.swift; sourceTree = "<group>"; };
 		B406DE201FA713C00092E2B4 /* MenuCategoryItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCategoryItemCell.swift; sourceTree = "<group>"; };
@@ -297,6 +302,7 @@
 				3FC6CEB91F6F744700DF2A12 /* AppDelegate.swift */,
 				3FC6CEC01F6F744700DF2A12 /* Assets.xcassets */,
 				3FC6CEC51F6F744700DF2A12 /* Info.plist */,
+				6FF81B241FB9A5E400697D9A /* Localizable.strings */,
 			);
 			path = Numnu;
 			sourceTree = "<group>";
@@ -686,6 +692,7 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
 			);
 			mainGroup = 3FC6CEAD1F6F744600DF2A12;
 			productRefGroup = 3FC6CEB71F6F744700DF2A12 /* Products */;
@@ -707,6 +714,7 @@
 				B4A2C06B1F8669A600C3D400 /* Auth.storyboard in Resources */,
 				B47BD4011F8A26A30099061C /* GoogleService-Info.plist in Resources */,
 				3FC6CEC41F6F744700DF2A12 /* LaunchScreen.storyboard in Resources */,
+				6FF81B261FB9A5E400697D9A /* Localizable.strings in Resources */,
 				3FC6CEC11F6F744700DF2A12 /* Assets.xcassets in Resources */,
 				B46310221FA32073009F6F0E /* PostDetail.storyboard in Resources */,
 				B474C5481FA070BB00201B6A /* EventDetailTab.storyboard in Resources */,
@@ -900,6 +908,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				3FC6CEBE1F6F744700DF2A12 /* Base */,
+				6FF81B221FB9A43D00697D9A /* fr */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -908,8 +917,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				3FC6CEC31F6F744700DF2A12 /* Base */,
+				6FF81B231FB9A43D00697D9A /* fr */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		6FF81B241FB9A5E400697D9A /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6FF81B251FB9A5E400697D9A /* Base */,
+				6FF81B281FB9A66500697D9A /* fr */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -919,6 +938,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -970,6 +990,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";

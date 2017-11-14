@@ -44,9 +44,21 @@ class PostDetailViewController : UIViewController {
         alertViewHide.alpha = 0
         alertTapRegister()
 
+        let tap = UITapGestureRecognizer(target: self, action: #selector(PostDetailViewController.imageTapped))
+        postDEventImage.addGestureRecognizer(tap)
+        postDEventImage.isUserInteractionEnabled = true
+        
         // Do any additional setup after loading the view.
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = false
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    func imageTapped() {
+        let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: "PostdetailImageViewController")
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
