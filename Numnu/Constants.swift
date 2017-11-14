@@ -92,7 +92,9 @@ class Constants {
     // Authentication Label
     
     static let Emailpasserror = "Enter email address and password."
-    static let Passworderror  = "Enter valid password with 8 characters & a special character."
+//    static let Passworderror  = "Enter valid password with 8 characters & a special character."
+    static let Passworderror  = "Please check password."
+
     static let Emailerror     = "Enter valid email address."
     
     // Map Api key

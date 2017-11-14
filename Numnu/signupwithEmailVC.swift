@@ -55,7 +55,9 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     
     @IBAction func signinPressed(_ sender: Any) {
         
-
+        let storyboard = UIStoryboard(name: Constants.Auth, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: "signInVC")
+        self.navigationController!.pushViewController(vc, animated: true)
         
     }
     
