@@ -19,7 +19,7 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         setNavBar()
         self.navigationController?.navigationBar.titleTextAttributes =
             [NSForegroundColorAttributeName: UIColor.black,
-             NSFontAttributeName: UIFont(name: "Avenir-Medium", size: 19)!]
+             NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
