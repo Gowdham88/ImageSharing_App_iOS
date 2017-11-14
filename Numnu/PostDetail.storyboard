@@ -159,11 +159,11 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Barbaque side platter" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c2D-wh-xbf">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Barbaque side platter fjdhfkjhd fdkjhfdhkj fkjdhkfjhd fkjdhf" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c2D-wh-xbf">
                                         <rect key="frame" x="40" y="336" width="75" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="35" id="A5G-VI-tzk"/>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="75" id="Rsm-62-fT5"/>
+                                            <constraint firstAttribute="width" constant="75" id="Rsm-62-fT5"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                         <color key="textColor" red="0.44705882349999998" green="0.45098039220000002" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -234,7 +234,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cottage house" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7EP-vb-NJn">
                                         <rect key="frame" x="151" y="336" width="75" height="35"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="75" id="Og4-Ou-x6C"/>
+                                            <constraint firstAttribute="width" constant="75" id="Og4-Ou-x6C"/>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="35" id="ZfJ-yk-TKZ"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
@@ -255,13 +255,14 @@
                                     <constraint firstItem="sab-nU-cTw" firstAttribute="leading" secondItem="vE2-yh-Yq6" secondAttribute="trailing" constant="8" id="9Uf-zU-J8A"/>
                                     <constraint firstAttribute="trailing" secondItem="ubE-a4-hnC" secondAttribute="trailing" constant="18" id="9Ux-F7-0h4"/>
                                     <constraint firstItem="RM3-2w-pIx" firstAttribute="top" secondItem="ubE-a4-hnC" secondAttribute="bottom" constant="10" id="BoL-Zg-Aou"/>
-                                    <constraint firstItem="GiX-XL-MSl" firstAttribute="leading" secondItem="7EP-vb-NJn" secondAttribute="trailing" constant="10" id="CSb-9I-2qz"/>
                                     <constraint firstItem="S26-95-fXa" firstAttribute="top" secondItem="r9a-im-5f4" secondAttribute="bottom" constant="14" id="DGL-Om-Lws"/>
                                     <constraint firstItem="7EP-vb-NJn" firstAttribute="top" secondItem="r9a-im-5f4" secondAttribute="bottom" constant="8" id="Eg8-C5-xZg"/>
                                     <constraint firstItem="ubE-a4-hnC" firstAttribute="top" secondItem="7EP-vb-NJn" secondAttribute="bottom" constant="8" id="HVK-jh-wEz"/>
                                     <constraint firstItem="S8b-G0-oRa" firstAttribute="top" secondItem="c2D-wh-xbf" secondAttribute="bottom" constant="17" id="Ins-o5-HXr"/>
                                     <constraint firstItem="ubE-a4-hnC" firstAttribute="top" secondItem="c2D-wh-xbf" secondAttribute="bottom" constant="8" id="JSV-5W-oNb"/>
                                     <constraint firstItem="o8O-Eg-dsa" firstAttribute="leading" secondItem="vE2-yh-Yq6" secondAttribute="trailing" constant="8" id="MBW-sE-1KW"/>
+                                    <constraint firstItem="S26-95-fXa" firstAttribute="leading" secondItem="c2D-wh-xbf" secondAttribute="trailing" constant="6" id="Rdl-iA-eKI"/>
+                                    <constraint firstItem="GiX-XL-MSl" firstAttribute="leading" secondItem="7EP-vb-NJn" secondAttribute="trailing" constant="10" id="UHD-Ub-qw5"/>
                                     <constraint firstItem="Wf4-FV-Y9d" firstAttribute="leading" secondItem="GiX-XL-MSl" secondAttribute="trailing" constant="14" id="UJ9-IX-9z2"/>
                                     <constraint firstAttribute="trailing" secondItem="Wf4-FV-Y9d" secondAttribute="trailing" constant="10" id="Uzy-07-s2v"/>
                                     <constraint firstItem="aYw-38-4Gt" firstAttribute="leading" secondItem="emq-kw-nq5" secondAttribute="leading" constant="10" id="Y4J-du-UNF"/>
@@ -276,7 +277,6 @@
                                     <constraint firstAttribute="trailing" secondItem="r9a-im-5f4" secondAttribute="trailing" constant="10" id="iHR-PS-CSf"/>
                                     <constraint firstItem="o8O-Eg-dsa" firstAttribute="top" secondItem="emq-kw-nq5" secondAttribute="top" constant="15" id="kEo-DN-OIs"/>
                                     <constraint firstItem="2HT-QO-BFJ" firstAttribute="leading" secondItem="sab-nU-cTw" secondAttribute="trailing" constant="9" id="lQT-hN-xhl"/>
-                                    <constraint firstItem="S26-95-fXa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="c2D-wh-xbf" secondAttribute="trailing" constant="6" id="luh-QW-U8t"/>
                                     <constraint firstAttribute="trailing" secondItem="MzI-xt-bC5" secondAttribute="trailing" constant="10" id="np4-dq-3Iq"/>
                                     <constraint firstItem="Wf4-FV-Y9d" firstAttribute="top" secondItem="r9a-im-5f4" secondAttribute="bottom" constant="8" id="oec-eR-MY5"/>
                                     <constraint firstItem="GiX-XL-MSl" firstAttribute="top" secondItem="r9a-im-5f4" secondAttribute="bottom" constant="8" id="ogv-Kk-PmM"/>
@@ -289,7 +289,7 @@
                                 </constraints>
                             </view>
                             <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tM9-9p-dVI">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="400" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -362,8 +362,10 @@
                         <outlet property="alertView" destination="mTc-GP-fFl" id="j7g-bf-v4D"/>
                         <outlet property="alertViewHide" destination="tM9-9p-dVI" id="00h-Ps-a55"/>
                         <outlet property="alertviewBottomConstraints" destination="rcv-Jf-mfa" id="MuW-ig-wMy"/>
+                        <outlet property="dishwidthDConstaint" destination="Rsm-62-fT5" id="dIE-IH-o7a"/>
                         <outlet property="mainPostView" destination="emq-kw-nq5" id="d7n-XF-mwr"/>
                         <outlet property="navigationItemList" destination="hq0-4z-tGK" id="Btt-To-RpV"/>
+                        <outlet property="placeWidthDConstraint" destination="Og4-Ou-x6C" id="zwc-u4-oqm"/>
                         <outlet property="postDCommentLabel" destination="MzI-xt-bC5" id="XF4-rW-vOC"/>
                         <outlet property="postDEventImage" destination="r9a-im-5f4" id="Lca-cF-GV1"/>
                         <outlet property="postDEventName" destination="ubE-a4-hnC" id="tbG-Ok-39B"/>
@@ -377,7 +379,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l2N-MO-vj6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-200.625" y="133.09859154929578"/>
+            <point key="canvasLocation" x="15" y="93"/>
         </scene>
     </scenes>
     <resources>
@@ -389,6 +391,6 @@
         <image name="foodie" width="640" height="480"/>
         <image name="love_ico" width="32" height="29"/>
         <image name="restaurant_ico" width="26" height="26"/>
-        <image name="share" width="24" height="24"/>
+        <image name="share" width="18" height="20"/>
     </resources>
 </document>

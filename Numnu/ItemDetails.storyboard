@@ -5,7 +5,7 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -209,32 +209,52 @@
                                                     <action selector="ButtonReadMore:" destination="5JW-jP-CEM" eventType="touchUpInside" id="V62-G4-CzI"/>
                                                 </connections>
                                             </button>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xAC-LR-yqq">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xAC-LR-yqq">
                                                 <rect key="frame" x="0.0" y="428" width="320" height="100"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="foodie" translatesAutoresizingMaskIntoConstraints="NO" id="lSM-Je-UDZ" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="foodie" translatesAutoresizingMaskIntoConstraints="NO" id="lSM-Je-UDZ" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
                                                         <rect key="frame" x="8" y="10" width="80" height="80"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="80" id="CXW-cm-G7F"/>
+                                                            <constraint firstAttribute="width" constant="80" id="dXo-pu-9vS"/>
+                                                        </constraints>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                 <real key="value" value="5"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Flatron" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dBS-0C-qvl">
-                                                        <rect key="frame" x="96" y="10" width="216" height="30"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flatron " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dBS-0C-qvl">
+                                                        <rect key="frame" x="96" y="10" width="216" height="22"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="45" id="D8p-Y6-cXY"/>
+                                                        </constraints>
                                                         <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
                                                         <color key="textColor" red="0.1529197991" green="0.15295344590000001" blue="0.15291768310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xhe-SY-7v8">
-                                                        <rect key="frame" x="96" y="48" width="216" height="35"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xhe-SY-7v8">
+                                                        <rect key="frame" x="96" y="40" width="216" height="35"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="35" id="Y81-ct-JYC"/>
+                                                        </constraints>
                                                     </scrollView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstItem="lSM-Je-UDZ" firstAttribute="top" secondItem="xAC-LR-yqq" secondAttribute="top" constant="10" id="2ee-HP-sNb"/>
+                                                    <constraint firstItem="dBS-0C-qvl" firstAttribute="top" secondItem="xAC-LR-yqq" secondAttribute="top" constant="10" id="8T3-QR-Y9q"/>
+                                                    <constraint firstItem="dBS-0C-qvl" firstAttribute="leading" secondItem="lSM-Je-UDZ" secondAttribute="trailing" constant="8" id="8qd-T1-eap"/>
+                                                    <constraint firstAttribute="bottom" secondItem="lSM-Je-UDZ" secondAttribute="bottom" constant="10" id="ArZ-Iz-uiz"/>
+                                                    <constraint firstAttribute="trailing" secondItem="dBS-0C-qvl" secondAttribute="trailing" constant="8" id="Byj-aZ-Cis"/>
+                                                    <constraint firstItem="xhe-SY-7v8" firstAttribute="top" secondItem="dBS-0C-qvl" secondAttribute="bottom" constant="8" id="J99-X9-Ux6"/>
+                                                    <constraint firstAttribute="trailing" secondItem="xhe-SY-7v8" secondAttribute="trailing" constant="8" id="Nru-LB-DE0"/>
+                                                    <constraint firstItem="xhe-SY-7v8" firstAttribute="top" secondItem="dBS-0C-qvl" secondAttribute="bottom" constant="8" id="PEj-pY-V5l"/>
+                                                    <constraint firstItem="xhe-SY-7v8" firstAttribute="leading" secondItem="lSM-Je-UDZ" secondAttribute="trailing" constant="8" id="gp9-AR-1jt"/>
+                                                    <constraint firstAttribute="height" constant="100" id="iuN-2A-ykj"/>
+                                                    <constraint firstItem="dBS-0C-qvl" firstAttribute="leading" secondItem="lSM-Je-UDZ" secondAttribute="trailing" constant="8" id="sIw-tR-FUt"/>
+                                                    <constraint firstItem="lSM-Je-UDZ" firstAttribute="leading" secondItem="xAC-LR-yqq" secondAttribute="leading" constant="8" id="tz9-cy-jbg"/>
+                                                </constraints>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -248,6 +268,7 @@
                                             <constraint firstAttribute="trailing" secondItem="OSA-us-qK6" secondAttribute="trailing" constant="10" id="43n-bB-L3C"/>
                                             <constraint firstItem="VpD-PE-uYq" firstAttribute="top" secondItem="mGI-B3-ZbW" secondAttribute="bottom" constant="10" id="55G-mz-ZtA"/>
                                             <constraint firstItem="6bz-va-xTV" firstAttribute="leading" secondItem="q7q-vD-aPP" secondAttribute="leading" constant="10" id="5O5-2y-M7Y"/>
+                                            <constraint firstItem="xAC-LR-yqq" firstAttribute="leading" secondItem="q7q-vD-aPP" secondAttribute="leading" id="5cq-2R-pkt"/>
                                             <constraint firstItem="OSA-us-qK6" firstAttribute="leading" secondItem="q7q-vD-aPP" secondAttribute="leading" constant="10" id="68N-zu-fnT"/>
                                             <constraint firstItem="Rgb-xP-UYt" firstAttribute="leading" secondItem="q7q-vD-aPP" secondAttribute="leading" constant="10" id="6xu-cc-36b"/>
                                             <constraint firstAttribute="bottom" secondItem="hPy-br-hTK" secondAttribute="bottom" id="8C2-eB-tkg"/>
@@ -266,6 +287,7 @@
                                             <constraint firstAttribute="trailing" secondItem="hPy-br-hTK" secondAttribute="trailing" id="Qri-VK-g4w"/>
                                             <constraint firstItem="f5v-ff-v3w" firstAttribute="top" secondItem="mGI-B3-ZbW" secondAttribute="bottom" constant="15" id="SJm-ga-kAc"/>
                                             <constraint firstItem="fRO-eD-Le5" firstAttribute="top" secondItem="B22-Vg-4hD" secondAttribute="bottom" constant="8" id="SXp-Kn-dSf"/>
+                                            <constraint firstAttribute="trailing" secondItem="xAC-LR-yqq" secondAttribute="trailing" id="T9J-ap-ojW"/>
                                             <constraint firstItem="5Zj-U8-6qn" firstAttribute="leading" secondItem="q7q-vD-aPP" secondAttribute="leading" id="Vo4-qI-nUH"/>
                                             <constraint firstItem="AiP-XY-Ag8" firstAttribute="top" secondItem="iuh-M2-zhK" secondAttribute="bottom" constant="10" id="WA4-42-bmx"/>
                                             <constraint firstAttribute="trailing" secondItem="3cw-7s-mrr" secondAttribute="trailing" id="YSS-CY-FvZ"/>
@@ -280,6 +302,7 @@
                                             <constraint firstItem="CWq-pm-0Ih" firstAttribute="top" secondItem="YSc-MB-4kd" secondAttribute="bottom" constant="8" id="cy3-Lq-hqz"/>
                                             <constraint firstAttribute="trailing" secondItem="fRO-eD-Le5" secondAttribute="trailing" constant="10" id="dNS-Yp-DBu"/>
                                             <constraint firstAttribute="trailing" secondItem="5Zj-U8-6qn" secondAttribute="trailing" id="fWH-G9-lQr"/>
+                                            <constraint firstItem="xAC-LR-yqq" firstAttribute="top" secondItem="OSA-us-qK6" secondAttribute="bottom" constant="8" id="frv-9i-TXG"/>
                                             <constraint firstItem="Rgb-xP-UYt" firstAttribute="top" secondItem="fRO-eD-Le5" secondAttribute="bottom" constant="-181" id="j10-fu-xhj"/>
                                             <constraint firstItem="mGI-B3-ZbW" firstAttribute="leading" secondItem="oA5-sW-Klg" secondAttribute="trailing" constant="10" id="jP7-iT-zfp"/>
                                             <constraint firstItem="6bz-va-xTV" firstAttribute="top" secondItem="VpD-PE-uYq" secondAttribute="bottom" constant="10" id="kFz-rA-e3B"/>
@@ -311,8 +334,8 @@
                                     <constraint firstItem="q7q-vD-aPP" firstAttribute="leading" secondItem="VRI-eP-ARI" secondAttribute="leading" id="wt5-hA-z6w"/>
                                 </constraints>
                             </scrollView>
-                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EK7-jI-jXn">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="1100"/>
+                            <view alpha="0.0" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EK7-jI-jXn">
+                                <rect key="frame" x="400" y="0.0" width="320" height="1100"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G0O-je-XLu">
                                         <rect key="frame" x="0.0" y="970" width="320" height="130"/>
@@ -501,7 +524,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xtc-ZF-92Z">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xtc-ZF-92Z">
                                 <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3R6-mb-egl">
@@ -578,10 +601,10 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0qr-rh-9g4">
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0qr-rh-9g4">
                                                 <rect key="frame" x="0.0" y="311" width="320" height="539"/>
                                             </scrollView>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="SOi-oT-o6c" customClass="ButtonBarView" customModule="XLPagerTabStrip">
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="SOi-oT-o6c" customClass="ButtonBarView" customModule="XLPagerTabStrip">
                                                 <rect key="frame" x="0.0" y="311" width="320" height="64"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -800,6 +823,6 @@
         <image name="map_ico" width="25" height="25"/>
         <image name="onboardbg" width="2225" height="1348"/>
         <image name="restaurant_ico" width="26" height="26"/>
-        <image name="share" width="24" height="24"/>
+        <image name="share" width="18" height="20"/>
     </resources>
 </document>

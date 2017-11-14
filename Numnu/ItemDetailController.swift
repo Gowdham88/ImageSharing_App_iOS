@@ -327,5 +327,9 @@ extension ItemDetailController : ReviewEventViewControllerDelegate {
      
         openPopup()
     }
+    
+    func postTableHeight(height: CGFloat) {
+        
+    }
 }
 

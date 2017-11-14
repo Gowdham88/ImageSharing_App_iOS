@@ -235,8 +235,8 @@ extension ItemCompleteviewcontroller {
     
     func openStoryBoard () {
         
-        let storyboard      = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
-        let vc              = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId)
+        let storyboard = UIStoryboard(name: Constants.ItemDetail, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId)
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
@@ -277,9 +277,16 @@ extension ItemCompleteviewcontroller {
 
 extension ItemCompleteviewcontroller : ReviewEventViewControllerDelegate {
     
+    func postTableHeight(height: CGFloat) {
+        
+    }
+    
+    
     func popupClick() {
         
         openPopup()
     }
+    
+    
 }
 

@@ -9,6 +9,13 @@
 import UIKit
 import XLPagerTabStrip
 
+protocol  EventTabControllerDelegate {
+    
+    func eventTableHeight(height : CGFloat)
+    
+}
+
+
 class EventTabController: UIViewController,IndicatorInfoProvider {
  
     @IBOutlet weak var eventTableView: UITableView!
@@ -17,6 +24,7 @@ class EventTabController: UIViewController,IndicatorInfoProvider {
     var tagarray = ["Festival","Wine","Party","Rum","Barbaque","Pasta","Sandwich","Burger"]
     var showNavBar : Bool = false
     @IBOutlet weak var navigationItemList: UINavigationItem!
+    var eventdelegate : EventTabControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +47,12 @@ class EventTabController: UIViewController,IndicatorInfoProvider {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+        eventdelegate?.eventTableHeight(height: eventTableView.contentSize.height)
     }
     
     

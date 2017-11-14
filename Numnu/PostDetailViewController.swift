@@ -39,6 +39,7 @@ class PostDetailViewController : UIViewController {
         super.viewDidLoad()
         
         setNavBar()
+        setHeight(heightview: Float(UIScreen.main.bounds.size.height))
         
         alertviewBottomConstraints.constant = self.view.frame.height + 600
         alertViewHide.alpha = 0
@@ -186,6 +187,43 @@ extension PostDetailViewController {
         }, completion: nil)
         
        
+    }
+    
+    func setHeight(heightview : Float){
+        
+        if heightview <= 568 {
+            
+            dishwidthDConstaint.constant   = 75
+            placeWidthDConstraint.constant = 75
+            
+            
+        } else if heightview <= 667 {
+            
+            dishwidthDConstaint.constant   = 99
+            placeWidthDConstraint.constant = 99
+            
+        } else if heightview <= 736 {
+            
+            dishwidthDConstaint.constant   = 117
+            placeWidthDConstraint.constant = 117
+            
+        } else if heightview <= 812 {
+            
+            dishwidthDConstaint.constant   = 99
+            placeWidthDConstraint.constant = 99
+            
+        } else if heightview <= 1024 {
+            
+            dishwidthDConstaint.constant   = 274
+            placeWidthDConstraint.constant = 274
+            
+        } else {
+            
+            dishwidthDConstaint.constant   = 387
+            placeWidthDConstraint.constant = 387
+            
+        }
+        
     }
     
     

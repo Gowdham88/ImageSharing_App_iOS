@@ -290,5 +290,9 @@ extension BusinessCompleteViewController : ReviewEventViewControllerDelegate {
         
         openPopup()
     }
+    
+    func postTableHeight(height: CGFloat) {
+        
+    }
 }
 

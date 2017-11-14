@@ -82,7 +82,7 @@
                                                     <constraint firstAttribute="height" constant="20" id="9N6-Hz-iDy"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Montreal" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5m-9M-c9p">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bouillon Bilk,595 St Laurent Blvd, Montreal, QC H2X 2S9, Canada" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5m-9M-c9p">
                                                 <rect key="frame" x="36" y="335" width="120" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="120" id="Shl-ma-aka"/>
@@ -414,6 +414,6 @@
         <image name="location_ico" width="16" height="23"/>
         <image name="map_ico" width="25" height="25"/>
         <image name="onboardbg" width="2225" height="1348"/>
-        <image name="share" width="24" height="24"/>
+        <image name="share" width="18" height="20"/>
     </resources>
 </document>
