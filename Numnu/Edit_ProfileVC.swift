@@ -63,7 +63,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
         let placesClient = GMSPlacesClient.shared()
-        self.view.superview?.addSubview(saveButton)
+//        self.myscrollView.superview?.addSubview(saveButton)
         placesClient.currentPlace(callback: { (placeLikelihoods: GMSPlaceLikelihoodList?, error) -> Void in
             if error != nil {
                 print("Current Place error: \(error!.localizedDescription)")
@@ -336,10 +336,15 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         dropdownTableView.isHidden = false
-        let substring = (foodTextfield.text! as NSString).replacingCharacters(in: range, with: string )
-        print("the substrings are::::",substring)
-        
-        searchAutocompleteEntriesWithSubstring(substring: substring)
+        if textField == foodTextfield {
+            let substring = (foodTextfield.text! as NSString).replacingCharacters(in: range, with: string )
+            print("the substrings are::::",substring)
+            
+            searchAutocompleteEntriesWithSubstring(substring: substring)
+        }else{
+            print("this is not a food textfield")
+        }
+       
         return true     // not sure about this - cou
     }
     

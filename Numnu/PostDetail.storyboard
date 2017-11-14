@@ -27,27 +27,27 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lpk-Kh-Pcv">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sJK-vH-G1D">
-                                        <rect key="frame" x="-20" y="0.0" width="377" height="632"/>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sJK-vH-G1D">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="foodie" translatesAutoresizingMaskIntoConstraints="NO" id="g5y-2m-2RR">
-                                                <rect key="frame" x="20" y="142" width="320" height="240"/>
+                                                <rect key="frame" x="0.0" y="142" width="320" height="240"/>
                                             </imageView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="g5y-2m-2RR" secondAttribute="trailing" constant="37" id="AYZ-J8-6qg"/>
-                                            <constraint firstAttribute="bottom" secondItem="g5y-2m-2RR" secondAttribute="bottom" constant="250" id="QoQ-kW-SR8"/>
-                                            <constraint firstItem="g5y-2m-2RR" firstAttribute="leading" secondItem="sJK-vH-G1D" secondAttribute="leading" constant="20" id="olo-tE-i7O"/>
+                                            <constraint firstAttribute="trailing" secondItem="g5y-2m-2RR" secondAttribute="trailing" id="AYZ-J8-6qg"/>
+                                            <constraint firstAttribute="bottom" secondItem="g5y-2m-2RR" secondAttribute="bottom" constant="186" id="QoQ-kW-SR8"/>
+                                            <constraint firstItem="g5y-2m-2RR" firstAttribute="leading" secondItem="sJK-vH-G1D" secondAttribute="leading" id="olo-tE-i7O"/>
                                             <constraint firstItem="g5y-2m-2RR" firstAttribute="top" secondItem="sJK-vH-G1D" secondAttribute="top" constant="142" id="pBI-t6-pNu"/>
-                                            <constraint firstItem="g5y-2m-2RR" firstAttribute="width" secondItem="sJK-vH-G1D" secondAttribute="width" constant="-57" id="uR7-Sp-eWa"/>
+                                            <constraint firstItem="g5y-2m-2RR" firstAttribute="width" secondItem="sJK-vH-G1D" secondAttribute="width" id="uR7-Sp-eWa"/>
                                         </constraints>
                                     </scrollView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="sJK-vH-G1D" firstAttribute="leading" secondItem="lpk-Kh-Pcv" secondAttribute="leading" constant="-20" id="1w5-on-Qgo"/>
-                                    <constraint firstAttribute="bottom" secondItem="sJK-vH-G1D" secondAttribute="bottom" constant="-64" id="20t-wO-3F3"/>
-                                    <constraint firstAttribute="trailing" secondItem="sJK-vH-G1D" secondAttribute="trailing" constant="-37" id="4HX-Z4-mym"/>
+                                    <constraint firstItem="sJK-vH-G1D" firstAttribute="leading" secondItem="lpk-Kh-Pcv" secondAttribute="leading" id="1w5-on-Qgo"/>
+                                    <constraint firstAttribute="bottom" secondItem="sJK-vH-G1D" secondAttribute="bottom" id="20t-wO-3F3"/>
+                                    <constraint firstAttribute="trailing" secondItem="sJK-vH-G1D" secondAttribute="trailing" id="4HX-Z4-mym"/>
                                     <constraint firstItem="sJK-vH-G1D" firstAttribute="top" secondItem="lpk-Kh-Pcv" secondAttribute="top" id="amV-XX-qDJ"/>
                                 </constraints>
                             </view>
