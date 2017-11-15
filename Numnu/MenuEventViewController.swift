@@ -9,13 +9,20 @@
 import UIKit
 import XLPagerTabStrip
 
-class MenuEventViewController: UIViewController,IndicatorInfoProvider {
+protocol MenuEventViewControllerDelegate {
+   
+    func menuTableHeight(height : CGFloat)
+}
+
+class MenuEventViewController: UIViewController,IndicatorInfoProvider,UITableViewDelegate,UITableViewDataSource {
     
     var tagarray = ["Festival","Wine","Party","Rum","Barbaque","Pasta","Sandwich","Burger"]
     
     @IBOutlet weak var menuEventTableview: UITableView!
     @IBOutlet weak var menuCategoryTableview: UITableView!
     var showentity : Bool = false
+    var menuDelegate : MenuEventViewControllerDelegate?
+    var viewState    : Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +35,24 @@ class MenuEventViewController: UIViewController,IndicatorInfoProvider {
         
         menuCategoryTableview.isHidden = false
         menuEventTableview.isHidden    = true
+        
+        menuCategoryTableview.isScrollEnabled = false
+        menuEventTableview.isScrollEnabled    = false
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+       viewState = true
+       menuCategoryTableview.reloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,16 +63,10 @@ class MenuEventViewController: UIViewController,IndicatorInfoProvider {
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: Constants.EventTab2)
     }
-   
-}
-
-extension MenuEventViewController : UITableViewDelegate,UITableViewDataSource {
-    
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if tableView == menuEventTableview {
+        if tableView == self.menuEventTableview {
             
             return 6
             
@@ -64,7 +81,7 @@ extension MenuEventViewController : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if tableView == menuEventTableview {
+        if tableView == self.menuEventTableview {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "menuEventCell", for: indexPath) as! MenuItemEventCell
             
@@ -84,6 +101,24 @@ extension MenuEventViewController : UITableViewDelegate,UITableViewDataSource {
         
         
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        let lastRowIndex = self.menuCategoryTableview.numberOfRows(inSection: 0)
+        if indexPath.row == lastRowIndex - 1 && viewState {
+
+            menuDelegate?.menuTableHeight(height: menuCategoryTableview.contentSize.height)
+            viewState = false
+        }
+    }
+   
+}
+
+extension MenuEventViewController   {
+    
+    
+    
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         

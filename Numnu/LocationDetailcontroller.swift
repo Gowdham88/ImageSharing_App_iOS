@@ -36,11 +36,15 @@ class LocationDetailcontroller: ButtonBarPagerTabStripViewController {
     @IBOutlet weak var businessEntityNameLabel: UILabel!
     @IBOutlet weak var businessEntityScrollview : UIScrollView!
     
+    @IBOutlet weak var maplabel: UILabel!
     /**********************Location cordinates***********************************/
     var locationManager = CLLocationManager()
     var currentLocation: CLLocation?
     var mapView: GMSMapView!
     var zoomLevel: Float = 15.0
+    
+    var latitude   : CLLocationDegrees = 45.511278
+    var longtitude : CLLocationDegrees = -73.565778
     
     override func viewDidLoad() {
         settings.style.selectedBarHeight = 3.0
@@ -106,7 +110,8 @@ class LocationDetailcontroller: ButtonBarPagerTabStripViewController {
         
         let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3) as! ReviewEventViewController
         child_1.popdelegate = self
-        let child_2 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid2)
+        let child_2 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid2) as! MenuEventViewController
+        child_2.menuDelegate = self
         return [child_1,child_2]
         
     }
@@ -124,6 +129,15 @@ extension LocationDetailcontroller {
         businessEntityView.isUserInteractionEnabled = true
         businessEntityView.addGestureRecognizer(completemenuTap)
         
+        let maptap = UITapGestureRecognizer(target: self, action: #selector(LocationDetailcontroller.mapRedirect(sender:)))
+        maplabel.isUserInteractionEnabled = true
+        maplabel.addGestureRecognizer(maptap)
+        
+    }
+    
+    func mapRedirect(sender:UITapGestureRecognizer) {
+        
+        openMapBoard()
     }
     
     func openCompleteMenu(sender:UITapGestureRecognizer) {
@@ -204,7 +218,7 @@ extension LocationDetailcontroller {
     
     func setMap() {
         
-        let camera = GMSCameraPosition.camera(withLatitude: 45.5017, longitude: -73.5673, zoom: zoomLevel)
+        let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longtitude, zoom: zoomLevel)
         mapView = GMSMapView.map(withFrame: view.bounds, camera: camera)
         mapView.settings.myLocationButton = true
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -213,6 +227,12 @@ extension LocationDetailcontroller {
         // Add the map to the view, hide it until we've got a location update.
         mapview.addSubview(mapView)
         //        mapView.isHidden = true
+        
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2D(latitude: latitude, longitude: longtitude)
+        marker.title = "BOUILLON BILK"
+        marker.snippet = "1595 St Laurent Blvd, Montreal, QC H2X 2S9, Canada"
+        marker.map = mapView
         
         
         
@@ -229,6 +249,14 @@ extension LocationDetailcontroller {
         
         let storyboard      = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
         let vc              = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId)
+        self.navigationController!.pushViewController(vc, animated: true)
+        
+    }
+    
+    func openMapBoard () {
+        
+        let storyboard      = UIStoryboard(name: Constants.Event, bundle: nil)
+        let vc              = storyboard.instantiateViewController(withIdentifier: Constants.MapStoryId) as! EventMapViewController
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
@@ -279,13 +307,7 @@ extension LocationDetailcontroller : CLLocationManagerDelegate {
             let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
                                                   longitude: location.coordinate.longitude,
                                                   zoom: self.zoomLevel)
-            let marker = GMSMarker()
-            marker.position = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-            marker.appearAnimation = .pop
-            marker.title = "Current location"
-            marker.snippet = ""
-            marker.map = self.mapView
-            
+          
             if self.mapView.isHidden {
                 self.mapView.isHidden = false
                 self.mapView.camera = camera
@@ -330,5 +352,25 @@ extension LocationDetailcontroller : ReviewEventViewControllerDelegate {
         
         openPopup()
     }
+    
+    func postTableHeight(height: CGFloat) {
+        
+        mainContainerView.constant = 708 + height
+        mainContainerViewBottom.constant = 0
+    }
+}
+
+
+
+/*******************Item delegate****************************/
+
+extension LocationDetailcontroller : MenuEventViewControllerDelegate {
+    
+    func menuTableHeight(height: CGFloat) {
+        
+        mainContainerView.constant = 708 + height
+        mainContainerViewBottom.constant = 0
+    }
+    
 }
 

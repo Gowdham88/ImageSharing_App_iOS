@@ -87,18 +87,11 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
             
             readMoreButton.isHidden         = true
             eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: BcDescriptionLabel.frame.width, font: BcDescriptionLabel.font)
-//            containerViewTop.constant  = 398
-//            barButtonTop.constant      = 398
+            containerViewTop.constant  = 8
+            barButtonTop.constant      = 8
         }
         
-        /******************checking iphone device****************************/
-        
-        if self.view.frame.height <= 568 {
-            
-            mainContainerView.constant       = 550
-            mainContainerViewBottom.constant = 0
-            
-        }
+       
 
         // Do any additional setup after loading the view.
     }
@@ -110,10 +103,13 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
-        let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid2)
+        let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid2) as! MenuEventViewController
+        child_1.menuDelegate    = self
         let child_2 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3) as! ReviewEventViewController
-        child_2.popdelegate = self
-        let child_3 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1)
+        child_2.popdelegate     = self
+        let child_3 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1) as! EventTabController
+        child_3.scrolltableview = false
+        child_3.eventdelegate   = self
         return [child_1,child_2,child_3]
         
     }
@@ -284,11 +280,48 @@ extension BusinessCompleteViewController {
     
 }
 
+
+/*************Post Delegate****************/
+
 extension BusinessCompleteViewController : ReviewEventViewControllerDelegate {
     
     func popupClick() {
         
         openPopup()
     }
+    
+    func postTableHeight(height: CGFloat) {
+        
+        mainContainerView.constant = 492 + height
+        mainContainerViewBottom.constant = 0
+    }
+    
+    
 }
 
+
+/*******************Item delegate****************************/
+
+extension BusinessCompleteViewController : MenuEventViewControllerDelegate {
+    
+    func menuTableHeight(height: CGFloat) {
+        
+        mainContainerView.constant = 492 + height
+        mainContainerViewBottom.constant = 0
+    }
+    
+}
+
+/************************Event Delegate**********************************************/
+
+extension BusinessCompleteViewController : EventTabControllerDelegate {
+    
+    func eventTableHeight(height: CGFloat) {
+        
+        mainContainerView.constant = 492 + height
+        mainContainerViewBottom.constant = 0
+        
+    }
+    
+    
+}

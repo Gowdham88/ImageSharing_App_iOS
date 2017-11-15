@@ -9,9 +9,10 @@
 import UIKit
 import XLPagerTabStrip
 
-protocol  ReviewEventViewControllerDelegate{
+protocol ReviewEventViewControllerDelegate{
     
     func popupClick()
+    func postTableHeight(height : CGFloat)
 }
 
 class ReviewEventViewController: UIViewController,IndicatorInfoProvider {
@@ -20,12 +21,23 @@ class ReviewEventViewController: UIViewController,IndicatorInfoProvider {
     @IBOutlet weak var postEventTableview: UITableView!
     var window : UIWindow?
     var popdelegate : ReviewEventViewControllerDelegate?
+    var viewState       : Bool = false
     
+    @IBOutlet weak var businesslabelwidth: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         postEventTableview.delegate   = self
         postEventTableview.dataSource = self
+        postEventTableview.isScrollEnabled = false
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+       viewState = true
+       postEventTableview.reloadData()
         
     }
 
@@ -78,6 +90,16 @@ extension ReviewEventViewController : UITableViewDelegate,UITableViewDataSource 
             return 402
         }
         
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        let lastRowIndex = tableView.numberOfRows(inSection: 0)
+        if indexPath.row == lastRowIndex - 1 && viewState {
+            
+            popdelegate?.postTableHeight(height: postEventTableview.contentSize.height)
+            viewState = false
+        }
     }
    
     

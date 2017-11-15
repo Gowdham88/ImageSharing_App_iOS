@@ -59,6 +59,7 @@ extension PostTabController : UITableViewDelegate,UITableViewDataSource {
         
         cell.delegate = self
         cell.postEventBookMark.tag = indexPath.row
+        cell.setHeight(heightview : Float(UIScreen.main.bounds.size.height))
        
         return cell
         

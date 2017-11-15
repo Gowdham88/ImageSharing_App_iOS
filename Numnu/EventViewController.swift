@@ -46,6 +46,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     /***************Read more variable*********************/
     
     var isLabelAtMaxHeight = false
+    var contentHeignt      = 649
     
     override func viewDidLoad() {
         settings.style.selectedBarHeight = 2.0
@@ -92,20 +93,15 @@ class EventViewController: ButtonBarPagerTabStripViewController {
             readMoreButton.isHidden = false
       
         } else {
-            
-            readMoreButton.isHidden = true
+        
+            readMoreButton.isHidden   = true
+            containerViewTop.constant = 8
+            barButtonTop.constant     = 8
             eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
            
         }
         
-        /******************checking iphone device****************************/
         
-        if self.view.frame.height <= 568 {
-            
-            mainContainerView.constant = 1000
-            mainContainerViewBottom.constant = 0
-            
-        }
         
     }
 
@@ -117,12 +113,16 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
         let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid1) as! BusinessEventViewController
-        child_1.showentity = true
+        child_1.showentity      = true
+        child_1.businesdelegate = self
+        
         let child_2 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid2) as! MenuEventViewController
         child_2.showentity = true
+        child_2.menuDelegate = self
+        
         let child_3 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3) as! ReviewEventViewController
         child_3.popdelegate = self
-        return [child_1, child_2,child_3]
+        return [child_1,child_2,child_3]
         
     }
     
@@ -182,18 +182,18 @@ extension EventViewController {
     
     func webLink1(sender:UITapGestureRecognizer) {
       
-        openWebBoard(url: "http://czsm.co.in/")
+        openWebBoard(url: "https://www.apple.com")
     }
     
     func webLink2(sender:UITapGestureRecognizer) {
         
-        openWebBoard(url: "http://czsm.co.in/")
+        openWebBoard(url: "https://www.apple.com")
         
     }
     
     func webLink3(sender:UITapGestureRecognizer) {
         
-        openWebBoard(url: "http://czsm.co.in/")
+        openWebBoard(url: "https://www.apple.com")
         
     }
     
@@ -297,7 +297,7 @@ extension EventViewController {
         
     }
     
-    func alertTapRegister(){
+    func alertTapRegister() {
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.closePopup(sender:)))
         self.shareView.addGestureRecognizer(tap)
@@ -331,12 +331,46 @@ extension EventViewController {
     
 }
 
+/*************Post Delegate****************/
+
 extension EventViewController : ReviewEventViewControllerDelegate {
     
     func popupClick() {
         
         openPopup()
     }
+    
+    func postTableHeight(height: CGFloat) {
+     
+        mainContainerView.constant = 649 + height
+        mainContainerViewBottom.constant = 0
+    }
+    
+   
+}
+
+
+/*******************Business delegate****************************/
+
+extension EventViewController : BusinessEventViewControllerDelegate {
+    
+    func BusinessTableHeight(height: CGFloat) {
+        
+        mainContainerView.constant = 649 + height
+        mainContainerViewBottom.constant = 0
+    }
+    
+    
+}
+
+extension EventViewController : MenuEventViewControllerDelegate {
+    
+    func menuTableHeight(height: CGFloat) {
+        
+        mainContainerView.constant = 649 + height
+        mainContainerViewBottom.constant = 0
+    }
+    
 }
 
 
