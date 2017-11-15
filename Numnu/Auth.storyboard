@@ -319,7 +319,7 @@
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="25"/>
+                                        <real key="value" value="26"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -345,9 +345,8 @@
                             <constraint firstItem="IYu-nF-6Nb" firstAttribute="leading" secondItem="f3z-ur-6gs" secondAttribute="leading" constant="20" id="MAU-9z-YPS"/>
                             <constraint firstItem="vFc-8d-c7i" firstAttribute="leading" secondItem="f3z-ur-6gs" secondAttribute="leading" constant="31" id="Mqv-wp-yFx"/>
                             <constraint firstItem="gt3-3P-gNM" firstAttribute="leading" secondItem="f3z-ur-6gs" secondAttribute="leading" constant="20" id="P5u-T3-BNV"/>
-                            <constraint firstItem="jFD-s9-Nyb" firstAttribute="centerX" secondItem="zcN-0i-lpY" secondAttribute="centerX" id="PNB-DL-ccN"/>
-                            <constraint firstItem="L7g-9K-1fT" firstAttribute="top" secondItem="zcN-0i-lpY" secondAttribute="bottom" constant="5.5" id="PRb-7e-kMv"/>
                             <constraint firstItem="utT-Fx-rdy" firstAttribute="centerY" secondItem="gt3-3P-gNM" secondAttribute="centerY" id="Qa0-8R-cc6"/>
+                            <constraint firstItem="L7g-9K-1fT" firstAttribute="top" secondItem="zcN-0i-lpY" secondAttribute="bottom" constant="5.5" id="QjY-MW-26X"/>
                             <constraint firstItem="f3z-ur-6gs" firstAttribute="trailing" secondItem="h6X-V3-3ha" secondAttribute="trailing" constant="20" id="SQV-7x-x50"/>
                             <constraint firstItem="zcN-0i-lpY" firstAttribute="centerX" secondItem="f3z-ur-6gs" secondAttribute="centerX" id="T1q-ob-fX2"/>
                             <constraint firstItem="f3z-ur-6gs" firstAttribute="trailing" secondItem="HcA-is-X0E" secondAttribute="trailing" constant="20" id="T5w-pK-YgJ"/>
