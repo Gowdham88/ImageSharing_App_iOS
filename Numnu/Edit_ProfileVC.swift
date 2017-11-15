@@ -175,7 +175,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         
         myscrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height+100)
         
-        saveButton.layer.cornerRadius = 20.0
+        saveButton.layer.cornerRadius = 25.0
         saveButton.clipsToBounds = true
         view.superview?.addSubview(saveButton)
         
