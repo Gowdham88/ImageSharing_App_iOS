@@ -46,6 +46,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     /***************Read more variable*********************/
     
     var isLabelAtMaxHeight = false
+    var contentHeignt      = 649
     
     override func viewDidLoad() {
         settings.style.selectedBarHeight = 2.0
@@ -92,8 +93,8 @@ class EventViewController: ButtonBarPagerTabStripViewController {
             readMoreButton.isHidden = false
       
         } else {
-            
-            readMoreButton.isHidden = true
+        
+            readMoreButton.isHidden   = true
             containerViewTop.constant = 8
             barButtonTop.constant     = 8
             eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: "dsdus", width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
