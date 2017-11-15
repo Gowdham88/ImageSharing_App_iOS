@@ -645,7 +645,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     func setNavBar() {
                 
-        navigationItemList.title = "Profile"
+        navigationItemList.title = "Complete Profile"
         
         let button: UIButton = UIButton(type: UIButtonType.custom)
         //set image for button
