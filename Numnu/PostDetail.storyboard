@@ -16,10 +16,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Postdetail Image View Controller-->
+        <!--Post Image Zoom View Controller-->
         <scene sceneID="3I3-qG-LEd">
             <objects>
-                <viewController storyboardIdentifier="PostdetailImageViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Dwa-XP-O8w" customClass="PostdetailImageViewController" customModule="Numnu" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PostImageZoomViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Dwa-XP-O8w" customClass="PostImageZoomViewController" customModule="Numnu" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Cuc-sI-e54">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -28,45 +28,60 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sJK-vH-G1D">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                        <rect key="frame" x="0.0" y="93" width="320" height="382"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="foodie" translatesAutoresizingMaskIntoConstraints="NO" id="g5y-2m-2RR">
-                                                <rect key="frame" x="0.0" y="142" width="320" height="240"/>
+                                                <rect key="frame" x="0.0" y="71" width="320" height="240"/>
                                             </imageView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="g5y-2m-2RR" secondAttribute="trailing" id="AYZ-J8-6qg"/>
-                                            <constraint firstAttribute="bottom" secondItem="g5y-2m-2RR" secondAttribute="bottom" constant="186" id="QoQ-kW-SR8"/>
-                                            <constraint firstItem="g5y-2m-2RR" firstAttribute="leading" secondItem="sJK-vH-G1D" secondAttribute="leading" id="olo-tE-i7O"/>
-                                            <constraint firstItem="g5y-2m-2RR" firstAttribute="top" secondItem="sJK-vH-G1D" secondAttribute="top" constant="142" id="pBI-t6-pNu"/>
-                                            <constraint firstItem="g5y-2m-2RR" firstAttribute="width" secondItem="sJK-vH-G1D" secondAttribute="width" id="uR7-Sp-eWa"/>
+                                            <constraint firstAttribute="trailing" secondItem="g5y-2m-2RR" secondAttribute="trailing" id="4g0-eb-aKV"/>
+                                            <constraint firstItem="g5y-2m-2RR" firstAttribute="leading" secondItem="sJK-vH-G1D" secondAttribute="leading" id="EdG-lT-aCs"/>
+                                            <constraint firstAttribute="bottom" secondItem="g5y-2m-2RR" secondAttribute="bottom" constant="71" id="QNf-yd-pJs"/>
+                                            <constraint firstItem="g5y-2m-2RR" firstAttribute="width" secondItem="sJK-vH-G1D" secondAttribute="width" id="g9T-Rb-XYt"/>
+                                            <constraint firstItem="g5y-2m-2RR" firstAttribute="top" secondItem="sJK-vH-G1D" secondAttribute="top" constant="71" id="rCF-sK-O3S"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="delegate" destination="Dwa-XP-O8w" id="S4A-Us-wlm"/>
+                                        </connections>
                                     </scrollView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bin-3c-Fwj">
+                                        <rect key="frame" x="20" y="20" width="25" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="0EM-1m-ctR"/>
+                                            <constraint firstAttribute="width" constant="25" id="x4K-u1-BwE"/>
+                                        </constraints>
+                                        <state key="normal" image="closebtn">
+                                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="removeButton:" destination="Dwa-XP-O8w" eventType="touchUpInside" id="WGz-Ii-5oc"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="sJK-vH-G1D" firstAttribute="leading" secondItem="lpk-Kh-Pcv" secondAttribute="leading" id="1w5-on-Qgo"/>
-                                    <constraint firstAttribute="bottom" secondItem="sJK-vH-G1D" secondAttribute="bottom" id="20t-wO-3F3"/>
-                                    <constraint firstAttribute="trailing" secondItem="sJK-vH-G1D" secondAttribute="trailing" id="4HX-Z4-mym"/>
-                                    <constraint firstItem="sJK-vH-G1D" firstAttribute="top" secondItem="lpk-Kh-Pcv" secondAttribute="top" id="amV-XX-qDJ"/>
+                                    <constraint firstItem="sJK-vH-G1D" firstAttribute="top" secondItem="lpk-Kh-Pcv" secondAttribute="top" constant="93" id="7Rs-8h-teP"/>
+                                    <constraint firstItem="sJK-vH-G1D" firstAttribute="leading" secondItem="lpk-Kh-Pcv" secondAttribute="leading" id="8CX-hE-hqn"/>
+                                    <constraint firstAttribute="trailing" secondItem="sJK-vH-G1D" secondAttribute="trailing" id="AeO-zs-2ug"/>
+                                    <constraint firstAttribute="bottom" secondItem="sJK-vH-G1D" secondAttribute="bottom" constant="93" id="DGh-k7-idJ"/>
+                                    <constraint firstItem="bin-3c-Fwj" firstAttribute="top" secondItem="lpk-Kh-Pcv" secondAttribute="top" constant="20" id="I6g-ra-QyZ"/>
+                                    <constraint firstItem="bin-3c-Fwj" firstAttribute="leading" secondItem="lpk-Kh-Pcv" secondAttribute="leading" constant="20" id="vq8-Ud-Mhr"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="lpk-Kh-Pcv" firstAttribute="leading" secondItem="XVu-Wj-aRs" secondAttribute="leading" id="FR9-Kc-hUZ"/>
-                            <constraint firstItem="XVu-Wj-aRs" firstAttribute="trailing" secondItem="lpk-Kh-Pcv" secondAttribute="trailing" id="akH-XP-GJb"/>
-                            <constraint firstItem="XVu-Wj-aRs" firstAttribute="bottom" secondItem="lpk-Kh-Pcv" secondAttribute="bottom" id="rgN-42-sY5"/>
-                            <constraint firstItem="XVu-Wj-aRs" firstAttribute="top" secondItem="lpk-Kh-Pcv" secondAttribute="top" constant="20" id="xyP-ql-QrJ"/>
+                            <constraint firstItem="XVu-Wj-aRs" firstAttribute="top" secondItem="lpk-Kh-Pcv" secondAttribute="top" constant="20" id="4gr-z8-9aQ"/>
+                            <constraint firstItem="lpk-Kh-Pcv" firstAttribute="leading" secondItem="XVu-Wj-aRs" secondAttribute="leading" id="fCg-bC-HIi"/>
+                            <constraint firstItem="XVu-Wj-aRs" firstAttribute="trailing" secondItem="lpk-Kh-Pcv" secondAttribute="trailing" id="fqm-z1-cg3"/>
+                            <constraint firstItem="XVu-Wj-aRs" firstAttribute="bottom" secondItem="lpk-Kh-Pcv" secondAttribute="bottom" id="s6A-aJ-cts"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="XVu-Wj-aRs"/>
                     </view>
                     <connections>
-                        <outlet property="bottom" destination="QoQ-kW-SR8" id="1va-Ga-Br1"/>
-                        <outlet property="leading" destination="olo-tE-i7O" id="dez-dR-fxQ"/>
-                        <outlet property="scrollview" destination="sJK-vH-G1D" id="FdN-w9-zPa"/>
-                        <outlet property="top" destination="pBI-t6-pNu" id="Sdi-HI-CZW"/>
-                        <outlet property="trailing" destination="AYZ-J8-6qg" id="E4f-0t-zDt"/>
+                        <outlet property="imagePhoto" destination="g5y-2m-2RR" id="amA-im-mip"/>
+                        <outlet property="scrollView" destination="sJK-vH-G1D" id="BIZ-2N-FPA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zVQ-xG-j2N" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -383,6 +398,7 @@
     <resources>
         <image name="Bookmark" width="14" height="24"/>
         <image name="Numnu_appicon" width="122" height="122"/>
+        <image name="closebtn" width="35" height="35"/>
         <image name="dish_ico" width="22" height="23"/>
         <image name="eventDots" width="24" height="24"/>
         <image name="event_ico" width="25" height="27"/>

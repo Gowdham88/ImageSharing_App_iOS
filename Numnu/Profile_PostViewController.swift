@@ -29,7 +29,7 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
     }
     func setNavBar() {
         
-        navigationItemList.title = "Post"
+        navigationItemList.title = "Profile"
         
         let button: UIButton = UIButton(type: UIButtonType.custom)
         //set image for button
