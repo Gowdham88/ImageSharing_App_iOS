@@ -102,7 +102,6 @@ class EventViewController: ButtonBarPagerTabStripViewController {
         }
         
         
-        
     }
 
     override func didReceiveMemoryWarning() {
