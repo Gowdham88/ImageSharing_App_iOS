@@ -59,9 +59,9 @@ class Constants {
     static let Tabid2  = "BusinessesTab"
     static let Tabid3  = "MenuTab"
     static let Tabid4  = "PostTab"
-    static let Tabid5  = "UserTab"
-    static let Tabid6  = "ListTab"
-    static let Tabid7  = "LocationTab"
+    static let Tabid5     = "UserTab"
+    static let Tabid6     = "ListTab"
+    static let Tabid7     = "LocationTab"
     static let DefaultTab = "DefaultTab"
     
     // Event Detail Tab name

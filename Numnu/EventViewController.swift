@@ -210,12 +210,12 @@ extension EventViewController {
         for (i,text) in tagarray.enumerated() {
             
             let textLabel : UILabel = UILabel()
-            let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: text, fontname: "AvenirNext-Regular", size: 15)
-            textLabel.font = UIFont(name: "AvenirNext-Regular", size: 15)
+            let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: text, fontname: "AvenirNext-Medium", size: 12)
+            textLabel.font = UIFont(name: "AvenirNext-Medium", size: 12)
             textLabel.text = text
             textLabel.backgroundColor  = UIColor.tagBgColor()
             textLabel.textColor        = UIColor.tagTextColor()
-            textLabel.layer.cornerRadius = 10
+            textLabel.layer.cornerRadius = 4
             textLabel.layer.masksToBounds = true
             textLabel.textAlignment = .center
             
