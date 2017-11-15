@@ -17,7 +17,9 @@ var tagArray = [String] ()
 var selectedIndex = Int()
 var autocompleteUrls = [String]()
 
-class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate {
+class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,GMSAutocompleteViewControllerDelegate {
+  
+    
 
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var doneButotn: UIButton!
@@ -58,32 +60,37 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
 //    static private let regexEmail = "[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}"
 //    static private let regexMobNo = "^[0-9]{6,15}$"
 //    static private let regexNameType = "^[a-zA-Z]+$"
+    
+    
+    // place autocomplete //
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        
+        dismiss(animated: true, completion: nil)
+        self.cityTextfield.text = place.name
+
+    }
+
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        print("Error: ", error.localizedDescription)
+
+    }
+
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        dismiss(animated: true, completion: nil)
+
+    }
+    func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    }
+
+    func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        locationManager.delegate = self
-        locationManager.requestAlwaysAuthorization()
-        let placesClient = GMSPlacesClient.shared()
-//        self.myscrollView.superview?.addSubview(saveButton)
-        placesClient.currentPlace(callback: { (placeLikelihoods: GMSPlaceLikelihoodList?, error) -> Void in
-            if error != nil {
-                print("Current Place error: \(error!.localizedDescription)")
-                return
-            }
-            
-            for likelihood in placeLikelihoods!.likelihoods {
-                if let likelihood = likelihood as? GMSPlaceLikelihood {
-                    let place = likelihood.place
-                    print("Current Place name \(place.name) at likelihood \(likelihood.likelihood)")
-//                    print("Current Place address \(String(describing: place.formattedAddress))")
-//                    print("Current Place attributions \(String(describing: place.attributions))")
-//                    print("Current PlaceID \(place.placeID)")
-                    self.cityTextfield.text = place.name
-                    //Somehow work below code into here
-                    
-                }
-            }
-        })
-
+   
         imagePicker.delegate = self
         profileImage.isUserInteractionEnabled = true
         datePicker.isHidden = true
@@ -100,7 +107,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         NotificationCenter.default.addObserver(self, selector: #selector(Edit_ProfileVC.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(Edit_ProfileVC.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        
         
         genderdropButton.addTarget(self, action: #selector(genderClicked), for: UIControlEvents.allTouchEvents)
         doneButotn.addTarget(self, action: #selector(doneClick), for: UIControlEvents.allTouchEvents)
@@ -123,15 +129,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         border2.borderWidth = width2
         emailaddress.layer.addSublayer(border2)
         emailaddress.layer.masksToBounds = true
-        
-//        let border3 = CALayer()
-//        let width3 = CGFloat(1.0)
-//        border3.borderColor = UIColor(red: 232/255.0, green: 233/255.0, blue: 247/255.0, alpha: 1.0).cgColor
-//        border3.frame = CGRect(x: 0, y: usernameTextfield.frame.size.height - width3, width:  usernameTextfield.frame.size.width, height: usernameTextfield.frame.size.height)
-//        border3.borderWidth = width3
-//        usernameTextfield.layer.addSublayer(border3)
-//        usernameTextfield.layer.masksToBounds = true
-//
         
         let border4 = CALayer()
         let width4 = CGFloat(1.0)
@@ -178,7 +175,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         
         myscrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height+100)
         
-        saveButton.layer.cornerRadius = 20.0
+        saveButton.layer.cornerRadius = 25.0
         saveButton.clipsToBounds = true
         view.superview?.addSubview(saveButton)
         
@@ -196,10 +193,51 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         
         if show == false {
             
-//    addCollectionContainer()
+    addCollectionContainer()
 
         }
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Hide the navigation bar on the this view controller
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
+//        if CLLocationManager.locationServicesEnabled()  {
+//            let placesClient = GMSPlacesClient.shared()
+//
+//            placesClient.currentPlace(callback: { (placeLikelihoods: GMSPlaceLikelihoodList?, error) -> Void in
+//                if error != nil {
+//                    print("Current Place error: \(error!.localizedDescription)")
+//                    return
+//                }
+//
+//                for likelihood in placeLikelihoods!.likelihoods {
+//                    if let likelihood = likelihood as? GMSPlaceLikelihood {
+//                        let place = likelihood.place
+//                        print("Current Place name \(place.name) at likelihood \(likelihood.likelihood)")
+//                        //                    print("Current Place address \(String(describing: place.formattedAddress))")
+//                        //                    print("Current Place attributions \(String(describing: place.attributions))")
+//                        //                    print("Current PlaceID \(place.placeID)")
+//                        self.cityTextfield.text = place.name
+//                        //Somehow work below code into here
+//                        let defaults = UserDefaults.standard
+//                        defaults.setValue(place.name, forKey: "UserPlace")//(place.name, forKey: "UserPlace")
+//                        UserDefaults.standard.synchronize()
+//                        print("saved location is::::",defaults)
+//                    }
+//                }
+//            })
+//        }else{
+//            let result = UserDefaults.standard.value(forKey: "UserPlace")
+//            UserDefaults.standard.synchronize()
+//            self.cityTextfield.text = result as? String
+//
+//            print("Retrieved place is::::",result!)
+//        }
     }
     
     func addClicked() {
@@ -342,7 +380,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             
             searchAutocompleteEntriesWithSubstring(substring: substring)
         }else{
-            print("this is not a food textfield")
         }
        
         return true     // not sure about this - cou
@@ -374,6 +411,10 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             datePicker.isHidden = false
             superVieww.isHidden = false
             doneView.isHidden = false
+        }else if textField == cityTextfield {
+            let autocompleteController = GMSAutocompleteViewController()
+            autocompleteController.delegate = self
+            present(autocompleteController, animated: true, completion: nil)
         }
         
         if textField == foodTextfield {
@@ -453,18 +494,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         toolBar.isTranslucent = true
         toolBar.tintColor = UIColor.blue
         toolBar.sizeToFit()
-        
-//        // Adds the buttons
-//        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(Edit_ProfileVC.doneClick)) //check selector action for barbutton
-//        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-//
-//        toolBar.setItems([ spaceButton, doneButton], animated: false)
-//        toolBar.isUserInteractionEnabled = true
-////        birthTextfield.inputView = datePicker
-////        birthTextfield.inputAccessoryView = toolBar
-//        self.superVieww.insertSubview(datePicker, aboveSubview: toolBar)
-        
-        
         datePicker.addTarget(self, action: #selector(Edit_ProfileVC.datePickerValueChanged), for: UIControlEvents.valueChanged)
     }
     func doneClick() {
@@ -475,7 +504,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         doneView.isHidden = true
     }
   
-
     func datePickerValueChanged(sender:UIDatePicker) {
         let dateFormatter = DateFormatter()
         
@@ -617,7 +645,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     func setNavBar() {
                 
-        navigationItemList.title = "Profile"
+        navigationItemList.title = "Complete Profile"
         
         let button: UIButton = UIButton(type: UIButtonType.custom)
         //set image for button
@@ -637,13 +665,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         navigationItemList.leftBarButtonItem = leftButton
         navigationItemList.rightBarButtonItem = rightButton
         
-        
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        // Hide the navigation bar on the this view controller
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
-    }
+   
     func backButtonClicked() {
         
         _ = self.navigationController?.popToRootViewController(animated: true)
@@ -704,10 +727,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 //        let cell = dropdownTableView.dequeueReusableCell(withIdentifier: "cell")
 //        var cell : UITableViewCell? = (dropdownTableView.dequeueReusableCell(withIdentifier: "cell") as! UITableViewCell)
-        
         var cell : UITableViewCell? = dropdownTableView.dequeueReusableCell(withIdentifier: "cell")
-
-        
         if(cell == nil)
         {
             cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")

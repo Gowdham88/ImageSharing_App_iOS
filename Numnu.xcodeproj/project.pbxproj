@@ -100,6 +100,7 @@
 		B4C5158A1FA085D100348E2A /* BusinessTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C515891FA085D100348E2A /* BusinessTabController.swift */; };
 		B4C515911FA0AC1700348E2A /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C515901FA0AC1600348E2A /* WebViewController.swift */; };
 		B4C7BCEB1F9F74E500B2BEC4 /* PostEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C7BCEA1F9F74E500B2BEC4 /* PostEventTableViewCell.swift */; };
+		BE57DEF71FBB0BCD00A9C93B /* PostImageZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE57DEF61FBB0BCD00A9C93B /* PostImageZoomViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -228,6 +229,7 @@
 		B4C515891FA085D100348E2A /* BusinessTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessTabController.swift; sourceTree = "<group>"; };
 		B4C515901FA0AC1600348E2A /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		B4C7BCEA1F9F74E500B2BEC4 /* PostEventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEventTableViewCell.swift; sourceTree = "<group>"; };
+		BE57DEF61FBB0BCD00A9C93B /* PostImageZoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImageZoomViewController.swift; sourceTree = "<group>"; };
 		FAA3E614BAEE1AD3C19ADB46 /* Pods-Numnu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Numnu.release.xcconfig"; path = "Pods/Target Support Files/Pods-Numnu/Pods-Numnu.release.xcconfig"; sourceTree = "<group>"; };
 		FD87AF37876C16561F7CFD02 /* Pods_Numnu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Numnu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -448,6 +450,7 @@
 		B4BD9EE91F6FA4AF00C43182 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				BE57DEF61FBB0BCD00A9C93B /* PostImageZoomViewController.swift */,
 				60B4EA3F1FAAEA7600C1A6C9 /* SettingsVC.swift */,
 				B42F2A241FA9EA6B002419AB /* LocationDetailController */,
 				B4C5158B1FA085ED00348E2A /* AuthControllers */,
@@ -847,6 +850,7 @@
 				6F542A931FB1BD9B0024AC7D /* PlaceTableviewcellTableViewCell.swift in Sources */,
 				B4BD9EF71F6FB14200C43182 /* Constants.swift in Sources */,
 				B45CBCF11FA9BD66004B6E66 /* ItemDetailController.swift in Sources */,
+				BE57DEF71FBB0BCD00A9C93B /* PostImageZoomViewController.swift in Sources */,
 				B49ABD8A1F9F271D0091C5D1 /* EventDefaulCollectionCell.swift in Sources */,
 				B4BD9EF51F6FAAA400C43182 /* DBProvider.swift in Sources */,
 				B47BD4051F8A615C0099061C /* loginMainVC.swift in Sources */,

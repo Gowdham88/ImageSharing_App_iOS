@@ -57,8 +57,9 @@ class PostDetailViewController : UIViewController {
     }
     func imageTapped() {
         let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: "PostdetailImageViewController")
-        self.navigationController!.pushViewController(vc, animated: true)
+        let vc         = storyboard.instantiateViewController(withIdentifier: "PostImageZoomViewController")
+//        self.navigationController!.pushViewController(vc, animated: true)
+        self.navigationController?.present(vc, animated: true, completion: nil)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -16,6 +16,7 @@ var itemArray2 = [String]()
 class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
    
+    @IBOutlet weak var topHeaderView: UIView!
     @IBOutlet var navigationItemList: UINavigationItem!
     
     @IBOutlet var editButton: UIButton!
@@ -37,6 +38,7 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         
         itemArray = ["Share the app","Rate the app","Terms of service","Privacy policy"]
         itemArray2 = ["Events","Business","Items","Posts","Users"]
+//        topHeaderView.backgroundColor = UIColor(red: 216/255.0, green: 216/255.0, blue: 216/255.0, alpha: 1.0)
 
     }
 
@@ -79,13 +81,16 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 1 {
-            return "         Bookmarks"
+            return "          Bookmarks"
         }
         return ""
     }
     func tableView(_ tableView: UITableView, willDisplayHeaderView view:UIView, forSection: Int) {
         if let headerTitle = view as? UITableViewHeaderFooterView {
-            headerTitle.textLabel?.textColor = UIColor.lightGray
+            headerTitle.backgroundColor = UIColor(red: 216/255.0, green: 216/255.0, blue: 216/255.0, alpha: 1.0)
+            headerTitle.textLabel?.textColor = UIColor(red: 129/255.0, green: 135/255.0, blue: 144/255.0, alpha: 1.0)
+            headerTitle.textLabel?.font = UIFont(name: "Avenir-Medium", size: 14.0)
+
         }
     }
     override func didReceiveMemoryWarning() {

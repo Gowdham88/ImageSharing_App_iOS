@@ -99,6 +99,8 @@ class signInVC: UIViewController, UITextFieldDelegate {
            } else {
             
               authenticationError(error: Constants.Passworderror)
+//            authenticationError(error: "Please check password")
+
             
            }
        
@@ -141,7 +143,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func signupPressed(_ sender: Any) {
-     
+     self.navigationController?.popViewController(animated: true)
     }
     
     override func didReceiveMemoryWarning() {
