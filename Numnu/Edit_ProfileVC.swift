@@ -682,6 +682,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cvcell", for: indexPath as IndexPath) as! FoodPreferenceCollectionViewCell
         cell.foodtagLabel.text = tagArray[indexPath.row]
+        cell.foodtagLabel.layer.cornerRadius = 4.0
+//        cell.foodtagLabel.sizeToFit()
         cell.removetagButton.tag = indexPath.row
         cell.removetagButton.addTarget(self, action: #selector(buttonClicked(sender:)), for: .touchUpInside)
     

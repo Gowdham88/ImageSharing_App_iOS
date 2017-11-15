@@ -20,6 +20,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     var credential: AuthCredential?
     var userprofilename : String = ""
     var userprofileimage : String = ""
+    var ViewMoved = true
 
     
     @IBOutlet weak var orLbl: UILabel!
@@ -31,9 +32,20 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
   
         //        labelcredentials.isHidden = true
-        
-      
+
+//        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
+//        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
     }
+    
+   /*
+    @objc func keyboardWillShow(sender: NSNotification) {
+        self.view.frame.origin.y -= 30
+    }
+    
+    @objc func keyboardWillHide(sender: NSNotification) {
+        self.view.frame.origin.y += 30
+    }
+ */
     
     var iconClick = Bool()
     
@@ -76,8 +88,12 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
 //        labelcredentials.isHidden = true
+
     }
-    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textField.resignFirstResponder()
+
+    }
     @IBAction func signupPressed(_ sender: Any) {
         
         Login()

@@ -11,7 +11,16 @@ import UIKit
 class EventDefaulCollectionCell : UICollectionViewCell {
     
     
+    @IBOutlet weak var eventLocationname: UILabel!
     @IBOutlet weak var eventLabelname: UILabel!
     @IBOutlet weak var eventImage: ImageExtender!
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    
+//        eventImage.layer.cornerRadius = 5.0
+        
+    }
+
     
 }
