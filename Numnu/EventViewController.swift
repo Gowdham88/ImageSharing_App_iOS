@@ -84,7 +84,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
         
         tagViewUpdate()
         
-        eventDescriptionLabel.text = "dsdus"
+        eventDescriptionLabel.text = Constants.dummy
         
        /****************Checking number of lines************************/
      
@@ -97,7 +97,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
             readMoreButton.isHidden   = true
             containerViewTop.constant = 8
             barButtonTop.constant     = 8
-            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: "dsdus", width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
+            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
            
         }
         
