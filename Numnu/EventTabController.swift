@@ -25,6 +25,8 @@ class EventTabController: UIViewController,IndicatorInfoProvider {
     var showNavBar : Bool = false
     @IBOutlet weak var navigationItemList: UINavigationItem!
     var eventdelegate : EventTabControllerDelegate?
+    var viewState     : Bool = false
+    var scrolltableview : Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,14 +35,14 @@ class EventTabController: UIViewController,IndicatorInfoProvider {
         
         eventTableView.delegate   = self
         eventTableView.dataSource = self
+        eventTableView.isScrollEnabled = scrolltableview
         
         if showNavBar {
          
             setNavBar()
             
         }
-        
-       
+   
         
     }
 
@@ -52,7 +54,8 @@ class EventTabController: UIViewController,IndicatorInfoProvider {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
-        eventdelegate?.eventTableHeight(height: eventTableView.contentSize.height)
+        viewState = true
+        eventTableView.reloadData()
     }
     
     
@@ -101,6 +104,15 @@ extension EventTabController : UITableViewDelegate,UITableViewDataSource {
         cell.contentView.backgroundColor = UIColor.white
         openStoryBoard()
         
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        let lastRowIndex = tableView.numberOfRows(inSection: 0)
+        if indexPath.row == lastRowIndex - 1 && viewState {
+            eventdelegate?.eventTableHeight(height: eventTableView.contentSize.height)
+            viewState = false
+        }
     }
     
     

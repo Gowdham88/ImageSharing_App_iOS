@@ -94,7 +94,7 @@
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="cNC-Fl-1Jt"/>
+                                                    <constraint firstAttribute="height" constant="50" id="la0-9a-LSF"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Description for event" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gd4-rB-4dG">
@@ -157,25 +157,25 @@
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="79Q-lb-B6x" firstAttribute="leading" secondItem="YJ2-oM-Y9r" secondAttribute="leading" id="0bL-IH-Ybd"/>
-                                            <constraint firstAttribute="trailing" secondItem="79Q-lb-B6x" secondAttribute="trailing" id="2ys-FT-VIf"/>
+                                            <constraint firstItem="JnR-Aw-N5a" firstAttribute="top" secondItem="79Q-lb-B6x" secondAttribute="bottom" constant="8" id="0k6-R7-50J"/>
                                             <constraint firstItem="Ycz-53-5i8" firstAttribute="top" secondItem="dbq-an-3gn" secondAttribute="bottom" constant="3" id="37a-Kf-JmC"/>
                                             <constraint firstItem="oxf-Md-44l" firstAttribute="top" secondItem="Ycz-53-5i8" secondAttribute="bottom" constant="8" id="38e-ur-4Xz"/>
                                             <constraint firstItem="egJ-dm-ObJ" firstAttribute="top" secondItem="YJ2-oM-Y9r" secondAttribute="top" constant="8" id="6QE-Yr-et7"/>
                                             <constraint firstItem="0A4-Sx-8eI" firstAttribute="top" secondItem="oxf-Md-44l" secondAttribute="bottom" constant="5" id="7CC-sG-DU5"/>
+                                            <constraint firstItem="79Q-lb-B6x" firstAttribute="top" secondItem="0A4-Sx-8eI" secondAttribute="bottom" constant="35" id="7a6-yq-vJ6"/>
                                             <constraint firstAttribute="trailing" secondItem="oxf-Md-44l" secondAttribute="trailing" constant="8" id="8uD-Zy-kY8"/>
                                             <constraint firstItem="dbq-an-3gn" firstAttribute="top" secondItem="YJ2-oM-Y9r" secondAttribute="top" constant="8" id="DyC-iq-tqI"/>
                                             <constraint firstAttribute="height" constant="850" id="EKD-Uq-tq9"/>
                                             <constraint firstItem="59l-cz-Dep" firstAttribute="top" secondItem="Ycz-53-5i8" secondAttribute="bottom" constant="8" id="Eoa-0i-0DJ"/>
                                             <constraint firstItem="0A4-Sx-8eI" firstAttribute="leading" secondItem="YJ2-oM-Y9r" secondAttribute="leading" constant="10" id="Gth-oX-57V"/>
+                                            <constraint firstAttribute="trailing" secondItem="79Q-lb-B6x" secondAttribute="trailing" id="HWA-sX-YfD"/>
                                             <constraint firstItem="eYQ-kW-VVX" firstAttribute="leading" secondItem="YJ2-oM-Y9r" secondAttribute="leading" id="IO7-ob-ZVD"/>
                                             <constraint firstItem="egJ-dm-ObJ" firstAttribute="leading" secondItem="YJ2-oM-Y9r" secondAttribute="leading" constant="10" id="IXd-kI-jyy"/>
                                             <constraint firstAttribute="trailing" secondItem="dbq-an-3gn" secondAttribute="trailing" constant="4" id="K3w-6H-yes"/>
+                                            <constraint firstItem="79Q-lb-B6x" firstAttribute="leading" secondItem="YJ2-oM-Y9r" secondAttribute="leading" id="KPx-At-gwV"/>
                                             <constraint firstItem="JnR-Aw-N5a" firstAttribute="leading" secondItem="YJ2-oM-Y9r" secondAttribute="leading" id="PcJ-Si-u5F"/>
-                                            <constraint firstItem="eYQ-kW-VVX" firstAttribute="top" secondItem="79Q-lb-B6x" secondAttribute="bottom" constant="8" id="QAH-Vz-rNI"/>
+                                            <constraint firstItem="eYQ-kW-VVX" firstAttribute="top" secondItem="79Q-lb-B6x" secondAttribute="bottom" constant="8" id="VdA-GU-JXx"/>
                                             <constraint firstItem="Ycz-53-5i8" firstAttribute="leading" secondItem="egJ-dm-ObJ" secondAttribute="trailing" constant="8" id="YBj-kx-xL9"/>
-                                            <constraint firstItem="79Q-lb-B6x" firstAttribute="top" secondItem="KR4-Ba-hk7" secondAttribute="bottom" constant="5" id="Zi9-nI-e4w"/>
-                                            <constraint firstItem="JnR-Aw-N5a" firstAttribute="top" secondItem="79Q-lb-B6x" secondAttribute="bottom" constant="8" id="aAb-Pq-K4b"/>
                                             <constraint firstAttribute="trailing" secondItem="JnR-Aw-N5a" secondAttribute="trailing" id="aHm-9v-Tcw"/>
                                             <constraint firstAttribute="trailing" secondItem="0A4-Sx-8eI" secondAttribute="trailing" constant="10" id="bRx-lV-N2E"/>
                                             <constraint firstAttribute="bottom" secondItem="eYQ-kW-VVX" secondAttribute="bottom" id="bWw-oC-ZCX"/>
@@ -258,12 +258,14 @@
                     <size key="freeformSize" width="320" height="1100"/>
                     <connections>
                         <outlet property="TabBarView" destination="JnR-Aw-N5a" id="l0P-gf-Rzd"/>
+                        <outlet property="busDescriptionHeight" destination="xJD-Vx-Sxv" id="OFn-3K-TRZ"/>
                         <outlet property="busImageView" destination="egJ-dm-ObJ" id="m3O-FD-Ac5"/>
                         <outlet property="busTitleLabel" destination="dbq-an-3gn" id="nST-5Z-2pH"/>
                         <outlet property="buseventLabel" destination="oxf-Md-44l" id="whr-RV-rST"/>
                         <outlet property="buttonBarView" destination="JnR-Aw-N5a" id="Enw-3o-JLo"/>
                         <outlet property="completeViewMenu" destination="79Q-lb-B6x" id="w6k-Mw-vrq"/>
                         <outlet property="containerView" destination="eYQ-kW-VVX" id="AiZ-7u-pN0"/>
+                        <outlet property="containerViewTop" destination="7a6-yq-vJ6" id="YdL-1R-hpW"/>
                         <outlet property="eventDescriptionLabel" destination="0A4-Sx-8eI" id="wJ3-lA-m8U"/>
                         <outlet property="mainContainerView" destination="EKD-Uq-tq9" id="Tro-bF-YmK"/>
                         <outlet property="mainContainerViewBottom" destination="ING-nN-A1o" id="6M3-vl-wNM"/>

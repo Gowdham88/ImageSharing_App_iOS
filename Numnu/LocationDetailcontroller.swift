@@ -110,7 +110,8 @@ class LocationDetailcontroller: ButtonBarPagerTabStripViewController {
         
         let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3) as! ReviewEventViewController
         child_1.popdelegate = self
-        let child_2 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid2)
+        let child_2 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid2) as! MenuEventViewController
+        child_2.menuDelegate = self
         return [child_1,child_2]
         
     }
@@ -354,6 +355,22 @@ extension LocationDetailcontroller : ReviewEventViewControllerDelegate {
     
     func postTableHeight(height: CGFloat) {
         
+        mainContainerView.constant = 708 + height
+        mainContainerViewBottom.constant = 0
     }
+}
+
+
+
+/*******************Item delegate****************************/
+
+extension LocationDetailcontroller : MenuEventViewControllerDelegate {
+    
+    func menuTableHeight(height: CGFloat) {
+        
+        mainContainerView.constant = 708 + height
+        mainContainerViewBottom.constant = 0
+    }
+    
 }
 

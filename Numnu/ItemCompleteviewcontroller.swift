@@ -35,6 +35,7 @@ class ItemCompleteviewcontroller : ButtonBarPagerTabStripViewController {
     
     @IBOutlet weak var eventDescriptionHeight : NSLayoutConstraint!
     
+    @IBOutlet weak var containerviewtop: NSLayoutConstraint!
     
     var isLabelAtMaxHeight = false
     
@@ -86,7 +87,7 @@ class ItemCompleteviewcontroller : ButtonBarPagerTabStripViewController {
             
             readMoreButton.isHidden         = true
             eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: ItDescriptionLabel.frame.width, font: ItDescriptionLabel.font)
-            
+            containerviewtop.constant = 8
         }
         
         

@@ -83,7 +83,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
         
         tagViewUpdate()
         
-        eventDescriptionLabel.text = Constants.dummy
+        eventDescriptionLabel.text = "dsdus"
         
        /****************Checking number of lines************************/
      
@@ -94,18 +94,13 @@ class EventViewController: ButtonBarPagerTabStripViewController {
         } else {
             
             readMoreButton.isHidden = true
-            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
+            containerViewTop.constant = 8
+            barButtonTop.constant     = 8
+            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: "dsdus", width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
            
         }
         
-        /******************checking iphone device****************************/
         
-        if self.view.frame.height <= 568 {
-            
-            mainContainerView.constant = 1000
-            mainContainerViewBottom.constant = 0
-            
-        }
         
     }
 

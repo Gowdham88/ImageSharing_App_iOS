@@ -91,17 +91,10 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
             
             readMoreButton.isHidden         = true
             eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: ItDescriptionLabel.frame.width, font: ItDescriptionLabel.font)
-         
+            containerViewTop.constant = 8
         }
         
-        /******************checking iphone device****************************/
-        
-        if self.view.frame.height <= 568 {
-            
-            mainContainerView.constant       = 850
-            mainContainerViewBottom.constant = 0
-            
-        }
+       
 
         // Do any additional setup after loading the view.
     }
@@ -115,8 +108,11 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
         
         let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3) as! ReviewEventViewController
         child_1.popdelegate = self
-        let child_2 = UIStoryboard(name: Constants.ItemDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid7)
-        let child_3 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1)
+        let child_2 = UIStoryboard(name: Constants.ItemDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid7)  as! LocationTabController
+        child_2.locationdelegate = self
+        let child_3 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1) as! EventTabController
+        child_3.eventdelegate = self
+        child_3.scrolltableview = false
         return [child_1,child_2,child_3]
         
     }
@@ -321,15 +317,51 @@ extension ItemDetailController {
     
 }
 
+
+
+/*************Post Delegate****************/
+
 extension ItemDetailController : ReviewEventViewControllerDelegate {
     
     func popupClick() {
-     
+        
         openPopup()
     }
     
     func postTableHeight(height: CGFloat) {
         
+        mainContainerView.constant = 616 + height
+        mainContainerViewBottom.constant = 0
     }
+    
+    
+}
+
+
+/*******************Business delegate****************************/
+
+extension ItemDetailController : EventTabControllerDelegate {
+    
+    func eventTableHeight(height: CGFloat) {
+        
+        mainContainerView.constant = 616 + height
+        mainContainerViewBottom.constant = 0
+    }
+  
+    
+}
+
+/*******************Location delegate****************************/
+
+extension ItemDetailController : LocationTabControllerDelegate {
+    
+    func locationTableHeight(height: CGFloat) {
+        
+        mainContainerView.constant = 616 + height
+        mainContainerViewBottom.constant = 0
+    }
+    
+   
+    
 }
 

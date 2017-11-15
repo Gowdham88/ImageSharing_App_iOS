@@ -550,6 +550,7 @@
                                         <constraints>
                                             <constraint firstItem="1lW-hB-p6D" firstAttribute="top" secondItem="hDJ-th-ytJ" secondAttribute="bottom" constant="8" id="0PM-Mv-sjV"/>
                                             <constraint firstAttribute="trailing" secondItem="zap-vb-pMv" secondAttribute="trailing" constant="10" id="3Wi-nb-9Rh"/>
+                                            <constraint firstItem="SfR-e9-tEN" firstAttribute="top" secondItem="o10-fq-NHl" secondAttribute="bottom" constant="38" id="48u-nJ-rYm"/>
                                             <constraint firstItem="hDJ-th-ytJ" firstAttribute="top" secondItem="02U-Jr-3EC" secondAttribute="bottom" constant="8" id="4P6-yW-avN"/>
                                             <constraint firstAttribute="trailing" secondItem="SfR-e9-tEN" secondAttribute="trailing" id="5J7-yn-T89"/>
                                             <constraint firstAttribute="trailing" secondItem="BIb-eF-MWh" secondAttribute="trailing" constant="10" id="5nI-nh-EsG"/>
@@ -569,7 +570,6 @@
                                             <constraint firstItem="IIT-eM-7iS" firstAttribute="leading" secondItem="yiT-ll-IaZ" secondAttribute="leading" constant="10" id="Ibf-XI-J9F"/>
                                             <constraint firstAttribute="trailing" secondItem="o10-fq-NHl" secondAttribute="trailing" constant="10" id="JhM-pK-onO"/>
                                             <constraint firstAttribute="trailing" secondItem="o2u-yn-ITc" secondAttribute="trailing" constant="10" id="KEr-cn-Mnh"/>
-                                            <constraint firstItem="SfR-e9-tEN" firstAttribute="top" secondItem="yiT-ll-IaZ" secondAttribute="top" constant="428" id="LNm-XM-zkf"/>
                                             <constraint firstItem="IGn-J8-oNs" firstAttribute="leading" secondItem="WZK-XB-fTr" secondAttribute="trailing" constant="8" id="LZL-Y9-BaK"/>
                                             <constraint firstItem="Ogp-uE-AMy" firstAttribute="leading" secondItem="yiT-ll-IaZ" secondAttribute="leading" id="LcG-No-6ps"/>
                                             <constraint firstItem="qHJ-AJ-BgP" firstAttribute="leading" secondItem="yiT-ll-IaZ" secondAttribute="leading" id="Nkd-1L-kLV"/>
@@ -590,6 +590,7 @@
                                             <constraint firstItem="nfW-pc-mNv" firstAttribute="top" secondItem="jq6-W2-rl2" secondAttribute="bottom" constant="7" id="ZY7-yi-jyj"/>
                                             <constraint firstAttribute="bottom" secondItem="Ogp-uE-AMy" secondAttribute="bottom" id="Zkp-OO-16z"/>
                                             <constraint firstItem="1lW-hB-p6D" firstAttribute="top" secondItem="hDJ-th-ytJ" secondAttribute="bottom" constant="8" id="ZsT-lZ-J0f"/>
+                                            <constraint firstItem="Ogp-uE-AMy" firstAttribute="top" secondItem="o10-fq-NHl" secondAttribute="bottom" constant="38" id="dWx-85-YOB"/>
                                             <constraint firstAttribute="trailing" secondItem="1lW-hB-p6D" secondAttribute="trailing" constant="10" id="eVD-Lj-1ZZ"/>
                                             <constraint firstItem="02U-Jr-3EC" firstAttribute="top" secondItem="VXA-uN-fNO" secondAttribute="bottom" constant="8" id="gaY-3D-BCh"/>
                                             <constraint firstItem="eIV-P1-ram" firstAttribute="top" secondItem="jq6-W2-rl2" secondAttribute="bottom" constant="12" id="gvu-ul-Yxa"/>
@@ -602,7 +603,6 @@
                                             <constraint firstItem="H7o-yV-lbd" firstAttribute="top" secondItem="nfW-pc-mNv" secondAttribute="bottom" constant="10" id="m4W-q3-jBu"/>
                                             <constraint firstItem="BIb-eF-MWh" firstAttribute="leading" secondItem="yiT-ll-IaZ" secondAttribute="leading" constant="10" id="ogm-wt-qXJ"/>
                                             <constraint firstItem="IIT-eM-7iS" firstAttribute="top" secondItem="BIb-eF-MWh" secondAttribute="bottom" constant="10" id="qiw-Tc-WDy"/>
-                                            <constraint firstItem="Ogp-uE-AMy" firstAttribute="top" secondItem="yiT-ll-IaZ" secondAttribute="top" constant="428" id="s9N-fW-CUm"/>
                                             <constraint firstItem="zap-vb-pMv" firstAttribute="leading" secondItem="yiT-ll-IaZ" secondAttribute="leading" constant="10" id="sAE-Sd-mPs"/>
                                             <constraint firstItem="WZK-XB-fTr" firstAttribute="top" secondItem="nfW-pc-mNv" secondAttribute="bottom" constant="15" id="sVY-xI-Pls"/>
                                             <constraint firstItem="BIb-eF-MWh" firstAttribute="top" secondItem="yiT-ll-IaZ" secondAttribute="top" constant="10" id="tze-yd-lfO"/>
@@ -618,8 +618,8 @@
                                     <constraint firstItem="yiT-ll-IaZ" firstAttribute="top" secondItem="Bp9-5t-YNe" secondAttribute="top" id="pXa-HN-irl"/>
                                 </constraints>
                             </scrollView>
-                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lwg-fG-j9c">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="1100"/>
+                            <view alpha="0.0" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lwg-fG-j9c">
+                                <rect key="frame" x="400" y="0.0" width="320" height="1100"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9qa-Wy-m3S">
                                         <rect key="frame" x="0.0" y="970" width="320" height="130"/>
@@ -682,10 +682,10 @@
                         <outlet property="BcImageView" destination="BIb-eF-MWh" id="c3y-tX-Lfl"/>
                         <outlet property="BcTitleLabel" destination="IIT-eM-7iS" id="TwH-4E-mUw"/>
                         <outlet property="TabBarView" destination="SfR-e9-tEN" id="jRI-bJ-a0Z"/>
-                        <outlet property="barButtonTop" destination="LNm-XM-zkf" id="HnR-OT-0Sh"/>
+                        <outlet property="barButtonTop" destination="48u-nJ-rYm" id="MW3-D4-xmM"/>
                         <outlet property="buttonBarView" destination="SfR-e9-tEN" id="S61-cw-qWl"/>
                         <outlet property="containerView" destination="Ogp-uE-AMy" id="XVc-ds-AU0"/>
-                        <outlet property="containerViewTop" destination="s9N-fW-CUm" id="8Ck-9Z-Jwc"/>
+                        <outlet property="containerViewTop" destination="dWx-85-YOB" id="s25-gS-ywM"/>
                         <outlet property="eventDescriptionHeight" destination="YFW-Oe-e7y" id="hhn-JG-ue2"/>
                         <outlet property="mainContainerView" destination="6px-BC-kh5" id="qB0-ja-Oy8"/>
                         <outlet property="mainContainerViewBottom" destination="IlD-BM-uOa" id="NSz-Ee-Hbl"/>

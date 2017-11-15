@@ -278,8 +278,8 @@
                         <outlet property="businessEntityView" destination="KgV-1d-5oi" id="YgW-Gs-KYj"/>
                         <outlet property="buttonBarView" destination="B0D-bc-1aJ" id="DjA-Bq-GAK"/>
                         <outlet property="containerView" destination="j11-fk-Cj0" id="nSB-o6-mVJ"/>
-                        <outlet property="mainContainerView" destination="pzO-RX-Nj6" id="qGj-e1-XrV"/>
-                        <outlet property="mainContainerViewBottom" destination="OIZ-pM-YXk" id="sNV-xJ-j6b"/>
+                        <outlet property="mainContainerView" destination="OIZ-pM-YXk" id="fnE-EI-Xi6"/>
+                        <outlet property="mainContainerViewBottom" destination="pzO-RX-Nj6" id="cU9-Nu-YRm"/>
                         <outlet property="maplabel" destination="mxk-qW-XnV" id="naN-94-3wY"/>
                         <outlet property="mapview" destination="wmo-JJ-5vE" id="KfT-Bh-Sb4"/>
                         <outlet property="navigationItemList" destination="y8y-hG-dV7" id="7Z5-hu-EkO"/>
