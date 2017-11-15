@@ -9,6 +9,12 @@
 import UIKit
 import XLPagerTabStrip
 
+protocol  BusinessEventViewControllerDelegate {
+    
+    func BusinessTableHeight(height : CGFloat)
+    
+}
+
 class BusinessEventViewController: UIViewController,IndicatorInfoProvider {
     
     var tagarray = ["Festival","Wine","Party","Rum","Barbaque","Pasta","Sandwich","Burger"]
@@ -17,6 +23,8 @@ class BusinessEventViewController: UIViewController,IndicatorInfoProvider {
     @IBOutlet weak var businessCategoryTableView : UITableView!
     
     var showentity : Bool = false
+    var businesdelegate : BusinessEventViewControllerDelegate?
+    var viewState       : Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,10 +36,19 @@ class BusinessEventViewController: UIViewController,IndicatorInfoProvider {
         businessCategoryTableView.dataSource = self
 
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+        viewState = true
+        businessCategoryTableView.reloadData()
+        
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
+    
         
     }
     
@@ -121,6 +138,14 @@ extension BusinessEventViewController : UITableViewDelegate,UITableViewDataSourc
         
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        let lastRowIndex = tableView.numberOfRows(inSection: 0)
+        if indexPath.row == lastRowIndex - 1 && viewState {
+           businesdelegate?.BusinessTableHeight(height: businessEventTableView.contentSize.height)
+           viewState = false
+        }
+    }
     
 }
 

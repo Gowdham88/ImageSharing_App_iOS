@@ -37,15 +37,55 @@ class PostEventTableViewCell: UITableViewCell {
     
     var delegate : PostEventTableViewCellDelegate?
     
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func setHeight(heightview : Float){
+        
+        if heightview <= 568 {
+            
+            dishwidthConstaint.constant   = 75
+            placeWidthConstraint.constant = 75
+            
+            
+        } else if heightview <= 667 {
+            
+            dishwidthConstaint.constant   = 99
+            placeWidthConstraint.constant = 99
+            
+        } else if heightview <= 736 {
+            
+            dishwidthConstaint.constant   = 117
+            placeWidthConstraint.constant = 117
+            
+        } else if heightview <= 812 {
+            
+            dishwidthConstaint.constant   = 99
+            placeWidthConstraint.constant = 99
+            
+        } else if heightview <= 1024 {
+            
+            dishwidthConstaint.constant   = 274
+            placeWidthConstraint.constant = 274
+            
+        } else {
+            
+            dishwidthConstaint.constant   = 387
+            placeWidthConstraint.constant = 387
+            
+        }
+        
     }
     
     

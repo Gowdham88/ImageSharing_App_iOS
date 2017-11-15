@@ -9,6 +9,9 @@
 import UIKit
 import XLPagerTabStrip
 
+
+
+
 class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
     
     @IBOutlet weak var busImageView: ImageExtender!
@@ -87,21 +90,16 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
             
             readMoreButton.isHidden = false
             
+            
         } else {
             
             readMoreButton.isHidden = true
+            containerViewTop.constant = 8
             busDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
             
         }
         
-        /******************checking iphone device****************************/
-        
-        if self.view.frame.height <= 568 {
-            
-            mainContainerView.constant = 750
-            mainContainerViewBottom.constant = 0
-            
-        }
+       
 
         
     }
@@ -134,7 +132,8 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
-        let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid2)
+        let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid2) as! MenuEventViewController
+        child_1.menuDelegate = self
         let child_2 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3) as! ReviewEventViewController
         child_2.popdelegate = self
         return [child_1, child_2]
@@ -266,7 +265,7 @@ extension BusinessDetailViewController {
         
     }
     
-    func alertTapRegister(){
+    func alertTapRegister() {
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.closePopup(sender:)))
         self.shareView.addGestureRecognizer(tap)
@@ -294,11 +293,12 @@ extension BusinessDetailViewController {
             self.shareView.transform = top
             
         }, completion: nil)
-        
-        
+      
     }
     
 }
+
+/*************Post Delegate****************/
 
 extension BusinessDetailViewController : ReviewEventViewControllerDelegate {
     
@@ -306,4 +306,25 @@ extension BusinessDetailViewController : ReviewEventViewControllerDelegate {
         
         openPopup()
     }
+    
+    func postTableHeight(height: CGFloat) {
+        
+        mainContainerView.constant = 346 + height
+        mainContainerViewBottom.constant = 0
+    }
+    
+    
+}
+
+
+/*******************Item delegate****************************/
+
+extension BusinessDetailViewController : MenuEventViewControllerDelegate {
+    
+    func menuTableHeight(height: CGFloat) {
+        
+        mainContainerView.constant = 346 + height
+        mainContainerViewBottom.constant = 0
+    }
+    
 }

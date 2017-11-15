@@ -9,16 +9,34 @@
 import UIKit
 import XLPagerTabStrip
 
+protocol  LocationTabControllerDelegate {
+    
+    func locationTableHeight(height : CGFloat)
+    
+}
+
 class LocationTabController: UIViewController,IndicatorInfoProvider {
 
     @IBOutlet weak var locationTableView: UITableView!
+    var locationdelegate : LocationTabControllerDelegate?
+    var viewState        : Bool = false
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         locationTableView.delegate   = self
         locationTableView.dataSource = self
+        locationTableView.isScrollEnabled = false
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+        viewState = true
+        locationTableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -65,6 +83,15 @@ extension LocationTabController : UITableViewDelegate,UITableViewDataSource {
         let vc         = storyboard.instantiateViewController(withIdentifier: Constants.LocationDetailId)
         self.navigationController!.pushViewController(vc, animated: true)
         
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        let lastRowIndex = tableView.numberOfRows(inSection: 0)
+        if indexPath.row == lastRowIndex - 1 && viewState {
+            locationdelegate?.locationTableHeight(height: locationTableView.contentSize.height)
+            viewState = false
+        }
     }
     
     

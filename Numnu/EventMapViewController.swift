@@ -18,6 +18,9 @@ class EventMapViewController: UIViewController {
     var zoomLevel: Float = 15.0
     @IBOutlet weak var navigationItemList: UINavigationItem!
     
+    var latitude   : CLLocationDegrees = 45.511278
+    var longtitude : CLLocationDegrees = -73.565778
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,7 +33,6 @@ class EventMapViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
         
         if CLLocationManager.locationServicesEnabled()
-            
         {
             locationManager.distanceFilter = 50
             locationManager.startUpdatingLocation()
@@ -39,6 +41,8 @@ class EventMapViewController: UIViewController {
         }
     
         self.tabBarController?.tabBar.isHidden = true
+        
+        
      
         // Do any additional setup after loading the view.
     }
@@ -52,7 +56,7 @@ class EventMapViewController: UIViewController {
     
     func setMap() {
       
-        let camera = GMSCameraPosition.camera(withLatitude: 45.5017, longitude: -73.5673, zoom: zoomLevel)
+        let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longtitude, zoom: zoomLevel)
         mapView = GMSMapView.map(withFrame: view.bounds, camera: camera)
         mapView.settings.myLocationButton = true
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -61,6 +65,12 @@ class EventMapViewController: UIViewController {
         // Add the map to the view, hide it until we've got a location update.
         view.addSubview(mapView)
 //        mapView.isHidden = true
+        
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2D(latitude: latitude, longitude: longtitude)
+        marker.title = "BOUILLON BILK"
+        marker.snippet = "1595 St Laurent Blvd, Montreal, QC H2X 2S9, Canada"
+        marker.map = mapView
         
         
         
