@@ -78,8 +78,7 @@ extension DefaultHomeController : UICollectionViewDataSource,UICollectionViewDel
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let cell : EventDefaulCollectionCell = collectionView.cellForItem(at: indexPath) as! EventDefaulCollectionCell
-        cell.backgroundColor = UIColor.white
+    
         openStoryBoard(name: Constants.Event, id: Constants.EventStoryId)
         
     }

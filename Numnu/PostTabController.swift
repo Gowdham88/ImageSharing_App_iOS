@@ -67,8 +67,7 @@ extension PostTabController : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let cell : PostEventTableViewCell = tableView.cellForRow(at: indexPath) as! PostEventTableViewCell
-        cell.contentView.backgroundColor = UIColor.white
+        
         
         openStoryBoard()
     }
