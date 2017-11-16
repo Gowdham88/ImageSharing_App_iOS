@@ -9,9 +9,11 @@
 import UIKit
 
 class Profile_PostViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
+    
     @IBOutlet var tableView: UITableView!
     @IBOutlet var navigationItemList: UINavigationItem!
     
+    @IBOutlet weak var shareview: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,13 +22,17 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         self.navigationController?.navigationBar.titleTextAttributes =
             [NSForegroundColorAttributeName: UIColor.black,
              NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
+        
+        alertTapRegister()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         // Hide the navigation bar on the this view controller
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
+    
     func setNavBar() {
         
         navigationItemList.title = "Profile"
@@ -71,7 +77,8 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         
     }
     
-    func settingsClicked(){
+    func settingsClicked() {
+        
         let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: "SettingsVC")
         self.navigationController!.pushViewController(vc, animated: true)
@@ -84,8 +91,8 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! Profile_postTableViewCell
         
-//        cell.delegate = (self as! PostEventTableViewCellDelegate)
-//        cell.postEventBookMark.tag = indexPath.row
+        cell.delegate = self
+        cell.postEventBookMark.tag = indexPath.row
         
         return cell
     }
@@ -106,4 +113,45 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
     }
     */
 
+}
+
+extension Profile_PostViewController : Profile_postTableViewCellDelegate {
+    
+    func popup() {
+       
+        openPopup()
+        
+    }
+    
+    func alertTapRegister() {
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.closePopup(sender:)))
+        self.shareview.addGestureRecognizer(tap)
+        
+    }
+    
+    func closePopup(sender : UITapGestureRecognizer) {
+        
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            
+            self.shareview.alpha  = 0
+            
+        }, completion: nil)
+        
+    }
+    
+    func openPopup() {
+        
+        self.shareview.alpha   = 1
+        
+        let top = CGAffineTransform(translationX: 0, y: 0)
+        
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            
+            self.shareview.isHidden  = false
+            self.shareview.transform = top
+            
+        }, completion: nil)
+  
+    }
 }

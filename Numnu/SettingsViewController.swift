@@ -137,6 +137,7 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         
         let storyBoard : UIStoryboard = UIStoryboard(name: Constants.Main, bundle:nil)
         let editProfile = storyBoard.instantiateViewController(withIdentifier: "profileid") as! Edit_ProfileVC
+        
 //        self.present(editProfile, animated:true, completion:nil)
 //        self.navigationController?.pushViewController(editProfile, animated: true)
         self.navigationController?.present(editProfile, animated: true, completion: nil)

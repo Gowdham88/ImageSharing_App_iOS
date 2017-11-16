@@ -14,12 +14,12 @@ class EventTagCollectionCell: UICollectionViewCell {
     
     func setLabelSize(size : CGSize) {
         
-        tagnamelabel.backgroundColor  = UIColor.tagBgColor()
-        tagnamelabel.textColor        = UIColor.tagTextColor()
-        tagnamelabel.layer.cornerRadius = 10
+        tagnamelabel.backgroundColor     = UIColor.tagBgColor()
+        tagnamelabel.textColor           = UIColor.tagTextColor()
+        tagnamelabel.layer.cornerRadius  = 4
         tagnamelabel.layer.masksToBounds = true
         tagnamelabel.textAlignment = .center
-        tagnamelabel.frame = CGRect(x: 0, y: 0, width: size.width+20, height: 30)
+        tagnamelabel.frame = CGRect(x: 0, y: 0, width: size.width+20, height: 22)
         
     }
 }
