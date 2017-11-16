@@ -8,7 +8,14 @@
 
 import UIKit
 
+protocol  Profile_postTableViewCellDelegate {
+    
+    func popup()
+    
+}
+
 class Profile_postTableViewCell: UITableViewCell {
+    
     @IBOutlet weak var postUsernameLabel: UILabel!
     @IBOutlet weak var postUserImage: ImageExtender!
     @IBOutlet weak var postUserplaceLabbel: UILabel!
@@ -26,7 +33,7 @@ class Profile_postTableViewCell: UITableViewCell {
     @IBOutlet weak var placeWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var dishRightLayoutConstraint: NSLayoutConstraint!
     
-    var delegate : PostEventTableViewCellDelegate?
+    var delegate : Profile_postTableViewCellDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -38,4 +45,8 @@ class Profile_postTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func ButtonBookmark(_ sender: UIButton) {
+        
+        delegate?.popup()
+    }
 }

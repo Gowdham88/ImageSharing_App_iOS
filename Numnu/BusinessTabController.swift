@@ -89,7 +89,7 @@ extension BusinessTabController : UICollectionViewDelegate,UICollectionViewDataS
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "businesstagcell", for: indexPath) as! EventTagCollectionCell
         
-        let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagarray[indexPath.row], fontname: "AvenirNext-Regular", size: 15)
+        let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagarray[indexPath.row], fontname: "Avenir-Book", size: 16)
         
         cell.tagnamelabel.text = tagarray[indexPath.row]
         
@@ -102,9 +102,9 @@ extension BusinessTabController : UICollectionViewDelegate,UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagarray[indexPath.row], fontname: "AvenirNext-Regular", size: 15)
+        let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagarray[indexPath.row], fontname: "Avenir-Book", size: 16)
         
-        return CGSize(width: textSize.width+20, height: 30)
+        return CGSize(width: textSize.width+20, height: 22)
     }
     
     

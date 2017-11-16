@@ -42,19 +42,19 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
 
     override func viewDidLoad() {
        settings.style.selectedBarHeight = 3.0
-         settings.style.buttonBarItemFont = UIFont(name: "Avenir-Book", size: 17)!
-        super.viewDidLoad()
+       settings.style.buttonBarItemFont = UIFont(name: "Avenir-Medium", size: 14)!
+       super.viewDidLoad()
         
-        settings.style.buttonBarBackgroundColor = .white
+        settings.style.buttonBarBackgroundColor     = .white
         settings.style.buttonBarItemBackgroundColor = .white
-        settings.style.selectedBarBackgroundColor = UIColor.appBlackColor()
+        settings.style.selectedBarBackgroundColor   = UIColor.appBlackColor()
    
         settings.style.buttonBarMinimumLineSpacing = 0
-        settings.style.buttonBarItemTitleColor = .black
+        settings.style.buttonBarItemTitleColor     = .black
         settings.style.buttonBarItemsShouldFillAvailiableWidth = true
-        settings.style.buttonBarLeftContentInset = 0
-        settings.style.buttonBarRightContentInset = 0
-        buttonBarView.selectedBar.backgroundColor = UIColor.appThemeColor()
+        settings.style.buttonBarLeftContentInset   = 0
+        settings.style.buttonBarRightContentInset  = 0
+        buttonBarView.selectedBar.backgroundColor  = UIColor.appThemeColor()
         
         changeCurrentIndexProgressive = { [weak self] (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
             guard changeCurrentIndex == true else { return }
@@ -120,7 +120,7 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
             
             readMoreButton.setTitle("more", for: .normal)
             isLabelAtMaxHeight = false
-            eventDescriptionHeight.constant = 85
+            eventDescriptionHeight.constant = 75
             
             
         } else {
@@ -167,22 +167,22 @@ extension BusinessCompleteViewController {
         for (i,text) in tagarray.enumerated() {
             
             let textLabel : UILabel = UILabel()
-            let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: text, fontname: "AvenirNext-Regular", size: 15)
-            textLabel.font = UIFont(name: "AvenirNext-Regular", size: 15)
+            let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: text, fontname: "Avenir-Medium", size: 12)
+            textLabel.font = UIFont(name: "Avenir-Medium", size: 12)
             textLabel.text = text
             textLabel.backgroundColor  = UIColor.tagBgColor()
             textLabel.textColor        = UIColor.tagTextColor()
-            textLabel.layer.cornerRadius = 10
+            textLabel.layer.cornerRadius = 4
             textLabel.layer.masksToBounds = true
             textLabel.textAlignment = .center
             
             if i == 0 {
                 
-                textLabel.frame = CGRect(x: 0, y: 0, width: textSize.width+20, height: 30)
+                textLabel.frame = CGRect(x: 0, y: 0, width: textSize.width+20, height: 22)
                 
             } else {
                 
-                textLabel.frame = CGRect(x: expandableWidth, y: 0, width: textSize.width+20, height: 30)
+                textLabel.frame = CGRect(x: expandableWidth, y: 0, width: textSize.width+20, height: 22)
                 
             }
             
@@ -292,7 +292,7 @@ extension BusinessCompleteViewController : ReviewEventViewControllerDelegate {
     
     func postTableHeight(height: CGFloat) {
         
-        mainContainerView.constant = 492 + height
+        mainContainerView.constant = 440 + height
         mainContainerViewBottom.constant = 0
     }
     
@@ -306,7 +306,7 @@ extension BusinessCompleteViewController : MenuEventViewControllerDelegate {
     
     func menuTableHeight(height: CGFloat) {
         
-        mainContainerView.constant = 492 + height
+        mainContainerView.constant = 440 + height
         mainContainerViewBottom.constant = 0
     }
     
@@ -318,7 +318,7 @@ extension BusinessCompleteViewController : EventTabControllerDelegate {
     
     func eventTableHeight(height: CGFloat) {
         
-        mainContainerView.constant = 492 + height
+        mainContainerView.constant = 440 + height
         mainContainerViewBottom.constant = 0
         
     }

@@ -37,7 +37,7 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
     @IBOutlet weak var collectionContainerView: UIView!
     override func viewDidLoad() {
         settings.style.selectedBarHeight = 3.0
-        settings.style.buttonBarItemFont = UIFont(name: "Avenir-Book", size: 17)!
+        settings.style.buttonBarItemFont = UIFont(name: "Avenir-Medium", size: 14)!
         super.viewDidLoad()
         // change selected bar color
         
@@ -276,7 +276,7 @@ extension ParentViewController {
 
 /*************************Google place autocomplete*******************************************/
 
-extension ParentViewController: GMSAutocompleteViewControllerDelegate {
+extension ParentViewController : GMSAutocompleteViewControllerDelegate {
     
     // Handle the user's selection.
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
