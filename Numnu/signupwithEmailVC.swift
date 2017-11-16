@@ -35,17 +35,25 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
 
 //        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
 //        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
+//
+       
     }
     
-   /*
-    @objc func keyboardWillShow(sender: NSNotification) {
-        self.view.frame.origin.y -= 30
+    func animateViewMoving (up:Bool, moveValue :CGFloat){
+        
+        let movementDuration:TimeInterval = 0.3
+        let movement:CGFloat = ( up ? -moveValue : moveValue)
+        
+        UIView.beginAnimations("animateView", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(movementDuration)
+        
+        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+        
+        //        self.view.frame = offsetBy(self.view.frame, 0, movement)
+        
+        UIView.commitAnimations()
     }
-    
-    @objc func keyboardWillHide(sender: NSNotification) {
-        self.view.frame.origin.y += 30
-    }
- */
     
     var iconClick = Bool()
     
@@ -92,6 +100,8 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
         textField.resignFirstResponder()
+        animateViewMoving(up: false, moveValue: 0)
+
 
     }
     @IBAction func signupPressed(_ sender: Any) {
@@ -157,8 +167,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                 authenticationError(error: Constants.Passworderror)
               
             }
-            
-        } else {
+         } else {
             
             authenticationError(error: Constants.Emailpasserror)
             print("Please fill in all the fields")

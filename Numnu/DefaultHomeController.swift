@@ -23,7 +23,7 @@ class DefaultHomeController: UIViewController,IndicatorInfoProvider {
         eventDefaultTableview.delegate   = self
         eventDefaultTableview.dataSource = self
         ImagesArray = [UIImage(named: "1.png")!,UIImage(named: "2.png")!,UIImage(named: "3.png")!,UIImage(named: "4.png")!]
-        namesArray = ["Flatron","Masuike","Umami Burger","Ada Burger"]
+        namesArray = ["Flatron","Masuike","Umami Burger","Ada Salad"]
        locationArray = ["Montreal","Miami","New Orleans","Miami"]
         // Do any additional setup after loading the view.
     }
@@ -77,12 +77,6 @@ extension DefaultHomeController : UICollectionViewDataSource,UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
      
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "eventcell1", for: indexPath) as! EventDefaulCollectionCell
-//        cell.eventImage.layer.masksToBounds = true
-//        cell.eventImage.clipsToBounds = true
-//        cell.eventImage.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
-//        cell.eventImage.layer.shadowOpacity = 1.0
-//        cell.eventImage.layer.shadowOffset = CGSize(width: 15.0, height: 15.0)
-//        cell.eventImage.layer.shadowRadius = 10.0
         cell.eventImage.image = ImagesArray[indexPath.row]
         cell.eventLabelname.text = namesArray[indexPath.row]
         cell.eventLocationname.text = locationArray[indexPath.row]
