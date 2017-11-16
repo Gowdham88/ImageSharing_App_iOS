@@ -10,17 +10,15 @@ import UIKit
 import MapKit
 import CoreLocation
 import GooglePlaces
+
 var dropdownArray = [String] ()
 var dropdownString = String ()
 var tagArray = [String] ()
-//var selectedIndex = integer_t()
 var selectedIndex = Int()
 var autocompleteUrls = [String]()
 
 class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,GMSAutocompleteViewControllerDelegate {
-  
     
-
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var doneButotn: UIButton!
     @IBOutlet weak var doneView: UIView!
@@ -206,38 +204,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
-//        if CLLocationManager.locationServicesEnabled()  {
-//            let placesClient = GMSPlacesClient.shared()
-//
-//            placesClient.currentPlace(callback: { (placeLikelihoods: GMSPlaceLikelihoodList?, error) -> Void in
-//                if error != nil {
-//                    print("Current Place error: \(error!.localizedDescription)")
-//                    return
-//                }
-//
-//                for likelihood in placeLikelihoods!.likelihoods {
-//                    if let likelihood = likelihood as? GMSPlaceLikelihood {
-//                        let place = likelihood.place
-//                        print("Current Place name \(place.name) at likelihood \(likelihood.likelihood)")
-//                        //                    print("Current Place address \(String(describing: place.formattedAddress))")
-//                        //                    print("Current Place attributions \(String(describing: place.attributions))")
-//                        //                    print("Current PlaceID \(place.placeID)")
-//                        self.cityTextfield.text = place.name
-//                        //Somehow work below code into here
-//                        let defaults = UserDefaults.standard
-//                        defaults.setValue(place.name, forKey: "UserPlace")//(place.name, forKey: "UserPlace")
-//                        UserDefaults.standard.synchronize()
-//                        print("saved location is::::",defaults)
-//                    }
-//                }
-//            })
-//        }else{
-//            let result = UserDefaults.standard.value(forKey: "UserPlace")
-//            UserDefaults.standard.synchronize()
-//            self.cityTextfield.text = result as? String
-//
-//            print("Retrieved place is::::",result!)
-//        }
     }
     
     func addClicked() {
@@ -404,7 +370,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        
         if textField == birthTextfield {
             showDatePicker()
             birthTextfield.resignFirstResponder()
@@ -415,38 +380,32 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             let autocompleteController = GMSAutocompleteViewController()
             autocompleteController.delegate = self
             present(autocompleteController, animated: true, completion: nil)
-        }
-        
-        if textField == foodTextfield {
-            dropdownTableView.isHidden = false
-
-        }else{
-            dropdownTableView.isHidden = true
-        }
-        
-        if textField == genderTextfield {
+        }else if textField == genderTextfield {
             genderTextfield.resignFirstResponder()
-
+            
             let Alert = UIAlertController(title: "Select Gender", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
             
             let MaleAction = UIAlertAction(title: "Male", style: UIAlertActionStyle.default) { _ in
                 self.genderTextfield.text = "Male"
                 self.genderTextfield.resignFirstResponder()
-
+                
             }
             let FemaleAction = UIAlertAction(title: "Female", style: UIAlertActionStyle.default) { _ in
                 self.genderTextfield.text = "Female"
                 self.genderTextfield.resignFirstResponder()
-
+                
             }
             
             Alert.addAction(MaleAction)
             Alert.addAction(FemaleAction)
-
-            present(Alert, animated: true, completion: nil)
-        }else{
             
+            present(Alert, animated: true, completion: nil)
+        }else if textField == foodTextfield {
+            dropdownTableView.isHidden = false
+        }else{
+            dropdownTableView.isHidden = true
         }
+        
        
     }
     
@@ -463,7 +422,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             superVieww.isHidden = true
             doneView.isHidden = true
         }
-       
     }
    
     func animateViewMoving (up:Bool, moveValue :CGFloat){
@@ -524,7 +482,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         monthLabel.text = month
         
         yearLabel.text = year
-        
 }
     
     func addCollectionContainer(){
@@ -540,7 +497,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         self.view.addSubview(controller.view)
         self.addChildViewController(controller)
         controller.didMove(toParentViewController: self)
-        
     }
     
     @IBAction func didTappedSave(_ sender: Any) {
@@ -682,6 +638,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cvcell", for: indexPath as IndexPath) as! FoodPreferenceCollectionViewCell
         cell.foodtagLabel.text = tagArray[indexPath.row]
+        cell.foodtagLabel.layer.cornerRadius = 4.0
+//        cell.foodtagLabel.sizeToFit()
         cell.removetagButton.tag = indexPath.row
         cell.removetagButton.addTarget(self, action: #selector(buttonClicked(sender:)), for: .touchUpInside)
     
