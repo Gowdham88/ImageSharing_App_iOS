@@ -8,6 +8,10 @@
 
 import UIKit
 import XLPagerTabStrip
+var ImagesArray = [UIImage]()
+var namesArray = [String]()
+var locationArray = [String]()
+
 
 class DefaultHomeController: UIViewController,IndicatorInfoProvider {
 
@@ -18,7 +22,9 @@ class DefaultHomeController: UIViewController,IndicatorInfoProvider {
         
         eventDefaultTableview.delegate   = self
         eventDefaultTableview.dataSource = self
-
+        ImagesArray = [UIImage(named: "1.png")!,UIImage(named: "2.png")!,UIImage(named: "3.png")!,UIImage(named: "4.png")!]
+        namesArray = ["Flatron","Masuike","Umami Burger","Ada Salad"]
+       locationArray = ["Montreal","Miami","New Orleans","Miami"]
         // Do any additional setup after loading the view.
     }
 
@@ -64,13 +70,17 @@ extension DefaultHomeController : UICollectionViewDataSource,UICollectionViewDel
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 10
+        return namesArray.count
         
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
      
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "eventcell1", for: indexPath) as! EventDefaulCollectionCell
+        cell.eventImage.image = ImagesArray[indexPath.row]
+        cell.eventLabelname.text = namesArray[indexPath.row]
+        cell.eventLocationname.text = locationArray[indexPath.row]
+
         return cell
    
     }

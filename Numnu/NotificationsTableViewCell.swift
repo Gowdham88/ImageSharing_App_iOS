@@ -21,6 +21,7 @@ class NotificationsTableViewCell: UITableViewCell {
         userDP.layer.cornerRadius = self.userDP.frame.size.height/2
         userDP.clipsToBounds = true
         accessoryButton.backgroundColor = UIColor.clear
+        self.notificationLabel.sizeToFit()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

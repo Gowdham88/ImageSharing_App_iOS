@@ -20,6 +20,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     var credential: AuthCredential?
     var userprofilename : String = ""
     var userprofileimage : String = ""
+    var ViewMoved = true
 
     
     @IBOutlet weak var orLbl: UILabel!
@@ -31,8 +32,27 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
   
         //        labelcredentials.isHidden = true
+
+//        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
+//        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
+//
+       
+    }
+    
+    func animateViewMoving (up:Bool, moveValue :CGFloat){
         
-      
+        let movementDuration:TimeInterval = 0.3
+        let movement:CGFloat = ( up ? -moveValue : moveValue)
+        
+        UIView.beginAnimations("animateView", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(movementDuration)
+        
+        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+        
+        //        self.view.frame = offsetBy(self.view.frame, 0, movement)
+        
+        UIView.commitAnimations()
     }
     
     var iconClick = Bool()
@@ -76,8 +96,14 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
 //        labelcredentials.isHidden = true
+
     }
-    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textField.resignFirstResponder()
+        animateViewMoving(up: false, moveValue: 0)
+
+
+    }
     @IBAction func signupPressed(_ sender: Any) {
         
         Login()
@@ -141,8 +167,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                 authenticationError(error: Constants.Passworderror)
               
             }
-            
-        } else {
+         } else {
             
             authenticationError(error: Constants.Emailpasserror)
             print("Please fill in all the fields")
