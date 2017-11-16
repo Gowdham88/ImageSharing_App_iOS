@@ -205,7 +205,10 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        let offset = CGPoint(x: 0,y :0)
+        myscrollView.setContentOffset(offset, animated: true)
+    }
     func addClicked() {
         if foodTextfield.text == "" {
           print("could not add empty fields")
