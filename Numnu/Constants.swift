@@ -87,7 +87,7 @@ class Constants {
     static let BusinessTabid2 = "ReviewTab"
     static let BusinessTabid3 = "EventTab"
    
-    static let dummy   = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolfdfdfdfdfdfdfdfdfdfdfdf fdfdfddsdsdsdsdsds djhdjs dsjhdjhsjdhsjhdhs dsjhd Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolfdfdfdfdfdfdfdfdfdfdfdf fdfdfddsdsdsdsdsds djhdjs dsjhdjhsjdhsjhdhs dsjhd Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolfdfdfdfdfdfdfdfdfdfdfdf fdfdfddsdsdsdsdsds djhdjs dsjhdjhsjdhsjhdhs dsjhd"
+    static let dummy   = "This much-talked-about festival brings all your favorite Food Network personalities and celebrity chefs to Miami for five days of events, from intimate dinners cooked by Sean Brock to a late-night Tacos After Dark session with Aarón Sanchez. If you've always dreamed of drinking tiki cocktails with Guy Fieri or having a rosé brunch with Martha Stewart, the South Beach Wine & Food Festival can make your wishes come true."
     
     // Authentication Label
     

@@ -113,7 +113,7 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
         let child_3 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1) as! EventTabController
         child_3.eventdelegate = self
         child_3.scrolltableview = false
-        return [child_1,child_2,child_3]
+        return [child_1,child_2]
         
     }
     
@@ -270,7 +270,7 @@ extension ItemDetailController {
     
     func backButtonClicked() {
         
-        _ = self.navigationController?.popToRootViewController(animated: true)
+        _ = self.navigationController?.popViewController(animated: true)
         
     }
   
@@ -283,7 +283,7 @@ extension ItemDetailController {
         
     }
     
-    func alertTapRegister(){
+    func alertTapRegister() {
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.closePopup(sender:)))
         self.shareView.addGestureRecognizer(tap)
@@ -330,7 +330,7 @@ extension ItemDetailController : ReviewEventViewControllerDelegate {
     
     func postTableHeight(height: CGFloat) {
         
-        mainContainerView.constant = 562 + height
+        mainContainerView.constant = 548 + height
         mainContainerViewBottom.constant = 0
     }
   
@@ -343,7 +343,7 @@ extension ItemDetailController : EventTabControllerDelegate {
     
     func eventTableHeight(height: CGFloat) {
         
-        mainContainerView.constant = 562 + height
+        mainContainerView.constant = 548 + height
         mainContainerViewBottom.constant = 0
     }
   
@@ -355,7 +355,7 @@ extension ItemDetailController : LocationTabControllerDelegate {
     
     func locationTableHeight(height: CGFloat) {
         
-        mainContainerView.constant = 562 + height
+        mainContainerView.constant = 548 + height
         mainContainerViewBottom.constant = 0
     }
   

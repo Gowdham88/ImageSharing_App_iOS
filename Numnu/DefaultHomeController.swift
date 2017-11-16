@@ -87,7 +87,6 @@ extension DefaultHomeController : UICollectionViewDataSource,UICollectionViewDel
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
     
         openStoryBoard(name: Constants.Event, id: Constants.EventStoryId)
         
@@ -114,6 +113,5 @@ extension DefaultHomeController : UICollectionViewDataSource,UICollectionViewDel
         
     }
     
-    
-    
+   
 }
