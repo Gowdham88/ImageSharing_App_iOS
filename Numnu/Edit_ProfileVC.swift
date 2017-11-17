@@ -146,6 +146,11 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 
             }
             
+<<<<<<< HEAD
+=======
+//            addCollectionContainer()
+
+>>>>>>> 39b28d9e77ea15e3ab26f61e16522a9b2cffbeba
         }
         
     }
@@ -535,7 +540,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            self.profileImage.contentMode = .scaleToFill
+            self.profileImage.contentMode = .scaleAspectFit
             self.profileImage.image = pickedImage
         }
         
