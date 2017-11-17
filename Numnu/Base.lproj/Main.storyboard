@@ -637,7 +637,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u4L-Rv-YGc">
-                                        <rect key="frame" x="190" y="120" width="25" height="25"/>
+                                        <rect key="frame" x="188" y="118" width="25" height="25"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="Pzm-bo-zfh"/>
@@ -803,7 +803,7 @@
                                             <constraint firstAttribute="height" constant="50" id="mqi-PT-aoA"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
-                                        <state key="normal" title="Save">
+                                        <state key="normal">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
@@ -990,7 +990,7 @@
                                     <constraint firstItem="kxV-ix-rTc" firstAttribute="top" secondItem="qJk-3B-n4F" secondAttribute="bottom" constant="2" id="Mn1-in-Lrx"/>
                                     <constraint firstAttribute="trailing" secondItem="ylG-1u-Xev" secondAttribute="trailing" constant="35" id="N91-c5-Lpu"/>
                                     <constraint firstItem="LJ0-Io-Clr" firstAttribute="centerX" secondItem="VH4-X6-Kdb" secondAttribute="centerX" id="OW0-ca-2II"/>
-                                    <constraint firstItem="u4L-Rv-YGc" firstAttribute="trailing" secondItem="LJ0-Io-Clr" secondAttribute="trailing" id="Ob5-mJ-DRb"/>
+                                    <constraint firstItem="u4L-Rv-YGc" firstAttribute="trailing" secondItem="LJ0-Io-Clr" secondAttribute="trailing" constant="-2" id="Ob5-mJ-DRb"/>
                                     <constraint firstItem="OzM-Dh-gae" firstAttribute="bottom" secondItem="7xv-j6-YU0" secondAttribute="bottom" constant="-2" id="OvE-k3-9Hf"/>
                                     <constraint firstItem="ylG-1u-Xev" firstAttribute="top" secondItem="Tpn-jl-Km2" secondAttribute="bottom" constant="3" id="P0h-SZ-nKQ"/>
                                     <constraint firstItem="B7Z-ya-upK" firstAttribute="leading" secondItem="VH4-X6-Kdb" secondAttribute="leading" constant="35" id="SKk-9S-PIK"/>
@@ -1028,7 +1028,7 @@
                                     <constraint firstItem="keU-dd-wio" firstAttribute="top" secondItem="ufu-a9-C8Z" secondAttribute="bottom" constant="5" id="iL6-bS-ILZ"/>
                                     <constraint firstAttribute="trailing" secondItem="1xL-aT-iZT" secondAttribute="trailing" id="jLs-Hh-EEl"/>
                                     <constraint firstAttribute="trailing" secondItem="AUd-8j-FZA" secondAttribute="trailing" constant="35" id="kXY-ZP-xma"/>
-                                    <constraint firstItem="u4L-Rv-YGc" firstAttribute="bottom" secondItem="LJ0-Io-Clr" secondAttribute="bottom" id="kla-0H-S4w"/>
+                                    <constraint firstItem="u4L-Rv-YGc" firstAttribute="bottom" secondItem="LJ0-Io-Clr" secondAttribute="bottom" constant="-2" id="kla-0H-S4w"/>
                                     <constraint firstAttribute="bottom" secondItem="kxV-ix-rTc" secondAttribute="bottom" constant="391" id="l34-d1-ZUP"/>
                                     <constraint firstAttribute="trailing" secondItem="Io6-qy-Mlj" secondAttribute="trailing" constant="185" id="lfz-e4-ejk"/>
                                     <constraint firstItem="IqV-0J-6Rl" firstAttribute="leading" secondItem="VH4-X6-Kdb" secondAttribute="leading" constant="35" id="mej-Rj-Unn"/>
@@ -1119,7 +1119,7 @@
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="432" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HGh-Az-pvx">
                                                 <rect key="frame" x="0.0" y="172" width="320" height="557"/>
-                                                <color key="backgroundColor" red="0.53455946180555558" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" rowHeight="432" id="zHC-aN-qeh" customClass="Profile_postTableViewCell" customModule="Numnu" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="28" width="320" height="432"/>
@@ -1830,7 +1830,7 @@
         <scene sceneID="O7V-V1-5BX">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="u4k-tE-czu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="notifiunselected" id="g9G-G8-neI">
+                    <tabBarItem key="tabBarItem" title="" image="bell red" id="g9G-G8-neI">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -1906,6 +1906,7 @@
         <image name="Search Icon Copy" width="15" height="15"/>
         <image name="Shape Copy 192" width="11" height="16"/>
         <image name="Shape_new@1x" width="8" height="12"/>
+        <image name="bell red" width="25" height="24"/>
         <image name="cloche" width="13" height="9"/>
         <image name="comment" width="20" height="16"/>
         <image name="cottage" width="14" height="13"/>
@@ -1920,7 +1921,6 @@
         <image name="location_ico" width="16" height="23"/>
         <image name="love_ico" width="32" height="29"/>
         <image name="menu" width="24" height="18"/>
-        <image name="notifiunselected" width="21" height="20"/>
         <image name="onboardbg" width="2225" height="1348"/>
         <image name="p7" width="400" height="400"/>
         <image name="profileunselected" width="20" height="20"/>

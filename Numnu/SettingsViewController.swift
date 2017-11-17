@@ -159,6 +159,7 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         if let   myController  = self.navigationController!.viewControllers[1] as? Edit_ProfileVC
         {
             myController.show = true
+            myController.boolForTitle = false
             _ =  self.navigationController!.popToViewController(myController, animated: true)
         }
     }

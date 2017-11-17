@@ -48,7 +48,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     @IBOutlet weak var navigationItemList: UINavigationItem!
     var show : Bool = false
-    
+    var boolForTitle: Bool = false
+//    var showProfile: Bool = true
     @IBOutlet var myscrollView: UIScrollView!
    
     @IBOutlet var saveButton: UIButton!
@@ -132,8 +133,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
              NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
 
         // Do any additional setup after loading the view.
-        
-        if show == false {
+                if show == false {
             
             addCollectionContainer()
 
@@ -152,13 +152,23 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         super.viewWillAppear(animated)
         // Hide the navigation bar on the this view controller
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
-        
+        if boolForTitle == true {
+            navigationItemList.title = "Complete Profile"
+            saveButton.setTitle("Complete SignUp", for: .normal)
+            saveButton.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 16)
+        }else{
+            navigationItemList.title = "Edit Profile"
+            saveButton.setTitle("Save", for: .normal)
+            saveButton.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 16)
+
+        }
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
     }
     override func viewDidAppear(_ animated: Bool) {
         let offset = CGPoint(x: 0,y :0)
         myscrollView.setContentOffset(offset, animated: true)
+       
     }
     func addClicked() {
         if foodTextfield.text == "" {
@@ -237,14 +247,11 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         
     }
     
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//
-//        self.view.endEditing(true)
-//
-//    }
     
     /// TextField delegates ///
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesBegan(_: Set<UITouch>, with: UIEvent?) {
+        nameTextfield.resignFirstResponder()
+        emailaddress.resignFirstResponder()
         self.view.endEditing(true)
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -516,8 +523,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     
     func setNavBar() {
-                
-        navigationItemList.title = "Complete Profile"
+       
         
         let button: UIButton = UIButton(type: UIButtonType.custom)
         //set image for button

@@ -186,6 +186,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
 //                    self.labelcredentials.layer.add(animation, forKey: "position")
                     // added by siva
                     self.openStoryBoard(name: Constants.Main, id: Constants.TabStoryId)
+                    
 
                     return
                     
@@ -256,6 +257,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         let storyboard                  = UIStoryboard(name: name, bundle: nil)
         let initialViewController       = storyboard.instantiateViewController(withIdentifier: "profileid") as! Edit_ProfileVC
         initialViewController.show      = true
+        initialViewController.boolForTitle = true
         self.navigationController!.pushViewController(initialViewController, animated: true)
         
         
