@@ -29,6 +29,7 @@ class Constants {
     // Storyboards id
     
     static let TabStoryId   = "tabcontrollerid"
+    static let ProfileId    = "profileid"
     static let EventStoryId = "eventstoryid"
     static let LoginStoryId = "loginStoryId"
     static let PostDetailId = "postdetailid"

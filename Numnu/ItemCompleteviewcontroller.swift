@@ -167,7 +167,7 @@ extension ItemCompleteviewcontroller {
             textLabel.text = text
             textLabel.backgroundColor  = UIColor.tagBgColor()
             textLabel.textColor        = UIColor.tagTextColor()
-            textLabel.layer.cornerRadius  = 10
+            textLabel.layer.cornerRadius  = 4
             textLabel.layer.masksToBounds = true
             textLabel.textAlignment = .center
             
