@@ -124,6 +124,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         
         profileImage.layer.cornerRadius = self.profileImage.frame.size.height/2
         profileImage.clipsToBounds = true
+        profileImage.layer.masksToBounds = true
+
         
         self.editButton.layer.cornerRadius =  self.editButton.frame.size.height/2
         self.editButton.clipsToBounds = true
@@ -459,7 +461,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     // Image Picker //
     
     @IBAction func editPicture(_ sender: Any) {
-        imagePicker.allowsEditing = true
+        imagePicker.allowsEditing = false
         
         let Alert = UIAlertController(title: "Select Source Type", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
         
@@ -511,8 +513,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            self.profileImage.contentMode = .scaleAspectFit
+            self.profileImage.contentMode = .scaleToFill
             self.profileImage.image = pickedImage
+            
         }
         
         dismiss(animated: true, completion: nil)
