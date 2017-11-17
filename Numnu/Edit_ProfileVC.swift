@@ -146,11 +146,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 
             }
             
-<<<<<<< HEAD
-=======
-//            addCollectionContainer()
 
->>>>>>> 39b28d9e77ea15e3ab26f61e16522a9b2cffbeba
         }
         
     }
