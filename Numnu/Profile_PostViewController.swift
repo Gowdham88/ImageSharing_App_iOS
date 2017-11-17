@@ -127,9 +127,9 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ccell", for: indexPath as IndexPath) as! UserProfileTagCollectionViewCell
-      cell.tagLabel.text = itemArray[indexPath.row]
-        cell.tagLabel.layer.cornerRadius = 4.0
-        cell.tagLabel.clipsToBounds = true
+       cell.tagLabel.text = itemArray[indexPath.row]
+       cell.tagLabel.layer.cornerRadius = 4.0
+    cell.tagLabel.clipsToBounds = true
         
         return cell
     }
