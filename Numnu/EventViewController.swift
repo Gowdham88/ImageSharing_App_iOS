@@ -49,7 +49,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     var contentHeignt      = 649
     
     override func viewDidLoad() {
-        settings.style.selectedBarHeight = 2.0
+        settings.style.selectedBarHeight = 3.0
          settings.style.buttonBarItemFont = UIFont(name: "Avenir-Medium", size: 14)!
         super.viewDidLoad()
         
