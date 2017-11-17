@@ -43,7 +43,7 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -75,13 +75,17 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     if section == 1 {
         return 40
-    }else {
-    return 0
+    }else if section == 2 {
+    return 40
+    }else{
+        return 0
     }
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 1 {
             return "          Bookmarks"
+        }else if section == 2 {
+            return "                                   Logout"
         }
         return ""
     }
@@ -142,19 +146,6 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     
     // Edit button Navigation //
     @IBAction func didTappedEdit(_ sender: Any) {
-        
-//        let storyBoard : UIStoryboard = UIStoryboard(name: Constants.Main, bundle:nil)
-//        let editProfile = storyBoard.instantiateViewController(withIdentifier: "profileid") as! Edit_ProfileVC
-//        editProfile.show = true
-//        let controllers = self.navigationController?.viewControllers
-//        for vc in controllers! {
-//            if vc is Edit_ProfileVC {
-//                let aVC = Edit_ProfileVC()
-//                aVC.show = true
-//                _ = self.navigationController?.popToViewController(aVC, animated: true)
-//            }
-//        }
-//
         
         if let   myController  = self.navigationController!.viewControllers[1] as? Edit_ProfileVC
         {
