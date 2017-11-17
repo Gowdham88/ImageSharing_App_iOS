@@ -135,7 +135,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         // Do any additional setup after loading the view.
                 if show == false {
             
-            addCollectionContainer()
+//            addCollectionContainer()
 
         }
         
@@ -511,7 +511,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            self.profileImage.contentMode = .scaleToFill
+            self.profileImage.contentMode = .scaleAspectFit
             self.profileImage.image = pickedImage
         }
         
