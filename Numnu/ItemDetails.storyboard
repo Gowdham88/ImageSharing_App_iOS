@@ -360,8 +360,8 @@
                                     <constraint firstItem="q7q-vD-aPP" firstAttribute="leading" secondItem="VRI-eP-ARI" secondAttribute="leading" id="wt5-hA-z6w"/>
                                 </constraints>
                             </scrollView>
-                            <view alpha="0.0" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EK7-jI-jXn">
-                                <rect key="frame" x="400" y="0.0" width="320" height="1100"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EK7-jI-jXn">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="1100"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G0O-je-XLu">
                                         <rect key="frame" x="0.0" y="970" width="320" height="130"/>

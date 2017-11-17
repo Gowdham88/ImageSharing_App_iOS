@@ -116,6 +116,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        
         if textField == emailTextfield {
             emailtitleLAbel.textColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
             emailLineView.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
@@ -128,6 +129,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
 
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
+        
         textField.resignFirstResponder()
         animateViewMoving(up: false, moveValue: 0)
         if textField == emailTextfield {
@@ -156,7 +158,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         //Make sure there is an email and a password
         if let email = emailTextfield.text , email != "", let pwd = passwordTextfield.text , pwd != "" {
             
-        if ValidationHelper.Instance.isValidEmail(email:email) && pwd.count < 3 {
+        if ValidationHelper.Instance.isValidEmail(email:email) && pwd.count > 2 {
             
             HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
             

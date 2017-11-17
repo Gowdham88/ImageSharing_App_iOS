@@ -133,21 +133,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
              NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
 
         // Checking users login
+        addProfileContainer()
         
-        if PrefsManager.sharedinstance.isLoginned {
-            
-               addProfileContainer()
-            
-        } else {
-            
-            if boolForTitle == false {
-                
-                addCollectionContainer()
-                
-            }
-            
-
-        }
         
     }
 //    func dismissKeyboard (_ sender: UITapGestureRecognizer) {
@@ -174,10 +161,26 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         }
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
+        
+        
     }
     override func viewDidAppear(_ animated: Bool) {
         let offset = CGPoint(x: 0,y :0)
         myscrollView.setContentOffset(offset, animated: true)
+        
+        if PrefsManager.sharedinstance.isLoginned {
+            
+            
+            
+        } else {
+            
+            if boolForTitle == false {
+                
+                addCollectionContainer()
+                
+            }
+            
+        }
        
     }
     func addClicked() {
@@ -434,8 +437,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     func addProfileContainer(){
         
-        let storyboard        = UIStoryboard(name: Constants.Auth, bundle: nil)
-        let controller        = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController")
+        let storyboard        = UIStoryboard(name: Constants.Main, bundle: nil)
+        let controller        = storyboard.instantiateViewController(withIdentifier: "profileid")
         controller.view.frame = self.view.bounds;
         controller.willMove(toParentViewController: self)
         self.view.addSubview(controller.view)
