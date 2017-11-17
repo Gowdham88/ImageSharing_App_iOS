@@ -8,12 +8,19 @@
 
 import UIKit
 
-class Profile_PostViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
+class Profile_PostViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource {
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var navigationItemList: UINavigationItem!
     
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var mainViewBottom: NSLayoutConstraint!
+    @IBOutlet weak var mainViewConstraint: NSLayoutConstraint!
+    @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var shareview: UIView!
+    
+    var itemArray = [String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,13 +29,15 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         self.navigationController?.navigationBar.titleTextAttributes =
             [NSForegroundColorAttributeName: UIColor.black,
              NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
-        
+        userImage.layer.cornerRadius = self.userImage.frame.size.height/2
+        userImage.clipsToBounds = true
         alertTapRegister()
+        itemArray = ["Festival","Wine","Party","Meeting"]
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        tableView.reloadData()
         // Hide the navigation bar on the this view controller
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
@@ -97,12 +106,36 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         return cell
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        let lastRowIndex = tableView.numberOfRows(inSection: 0)
+        if indexPath.row == lastRowIndex - 1 {
+           menuTableHeight(height: self.tableView.contentSize.height)
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+// collectionview cell //
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return itemArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ccell", for: indexPath as IndexPath) as! UserProfileTagCollectionViewCell
+       cell.tagLabel.text = itemArray[indexPath.row]
+       cell.tagLabel.layer.cornerRadius = 4.0
+    cell.tagLabel.clipsToBounds = true
+        
+        return cell
+    }
+    
+    
+    
     /*
     // MARK: - Navigation
 
@@ -153,5 +186,11 @@ extension Profile_PostViewController : Profile_postTableViewCellDelegate {
             
         }, completion: nil)
   
+    }
+    
+    func menuTableHeight(height: CGFloat) {
+        
+        mainViewConstraint.constant = 186 + height
+        mainViewBottom.constant = 0
     }
 }

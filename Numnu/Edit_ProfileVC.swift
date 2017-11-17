@@ -101,7 +101,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         cityTextfield.delegate = self
         birthTextfield.delegate = self
         foodTextfield.delegate = self
-
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
+        self.view.addGestureRecognizer(tapGesture)
         NotificationCenter.default.addObserver(self, selector: #selector(Edit_ProfileVC.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(Edit_ProfileVC.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -110,58 +111,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         doneButotn.addTarget(self, action: #selector(doneClick), for: UIControlEvents.allTouchEvents)
         addButton.addTarget(self, action: #selector(addClicked), for: UIControlEvents.allTouchEvents)
 
-   // bottom border for textfields //
-        let border = CALayer()
-        let width = CGFloat(1.0)
-        border.borderColor = UIColor(red: 232/255.0, green: 233/255.0, blue: 247/255.0, alpha: 1.0).cgColor
-        border.frame = CGRect(x: 0, y: nameTextfield.frame.size.height - width, width:  nameTextfield.frame.size.width, height: nameTextfield.frame.size.height)
-        border.borderWidth = width
-        nameTextfield.layer.addSublayer(border)
-        nameTextfield.layer.masksToBounds = true
-
-        
-        let border2 = CALayer()
-        let width2 = CGFloat(1.0)
-        border2.borderColor = UIColor(red: 232/255.0, green: 233/255.0, blue: 247/255.0, alpha: 1.0).cgColor
-        border2.frame = CGRect(x: 0, y: emailaddress.frame.size.height - width2, width:  emailaddress.frame.size.width, height: emailaddress.frame.size.height)
-        border2.borderWidth = width2
-        emailaddress.layer.addSublayer(border2)
-        emailaddress.layer.masksToBounds = true
-        
-        let border4 = CALayer()
-        let width4 = CGFloat(1.0)
-        border4.borderColor = UIColor(red: 232/255.0, green: 233/255.0, blue: 247/255.0, alpha: 1.0).cgColor
-        border4.frame = CGRect(x: 0, y: genderTextfield.frame.size.height - width4, width:  genderTextfield.frame.size.width, height: genderTextfield.frame.size.height)
-        border4.borderWidth = width4
-        genderTextfield.layer.addSublayer(border4)
-        genderTextfield.layer.masksToBounds = true
-        
-        let border5 = CALayer()
-        let width5 = CGFloat(1.0)
-        border5.borderColor = UIColor(red: 232/255.0, green: 233/255.0, blue: 247/255.0, alpha: 1.0).cgColor
-        border5.frame = CGRect(x: 0, y: cityTextfield.frame.size.height - width5, width:  cityTextfield.frame.size.width, height: cityTextfield.frame.size.height)
-        border5.borderWidth = width5
-        cityTextfield.layer.addSublayer(border5)
-        cityTextfield.layer.masksToBounds = true
-        
-        let border6 = CALayer()
-        let width6 = CGFloat(1.0)
-        border6.borderColor = UIColor(red: 232/255.0, green: 233/255.0, blue: 247/255.0, alpha: 1.0).cgColor
-        border6.frame = CGRect(x: 0, y: foodTextfield.frame.size.height - width6, width:  foodTextfield.frame.size.width, height: foodTextfield.frame.size.height)
-        border6.borderWidth = width6
-        foodTextfield.layer.addSublayer(border6)
-        foodTextfield.layer.masksToBounds = true
-        
-        
-        let border7 = CALayer()
-        let width7 = CGFloat(1.0)
-        border7.borderColor = UIColor(red: 232/255.0, green: 233/255.0, blue: 247/255.0, alpha: 1.0).cgColor
-        border7.frame = CGRect(x: 0, y: birthTextfield.frame.size.height - width7, width:  birthTextfield.frame.size.width, height: birthTextfield.frame.size.height)
-        border7.borderWidth = width7
-        birthTextfield.layer.addSublayer(border7)
-        birthTextfield.layer.masksToBounds = true
-        
-        
         
         foodTextfield.addTarget(self, action: #selector(textFieldActive), for: UIControlEvents.allTouchEvents)
 
@@ -196,7 +145,14 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         }
         
     }
-    
+    func dismissKeyboard (_ sender: UITapGestureRecognizer) {
+        nameTextfield.resignFirstResponder()
+        emailaddress.resignFirstResponder()
+        genderTextfield.resignFirstResponder()
+        cityTextfield.resignFirstResponder()
+        birthTextfield.resignFirstResponder()
+        foodTextfield.resignFirstResponder()
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Hide the navigation bar on the this view controller
@@ -205,7 +161,10 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        let offset = CGPoint(x: 0,y :0)
+        myscrollView.setContentOffset(offset, animated: true)
+    }
     func addClicked() {
         if foodTextfield.text == "" {
           print("could not add empty fields")

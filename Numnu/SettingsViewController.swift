@@ -93,6 +93,13 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
 
         }
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let selectedCell:UITableViewCell = tableView.cellForRow(at: indexPath)!
+        selectedCell.contentView.backgroundColor = UIColor.clear
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -136,20 +143,24 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     // Edit button Navigation //
     @IBAction func didTappedEdit(_ sender: Any) {
         
-        let storyBoard : UIStoryboard = UIStoryboard(name: Constants.Main, bundle:nil)
-        let editProfile = storyBoard.instantiateViewController(withIdentifier: "profileid") as! Edit_ProfileVC
-        editProfile.show = true
-//        self.navigationController!.popToViewController(editProfile, animated: true)
-        let controllers = self.navigationController?.viewControllers
-//        controllers.show = true
-        for vc in controllers! {
-            if vc is Edit_ProfileVC {
-//                vc.show = true as! Edit_ProfileVC
-                _ = self.navigationController?.popToViewController(vc as! Edit_ProfileVC, animated: true)
-            }
-        }
+//        let storyBoard : UIStoryboard = UIStoryboard(name: Constants.Main, bundle:nil)
+//        let editProfile = storyBoard.instantiateViewController(withIdentifier: "profileid") as! Edit_ProfileVC
+//        editProfile.show = true
+//        let controllers = self.navigationController?.viewControllers
+//        for vc in controllers! {
+//            if vc is Edit_ProfileVC {
+//                let aVC = Edit_ProfileVC()
+//                aVC.show = true
+//                _ = self.navigationController?.popToViewController(aVC, animated: true)
+//            }
+//        }
+//
         
-
+        if let   myController  = self.navigationController!.viewControllers[1] as? Edit_ProfileVC
+        {
+            myController.show = true
+            _ =  self.navigationController!.popToViewController(myController, animated: true)
+        }
     }
     /*
     // MARK: - Navigation
