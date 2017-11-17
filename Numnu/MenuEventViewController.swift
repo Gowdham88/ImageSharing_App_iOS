@@ -115,15 +115,12 @@ class MenuEventViewController: UIViewController,IndicatorInfoProvider,UITableVie
 }
 
 extension MenuEventViewController   {
-    
-    
-    
-    
+  
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         
-        openStoryBoard(name: Constants.EventDetail, id: Constants.MenuItemId)
+        openStoryBoard(name: Constants.EventDetail, id: Constants.MenuItemId,heading: tagarray[indexPath.row])
         
         
 //        if tableView == menuEventTableview {
@@ -151,10 +148,11 @@ extension MenuEventViewController   {
         
     }
     
-    func openStoryBoard (name : String,id : String) {
+    func openStoryBoard (name : String,id : String,heading : String) {
         
         let storyboard      = UIStoryboard(name: name, bundle: nil)
-        let vc              = storyboard.instantiateViewController(withIdentifier: id)
+        let vc              = storyboard.instantiateViewController(withIdentifier: id) as! MenuItemViewController
+        vc.heading          = heading
         self.navigationController!.pushViewController(vc, animated: true)
         
     }

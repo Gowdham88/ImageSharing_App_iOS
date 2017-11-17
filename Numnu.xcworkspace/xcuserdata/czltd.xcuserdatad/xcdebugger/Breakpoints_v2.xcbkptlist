@@ -129,6 +129,38 @@
             endingLineNumber = "355"
             landmarkName = "searchAutocompleteEntriesWithSubstring(substring:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Numnu.Edit_ProfileVC.textFieldDidBeginEditing(__ObjC.UITextField) -&gt; ()"
+                  moduleName = "Numnu"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/czltd/Documents/Development/Numnu_client/Numnu/Edit_ProfileVC.swift"
+                  timestampString = "532601777.642689"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "356"
+                  endingLineNumber = "356"
+                  offsetFromSymbolStart = "2603">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (__ObjC.UIAlertAction) -&gt; () in Numnu.Edit_ProfileVC.textFieldDidBeginEditing(__ObjC.UITextField) -&gt; ()"
+                  moduleName = "Numnu"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/czltd/Documents/Development/Numnu_client/Numnu/Edit_ProfileVC.swift"
+                  timestampString = "532601777.644237"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "356"
+                  endingLineNumber = "356"
+                  offsetFromSymbolStart = "414">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -229,10 +229,9 @@ extension ItemDetailController {
             
         }
         
-        businessEntityScrollview.contentSize = CGSize(width: expandableWidth, height: 0)
+        businessEntityScrollview.contentSize     = CGSize(width: expandableWidth, height: 0)
         businessEntityScrollview.isScrollEnabled = true
-        
-        
+  
     }
     
     /******************Set navigation bar**************************/
