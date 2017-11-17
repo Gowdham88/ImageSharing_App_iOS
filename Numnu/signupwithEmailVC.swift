@@ -22,6 +22,11 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     var userprofileimage : String = ""
     var ViewMoved = true
 
+    @IBOutlet weak var passwordReveal: UIButton!
+    @IBOutlet weak var emailtitleLAbel: UILabel!
+    @IBOutlet weak var emailLineView: UIView!
+    @IBOutlet weak var passwordLineView: UIView!
+    @IBOutlet weak var passwordtitleLabel: UILabel!
     
     @IBOutlet weak var orLbl: UILabel!
     @IBOutlet weak var emailTextfield: UITextField!
@@ -30,16 +35,16 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-  
-      labelcredentials.isHidden = true
+        passwordReveal.setImage(UIImage(named: "Show password icon"), for: .normal)
+        passwordReveal.tintColor = UIColor(red: 136/255.0, green: 143/255.0, blue: 158/255.0, alpha: 1.0)
+
+        //        labelcredentials.isHidden = true
 
 //        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
 //        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
 //
-        
-       
+
     }
-    
     func animateViewMoving (up:Bool, moveValue :CGFloat){
         
         let movementDuration:TimeInterval = 0.3
@@ -62,16 +67,30 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         
         if(iconClick == true) {
             
-            passwordTextfield.isSecureTextEntry = false
+             passwordTextfield.isSecureTextEntry = false
             iconClick = false
-            
-        } else {
-            
+            passwordReveal.setImage(UIImage(named: "eye-off.png"), for: .normal)
+            passwordReveal.tintColor = UIColor(red: 42/255.0, green: 42/255.0, blue: 42/255.0, alpha: 1.0)
+//                        passwordReveal.setBackgroundImage(UIImage(named:"eye-off.png"), for: .normal)
+
+
+        }else if iconClick == false {
             passwordTextfield.isSecureTextEntry = true
             iconClick = true
-            
+            passwordReveal.setImage(UIImage(named: "Show password icon.png"), for: .normal)
+            passwordReveal.tintColor = UIColor(red: 136/255.0, green: 143/255.0, blue: 158/255.0, alpha: 1.0)
+
+//            passwordReveal.setBackgroundImage(UIImage(named:"Show password icon.png"), for: .normal)
+
         }
         
+//        if passwordTextfield.isSecureTextEntry == false {
+//            passwordReveal.setImage(UIImage(named: "eye-off.png"), for: .normal)
+//        }else {
+//            iconClick = true
+//            passwordReveal.setImage(UIImage(named: "Show password icon.png"), for: .normal)
+//            passwordReveal.setBackgroundImage(UIImage(named:"Show password icon.png"), for: .normal)
+//        }
     }
     
     @IBAction func signinPressed(_ sender: Any) {
@@ -96,13 +115,27 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        labelcredentials.isHidden = true
+        if textField == emailTextfield {
+            emailtitleLAbel.textColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
+            emailLineView.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
+        }else {
+            passwordtitleLabel.textColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
+            passwordLineView.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
+        }
+        
+//        labelcredentials.isHidden = true
 
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
         textField.resignFirstResponder()
         animateViewMoving(up: false, moveValue: 0)
-
+        if textField == emailTextfield {
+            emailtitleLAbel.textColor = UIColor(red: 129/255.0, green: 125/255.0, blue: 144/255.0, alpha: 1.0)
+            emailLineView.backgroundColor = UIColor(red: 229/255.0, green: 229/255.0, blue: 229/255.0, alpha: 1.0)
+        }else{
+            passwordtitleLabel.textColor = UIColor(red: 129/255.0, green: 125/255.0, blue: 144/255.0, alpha: 1.0)
+            passwordLineView.backgroundColor = UIColor(red: 229/255.0, green: 229/255.0, blue: 229/255.0, alpha: 1.0)
+        }
 
     }
     @IBAction func signupPressed(_ sender: Any) {
@@ -133,7 +166,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
   
                     self.authenticationError(error: "Oops! Invalid login.")
                     HUD.hide()
- 
+
                     return
                     
                 }
@@ -212,6 +245,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         let storyboard                  = UIStoryboard(name: name, bundle: nil)
         let initialViewController       = storyboard.instantiateViewController(withIdentifier: "profileid") as! Edit_ProfileVC
         initialViewController.show      = true
+        initialViewController.boolForTitle = true
         self.navigationController!.pushViewController(initialViewController, animated: true)
         
         
