@@ -69,7 +69,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
         
         if let email = emailAddressTF.text , email != "", let pwd = passwordTF.text , pwd != "" {
             
-           if isPasswordValid(pwd) {
+           if ValidationHelper.Instance.isValidEmail(email:email) && pwd.count < 3 {
             
             Auth.auth().signIn(withEmail: email, password: pwd, completion: { (user, error) in
                 
@@ -77,7 +77,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
                 
                 if user == nil {
                     
-                    self.showAlertMessagepop(title: "Oops! Invalid login.")
+                    self.authenticationError(error: "Oops! Invalid login.")
                     
                     HUD.hide()
                     
@@ -92,7 +92,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
                 DispatchQueue.main.async {
                     
                     HUD.hide()
-                     self.openStoryBoard(name: Constants.Main, id: Constants.TabStoryId)
+                    self.openStoryBoard(name: Constants.Main, id: Constants.TabStoryId)
                     
                     self.emailAddressTF.text = ""
                     self.passwordTF.text     = ""
@@ -104,9 +104,15 @@ class signInVC: UIViewController, UITextFieldDelegate {
                 
            } else {
             
-              authenticationError(error: Constants.Passworderror)
-//            authenticationError(error: "Please check password")
-
+            if !ValidationHelper.Instance.isValidEmail(email:email) {
+                
+                authenticationError(error: Constants.Emailerror)
+                
+            } else {
+                
+                authenticationError(error: Constants.Passworderror)
+                
+            }
             
            }
        

@@ -49,16 +49,15 @@ class LocationDetailcontroller: ButtonBarPagerTabStripViewController {
     override func viewDidLoad() {
         settings.style.selectedBarHeight = 3.0
         settings.style.buttonBarItemFont = UIFont(name: "Avenir-Medium", size: 14)!
+        settings.style.buttonBarItemsShouldFillAvailiableWidth = true
         super.viewDidLoad()
         
         settings.style.buttonBarBackgroundColor = .white
         settings.style.buttonBarItemBackgroundColor = .white
         settings.style.selectedBarBackgroundColor = UIColor.appBlackColor()
-        
-        
         settings.style.buttonBarMinimumLineSpacing = 0
         settings.style.buttonBarItemTitleColor = .black
-        settings.style.buttonBarItemsShouldFillAvailiableWidth = true
+        
         settings.style.buttonBarLeftContentInset = 0
         settings.style.buttonBarRightContentInset = 0
         buttonBarView.selectedBar.backgroundColor = UIColor.appThemeColor()
@@ -99,7 +98,17 @@ class LocationDetailcontroller: ButtonBarPagerTabStripViewController {
        
         setMap()
         
+        
+        
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+ 
+        let desiredOffset = CGPoint(x: -1, y: 0)
+        pagerView.setContentOffset(desiredOffset, animated: true)
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -115,6 +124,8 @@ class LocationDetailcontroller: ButtonBarPagerTabStripViewController {
         return [child_1,child_2]
         
     }
+    
+    
     
     
 }
@@ -158,7 +169,7 @@ extension LocationDetailcontroller {
             textLabel.text = text
             textLabel.backgroundColor  = UIColor.tagBgColor()
             textLabel.textColor        = UIColor.tagTextColor()
-            textLabel.layer.cornerRadius  = 10
+            textLabel.layer.cornerRadius  = 4
             textLabel.layer.masksToBounds = true
             textLabel.textAlignment   = .center
             
@@ -179,8 +190,7 @@ extension LocationDetailcontroller {
         
         businessEntityScrollview.contentSize = CGSize(width: expandableWidth, height: 0)
         businessEntityScrollview.isScrollEnabled = true
-        
-        
+  
     }
     
     /******************Set navigation bar**************************/
@@ -219,9 +229,9 @@ extension LocationDetailcontroller {
     func setMap() {
         
         let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longtitude, zoom: zoomLevel)
-        mapView = GMSMapView.map(withFrame: view.bounds, camera: camera)
-        mapView.settings.myLocationButton = true
+        mapView = GMSMapView.map(withFrame: mapview.bounds, camera: camera)
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        mapView.settings.myLocationButton = true
         mapView.isMyLocationEnabled = true
         
         // Add the map to the view, hide it until we've got a location update.
@@ -261,7 +271,7 @@ extension LocationDetailcontroller {
         
     }
     
-    func alertTapRegister(){
+    func alertTapRegister() {
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.closePopup(sender:)))
         self.shareView.addGestureRecognizer(tap)
@@ -308,12 +318,12 @@ extension LocationDetailcontroller : CLLocationManagerDelegate {
                                                   longitude: location.coordinate.longitude,
                                                   zoom: self.zoomLevel)
           
-            if self.mapView.isHidden {
-                self.mapView.isHidden = false
-                self.mapView.camera = camera
-            } else {
-                self.mapView.animate(to: camera)
-            }
+//            if self.mapView.isHidden {
+//                self.mapView.isHidden = false
+//                self.mapView.camera = camera
+//            } else {
+//                self.mapView.animate(to: camera)
+//            }
             
         }
         

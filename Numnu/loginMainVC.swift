@@ -59,6 +59,7 @@ class loginMainVC: UIViewController, UIWebViewDelegate {
     }
     
     @IBAction func facebookLoginPressed(_ sender: Any) {
+        
         let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
         fbLoginManager.logIn(withReadPermissions: ["public_profile", "email"], from: self) { (result, error) in
             if let error = error {
@@ -79,11 +80,9 @@ class loginMainVC: UIViewController, UIWebViewDelegate {
             Auth.auth().signIn(with: credential, completion: { (user, error) in
                 if let error = error {
                     print("Login error: \(error.localizedDescription)")
-                    let alertController = UIAlertController(title: "Login Error", message: error.localizedDescription, preferredStyle: .alert)
-                    let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                    alertController.addAction(okayAction)
-                    self.present(alertController, animated: true, completion: nil)
-
+                    
+                    AlertProvider.Instance.showAlert(title: "Login error", subtitle: "Facebook failed", vc: self)
+                    
                     return
                 }
 
@@ -92,6 +91,7 @@ class loginMainVC: UIViewController, UIWebViewDelegate {
                 })
 
         }
+        
 
     }
     
@@ -102,8 +102,7 @@ class loginMainVC: UIViewController, UIWebViewDelegate {
         let initialViewController       = storyboard.instantiateViewController(withIdentifier: "profileid") as! Edit_ProfileVC
         initialViewController.show      = true
         self.navigationController!.pushViewController(initialViewController, animated: true)
-//        window?.rootViewController = initialViewController
-//        window?.makeKeyAndVisible()
+
         
     }
     
