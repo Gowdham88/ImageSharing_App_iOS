@@ -143,9 +143,12 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     // Edit button Navigation //
     @IBAction func didTappedEdit(_ sender: Any) {
         
-//        let storyBoard : UIStoryboard = UIStoryboard(name: Constants.Main, bundle:nil)
-//        let editProfile = storyBoard.instantiateViewController(withIdentifier: "profileid") as! Edit_ProfileVC
-//        editProfile.show = true
+        let editProfile = self.navigationController?.viewControllers.first as! Edit_ProfileVC
+        editProfile.show = true
+        editProfile.boolForTitle = false
+        self.navigationController?.popToRootViewController(animated: true)
+      
+        
 //        let controllers = self.navigationController?.viewControllers
 //        for vc in controllers! {
 //            if vc is Edit_ProfileVC {
@@ -156,12 +159,7 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
 //        }
 //
         
-        if let   myController  = self.navigationController!.viewControllers[1] as? Edit_ProfileVC
-        {
-            myController.show = true
-            myController.boolForTitle = false
-            _ =  self.navigationController!.popToViewController(myController, animated: true)
-        }
+       
     }
     /*
     // MARK: - Navigation

@@ -89,6 +89,20 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if PrefsManager.sharedinstance.isLoginned {
+            
+            addProfileContainer()
+            
+        } else {
+            
+            if boolForTitle == false {
+                
+                addCollectionContainer()
+                
+            }
+            
+        }
    
         imagePicker.delegate = self
         profileImage.isUserInteractionEnabled = true
@@ -131,9 +145,11 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         self.navigationController?.navigationBar.titleTextAttributes =
             [NSForegroundColorAttributeName: UIColor.black,
              NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
-
+      
         // Checking users login
-        addProfileContainer()
+        
+       
+        
         
         
     }
@@ -159,8 +175,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             saveButton.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 16)
 
         }
-        locationManager.delegate = self
-        locationManager.requestAlwaysAuthorization()
+        
         
         
     }
@@ -168,19 +183,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         let offset = CGPoint(x: 0,y :0)
         myscrollView.setContentOffset(offset, animated: true)
         
-        if PrefsManager.sharedinstance.isLoginned {
-            
-            
-            
-        } else {
-            
-            if boolForTitle == false {
-                
-                addCollectionContainer()
-                
-            }
-            
-        }
+       
        
     }
     func addClicked() {
@@ -438,12 +441,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     func addProfileContainer(){
         
         let storyboard        = UIStoryboard(name: Constants.Main, bundle: nil)
-        let controller        = storyboard.instantiateViewController(withIdentifier: "profileid")
-        controller.view.frame = self.view.bounds;
-        controller.willMove(toParentViewController: self)
-        self.view.addSubview(controller.view)
-        self.addChildViewController(controller)
-        controller.didMove(toParentViewController: self)
+        let controller        = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController")
+        self.navigationController!.pushViewController(controller, animated: true)
         
     }
     

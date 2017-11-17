@@ -44,7 +44,7 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
     
     func setNavBar() {
         
-        navigationItemList.title = "Profile"
+        navigationItemList.title = "@Suraj Balachandran"
         
         let button: UIButton = UIButton(type: UIButtonType.custom)
         //set image for button
@@ -65,7 +65,7 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         button2.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
         
         // Create left and right button for navigation item
-        let leftButton =  UIBarButtonItem(customView: button)
+        let leftButton =  UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         leftButton.isEnabled = true
         
 //        let rightButton = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
