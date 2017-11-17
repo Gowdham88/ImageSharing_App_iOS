@@ -26,16 +26,17 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var orLbl: UILabel!
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
-        //    @IBOutlet var labelcredentials: UILabel!
+    @IBOutlet var labelcredentials: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
   
-        //        labelcredentials.isHidden = true
+      labelcredentials.isHidden = true
 
 //        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
 //        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
 //
+        
        
     }
     
@@ -95,7 +96,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-//        labelcredentials.isHidden = true
+        labelcredentials.isHidden = true
 
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -119,52 +120,46 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     func Login() {
         
         //Make sure there is an email and a password
-        if let email = emailTextfield.text , email != "", let pwd = passwordTextfield.text , pwd != "" { //, let nme = firstnametextfield.text , nme != "" {
+        if let email = emailTextfield.text , email != "", let pwd = passwordTextfield.text , pwd != "" {
             
-            let passwordvalid = isPasswordValid(pwd)
+        if ValidationHelper.Instance.isValidEmail(email:email) && pwd.count < 3 {
             
-            if passwordvalid ==  true {
-                
-//            labelcredentials.isHidden = true
-                
             HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
             
             
             Auth.auth().createUser(withEmail: email, password: pwd) { (user: User?, error) in
                 
                 if user == nil {
-                    
-//                self.labelcredentials.isHidden = false
-                    
+  
+                    self.authenticationError(error: "Oops! Invalid login.")
                     HUD.hide()
-                    
-                    let animation = CABasicAnimation(keyPath: "position")
-                    animation.duration = 0.07
-                    animation.repeatCount = 4
-                    animation.autoreverses = true
-//                    animation.fromValue = NSValue(cgPoint: CGPoint(x: self.labelcredentials.center.x - 10, y: self.labelcredentials.center.y))
-//                    animation.toValue = NSValue(cgPoint: CGPoint(x: self.labelcredentials.center.x + 10, y: self.labelcredentials.center.y))
-//                    self.labelcredentials.layer.add(animation, forKey: "position")
-                    // added by siva
-                    self.openStoryBoard(name: Constants.Main, id: Constants.TabStoryId)
-
+ 
                     return
                     
                 }
                
                 HUD.hide()
                 
-//                self.openStoryBoard(name: Constants.Main, id: Constants.TabStoryId)
+                self.openStoryBoard(name: Constants.Main, id: Constants.TabStoryId)
                 
                 
                 self.idprim.removeAll()
  
                 print(" App Delegate SignIn with credential called")
-                }
+                
+               }
                 
             } else {
                 
+                if !ValidationHelper.Instance.isValidEmail(email:email) {
+                
+                authenticationError(error: Constants.Emailerror)
+                
+                } else {
+                
                 authenticationError(error: Constants.Passworderror)
+                
+                }
               
             }
          } else {
@@ -186,18 +181,18 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     }
   
     
-    func authenticationError(error : String){
+    func authenticationError(error : String) {
         
-//        labelcredentials.text     = error
-//        labelcredentials.isHidden = false
+        labelcredentials.text     = error
+        labelcredentials.isHidden = false
         
         let animation = CABasicAnimation(keyPath: "position")
         animation.duration = 0.07
         animation.repeatCount = 4
         animation.autoreverses = true
-//        animation.fromValue = NSValue(cgPoint: CGPoint(x: self.labelcredentials.center.x - 10, y: self.labelcredentials.center.y))
-//        animation.toValue = NSValue(cgPoint: CGPoint(x: self.labelcredentials.center.x + 10, y: self.labelcredentials.center.y))
-//        self.labelcredentials.layer.add(animation, forKey: "position")
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: self.labelcredentials.center.x - 10, y: self.labelcredentials.center.y))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: self.labelcredentials.center.x + 10, y: self.labelcredentials.center.y))
+        self.labelcredentials.layer.add(animation, forKey: "position")
         HUD.hide()
         
     }
@@ -237,6 +232,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func fbSignup(_ sender: Any) {
+        
         let fbLoginmanager : FBSDKLoginManager = FBSDKLoginManager()
         fbLoginmanager.logIn(withReadPermissions: ["public_profile", "email"], from: self) { (result, error) in
             if let error = error {

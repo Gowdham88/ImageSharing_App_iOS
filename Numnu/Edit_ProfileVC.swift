@@ -259,9 +259,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     public var nameRegEx = "[a-zA-Z]+$"
     
     func isValidEmail(testStr:String) -> Bool {
-    let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-    let result = emailTest.evaluate(with: testStr)
-    return result
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        let result = emailTest.evaluate(with: testStr)
+        return result
     }
     
     func isValidName(testStr:String) -> Bool {

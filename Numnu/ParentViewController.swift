@@ -244,6 +244,7 @@ extension ParentViewController {
     
     func hideNavBar() {
         
+        navigationItemList.title = "Numnu"
         searchClick = false
         reloadPagerTabStripView()
         buttonTabBarView.reloadData()
