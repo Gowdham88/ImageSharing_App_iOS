@@ -337,6 +337,19 @@ extension ParentViewController : UITableViewDataSource,UITableViewDelegate {
         
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        let lastRowIndex = tableView.numberOfRows(inSection: 0)
+        if indexPath.row == lastRowIndex - 1  {
+            
+            tableView.allowsSelection = true
+            
+        } else {
+            
+            tableView.allowsSelection = false
+        }
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         editsearchbyLocation.text = autocompleteplaceArray[indexPath.row]

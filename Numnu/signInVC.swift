@@ -69,7 +69,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
         
         if let email = emailAddressTF.text , email != "", let pwd = passwordTF.text , pwd != "" {
             
-           if ValidationHelper.Instance.isValidEmail(email:email) && pwd.count < 3 {
+           if ValidationHelper.Instance.isValidEmail(email:email) && pwd.count > 2 {
             
             Auth.auth().signIn(withEmail: email, password: pwd, completion: { (user, error) in
                 
