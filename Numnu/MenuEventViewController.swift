@@ -122,8 +122,7 @@ extension MenuEventViewController   {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let cell = tableView.cellForRow(at: indexPath)
-        cell?.contentView.backgroundColor = UIColor.white
+        
         openStoryBoard(name: Constants.EventDetail, id: Constants.MenuItemId)
         
         

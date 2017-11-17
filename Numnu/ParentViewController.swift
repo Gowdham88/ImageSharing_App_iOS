@@ -117,7 +117,7 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
             child_4.popdelegate = self
             let child_5 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid5)
             let child_6 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid6)
-            return [child_1, child_2,child_3,child_4,child_5,child_6]
+            return [child_1, child_2,child_3,child_4,child_5]
     
        
     }

@@ -229,7 +229,7 @@ extension ItemCompleteviewcontroller {
     
     func backButtonClicked() {
         
-        _ = self.navigationController?.popToRootViewController(animated: true)
+        _ = self.navigationController?.popViewController(animated: true)
         
     }
     

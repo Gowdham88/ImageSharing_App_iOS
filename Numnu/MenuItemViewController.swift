@@ -12,6 +12,7 @@ class MenuItemViewController: UIViewController {
 
     @IBOutlet weak var menuItemTableview: UITableView!
     var tagarray = ["Festival","Wine","Party","Rum","Barbaque","Pasta","Sandwich","Burger"]
+    var heading : String = ""
     
     @IBOutlet weak var navigationItemList: UINavigationItem!
     override func viewDidLoad() {
@@ -34,7 +35,7 @@ class MenuItemViewController: UIViewController {
     
     func setNavBar() {
         
-        navigationItemList.title = "Items"
+        navigationItemList.title = heading
         
         let button: UIButton = UIButton(type: UIButtonType.custom)
         //set image for button
@@ -58,7 +59,7 @@ class MenuItemViewController: UIViewController {
     
     func backButtonClicked() {
         
-        _ = self.navigationController?.popToRootViewController(animated: true)
+        _ = self.navigationController?.popViewController(animated: true)
         
     }
    
@@ -83,9 +84,7 @@ extension MenuItemViewController : UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let cell = tableView.cellForRow(at: indexPath)
-        cell?.contentView.backgroundColor = UIColor.white
+      
         openStoryBoard(name: Constants.ItemDetail, id: Constants.ItemCompleteId)
      
         

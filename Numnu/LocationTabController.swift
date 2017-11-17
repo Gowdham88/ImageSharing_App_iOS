@@ -71,8 +71,7 @@ extension LocationTabController : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let cell : Locationtableviewcell = tableView.cellForRow(at: indexPath) as! Locationtableviewcell
-        cell.contentView.backgroundColor = UIColor.white
+       
         openStoryBoard()
         
     }

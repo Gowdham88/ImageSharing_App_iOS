@@ -369,7 +369,27 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yiT-ll-IaZ">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="1150"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboardbg" translatesAutoresizingMaskIntoConstraints="NO" id="BIb-eF-MWh" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hID-Z5-rrs" customClass="ViewExtender" customModule="Numnu" customModuleProvider="target">
+                                                <rect key="frame" x="13" y="10" width="294" height="179"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="179" id="HHB-Tn-Bij"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                        <size key="value" width="0.0" height="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundcolor">
+                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                        <real key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4" translatesAutoresizingMaskIntoConstraints="NO" id="BIb-eF-MWh" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
                                                 <rect key="frame" x="10" y="10" width="300" height="179"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="179" id="m6z-ta-TPD"/>
@@ -566,6 +586,7 @@
                                             <constraint firstAttribute="trailing" secondItem="qHJ-AJ-BgP" secondAttribute="trailing" id="BFk-JR-1TY"/>
                                             <constraint firstItem="rkz-bK-KWE" firstAttribute="leading" secondItem="yiT-ll-IaZ" secondAttribute="leading" constant="8" id="Cry-eK-Jme"/>
                                             <constraint firstItem="rkz-bK-KWE" firstAttribute="top" secondItem="eIV-P1-ram" secondAttribute="bottom" constant="20" id="D23-OJ-Rrj"/>
+                                            <constraint firstItem="hID-Z5-rrs" firstAttribute="top" secondItem="yiT-ll-IaZ" secondAttribute="top" constant="10" id="Flv-c4-Rcd"/>
                                             <constraint firstItem="IGn-J8-oNs" firstAttribute="leading" secondItem="WZK-XB-fTr" secondAttribute="trailing" constant="8" id="GPI-w5-J4v"/>
                                             <constraint firstItem="nfW-pc-mNv" firstAttribute="top" secondItem="jq6-W2-rl2" secondAttribute="bottom" constant="7" id="HT6-Gf-KGf"/>
                                             <constraint firstItem="qHJ-AJ-BgP" firstAttribute="top" secondItem="02U-Jr-3EC" secondAttribute="bottom" constant="7" id="ITL-LM-zaN"/>
@@ -580,6 +601,7 @@
                                             <constraint firstAttribute="trailing" secondItem="jq6-W2-rl2" secondAttribute="trailing" constant="10" id="PQF-WS-P2z"/>
                                             <constraint firstAttribute="trailing" secondItem="hDJ-th-ytJ" secondAttribute="trailing" id="PoZ-7w-opY"/>
                                             <constraint firstAttribute="trailing" secondItem="02U-Jr-3EC" secondAttribute="trailing" constant="10" id="QJt-8E-JTj"/>
+                                            <constraint firstAttribute="trailing" secondItem="hID-Z5-rrs" secondAttribute="trailing" constant="13" id="Rc4-zn-H6u"/>
                                             <constraint firstItem="o2u-yn-ITc" firstAttribute="leading" secondItem="yiT-ll-IaZ" secondAttribute="leading" constant="10" id="SAI-99-1Zb"/>
                                             <constraint firstItem="IGn-J8-oNs" firstAttribute="top" secondItem="nfW-pc-mNv" secondAttribute="bottom" constant="10" id="SOy-SP-Qrb"/>
                                             <constraint firstAttribute="trailing" secondItem="Ogp-uE-AMy" secondAttribute="trailing" id="UL6-wC-WhY"/>
@@ -599,6 +621,7 @@
                                             <constraint firstAttribute="trailing" secondItem="IIT-eM-7iS" secondAttribute="trailing" constant="10" id="gxl-yo-4Wf"/>
                                             <constraint firstItem="1lW-hB-p6D" firstAttribute="leading" secondItem="yiT-ll-IaZ" secondAttribute="leading" constant="10" id="hLD-ez-Imt"/>
                                             <constraint firstItem="o10-fq-NHl" firstAttribute="top" secondItem="02U-Jr-3EC" secondAttribute="bottom" constant="-181" id="hca-5H-L4F"/>
+                                            <constraint firstItem="hID-Z5-rrs" firstAttribute="leading" secondItem="yiT-ll-IaZ" secondAttribute="leading" constant="13" id="iPy-bP-Xda"/>
                                             <constraint firstItem="hDJ-th-ytJ" firstAttribute="top" secondItem="qHJ-AJ-BgP" secondAttribute="bottom" id="jJf-70-Jhk"/>
                                             <constraint firstItem="hDJ-th-ytJ" firstAttribute="leading" secondItem="yiT-ll-IaZ" secondAttribute="leading" id="lPy-B2-GAE"/>
                                             <constraint firstItem="WZK-XB-fTr" firstAttribute="leading" secondItem="H7o-yV-lbd" secondAttribute="trailing" constant="4" id="llB-sY-kBt"/>
@@ -727,6 +750,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="4" width="1280" height="824"/>
         <image name="Bookmark" width="14" height="24"/>
         <image name="Numnu_appicon" width="122" height="122"/>
         <image name="arrow" width="18" height="10"/>

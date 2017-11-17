@@ -67,9 +67,7 @@ extension MenuTabController : UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let cell : MenuEventTableViewCell = tableView.cellForRow(at: indexPath) as! MenuEventTableViewCell
-        cell.contentView.backgroundColor = UIColor.white
+   
         openStoryBoard()
         
     }
