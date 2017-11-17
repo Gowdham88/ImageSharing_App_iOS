@@ -101,17 +101,12 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         cityTextfield.delegate = self
         birthTextfield.delegate = self
         foodTextfield.delegate = self
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
-        self.view.addGestureRecognizer(tapGesture)
-        NotificationCenter.default.addObserver(self, selector: #selector(Edit_ProfileVC.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(Edit_ProfileVC.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
+//        self.view.addGestureRecognizer(tapGesture)
         genderdropButton.addTarget(self, action: #selector(genderClicked), for: UIControlEvents.allTouchEvents)
         doneButotn.addTarget(self, action: #selector(doneClick), for: UIControlEvents.allTouchEvents)
         addButton.addTarget(self, action: #selector(addClicked), for: UIControlEvents.allTouchEvents)
 
-        
         foodTextfield.addTarget(self, action: #selector(textFieldActive), for: UIControlEvents.allTouchEvents)
 
         dropdownArray = ["Chicken","Chicken chilli","Chicken manjurian","Chicken 65","Chicken fried rice","Grill chicken","Pizza","Burger","Sandwich","Mutton","Mutton chukka","Mutton masala","Mutton fry","Prawn","Gobi chilli","Panneer","Noodles","Mutton soup","Fish fry","Dry fish"]
@@ -145,14 +140,14 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         }
         
     }
-    func dismissKeyboard (_ sender: UITapGestureRecognizer) {
-        nameTextfield.resignFirstResponder()
-        emailaddress.resignFirstResponder()
-        genderTextfield.resignFirstResponder()
-        cityTextfield.resignFirstResponder()
-        birthTextfield.resignFirstResponder()
-        foodTextfield.resignFirstResponder()
-    }
+//    func dismissKeyboard (_ sender: UITapGestureRecognizer) {
+//        nameTextfield.resignFirstResponder()
+//        emailaddress.resignFirstResponder()
+//        genderTextfield.resignFirstResponder()
+//        cityTextfield.resignFirstResponder()
+//        birthTextfield.resignFirstResponder()
+////        foodTextfield.resignFirstResponder()
+//    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Hide the navigation bar on the this view controller
@@ -173,7 +168,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 print("already added in collectionview")
             }else{
                 tagArray.append(foodTextfield.text!)
-
+                dropdownTableView.isHidden = true
             }
             print("the appended item is:::::",foodTextfield.text!)
             //        tagArray.remove(at: 1)
@@ -208,47 +203,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         present(Alert, animated: true, completion: nil)
 
     }
-    
-    func keyboardWillShow(notification:NSNotification) {
-        adjustingHeight(show: true, notification: notification)
 
-    }
-    
-    func keyboardWillHide(notification:NSNotification) {
-        adjustingHeight(show: false, notification: notification)
-
-    }
-    func adjustingHeight(show:Bool, notification:NSNotification) {
-        // 1
-//        var userInfo = notification.userInfo!
-//        // 2
-//        let keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
-//        // 3
-//        let animationDurarion = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval
-//        // 4
-//        let changeInHeight = (CGRectGetHeight(keyboardFrame) + 40) * (show ? 1 : -1)
-//        //5
-//        UIView.animate(withDuration: animationDurarion, animations: { () -> Void in
-//            self.bottomConstraint.constant += changeInHeight
-//        })
-
-//        self.myscrollView.isScrollEnabled = true
-//        var info = notification.userInfo!
-//        let keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
-//        let contentInsets : UIEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize!.height, 0.0)
-//
-//        self.myscrollView.contentInset = contentInsets
-//        self.myscrollView.scrollIndicatorInsets = contentInsets
-//
-//        var aRect : CGRect = self.view.frame
-//        aRect.size.height -= keyboardSize!.height
-//        if let activeField = self.foodTextfield {
-//            if (!aRect.contains(activeField.frame.origin)){
-//                self.myscrollView.scrollRectToVisible(activeField.frame, animated: true)
-//            }
-//        }
-    
-    }
     
     func textFieldActive() {
         
@@ -282,14 +237,16 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        self.view.endEditing(true)
-    
-    }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//
+//        self.view.endEditing(true)
+//
+//    }
     
     /// TextField delegates ///
-    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 //        self.view.endEditing(true)
 
@@ -371,7 +328,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == foodTextfield || textField == birthTextfield {
             foodTextfield.text = ""
-            dropdownTableView.isHidden = true
+//            dropdownTableView.isHidden = true
             animateViewMoving(up: false, moveValue: 0)
         }
         if textField == birthTextfield {

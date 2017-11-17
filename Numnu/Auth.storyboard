@@ -179,7 +179,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="omR-Cv-uDa"/>
                                 </constraints>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="0.16470588235294117" green="0.16470588235294117" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
                                 <connections>
@@ -189,7 +189,7 @@
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HcA-is-X0E">
                                 <rect key="frame" x="20" y="307" width="280" height="1"/>
-                                <color key="backgroundColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="AET-zU-JcO"/>
                                 </constraints>
@@ -199,7 +199,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="kvF-fN-dti"/>
                                 </constraints>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="0.16470588235294117" green="0.16470588235294117" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
                                 <connections>
@@ -208,7 +208,7 @@
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QFP-6L-TOV">
                                 <rect key="frame" x="20" y="379" width="280" height="1"/>
-                                <color key="backgroundColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="UfA-IT-ekg"/>
                                 </constraints>
@@ -220,7 +220,9 @@
                                     <constraint firstAttribute="width" constant="20" id="tcM-dO-CJe"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="17"/>
-                                <state key="normal" backgroundImage="Show password icon"/>
+                                <state key="normal">
+                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="passwordHideButton:" destination="URX-2s-g1Q" eventType="touchUpInside" id="IyJ-Kw-RHe"/>
                                 </connections>
@@ -376,9 +378,14 @@
                     <navigationItem key="navigationItem" id="bVt-KY-qgi"/>
                     <size key="freeformSize" width="320" height="568"/>
                     <connections>
+                        <outlet property="emailLineView" destination="HcA-is-X0E" id="T9d-T7-1lj"/>
                         <outlet property="emailTextfield" destination="h6X-V3-3ha" id="WR6-X0-eV7"/>
+                        <outlet property="emailtitleLAbel" destination="IYu-nF-6Nb" id="7Q9-wL-RRA"/>
                         <outlet property="orLbl" destination="vFc-8d-c7i" id="chk-e0-kjs"/>
+                        <outlet property="passwordLineView" destination="QFP-6L-TOV" id="yvg-2B-KWa"/>
+                        <outlet property="passwordReveal" destination="utT-Fx-rdy" id="xSc-Z7-KXc"/>
                         <outlet property="passwordTextfield" destination="gt3-3P-gNM" id="xAZ-1i-2Xx"/>
+                        <outlet property="passwordtitleLabel" destination="ypX-7D-CMz" id="Tm6-Bw-OHZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iac-mD-4Rf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -656,7 +663,7 @@
                                     <constraint firstAttribute="height" constant="25" id="qxw-Xk-eyu"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
-                                <color key="textColor" red="0.53333333333333333" green="0.5607843137254902" blue="0.61960784313725492" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.070588235289999995" green="0.12941176469999999" blue="0.2470588235" alpha="0.5" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y8f-XD-BVK">
@@ -664,7 +671,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="u9U-Yu-Tlq"/>
                                 </constraints>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="0.16470588235294117" green="0.16470588235294117" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
                                 <connections>
@@ -673,7 +680,7 @@
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5BK-vR-k7Z">
                                 <rect key="frame" x="20" y="296" width="280" height="1"/>
-                                <color key="backgroundColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="vwH-Bn-HDy"/>
                                 </constraints>
@@ -683,7 +690,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="nzF-Kr-Lo7"/>
                                 </constraints>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="0.16470588235294117" green="0.16470588235294117" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
                                 <connections>
@@ -692,7 +699,7 @@
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yYk-3I-mdY">
                                 <rect key="frame" x="20" y="377" width="280" height="1"/>
-                                <color key="backgroundColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="D3E-Fo-jbK"/>
                                 </constraints>
@@ -704,7 +711,9 @@
                                     <constraint firstAttribute="height" constant="20" id="qeA-Sw-Z9w"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="17"/>
-                                <state key="normal" backgroundImage="Show password icon"/>
+                                <state key="normal">
+                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="showPassword:" destination="WUv-D2-SgJ" eventType="touchUpInside" id="vcu-gG-FvB"/>
                                 </connections>
@@ -717,7 +726,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="13"/>
                                 <state key="normal" title="Forgot Password?">
-                                    <color key="titleColor" red="0.53333333333333333" green="0.5607843137254902" blue="0.61960784313725492" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.53333333333333333" green="0.56470588235294117" blue="0.62352941176470589" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="forgotPassword:" destination="WUv-D2-SgJ" eventType="touchUpInside" id="joO-HR-RH5"/>
@@ -883,6 +892,7 @@
                     <connections>
                         <outlet property="emailAddressTF" destination="Y8f-XD-BVK" id="HIa-cH-Axi"/>
                         <outlet property="passwordInfoLabel" destination="ISg-wM-MbH" id="e10-0n-8Bb"/>
+                        <outlet property="passwordReveal" destination="mC4-rY-bg2" id="aZb-s8-SQc"/>
                         <outlet property="passwordTF" destination="NHS-8c-dU0" id="FyA-O4-dRq"/>
                         <segue destination="03o-a8-Dx6" kind="show" identifier="forgotPassword" id="2Zo-UJ-olt"/>
                     </connections>
@@ -894,7 +904,6 @@
     </scenes>
     <resources>
         <image name="Numnu_appicon" width="122" height="122"/>
-        <image name="Show password icon" width="17" height="17"/>
         <image name="bg" width="374" height="667"/>
         <image name="fbButton" width="327" height="52"/>
         <image name="fbbtnsignin" width="327" height="52"/>

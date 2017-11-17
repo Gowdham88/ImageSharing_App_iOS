@@ -24,6 +24,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
     var userprofilename : String = ""
     var userprofileimage : String = ""
 
+    @IBOutlet weak var passwordReveal: UIButton!
     
     
     @IBOutlet weak var lbl: UILabel!
@@ -34,12 +35,17 @@ class signInVC: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        passwordReveal.setImage(UIImage(named: "Show password icon"), for: .normal)
+        passwordReveal.tintColor = UIColor(red: 136/255.0, green: 143/255.0, blue: 158/255.0, alpha: 1.0)
         passwordInfoLabel.isHidden = true
-        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
+        self.view.addGestureRecognizer(tapGesture)
         // Do any additional setup after loading the view.
     }
-   
+    func dismissKeyboard (_ sender: UITapGestureRecognizer) {
+        emailAddressTF.resignFirstResponder()
+        passwordTF.resignFirstResponder()
+    }
     @IBAction func dismissPressed(_ sender: Any) {
         
         _ = self.navigationController?.popViewController(animated: true)
@@ -135,9 +141,13 @@ class signInVC: UIViewController, UITextFieldDelegate {
         if(iconClick == true) {
             passwordTF.isSecureTextEntry = false
             iconClick = false
-        } else {
+            passwordReveal.setImage(UIImage(named: "eye-off.png"), for: .normal)
+            passwordReveal.tintColor = UIColor(red: 42/255.0, green: 42/255.0, blue: 42/255.0, alpha: 1.0)
+        } else if iconClick == false {
             passwordTF.isSecureTextEntry = true
             iconClick = true
+            passwordReveal.setImage(UIImage(named: "Show password icon.png"), for: .normal)
+            passwordReveal.tintColor = UIColor(red: 136/255.0, green: 143/255.0, blue: 158/255.0, alpha: 1.0)
         }
         
     }
