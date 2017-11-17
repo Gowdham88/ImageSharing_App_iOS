@@ -132,10 +132,20 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             [NSForegroundColorAttributeName: UIColor.black,
              NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
 
-        // Do any additional setup after loading the view.
-                if show == false {
+        // Checking users login
+        
+        if PrefsManager.sharedinstance.isLoginned {
             
-//            addCollectionContainer()
+               addProfileContainer()
+            
+        } else {
+            
+            if boolForTitle == false {
+                
+                addCollectionContainer()
+                
+            }
+            
 
         }
         
@@ -422,6 +432,18 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         controller.didMove(toParentViewController: self)
     }
     
+    func addProfileContainer(){
+        
+        let storyboard        = UIStoryboard(name: Constants.Auth, bundle: nil)
+        let controller        = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController")
+        controller.view.frame = self.view.bounds;
+        controller.willMove(toParentViewController: self)
+        self.view.addSubview(controller.view)
+        self.addChildViewController(controller)
+        controller.didMove(toParentViewController: self)
+        
+    }
+    
     @IBAction func didTappedSave(_ sender: Any) {
         let Email:NSString = emailaddress.text! as NSString
 
@@ -437,6 +459,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         } else {
            
             if isValidEmail(testStr: Email as String) == true {
+                
+                PrefsManager.sharedinstance.isLoginned = true
+                
                 let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
                 let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController")
                 self.navigationController!.pushViewController(vc, animated: true)

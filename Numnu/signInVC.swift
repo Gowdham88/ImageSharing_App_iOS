@@ -92,7 +92,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
                 DispatchQueue.main.async {
                     
                     HUD.hide()
-                    self.openStoryBoard(name: Constants.Main, id: Constants.TabStoryId)
+                    self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId)
                     
                     self.emailAddressTF.text = ""
                     self.passwordTF.text     = ""
@@ -196,8 +196,8 @@ class signInVC: UIViewController, UITextFieldDelegate {
         
         window                          = UIWindow(frame: UIScreen.main.bounds)
         let storyboard                  = UIStoryboard(name: name, bundle: nil)
-        let initialViewController       = storyboard.instantiateViewController(withIdentifier: "profileid") as! Edit_ProfileVC
-        initialViewController.show      = true
+        let initialViewController       = storyboard.instantiateViewController(withIdentifier: id) as! Edit_ProfileVC
+        initialViewController.boolForTitle  = true
         self.navigationController!.pushViewController(initialViewController, animated: true)
 //        window?.rootViewController = initialViewController
 //        window?.makeKeyAndVisible()
@@ -248,7 +248,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
                 }
                 
                 //                 Present the main view
-                self.openStoryBoard(name: Constants.Main, id: Constants.TabStoryId)
+                self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId)
             })
             
         }

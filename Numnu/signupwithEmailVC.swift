@@ -38,7 +38,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         passwordReveal.setImage(UIImage(named: "Show password icon"), for: .normal)
         passwordReveal.tintColor = UIColor(red: 136/255.0, green: 143/255.0, blue: 158/255.0, alpha: 1.0)
 
-        //        labelcredentials.isHidden = true
+        labelcredentials.isHidden = true
 
 //        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
 //        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
@@ -67,7 +67,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         
         if(iconClick == true) {
             
-             passwordTextfield.isSecureTextEntry = false
+            passwordTextfield.isSecureTextEntry = false
             iconClick = false
             passwordReveal.setImage(UIImage(named: "eye-off.png"), for: .normal)
             passwordReveal.tintColor = UIColor(red: 42/255.0, green: 42/255.0, blue: 42/255.0, alpha: 1.0)
@@ -75,6 +75,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
 
 
         }else if iconClick == false {
+            
             passwordTextfield.isSecureTextEntry = true
             iconClick = true
             passwordReveal.setImage(UIImage(named: "Show password icon.png"), for: .normal)
@@ -123,7 +124,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
             passwordLineView.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
         }
         
-//        labelcredentials.isHidden = true
+        labelcredentials.isHidden = true
 
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -173,7 +174,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                
                 HUD.hide()
                 
-                self.openStoryBoard(name: Constants.Main, id: Constants.TabStoryId)
+                self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId)
                 
                 
                 self.idprim.removeAll()
@@ -241,14 +242,12 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
 //        window?.makeKeyAndVisible()
         
         
-//        window                          = UIWindow(frame: UIScreen.main.bounds)
+//        window                        = UIWindow(frame: UIScreen.main.bounds)
         let storyboard                  = UIStoryboard(name: name, bundle: nil)
-        let initialViewController       = storyboard.instantiateViewController(withIdentifier: "profileid") as! Edit_ProfileVC
-        initialViewController.show      = true
+        let initialViewController       = storyboard.instantiateViewController(withIdentifier: id) as! Edit_ProfileVC
         initialViewController.boolForTitle = true
         self.navigationController!.pushViewController(initialViewController, animated: true)
-        
-        
+     
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -286,17 +285,14 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
             // Perform login by calling Firebase APIs
             Auth.auth().signIn(with: credential, completion: { (user, error) in
                 if let error = error {
-                    print("Login error: \(error.localizedDescription)")
-                    let alertController = UIAlertController(title: "Login Error", message: error.localizedDescription, preferredStyle: .alert)
-                    let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                    alertController.addAction(okayAction)
-                    self.present(alertController, animated: true, completion: nil)
                     
+                    AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Facebook login failed.", vc: self)
+                   
                     return
                 }
                 
                 //                 Present the main view
-                self.openStoryBoard(name: Constants.Main, id: Constants.TabStoryId)
+                self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId)
             })
             
         }
