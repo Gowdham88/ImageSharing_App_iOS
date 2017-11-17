@@ -1616,7 +1616,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="126"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="p7" translatesAutoresizingMaskIntoConstraints="NO" id="ed3-Wf-Alf">
-                                                <rect key="frame" x="120" y="14" width="80" height="80"/>
+                                                <rect key="frame" x="120" y="12" width="80" height="80"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="80" id="Qlt-fC-o3L"/>
                                                     <constraint firstAttribute="width" constant="80" id="nup-M8-dCs"/>
@@ -1634,7 +1634,10 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Marc chriqui" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aNM-pB-bIX">
-                                                <rect key="frame" x="110" y="97" width="100" height="19"/>
+                                                <rect key="frame" x="110" y="95" width="100" height="19"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="19" id="fij-0O-VMn"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
                                                 <color key="textColor" red="0.16470588235294117" green="0.16470588235294117" blue="0.16470588235294117" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
@@ -1644,11 +1647,11 @@
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="aNM-pB-bIX" firstAttribute="top" secondItem="ed3-Wf-Alf" secondAttribute="bottom" constant="3" id="3QM-k8-6r4"/>
-                                            <constraint firstItem="ed3-Wf-Alf" firstAttribute="top" secondItem="bgr-TL-zUa" secondAttribute="top" constant="14" id="Uog-mW-xC9"/>
+                                            <constraint firstItem="ed3-Wf-Alf" firstAttribute="top" secondItem="bgr-TL-zUa" secondAttribute="top" constant="12" id="Uog-mW-xC9"/>
                                             <constraint firstItem="WA7-VN-cFE" firstAttribute="trailing" secondItem="ed3-Wf-Alf" secondAttribute="trailing" constant="-1" id="g2e-gQ-efo"/>
-                                            <constraint firstItem="WA7-VN-cFE" firstAttribute="bottom" secondItem="ed3-Wf-Alf" secondAttribute="bottom" constant="-1" id="iyE-1Z-UoI"/>
+                                            <constraint firstItem="WA7-VN-cFE" firstAttribute="bottom" secondItem="ed3-Wf-Alf" secondAttribute="bottom" constant="1" id="iyE-1Z-UoI"/>
                                             <constraint firstItem="ed3-Wf-Alf" firstAttribute="centerX" secondItem="bgr-TL-zUa" secondAttribute="centerX" id="o4V-4X-CPw"/>
-                                            <constraint firstAttribute="bottom" secondItem="aNM-pB-bIX" secondAttribute="bottom" constant="10" id="s9J-Mk-oTv"/>
+                                            <constraint firstAttribute="bottom" secondItem="aNM-pB-bIX" secondAttribute="bottom" constant="12" id="s9J-Mk-oTv"/>
                                             <constraint firstItem="aNM-pB-bIX" firstAttribute="centerX" secondItem="bgr-TL-zUa" secondAttribute="centerX" id="thS-4u-5V0"/>
                                         </constraints>
                                     </view>

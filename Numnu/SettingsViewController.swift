@@ -43,7 +43,7 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -75,13 +75,17 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     if section == 1 {
         return 40
-    }else {
-    return 0
+    }else if section == 2 {
+    return 40
+    }else{
+        return 0
     }
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 1 {
             return "          Bookmarks"
+        }else if section == 2 {
+            return "                                   Logout"
         }
         return ""
     }
@@ -143,6 +147,7 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     // Edit button Navigation //
     @IBAction func didTappedEdit(_ sender: Any) {
         
+<<<<<<< HEAD
         let editProfile = self.navigationController?.viewControllers.first as! Edit_ProfileVC
         editProfile.show = true
         editProfile.boolForTitle = false
@@ -160,6 +165,14 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
 //
         
        
+=======
+        if let   myController  = self.navigationController!.viewControllers[1] as? Edit_ProfileVC
+        {
+            myController.show = true
+            myController.boolForTitle = false
+            _ =  self.navigationController!.popToViewController(myController, animated: true)
+        }
+>>>>>>> e8191d8b16ea030f14b61b37de5b40b1a1ae2ecc
     }
     /*
     // MARK: - Navigation
