@@ -8,6 +8,15 @@
 
 import UIKit
 
+protocol Profile_PostViewControllerDelegae {
+    
+    func sendlogoutstatus()
+    
+    func logout()
+}
+
+
+
 class Profile_PostViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource {
     
     @IBOutlet var tableView: UITableView!
@@ -20,6 +29,7 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
     @IBOutlet weak var shareview: UIView!
     
     var itemArray = [String]()
+    var delegate : Profile_PostViewControllerDelegae?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,7 +99,8 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
     func settingsClicked() {
         
         let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: "SettingsVC")
+        let vc         = storyboard.instantiateViewController(withIdentifier: "SettingsVC") as! SettingsViewController
+        vc.delegate    = self
         self.navigationController!.pushViewController(vc, animated: true)
     }
     
@@ -192,5 +203,19 @@ extension Profile_PostViewController : Profile_postTableViewCellDelegate {
         
         mainViewConstraint.constant = 186 + height
         mainViewBottom.constant = 0
+    }
+}
+
+extension Profile_PostViewController :SettingsViewControllerDelegate {
+    
+    func sendlogoutstatus() {
+        
+        delegate?.sendlogoutstatus()
+        
+    }
+    
+    func logout() {
+        
+        delegate?.logout()
     }
 }
