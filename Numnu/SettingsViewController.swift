@@ -12,6 +12,13 @@ import UIKit
 var itemArray = [String]()
 var itemArray2 = [String]()
 
+protocol SettingsViewControllerDelegate {
+    
+    func sendlogoutstatus()
+    
+    func logout()
+}
+
 
 class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
@@ -22,6 +29,7 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     @IBOutlet var editButton: UIButton!
     @IBOutlet var profileImageview: UIImageView!
     @IBOutlet var settingsTableView: UITableView!
+    var delegate : SettingsViewControllerDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
        setNavBar()
@@ -37,7 +45,7 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         profileImageview.clipsToBounds = true
         
         itemArray = ["Share the app","Rate the app","Terms of service","Privacy policy"]
-        itemArray2 = ["Events","Business","Items","Posts","Users"]
+        itemArray2 = ["Events","Business","Items","Posts","Users","Logout"]
 //        topHeaderView.backgroundColor = UIColor(red: 216/255.0, green: 216/255.0, blue: 216/255.0, alpha: 1.0)
 
     }
@@ -76,7 +84,7 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     if section == 1 {
         return 40
     }else if section == 2 {
-    return 40
+    return 0
     }else{
         return 0
     }
@@ -98,6 +106,12 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if indexPath.section == 1 && indexPath.row == 5 {
+            
+            delegate?.logout()
+            _ = self.navigationController?.popToRootViewController(animated: true)
+        }
         
         let selectedCell:UITableViewCell = tableView.cellForRow(at: indexPath)!
         selectedCell.contentView.backgroundColor = UIColor.clear
@@ -147,12 +161,19 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     // Edit button Navigation //
     @IBAction func didTappedEdit(_ sender: Any) {
         
-        if let   myController  = self.navigationController!.viewControllers[1] as? Edit_ProfileVC
-        {
-            myController.show = true
-            myController.boolForTitle = false
-            _ =  self.navigationController!.popToViewController(myController, animated: true)
-        }
+        delegate?.sendlogoutstatus()
+      _ = self.navigationController?.popToRootViewController(animated: true)
+        
+//        let controllers = self.navigationController?.viewControllers
+//        for vc in controllers! {
+//            if vc is Edit_ProfileVC {
+//                let aVC = Edit_ProfileVC()
+//                aVC.show = true
+//                _ = self.navigationController?.popToViewController(aVC, animated: true)
+//            }
+//        }
+//
+ 
     }
     /*
     // MARK: - Navigation
@@ -163,5 +184,6 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         // Pass the selected object to the new view controller.
     }
     */
-
+    
+  
 }

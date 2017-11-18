@@ -8,6 +8,15 @@
 
 import UIKit
 
+protocol Profile_PostViewControllerDelegae {
+    
+    func sendlogoutstatus()
+    
+    func logout()
+}
+
+
+
 class Profile_PostViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource {
     
     @IBOutlet var tableView: UITableView!
@@ -20,6 +29,7 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
     @IBOutlet weak var shareview: UIView!
     
     var itemArray = [String]()
+    var delegate : Profile_PostViewControllerDelegae?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +54,7 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
     
     func setNavBar() {
         
-        navigationItemList.title = "Profile"
+        navigationItemList.title = "@Suraj Balachandran"
         
         let button: UIButton = UIButton(type: UIButtonType.custom)
         //set image for button
@@ -65,7 +75,7 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         button2.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
         
         // Create left and right button for navigation item
-        let leftButton =  UIBarButtonItem(customView: button)
+        let leftButton =  UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         leftButton.isEnabled = true
         
 //        let rightButton = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
@@ -89,7 +99,8 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
     func settingsClicked() {
         
         let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: "SettingsVC")
+        let vc         = storyboard.instantiateViewController(withIdentifier: "SettingsVC") as! SettingsViewController
+        vc.delegate    = self
         self.navigationController!.pushViewController(vc, animated: true)
     }
     
@@ -192,5 +203,19 @@ extension Profile_PostViewController : Profile_postTableViewCellDelegate {
         
         mainViewConstraint.constant = 186 + height
         mainViewBottom.constant = 0
+    }
+}
+
+extension Profile_PostViewController :SettingsViewControllerDelegate {
+    
+    func sendlogoutstatus() {
+        
+        delegate?.sendlogoutstatus()
+        
+    }
+    
+    func logout() {
+        
+        delegate?.logout()
     }
 }

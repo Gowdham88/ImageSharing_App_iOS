@@ -89,6 +89,20 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if PrefsManager.sharedinstance.isLoginned {
+            
+            addProfileContainer()
+            
+        } else {
+            
+            if boolForTitle == false {
+                
+                addCollectionContainer()
+                
+            }
+            
+        }
    
         imagePicker.delegate = self
         profileImage.isUserInteractionEnabled = true
@@ -133,9 +147,11 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         self.navigationController?.navigationBar.titleTextAttributes =
             [NSForegroundColorAttributeName: UIColor.black,
              NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
-
+      
         // Checking users login
-        addProfileContainer()
+        
+       
+        
         
         
     }
@@ -152,7 +168,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         // Hide the navigation bar on the this view controller
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
         if boolForTitle == true {
-            navigationItemList.title = "Complete Profile"
+            navigationItemList.title = "Complete Sign up"
             saveButton.setTitle("Complete SignUp", for: .normal)
             saveButton.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 16)
         }else{
@@ -161,8 +177,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             saveButton.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 16)
 
         }
-        locationManager.delegate = self
-        locationManager.requestAlwaysAuthorization()
+        
         
         
     }
@@ -170,19 +185,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         let offset = CGPoint(x: 0,y :0)
         myscrollView.setContentOffset(offset, animated: true)
         
-        if PrefsManager.sharedinstance.isLoginned {
-            
-            
-            
-        } else {
-            
-            if boolForTitle == false {
-                
-                addCollectionContainer()
-                
-            }
-            
-        }
+       
        
     }
     func addClicked() {
@@ -440,12 +443,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     func addProfileContainer(){
         
         let storyboard        = UIStoryboard(name: Constants.Main, bundle: nil)
-        let controller        = storyboard.instantiateViewController(withIdentifier: "profileid")
-        controller.view.frame = self.view.bounds;
-        controller.willMove(toParentViewController: self)
-        self.view.addSubview(controller.view)
-        self.addChildViewController(controller)
-        controller.didMove(toParentViewController: self)
+        let controller        = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
+        controller.delegate   = self
+        self.navigationController!.pushViewController(controller, animated: true)
         
     }
     
@@ -468,7 +468,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 PrefsManager.sharedinstance.isLoginned = true
                 
                 let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
-                let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController")
+                let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
+                vc.delegate    = self
                 self.navigationController!.pushViewController(vc, animated: true)
 //                self.navigationController?.present(vc, animated: true, completion: nil)
                 
@@ -669,4 +670,22 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
 
     }
   
+}
+
+extension Edit_ProfileVC : Profile_PostViewControllerDelegae {
+    
+    func sendlogoutstatus() {
+        
+        let rightButton = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        // Create two buttons for the navigation item
+        navigationItemList.leftBarButtonItem = rightButton
+        
+    }
+    
+    func logout() {
+        
+        PrefsManager.sharedinstance.isLoginned = false
+        addCollectionContainer()
+        
+    }
 }
