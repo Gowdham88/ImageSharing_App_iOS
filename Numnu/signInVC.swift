@@ -13,6 +13,7 @@ import FBSDKLoginKit
 import FBSDKCoreKit
 import PKHUD
 import FBSDKLoginKit
+import Alamofire
 
 var closed = String()
 
@@ -87,17 +88,9 @@ class signInVC: UIViewController, UITextFieldDelegate {
                 
                 self.idprim.removeAll()
                 
-                print("user?.uid: \(user?.uid)")
                 
-                DispatchQueue.main.async {
-                    
-                    HUD.hide()
-                    self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId)
-                    
-                    self.emailAddressTF.text = ""
-                    self.passwordTF.text     = ""
-                    
-                }
+                self.userLoginApi(uid: (user?.uid)!)
+               
                 
                 print("Login FIRAuth Sign in called")
             })
@@ -262,7 +255,42 @@ class signInVC: UIViewController, UITextFieldDelegate {
 
 extension signInVC {
     
-    func userLoginApi() {
+    func userLoginApi(uid:String) {
+        
+        let clientIp = IPChecker.getIP() ?? "1.0.1"
+        
+        let parameters : Parameters = ["firebaseuid" : uid,"createdByUserId" : "","updatedByUserId" : "","createdTimestamp" : "","updatedTimestamp" : "","clientApp": "iosapp","clientIP":clientIp]
+        
+        let loginRequest : ApiClient  = ApiClient()
+        loginRequest.userLogin(parameters: parameters, completion: { status,userlist in
+            
+            if status == "success" {
+                
+                DispatchQueue.main.async {
+                   
+                    if let user = userlist {
+                        
+                        print(user.firebaseUID!)
+                        print(user.id!)
+                        
+                    }
+                    
+                    HUD.hide()
+//                    self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId)
+//
+//                    self.emailAddressTF.text = ""
+//                    self.passwordTF.text     = ""
+                    
+                }
+                
+            } else {
+                
+                 HUD.hide()
+                
+            }
+            
+            
+        })
         
         
     }
