@@ -105,6 +105,7 @@
 		B4C7BCEB1F9F74E500B2BEC4 /* PostEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C7BCEA1F9F74E500B2BEC4 /* PostEventTableViewCell.swift */; };
 		BE5201F41FBDE82E00462B0E /* UserProfileTagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5201F31FBDE82E00462B0E /* UserProfileTagCollectionViewCell.swift */; };
 		BE57DEF71FBB0BCD00A9C93B /* PostImageZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE57DEF61FBB0BCD00A9C93B /* PostImageZoomViewController.swift */; };
+		BEF026A61FC2B5D300100392 /* SettingsEdit_ProfieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF026A51FC2B5D300100392 /* SettingsEdit_ProfieViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -238,6 +239,7 @@
 		B4C7BCEA1F9F74E500B2BEC4 /* PostEventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEventTableViewCell.swift; sourceTree = "<group>"; };
 		BE5201F31FBDE82E00462B0E /* UserProfileTagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileTagCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE57DEF61FBB0BCD00A9C93B /* PostImageZoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImageZoomViewController.swift; sourceTree = "<group>"; };
+		BEF026A51FC2B5D300100392 /* SettingsEdit_ProfieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsEdit_ProfieViewController.swift; sourceTree = "<group>"; };
 		FAA3E614BAEE1AD3C19ADB46 /* Pods-Numnu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Numnu.release.xcconfig"; path = "Pods/Target Support Files/Pods-Numnu/Pods-Numnu.release.xcconfig"; sourceTree = "<group>"; };
 		FD87AF37876C16561F7CFD02 /* Pods_Numnu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Numnu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -472,6 +474,7 @@
 				6043865D1FB09E970049F971 /* Profile_PostViewController.swift */,
 				B418423E1F8FD1B000CBBA57 /* NotificationsVC.swift */,
 				60B4EA411FAAFB9300C1A6C9 /* SettingsViewController.swift */,
+				BEF026A51FC2B5D300100392 /* SettingsEdit_ProfieViewController.swift */,
 				B426C68D1F9E0A6B008D586B /* SplashViewController.swift */,
 				B46310231FA323E2009F6F0E /* PostDetailViewController.swift */,
 			);
@@ -850,6 +853,7 @@
 				604386601FB0A9480049F971 /* Profile_postTableViewCell.swift in Sources */,
 				B42F2A261FA9EA96002419AB /* LocationDetailcontroller.swift in Sources */,
 				B4C515881FA085BB00348E2A /* ListTabController.swift in Sources */,
+				BEF026A61FC2B5D300100392 /* SettingsEdit_ProfieViewController.swift in Sources */,
 				601D46791F8F3B1C00832BDD /* UserList.swift in Sources */,
 				B49ABD8C1F9F28690091C5D1 /* EventDefaulCollectionCell2.swift in Sources */,
 				B41842391F8FCBF100CBBA57 /* Edit_ProfileVC.swift in Sources */,
