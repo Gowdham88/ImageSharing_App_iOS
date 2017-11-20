@@ -85,7 +85,7 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         if section == 1 {
             return "          Bookmarks"
         }else if section == 2 {
-            return "                                   Logout"
+            return ""
         }
         return ""
     }

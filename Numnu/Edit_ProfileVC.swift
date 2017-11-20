@@ -122,7 +122,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         saveButton.clipsToBounds = true
         view.superview?.addSubview(saveButton)
         
-        profileImage.layer.cornerRadius = self.profileImage.frame.size.height/2
+        profileImage.layer.cornerRadius = self.profileImage.frame.size.width/2
         profileImage.clipsToBounds = true
         profileImage.layer.masksToBounds = true
 
@@ -199,7 +199,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     func genderClicked(){
         genderTextfield.resignFirstResponder()
         let Alert = UIAlertController(title: "Select Gender", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
-        
+
         let MaleAction = UIAlertAction(title: "Male", style: UIAlertActionStyle.default) { _ in
             self.genderTextfield.text = "Male"
             self.genderTextfield.resignFirstResponder()
@@ -208,12 +208,13 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             self.genderTextfield.text = "Female"
             self.genderTextfield.resignFirstResponder()
         }
-        
+
         Alert.addAction(MaleAction)
         Alert.addAction(FemaleAction)
-        
+
         present(Alert, animated: true, completion: nil)
 
+        
     }
 
     
@@ -513,9 +514,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            self.profileImage.contentMode = .scaleToFill
+            self.profileImage.contentMode = .scaleAspectFill
             self.profileImage.image = pickedImage
-            
         }
         
         dismiss(animated: true, completion: nil)
@@ -576,12 +576,10 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//    let indexPath = collectionView.indexPathsForSelectedItems
-//print("selected item index is",indexPath)
+
         let indexPath = collectionView.indexPathsForSelectedItems?.first
         let cell = collectionView.cellForItem(at: indexPath!) as? FoodPreferenceCollectionViewCell
-  //      selectedIndex = (indexPath?.item)!
- //       print("selected index::::",selectedIndex)
+  
     }
     func buttonClicked(sender: Any){
         
@@ -608,8 +606,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = dropdownTableView.dequeueReusableCell(withIdentifier: "cell")
-//        var cell : UITableViewCell? = (dropdownTableView.dequeueReusableCell(withIdentifier: "cell") as! UITableViewCell)
         var cell : UITableViewCell? = dropdownTableView.dequeueReusableCell(withIdentifier: "cell")
         if(cell == nil)
         {
