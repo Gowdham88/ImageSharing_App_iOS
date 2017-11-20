@@ -12,6 +12,7 @@ import Firebase
 import FBSDKCoreKit
 import FBSDKLoginKit
 import PKHUD
+import Alamofire
 
 class signupwithEmailVC: UIViewController, UITextFieldDelegate {
 
@@ -295,6 +296,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                     return
                 }
                 
+                self.userLoginApi(uid: user.uid)
                 //                 Present the main view
                 self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId)
             })
@@ -319,4 +321,50 @@ extension UITextField {
         self.layer.masksToBounds = true
     }
 }
+
+extension signupwithEmailVC {
+    
+    func userLoginApi(uid:String) {
+        
+        let clientIp = IPChecker.getIP() ?? "1.0.1"
+        
+        let parameters : Parameters = ["firebaseuid" : uid,"createdByUserId" : "","updatedByUserId" : "","createdTimestamp" : "","updatedTimestamp" : "","clientApp": "iosapp","clientIP":clientIp]
+        
+        let loginRequest : ApiClient  = ApiClient()
+        loginRequest.userLogin(parameters: parameters, completion: { status,userlist in
+            
+            if status == "success" {
+                
+                DispatchQueue.main.async {
+                    
+                    if let user = userlist {
+                        
+                        print(user.firebaseUID!)
+                        print(user.id!)
+                        
+                    }
+                    
+                    HUD.hide()
+                    //                    self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId)
+                    //
+                    //                    self.emailAddressTF.text = ""
+                    //                    self.passwordTF.text     = ""
+                    
+                }
+                
+            } else {
+                
+                HUD.hide()
+                
+            }
+            
+            
+        })
+        
+        
+    }
+    
+    
+}
+
 

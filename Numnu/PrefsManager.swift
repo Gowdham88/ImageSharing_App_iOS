@@ -53,29 +53,155 @@ struct PrefsManager {
     
     
     
-//    var userId : String {
-//        
-//        get {
-//            
-//            if checkprefsobject(object: Constants.loginstatus) {
-//                
-//                return UserDefaults.standard.bool(forKey: Constants.loginstatus)
-//                
-//            } else {
-//                
-//                return false
-//            }
-//            
-//            
-//        }
-//        
-//        set {
-//            
-//            UserDefaults.standard.set(newValue, forKey: Constants.loginstatus)
-//            UserDefaults.standard.synchronize()
-//        }
-//    }
+    var userId : String {
+        
+        get {
+            
+            if checkprefsobject(object: Constants.id) {
+                
+                return UserDefaults.standard.string(forKey: Constants.id)
+                
+            } else {
+                
+                return false
+            }
+            
+            
+        }
+        
+        set {
+            
+            UserDefaults.standard.set(newValue, forKey: Constants.id)
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    var userEmail : String {
+        
+        get {
+            
+            if checkprefsobject(object: Constants.useremail) {
+                
+                return UserDefaults.standard.string(forKey: Constants.useremail)
+            } else {
+                
+                return false
+            }
+            
+        }
+        
+        set {
+            
+            UserDefaults.standard.set(newValue, forKey: Constants.useremail)
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    var username : String {
+        
+        get {
+            
+            if checkprefsobject(object: Constants.userName) {
+                
+                return UserDefaults.standard.string(forKey: Constants.userName)
+            } else {
+                
+                return false
+            }
+            
+        }
+        
+        set {
+            
+            UserDefaults.standard.set(newValue, forKey: Constants.userName)
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    var firstname : String {
+        
+        get {
+            
+            if checkprefsobject(object: Constants.firstName) {
+                
+                return UserDefaults.standard.string(forKey: Constants.firstName)
+            } else {
+                
+                return false
+            }
+            
+        }
+        
+        set {
+            
+            UserDefaults.standard.set(newValue, forKey: Constants.firstName)
+            UserDefaults.standard.synchronize()
+        }
+    }
+
+    var lastname : String {
+        
+        get {
+            
+            if checkprefsobject(object: Constants.lastName) {
+                
+                return UserDefaults.standard.string(forKey: Constants.lastName)
+            } else {
+                
+                return false
+            }
+            
+        }
+        
+        set {
+            
+            UserDefaults.standard.set(newValue, forKey: Constants.lastName)
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    var UIDfirebase : String {
+        
+        get {
+            
+            if checkprefsobject(object: Constants.firebaseUID) {
+                
+                return UserDefaults.standard.string(forKey: Constants.firebaseUID)
+            } else {
+                
+                return false
+            }
+            
+        }
+        
+        set {
+            
+            UserDefaults.standard.set(newValue, forKey: Constants.firebaseUID)
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    var imageURL : String {
+        
+        get {
+            
+            if checkprefsobject(object: Constants.imageURLs) {
+                
+                return UserDefaults.standard.string(forKey: Constants.imageURLs)
+            } else {
+                
+                return false
+            }
+            
+        }
+        
+        set {
+            
+            UserDefaults.standard.set(newValue, forKey: Constants.imageURLs)
+            UserDefaults.standard.synchronize()
+        }
+    }
     
     
     
-}
+} // Struct
