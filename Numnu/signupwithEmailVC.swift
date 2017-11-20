@@ -37,6 +37,8 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         passwordReveal.setImage(UIImage(named: "Show password icon"), for: .normal)
         passwordReveal.tintColor = UIColor(red: 136/255.0, green: 143/255.0, blue: 158/255.0, alpha: 1.0)
+        
+        navigationController?.tabBarController?.tabBar.isHidden = true
 
         labelcredentials.isHidden = true
 
