@@ -271,7 +271,7 @@ extension signInVC {
                     if let user = userlist {
                         
                         print(user.firebaseUID!)
-                        print(user.id!)
+                        print(user.tagNameArray!)
                         
                     }
                     

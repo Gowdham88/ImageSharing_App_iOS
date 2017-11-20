@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class  ApiClient {
     
-    /*********************Login *****************************/
+    /*********************Login Api*****************************/
     
     func userLogin(parameters : Parameters,completion : @escaping (String,UserList?) -> Void) {
         
@@ -48,6 +48,38 @@ class  ApiClient {
     
     }
     
+    
+    /************************Tags Api**********************************/
+    
+    func getTagsApi(parameters : Parameters,headers : HTTPHeaders,completion : @escaping (String,TagList?) -> Void) {
+        
+        Alamofire.request(Constants.TagApiUrl, method: .get, parameters: parameters, headers: headers).validate().responseJSON { response in
+            
+            switch response.result {
+                
+            case .success:
+                
+                if let value = response.result.value {
+                    
+                    let json = JSON(value)
+                    if let userList = TagList(json: json) {
+                        
+                        completion("success",userList)
+                    }
+                  
+                }
+                
+                
+            case .failure(let error):
+                
+                print(error)
+                completion(error.localizedDescription,nil)
+                
+            }
+            
+        }
+        
+    }
     
     
 }

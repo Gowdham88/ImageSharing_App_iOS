@@ -53,28 +53,28 @@ struct PrefsManager {
     
     
     
-//    var userId : String {
-//        
-//        get {
-//            
-//            if checkprefsobject(object: Constants.loginstatus) {
-//                
-//                return UserDefaults.standard.bool(forKey: Constants.loginstatus)
-//                
-//            } else {
-//                
-//                return false
-//            }
-//            
-//            
-//        }
-//        
-//        set {
-//            
-//            UserDefaults.standard.set(newValue, forKey: Constants.loginstatus)
-//            UserDefaults.standard.synchronize()
-//        }
-//    }
+    var userId : String {
+        
+        get {
+            
+            if checkprefsobject(object: Constants.userId) {
+                
+                return UserDefaults.standard.string(forKey: Constants.userId)!
+                
+            } else {
+                
+                return "empty"
+            }
+            
+            
+        }
+        
+        set {
+            
+            UserDefaults.standard.set(newValue, forKey: Constants.userId)
+            UserDefaults.standard.synchronize()
+        }
+    }
     
     
     
