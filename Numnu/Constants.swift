@@ -111,4 +111,10 @@ class Constants {
     // Web Api key
     
     static let PlaceApiUrl = "https://maps.googleapis.com/maps/api/place/autocomplete/json"
+    
+    /*********Api **********/
+    
+    static let LoginApiUrl = "https://numnu-server-dev.appspot.com/users/login"
+    
+    
 }

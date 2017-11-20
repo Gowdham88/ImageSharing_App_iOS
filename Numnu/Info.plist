@@ -58,7 +58,7 @@
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>http://192.168.1.159:8081/api/</key>
+			<key>https://numnu-server-dev.appspot.com/</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
 				<true/>
@@ -134,26 +134,7 @@
 				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
 				<true/>
 			</dict>
-			<key>ios.emdsys.com:8090</key>
-			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-				<key>NSExceptionMinimumTLSVersion</key>
-				<string>TLSv1.2</string>
-				<key>NSExceptionRequiresForwardSecrecy</key>
-				<true/>
-				<key>NSIncludesSubdomains</key>
-				<true/>
-				<key>NSRequiresCertificateTransparency</key>
-				<false/>
-				<key>NSThirdPartyExceptionAllowsInsecureHTTPLoads</key>
-				<false/>
-				<key>NSThirdPartyExceptionMinimumTLSVersion</key>
-				<string>TLSv1.2</string>
-				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
-				<true/>
-			</dict>
-		</dict>
+        </dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>$(PRODUCT_NAME) app requires access to the camera</string>
