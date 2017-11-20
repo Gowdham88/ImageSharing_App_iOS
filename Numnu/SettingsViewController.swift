@@ -41,8 +41,8 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         editButton.layer.cornerRadius = self.editButton.frame.size.height/2
         editButton.clipsToBounds = true
         
-        profileImageview.layer.cornerRadius = self.profileImageview.frame.size.height/2
-        profileImageview.clipsToBounds = true
+        self.profileImageview.layer.cornerRadius = self.profileImageview.frame.size.height/2
+        self.profileImageview.clipsToBounds = true
         
         itemArray = ["Share the app","Rate the app","Terms of service","Privacy policy"]
         itemArray2 = ["Events","Business","Items","Posts","Users","Logout"]
@@ -162,7 +162,14 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     @IBAction func didTappedEdit(_ sender: Any) {
         
         delegate?.sendlogoutstatus()
-      _ = self.navigationController?.popToRootViewController(animated: true)
+//      _ = self.navigationController?.popToRootViewController(animated: true)
+        
+        
+        
+        
+        let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: "SettingsEdit_ProfieViewController") as! SettingsEdit_ProfieViewController
+        self.navigationController!.pushViewController(vc, animated: true)
         
 //        let controllers = self.navigationController?.viewControllers
 //        for vc in controllers! {
