@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 import GooglePlaces
+import Alamofire
 
 class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,GMSAutocompleteViewControllerDelegate {
     var dropdownArray = [String] ()
@@ -87,6 +88,19 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let parameters: Parameters = ["checkusername":"siva"]
+        
+        let userNameRequest: ApiClient = ApiClient()
+        userNameRequest.usernameexists(parameters: parameters, completion:{status, Exists in
+ 
+            if Exists! {
+                
+            }else{
+                
+            }
+            
+            
+        })
         
         if PrefsManager.sharedinstance.isLoginned {
             
