@@ -92,9 +92,16 @@ class Constants {
     // Prferences
     
     static let loginstatus  = "loginstatus"
-    static let userId       = "userId"
-    
+
+    static let id           = "id"
+    static let useremail    = "useremail"
+    static let userName     = "userName"
+    static let lastName     = "lastName"
+    static let firebaseUID  = "firebaseUID"
+    static let imageURLs    = "imageURLs"
+
    
+
     static let dummy   = "This much-talked-about festival brings all your favorite Food Network personalities and celebrity chefs to Miami for five days of events, from intimate dinners cooked by Sean Brock to a late-night Tacos After Dark session with Aarón Sanchez. If you've always dreamed of drinking tiki cocktails with Guy Fieri or having a rosé brunch with Martha Stewart, the South Beach Wine & Food Festival can make your wishes come true."
     
     // Authentication Label
@@ -117,5 +124,7 @@ class Constants {
     
     static let LoginApiUrl = "https://numnu-server-dev.appspot.com/users/login"
     static let TagApiUrl   = "https://numnu-server-dev.appspot.com/tags"
+    
+    
     
 }

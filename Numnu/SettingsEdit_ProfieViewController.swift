@@ -1,8 +1,8 @@
 //
-//  Edit_ProfileVC.swift
+//  SettingsEdit_ProfieViewController.swift
 //  Numnu
 //
-//  Created by CZ Ltd on 10/12/17.
+//  Created by Siva_iOS on 20/11/17.
 //  Copyright © 2017 czsm. All rights reserved.
 //
 
@@ -10,9 +10,8 @@ import UIKit
 import MapKit
 import CoreLocation
 import GooglePlaces
-import Alamofire
 
-class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,GMSAutocompleteViewControllerDelegate {
+class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,GMSAutocompleteViewControllerDelegate {
     var dropdownArray = [String] ()
     var dropdownString = String ()
     var tagArray = [String] ()
@@ -24,7 +23,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     @IBOutlet var superVieww: UIView!
     @IBOutlet var genderdropButton: UIButton!
     @IBOutlet var dropdownTableView: UITableView!
-  
+    
     @IBOutlet var datePicker: UIDatePicker!
     @IBOutlet var yearLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!
@@ -39,8 +38,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     @IBOutlet var cityTextfield: UITextField!
     @IBOutlet var genderTextfield: UITextField!
-//    @IBOutlet var usernameTextfield: UITextField!
-    
+    //    @IBOutlet var usernameTextfield: UITextField!
+    @IBOutlet var myscrollView: UIScrollView!
+
     @IBOutlet var birthTextfield: UITextField!
     
     @IBOutlet var foodTextfield: UITextField!
@@ -48,88 +48,71 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     @IBOutlet weak var navigationItemList: UINavigationItem!
     var show : Bool = false
     var boolForTitle: Bool = false
-//    var showProfile: Bool = true
-    @IBOutlet var myscrollView: UIScrollView!
-   
     @IBOutlet var saveButton: UIButton!
     let locationManager = CLLocationManager()
-
+    
     let imagePicker = UIImagePickerController()
-    var apiClient : ApiClient!
-//    static private let regexEmail = "[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}"
-//    static private let regexMobNo = "^[0-9]{6,15}$"
-//    static private let regexNameType = "^[a-zA-Z]+$"
-    
-    /***************Tags array*****************/
-
-    var tagidArray   = [Int]()
-    var tagnamearray = [String]()
-    
-    // place autocomplete //
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         
         dismiss(animated: true, completion: nil)
         self.cityTextfield.text = place.name
-
+        
     }
-
+    
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
         print("Error: ", error.localizedDescription)
-
+        
     }
-
+    
     func wasCancelled(_ viewController: GMSAutocompleteViewController) {
         dismiss(animated: true, completion: nil)
-
+        
     }
     func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
     }
-
+    
     func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
 //        if PrefsManager.sharedinstance.isLoginned {
 //
 //            addProfileContainer()
 //
 //        } else {
 //
-//            if boolForTitle == false {
+            if boolForTitle == true {
+        
+                addCollectionContainer()
+        
+            }
 //
-//                addCollectionContainer()
-//
-//            }
-//            
 //        }
-
-   
+        
         imagePicker.delegate = self
         profileImage.isUserInteractionEnabled = true
         datePicker.isHidden = true
         superVieww.isHidden = true
         doneView.isHidden = true
-//        superVieww.addSubview(datePicker)
+        //        superVieww.addSubview(datePicker)
         nameTextfield.delegate = self
         emailaddress.delegate = self
         genderTextfield.delegate = self
         cityTextfield.delegate = self
         birthTextfield.delegate = self
         foodTextfield.delegate = self
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
-//        self.view.addGestureRecognizer(tapGesture)
+        //        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
+        //        self.view.addGestureRecognizer(tapGesture)
         genderdropButton.addTarget(self, action: #selector(genderClicked), for: UIControlEvents.allTouchEvents)
         doneButotn.addTarget(self, action: #selector(doneClick), for: UIControlEvents.allTouchEvents)
         addButton.addTarget(self, action: #selector(addClicked), for: UIControlEvents.allTouchEvents)
-
+        
         foodTextfield.addTarget(self, action: #selector(textFieldActive), for: UIControlEvents.allTouchEvents)
-
+        
         dropdownArray = ["Chicken","Chicken chilli","Chicken manjurian","Chicken 65","Chicken fried rice","Grill chicken","Pizza","Burger","Sandwich","Mutton","Mutton chukka","Mutton masala","Mutton fry","Prawn","Gobi chilli","Panneer","Noodles","Mutton soup","Fish fry","Dry fish"]
         
         setNavBar()
@@ -145,7 +128,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         profileImage.layer.cornerRadius = self.profileImage.frame.size.width/2
         profileImage.clipsToBounds = true
         profileImage.layer.masksToBounds = true
-
+        
         
         self.editButton.layer.cornerRadius =  self.editButton.frame.size.height/2
         self.editButton.clipsToBounds = true
@@ -153,24 +136,14 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         self.navigationController?.navigationBar.titleTextAttributes =
             [NSForegroundColorAttributeName: UIColor.black,
              NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
-      
-        // Checking users login
-        /***********************Api login******************************/
         
-        apiClient = ApiClient()
-       
+        // Checking users login
+        
+        
         
         
         
     }
-//    func dismissKeyboard (_ sender: UITapGestureRecognizer) {
-//        nameTextfield.resignFirstResponder()
-//        emailaddress.resignFirstResponder()
-//        genderTextfield.resignFirstResponder()
-//        cityTextfield.resignFirstResponder()
-//        birthTextfield.resignFirstResponder()
-////        foodTextfield.resignFirstResponder()
-//    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Hide the navigation bar on the this view controller
@@ -185,7 +158,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
 //            saveButton.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 16)
 //
 //        }
-//        
+        
         
         
     }
@@ -193,12 +166,13 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         let offset = CGPoint(x: 0,y :0)
         myscrollView.setContentOffset(offset, animated: true)
         
-       
-       
+        
+        
     }
+   
     func addClicked() {
         if foodTextfield.text == "" {
-          print("could not add empty fields")
+            print("could not add empty fields")
         }else{
             if tagArray.contains(foodTextfield.text!){
                 print("already added in collectionview")
@@ -216,14 +190,14 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             collectionView.reloadData()
             foodTextfield.resignFirstResponder()
         }
-      
+        
         
     }
     
     func genderClicked(){
         genderTextfield.resignFirstResponder()
         let Alert = UIAlertController(title: "Select Gender", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
-
+        
         let MaleAction = UIAlertAction(title: "Male", style: UIAlertActionStyle.default) { _ in
             self.genderTextfield.text = "Male"
             self.genderTextfield.resignFirstResponder()
@@ -232,15 +206,15 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             self.genderTextfield.text = "Female"
             self.genderTextfield.resignFirstResponder()
         }
-
+        
         Alert.addAction(MaleAction)
         Alert.addAction(FemaleAction)
-
+        
         present(Alert, animated: true, completion: nil)
-
+        
         
     }
-
+    
     
     func textFieldActive() {
         
@@ -282,8 +256,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         self.view.endEditing(true)
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        self.view.endEditing(true)
-
+        //        self.view.endEditing(true)
+        
         textField.resignFirstResponder()
         return true
     }
@@ -294,10 +268,10 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             let substring = (foodTextfield.text! as NSString).replacingCharacters(in: range, with: string )
             print("the substrings are::::",substring)
             
-             loadTagList(tag: substring)
+            searchAutocompleteEntriesWithSubstring(substring: substring)
         }else{
         }
-       
+        
         return true     // not sure about this - cou
     }
     
@@ -318,7 +292,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         }
         dropdownTableView.reloadData()
     }
-
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == birthTextfield {
             showDatePicker()
@@ -356,13 +330,13 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             dropdownTableView.isHidden = true
         }
         
-       
+        
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == foodTextfield || textField == birthTextfield {
             foodTextfield.text = ""
-//            dropdownTableView.isHidden = true
+            //            dropdownTableView.isHidden = true
             animateViewMoving(up: false, moveValue: 0)
         }
         if textField == birthTextfield {
@@ -373,9 +347,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             doneView.isHidden = true
         }
     }
-   
-    func animateViewMoving (up:Bool, moveValue :CGFloat){
     
+    func animateViewMoving (up:Bool, moveValue :CGFloat){
+        
         let movementDuration:TimeInterval = 0.3
         let movement:CGFloat = ( up ? -moveValue : moveValue)
         
@@ -384,8 +358,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         UIView.setAnimationDuration(movementDuration)
         
         self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
-
-//        self.view.frame = offsetBy(self.view.frame, 0, movement)
+        
+        //        self.view.frame = offsetBy(self.view.frame, 0, movement)
         
         UIView.commitAnimations()
     }
@@ -411,7 +385,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         datePicker.isHidden = true
         doneView.isHidden = true
     }
-  
+    
     func datePickerValueChanged(sender:UIDatePicker) {
         let dateFormatter = DateFormatter()
         
@@ -432,16 +406,16 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         monthLabel.text = month
         
         yearLabel.text = year
-}
+    }
     
     func addCollectionContainer(){
-
+        
         let storyboard        = UIStoryboard(name: Constants.Auth, bundle: nil)
-//        let controller        = storyboard.instantiateViewController(withIdentifier: "signupvc")
+        //        let controller        = storyboard.instantiateViewController(withIdentifier: "signupvc")
         let controller        = storyboard.instantiateViewController(withIdentifier: "signupwithEmailVC")
-
-//        let storyboard        = UIStoryboard(name: Constants.Main, bundle: nil)
-//        let controller        = storyboard.instantiateViewController(withIdentifier: "SettingsVC")
+        
+        //        let storyboard        = UIStoryboard(name: Constants.Main, bundle: nil)
+        //        let controller        = storyboard.instantiateViewController(withIdentifier: "SettingsVC")
         controller.view.frame = self.view.bounds;
         controller.willMove(toParentViewController: self)
         self.view.addSubview(controller.view)
@@ -449,29 +423,29 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         controller.didMove(toParentViewController: self)
     }
     
-    func addProfileContainer(){
-        
-        let storyboard        = UIStoryboard(name: Constants.Main, bundle: nil)
-        let controller        = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
-        controller.delegate   = self
-        self.navigationController!.pushViewController(controller, animated: true)
-        
-    }
-    
+//    func addProfileContainer(){
+//
+//        let storyboard        = UIStoryboard(name: Constants.Main, bundle: nil)
+//        let controller        = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
+//        controller.delegate   = self
+//        self.navigationController!.pushViewController(controller, animated: true)
+//
+//    }
+//
     @IBAction func didTappedSave(_ sender: Any) {
         let Email:NSString = emailaddress.text! as NSString
-
+        
         if nameTextfield.text == "" || emailaddress.text == ""  || cityTextfield.text == "" || genderTextfield.text == ""   {
             let Alert = UIAlertController(title: "Oops", message: "Fields Cannot be empty", preferredStyle: UIAlertControllerStyle.alert)
             
             let OkAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { _ in
-            
+                
             }
             
-           Alert.addAction(OkAction)
+            Alert.addAction(OkAction)
             present(Alert, animated: true, completion: nil)
         } else {
-           
+            
             if isValidEmail(testStr: Email as String) == true {
                 
                 PrefsManager.sharedinstance.isLoginned = true
@@ -480,7 +454,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
                 vc.delegate    = self
                 self.navigationController!.pushViewController(vc, animated: true)
-//                self.navigationController?.present(vc, animated: true, completion: nil)
+                //                self.navigationController?.present(vc, animated: true, completion: nil)
                 
             }else {
                 let Alert = UIAlertController(title: "Oops", message: "Please Enter valid mail ID", preferredStyle: UIAlertControllerStyle.alert)
@@ -505,8 +479,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         
         let CameraAction = UIAlertAction(title: "Camera", style: UIAlertActionStyle.default) { ACTION in
             
-//            self.imagePicker.sourceType = .camera
-//            self.present(self.imagePicker, animated: true, completion: nil)
+            //            self.imagePicker.sourceType = .camera
+            //            self.present(self.imagePicker, animated: true, completion: nil)
             
             if !UIImagePickerController.isSourceTypeAvailable(.camera){
                 
@@ -521,14 +495,14 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             }
             else{
                 self.imagePicker.sourceType = .camera
-                            self.present(self.imagePicker, animated: true, completion: nil)
+                self.present(self.imagePicker, animated: true, completion: nil)
                 
             }
             
         }
         
         let GalleryAction = UIAlertAction(title: "Gallery", style: UIAlertActionStyle.default) { ACTION in
-       
+            
             self.imagePicker.sourceType = .photoLibrary
             self.present(self.imagePicker, animated: true, completion: nil)
         }
@@ -536,14 +510,14 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             
             
         }
-
+        
         Alert.addAction(CameraAction)
         Alert.addAction(GalleryAction)
         Alert.addAction(CancelAction)
         present(Alert, animated: true, completion: nil)
         
         
-//        imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        //        imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
         
         
         present(imagePicker, animated: true, completion: nil)
@@ -563,8 +537,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     
     func setNavBar() {
-        navigationItemList.title = "Complete Signup"
- 
+        
+                    navigationItemList.title = "Edit Profile"
+
         let button: UIButton = UIButton(type: UIButtonType.custom)
         //set image for button
         button.setImage(UIImage(named: "ic_arrow_back"), for: UIControlState.normal)
@@ -584,26 +559,27 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         navigationItemList.rightBarButtonItem = rightButton
         
     }
-   
+    
     func backButtonClicked() {
         
-        _ = self.navigationController?.popToRootViewController(animated: true)
+        _ = self.navigationController?.popViewController(animated: true)
         
     }
     
-/// collectionView for food preferences ///
+    /// collectionView for food preferences ///
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return tagArray.count
     }
     
-   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cvcell", for: indexPath as IndexPath) as! FoodPreferenceCollectionViewCell
         cell.foodtagLabel.text = tagArray[indexPath.row]
         cell.foodtagLabel.layer.cornerRadius = 4.0
-//        cell.foodtagLabel.sizeToFit()
+        //        cell.foodtagLabel.sizeToFit()
         cell.removetagButton.tag = indexPath.row
         cell.removetagButton.addTarget(self, action: #selector(buttonClicked(sender:)), for: .touchUpInside)
+        
         return cell
     }
     
@@ -612,10 +588,10 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        
         let indexPath = collectionView.indexPathsForSelectedItems?.first
         let cell = collectionView.cellForItem(at: indexPath!) as? FoodPreferenceCollectionViewCell
-  
+        
     }
     func buttonClicked(sender: Any){
         
@@ -623,21 +599,21 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         tagArray.remove(at: tag!)
         collectionView.reloadData()
         print("selceted tag is:::::",tag!)
-
+        
     }
     // Food Textfield action ///
     
     @IBAction func didTappedFoodtext(_ sender: Any) {
         
         dropdownTableView.isHidden = false
-
+        
     }
     
     /// TableView Delegates and Datasources ///
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tagnamearray.count
-//        return 5
+        return autocompleteUrls.count
+        //        return 5
         
     }
     
@@ -648,22 +624,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
         }
         
-        cell?.textLabel?.text = tagnamearray[indexPath.row]
+        cell?.textLabel?.text = autocompleteUrls[indexPath.row]
         print("dropdown items are:::::",autocompleteUrls)
         return cell!
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
-        let lastRowIndex = tableView.numberOfRows(inSection: 0)
-        if indexPath.row == lastRowIndex - 1  {
-            
-            tableView.allowsSelection = true
-            
-        } else {
-            
-            tableView.allowsSelection = false
-        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -673,7 +636,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         
         print(currentCell.textLabel!.text!)
         dropdownString = (currentCell.textLabel?.text)!
-//        tagArray.append(dropdownString)
+        //        tagArray.append(dropdownString)
         if tagArray.contains(dropdownString) {
             print("already exist")
         }else{
@@ -683,12 +646,21 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         
         dropdownTableView.isHidden = true
         foodTextfield.resignFirstResponder()
-
+        
     }
-  
-}
+    
+    /*
+    // MARK: - Navigation
 
-extension Edit_ProfileVC : Profile_PostViewControllerDelegae {
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+}
+extension SettingsEdit_ProfieViewController : Profile_PostViewControllerDelegae {
     
     func sendlogoutstatus() {
         
@@ -704,55 +676,4 @@ extension Edit_ProfileVC : Profile_PostViewControllerDelegae {
         addCollectionContainer()
         
     }
-}
-
-extension Edit_ProfileVC {
-    
-    func loadTagList(tag : String) {
-        
-        let parameters : Parameters = ["beginWith" : tag]
-        let header     : HTTPHeaders = ["Accept-Language" : "en-US"]
-        
-        apiClient.getTagsApi(parameters: parameters, headers: header, completion: { status,taglist in
-            
-            if status == "success" {
-                
-                if let tagList = taglist {
-                    
-                    if tagList.id != nil {
-                        
-                        self.tagidArray = tagList.id!
-                        
-                    }
-                    
-                    if tagList.text != nil {
-                        
-                        self.tagnamearray = tagList.text!
-                        
-                    }
-                    
-                    DispatchQueue.main.async {
-                        
-                        self.dropdownTableView.reloadData()
-                    }
-                
-                    
-                }
-                
-                
-            } else {
-                
-                DispatchQueue.main.async {
-                    
-                    self.dropdownTableView.reloadData()
-                }
-                
-            }
-           
-        })
-        
-        
-    }
-    
-    
 }

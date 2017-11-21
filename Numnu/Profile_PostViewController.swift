@@ -23,7 +23,7 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
     @IBOutlet var navigationItemList: UINavigationItem!
     
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var mainViewBottom: NSLayoutConstraint!
+    @IBOutlet weak var mainViewBottom: NSLayoutConstraint! 
     @IBOutlet weak var mainViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var shareview: UIView!
