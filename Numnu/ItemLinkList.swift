@@ -1,23 +1,22 @@
 //
-//  EventlinkList.swift
+//  ItemLinkList.swift
 //  Numnu
 //
-//  Created by Suraj B on 11/21/17.
+//  Created by CZ Ltd on 11/21/17.
 //  Copyright © 2017 czsm. All rights reserved.
 //
 
 import Foundation
-import UIKit
 import SwiftyJSON
 
-struct  EventlinkList {
+struct ItemLinkList {
     
     var id              : Int?
+    var itemid          : Int?
     var weblink         : String?
     var linktext        : String?
-    var displayorder    : Int?
-    var createdat       : String?
     var updatedat       : String?
+    var createdat       : String?
     var createdby       : Int?
     var updatedby       : Int?
     
@@ -26,6 +25,12 @@ struct  EventlinkList {
         if let id = json["id"].int {
             
             self.id  = id
+        }
+        
+        if let itemid = json["itemid"].int {
+            
+            self.itemid = itemid
+            
         }
         
         if let weblink = json["weblink"].string {
@@ -38,11 +43,6 @@ struct  EventlinkList {
             
             self.linktext = linktext
             
-        }
-        
-        if let displayorder = json["displayorder"].int {
-            
-            self.displayorder = displayorder
         }
         
         if let createdat = json["createdat"].string {
@@ -66,9 +66,7 @@ struct  EventlinkList {
             self.updatedby = updatedby
             
         }
-      
+        
     }
     
 }
-
-

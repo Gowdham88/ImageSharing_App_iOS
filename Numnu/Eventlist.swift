@@ -25,10 +25,10 @@ struct  EventList{
     var locationsummary : String?
     var createdat       : String?
     var updatedat       : String?
-    var eventLinkList   : [Ev]
+    var eventLinkList   : [EventlinkList]?
     
     
-    init(json: JSON) {
+    init?(json: JSON) {
     
         if let id = json["id"].int {
             
@@ -94,6 +94,25 @@ struct  EventList{
             
         }
 
+        if let eventlinks = json["eventlinks"].array {
+            
+            for item in eventlinks {
+                
+                if let eventlinksItem = EventlinkList(json: item) {
+                
+                if eventLinkList == nil {
+                    eventLinkList = []
+                    
+                }
+                
+                eventLinkList?.append(eventlinksItem)
+                    
+                }
+                
+                
+            }
+            
+        }
         
     }
         

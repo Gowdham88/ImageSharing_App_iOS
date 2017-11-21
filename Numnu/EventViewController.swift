@@ -72,7 +72,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
             
         }
         
-        
+    
         /**********************set Nav bar****************************/
         
         setNavBar()
@@ -129,6 +129,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
         super.viewDidAppear(true)
         
         self.tabBarController?.tabBar.isHidden = false
+       
     }
     
 
@@ -180,7 +181,7 @@ extension EventViewController {
     }
     
     func webLink1(sender:UITapGestureRecognizer) {
-      
+    
         openWebBoard(url: "https://www.apple.com")
     }
     

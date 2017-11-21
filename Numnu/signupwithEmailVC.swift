@@ -146,7 +146,16 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     }
     @IBAction func signupPressed(_ sender: Any) {
         
-        Login()
+        if currentReachabilityStatus != .notReachable {
+            
+            Login()
+            
+        } else {
+            
+            AlertProvider.Instance.showInternetAlert(vc: self)
+        }
+        
+        
     }
     
     func isPasswordValid(_ password : String) -> Bool{
@@ -176,13 +185,23 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                     return
                     
                 }
+                
+                if self.currentReachabilityStatus != .notReachable {
+                    
+                    self.userLoginApi(uid: (user?.uid)!)
+                    
+                } else {
+                    
+                    DispatchQueue.main.async {
+                        
+                        AlertProvider.Instance.showInternetAlert(vc: self)
+                    }
+                
+                    
+                }
+                
                
-                HUD.hide()
-                
-                self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId)
-                
-                
-                self.idprim.removeAll()
+               AlertProvider.Instance.showInternetAlert(vc: self)
  
                 print(" App Delegate SignIn with credential called")
                 
@@ -297,10 +316,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                 }
                 
                 self.userLoginApi(uid: (user?.uid)!)
-                
-                
-                //                 Present the main view
-                self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId)
+              
             })
             
         }
@@ -341,16 +357,13 @@ extension signupwithEmailVC {
                     
                     if let user = userlist {
                         
-                        print(user.firebaseUID!)
-                        print(user.id!)
+                        self.getUserDetails(user: user)
                         
                     }
                     
                     HUD.hide()
-                    //                    self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId)
-                    //
-                    //                    self.emailAddressTF.text = ""
-                    //                    self.passwordTF.text     = ""
+//                    self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId)
+                   
                     
                 }
                 
@@ -362,6 +375,42 @@ extension signupwithEmailVC {
             
             
         })
+        
+        
+    }
+    
+    func getUserDetails(user:UserList) {
+        
+        if let firebaseid = user.firebaseUID {
+            
+            PrefsManager.sharedinstance.UIDfirebase = firebaseid
+            
+        }
+        
+        if let userid = user.id {
+            
+            PrefsManager.sharedinstance.userId = userid
+            
+        }
+        
+        if let username = user.userName {
+            
+            PrefsManager.sharedinstance.username = username
+            
+        }
+        
+        if let dateofbirth = user.dateOfBirth {
+            
+            PrefsManager.sharedinstance.dateOfBirth = dateofbirth
+            
+        }
+        
+        if let gender = user.gender {
+            
+            PrefsManager.sharedinstance.gender = gender
+            
+        }
+        
         
         
     }
