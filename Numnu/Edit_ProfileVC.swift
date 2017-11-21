@@ -51,10 +51,17 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
 //    var showProfile: Bool = true
     @IBOutlet var myscrollView: UIScrollView!
    
+    @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet var saveButton: UIButton!
     let locationManager = CLLocationManager()
-
+    
+    //Upload Image Declaration
     let imagePicker = UIImagePickerController()
+    var pickedImagePath: NSURL?
+    var pickedImageData: NSData?
+    
+    var localPath: String?
+
     var apiClient : ApiClient!
 //    static private let regexEmail = "[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}"
 //    static private let regexMobNo = "^[0-9]{6,15}$"
@@ -93,7 +100,19 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+//        let parameters: Parameters = ["checkusername":"siva"]
+//
+//        let userNameRequest: ApiClient = ApiClient()
+//        userNameRequest.usernameexists(parameters: parameters, completion:{status, Exists in
+//
+//            if Exists! {
+//
+//            }else{
+//
+//            }
+//
+//
+//        })
 
         if PrefsManager.sharedinstance.isLoginned {
 
@@ -109,14 +128,14 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
 
         }
 
-        
-   
         imagePicker.delegate = self
+        
         profileImage.isUserInteractionEnabled = true
         datePicker.isHidden = true
         superVieww.isHidden = true
         doneView.isHidden = true
 //        superVieww.addSubview(datePicker)
+        usernameTextField.delegate = self
         nameTextfield.delegate = self
         emailaddress.delegate = self
         genderTextfield.delegate = self
@@ -174,18 +193,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         super.viewWillAppear(animated)
         // Hide the navigation bar on the this view controller
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
-//        if boolForTitle == true {
-//            navigationItemList.title = "Complete Sign up"
-//            saveButton.setTitle("Complete SignUp", for: .normal)
-//            saveButton.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 16)
-//        }else{
-//            navigationItemList.title = "Edit Profile"
-//            saveButton.setTitle("Save", for: .normal)
-//            saveButton.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 16)
-//
-//        }
-//        
-        
         
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -282,7 +289,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 //        self.view.endEditing(true)
-
+       
         textField.resignFirstResponder()
         return true
     }
@@ -359,6 +366,23 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == usernameTextField {
+            let parameters: Parameters = ["checkusername":"siva_nsn"]
+            
+            let userNameRequest: ApiClient = ApiClient()
+            userNameRequest.usernameexists(parameters: parameters, completion:{status, Exists in
+                
+                if Exists! {
+                    print("the username already exists")
+                }else{
+                    print("the username available")
+                    
+                }
+                
+                
+            })
+            
+        }
         if textField == foodTextfield || textField == birthTextfield {
             foodTextfield.text = ""
 //            dropdownTableView.isHidden = true
@@ -458,6 +482,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     }
     
     @IBAction func didTappedSave(_ sender: Any) {
+        upload(image: profileImage.image!, completion: { URL in
+            
+        })
         let Email:NSString = emailaddress.text! as NSString
 
         if nameTextfield.text == "" || emailaddress.text == ""  || cityTextfield.text == "" || genderTextfield.text == ""   {
@@ -492,6 +519,42 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             }
             
         }
+        
+    }
+    
+    func upload(image: UIImage, completion: (URL?) -> Void) {
+        
+        guard let data = UIImageJPEGRepresentation(image, 0.9) else {
+            
+            return
+            
+        }
+        
+        
+        
+        Alamofire.upload(multipartFormData: { (form) in
+            
+            form.append(data, withName: "file", fileName: "file.jpg", mimeType: "image/jpg")
+            
+        }, to: "https://numnu-server-dev.appspot.com/users/1/images", encodingCompletion: { result in
+            
+            switch result {
+                
+            case .success(let upload, _, _):
+                
+                upload.responseString { response in
+                    
+                    print(response.value)
+                    
+                }
+                
+            case .failure(let encodingError):
+                
+                print(encodingError)
+                
+            }
+            
+        })
         
     }
     
