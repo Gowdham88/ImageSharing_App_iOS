@@ -239,6 +239,8 @@ class signInVC: UIViewController, UITextFieldDelegate {
                     
                     return
                 }
+                self.userLoginApi(uid: (user?.uid)!)
+
                 
                 //                 Present the main view
                 self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId)
@@ -271,7 +273,7 @@ extension signInVC {
                     if let user = userlist {
                         
                         print(user.firebaseUID!)
-                        print(user.id!)
+                        print(user.tagNameArray!)
                         
                     }
                     
