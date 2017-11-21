@@ -36,21 +36,14 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var nameTextfield: UITextField!
     @IBOutlet weak var emailaddress: UITextField!
-    
     @IBOutlet var cityTextfield: UITextField!
     @IBOutlet var genderTextfield: UITextField!
-//    @IBOutlet var usernameTextfield: UITextField!
-    
     @IBOutlet var birthTextfield: UITextField!
-    
     @IBOutlet var foodTextfield: UITextField!
-    
     @IBOutlet weak var navigationItemList: UINavigationItem!
     var show : Bool = false
     var boolForTitle: Bool = false
-//    var showProfile: Bool = true
     @IBOutlet var myscrollView: UIScrollView!
-   
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet var saveButton: UIButton!
     let locationManager = CLLocationManager()
@@ -59,14 +52,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     let imagePicker = UIImagePickerController()
     var pickedImagePath: NSURL?
     var pickedImageData: NSData?
-    
     var localPath: String?
-
     var apiClient : ApiClient!
-//    static private let regexEmail = "[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}"
-//    static private let regexMobNo = "^[0-9]{6,15}$"
-//    static private let regexNameType = "^[a-zA-Z]+$"
-    
     /***************Tags array*****************/
 
     var tagidArray   = [Int]()
@@ -77,7 +64,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         
         dismiss(animated: true, completion: nil)
         self.cityTextfield.text = place.name
-
     }
 
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
@@ -100,33 +86,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let parameters: Parameters = ["checkusername":"siva"]
-//
-//        let userNameRequest: ApiClient = ApiClient()
-//        userNameRequest.usernameexists(parameters: parameters, completion:{status, Exists in
-//
-//            if Exists! {
-//
-//            }else{
-//
-//            }
-//
-//
-//        })
-
-        if PrefsManager.sharedinstance.isLoginned {
-
-            addProfileContainer()
-
-        } else {
-
-            if boolForTitle == false {
-
-                addCollectionContainer()
-
-            }
-
-        }
 
         imagePicker.delegate = self
         
@@ -186,7 +145,17 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         super.viewWillAppear(animated)
         // Hide the navigation bar on the this view controller
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
-        
+        if PrefsManager.sharedinstance.isLoginned {
+            
+            addProfileContainer()
+            
+        } else {
+            
+            if boolForTitle == false {
+                addCollectionContainer()
+            }
+        }
+
     }
     override func viewDidAppear(_ animated: Bool) {
         let offset = CGPoint(x: 0,y :0)
@@ -209,8 +178,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             if let index = tagArray.index(of:"") {
                 tagArray.remove(at: index)
             }
-            //        let nonOptionals = tagArray.flatMap{$0}
-            //        print(nonOptionals)
+           
             collectionView.reloadData()
             foodTextfield.resignFirstResponder()
         }
@@ -354,18 +322,14 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == usernameTextField {
             let parameters: Parameters = ["checkusername": usernameTextField.text!]
-            
             let userNameRequest: ApiClient = ApiClient()
             userNameRequest.usernameexists(parameters: parameters, completion:{status, Exists in
-        
                 if Exists == true {
                     print("the username already exists")
                 }else{
                     print("the username available")
-                    
                 }
             })
-            
         }
         if textField == foodTextfield || textField == birthTextfield {
             foodTextfield.text = ""
@@ -396,7 +360,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         
         UIView.commitAnimations()
     }
-    
     func showDatePicker(){
         datePicker.datePickerMode = UIDatePickerMode.date
         birthTextfield.tintColor = UIColor.clear
@@ -440,7 +403,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         
         yearLabel.text = year
 }
-    
     func addCollectionContainer(){
         let storyboard        = UIStoryboard(name: Constants.Auth, bundle: nil)
         let controller        = storyboard.instantiateViewController(withIdentifier: "signupwithEmailVC")
@@ -487,6 +449,20 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 self.navigationController!.pushViewController(vc, animated: true)
 //                self.navigationController?.present(vc, animated: true, completion: nil)
                 
+                let parameters: Parameters = ["username": usernameTextField.text!, "firstname":nameTextfield.text! , "lastname" : "" ,"firebaseuid" : "bIBh7fZXL1OP7NkGJIsPHucAPQA3" ,"dateofbirth": birthTextfield.text! , "gender": genderTextfield.text! ,"isbusinessuser": "0" , "email": emailaddress.text! ,  "citylocationid": "1", "createdby": "2" , "updatedby": "2" , "clientApp": "iosapp"  , "clientip": "765.768.7868.8888"  ]
+                let completeSignupApi: ApiClient = ApiClient()
+                completeSignupApi.completeSignup(parameters: parameters, completion:{status, Values in
+                    if status == "success" {
+                        print("Values from json:::::::",Values!)
+                    }else {
+                        
+                    }
+                    
+                })
+                
+                
+                
+                
             }else {
                 let Alert = UIAlertController(title: "Oops", message: "Please Enter valid mail ID", preferredStyle: UIAlertControllerStyle.alert)
                 
@@ -502,15 +478,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     }
     
     func upload(image: UIImage, completion: (URL?) -> Void) {
-        
         guard let data = UIImageJPEGRepresentation(image, 0.9) else {
-            
             return
-            
         }
-        
-        
-        
         Alamofire.upload(multipartFormData: { (form) in
             
             form.append(data, withName: "file", fileName: "file.jpg", mimeType: "image/jpg")
@@ -644,15 +614,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         print("selceted tag is:::::",tag!)
 
     }
-    // Food Textfield action ///
     
-    @IBAction func didTappedFoodtext(_ sender: Any) {
-        
-        dropdownTableView.isHidden = false
-    }
     /// TableView Delegates and Datasources ///
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tagnamearray.count
     }
     
@@ -669,110 +633,71 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
         let lastRowIndex = dropdownTableView.numberOfRows(inSection: 0)
         if indexPath.row == lastRowIndex {
-            
             dropdownTableView.allowsSelection = true
-            
-        } else {
-            
+    } else {
             dropdownTableView.allowsSelection = true
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         if let indexPath = dropdownTableView.indexPathForSelectedRow  {
-            
             let currentCell = dropdownTableView.cellForRow(at: indexPath) as! UITableViewCell
-            
-            print(tagidArray[(indexPath.row)])
             dropdownString = (currentCell.textLabel?.text)!
-           
             if tagArray.contains(dropdownString) {
                 print("already exist")
             }else{
                 tagArray.append(dropdownString)
             }
             collectionView.reloadData()
-            
             dropdownTableView.isHidden = true
             foodTextfield.resignFirstResponder()
-            
         }
-
     }
 }
 
 extension Edit_ProfileVC : Profile_PostViewControllerDelegae {
     
     func sendlogoutstatus() {
-        
         let rightButton = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         // Create two buttons for the navigation item
         navigationItemList.leftBarButtonItem = rightButton
-        
     }
     
     func logout() {
-        
         PrefsManager.sharedinstance.isLoginned = false
         addCollectionContainer()
-        
     }
 }
 
 extension Edit_ProfileVC {
-    
     func loadTagList(tag : String) {
-        
         tagidArray.removeAll()
         tagnamearray.removeAll()
-        
         let parameters : Parameters = ["beginWith" : tag]
         let header     : HTTPHeaders = ["Accept-Language" : "en-US"]
-        
         apiClient.getTagsApi(parameters: parameters, headers: header, completion: { status,taglist in
-            
             if status == "success" {
-                
                 if let tagList = taglist {
-                    
                     if tagList.id != nil {
-                        
                         self.tagidArray = tagList.id!
-                        
                     }
-                    
                     if tagList.text != nil {
-                        
                         self.tagnamearray = tagList.text!
-                        
                     }
-                    
                     DispatchQueue.main.async {
-                        
                         self.dropdownTableView.reloadData()
                     }
-                
-                    
                 }
-                
-                
+            
             } else {
-                
                 DispatchQueue.main.async {
-                    
                     self.dropdownTableView.reloadData()
                 }
-                
             }
-           
         })
-        
-        
+ 
     }
-    
-    
+
 }

@@ -95,7 +95,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
                 self.userLoginApi(uid: (user?.uid)!)
                
                 
-                print("Login FIRAuth Sign in called")
+                print("firebase id is:::",user?.uid as Any)
             })
                 
            } else {
