@@ -13,6 +13,11 @@ class TagList {
     
     var id    : [Int]?
     var text  : [String]?
+    
+    var id_str   : Int?
+    var text_str : String?
+    
+    /***************Tag Auto complete Api**********************/
   
     init?(json: JSON) {
    
@@ -40,6 +45,25 @@ class TagList {
         }
         
     }
+    
+    /*************** sign up**********************/
+    
+    init(array : JSON) {
+        
+        if let id = array["id"].int {
+            
+            self.id_str  = id
+        }
+        
+        if let text = array["text"].string {
+            
+            self.text_str = text
+            
+        }
+        
+    }
+    
+    
     
 
 }

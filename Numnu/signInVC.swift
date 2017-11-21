@@ -42,6 +42,9 @@ class signInVC: UIViewController, UITextFieldDelegate {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
         self.view.addGestureRecognizer(tapGesture)
         // Do any additional setup after loading the view.
+        
+       
+        
     }
     func dismissKeyboard (_ sender: UITapGestureRecognizer) {
         emailAddressTF.resignFirstResponder()
@@ -256,12 +259,14 @@ class signInVC: UIViewController, UITextFieldDelegate {
 }//class
 
 extension signInVC {
-    
+   
     func userLoginApi(uid:String) {
         
         let clientIp = IPChecker.getIP() ?? "1.0.1"
+        print(clientIp)
+        print(uid)
         
-        let parameters : Parameters = ["firebaseuid" : uid,"createdByUserId" : "","updatedByUserId" : "","createdTimestamp" : "","updatedTimestamp" : "","clientApp": "iosapp","clientIP":clientIp]
+        let parameters : Parameters = ["firebaseuid" : uid,"createdByUserId" : "","updatedByUserId" : "","createdTimestamp" : "","updatedTimestamp" : "","clientApp": "iosapp","clientIP":"201.222.767.112"]
         
         let loginRequest : ApiClient  = ApiClient()
         loginRequest.userLogin(parameters: parameters, completion: { status,userlist in
@@ -273,8 +278,7 @@ extension signInVC {
                     if let user = userlist {
                         
                         print(user.firebaseUID!)
-                        print(user.tagNameArray!)
-                        
+                    
                     }
                     
                     HUD.hide()

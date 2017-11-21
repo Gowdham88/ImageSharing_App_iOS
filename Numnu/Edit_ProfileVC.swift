@@ -113,24 +113,21 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
 //
 //
 //        })
-        
 
-//        if PrefsManager.sharedinstance.isLoginned {
-//
-//            addProfileContainer()
-//
-//        } else {
-//
-//            if boolForTitle == false {
-//
-//                addCollectionContainer()
-//
-//            }
-//            
-//        }
-        
-        //Upload Image
-        imagePicker.allowsEditing = false
+        if PrefsManager.sharedinstance.isLoginned {
+
+            addProfileContainer()
+
+        } else {
+
+            if boolForTitle == false {
+
+                addCollectionContainer()
+
+            }
+
+        }
+
         imagePicker.delegate = self
         
         profileImage.isUserInteractionEnabled = true
@@ -181,9 +178,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         /***********************Api login******************************/
         
         apiClient = ApiClient()
-       
-        
-        
+      
         
     }
 //    func dismissKeyboard (_ sender: UITapGestureRecognizer) {
@@ -716,41 +711,44 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         }
         
         cell?.textLabel?.text = tagnamearray[indexPath.row]
-        print("dropdown items are:::::",autocompleteUrls)
+        
         return cell!
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        let lastRowIndex = tableView.numberOfRows(inSection: 0)
-        if indexPath.row == lastRowIndex - 1  {
+        let lastRowIndex = dropdownTableView.numberOfRows(inSection: 0)
+        if indexPath.row == lastRowIndex {
             
-            tableView.allowsSelection = true
+            dropdownTableView.allowsSelection = true
             
         } else {
             
-            tableView.allowsSelection = false
+            dropdownTableView.allowsSelection = true
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let indexPath = dropdownTableView.indexPathForSelectedRow //optional, to get from any UIButton for example
         
-        let currentCell = dropdownTableView.cellForRow(at: indexPath!) as! UITableViewCell
-        
-        print(currentCell.textLabel!.text!)
-        dropdownString = (currentCell.textLabel?.text)!
-//        tagArray.append(dropdownString)
-        if tagArray.contains(dropdownString) {
-            print("already exist")
-        }else{
-            tagArray.append(dropdownString)
+        if let indexPath = dropdownTableView.indexPathForSelectedRow  {
+            
+            let currentCell = dropdownTableView.cellForRow(at: indexPath) as! UITableViewCell
+            
+            print(tagidArray[(indexPath.row)])
+            dropdownString = (currentCell.textLabel?.text)!
+           
+            if tagArray.contains(dropdownString) {
+                print("already exist")
+            }else{
+                tagArray.append(dropdownString)
+            }
+            collectionView.reloadData()
+            
+            dropdownTableView.isHidden = true
+            foodTextfield.resignFirstResponder()
+            
         }
-        collectionView.reloadData()
-        
-        dropdownTableView.isHidden = true
-        foodTextfield.resignFirstResponder()
-
+    
     }
   
 }
@@ -776,6 +774,9 @@ extension Edit_ProfileVC : Profile_PostViewControllerDelegae {
 extension Edit_ProfileVC {
     
     func loadTagList(tag : String) {
+        
+        tagidArray.removeAll()
+        tagnamearray.removeAll()
         
         let parameters : Parameters = ["beginWith" : tag]
         let header     : HTTPHeaders = ["Accept-Language" : "en-US"]
