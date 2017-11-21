@@ -54,8 +54,14 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet var saveButton: UIButton!
     let locationManager = CLLocationManager()
-
+    
+    //Upload Image Declaration
     let imagePicker = UIImagePickerController()
+    var pickedImagePath: NSURL?
+    var pickedImageData: NSData?
+    
+    var localPath: String?
+
     var apiClient : ApiClient!
 //    static private let regexEmail = "[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}"
 //    static private let regexMobNo = "^[0-9]{6,15}$"
@@ -122,9 +128,11 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
 //            }
 //            
 //        }
-
-   
+        
+        //Upload Image
+        imagePicker.allowsEditing = false
         imagePicker.delegate = self
+        
         profileImage.isUserInteractionEnabled = true
         datePicker.isHidden = true
         superVieww.isHidden = true
@@ -479,6 +487,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     }
     
     @IBAction func didTappedSave(_ sender: Any) {
+        upload(image: profileImage.image!, completion: { URL in
+            
+        })
         let Email:NSString = emailaddress.text! as NSString
 
         if nameTextfield.text == "" || emailaddress.text == ""  || cityTextfield.text == "" || genderTextfield.text == ""   {
@@ -513,6 +524,42 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             }
             
         }
+        
+    }
+    
+    func upload(image: UIImage, completion: (URL?) -> Void) {
+        
+        guard let data = UIImageJPEGRepresentation(image, 0.9) else {
+            
+            return
+            
+        }
+        
+        
+        
+        Alamofire.upload(multipartFormData: { (form) in
+            
+            form.append(data, withName: "file", fileName: "file.jpg", mimeType: "image/jpg")
+            
+        }, to: "https://numnu-server-dev.appspot.com/users/1/images", encodingCompletion: { result in
+            
+            switch result {
+                
+            case .success(let upload, _, _):
+                
+                upload.responseString { response in
+                    
+                    print(response.value)
+                    
+                }
+                
+            case .failure(let encodingError):
+                
+                print(encodingError)
+                
+            }
+            
+        })
         
     }
     
