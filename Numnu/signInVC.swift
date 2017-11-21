@@ -239,7 +239,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
                     
                     return
                 }
-                 self.userLoginApi(uid: user.uid)
+                self.userLoginApi(uid: (user?.uid)!)
 
                 
                 //                 Present the main view

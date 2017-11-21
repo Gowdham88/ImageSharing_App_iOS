@@ -59,11 +59,11 @@ struct PrefsManager {
             
             if checkprefsobject(object: Constants.id) {
                 
-                return UserDefaults.standard.string(forKey: Constants.id)
+                return UserDefaults.standard.string(forKey: Constants.id)!
                 
             } else {
                 
-                return false
+                return "empty"
             }
             
             
@@ -82,10 +82,10 @@ struct PrefsManager {
             
             if checkprefsobject(object: Constants.useremail) {
                 
-                return UserDefaults.standard.string(forKey: Constants.useremail)
+                return UserDefaults.standard.string(forKey: Constants.useremail)!
             } else {
                 
-                return false
+                return "empty"
             }
             
         }
@@ -103,10 +103,10 @@ struct PrefsManager {
             
             if checkprefsobject(object: Constants.userName) {
                 
-                return UserDefaults.standard.string(forKey: Constants.userName)
+                return UserDefaults.standard.string(forKey: Constants.userName)!
             } else {
                 
-                return false
+                return "empty"
             }
             
         }
@@ -118,26 +118,26 @@ struct PrefsManager {
         }
     }
     
-    var firstname : String {
-        
-        get {
-            
-            if checkprefsobject(object: Constants.firstName) {
-                
-                return UserDefaults.standard.string(forKey: Constants.firstName)
-            } else {
-                
-                return false
-            }
-            
-        }
-        
-        set {
-            
-            UserDefaults.standard.set(newValue, forKey: Constants.firstName)
-            UserDefaults.standard.synchronize()
-        }
-    }
+//    var firstname : String {
+//
+//        get {
+//
+//            if checkprefsobject(object: Constants.firstName) {
+//
+//                return UserDefaults.standard.string(forKey: Constants.firstName)!
+//            } else {
+//
+//                return "empty"
+//            }
+//
+//        }
+//
+//        set {
+//
+//            UserDefaults.standard.set(newValue, forKey: Constants.firstName)
+//            UserDefaults.standard.synchronize()
+//        }
+//    }
 
     var lastname : String {
         
@@ -145,10 +145,10 @@ struct PrefsManager {
             
             if checkprefsobject(object: Constants.lastName) {
                 
-                return UserDefaults.standard.string(forKey: Constants.lastName)
+                return UserDefaults.standard.string(forKey: Constants.lastName)!
             } else {
                 
-                return false
+                return "empty"
             }
             
         }
@@ -166,10 +166,10 @@ struct PrefsManager {
             
             if checkprefsobject(object: Constants.firebaseUID) {
                 
-                return UserDefaults.standard.string(forKey: Constants.firebaseUID)
+                return UserDefaults.standard.string(forKey: Constants.firebaseUID)!
             } else {
                 
-                return false
+                return "empty"
             }
             
         }
@@ -187,10 +187,10 @@ struct PrefsManager {
             
             if checkprefsobject(object: Constants.imageURLs) {
                 
-                return UserDefaults.standard.string(forKey: Constants.imageURLs)
+                return UserDefaults.standard.string(forKey: Constants.imageURLs)!
             } else {
                 
-                return false
+                return "empty"
             }
             
         }
