@@ -181,14 +181,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
       
         
     }
-//    func dismissKeyboard (_ sender: UITapGestureRecognizer) {
-//        nameTextfield.resignFirstResponder()
-//        emailaddress.resignFirstResponder()
-//        genderTextfield.resignFirstResponder()
-//        cityTextfield.resignFirstResponder()
-//        birthTextfield.resignFirstResponder()
-////        foodTextfield.resignFirstResponder()
-//    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Hide the navigation bar on the this view controller
@@ -198,10 +191,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     override func viewDidAppear(_ animated: Bool) {
         let offset = CGPoint(x: 0,y :0)
         myscrollView.setContentOffset(offset, animated: true)
-        
-       
        
     }
+    
     func addClicked() {
         if foodTextfield.text == "" {
           print("could not add empty fields")
@@ -222,8 +214,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             collectionView.reloadData()
             foodTextfield.resignFirstResponder()
         }
-      
-        
     }
     
     func genderClicked(){
@@ -238,16 +228,12 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             self.genderTextfield.text = "Female"
             self.genderTextfield.resignFirstResponder()
         }
-
         Alert.addAction(MaleAction)
         Alert.addAction(FemaleAction)
-
         present(Alert, animated: true, completion: nil)
 
-        
     }
 
-    
     func textFieldActive() {
         
     }
@@ -367,19 +353,17 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == usernameTextField {
-            let parameters: Parameters = ["checkusername":"siva_nsn"]
+            let parameters: Parameters = ["checkusername": usernameTextField.text!]
             
             let userNameRequest: ApiClient = ApiClient()
             userNameRequest.usernameexists(parameters: parameters, completion:{status, Exists in
-                
-                if Exists! {
+        
+                if Exists == true {
                     print("the username already exists")
                 }else{
                     print("the username available")
                     
                 }
-                
-                
             })
             
         }
@@ -458,13 +442,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
 }
     
     func addCollectionContainer(){
-
         let storyboard        = UIStoryboard(name: Constants.Auth, bundle: nil)
-//        let controller        = storyboard.instantiateViewController(withIdentifier: "signupvc")
         let controller        = storyboard.instantiateViewController(withIdentifier: "signupwithEmailVC")
-
-//        let storyboard        = UIStoryboard(name: Constants.Main, bundle: nil)
-//        let controller        = storyboard.instantiateViewController(withIdentifier: "SettingsVC")
         controller.view.frame = self.view.bounds;
         controller.willMove(toParentViewController: self)
         self.view.addSubview(controller.view)
@@ -567,9 +546,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         
         let CameraAction = UIAlertAction(title: "Camera", style: UIAlertActionStyle.default) { ACTION in
             
-//            self.imagePicker.sourceType = .camera
-//            self.present(self.imagePicker, animated: true, completion: nil)
-            
             if !UIImagePickerController.isSourceTypeAvailable(.camera){
                 
                 let alertController = UIAlertController.init(title: nil, message: "Device has no camera.", preferredStyle: .alert)
@@ -586,7 +562,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                             self.present(self.imagePicker, animated: true, completion: nil)
                 
             }
-            
         }
         
         let GalleryAction = UIAlertAction(title: "Gallery", style: UIAlertActionStyle.default) { ACTION in
@@ -595,18 +570,11 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             self.present(self.imagePicker, animated: true, completion: nil)
         }
         let CancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) {_ in
-            
-            
         }
-
         Alert.addAction(CameraAction)
         Alert.addAction(GalleryAction)
         Alert.addAction(CancelAction)
         present(Alert, animated: true, completion: nil)
-        
-        
-//        imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
-        
         
         present(imagePicker, animated: true, completion: nil)
     }
@@ -616,32 +584,22 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             self.profileImage.contentMode = .scaleAspectFill
             self.profileImage.image = pickedImage
         }
-        
         dismiss(animated: true, completion: nil)
     }
     private func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
     
-    
     func setNavBar() {
         navigationItemList.title = "Complete Signup"
  
         let button: UIButton = UIButton(type: UIButtonType.custom)
-        //set image for button
         button.setImage(UIImage(named: "ic_arrow_back"), for: UIControlState.normal)
-        //add function for button
         button.addTarget(self, action: #selector(EventViewController.backButtonClicked), for: UIControlEvents.touchUpInside)
-        //set frame
         button.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
-        
-        // Create left and right button for navigation item
         let leftButton =  UIBarButtonItem(customView: button)
         leftButton.isEnabled = true
-        
         let rightButton = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-        
-        // Create two buttons for the navigation item
         navigationItemList.leftBarButtonItem = leftButton
         navigationItemList.rightBarButtonItem = rightButton
         
@@ -663,7 +621,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cvcell", for: indexPath as IndexPath) as! FoodPreferenceCollectionViewCell
         cell.foodtagLabel.text = tagArray[indexPath.row]
         cell.foodtagLabel.layer.cornerRadius = 4.0
-//        cell.foodtagLabel.sizeToFit()
         cell.removetagButton.tag = indexPath.row
         cell.removetagButton.addTarget(self, action: #selector(buttonClicked(sender:)), for: .touchUpInside)
         return cell
@@ -692,15 +649,11 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     @IBAction func didTappedFoodtext(_ sender: Any) {
         
         dropdownTableView.isHidden = false
-
     }
-    
     /// TableView Delegates and Datasources ///
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tagnamearray.count
-//        return 5
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -748,9 +701,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             foodTextfield.resignFirstResponder()
             
         }
-    
+
     }
-  
 }
 
 extension Edit_ProfileVC : Profile_PostViewControllerDelegae {
