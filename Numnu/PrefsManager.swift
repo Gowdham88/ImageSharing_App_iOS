@@ -57,9 +57,11 @@ struct PrefsManager {
         
         get {
             
+
             if checkprefsobject(object: Constants.id) {
                 
                 return UserDefaults.standard.string(forKey: Constants.id)!
+
                 
             } else {
                 
@@ -71,6 +73,7 @@ struct PrefsManager {
         
         set {
             
+
             UserDefaults.standard.set(newValue, forKey: Constants.id)
             UserDefaults.standard.synchronize()
         }
@@ -198,6 +201,7 @@ struct PrefsManager {
         set {
             
             UserDefaults.standard.set(newValue, forKey: Constants.imageURLs)
+
             UserDefaults.standard.synchronize()
         }
     }

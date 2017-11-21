@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 import GooglePlaces
+import Alamofire
 
 class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,GMSAutocompleteViewControllerDelegate {
     var dropdownArray = [String] ()
@@ -50,14 +51,20 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
 //    var showProfile: Bool = true
     @IBOutlet var myscrollView: UIScrollView!
    
+    @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet var saveButton: UIButton!
     let locationManager = CLLocationManager()
 
     let imagePicker = UIImagePickerController()
+    var apiClient : ApiClient!
 //    static private let regexEmail = "[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}"
 //    static private let regexMobNo = "^[0-9]{6,15}$"
 //    static private let regexNameType = "^[a-zA-Z]+$"
     
+    /***************Tags array*****************/
+
+    var tagidArray   = [Int]()
+    var tagnamearray = [String]()
     
     // place autocomplete //
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
@@ -87,19 +94,35 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        let parameters: Parameters = ["checkusername":"siva"]
+//
+//        let userNameRequest: ApiClient = ApiClient()
+//        userNameRequest.usernameexists(parameters: parameters, completion:{status, Exists in
+//
+//            if Exists! {
+//
+//            }else{
+//
+//            }
+//
+//
+//        })
         
-        if PrefsManager.sharedinstance.isLoginned {
-            
-            addProfileContainer()
-            
-        } else {
-            if boolForTitle == false {
 
-                addCollectionContainer()
+//        if PrefsManager.sharedinstance.isLoginned {
+//
+//            addProfileContainer()
+//
+//        } else {
+//
+//            if boolForTitle == false {
+//
+//                addCollectionContainer()
+//
+//            }
+//            
+//        }
 
-            }
-            
-        }
    
         imagePicker.delegate = self
         profileImage.isUserInteractionEnabled = true
@@ -107,6 +130,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         superVieww.isHidden = true
         doneView.isHidden = true
 //        superVieww.addSubview(datePicker)
+        usernameTextField.delegate = self
         nameTextfield.delegate = self
         emailaddress.delegate = self
         genderTextfield.delegate = self
@@ -146,7 +170,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
              NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
       
         // Checking users login
+        /***********************Api login******************************/
         
+        apiClient = ApiClient()
        
         
         
@@ -164,18 +190,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         super.viewWillAppear(animated)
         // Hide the navigation bar on the this view controller
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
-//        if boolForTitle == true {
-//            navigationItemList.title = "Complete Sign up"
-//            saveButton.setTitle("Complete SignUp", for: .normal)
-//            saveButton.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 16)
-//        }else{
-//            navigationItemList.title = "Edit Profile"
-//            saveButton.setTitle("Save", for: .normal)
-//            saveButton.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 16)
-//
-//        }
-//        
-        
         
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -272,7 +286,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 //        self.view.endEditing(true)
-
+       
         textField.resignFirstResponder()
         return true
     }
@@ -283,7 +297,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             let substring = (foodTextfield.text! as NSString).replacingCharacters(in: range, with: string )
             print("the substrings are::::",substring)
             
-            searchAutocompleteEntriesWithSubstring(substring: substring)
+             loadTagList(tag: substring)
         }else{
         }
        
@@ -349,6 +363,23 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == usernameTextField {
+            let parameters: Parameters = ["checkusername":"siva_nsn"]
+            
+            let userNameRequest: ApiClient = ApiClient()
+            userNameRequest.usernameexists(parameters: parameters, completion:{status, Exists in
+                
+                if Exists! {
+                    print("the username already exists")
+                }else{
+                    print("the username available")
+                    
+                }
+                
+                
+            })
+            
+        }
         if textField == foodTextfield || textField == birthTextfield {
             foodTextfield.text = ""
 //            dropdownTableView.isHidden = true
@@ -625,7 +656,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     /// TableView Delegates and Datasources ///
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return autocompleteUrls.count
+        return tagnamearray.count
 //        return 5
         
     }
@@ -637,9 +668,22 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
         }
         
-        cell?.textLabel?.text = autocompleteUrls[indexPath.row]
+        cell?.textLabel?.text = tagnamearray[indexPath.row]
         print("dropdown items are:::::",autocompleteUrls)
         return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        let lastRowIndex = tableView.numberOfRows(inSection: 0)
+        if indexPath.row == lastRowIndex - 1  {
+            
+            tableView.allowsSelection = true
+            
+        } else {
+            
+            tableView.allowsSelection = false
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -680,4 +724,55 @@ extension Edit_ProfileVC : Profile_PostViewControllerDelegae {
         addCollectionContainer()
         
     }
+}
+
+extension Edit_ProfileVC {
+    
+    func loadTagList(tag : String) {
+        
+        let parameters : Parameters = ["beginWith" : tag]
+        let header     : HTTPHeaders = ["Accept-Language" : "en-US"]
+        
+        apiClient.getTagsApi(parameters: parameters, headers: header, completion: { status,taglist in
+            
+            if status == "success" {
+                
+                if let tagList = taglist {
+                    
+                    if tagList.id != nil {
+                        
+                        self.tagidArray = tagList.id!
+                        
+                    }
+                    
+                    if tagList.text != nil {
+                        
+                        self.tagnamearray = tagList.text!
+                        
+                    }
+                    
+                    DispatchQueue.main.async {
+                        
+                        self.dropdownTableView.reloadData()
+                    }
+                
+                    
+                }
+                
+                
+            } else {
+                
+                DispatchQueue.main.async {
+                    
+                    self.dropdownTableView.reloadData()
+                }
+                
+            }
+           
+        })
+        
+        
+    }
+    
+    
 }
