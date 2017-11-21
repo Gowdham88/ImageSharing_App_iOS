@@ -40,11 +40,7 @@ class  ApiClient {
                 completion(error.localizedDescription,nil)
                 
             }
-        
-            
        }
-        
-        
     
     }
     
@@ -110,5 +106,37 @@ class  ApiClient {
         
     }
     
+    
+    /*********************Complete Signup Api*****************************/
+    
+       func completeSignup(parameters : Parameters,completion : @escaping (String,UserList?) -> Void) {
+        
+        Alamofire.request(Constants.completeSignup, method: .post, parameters: parameters).validate().responseJSON { response in
+            
+            switch response.result {
+                
+            case .success:
+                
+                if let value = response.result.value {
+                    
+                    let json = JSON(value)
+                    if let userList = UserList(json: json) {
+                        
+                        completion("success",userList)
+                    }
+                    
+                    
+                }
+                
+                
+            case .failure(let error):
+                
+                print(error)
+                completion(error.localizedDescription,nil)
+                
+            }
+        }
+        
+    }
     
 }

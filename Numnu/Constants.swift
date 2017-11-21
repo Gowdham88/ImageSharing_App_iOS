@@ -125,6 +125,7 @@ class Constants {
     static let LoginApiUrl = "https://numnu-server-dev.appspot.com/users/login"
     static let TagApiUrl   = "https://numnu-server-dev.appspot.com/tags"
     
-    
     static let CheckUserName = "https://numnu-server-dev.appspot.com/users"
+    
+   static let completeSignup =  "https://numnu-server-dev.appspot.com/users"
 }
