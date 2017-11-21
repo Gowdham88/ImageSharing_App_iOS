@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-struct  UserList{
+struct  UserList {
 
     var id         : String?
     var useremail  : String?
@@ -23,6 +23,7 @@ struct  UserList{
     var userCity   : String?
     var tagidArray : [Int]?
     var tagNameArray    : [String]?
+    var tagList : [TagList]?
     
     init?(json: JSON) {
         if let id = json["id"].string {
@@ -74,27 +75,35 @@ struct  UserList{
             
         }
         
+        /******************sign up************************/
         
         if let tagArray = json["userTags"].array {
+          
+            for item in tagArray {
+                
+                let tagItem = TagList(array: item)
+                if tagList == nil {
+                    tagList = []
+                }
+                tagList?.append(tagItem)
+             
+
+            }
+        }
+        
+        /******************Complete sign up************************/
+        
+        if let tagArray = json["tags"].array {
             
             for item in tagArray {
                 
-                let tag_id   = item["tagId"].int ?? 0
-                let tag_name = item["tagName"].string ?? "empty"
-                
-                if tagidArray == nil {
-                    tagidArray = []
+                let tagItem = TagList(array: item)
+                if tagList == nil {
+                    tagList = []
                 }
+                tagList?.append(tagItem)
                 
-                if tagNameArray == nil {
-                    
-                    tagNameArray = []
-                    
-                }
                 
-                tagNameArray?.append(tag_name)
-                tagidArray?.append(tag_id)
-
             }
         }
        

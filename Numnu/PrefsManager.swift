@@ -206,6 +206,28 @@ struct PrefsManager {
         }
     }
     
+    var dateOfBirth : String {
+        
+        get {
+            
+            if checkprefsobject(object: Constants.dateOfBirth) {
+                
+                return UserDefaults.standard.string(forKey: Constants.dateOfBirth)!
+            } else {
+                
+                return "empty"
+            }
+            
+        }
+        
+        set {
+            
+            UserDefaults.standard.set(newValue, forKey: Constants.dateOfBirth)
+            
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
     
     
 } // Struct

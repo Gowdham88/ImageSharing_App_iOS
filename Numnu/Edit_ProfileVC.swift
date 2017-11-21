@@ -54,8 +54,14 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet var saveButton: UIButton!
     let locationManager = CLLocationManager()
-
+    
+    //Upload Image Declaration
     let imagePicker = UIImagePickerController()
+    var pickedImagePath: NSURL?
+    var pickedImageData: NSData?
+    
+    var localPath: String?
+
     var apiClient : ApiClient!
 //    static private let regexEmail = "[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}"
 //    static private let regexMobNo = "^[0-9]{6,15}$"
@@ -107,7 +113,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
 //
 //
 //        })
-        
 
         if PrefsManager.sharedinstance.isLoginned {
 
@@ -120,11 +125,11 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 addCollectionContainer()
 
             }
-            
+
         }
 
-   
         imagePicker.delegate = self
+        
         profileImage.isUserInteractionEnabled = true
         datePicker.isHidden = true
         superVieww.isHidden = true
@@ -173,9 +178,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         /***********************Api login******************************/
         
         apiClient = ApiClient()
-       
-        
-        
+      
         
     }
     
@@ -458,6 +461,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     }
     
     @IBAction func didTappedSave(_ sender: Any) {
+        upload(image: profileImage.image!, completion: { URL in
+            
+        })
         let Email:NSString = emailaddress.text! as NSString
 
         if nameTextfield.text == "" || emailaddress.text == ""  || cityTextfield.text == "" || genderTextfield.text == ""   {
@@ -492,6 +498,42 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             }
             
         }
+        
+    }
+    
+    func upload(image: UIImage, completion: (URL?) -> Void) {
+        
+        guard let data = UIImageJPEGRepresentation(image, 0.9) else {
+            
+            return
+            
+        }
+        
+        
+        
+        Alamofire.upload(multipartFormData: { (form) in
+            
+            form.append(data, withName: "file", fileName: "file.jpg", mimeType: "image/jpg")
+            
+        }, to: "https://numnu-server-dev.appspot.com/users/1/images", encodingCompletion: { result in
+            
+            switch result {
+                
+            case .success(let upload, _, _):
+                
+                upload.responseString { response in
+                    
+                    print(response.value)
+                    
+                }
+                
+            case .failure(let encodingError):
+                
+                print(encodingError)
+                
+            }
+            
+        })
         
     }
     
@@ -622,40 +664,44 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         }
         
         cell?.textLabel?.text = tagnamearray[indexPath.row]
-        print("dropdown items are:::::",autocompleteUrls)
+        
         return cell!
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        let lastRowIndex = tableView.numberOfRows(inSection: 0)
-        if indexPath.row == lastRowIndex - 1  {
+        let lastRowIndex = dropdownTableView.numberOfRows(inSection: 0)
+        if indexPath.row == lastRowIndex {
             
-            tableView.allowsSelection = true
+            dropdownTableView.allowsSelection = true
             
         } else {
             
-            tableView.allowsSelection = false
+            dropdownTableView.allowsSelection = true
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let indexPath = dropdownTableView.indexPathForSelectedRow //optional, to get from any UIButton for example
         
-        let currentCell = dropdownTableView.cellForRow(at: indexPath!) as! UITableViewCell
-        
-        print(currentCell.textLabel!.text!)
-        dropdownString = (currentCell.textLabel?.text)!
-//        tagArray.append(dropdownString)
-        if tagArray.contains(dropdownString) {
-            print("already exist")
-        }else{
-            tagArray.append(dropdownString)
+        if let indexPath = dropdownTableView.indexPathForSelectedRow  {
+            
+            let currentCell = dropdownTableView.cellForRow(at: indexPath) as! UITableViewCell
+            
+            print(tagidArray[(indexPath.row)])
+            dropdownString = (currentCell.textLabel?.text)!
+           
+            if tagArray.contains(dropdownString) {
+                print("already exist")
+            }else{
+                tagArray.append(dropdownString)
+            }
+            collectionView.reloadData()
+            
+            dropdownTableView.isHidden = true
+            foodTextfield.resignFirstResponder()
+            
         }
-        collectionView.reloadData()
-        
-        dropdownTableView.isHidden = true
-        foodTextfield.resignFirstResponder()
+
     }
 }
 
@@ -680,6 +726,9 @@ extension Edit_ProfileVC : Profile_PostViewControllerDelegae {
 extension Edit_ProfileVC {
     
     func loadTagList(tag : String) {
+        
+        tagidArray.removeAll()
+        tagnamearray.removeAll()
         
         let parameters : Parameters = ["beginWith" : tag]
         let header     : HTTPHeaders = ["Accept-Language" : "en-US"]
