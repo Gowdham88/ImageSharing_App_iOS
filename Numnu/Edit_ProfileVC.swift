@@ -51,6 +51,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
 //    var showProfile: Bool = true
     @IBOutlet var myscrollView: UIScrollView!
    
+    @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet var saveButton: UIButton!
     let locationManager = CLLocationManager()
 
@@ -88,19 +89,19 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let parameters: Parameters = ["checkusername":"siva"]
-        
-        let userNameRequest: ApiClient = ApiClient()
-        userNameRequest.usernameexists(parameters: parameters, completion:{status, Exists in
- 
-            if Exists! {
-                
-            }else{
-                
-            }
-            
-            
-        })
+//        let parameters: Parameters = ["checkusername":"siva"]
+//
+//        let userNameRequest: ApiClient = ApiClient()
+//        userNameRequest.usernameexists(parameters: parameters, completion:{status, Exists in
+//
+//            if Exists! {
+//
+//            }else{
+//
+//            }
+//
+//
+//        })
         
         if PrefsManager.sharedinstance.isLoginned {
             
@@ -121,6 +122,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         superVieww.isHidden = true
         doneView.isHidden = true
 //        superVieww.addSubview(datePicker)
+        usernameTextField.delegate = self
         nameTextfield.delegate = self
         emailaddress.delegate = self
         genderTextfield.delegate = self
@@ -178,18 +180,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         super.viewWillAppear(animated)
         // Hide the navigation bar on the this view controller
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
-//        if boolForTitle == true {
-//            navigationItemList.title = "Complete Sign up"
-//            saveButton.setTitle("Complete SignUp", for: .normal)
-//            saveButton.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 16)
-//        }else{
-//            navigationItemList.title = "Edit Profile"
-//            saveButton.setTitle("Save", for: .normal)
-//            saveButton.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 16)
-//
-//        }
-//        
-        
         
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -286,7 +276,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 //        self.view.endEditing(true)
-
+       
         textField.resignFirstResponder()
         return true
     }
@@ -363,6 +353,23 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == usernameTextField {
+            let parameters: Parameters = ["checkusername":"siva_nsn"]
+            
+            let userNameRequest: ApiClient = ApiClient()
+            userNameRequest.usernameexists(parameters: parameters, completion:{status, Exists in
+                
+                if Exists! {
+                    print("the username already exists")
+                }else{
+                    print("the username available")
+                    
+                }
+                
+                
+            })
+            
+        }
         if textField == foodTextfield || textField == birthTextfield {
             foodTextfield.text = ""
 //            dropdownTableView.isHidden = true
