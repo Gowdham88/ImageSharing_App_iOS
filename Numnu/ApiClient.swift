@@ -48,6 +48,35 @@ class  ApiClient {
     
     }
     
+    func usernameexists(parameters : Parameters, completion : @escaping (String,Bool?) -> Void) {
+        Alamofire.request(Constants.CheckUserName, method: .get, parameters: parameters).validate().responseJSON { response in
+            
+            switch response.result {
+                
+            case .success:
+                
+                if let value = response.result.value {
+                    
+                    let json = JSON(value)
+                    if let usernameexists = json["usernameexists"].bool {
+                        
+                        completion("success",usernameexists)
+                    }
+                    
+                    
+                }
+                
+                
+            case .failure(let error):
+                
+                print(error)
+                completion(error.localizedDescription,nil)
+                
+            }
+            
+            
+        }
+    }
     
     /************************Tags Api**********************************/
     
