@@ -25,8 +25,8 @@ struct  EventList{
     var locationsummary : String?
     var createdat       : String?
     var updatedat       : String?
+    var eventLinkList   : [Ev]
     
-
     
     init(json: JSON) {
     
