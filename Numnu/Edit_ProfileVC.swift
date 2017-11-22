@@ -12,7 +12,7 @@ import CoreLocation
 import GooglePlaces
 import Alamofire
 
-class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,GMSAutocompleteViewControllerDelegate {
+class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,GMSAutocompleteViewControllerDelegate,UICollectionViewDelegateFlowLayout {
     var dropdownArray = [String] ()
     var dropdownString = String ()
     var tagArray = [String] ()
@@ -591,6 +591,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cvcell", for: indexPath as IndexPath) as! FoodPreferenceCollectionViewCell
         cell.foodtagLabel.text = tagArray[indexPath.row]
         cell.foodtagLabel.layer.cornerRadius = 4.0
+        let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagArray[indexPath.row], fontname: "Avenir-Book", size: 13)
+        cell.setLabelSize(size: textSize)
         cell.removetagButton.tag = indexPath.row
         cell.removetagButton.addTarget(self, action: #selector(buttonClicked(sender:)), for: .touchUpInside)
         return cell
@@ -606,13 +608,15 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         let cell = collectionView.cellForItem(at: indexPath!) as? FoodPreferenceCollectionViewCell
   
     }
-    func buttonClicked(sender: Any){
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
+        let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagArray[indexPath.row], fontname: "Avenir-Book", size: 13)
+        return CGSize(width: textSize.width+50, height: 22)
+    }
+    func buttonClicked(sender: Any){
         let tag = (sender as AnyObject).tag
         tagArray.remove(at: tag!)
         collectionView.reloadData()
-        print("selceted tag is:::::",tag!)
-
     }
     
     /// TableView Delegates and Datasources ///

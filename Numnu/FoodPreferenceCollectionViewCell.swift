@@ -16,9 +16,20 @@ class FoodPreferenceCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
 
-    foodtagLabel.layer.cornerRadius = 10
-    foodtagLabel.clipsToBounds = true
+//    foodtagLabel.layer.cornerRadius = 10
+//    foodtagLabel.clipsToBounds = true
 
     
+    }
+    func setLabelSize(size : CGSize) {
+        
+        foodtagLabel.backgroundColor     = UIColor.tagBgColor()
+        foodtagLabel.textColor           = UIColor.tagTextColor()
+        foodtagLabel.layer.cornerRadius  = 4
+        foodtagLabel.layer.masksToBounds = true
+        foodtagLabel.textAlignment = .center
+        foodtagLabel.frame = CGRect(x: 0, y: 0, width: size.width+20, height: 22)
+        removetagButton.frame.origin.x = size.width+25
+
     }
 }

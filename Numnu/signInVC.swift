@@ -28,6 +28,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordReveal: UIButton!
     
     
+    @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var lbl: UILabel!
     @IBOutlet weak var emailAddressTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
@@ -36,6 +37,8 @@ class signInVC: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        signInButton.layer.cornerRadius = 25
+        signInButton.clipsToBounds = true
         passwordReveal.setImage(UIImage(named: "Show password icon"), for: .normal)
         passwordReveal.tintColor = UIColor(red: 136/255.0, green: 143/255.0, blue: 158/255.0, alpha: 1.0)
         passwordInfoLabel.isHidden = true
