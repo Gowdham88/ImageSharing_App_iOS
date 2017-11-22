@@ -66,6 +66,7 @@ extension ReviewEventViewController : UITableViewDelegate,UITableViewDataSource 
         
         cell.delegate = self
         cell.postDtEventBookMark.tag = indexPath.row
+        cell.setHeight(heightview : Float(UIScreen.main.bounds.size.height))
         
         return cell
         

@@ -90,7 +90,7 @@ class ItemCompleteviewcontroller : ButtonBarPagerTabStripViewController {
             containerviewtop.constant = 8
         }
         
-        
+        pagerView.alpha = 1
         
         // Do any additional setup after loading the view.
     }
@@ -104,9 +104,7 @@ class ItemCompleteviewcontroller : ButtonBarPagerTabStripViewController {
         
         let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3) as! ReviewEventViewController
         child_1.popdelegate = self
-        let child_2 = UIStoryboard(name: Constants.ItemDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid7)
-        let child_3 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1)
-        return [child_1,child_2,child_3]
+        return [child_1]
         
     }
     
@@ -279,6 +277,9 @@ extension ItemCompleteviewcontroller {
 extension ItemCompleteviewcontroller : ReviewEventViewControllerDelegate {
     
     func postTableHeight(height: CGFloat) {
+        
+        mainContainerView.constant = 347 + height
+        mainContainerViewBottom.constant = 0
         
     }
     

@@ -35,6 +35,7 @@ class PostEventTableViewCell: UITableViewCell {
     @IBOutlet weak var placeWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var dishRightLayoutConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var eventTopConstraint: NSLayoutConstraint!
     var delegate : PostEventTableViewCellDelegate?
     
     
@@ -85,6 +86,20 @@ class PostEventTableViewCell: UITableViewCell {
             placeWidthConstraint.constant = 387
             
         }
+        
+        if (postEventDishLabel.numberOfVisibleLines > 1) {
+            
+            eventTopConstraint.constant = 52
+            
+        }
+        
+        if (postEventPlace.numberOfVisibleLines > 1) {
+            
+            eventTopConstraint.constant = 52
+            
+        }
+        
+        
         
     }
     
