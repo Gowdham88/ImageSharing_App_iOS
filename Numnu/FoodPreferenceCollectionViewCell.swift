@@ -16,10 +16,6 @@ class FoodPreferenceCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
 
-//    foodtagLabel.layer.cornerRadius = 10
-//    foodtagLabel.clipsToBounds = true
-
-    
     }
     func setLabelSize(size : CGSize) {
         

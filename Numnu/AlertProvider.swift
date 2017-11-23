@@ -28,7 +28,6 @@ struct AlertProvider {
         vc.present(alertController, animated: true, completion: nil)
   
     }
-
    
 
 }
