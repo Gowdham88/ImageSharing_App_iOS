@@ -353,8 +353,6 @@ extension ParentViewController : UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         editsearchbyLocation.text = autocompleteplaceArray[indexPath.row]
-        editsearchbyItem.text     = autocompleteplaceArray[indexPath.row]
-        
         dismissKeyboard()
         setNavBar()
         
@@ -458,8 +456,3 @@ extension ParentViewController : PostTabControllerDelegate {
         
     }
 }
-
-
-
-
-
