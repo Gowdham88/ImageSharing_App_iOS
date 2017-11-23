@@ -67,7 +67,15 @@ class signInVC: UIViewController, UITextFieldDelegate {
     
     @IBAction func signinPressed(_ sender: Any) {
         
-        login()
+        if self.currentReachabilityStatus != .notReachable {
+            
+              login()
+            
+        } else {
+       
+            AlertProvider.Instance.showInternetAlert(vc: self)
+        
+        }
         
     }
     var iconClick = Bool()
@@ -93,9 +101,20 @@ class signInVC: UIViewController, UITextFieldDelegate {
                 }
                 
                 self.idprim.removeAll()
-                
-                
-                self.userLoginApi(uid: (user?.uid)!)
+               
+                if self.currentReachabilityStatus != .notReachable {
+                    
+                    self.userLoginApi(uid: (user?.uid)!)
+                    
+                } else {
+                    
+                    DispatchQueue.main.async {
+                        
+                        AlertProvider.Instance.showInternetAlert(vc: self)
+                    }
+                    
+                    
+                }
                
                 
                 print("firebase id is:::",user?.uid as Any)
@@ -218,43 +237,48 @@ class signInVC: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func fbLogin(_ sender: Any) {
-        let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
-        fbLoginManager.logIn(withReadPermissions: ["public_profile", "email"], from: self) { (result, error) in
-            if let error = error {
-                print("Failed to login: \(error.localizedDescription)")
-                return
-            }
+        
+        if self.currentReachabilityStatus != .notReachable {
             
-            
-            guard let accessToken = FBSDKAccessToken.current() else {
-                print("Failed to get access token")
-                return
-            }
-            
-            
-            let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
-            
-            // Perform login by calling Firebase APIs
-            Auth.auth().signIn(with: credential, completion: { (user, error) in
+            let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
+            fbLoginManager.logIn(withReadPermissions: ["public_profile", "email"], from: self) { (result, error) in
                 if let error = error {
-                    print("Login error: \(error.localizedDescription)")
-                    let alertController = UIAlertController(title: "Login Error", message: error.localizedDescription, preferredStyle: .alert)
-                    let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                    alertController.addAction(okayAction)
-                    self.present(alertController, animated: true, completion: nil)
-                    
+                    print("Failed to login: \(error.localizedDescription)")
                     return
                 }
-                self.userLoginApi(uid: (user?.uid)!)
-
                 
-                //                 Present the main view
-                self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId)
-            })
+                
+                guard let accessToken = FBSDKAccessToken.current() else {
+                    print("Failed to get access token")
+                    return
+                }
+                
+                
+                let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
+                
+                // Perform login by calling Firebase APIs
+                Auth.auth().signIn(with: credential, completion: { (user, error) in
+                    if let error = error {
+                        print("Login error: \(error.localizedDescription)")
+                        let alertController = UIAlertController(title: "Login Error", message: error.localizedDescription, preferredStyle: .alert)
+                        let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                        alertController.addAction(okayAction)
+                        self.present(alertController, animated: true, completion: nil)
+                        
+                        return
+                    }
+                    self.userLoginApi(uid: (user?.uid)!)
+                   
+                })
+                
+            }
             
+        } else {
+            
+            AlertProvider.Instance.showInternetAlert(vc: self)
+           
         }
-
-    
+  
     }//fb login
     
     
@@ -265,11 +289,9 @@ extension signInVC {
    
     func userLoginApi(uid:String) {
         
-        let clientIp = IPChecker.getIP() ?? "1.0.1"
-        print(clientIp)
-        print(uid)
+        let clientIp = ValidationHelper.Instance.getIPAddress() ?? "1.0.1"
         
-        let parameters : Parameters = ["firebaseuid" : uid,"createdByUserId" : "","updatedByUserId" : "","createdTimestamp" : "","updatedTimestamp" : "","clientApp": "iosapp","clientIP":"201.222.767.112"]
+        let parameters : Parameters = ["firebaseuid" : uid,"createdByUserId" : "","updatedByUserId" : "","createdTimestamp" : "","updatedTimestamp" : "","clientApp": "iosapp","clientIP":clientIp]
         
         let loginRequest : ApiClient  = ApiClient()
         loginRequest.userLogin(parameters: parameters, completion: { status,userlist in
@@ -281,14 +303,16 @@ extension signInVC {
                     if let user = userlist {
                         
                         print(user.firebaseUID!)
+                        self.getUserDetails(user: user)
                     
                     }
                     
                     HUD.hide()
+                    
 //                    self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId)
-//
-//                    self.emailAddressTF.text = ""
-//                    self.passwordTF.text     = ""
+
+                    self.emailAddressTF.text = ""
+                    self.passwordTF.text     = ""
                     
                 }
                 
@@ -304,5 +328,41 @@ extension signInVC {
         
     }
     
+    func getUserDetails(user:UserList) {
+        
+        if let firebaseid = user.firebaseUID {
+            
+            PrefsManager.sharedinstance.UIDfirebase = firebaseid
+            
+        }
+        
+        if let userid = user.id {
+            
+            PrefsManager.sharedinstance.userId = userid
+            
+        }
+        
+        if let username = user.userName {
+            
+            PrefsManager.sharedinstance.username = username
+            
+        }
+        
+        if let dateofbirth = user.dateOfBirth {
+            
+            PrefsManager.sharedinstance.dateOfBirth = dateofbirth
+            
+        }
+        
+        if let gender = user.gender {
+            
+            PrefsManager.sharedinstance.gender = gender
+            
+        }
+        
+       
+        
+    }
+ 
     
 }

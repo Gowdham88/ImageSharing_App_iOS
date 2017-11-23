@@ -34,6 +34,7 @@ class PostDetailViewController : UIViewController {
     @IBOutlet weak var navigationItemList: UINavigationItem!
     var window : UIWindow?
     
+    @IBOutlet weak var eventTopHeight: NSLayoutConstraint!
     @IBOutlet weak var alertviewBottomConstraints: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +51,18 @@ class PostDetailViewController : UIViewController {
         postDEventImage.isUserInteractionEnabled = true
         
         // Do any additional setup after loading the view.
+        
+        if (postDEventDishLabel.numberOfVisibleLines > 1) {
+            
+            eventTopHeight.constant = 52
+            
+        }
+        
+        if (postDEventPlace.numberOfVisibleLines > 1) {
+            
+            eventTopHeight.constant = 52
+            
+        }
     }
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = false

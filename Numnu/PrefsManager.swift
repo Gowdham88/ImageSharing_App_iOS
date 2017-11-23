@@ -228,6 +228,28 @@ struct PrefsManager {
         }
     }
     
+    var gender : String {
+        
+        get {
+            
+            if checkprefsobject(object: Constants.gender) {
+                
+                return UserDefaults.standard.string(forKey: Constants.gender)!
+            } else {
+                
+                return "empty"
+            }
+            
+        }
+        
+        set {
+            
+            UserDefaults.standard.set(newValue, forKey: Constants.gender)
+            
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
     
     
 } // Struct

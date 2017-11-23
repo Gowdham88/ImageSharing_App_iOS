@@ -107,7 +107,7 @@ class  ApiClient {
     }
     
      /************************Events Api**********************************/
-    func getEventsApi(parameters : Parameters,completion : @escaping (String,TagList?) -> Void) {
+    func getEventsApi(parameters : Parameters,completion : @escaping (String,EventModelList?) -> Void) {
         
         Alamofire.request(Constants.EventApiUrl, method: .get, parameters: parameters).validate().responseJSON { response in
             
@@ -118,9 +118,9 @@ class  ApiClient {
                 if let value = response.result.value {
                     
                     let json = JSON(value)
-                    if let userList = TagList(json: json) {
+                    if let eventList = EventModelList(json: json) {
                         
-                        completion("success",userList)
+                        completion("success",eventList)
                     }
                     
                 }
@@ -138,7 +138,7 @@ class  ApiClient {
     }
     
     /************************Items Api**********************************/
-    func getItemsApi(parameters : Parameters,completion : @escaping (String,TagList?) -> Void) {
+    func getItemsApi(parameters : Parameters,completion : @escaping (String,ItemList?) -> Void) {
         
         Alamofire.request(Constants.ItemsApiUrl, method: .get, parameters: parameters).validate().responseJSON { response in
             
@@ -149,9 +149,9 @@ class  ApiClient {
                 if let value = response.result.value {
                     
                     let json = JSON(value)
-                    if let userList = TagList(json: json) {
+                    if let itemList = ItemList(json: json) {
                         
-                        completion("success",userList)
+                        completion("success",itemList)
                     }
                     
                 }

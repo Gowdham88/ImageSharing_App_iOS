@@ -35,7 +35,8 @@ class postEventDetailTableViewCell : UITableViewCell {
     
     var delegate : postEventDetailTableViewCellDelegate?
     
-
+    @IBOutlet weak var eventTopHeight: NSLayoutConstraint!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -84,6 +85,18 @@ class postEventDetailTableViewCell : UITableViewCell {
             
             postDtdishwidthConstaint.constant   = 387
             DtplaceWidthConstraint.constant = 387
+            
+        }
+        
+        if (postDtEventDishLabel.numberOfVisibleLines > 1) {
+            
+            eventTopHeight.constant = 52
+            
+        }
+        
+        if (postDtEventPlace.numberOfVisibleLines > 1) {
+            
+            eventTopHeight.constant = 52
             
         }
         

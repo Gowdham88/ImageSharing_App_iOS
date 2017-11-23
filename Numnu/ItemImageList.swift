@@ -1,23 +1,22 @@
 //
-//  EventlinkList.swift
+//  ItemImageList.swift
 //  Numnu
 //
-//  Created by Suraj B on 11/21/17.
+//  Created by CZ Ltd on 11/21/17.
 //  Copyright © 2017 czsm. All rights reserved.
 //
 
 import Foundation
-import UIKit
 import SwiftyJSON
 
-struct  EventlinkList {
+struct ItemImageList {
     
     var id              : Int?
-    var weblink         : String?
-    var linktext        : String?
+    var itemid          : Int?
+    var imageurl        : String?
     var displayorder    : Int?
-    var createdat       : String?
     var updatedat       : String?
+    var createdat       : String?
     var createdby       : Int?
     var updatedby       : Int?
     
@@ -28,21 +27,16 @@ struct  EventlinkList {
             self.id  = id
         }
         
-        if let weblink = json["weblink"].string {
+        if let itemid = json["itemid"].int {
             
-            self.weblink = weblink
-            
-        }
-        
-        if let linktext = json["linktext"].string {
-            
-            self.linktext = linktext
+            self.itemid = itemid
             
         }
         
-        if let displayorder = json["displayorder"].int {
+        if let imageurl = json["imageurl"].string {
             
-            self.displayorder = displayorder
+            self.imageurl = imageurl
+            
         }
         
         if let createdat = json["createdat"].string {
@@ -66,9 +60,7 @@ struct  EventlinkList {
             self.updatedby = updatedby
             
         }
-      
+        
     }
     
 }
-
-
