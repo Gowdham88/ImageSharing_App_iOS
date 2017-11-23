@@ -28,8 +28,7 @@ struct AlertProvider {
         vc.present(alertController, animated: true, completion: nil)
   
     }
-    
-    
+
     func showInternetAlert(vc:UIViewController) {
         
         let alertController = UIAlertController(title: "No Internet", message: "Check your internet connection.", preferredStyle: .alert)
@@ -39,9 +38,7 @@ struct AlertProvider {
         
     }
     
-    
-    
-    
+ 
    
 
 }

@@ -23,6 +23,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     var userprofileimage : String = ""
     var ViewMoved = true
 
+    @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var passwordReveal: UIButton!
     @IBOutlet weak var emailtitleLAbel: UILabel!
     @IBOutlet weak var emailLineView: UIView!
@@ -42,6 +43,8 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         navigationController?.tabBarController?.tabBar.isHidden = true
 
         labelcredentials.isHidden = true
+        signUpButton.layer.cornerRadius = 25
+        signUpButton.clipsToBounds = true
 
 //        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
 //        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)

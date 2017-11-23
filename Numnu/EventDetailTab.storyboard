@@ -179,7 +179,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="98c-9g-bA6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3.75" y="86.619718309859152"/>
+            <point key="canvasLocation" x="3" y="86"/>
         </scene>
         <!--Menu Event View Controller-->
         <scene sceneID="B5s-K9-rHv">
@@ -222,7 +222,7 @@
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="apN-Gq-YHm">
                                                     <rect key="frame" x="10" y="58" width="300" height="1"/>
-                                                    <color key="backgroundColor" red="0.45882352941176469" green="0.47843137254901957" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="fpX-qK-FdH"/>
                                                     </constraints>

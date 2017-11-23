@@ -17,7 +17,7 @@ protocol Profile_PostViewControllerDelegae {
 
 
 
-class Profile_PostViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource {
+class Profile_PostViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout  {
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var navigationItemList: UINavigationItem!
@@ -28,6 +28,7 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var shareview: UIView!
     
+    @IBOutlet weak var EventverticalConstraint: NSLayoutConstraint!
     var itemArray = [String]()
     var delegate : Profile_PostViewControllerDelegae?
     
@@ -42,7 +43,7 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         userImage.layer.cornerRadius = self.userImage.frame.size.height/2
         userImage.clipsToBounds = true
         alertTapRegister()
-        itemArray = ["Festival","Wine","Party","Meeting"]
+        itemArray = ["Festival","Wine","Party","Meeting","conference","Family function"]
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -138,15 +139,22 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ccell", for: indexPath as IndexPath) as! UserProfileTagCollectionViewCell
-       cell.tagLabel.text = itemArray[indexPath.row]
-       cell.tagLabel.layer.cornerRadius = 4.0
-    cell.tagLabel.clipsToBounds = true
-        
+        let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: itemArray[indexPath.row], fontname: "Avenir-Book", size: 13)
+        cell.tagLabel.text = itemArray[indexPath.row]
+        cell.setLabelSize(size: textSize)
+
         return cell
     }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: itemArray[indexPath.row], fontname: "Avenir-Book", size: 13)
+        
+        return CGSize(width: textSize.width+20, height: 22)
+    }
     
-    
-    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
     /*
     // MARK: - Navigation
 
