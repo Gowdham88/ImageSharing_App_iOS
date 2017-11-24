@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '3B08C49A396BAA0D9DCAD4460CC52F95'
-               BlueprintName = 'leveldb-library'
+               BlueprintIdentifier = '18F0B3A1CAF0404A01F194F52E0D3924'
+               BlueprintName = 'Pods-Numnu'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'leveldb-library.framework'>
+               BuildableName = 'Pods-Numnu.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

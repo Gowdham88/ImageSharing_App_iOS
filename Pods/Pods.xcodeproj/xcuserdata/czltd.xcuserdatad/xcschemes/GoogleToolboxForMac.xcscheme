@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '3B08C49A396BAA0D9DCAD4460CC52F95'
-               BlueprintName = 'leveldb-library'
+               BlueprintIdentifier = '107A9565F9DF88517DFD3E28C05B2B96'
+               BlueprintName = 'GoogleToolboxForMac'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'leveldb-library.framework'>
+               BuildableName = 'GoogleToolboxForMac.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
