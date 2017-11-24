@@ -469,7 +469,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dish_ico" translatesAutoresizingMaskIntoConstraints="NO" id="xcb-Yg-cY6" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
-                                                            <rect key="frame" x="10" y="302.5" width="15" height="16"/>
+                                                            <rect key="frame" x="10" y="305.5" width="15" height="16"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="16" id="s7p-uY-8ko"/>
                                                                 <constraint firstAttribute="width" constant="15" id="yn1-l0-qAP"/>
@@ -530,7 +530,7 @@
                                                             </constraints>
                                                         </view>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="restaurant_ico" translatesAutoresizingMaskIntoConstraints="NO" id="PVJ-Oe-q0Y" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
-                                                            <rect key="frame" x="114" y="302.5" width="19" height="19"/>
+                                                            <rect key="frame" x="114" y="305.5" width="19" height="19"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="19" id="M8N-o6-IxD"/>
                                                                 <constraint firstAttribute="width" constant="19" id="kwd-aC-irZ"/>
@@ -552,7 +552,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="event_ico" translatesAutoresizingMaskIntoConstraints="NO" id="sW9-6b-dPe" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
-                                                            <rect key="frame" x="10" y="327.5" width="14" height="15"/>
+                                                            <rect key="frame" x="10" y="328.5" width="14" height="15"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="15" id="YRn-GG-7Q2"/>
                                                                 <constraint firstAttribute="width" constant="14" id="pvt-1D-DYD"/>
@@ -568,7 +568,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="cag-38-Vy0" secondAttribute="trailing" constant="10" id="2XI-It-t6P"/>
                                                         <constraint firstItem="uKa-ja-Wj5" firstAttribute="leading" secondItem="ahw-4s-BUN" secondAttribute="leading" constant="10" id="2fg-Jf-TIt"/>
-                                                        <constraint firstItem="sW9-6b-dPe" firstAttribute="top" secondItem="BNR-np-Yml" secondAttribute="top" id="2vY-CC-MYW"/>
+                                                        <constraint firstItem="sW9-6b-dPe" firstAttribute="top" secondItem="BNR-np-Yml" secondAttribute="top" constant="1" id="2vY-CC-MYW"/>
                                                         <constraint firstItem="uKa-ja-Wj5" firstAttribute="top" secondItem="Pib-V2-igk" secondAttribute="bottom" constant="8" id="6Ya-pN-Tz2"/>
                                                         <constraint firstItem="fh9-Yn-8dC" firstAttribute="leading" secondItem="ahw-4s-BUN" secondAttribute="leading" constant="10" id="7GB-ZW-eBK"/>
                                                         <constraint firstItem="HLp-vk-Sqd" firstAttribute="leading" secondItem="Wf2-6R-umF" secondAttribute="trailing" constant="8" id="81A-Fa-h0V"/>
@@ -578,11 +578,11 @@
                                                         <constraint firstItem="cag-38-Vy0" firstAttribute="leading" secondItem="Wf2-6R-umF" secondAttribute="trailing" constant="8" id="G7c-bj-8cJ"/>
                                                         <constraint firstItem="HLp-vk-Sqd" firstAttribute="top" secondItem="cag-38-Vy0" secondAttribute="bottom" constant="3" id="GDg-u2-CFY"/>
                                                         <constraint firstAttribute="trailing" secondItem="ohA-Yh-Joh" secondAttribute="trailing" constant="8" id="HuZ-6N-VfW"/>
-                                                        <constraint firstItem="PVJ-Oe-q0Y" firstAttribute="top" secondItem="bsw-NZ-JX4" secondAttribute="top" id="LBQ-W3-dWh"/>
+                                                        <constraint firstItem="PVJ-Oe-q0Y" firstAttribute="top" secondItem="bsw-NZ-JX4" secondAttribute="top" constant="3" id="LBQ-W3-dWh"/>
                                                         <constraint firstItem="PVJ-Oe-q0Y" firstAttribute="leading" secondItem="DyA-3T-Ldh" secondAttribute="trailing" constant="6" id="NeV-pT-UHH"/>
                                                         <constraint firstItem="xcb-Yg-cY6" firstAttribute="leading" secondItem="ahw-4s-BUN" secondAttribute="leading" constant="10" id="Nxl-Lv-rpe"/>
                                                         <constraint firstItem="BNR-np-Yml" firstAttribute="top" secondItem="uKa-ja-Wj5" secondAttribute="bottom" constant="33" id="QXU-GE-ziu"/>
-                                                        <constraint firstItem="xcb-Yg-cY6" firstAttribute="top" secondItem="DyA-3T-Ldh" secondAttribute="top" id="Sbk-fW-g5p"/>
+                                                        <constraint firstItem="xcb-Yg-cY6" firstAttribute="top" secondItem="DyA-3T-Ldh" secondAttribute="top" constant="3" id="Sbk-fW-g5p"/>
                                                         <constraint firstAttribute="trailing" secondItem="Kqb-Vn-QbE" secondAttribute="trailing" constant="10" id="WQG-BB-ZXi"/>
                                                         <constraint firstItem="ZHV-Ji-sMb" firstAttribute="top" secondItem="uKa-ja-Wj5" secondAttribute="bottom" constant="8" id="XOL-os-YW4"/>
                                                         <constraint firstAttribute="trailing" secondItem="uKa-ja-Wj5" secondAttribute="trailing" constant="10" id="YAt-IU-OUW"/>
