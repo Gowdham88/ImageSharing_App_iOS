@@ -88,21 +88,21 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
     
     @IBAction func ButtonSearach(_ sender: UIButton) {
         
-        let top = CGAffineTransform(translationX: 0, y: 0)
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-            self.filtertableView.transform = top
-            self.filtertableView.isHidden = false
-        }, completion: nil)
+//        let top = CGAffineTransform(translationX: 0, y: 0)
+//        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+//            self.filtertableView.transform = top
+//            self.filtertableView.isHidden = false
+//        }, completion: nil)
         
         
     }
     @IBAction func ButtonLocation(_ sender: UIButton) {
         
-        let top = CGAffineTransform(translationX: 0, y: 0)
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-            self.filtertableView.transform = top
-            self.filtertableView.isHidden = false
-        }, completion: nil)
+//        let top = CGAffineTransform(translationX: 0, y: 0)
+//        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+//            self.filtertableView.transform = top
+//            self.filtertableView.isHidden = false
+//        }, completion: nil)
        
     }
     // Tab controllers switch func
