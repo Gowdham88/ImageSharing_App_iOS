@@ -551,6 +551,11 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.65000000000000002" colorSpace="calibratedRGB"/>
                             </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dy5-8L-9gM">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.28000000000000003" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Discover delicious food and drink at events and festivals near you" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="zMO-xg-2eT">
                                 <rect key="frame" x="16" y="427" width="288" height="77"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
@@ -631,6 +636,7 @@
                         <outlet property="letmeinButtonoutlet" destination="Zpv-5q-vSh" id="hsH-pb-kt3"/>
                         <outlet property="notificationsAlert" destination="hpc-x7-f8x" id="5Me-kk-OTP"/>
                         <outlet property="onboardingText" destination="zMO-xg-2eT" id="gad-Cd-gFG"/>
+                        <outlet property="shadowview" destination="Dy5-8L-9gM" id="NzV-bX-uNw"/>
                         <segue destination="Zpp-RP-GwK" kind="show" identifier="letmein" id="3s5-Xx-b2L"/>
                     </connections>
                 </viewController>
