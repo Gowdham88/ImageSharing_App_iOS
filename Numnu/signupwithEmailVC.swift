@@ -203,11 +203,6 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                     
                 }
                 
-               
-               AlertProvider.Instance.showInternetAlert(vc: self)
- 
-                print(" App Delegate SignIn with credential called")
-                
                }
                 
             } else {
