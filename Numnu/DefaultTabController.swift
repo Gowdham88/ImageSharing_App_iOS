@@ -9,6 +9,7 @@
 import UIKit
 import XLPagerTabStrip
 
+
 class DefaultTabController: UIViewController,IndicatorInfoProvider {
     
     var window : UIWindow?

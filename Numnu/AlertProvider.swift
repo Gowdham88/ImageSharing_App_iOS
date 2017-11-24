@@ -29,6 +29,16 @@ struct AlertProvider {
   
     }
 
+    func showInternetAlert(vc:UIViewController) {
+        
+        let alertController = UIAlertController(title: "No Internet", message: "Check your internet connection.", preferredStyle: .alert)
+        let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alertController.addAction(okayAction)
+        vc.present(alertController, animated: true, completion: nil)
+        
+    }
+    
+ 
    
 
 }

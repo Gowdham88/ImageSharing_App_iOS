@@ -13,6 +13,7 @@ import FBSDKLoginKit
 import FBSDKCoreKit
 import PKHUD
 import FBSDKLoginKit
+import Alamofire
 
 var closed = String()
 
@@ -27,6 +28,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordReveal: UIButton!
     
     
+    @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var lbl: UILabel!
     @IBOutlet weak var emailAddressTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
@@ -35,12 +37,17 @@ class signInVC: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        signInButton.layer.cornerRadius = 25
+        signInButton.clipsToBounds = true
         passwordReveal.setImage(UIImage(named: "Show password icon"), for: .normal)
         passwordReveal.tintColor = UIColor(red: 136/255.0, green: 143/255.0, blue: 158/255.0, alpha: 1.0)
         passwordInfoLabel.isHidden = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
         self.view.addGestureRecognizer(tapGesture)
         // Do any additional setup after loading the view.
+        
+       
+        
     }
     func dismissKeyboard (_ sender: UITapGestureRecognizer) {
         emailAddressTF.resignFirstResponder()
@@ -60,7 +67,15 @@ class signInVC: UIViewController, UITextFieldDelegate {
     
     @IBAction func signinPressed(_ sender: Any) {
         
-        login()
+        if self.currentReachabilityStatus != .notReachable {
+            
+              login()
+            
+        } else {
+       
+            AlertProvider.Instance.showInternetAlert(vc: self)
+        
+        }
         
     }
     var iconClick = Bool()
@@ -86,20 +101,23 @@ class signInVC: UIViewController, UITextFieldDelegate {
                 }
                 
                 self.idprim.removeAll()
-                
-                print("user?.uid: \(user?.uid)")
-                
-                DispatchQueue.main.async {
+               
+                if self.currentReachabilityStatus != .notReachable {
                     
-                    HUD.hide()
-                    self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId)
+                    self.userLoginApi(uid: (user?.uid)!)
                     
-                    self.emailAddressTF.text = ""
-                    self.passwordTF.text     = ""
+                } else {
+                    
+                    DispatchQueue.main.async {
+                        
+                        AlertProvider.Instance.showInternetAlert(vc: self)
+                    }
+                    
                     
                 }
+               
                 
-                print("Login FIRAuth Sign in called")
+                print("firebase id is:::",user?.uid as Any)
             })
                 
            } else {
@@ -219,41 +237,48 @@ class signInVC: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func fbLogin(_ sender: Any) {
-        let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
-        fbLoginManager.logIn(withReadPermissions: ["public_profile", "email"], from: self) { (result, error) in
-            if let error = error {
-                print("Failed to login: \(error.localizedDescription)")
-                return
-            }
+        
+        if self.currentReachabilityStatus != .notReachable {
             
-            
-            guard let accessToken = FBSDKAccessToken.current() else {
-                print("Failed to get access token")
-                return
-            }
-            
-            
-            let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
-            
-            // Perform login by calling Firebase APIs
-            Auth.auth().signIn(with: credential, completion: { (user, error) in
+            let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
+            fbLoginManager.logIn(withReadPermissions: ["public_profile", "email"], from: self) { (result, error) in
                 if let error = error {
-                    print("Login error: \(error.localizedDescription)")
-                    let alertController = UIAlertController(title: "Login Error", message: error.localizedDescription, preferredStyle: .alert)
-                    let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                    alertController.addAction(okayAction)
-                    self.present(alertController, animated: true, completion: nil)
-                    
+                    print("Failed to login: \(error.localizedDescription)")
                     return
                 }
                 
-                //                 Present the main view
-                self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId)
-            })
+                
+                guard let accessToken = FBSDKAccessToken.current() else {
+                    print("Failed to get access token")
+                    return
+                }
+                
+                
+                let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
+                
+                // Perform login by calling Firebase APIs
+                Auth.auth().signIn(with: credential, completion: { (user, error) in
+                    if let error = error {
+                        print("Login error: \(error.localizedDescription)")
+                        let alertController = UIAlertController(title: "Login Error", message: error.localizedDescription, preferredStyle: .alert)
+                        let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                        alertController.addAction(okayAction)
+                        self.present(alertController, animated: true, completion: nil)
+                        
+                        return
+                    }
+                    self.userLoginApi(uid: (user?.uid)!)
+                   
+                })
+                
+            }
             
+        } else {
+            
+            AlertProvider.Instance.showInternetAlert(vc: self)
+           
         }
-
-    
+  
     }//fb login
     
     
@@ -261,11 +286,83 @@ class signInVC: UIViewController, UITextFieldDelegate {
 }//class
 
 extension signInVC {
-    
-    func userLoginApi() {
+   
+    func userLoginApi(uid:String) {
+        
+        let clientIp = ValidationHelper.Instance.getIPAddress() ?? "1.0.1"
+        
+        let parameters : Parameters = ["firebaseuid" : uid,"createdByUserId" : "","updatedByUserId" : "","createdTimestamp" : "","updatedTimestamp" : "","clientApp": "iosapp","clientIP":clientIp]
+        
+        let loginRequest : ApiClient  = ApiClient()
+        loginRequest.userLogin(parameters: parameters, completion: { status,userlist in
+            
+            if status == "success" {
+                
+                DispatchQueue.main.async {
+                   
+                    if let user = userlist {
+                        
+                        print(user.firebaseUID!)
+                        self.getUserDetails(user: user)
+                    
+                    }
+                    
+                    HUD.hide()
+                    
+//                    self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId)
+
+                    self.emailAddressTF.text = ""
+                    self.passwordTF.text     = ""
+                    
+                }
+                
+            } else {
+                
+                 HUD.hide()
+                
+            }
+            
+            
+        })
         
         
     }
     
+    func getUserDetails(user:UserList) {
+        
+        if let firebaseid = user.firebaseUID {
+            
+            PrefsManager.sharedinstance.UIDfirebase = firebaseid
+            
+        }
+        
+        if let userid = user.id {
+            
+            PrefsManager.sharedinstance.userId = userid
+            
+        }
+        
+        if let username = user.userName {
+            
+            PrefsManager.sharedinstance.username = username
+            
+        }
+        
+        if let dateofbirth = user.dateOfBirth {
+            
+            PrefsManager.sharedinstance.dateOfBirth = dateofbirth
+            
+        }
+        
+        if let gender = user.gender {
+            
+            PrefsManager.sharedinstance.gender = gender
+            
+        }
+        
+       
+        
+    }
+ 
     
 }

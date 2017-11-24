@@ -16,17 +16,19 @@ class OnboardingVC: UIViewController {
     @IBOutlet var onboardingText: UILabel!
     var window : UIWindow?
     
+    @IBOutlet weak var shadowview: UIView!
     var locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.notificationsAlert.frame.origin.y += self.view.frame.height
-        
+        shadowview.isHidden = true
     }
 
     @IBAction func okPressed(_ sender: Any) {
         
+        shadowview.isHidden = true
         notificationsAlert.isHidden = true
         self.openStoryBoard(name: Constants.Main, id: Constants.TabStoryId)
     
@@ -47,6 +49,7 @@ class OnboardingVC: UIViewController {
         letmeinButtonoutlet.isHidden = true
         UIView.animate(withDuration: 0.5, animations: {
             self.notificationsAlert.frame.origin.y -= self.view.frame.height
+            self.shadowview.isHidden = false
         }, completion: nil)
         
     }

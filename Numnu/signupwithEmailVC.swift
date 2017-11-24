@@ -12,6 +12,7 @@ import Firebase
 import FBSDKCoreKit
 import FBSDKLoginKit
 import PKHUD
+import Alamofire
 
 class signupwithEmailVC: UIViewController, UITextFieldDelegate {
 
@@ -22,6 +23,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     var userprofileimage : String = ""
     var ViewMoved = true
 
+    @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var passwordReveal: UIButton!
     @IBOutlet weak var emailtitleLAbel: UILabel!
     @IBOutlet weak var emailLineView: UIView!
@@ -41,6 +43,8 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         navigationController?.tabBarController?.tabBar.isHidden = true
 
         labelcredentials.isHidden = true
+        signUpButton.layer.cornerRadius = 25
+        signUpButton.clipsToBounds = true
 
 //        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
 //        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
@@ -145,7 +149,16 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     }
     @IBAction func signupPressed(_ sender: Any) {
         
-        Login()
+        if currentReachabilityStatus != .notReachable {
+            
+            Login()
+            
+        } else {
+            
+            AlertProvider.Instance.showInternetAlert(vc: self)
+        }
+        
+        
     }
     
     func isPasswordValid(_ password : String) -> Bool{
@@ -175,15 +188,20 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                     return
                     
                 }
-               
-                HUD.hide()
                 
-                self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId)
+                if self.currentReachabilityStatus != .notReachable {
+                    
+                    self.userLoginApi(uid: (user?.uid)!)
+                    
+                } else {
+                    
+                    DispatchQueue.main.async {
+                        
+                        AlertProvider.Instance.showInternetAlert(vc: self)
+                    }
                 
-                
-                self.idprim.removeAll()
- 
-                print(" App Delegate SignIn with credential called")
+                    
+                }
                 
                }
                 
@@ -295,8 +313,8 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                     return
                 }
                 
-                //                 Present the main view
-                self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId)
+                self.userLoginApi(uid: (user?.uid)!)
+              
             })
             
         }
@@ -319,4 +337,83 @@ extension UITextField {
         self.layer.masksToBounds = true
     }
 }
+
+extension signupwithEmailVC {
+    
+    func userLoginApi(uid:String) {
+        
+        let clientIp = IPChecker.getIP() ?? "1.0.1"
+        
+        let parameters : Parameters = ["firebaseuid" : uid,"createdByUserId" : "","updatedByUserId" : "","createdTimestamp" : "","updatedTimestamp" : "","clientApp": "iosapp","clientIP":clientIp]
+        
+        let loginRequest : ApiClient  = ApiClient()
+        loginRequest.userLogin(parameters: parameters, completion: { status,userlist in
+            
+            if status == "success" {
+                
+                DispatchQueue.main.async {
+                    
+                    if let user = userlist {
+                        
+                        self.getUserDetails(user: user)
+                        
+                    }
+                    
+                    HUD.hide()
+//                    self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId)
+                   
+                    
+                }
+                
+            } else {
+                
+                HUD.hide()
+                
+            }
+            
+            
+        })
+        
+        
+    }
+    
+    func getUserDetails(user:UserList) {
+        
+        if let firebaseid = user.firebaseUID {
+            
+            PrefsManager.sharedinstance.UIDfirebase = firebaseid
+            
+        }
+        
+        if let userid = user.id {
+            
+            PrefsManager.sharedinstance.userId = userid
+            
+        }
+        
+        if let username = user.userName {
+            
+            PrefsManager.sharedinstance.username = username
+            
+        }
+        
+        if let dateofbirth = user.dateOfBirth {
+            
+            PrefsManager.sharedinstance.dateOfBirth = dateofbirth
+            
+        }
+        
+        if let gender = user.gender {
+            
+            PrefsManager.sharedinstance.gender = gender
+            
+        }
+        
+        
+        
+    }
+    
+    
+}
+
 

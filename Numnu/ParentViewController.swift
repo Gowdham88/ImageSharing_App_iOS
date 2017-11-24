@@ -88,21 +88,21 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
     
     @IBAction func ButtonSearach(_ sender: UIButton) {
         
-        let top = CGAffineTransform(translationX: 0, y: 0)
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-            self.filtertableView.transform = top
-            self.filtertableView.isHidden = false
-        }, completion: nil)
+//        let top = CGAffineTransform(translationX: 0, y: 0)
+//        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+//            self.filtertableView.transform = top
+//            self.filtertableView.isHidden = false
+//        }, completion: nil)
         
         
     }
     @IBAction func ButtonLocation(_ sender: UIButton) {
         
-        let top = CGAffineTransform(translationX: 0, y: 0)
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-            self.filtertableView.transform = top
-            self.filtertableView.isHidden = false
-        }, completion: nil)
+//        let top = CGAffineTransform(translationX: 0, y: 0)
+//        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+//            self.filtertableView.transform = top
+//            self.filtertableView.isHidden = false
+//        }, completion: nil)
        
     }
     // Tab controllers switch func
@@ -353,8 +353,6 @@ extension ParentViewController : UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         editsearchbyLocation.text = autocompleteplaceArray[indexPath.row]
-        editsearchbyItem.text     = autocompleteplaceArray[indexPath.row]
-        
         dismissKeyboard()
         setNavBar()
         
@@ -458,8 +456,3 @@ extension ParentViewController : PostTabControllerDelegate {
         
     }
 }
-
-
-
-
-
