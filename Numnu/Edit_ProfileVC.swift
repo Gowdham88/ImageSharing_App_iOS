@@ -132,7 +132,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             addProfileContainer()
         } else {
             if boolForTitle == false {
-                addCollectionContainer()
+//                addCollectionContainer()
             }
         }
     }
