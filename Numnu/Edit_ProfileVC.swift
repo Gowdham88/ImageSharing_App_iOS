@@ -81,10 +81,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.isUserInteractionEnabled = true
-        self.myscrollView.isUserInteractionEnabled = true
-        self.view.superview?.isUserInteractionEnabled = true
-        self.myscrollView.superview?.isUserInteractionEnabled = true
         
         dropdownTableView.isHidden = true
         imagePicker.delegate = self
@@ -149,7 +145,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             addProfileContainer()
         } else {
             if boolForTitle == false {
-//                addCollectionContainer()
+                addCollectionContainer()
             }
         }
     }
@@ -206,7 +202,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         Alert.addAction(cancelAction)
         present(Alert, animated: true, completion:nil )
        
-//        Alert.view.superview?.addGestureRecognizer(sampleTapGesture)
     }
     func handleTap(recognizer: UITapGestureRecognizer){
         dismiss(animated: true, completion: nil)
@@ -250,11 +245,13 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        dropdownTableView.isHidden = false
         if textField == foodTextfield {
+            dropdownTableView.isHidden = false
             let substring = (foodTextfield.text! as NSString).replacingCharacters(in: range, with: string )
              loadTagList(tag: substring)
         }else{
+            dropdownTableView.isHidden = true
+
         }
             return true
     }
@@ -324,6 +321,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             datePicker.isHidden = true
             superVieww.isHidden = true
             doneView.isHidden = true
+        }
+        if textField == genderTextfield {
+            genderTextfield.tintColor = .clear
         }
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
