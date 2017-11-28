@@ -9,9 +9,8 @@
 import UIKit
 import GoogleMaps
 
-
 class EventMapViewController: UIViewController {
-    
+    var boolForMapTitle: Bool = true
     var locationManager = CLLocationManager()
     var currentLocation: CLLocation?
     var mapView: GMSMapView!
@@ -77,8 +76,13 @@ class EventMapViewController: UIViewController {
     }
     
     func setNavBar() {
-        
-        navigationItemList.title = "Map view"
+        if boolForMapTitle == true{
+            navigationItemList.title = "Event Map view"
+
+        }else{
+            navigationItemList.title = "Location Map view"
+
+        }
         
         let button: UIButton = UIButton(type: UIButtonType.custom)
         //set image for button

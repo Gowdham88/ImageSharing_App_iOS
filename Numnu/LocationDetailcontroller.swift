@@ -68,6 +68,9 @@ class LocationDetailcontroller: ButtonBarPagerTabStripViewController {
             newCell?.label.textColor = UIColor.appBlackColor()
             
         }
+        let centerImagetap = UITapGestureRecognizer(target: self, action: #selector(EventViewController.centerImagetap))
+        LocImageView.addGestureRecognizer(centerImagetap)
+        LocImageView.isUserInteractionEnabled = true
         /**********************Location cordinates***********************************/
         
         locationManager = CLLocationManager()
@@ -101,7 +104,12 @@ class LocationDetailcontroller: ButtonBarPagerTabStripViewController {
         
         
     }
-    
+    func centerImagetap(){
+        
+        let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: "PostImageZoomViewController")
+        self.navigationController?.present(vc, animated: true, completion: nil)
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
  
@@ -267,6 +275,7 @@ extension LocationDetailcontroller {
         
         let storyboard      = UIStoryboard(name: Constants.Event, bundle: nil)
         let vc              = storyboard.instantiateViewController(withIdentifier: Constants.MapStoryId) as! EventMapViewController
+        vc.boolForMapTitle = false
         self.navigationController!.pushViewController(vc, animated: true)
         
     }

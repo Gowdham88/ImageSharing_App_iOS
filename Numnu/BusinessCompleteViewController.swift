@@ -63,7 +63,9 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
             
         }
         
-        
+        let centerImagetap = UITapGestureRecognizer(target: self, action: #selector(EventViewController.centerImagetap))
+        BcImageView.addGestureRecognizer(centerImagetap)
+        BcImageView.isUserInteractionEnabled = true
         /**********************set Nav bar****************************/
         
         setNavBar()
@@ -95,7 +97,12 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
 
         // Do any additional setup after loading the view.
     }
-
+    func centerImagetap(){
+        
+        let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: "PostImageZoomViewController")
+        self.navigationController?.present(vc, animated: true, completion: nil)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
