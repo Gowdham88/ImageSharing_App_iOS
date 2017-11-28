@@ -142,7 +142,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         dropdownTableView.isHidden = true
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
         if PrefsManager.sharedinstance.isLoginned {
-            addProfileContainer()
+//            addProfileContainer()
         } else {
             if boolForTitle == false {
                 //                addCollectionContainer()

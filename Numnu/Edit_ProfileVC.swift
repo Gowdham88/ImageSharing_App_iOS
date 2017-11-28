@@ -141,17 +141,21 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         // Hide the navigation bar on the this view controller
         dropdownTableView.isHidden = true
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
-        if PrefsManager.sharedinstance.isLoginned {
-            addProfileContainer()
-        } else {
+//        if PrefsManager.sharedinstance.isLoginned {
+//            addProfileContainer()
+//        } else {
             if boolForTitle == false {
+                if PrefsManager.sharedinstance.isLoginned {
+                    addProfileContainer()
+                } else{
+                    
                 addCollectionContainer()
             }
         }
     }
     override func viewDidAppear(_ animated: Bool) {
         dropdownTableView.isHidden = true
-
+       
         let offset = CGPoint(x: 0,y :0)
         myscrollView.setContentOffset(offset, animated: true)
     }

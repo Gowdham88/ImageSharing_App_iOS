@@ -188,7 +188,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                     return
                     
                 }
-                
+             /*
                 if self.currentReachabilityStatus != .notReachable {
                     
                     self.userLoginApi(uid: (user?.uid)!)
@@ -202,6 +202,10 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                 
                     
                 }
+ */
+                HUD.hide()
+                    self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId)
+
                 
                }
                 

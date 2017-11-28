@@ -169,6 +169,7 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         
         let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: "SettingsEdit_ProfieViewController") as! SettingsEdit_ProfieViewController
+        vc.show        = false
         self.navigationController!.pushViewController(vc, animated: true)
         
 //        let controllers = self.navigationController?.viewControllers
