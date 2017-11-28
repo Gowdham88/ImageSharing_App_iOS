@@ -28,18 +28,22 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sJK-vH-G1D">
-                                        <rect key="frame" x="0.0" y="93" width="320" height="382"/>
+                                        <rect key="frame" x="0.0" y="184" width="320" height="200"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="g5y-2m-2RR">
-                                                <rect key="frame" x="0.0" y="71" width="320" height="240"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="5" translatesAutoresizingMaskIntoConstraints="NO" id="g5y-2m-2RR">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="220"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="220" id="2nA-zk-710"/>
+                                                    <constraint firstAttribute="width" constant="320" id="piX-2P-eML"/>
+                                                </constraints>
                                             </imageView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="g5y-2m-2RR" secondAttribute="trailing" id="4g0-eb-aKV"/>
+                                            <constraint firstItem="g5y-2m-2RR" firstAttribute="width" secondItem="sJK-vH-G1D" secondAttribute="width" id="E3P-qV-W0h"/>
                                             <constraint firstItem="g5y-2m-2RR" firstAttribute="leading" secondItem="sJK-vH-G1D" secondAttribute="leading" id="EdG-lT-aCs"/>
-                                            <constraint firstAttribute="bottom" secondItem="g5y-2m-2RR" secondAttribute="bottom" constant="71" id="QNf-yd-pJs"/>
-                                            <constraint firstItem="g5y-2m-2RR" firstAttribute="width" secondItem="sJK-vH-G1D" secondAttribute="width" id="g9T-Rb-XYt"/>
-                                            <constraint firstItem="g5y-2m-2RR" firstAttribute="top" secondItem="sJK-vH-G1D" secondAttribute="top" constant="71" id="rCF-sK-O3S"/>
+                                            <constraint firstAttribute="bottom" secondItem="g5y-2m-2RR" secondAttribute="bottom" constant="-20" id="QNf-yd-pJs"/>
+                                            <constraint firstItem="g5y-2m-2RR" firstAttribute="top" secondItem="sJK-vH-G1D" secondAttribute="top" id="rCF-sK-O3S"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="delegate" destination="Dwa-XP-O8w" id="S4A-Us-wlm"/>
@@ -61,10 +65,11 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="sJK-vH-G1D" firstAttribute="top" secondItem="lpk-Kh-Pcv" secondAttribute="top" constant="93" id="7Rs-8h-teP"/>
+                                    <constraint firstItem="sJK-vH-G1D" firstAttribute="width" secondItem="lpk-Kh-Pcv" secondAttribute="width" id="0TO-x6-YhN"/>
+                                    <constraint firstItem="sJK-vH-G1D" firstAttribute="top" secondItem="lpk-Kh-Pcv" secondAttribute="top" constant="184" id="7Rs-8h-teP"/>
                                     <constraint firstItem="sJK-vH-G1D" firstAttribute="leading" secondItem="lpk-Kh-Pcv" secondAttribute="leading" id="8CX-hE-hqn"/>
                                     <constraint firstAttribute="trailing" secondItem="sJK-vH-G1D" secondAttribute="trailing" id="AeO-zs-2ug"/>
-                                    <constraint firstAttribute="bottom" secondItem="sJK-vH-G1D" secondAttribute="bottom" constant="93" id="DGh-k7-idJ"/>
+                                    <constraint firstAttribute="bottom" secondItem="sJK-vH-G1D" secondAttribute="bottom" constant="184" id="DGh-k7-idJ"/>
                                     <constraint firstItem="bin-3c-Fwj" firstAttribute="top" secondItem="lpk-Kh-Pcv" secondAttribute="top" constant="20" id="I6g-ra-QyZ"/>
                                     <constraint firstItem="bin-3c-Fwj" firstAttribute="leading" secondItem="lpk-Kh-Pcv" secondAttribute="leading" constant="20" id="vq8-Ud-Mhr"/>
                                 </constraints>
@@ -91,7 +96,7 @@
         <!--Title-->
         <scene sceneID="9Dr-aj-aLb">
             <objects>
-                <viewController storyboardIdentifier="postdetailid" id="mJ8-fd-Pyf" customClass="PostDetailViewController" customModule="Numnu" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="postdetailid" useStoryboardIdentifierAsRestorationIdentifier="YES" id="mJ8-fd-Pyf" customClass="PostDetailViewController" customModule="Numnu" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VZe-Pp-pve">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -235,16 +240,6 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cottage house" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7EP-vb-NJn">
-                                        <rect key="frame" x="141" y="310" width="75" height="36"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="75" id="Og4-Ou-x6C"/>
-                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="36" id="ZfJ-yk-TKZ"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="13"/>
-                                        <color key="textColor" red="0.45882352941176469" green="0.47843137254901957" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="event_ico" translatesAutoresizingMaskIntoConstraints="NO" id="S8b-G0-oRa" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
                                         <rect key="frame" x="10" y="336" width="14" height="15"/>
                                         <constraints>
@@ -257,6 +252,16 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cottage house" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7EP-vb-NJn">
+                                        <rect key="frame" x="141" y="310" width="75" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="75" id="Og4-Ou-x6C"/>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="36" id="ZfJ-yk-TKZ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="13"/>
+                                        <color key="textColor" red="0.45882352941176469" green="0.47843137254901957" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -299,8 +304,8 @@
                                     <constraint firstAttribute="trailing" secondItem="RM3-2w-pIx" secondAttribute="trailing" constant="10" id="zUo-Ik-QWX"/>
                                 </constraints>
                             </view>
-                            <view alpha="0.0" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tM9-9p-dVI">
-                                <rect key="frame" x="400" y="0.0" width="320" height="568"/>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tM9-9p-dVI">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mTc-GP-fFl">
@@ -402,6 +407,7 @@
     </scenes>
     <resources>
         <image name="1" width="1280" height="853"/>
+        <image name="5" width="1280" height="853"/>
         <image name="Bookmark" width="14" height="24"/>
         <image name="Numnu_appicon" width="122" height="122"/>
         <image name="closebtn" width="35" height="35"/>

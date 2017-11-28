@@ -36,7 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /*****Screen opening function******/
         openFirstScreen()
         IQKeyboardManager.sharedManager().enable = true
-
+        IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
+        
         return true
   }
     

@@ -11,6 +11,7 @@ import MapKit
 import CoreLocation
 import GooglePlaces
 import Alamofire
+import IQKeyboardManagerSwift
 
 class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,GMSAutocompleteViewControllerDelegate,UICollectionViewDelegateFlowLayout {
     var dropdownArray = [String] ()
@@ -45,7 +46,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet var saveButton: UIButton!
     let locationManager = CLLocationManager()
-    
+    var Alert = UIAlertController()
     //Upload Image Declaration
     let imagePicker = UIImagePickerController()
     var pickedImagePath: NSURL?
@@ -80,12 +81,13 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        dropdownTableView.isHidden = true
         imagePicker.delegate = self
         profileImage.isUserInteractionEnabled = true
         datePicker.isHidden = true
         superVieww.isHidden = true
         doneView.isHidden = true
-//        superVieww.addSubview(datePicker)
         usernameTextField.delegate = self
         nameTextfield.delegate = self
         emailaddress.delegate = self
@@ -93,8 +95,16 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         cityTextfield.delegate = self
         birthTextfield.delegate = self
         foodTextfield.delegate = self
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
+        
+        let sampleTapGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(recognizer:)))
+       
+        Alert.view.isUserInteractionEnabled = true
+        Alert.view.addGestureRecognizer(sampleTapGesture)
+    IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard (_:))as Selector)
 //        self.view.addGestureRecognizer(tapGesture)
+//
+        
         genderdropButton.addTarget(self, action: #selector(genderClicked), for: UIControlEvents.allTouchEvents)
         doneButotn.addTarget(self, action: #selector(doneClick), for: UIControlEvents.allTouchEvents)
         addButton.addTarget(self, action: #selector(addClicked), for: UIControlEvents.allTouchEvents)
@@ -118,25 +128,30 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         self.navigationController?.navigationBar.titleTextAttributes =
             [NSForegroundColorAttributeName: UIColor.black,
              NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
-      
+       
         // Checking users login
         /***********************Api login******************************/
         apiClient = ApiClient()
     }
-    
+//     @objc override func dismissKeyboard{
+//
+//    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Hide the navigation bar on the this view controller
+        dropdownTableView.isHidden = true
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
         if PrefsManager.sharedinstance.isLoginned {
             addProfileContainer()
         } else {
             if boolForTitle == false {
-//                addCollectionContainer()
+                addCollectionContainer()
             }
         }
     }
     override func viewDidAppear(_ animated: Bool) {
+        dropdownTableView.isHidden = true
+
         let offset = CGPoint(x: 0,y :0)
         myscrollView.setContentOffset(offset, animated: true)
     }
@@ -164,21 +179,32 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     func genderClicked(){
         genderTextfield.resignFirstResponder()
        showGenderActionsheet()
-
+    
     }
+  
     func showGenderActionsheet() {
-        let Alert = UIAlertController(title: "Select Gender", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
-         let MaleAction = UIAlertAction(title: "Male", style: UIAlertActionStyle.default) { _ in
-            self.genderTextfield.text = "Male"
-            self.genderTextfield.resignFirstResponder()
-        }
+
+         Alert = UIAlertController(title: "Select Gender", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
         let FemaleAction = UIAlertAction(title: "Female", style: UIAlertActionStyle.default) { _ in
             self.genderTextfield.text = "Female"
             self.genderTextfield.resignFirstResponder()
+
         }
-        Alert.addAction(MaleAction)
+        let MaleAction = UIAlertAction(title: "Male", style: UIAlertActionStyle.default) { _ in
+            self.genderTextfield.text = "Male"
+            self.genderTextfield.resignFirstResponder()
+
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) { _ in
+        }
         Alert.addAction(FemaleAction)
-        present(Alert, animated: true, completion: nil)
+        Alert.addAction(MaleAction)
+        Alert.addAction(cancelAction)
+        present(Alert, animated: true, completion:nil )
+       
+    }
+    func handleTap(recognizer: UITapGestureRecognizer){
+        dismiss(animated: true, completion: nil)
     }
     func textFieldActive() {
     }
@@ -209,25 +235,25 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     }
     
     /// TextField delegates ///
-    override func touchesBegan(_: Set<UITouch>, with: UIEvent?) {
-        nameTextfield.resignFirstResponder()
-        emailaddress.resignFirstResponder()
-        self.view.endEditing(true)
-    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == foodTextfield {
+            dropdownTableView.isHidden = true
+        }
         textField.resignFirstResponder()
         return true
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        dropdownTableView.isHidden = false
         if textField == foodTextfield {
+            dropdownTableView.isHidden = false
             let substring = (foodTextfield.text! as NSString).replacingCharacters(in: range, with: string )
              loadTagList(tag: substring)
         }else{
+            dropdownTableView.isHidden = true
+
         }
-       
-        return true
+            return true
     }
     
     func searchAutocompleteEntriesWithSubstring(substring: String)
@@ -254,11 +280,16 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             datePicker.isHidden = false
             superVieww.isHidden = false
             doneView.isHidden = false
+            dropdownTableView.isHidden = true
         }else if textField == cityTextfield {
+            dropdownTableView.isHidden = true
+
             let autocompleteController = GMSAutocompleteViewController()
             autocompleteController.delegate = self
             present(autocompleteController, animated: true, completion: nil)
         }else if textField == genderTextfield {
+            dropdownTableView.isHidden = true
+
             genderTextfield.resignFirstResponder()
            showGenderActionsheet()
         }else if textField == foodTextfield {
@@ -283,16 +314,27 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         if textField == foodTextfield || textField == birthTextfield {
             foodTextfield.text = ""
             animateViewMoving(up: false, moveValue: 0)
+            dropdownTableView.isHidden = true
         }
         if textField == birthTextfield {
-            
             self.datePickerValueChanged(sender: datePicker)
             datePicker.isHidden = true
             superVieww.isHidden = true
             doneView.isHidden = true
         }
+        if textField == genderTextfield {
+            genderTextfield.tintColor = .clear
+        }
     }
-   
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+       
+        self.view.endEditing(true)
+    }
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        self.view.endEditing(true)
+
+    }
     func animateViewMoving (up:Bool, moveValue :CGFloat){
         let movementDuration:TimeInterval = 0.3
         let movement:CGFloat = ( up ? -moveValue : moveValue)
@@ -358,7 +400,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         upload(image: profileImage.image!, completion: { URL in
         })
         let Email:NSString = emailaddress.text! as NSString
-        if nameTextfield.text == "" || emailaddress.text == ""  || cityTextfield.text == "" || genderTextfield.text == ""   {
+        if nameTextfield.text == "" || emailaddress.text == ""  || cityTextfield.text == "" || genderTextfield.text == "" || usernameTextField.text == ""  {
             AlertProvider.Instance.showAlert(title: "Oops", subtitle: "Fields Cannot be empty", vc: self)
         } else {
             if isValidEmail(testStr: Email as String) == true {
@@ -506,7 +548,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         {
             cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
         }
-        
+        cell?.selectionStyle = .none
+        self.dropdownTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 60)
         cell?.textLabel?.text = tagnamearray[indexPath.row]
         
         return cell!

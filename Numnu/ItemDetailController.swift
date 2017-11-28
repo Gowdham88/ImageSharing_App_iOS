@@ -67,7 +67,9 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
             
         }
         
-        
+        let centerImagetap = UITapGestureRecognizer(target: self, action: #selector(EventViewController.centerImagetap))
+        ItImageView.addGestureRecognizer(centerImagetap)
+        ItImageView.isUserInteractionEnabled = true
         /**********************set Nav bar****************************/
         
         setNavBar()
@@ -98,7 +100,12 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
 
         // Do any additional setup after loading the view.
     }
-
+    func centerImagetap(){
+        
+        let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: "PostImageZoomViewController")
+        self.navigationController?.present(vc, animated: true, completion: nil)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

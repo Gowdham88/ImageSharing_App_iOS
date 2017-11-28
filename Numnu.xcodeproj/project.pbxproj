@@ -112,8 +112,10 @@
 		B4C5158A1FA085D100348E2A /* BusinessTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C515891FA085D100348E2A /* BusinessTabController.swift */; };
 		B4C515911FA0AC1700348E2A /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C515901FA0AC1600348E2A /* WebViewController.swift */; };
 		B4C7BCEB1F9F74E500B2BEC4 /* PostEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C7BCEA1F9F74E500B2BEC4 /* PostEventTableViewCell.swift */; };
+		BE2E37EC1FCD6ED8000BEE63 /* LuanchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2E37EB1FCD6ED8000BEE63 /* LuanchScreenViewController.swift */; };
 		BE5201F41FBDE82E00462B0E /* UserProfileTagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5201F31FBDE82E00462B0E /* UserProfileTagCollectionViewCell.swift */; };
 		BE57DEF71FBB0BCD00A9C93B /* PostImageZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE57DEF61FBB0BCD00A9C93B /* PostImageZoomViewController.swift */; };
+		BE76CD221FCC219700F6811C /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE76CD211FCC219700F6811C /* UserTableViewCell.swift */; };
 		BEF026A61FC2B5D300100392 /* SettingsEdit_ProfieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF026A51FC2B5D300100392 /* SettingsEdit_ProfieViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -257,8 +259,10 @@
 		B4C515891FA085D100348E2A /* BusinessTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessTabController.swift; sourceTree = "<group>"; };
 		B4C515901FA0AC1600348E2A /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		B4C7BCEA1F9F74E500B2BEC4 /* PostEventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEventTableViewCell.swift; sourceTree = "<group>"; };
+		BE2E37EB1FCD6ED8000BEE63 /* LuanchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuanchScreenViewController.swift; sourceTree = "<group>"; };
 		BE5201F31FBDE82E00462B0E /* UserProfileTagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileTagCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE57DEF61FBB0BCD00A9C93B /* PostImageZoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImageZoomViewController.swift; sourceTree = "<group>"; };
+		BE76CD211FCC219700F6811C /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		BEF026A51FC2B5D300100392 /* SettingsEdit_ProfieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsEdit_ProfieViewController.swift; sourceTree = "<group>"; };
 		FAA3E614BAEE1AD3C19ADB46 /* Pods-Numnu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Numnu.release.xcconfig"; path = "Pods/Target Support Files/Pods-Numnu/Pods-Numnu.release.xcconfig"; sourceTree = "<group>"; };
 		FD87AF37876C16561F7CFD02 /* Pods_Numnu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Numnu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -517,6 +521,7 @@
 				BEF026A51FC2B5D300100392 /* SettingsEdit_ProfieViewController.swift */,
 				B426C68D1F9E0A6B008D586B /* SplashViewController.swift */,
 				B46310231FA323E2009F6F0E /* PostDetailViewController.swift */,
+				BE2E37EB1FCD6ED8000BEE63 /* LuanchScreenViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -638,6 +643,7 @@
 				B4C515871FA085BB00348E2A /* ListTabController.swift */,
 				B4C515891FA085D100348E2A /* BusinessTabController.swift */,
 				B45CBCE91FA9A212004B6E66 /* DefaultHomeController.swift */,
+				BE76CD211FCC219700F6811C /* UserTableViewCell.swift */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -966,8 +972,10 @@
 				B47BD4051F8A615C0099061C /* loginMainVC.swift in Sources */,
 				B47BD4071F8A75FA0099061C /* signupwithEmailVC.swift in Sources */,
 				B41530961F8BBCF1000FB369 /* UserTabController.swift in Sources */,
+				BE2E37EC1FCD6ED8000BEE63 /* LuanchScreenViewController.swift in Sources */,
 				60B4EA441FAB190300C1A6C9 /* SettingsTableViewCell.swift in Sources */,
 				B42214951FC2CDAB00FD56B0 /* IPChecker.m in Sources */,
+				BE76CD221FCC219700F6811C /* UserTableViewCell.swift in Sources */,
 				B40CF89F1FA21A77002DC7E8 /* BusinessTableViewCell.swift in Sources */,
 				B4470EE11FBEE0AC00DC2625 /* AlertProvider.swift in Sources */,
 				B418423F1F8FD1B000CBBA57 /* NotificationsVC.swift in Sources */,

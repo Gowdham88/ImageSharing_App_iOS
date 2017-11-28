@@ -50,6 +50,21 @@ class PostDetailViewController : UIViewController {
         postDEventImage.addGestureRecognizer(tap)
         postDEventImage.isUserInteractionEnabled = true
         
+        let postitemlabeltap = UITapGestureRecognizer(target: self, action: #selector(PostDetailViewController.postitemlabeltap))
+        postDEventPlace.addGestureRecognizer(postitemlabeltap)
+        postDEventPlace.isUserInteractionEnabled = true
+  
+        let posteventdishlabeltap = UITapGestureRecognizer(target: self, action: #selector(PostDetailViewController.posteventdishlabeltap))
+        postDEventDishLabel.addGestureRecognizer(posteventdishlabeltap)
+        postDEventDishLabel.isUserInteractionEnabled = true
+        
+        let posteventlabeltap = UITapGestureRecognizer(target: self, action: #selector(PostDetailViewController.posteventlabeltap))
+        postDEventName.addGestureRecognizer(posteventlabeltap)
+        postDEventName.isUserInteractionEnabled = true
+        
+        let userimagetap = UITapGestureRecognizer(target: self, action: #selector(PostDetailViewController.postDUserImagetap))
+        postDUserImage.addGestureRecognizer(userimagetap)
+        postDUserImage.isUserInteractionEnabled = true
         // Do any additional setup after loading the view.
         
         if (postDEventDishLabel.numberOfVisibleLines > 1) {
@@ -68,10 +83,36 @@ class PostDetailViewController : UIViewController {
         self.navigationController?.isNavigationBarHidden = false
         self.tabBarController?.tabBar.isHidden = false
     }
+    func postDUserImagetap(){
+        
+        let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController")
+        self.navigationController!.pushViewController(vc, animated: true)
+        
+    }
+    func postitemlabeltap(){
+
+        let storyboard = UIStoryboard(name: Constants.ItemDetail, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId)
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
+   
+    func posteventdishlabeltap(){
+        
+        let storyboard = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId)
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
+    
+    func posteventlabeltap(){
+        let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)
+        self.navigationController!.pushViewController(vc, animated: true)
+       
+    }
     func imageTapped() {
         let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: "PostImageZoomViewController")
-//        self.navigationController!.pushViewController(vc, animated: true)
         self.navigationController?.present(vc, animated: true, completion: nil)
     }
     override func didReceiveMemoryWarning() {

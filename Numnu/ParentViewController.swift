@@ -212,7 +212,7 @@ extension ParentViewController {
         collectionContainerView.isHidden = true
         tabScrollView.isHidden           = false
         
-        navigationItemList.title = "Explore"
+        navigationItemList.title = "Numnu"
         
         let button: UIButton = UIButton(type: UIButtonType.custom)
         //set image for button

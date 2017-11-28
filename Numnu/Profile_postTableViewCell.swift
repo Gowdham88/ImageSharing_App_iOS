@@ -38,8 +38,14 @@ class Profile_postTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+//        let posteventlabeltap = UITapGestureRecognizer(target: self, action: #selector(Profile_postTableViewCell.CenterImageTapped))
+//        postUserImage.addGestureRecognizer(posteventlabeltap)
+//        postUserImage.isUserInteractionEnabled = true
     }
-
+    func CenterImageTapped(){
+       
+       
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

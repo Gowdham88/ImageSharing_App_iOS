@@ -70,8 +70,12 @@ class EventViewController: ButtonBarPagerTabStripViewController {
             oldCell?.label.textColor = UIColor.textlightDark()
             newCell?.label.textColor = UIColor.appBlackColor()
             
+          
+            
         }
-        
+        let centerImagetap = UITapGestureRecognizer(target: self, action: #selector(EventViewController.centerImagetap))
+        eventImageView.addGestureRecognizer(centerImagetap)
+        eventImageView.isUserInteractionEnabled = true
     
         /**********************set Nav bar****************************/
         
@@ -103,7 +107,12 @@ class EventViewController: ButtonBarPagerTabStripViewController {
         
         
     }
-
+    func centerImagetap(){
+        
+        let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: "PostImageZoomViewController")
+        self.navigationController?.present(vc, animated: true, completion: nil)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
