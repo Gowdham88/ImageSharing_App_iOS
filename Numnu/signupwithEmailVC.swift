@@ -379,35 +379,35 @@ extension signupwithEmailVC {
     
     func getUserDetails(user:UserList) {
         
-        if let firebaseid = user.firebaseUID {
+        if let firebaseid = user.firebaseuid {
             
             PrefsManager.sharedinstance.UIDfirebase = firebaseid
             
         }
         
-        if let userid = user.id {
-            
-            PrefsManager.sharedinstance.userId = userid
-            
-        }
-        
-        if let username = user.userName {
+        if let username = user.username {
             
             PrefsManager.sharedinstance.username = username
             
         }
-        
-        if let dateofbirth = user.dateOfBirth {
-            
-            PrefsManager.sharedinstance.dateOfBirth = dateofbirth
-            
-        }
-        
         if let gender = user.gender {
             
             PrefsManager.sharedinstance.gender = gender
             
         }
+        
+//        if let dateofbirth = user.dateOfBirth {
+//
+//            PrefsManager.sharedinstance.dateOfBirth = dateofbirth
+//
+//        }
+        //        if let userid = user.id {
+        //
+        //            PrefsManager.sharedinstance.userId = userid
+        //
+        //        }
+        
+       
         
         
         

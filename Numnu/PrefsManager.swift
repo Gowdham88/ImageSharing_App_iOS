@@ -228,16 +228,16 @@ struct PrefsManager {
         }
     }
     
-    var gender : String {
+    var gender : Int {
         
         get {
             
             if checkprefsobject(object: Constants.gender) {
                 
-                return UserDefaults.standard.string(forKey: Constants.gender)!
+                return UserDefaults.standard.integer(forKey: Constants.gender)
             } else {
                 
-                return "empty"
+                return 0
             }
             
         }

@@ -25,6 +25,7 @@ struct ItemList {
     var itemLinkList    : [ItemLinkList]?
     var tagList         : [TagList]?
     
+    
     init?(json: JSON) {
         
         if let id = json["id"].int {
