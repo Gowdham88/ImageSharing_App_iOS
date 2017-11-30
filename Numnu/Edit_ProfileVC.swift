@@ -22,6 +22,32 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     var autocompleteUrls = [String]()
     
     
+    @IBOutlet weak var nameLabel: UITextField!
+    
+    @IBOutlet weak var nameview: UIView!
+    @IBOutlet weak var usernamelabel: UILabel!
+    
+    @IBOutlet weak var usernameview: UIView!
+    @IBOutlet weak var emailaddresslabel: UILabel!
+    
+    @IBOutlet weak var emailaddressview: UIView!
+    
+    @IBOutlet weak var citylabel: UILabel!
+     @IBOutlet weak var genderlabel: UILabel!
+     @IBOutlet weak var birthlabel: UILabel!
+     @IBOutlet weak var fooflabel: UILabel!
+     @IBOutlet weak var descriptionlabel: UILabel!
+    
+    @IBOutlet weak var cityview: UIView!
+    @IBOutlet weak var genderview: UIView!
+    @IBOutlet weak var foodview: UIView!
+    @IBOutlet weak var birthview: UIView!
+    @IBOutlet weak var descriptionview: UIView!
+
+
+
+    
+    
     @IBOutlet weak var cityTableView: UITableView!
     @IBOutlet weak var cancelDatePicker: UIButton!
     @IBOutlet weak var addButton: UIButton!
