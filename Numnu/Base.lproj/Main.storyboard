@@ -658,7 +658,7 @@
                                         <color key="textColor" red="0.50588235294117645" green="0.52941176470588236" blue="0.56470588235294117" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="keU-dd-wio">
+                                    <textField opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="keU-dd-wio">
                                         <rect key="frame" x="35" y="415" width="250" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="uBG-H6-RWI"/>

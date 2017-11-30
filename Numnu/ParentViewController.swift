@@ -193,8 +193,9 @@ extension ParentViewController : UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField == editsearchbyLocation {
             if let place = textField.text {
-                
-                getPlaceApi(place_Str: place)
+               
+                getPlaceApi(place_Str: "\(place)\(string)" as String)
+           
                 let top = CGAffineTransform(translationX: 0, y: 0)
                 
                 UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
@@ -370,9 +371,9 @@ extension ParentViewController : UITableViewDataSource,UITableViewDelegate {
             editsearchbyLocation.text = autocompleteplaceArray[indexPath.row]
 
         }
+ 
         dismissKeyboard()
-   //     setNavBar()
-        
+       
         let top = CGAffineTransform(translationX: 0, y: -self.filtertableView.frame.height)
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
             self.filtertableView.transform = top
