@@ -34,9 +34,9 @@ class BusinessEventViewController: UIViewController,IndicatorInfoProvider {
         
         businessCategoryTableView.delegate   = self
         businessCategoryTableView.dataSource = self
-
+       
     }
-    
+  
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         

@@ -737,6 +737,7 @@
                         <outlet property="eventDescriptionHeight" destination="YFW-Oe-e7y" id="hhn-JG-ue2"/>
                         <outlet property="mainContainerView" destination="6px-BC-kh5" id="qB0-ja-Oy8"/>
                         <outlet property="mainContainerViewBottom" destination="IlD-BM-uOa" id="NSz-Ee-Hbl"/>
+                        <outlet property="myscrollView" destination="Bp9-5t-YNe" id="zqY-D6-9SZ"/>
                         <outlet property="navigationItemList" destination="w1v-Ma-uZP" id="tyu-l1-YDA"/>
                         <outlet property="pagerView" destination="Ogp-uE-AMy" id="ozt-dq-0Oy"/>
                         <outlet property="readMoreButton" destination="zap-vb-pMv" id="P20-ib-uMx"/>
