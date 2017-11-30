@@ -294,6 +294,7 @@
                         <outlet property="eventDescriptionLabel" destination="0A4-Sx-8eI" id="wJ3-lA-m8U"/>
                         <outlet property="mainContainerView" destination="EKD-Uq-tq9" id="Tro-bF-YmK"/>
                         <outlet property="mainContainerViewBottom" destination="ING-nN-A1o" id="6M3-vl-wNM"/>
+                        <outlet property="myscrollView" destination="sy9-94-BJi" id="dIK-q9-F6A"/>
                         <outlet property="navigationItemList" destination="vmp-ri-1jc" id="FOU-Go-ECT"/>
                         <outlet property="pagerView" destination="eYQ-kW-VVX" id="raK-dr-4ep"/>
                         <outlet property="readMoreButton" destination="KR4-Ba-hk7" id="Uej-J6-YBz"/>

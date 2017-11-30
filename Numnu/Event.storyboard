@@ -408,6 +408,7 @@
                         <outlet property="eventTitleLabel" destination="wz1-XR-z7e" id="xfs-aV-Saw"/>
                         <outlet property="mainContainerView" destination="qJZ-CM-9pt" id="gUv-Si-KR0"/>
                         <outlet property="mainContainerViewBottom" destination="yqZ-my-MC5" id="S43-Gc-Gz0"/>
+                        <outlet property="myscrollView" destination="IhJ-Hd-al3" id="Fqg-cC-iXm"/>
                         <outlet property="navigationItemList" destination="Xtw-y6-M2U" id="ZFh-MY-6XS"/>
                         <outlet property="pagerView" destination="cgp-wT-7F1" id="TOd-BD-B2D"/>
                         <outlet property="readMoreButton" destination="WMp-Up-FUj" id="e5W-aV-pPD"/>

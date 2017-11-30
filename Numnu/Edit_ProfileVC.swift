@@ -570,7 +570,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     }
    
     func backButtonClicked() {
-        _ = self.navigationController?.popToRootViewController(animated: true)
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
 /// collectionView for food preferences ///

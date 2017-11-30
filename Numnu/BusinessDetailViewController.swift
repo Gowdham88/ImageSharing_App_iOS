@@ -35,6 +35,7 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
     
     /***************contraints***********************/
     
+    @IBOutlet weak var myscrollView: UIScrollView!
     @IBOutlet weak var shareView: UIView!
     @IBOutlet weak var busDescriptionHeight: NSLayoutConstraint!
     @IBOutlet weak var containerViewTop: NSLayoutConstraint!
@@ -50,7 +51,8 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
         settings.style.selectedBarHeight = 3.0
         settings.style.buttonBarItemFont = UIFont(name: "Avenir-Medium", size: 14)!
         super.viewDidLoad()
-        
+        self.myscrollView.delegate = self
+
         settings.style.buttonBarBackgroundColor = .white
         settings.style.buttonBarItemBackgroundColor = .white
         settings.style.selectedBarBackgroundColor = UIColor.appBlackColor()
@@ -69,7 +71,9 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
             newCell?.label.textColor = UIColor.appBlackColor()
             
         }
-        
+        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(BusinessDetailViewController.navigationTap))
+        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+        self.navigationController?.navigationBar.isUserInteractionEnabled = true
         /**********************set Nav bar****************************/
         
         setNavBar()
@@ -103,7 +107,11 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
 
         
     }
-    
+    func navigationTap(){
+        let offset = CGPoint(x: 0,y :0)
+        self.myscrollView.setContentOffset(offset, animated: true)
+        
+    }
     @IBAction func ButtonReadMore(_ sender: UIButton) {
         
         if isLabelAtMaxHeight {

@@ -457,6 +457,7 @@
                         <outlet property="eventDescriptionHeight" destination="UIp-wp-ThP" id="GMh-vr-pKq"/>
                         <outlet property="mainContainerView" destination="Kol-oG-rp2" id="fLu-kd-c28"/>
                         <outlet property="mainContainerViewBottom" destination="IRi-B8-MRh" id="l2u-Ti-ll6"/>
+                        <outlet property="myscrollView" destination="VRI-eP-ARI" id="8UL-mg-gUl"/>
                         <outlet property="navigationItemList" destination="Qp3-Ni-I7b" id="aaG-Ui-Hxh"/>
                         <outlet property="pagerView" destination="hPy-br-hTK" id="7mt-bE-G8W"/>
                         <outlet property="readMoreButton" destination="OSA-us-qK6" id="44h-LJ-VcV"/>
@@ -878,6 +879,7 @@
                         <outlet property="eventDescriptionHeight" destination="jZa-iA-teb" id="gZX-Ot-c3I"/>
                         <outlet property="mainContainerView" destination="7YT-bR-bj6" id="wm0-s6-hxj"/>
                         <outlet property="mainContainerViewBottom" destination="zK6-wp-lpU" id="mmB-jX-2PY"/>
+                        <outlet property="myscrollView" destination="xtc-ZF-92Z" id="8kT-pw-zrP"/>
                         <outlet property="navigationItemList" destination="yKJ-VN-jWM" id="oZh-MP-kJw"/>
                         <outlet property="pagerView" destination="0qr-rh-9g4" id="JAo-Xq-UWc"/>
                         <outlet property="readMoreButton" destination="mAC-eR-bQx" id="hH6-Bp-2sA"/>

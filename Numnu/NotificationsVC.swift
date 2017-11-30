@@ -21,7 +21,7 @@ class NotificationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             [NSForegroundColorAttributeName: UIColor.black,
              NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
         
-        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(Edit_ProfileVC.navigationTap))
+        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(NotificationsVC.navigationTap))
         self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
         self.navigationController?.navigationBar.isUserInteractionEnabled = true
     }
