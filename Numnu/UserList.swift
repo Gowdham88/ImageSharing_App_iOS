@@ -11,87 +11,142 @@ import SwiftyJSON
 
 struct  UserList {
 
-    var id         : String?
-    var useremail  : String?
-    var userName   : String?
-    var firstName  : String?
-    var lastName   : String?
-    var firebaseUID  : String?
-    var imageURLs   : String?
-    var dateOfBirth   : String?
-    var gender  : String?
-    var userCity   : String?
-    var tagidArray : [Int]?
-    var tagNameArray    : [String]?
-    var tagList : [TagList]?
+    var tagList            :   [TagList]?
+    var imgList            :   [ImgList]?
+    var locList            :   [LocList]?
+    
+    var id                 :    Int?
+    var username           :    String?
+    var description        :    String?
+    var firebaseuid        :    String?
+    var dateofbirth        :    String?
+    var gender             :    Int?
+    var citylocationid     :    Int?
+    var email              :    String?
+    var isemailverified    :    String?
+    var isbusiness         :    Int?
+    var businessusername   :    String?
+    var businessuserphone  :    String?
+    var businessdescription:    String?
+    var createdat          :    String?
+    var updatedat          :    String?
+    var createdby          :    String?
+    var updatedby          :    String?
+    var businessuseraddresslocationid: String?
+
+    
     
     init?(json: JSON) {
-        if let id = json["id"].string {
+        if let id = json["id"].int {
             
             self.id  = id
         }
         
-        if let userName = json["userName"].string {
+        if let username = json["username"].string {
             
-            self.userName = userName
-            
-        }
-        
-        if let firstName = json["firstName"].string {
-            
-            self.firstName = firstName
+            self.username = username
             
         }
         
-        if let lastName = json["lastName"].string {
+        if let description = json["description"].string {
             
-            self.lastName = lastName
-        }
-        
-        if let firebaseUID = json["firebaseUID"].string {
-            
-            self.firebaseUID = firebaseUID
-            
-        }
-        if let imageURLs = json["imageURLs"].string {
-            
-            self.imageURLs = imageURLs
+            self.description = description
             
         }
         
-        if let dateOfBirth = json["dateOfBirth"].string {
+        if let firebaseuid = json["firebaseuid"].string {
             
-            self.dateOfBirth = dateOfBirth
+            self.firebaseuid = firebaseuid
         }
         
-        if let gender = json["gender"].string {
+        if let dateofbirth = json["dateofbirth"].string {
+            
+            self.dateofbirth = dateofbirth
+            
+        }
+        if let gender = json["gender"].int {
             
             self.gender = gender
             
         }
-        if let userCity = json["userCity"].string {
+        
+        if let citylocationid = json["citylocationid"].int {
             
-            self.userCity = userCity
-            
+            self.citylocationid = citylocationid
         }
         
-        /******************sign up************************/
+        if let email = json["email"].string {
+            
+            self.email = email
+            
+        }
+        if let isemailverified = json["isemailverified"].string {
+            
+            self.isemailverified = isemailverified
+            
+        }
+        if let isbusiness = json["isbusiness"].int {
+            
+            self.isbusiness = isbusiness
+            
+        }
+        if let businessusername = json["businessusername"].string {
+            
+            self.businessusername = businessusername
+            
+        }
+        if let businessuserphone = json["businessuserphone"].string {
+            
+            self.businessuserphone = businessuserphone
+            
+        }
+        if let businessdescription = json["businessdescription"].string {
+            
+            self.businessdescription = businessdescription
+            
+        }
+        if let businessuseraddresslocationid = json["businessuseraddresslocationid"].string {
+            
+            self.businessuseraddresslocationid = businessuseraddresslocationid
+            
+        }
+        if let createdat = json["createdat"].string {
+            
+            self.createdat = createdat
+            
+        }
+        if let updatedat = json["updatedat"].string {
+            
+            self.updatedat = updatedat
+            
+        }
+        if let createdby = json["createdby"].string {
+            
+            self.createdby = createdby
+            
+        }
+        if let updatedby = json["updatedby"].string {
+            
+            self.updatedby = updatedby
+            
+        }
+    
+  //  ****************************************** image *********************************************************
         
-        if let tagArray = json["userTags"].array {
+        if let imgArray = json["userimages"].array {
           
-            for item in tagArray {
+            for item in imgArray {
                 
-                let tagItem = TagList(array: item)
-                if tagList == nil {
-                    tagList = []
+                let imgItem = ImgList(array: item)
+                if imgList == nil {
+                    imgList = []
                 }
-                tagList?.append(tagItem)
+                imgList?.append(imgItem)
        
             }
         }
-        
-        /******************Complete sign up************************/
-        
+
+//  ****************************************** tag *********************************************************
         if let tagArray = json["tags"].array {
             
             for item in tagArray {
@@ -105,6 +160,21 @@ struct  UserList {
                 
             }
         }
-       
-    }
-}
+//  ****************************************** location *********************************************************
+        
+        if let locArray = json["citylocation"].array {
+            
+            for item in locArray {
+                
+                let locItem = LocList(array: item)
+                if locList == nil {
+                    locList = []
+                }
+                locList?.append(locItem)
+                
+                }
+            }
+        
+         }
+    
+      }//class

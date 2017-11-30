@@ -326,7 +326,7 @@ extension signInVC {
                    
                     if let user = userlist {
                         
-                        print(user.firebaseUID!)
+                        print(user.firebaseuid!)
                         self.getUserDetails(user: user)
                     
                     }
@@ -354,32 +354,31 @@ extension signInVC {
     
     func getUserDetails(user:UserList) {
         
-        if let firebaseid = user.firebaseUID {
+        if let firebaseid = user.firebaseuid {
             
             PrefsManager.sharedinstance.UIDfirebase = firebaseid
             
         }
         
-        if let userid = user.id {
-            
-            PrefsManager.sharedinstance.userId = userid
-            
-        }
+//        if let userid = user.id {
         
-        if let username = user.userName {
+//            PrefsManager.sharedinstance.userid = userid
+            
+//        }
+        
+        if let username = user.username {
             
             PrefsManager.sharedinstance.username = username
             
         }
         
-        if let dateofbirth = user.dateOfBirth {
-            
-            PrefsManager.sharedinstance.dateOfBirth = dateofbirth
-            
-        }
+//        if let dateofbirth = user.dateOfBirth {
+//
+//            PrefsManager.sharedinstance.dateOfBirth = dateofbirth
+//
+//        }
         
         if let gender = user.gender {
-            
             PrefsManager.sharedinstance.gender = gender
             
         }
