@@ -20,7 +20,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     var tagArray = [String] ()
     var selectedIndex = Int()
     var autocompleteUrls = [String]()
-    
+    var cancelBool : Bool = true
     
     
     @IBOutlet weak var nameview: UIView!
@@ -282,7 +282,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         myscrollView.setContentOffset(offset, animated: true)
     }
     func dateCancelClicked() {
-        
+        cancelBool == true
         datePicker.isHidden = true
         doneView.isHidden = true
         superVieww.isHidden = true
@@ -470,7 +470,12 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             showPopup(table1: true, table2: true)
         }
         if textField == birthTextfield {
-            self.datePickerValueChanged(sender: datePicker)
+            if cancelBool == true {
+                birthTextfield.text = ""
+            }else{
+                self.datePickerValueChanged(sender: datePicker)
+
+            }
             datePicker.isHidden = true
             superVieww.isHidden = true
             doneView.isHidden   = true
