@@ -79,6 +79,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     var pickedImageData: NSData?
     var localPath: String?
     var apiClient : ApiClient!
+    var autocompleteplaceArray = [String]()
     /***************Tags array*****************/
     
     var tagidArray   = [Int]()
@@ -319,7 +320,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             }
             
             
-            cityTableView.isHidden  = false
+            citytableview.isHidden  = false
             
         } else {
             showPopup(table1: true, table2: true)
@@ -367,7 +368,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         }else if textField == foodTextfield {
              showPopup(table1: true, table2: false)
         }else{
-             showPopup(table1: true, table2: false)
+             showPopup(table1: true, table2: true)
         }
     }
     
@@ -684,10 +685,10 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             collectionView.reloadData()
             dropdownTableView.isHidden = true
             foodTextfield.resignFirstResponder()
-        } else if let indexPath = cityTableView.indexPathForSelectedRow  {
-            let currentCell = cityTableView.cellForRow(at: indexPath)
+        } else if let indexPath = citytableview.indexPathForSelectedRow  {
+            let currentCell = citytableview.cellForRow(at: indexPath)
             cityTextfield.text = (currentCell?.textLabel?.text)!
-            cityTableView.isHidden = true
+            citytableview.isHidden = true
             cityTextfield.resignFirstResponder()
             
         }
@@ -818,7 +819,7 @@ extension SettingsEdit_ProfieViewController {
                             
                             DispatchQueue.main.async {
                                 
-                                self.cityTableView.reloadData()
+                                self.citytableview.reloadData()
                                 
                             }
                             
@@ -833,7 +834,7 @@ extension SettingsEdit_ProfieViewController {
                 
                 DispatchQueue.main.async {
                     
-                    self.cityTableView.reloadData()
+                    self.citytableview.reloadData()
                     
                 }
                 
