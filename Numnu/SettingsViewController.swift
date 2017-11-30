@@ -110,7 +110,7 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         if indexPath.section == 1 && indexPath.row == 5 {
             
             delegate?.logout()
-            _ = self.navigationController?.popViewController(animated: true)
+            _ = self.navigationController?.popToRootViewController(animated: true)
         }
         
         let selectedCell:UITableViewCell = tableView.cellForRow(at: indexPath)!

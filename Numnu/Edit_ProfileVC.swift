@@ -804,8 +804,10 @@ extension Edit_ProfileVC : Profile_PostViewControllerDelegae {
     }
     
     func logout() {
+        
         PrefsManager.sharedinstance.isLoginned = false
         addCollectionContainer()
+     
     }
 }
 
