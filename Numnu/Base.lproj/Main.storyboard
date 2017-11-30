@@ -2452,6 +2452,17 @@
                                             <outlet property="delegate" destination="tS3-TA-lAZ" id="5eP-iT-q9B"/>
                                         </connections>
                                     </textField>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UMM-Tc-HQP">
+                                        <rect key="frame" x="35" y="179" width="250" height="230"/>
+                                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="230" id="zdf-Qa-vgo"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="dataSource" destination="tS3-TA-lAZ" id="emU-U1-VnQ"/>
+                                            <outlet property="delegate" destination="tS3-TA-lAZ" id="Oco-mt-Tuk"/>
+                                        </connections>
+                                    </tableView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -2478,6 +2489,7 @@
                                     <constraint firstAttribute="trailing" secondItem="tHV-wr-rY1" secondAttribute="trailing" constant="155" id="9jK-Qi-5no"/>
                                     <constraint firstItem="WZI-I9-zZh" firstAttribute="leading" secondItem="yKR-T6-OWe" secondAttribute="trailing" constant="50" id="AeH-bR-QrP"/>
                                     <constraint firstItem="PA7-vX-R83" firstAttribute="leading" secondItem="6bE-sH-Glz" secondAttribute="leading" constant="35" id="AjN-qq-MVR"/>
+                                    <constraint firstItem="UMM-Tc-HQP" firstAttribute="leading" secondItem="6bE-sH-Glz" secondAttribute="leading" constant="35" id="B6z-be-3Do"/>
                                     <constraint firstAttribute="trailing" secondItem="lXS-g0-qgd" secondAttribute="trailing" constant="35" id="BIE-hm-qA2"/>
                                     <constraint firstAttribute="trailing" secondItem="dgm-om-Tme" secondAttribute="trailing" constant="35" id="BL3-42-M6x"/>
                                     <constraint firstItem="NyL-Ja-GTG" firstAttribute="top" secondItem="2Qw-wD-j8y" secondAttribute="bottom" constant="-1" id="BY3-5r-JCH"/>
@@ -2501,6 +2513,7 @@
                                     <constraint firstItem="7f3-yQ-I6U" firstAttribute="top" secondItem="8Iw-Ya-G8h" secondAttribute="bottom" constant="12" id="LbB-xK-BB0"/>
                                     <constraint firstItem="2Qw-wD-j8y" firstAttribute="top" secondItem="a7h-LC-fjY" secondAttribute="bottom" constant="2" id="LwO-Hk-Ny3"/>
                                     <constraint firstAttribute="trailing" secondItem="zJO-5v-Jme" secondAttribute="trailing" constant="35" id="Mej-I5-3wr"/>
+                                    <constraint firstItem="zJO-5v-Jme" firstAttribute="top" secondItem="UMM-Tc-HQP" secondAttribute="bottom" constant="6" id="Moy-tc-I9K"/>
                                     <constraint firstItem="z6s-PT-awV" firstAttribute="top" secondItem="lgz-8h-WDc" secondAttribute="bottom" constant="5" id="N6e-vT-pql"/>
                                     <constraint firstAttribute="trailing" secondItem="ZxA-1H-2eo" secondAttribute="trailing" constant="25" id="NVR-ao-DjG"/>
                                     <constraint firstItem="zJO-5v-Jme" firstAttribute="leading" secondItem="6bE-sH-Glz" secondAttribute="leading" constant="35" id="O93-KD-oJo"/>
@@ -2525,6 +2538,7 @@
                                     <constraint firstItem="zJE-Fu-L0a" firstAttribute="trailing" secondItem="lXS-g0-qgd" secondAttribute="trailing" constant="10" id="WhT-uu-Ay2"/>
                                     <constraint firstItem="ZxA-1H-2eo" firstAttribute="leading" secondItem="6bE-sH-Glz" secondAttribute="leading" constant="25" id="Wjx-M2-MMg"/>
                                     <constraint firstItem="8Iw-Ya-G8h" firstAttribute="leading" secondItem="6bE-sH-Glz" secondAttribute="leading" id="XJn-dD-Syh"/>
+                                    <constraint firstAttribute="trailing" secondItem="UMM-Tc-HQP" secondAttribute="trailing" constant="35" id="XiA-Hk-hfs"/>
                                     <constraint firstItem="ZxA-1H-2eo" firstAttribute="top" secondItem="2Qw-wD-j8y" secondAttribute="bottom" constant="177" id="YHE-fF-QIr"/>
                                     <constraint firstItem="md8-Cs-pxQ" firstAttribute="leading" secondItem="6bE-sH-Glz" secondAttribute="leading" constant="35" id="YgF-dS-0Jn"/>
                                     <constraint firstItem="tHV-wr-rY1" firstAttribute="leading" secondItem="6bE-sH-Glz" secondAttribute="leading" constant="35" id="YzU-UN-DbV"/>
@@ -2598,6 +2612,7 @@
                         <outlet property="cancelDatePicker" destination="edw-PR-lo0" id="Va7-5S-krc"/>
                         <outlet property="cityTextfield" destination="zJO-5v-Jme" id="bjU-86-EBy"/>
                         <outlet property="citylabel" destination="UVr-h2-9mv" id="Ak0-6H-xwB"/>
+                        <outlet property="citytableview" destination="UMM-Tc-HQP" id="brF-cN-K9I"/>
                         <outlet property="cityview" destination="4Ug-MH-38E" id="Vgy-4z-tfJ"/>
                         <outlet property="collectionView" destination="2Qw-wD-j8y" id="tIb-bq-jJR"/>
                         <outlet property="dateLabel" destination="WZI-I9-zZh" id="iRr-xd-py1"/>
