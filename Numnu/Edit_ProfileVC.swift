@@ -22,6 +22,32 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     var autocompleteUrls = [String]()
     
     
+    
+    @IBOutlet weak var nameview: UIView!
+    @IBOutlet weak var namelabel: UILabel!
+    @IBOutlet weak var usernamelabel: UILabel!
+    
+    @IBOutlet weak var usernameview: UIView!
+    @IBOutlet weak var emailaddresslabel: UILabel!
+    
+    @IBOutlet weak var emailaddressview: UIView!
+    
+    @IBOutlet weak var citylabel: UILabel!
+     @IBOutlet weak var genderlabel: UILabel!
+     @IBOutlet weak var birthlabel: UILabel!
+     @IBOutlet weak var fooflabel: UILabel!
+     @IBOutlet weak var descriptionlabel: UILabel!
+    
+    @IBOutlet weak var cityview: UIView!
+    @IBOutlet weak var genderview: UIView!
+    @IBOutlet weak var foodview: UIView!
+    @IBOutlet weak var birthview: UIView!
+    @IBOutlet weak var descriptionview: UIView!
+
+
+
+    
+    
     @IBOutlet weak var cityTableView: UITableView!
     @IBOutlet weak var cancelDatePicker: UIButton!
     @IBOutlet weak var addButton: UIButton!
@@ -147,7 +173,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
              NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
         
             cityTableView.layer.shadowColor = UIColor.darkGray.cgColor
-            cityTableView.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha:0.5)
+            cityTableView.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha:1.0)
             cityTableView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
             cityTableView.layer.shadowOpacity = 2.0
             cityTableView.layer.shadowRadius = 5
@@ -156,7 +182,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             cityTableView.layer.masksToBounds = false
         
         dropdownTableView.layer.shadowColor = UIColor.darkGray.cgColor
-        dropdownTableView.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 0.5)
+        dropdownTableView.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1.0)
         dropdownTableView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
         dropdownTableView.layer.shadowOpacity = 2.0
         dropdownTableView.layer.shadowRadius = 5
@@ -176,7 +202,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             
         case nameTextfield:
             
-            nameLabel.textColor       = focus ? UIColor.textfieldFocus() : UIColor.labelunfocus()
+            namelabel.textColor       = focus ? UIColor.textfieldFocus() : UIColor.labelunfocus()
             nameview.backgroundColor  = focus ? UIColor.textfieldFocus() : UIColor.textfieldUnfocus()
             
         case emailaddress:
@@ -201,7 +227,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             
         case foodTextfield:
             
-            foodlabel.textColor       = focus ? UIColor.textfieldFocus() : UIColor.labelunfocus()
+            fooflabel.textColor       = focus ? UIColor.textfieldFocus() : UIColor.labelunfocus()
             foodview.backgroundColor  = focus ? UIColor.textfieldFocus() : UIColor.textfieldUnfocus()
             
         case usernameTextField:
@@ -209,14 +235,14 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             usernamelabel.textColor       = focus ? UIColor.textfieldFocus() : UIColor.labelunfocus()
             usernameview.backgroundColor  = focus ? UIColor.textfieldFocus() : UIColor.textfieldUnfocus()
             
-        case descriptionTextField:
+        case descriptionTextfield:
             
             descriptionlabel.textColor       = focus ? UIColor.textfieldFocus() : UIColor.labelunfocus()
             descriptionview.backgroundColor  = focus ? UIColor.textfieldFocus() : UIColor.textfieldUnfocus()
             
         default:
             
-            nameLabel.textColor       = focus ? UIColor.textfieldFocus() : UIColor.labelunfocus()
+            namelabel.textColor       = focus ? UIColor.textfieldFocus() : UIColor.labelunfocus()
             nameview.backgroundColor  = focus ? UIColor.textfieldFocus() : UIColor.textfieldUnfocus()
             
         }
@@ -245,7 +271,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                     addProfileContainer()
                 } else{
                     
-//                addCollectionContainer()
+                addCollectionContainer()
             }
         }
     }
@@ -256,6 +282,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         myscrollView.setContentOffset(offset, animated: true)
     }
     func dateCancelClicked() {
+        
         datePicker.isHidden = true
         doneView.isHidden = true
         superVieww.isHidden = true
@@ -397,7 +424,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
-       
+        focusEdittext(textfield: textField,focus: true)
+
         if textField == birthTextfield {
             showDatePicker()
             birthTextfield.resignFirstResponder()
@@ -429,6 +457,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
 }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        focusEdittext(textfield: textField,focus: false)
+
         if textField == usernameTextField {
             let parameters: Parameters = ["checkusername": usernameTextField.text!]
             let userNameRequest: ApiClient = ApiClient()
