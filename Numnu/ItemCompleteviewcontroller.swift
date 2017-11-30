@@ -19,6 +19,7 @@ class ItemCompleteviewcontroller : ButtonBarPagerTabStripViewController {
     @IBOutlet weak var ItDescriptionLabel: UILabel!
     @IBOutlet weak var readMoreButton: UIButton!
     
+    @IBOutlet weak var eventname: UILabel!
     
     @IBOutlet weak var TabBarView: ButtonBarView!
     @IBOutlet weak var pagerView: UIScrollView!
@@ -78,7 +79,9 @@ class ItemCompleteviewcontroller : ButtonBarPagerTabStripViewController {
         
         tagViewUpdate()
         
-        
+        let businesstap = UITapGestureRecognizer(target: self, action: #selector(ItemCompleteviewcontroller.businesstap))
+        eventname.addGestureRecognizer(businesstap)
+        eventname.isUserInteractionEnabled = true
         ItDescriptionLabel.text = Constants.dummy
         
         /****************Checking number of lines************************/
@@ -97,6 +100,12 @@ class ItemCompleteviewcontroller : ButtonBarPagerTabStripViewController {
         pagerView.alpha = 1
         
         // Do any additional setup after loading the view.
+    }
+    func businesstap(){
+        
+        let storyboard      = UIStoryboard(name: Constants.Event, bundle: nil)
+        let vc              = storyboard.instantiateViewController(withIdentifier: "eventstoryid")
+        self.navigationController!.pushViewController(vc, animated: true)
     }
     func navigationTap(){
         let offset = CGPoint(x: 0,y :0)
