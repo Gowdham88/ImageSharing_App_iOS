@@ -12,6 +12,7 @@ import CoreLocation
 import GooglePlaces
 import Alamofire
 import IQKeyboardManagerSwift
+import SwiftyJSON
 
 class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,UICollectionViewDelegateFlowLayout {
     var dropdownArray = [String] ()
@@ -59,6 +60,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     var pickedImageData: NSData?
     var localPath: String?
     var apiClient : ApiClient!
+    var autocompleteplaceArray = [String]()
     /***************Tags array*****************/
 
     var tagidArray   = [Int]()
@@ -88,8 +90,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        dropdownTableView.isHidden = true
-        cityTableView.isHidden = true
+        
         imagePicker.delegate = self
         profileImage.isUserInteractionEnabled = true
         datePicker.isHidden = true
@@ -113,6 +114,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
 //        self.view.addGestureRecognizer(tapGesture)
 //
         
+        showPopup(table1: true, table2: true)
+        
         genderdropButton.addTarget(self, action: #selector(genderClicked), for: UIControlEvents.allTouchEvents)
         doneButotn.addTarget(self, action: #selector(doneClick), for: UIControlEvents.allTouchEvents)
         addButton.addTarget(self, action: #selector(addClicked), for: UIControlEvents.allTouchEvents)
@@ -128,7 +131,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         dropdownArray = ["Chicken","Chicken chilli","Chicken manjurian","Chicken 65","Chicken fried rice","Grill chicken","Pizza","Burger","Sandwich","Mutton","Mutton chukka","Mutton masala","Mutton fry","Prawn","Gobi chilli","Panneer","Noodles","Mutton soup","Fish fry","Dry fish"]
         
         setNavBar()
-        dropdownTableView.isHidden = true
+        
         myscrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height+100)
         saveButton.layer.cornerRadius = 25.0
         saveButton.clipsToBounds = true
@@ -159,7 +162,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Hide the navigation bar on the this view controller
-        dropdownTableView.isHidden = true
+        showPopup(table1: true, table2: true)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
 //        if PrefsManager.sharedinstance.isLoginned {
 //            addProfileContainer()
@@ -169,12 +172,12 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                     addProfileContainer()
                 } else{
                     
-                addCollectionContainer()
+//                addCollectionContainer()
             }
         }
     }
     override func viewDidAppear(_ animated: Bool) {
-        dropdownTableView.isHidden = true
+       showPopup(table1: true, table2: true)
        
         let offset = CGPoint(x: 0,y :0)
         myscrollView.setContentOffset(offset, animated: true)
@@ -268,18 +271,36 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == foodTextfield {
             dropdownTableView.isHidden = true
+            
+        } else if textField == cityTextfield {
+            
+            cityTableView.isHidden  = true
         }
         textField.resignFirstResponder()
         return true
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
         if textField == foodTextfield {
+            
             dropdownTableView.isHidden = false
             let substring = (foodTextfield.text! as NSString).replacingCharacters(in: range, with: string )
-             loadTagList(tag: substring)
-        }else{
-            dropdownTableView.isHidden = true
+            loadTagList(tag: substring)
+            
+        } else if textField == cityTextfield {
+            
+            if let place = textField.text {
+                
+                getPlaceApi(place_Str: "\(place)\(string)" as String)
+                
+            }
+          
+            
+            cityTableView.isHidden  = false
+            
+        } else {
+            showPopup(table1: true, table2: true)
 
         }
             return true
@@ -309,22 +330,27 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             datePicker.isHidden = false
             superVieww.isHidden = false
             doneView.isHidden = false
-            dropdownTableView.isHidden = true
+            showPopup(table1: true, table2: true)
         }else if textField == cityTextfield {
-            dropdownTableView.isHidden = true
+            showPopup(table1: false, table2: true)
+            cityTableView.isHidden  = false
+            if let place = cityTextfield.text {
+                
+                getPlaceApi(place_Str: place)
+            }
+            
+                
+            
 
-//            let autocompleteController = GMSAutocompleteViewController()
-//            autocompleteController.delegate = self
-//            present(autocompleteController, animated: true, completion: nil)
-        }else if textField == genderTextfield {
-            dropdownTableView.isHidden = true
+        } else if textField == genderTextfield {
+            showPopup(table1: true, table2: true)
 
-            genderTextfield.resignFirstResponder()
+           genderTextfield.resignFirstResponder()
            showGenderActionsheet()
         }else if textField == foodTextfield {
-            dropdownTableView.isHidden = false
+            showPopup(table1: true, table2: false)
         }else{
-            dropdownTableView.isHidden = true
+            showPopup(table1: true, table2: true)
         }
 }
     
@@ -340,20 +366,37 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 }
             })
         }
-        if textField == foodTextfield || textField == birthTextfield {
+        if textField == foodTextfield || textField == birthTextfield  {
             foodTextfield.text = ""
             animateViewMoving(up: false, moveValue: 0)
-            dropdownTableView.isHidden = true
+            showPopup(table1: true, table2: true)
         }
         if textField == birthTextfield {
             self.datePickerValueChanged(sender: datePicker)
             datePicker.isHidden = true
             superVieww.isHidden = true
-            doneView.isHidden = true
+            doneView.isHidden   = true
+            
         }
         if textField == genderTextfield {
             genderTextfield.tintColor = .clear
         }
+    }
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            self.cityTableView.isHidden = true
+        }, completion: nil)
+        
+        dismissKeyboard()
+        
+        if textField == cityTextfield {
+            
+            cityTextfield.text = ""
+            
+        }
+        
+        return false
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
        
@@ -569,35 +612,66 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     /// TableView Delegates and Datasources ///
      func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tagnamearray.count
+        
+        if tableView == dropdownTableView {
+            
+            return tagnamearray.count
+            
+        } else {
+            
+            return autocompleteplaceArray.count
+        }
+    
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell : UITableViewCell? = dropdownTableView.dequeueReusableCell(withIdentifier: "cell")
-        if(cell == nil)
-        {
-            cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
-        }
-        cell?.selectionStyle = .none
-        self.dropdownTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 60)
-        cell?.textLabel?.text = tagnamearray[indexPath.row]
         
-        return cell!
+        if tableView == dropdownTableView {
+            
+            var cell : UITableViewCell? = dropdownTableView.dequeueReusableCell(withIdentifier: "cell")
+            if(cell == nil)
+            {
+                cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
+            }
+            cell?.selectionStyle = .none
+            self.dropdownTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 60)
+            cell?.textLabel?.text = tagnamearray[indexPath.row]
+            
+            return cell!
+            
+            
+        } else {
+            
+            var cell : UITableViewCell? = cityTableView.dequeueReusableCell(withIdentifier: "cell")
+            if(cell == nil)
+            {
+                cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
+            }
+            cell?.selectionStyle = .none
+            self.cityTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 60)
+            cell?.textLabel?.text = autocompleteplaceArray[indexPath.row]
+            
+            return cell!
+            
+            
+        }
+        
+       
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let lastRowIndex = dropdownTableView.numberOfRows(inSection: 0)
         if indexPath.row == lastRowIndex {
             dropdownTableView.allowsSelection = true
-    } else {
+         } else {
             dropdownTableView.allowsSelection = true
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let indexPath = dropdownTableView.indexPathForSelectedRow  {
-            let currentCell = dropdownTableView.cellForRow(at: indexPath) as! UITableViewCell
-            dropdownString = (currentCell.textLabel?.text)!
+            let currentCell = dropdownTableView.cellForRow(at: indexPath)
+            dropdownString = (currentCell?.textLabel?.text)!
             if tagArray.contains(dropdownString) {
                 print("already exist")
             }else{
@@ -606,6 +680,12 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             collectionView.reloadData()
             dropdownTableView.isHidden = true
             foodTextfield.resignFirstResponder()
+        } else if let indexPath = cityTableView.indexPathForSelectedRow  {
+            let currentCell = cityTableView.cellForRow(at: indexPath)
+            cityTextfield.text = (currentCell?.textLabel?.text)!
+            cityTableView.isHidden = true
+            cityTextfield.resignFirstResponder()
+            
         }
     }
 }
@@ -649,5 +729,65 @@ extension Edit_ProfileVC {
                 }
             }
         })
+    }
+    
+    
+    /************************City Api****************************/
+    
+    func getPlaceApi(place_Str:String) {
+        
+        autocompleteplaceArray.removeAll()
+        
+        let parameters: Parameters = ["input": place_Str ,"types" : "geocode" , "key" : "AIzaSyDmfYE1gIA6UfjrmOUkflK9kw0nLZf0nYw"]
+        
+        Alamofire.request(Constants.PlaceApiUrl, parameters: parameters).validate().responseJSON { response in
+            
+            switch response.result {
+            case .success:
+                if let value = response.result.value {
+                    let json = JSON(value)
+                    if let status = json["status"].string {
+                        print(status)
+                        if let place_dic = json["predictions"].array {
+                            
+                            for item in place_dic {
+                                
+                                let placeName = item["description"].string ?? "empty"
+                                self.autocompleteplaceArray.append(placeName)
+                                
+                            }
+                            
+                            DispatchQueue.main.async {
+                                
+                                self.cityTableView.reloadData()
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            case .failure(let error):
+                print(error)
+                
+                DispatchQueue.main.async {
+                    
+                    self.cityTableView.reloadData()
+                    
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+    func showPopup(table1: Bool,table2 : Bool){
+    
+        cityTableView.isHidden      = table1
+        dropdownTableView.isHidden  = table2
+     
     }
 }
