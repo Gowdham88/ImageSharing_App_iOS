@@ -286,5 +286,6 @@ extension Profile_PostViewController :SettingsViewControllerDelegate {
     func logout() {
         
         delegate?.logout()
+        
     }
 }
