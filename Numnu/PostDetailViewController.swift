@@ -85,8 +85,9 @@ class PostDetailViewController : UIViewController {
     }
     func postDUserImagetap(){
         
-        let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController")
+        let storyboard  = UIStoryboard(name: Constants.Main, bundle: nil)
+        let vc          = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
+        vc.boolForBack = false
         self.navigationController!.pushViewController(vc, animated: true)
         
     }

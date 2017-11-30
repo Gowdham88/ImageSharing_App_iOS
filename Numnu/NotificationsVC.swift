@@ -21,13 +21,20 @@ class NotificationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             [NSForegroundColorAttributeName: UIColor.black,
              NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
         
+        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(Edit_ProfileVC.navigationTap))
+        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+        self.navigationController?.navigationBar.isUserInteractionEnabled = true
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    func navigationTap(){
+        let offset = CGPoint(x: 0,y :0)
+        self.notificationTableView.setContentOffset(offset, animated: true)
+        
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10

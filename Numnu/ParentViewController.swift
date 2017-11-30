@@ -147,16 +147,16 @@ extension ParentViewController : UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
        
-        if let place = textField.text {
-            
-            getPlaceApi(place_Str: place)
-            
-        }
+//        if let place = textField.text {
+//
+//            getPlaceApi(place_Str: place)
+//
+//        }
         
         let top = CGAffineTransform(translationX: 0, y: 0)
         
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-            self.filtertableView.isHidden = false
+            self.filtertableView.isHidden = true
             self.filtertableView.transform = top
         }, completion: nil)
         dismissKeyboard()
@@ -191,7 +191,20 @@ extension ParentViewController : UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
+        if textField == editsearchbyLocation {
+            if let place = textField.text {
+                
+                getPlaceApi(place_Str: place)
+                let top = CGAffineTransform(translationX: 0, y: 0)
+                
+                UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                    self.filtertableView.isHidden = false
+                    self.filtertableView.transform = top
+                }, completion: nil)
+//                dismissKeyboard()
+                
+            }
+        }
         
         
         return true
@@ -346,15 +359,20 @@ extension ParentViewController : UITableViewDataSource,UITableViewDelegate {
             
         } else {
             
-            tableView.allowsSelection = false
+            tableView.allowsSelection = true
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        editsearchbyLocation.text = autocompleteplaceArray[indexPath.row]
+        if let indexPath = tableView.indexPathForSelectedRow  {
+            let currentCell = tableView.cellForRow(at: indexPath) as! UITableViewCell
+            editsearchbyLocation.text = (currentCell.textLabel?.text)
+            editsearchbyLocation.text = autocompleteplaceArray[indexPath.row]
+
+        }
+//        editsearchbyLocation.text = autocompleteplaceArray[indexPath.row]
         dismissKeyboard()
-        setNavBar()
+   //     setNavBar()
         
         let top = CGAffineTransform(translationX: 0, y: -self.filtertableView.frame.height)
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {

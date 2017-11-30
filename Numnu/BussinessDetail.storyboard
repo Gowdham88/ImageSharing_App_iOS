@@ -89,7 +89,7 @@
                                                         <rect key="frame" x="297" y="15" width="15" height="20"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
-                                                        <state key="normal" image="bluearrow"/>
+                                                        <state key="normal" image="Shape_new@1x"/>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -309,7 +309,7 @@
     <resources>
         <image name="4" width="1280" height="824"/>
         <image name="Bookmark" width="14" height="24"/>
-        <image name="bluearrow" width="11" height="17"/>
+        <image name="Shape_new@1x" width="8" height="12"/>
         <image name="event_ico" width="25" height="27"/>
         <image name="share" width="18" height="20"/>
     </resources>

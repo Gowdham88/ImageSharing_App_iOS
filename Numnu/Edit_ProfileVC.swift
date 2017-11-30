@@ -13,12 +13,16 @@ import GooglePlaces
 import Alamofire
 import IQKeyboardManagerSwift
 
-class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,GMSAutocompleteViewControllerDelegate,UICollectionViewDelegateFlowLayout {
+class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,UICollectionViewDelegateFlowLayout {
     var dropdownArray = [String] ()
     var dropdownString = String ()
     var tagArray = [String] ()
     var selectedIndex = Int()
     var autocompleteUrls = [String]()
+    
+    
+    @IBOutlet weak var cityTableView: UITableView!
+    @IBOutlet weak var cancelDatePicker: UIButton!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var doneButotn: UIButton!
     @IBOutlet weak var doneView: UIView!
@@ -39,6 +43,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     @IBOutlet var genderTextfield: UITextField!
     @IBOutlet var birthTextfield: UITextField!
     @IBOutlet var foodTextfield: UITextField!
+    
+    @IBOutlet weak var descriptionTextfield: UITextField!
     @IBOutlet weak var navigationItemList: UINavigationItem!
     var show : Bool = false
     var boolForTitle: Bool = false
@@ -57,7 +63,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
 
     var tagidArray   = [Int]()
     var tagnamearray = [String]()
-    
+/*
     // place autocomplete //
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         dismiss(animated: true, completion: nil)
@@ -78,11 +84,12 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
-    
+ */
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         dropdownTableView.isHidden = true
+        cityTableView.isHidden = true
         imagePicker.delegate = self
         profileImage.isUserInteractionEnabled = true
         datePicker.isHidden = true
@@ -95,6 +102,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         cityTextfield.delegate = self
         birthTextfield.delegate = self
         foodTextfield.delegate = self
+        descriptionTextfield.delegate = self
         
         let sampleTapGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(recognizer:)))
        
@@ -108,9 +116,15 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         genderdropButton.addTarget(self, action: #selector(genderClicked), for: UIControlEvents.allTouchEvents)
         doneButotn.addTarget(self, action: #selector(doneClick), for: UIControlEvents.allTouchEvents)
         addButton.addTarget(self, action: #selector(addClicked), for: UIControlEvents.allTouchEvents)
+        cancelDatePicker.addTarget(self, action: #selector(dateCancelClicked), for: UIControlEvents.allTouchEvents)
 
         foodTextfield.addTarget(self, action: #selector(textFieldActive), for: UIControlEvents.allTouchEvents)
-
+        
+        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(Edit_ProfileVC.navigationTap))
+        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+        self.navigationController?.navigationBar.isUserInteractionEnabled = true
+        
+        
         dropdownArray = ["Chicken","Chicken chilli","Chicken manjurian","Chicken 65","Chicken fried rice","Grill chicken","Pizza","Burger","Sandwich","Mutton","Mutton chukka","Mutton masala","Mutton fry","Prawn","Gobi chilli","Panneer","Noodles","Mutton soup","Fish fry","Dry fish"]
         
         setNavBar()
@@ -133,29 +147,44 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         /***********************Api login******************************/
         apiClient = ApiClient()
     }
-//     @objc override func dismissKeyboard{
-//
-//    }
+    func navigationTap(){
+        let offset = CGPoint(x: 0,y :0)
+        myscrollView.setContentOffset(offset, animated: true)
+     
+    }
+    func clickOnNavButton() {
+        let offset = CGPoint(x: 0,y :0)
+        myscrollView.setContentOffset(offset, animated: true)
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Hide the navigation bar on the this view controller
         dropdownTableView.isHidden = true
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
-        if PrefsManager.sharedinstance.isLoginned {
-            addProfileContainer()
-        } else {
+//        if PrefsManager.sharedinstance.isLoginned {
+//            addProfileContainer()
+//        } else {
             if boolForTitle == false {
+                if PrefsManager.sharedinstance.isLoginned {
+                    addProfileContainer()
+                } else{
+                    
                 addCollectionContainer()
             }
         }
     }
     override func viewDidAppear(_ animated: Bool) {
         dropdownTableView.isHidden = true
-
+       
         let offset = CGPoint(x: 0,y :0)
         myscrollView.setContentOffset(offset, animated: true)
     }
-    
+    func dateCancelClicked() {
+        datePicker.isHidden = true
+        doneView.isHidden = true
+        superVieww.isHidden = true
+        birthTextfield.text = ""
+    }
     func addClicked() {
         if foodTextfield.text == "" {
           print("could not add empty fields")
@@ -284,9 +313,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         }else if textField == cityTextfield {
             dropdownTableView.isHidden = true
 
-            let autocompleteController = GMSAutocompleteViewController()
-            autocompleteController.delegate = self
-            present(autocompleteController, animated: true, completion: nil)
+//            let autocompleteController = GMSAutocompleteViewController()
+//            autocompleteController.delegate = self
+//            present(autocompleteController, animated: true, completion: nil)
         }else if textField == genderTextfield {
             dropdownTableView.isHidden = true
 
@@ -379,9 +408,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         yearLabel.text = year
 }
     func addCollectionContainer(){
-        let storyboard        = UIStoryboard(name: Constants.Auth, bundle: nil)
-        let controller        = storyboard.instantiateViewController(withIdentifier: "signupwithEmailVC")
-        controller.view.frame = self.view.bounds;
+        let storyboard         = UIStoryboard(name: Constants.Auth, bundle: nil)
+        let controller         = storyboard.instantiateViewController(withIdentifier: "signupwithEmailVC")
+        controller.view.frame = self.view.bounds
         controller.willMove(toParentViewController: self)
         self.view.addSubview(controller.view)
         self.addChildViewController(controller)
@@ -407,6 +436,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 PrefsManager.sharedinstance.isLoginned = true
                 let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
                 let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
+                vc.boolForBack = false
                 vc.delegate    = self
                 self.navigationController!.pushViewController(vc, animated: true)
                 let parameters: Parameters = ["username": usernameTextField.text!, "firstname":nameTextfield.text! , "lastname" : "" ,"firebaseuid" : "bIBh7fZXL1OP7NkGJIsPHucAPQA3" ,"dateofbirth": birthTextfield.text! , "gender": genderTextfield.text! ,"isbusinessuser": "0" , "email": emailaddress.text! ,  "citylocationid": "1", "createdby": "2" , "updatedby": "2" , "clientApp": "iosapp"  , "clientip": "765.768.7868.8888"  ]
