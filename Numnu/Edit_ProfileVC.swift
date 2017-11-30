@@ -407,14 +407,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             showPopup(table1: true, table2: true)
         }else if textField == cityTextfield {
             showPopup(table1: false, table2: true)
-            cityTableView.isHidden  = false
-            if let place = cityTextfield.text {
-                
-                getPlaceApi(place_Str: place)
-            }
             
-                
-            
+          
 
         } else if textField == genderTextfield {
             showPopup(table1: true, table2: true)
