@@ -331,6 +331,7 @@
                         <outlet property="mainContainerViewBottom" destination="YrJ-k0-NmD" id="REA-cv-Dei"/>
                         <outlet property="maplabel" destination="mxk-qW-XnV" id="gWl-Yy-Pfd"/>
                         <outlet property="mapview" destination="wmo-JJ-5vE" id="42l-Q4-WDF"/>
+                        <outlet property="myscrollView" destination="m0z-X5-pjs" id="nRj-34-UJq"/>
                         <outlet property="navigationItemList" destination="0Wm-9T-80V" id="CVB-bt-Esf"/>
                         <outlet property="pagerView" destination="HJY-3M-5mm" id="Dhf-nq-Bh2"/>
                         <outlet property="shareView" destination="YZm-xc-Jwo" id="A6a-pt-aTX"/>

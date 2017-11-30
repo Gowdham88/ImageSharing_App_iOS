@@ -60,6 +60,11 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
             
         }
         
+        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(ParentViewController.navigationTap))
+        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+        self.navigationController?.navigationBar.isUserInteractionEnabled = true
+
+        
         hideKeyboardWhenTappedAround()
         buttonTabBarView.isHidden = true
         
@@ -73,7 +78,11 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
         filtertable.dataSource = self
         
     }
-
+    func navigationTap(){
+        let offset = CGPoint(x: 0,y :0)
+        self.containerView.setContentOffset(offset, animated: true)
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
@@ -122,19 +131,6 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
        
     }
   
-    func setnavBar()  {
-        
-        let searchController = UISearchController(searchResultsController: nil)
-        if #available(iOS 11.0, *) {
-           navigationController?.navigationBar.prefersLargeTitles = true
-            navigationItem.searchController = searchController
-            navigationItem.hidesSearchBarWhenScrolling = true
-        } else {
-            // Fallback on earlier versions
-        }
-       
-        
-    }
 
 }
 
@@ -152,6 +148,9 @@ extension ParentViewController : UITextFieldDelegate {
 //            getPlaceApi(place_Str: place)
 //
 //        }
+        if textField == editsearchbyItem {
+            setNavBar()
+        }
         
         let top = CGAffineTransform(translationX: 0, y: 0)
         

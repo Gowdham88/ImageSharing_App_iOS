@@ -21,10 +21,16 @@ class MenuItemViewController: UIViewController {
         menuItemTableview.delegate   = self
         menuItemTableview.dataSource = self
        // Do any additional setup after loading the view.
-        
+        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(MenuItemViewController.navigationTap))
+        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+        self.navigationController?.navigationBar.isUserInteractionEnabled = true
         setNavBar()
     }
-    
+    func navigationTap(){
+        let offset = CGPoint(x: 0,y :0)
+        self.menuItemTableview.setContentOffset(offset, animated: true)
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

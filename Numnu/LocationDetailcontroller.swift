@@ -14,6 +14,7 @@ class LocationDetailcontroller: ButtonBarPagerTabStripViewController {
     
     @IBOutlet weak var LocImageView: ImageExtender!
     @IBOutlet weak var LocTitleLabel: UILabel!
+    @IBOutlet weak var myscrollView: UIScrollView!
     
     @IBOutlet weak var LocAddressLabel: UILabel!
     
@@ -68,6 +69,10 @@ class LocationDetailcontroller: ButtonBarPagerTabStripViewController {
             newCell?.label.textColor = UIColor.appBlackColor()
             
         }
+        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(LocationDetailcontroller.navigationTap))
+        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+        self.navigationController?.navigationBar.isUserInteractionEnabled = true
+        
         let centerImagetap = UITapGestureRecognizer(target: self, action: #selector(EventViewController.centerImagetap))
         LocImageView.addGestureRecognizer(centerImagetap)
         LocImageView.isUserInteractionEnabled = true
@@ -104,6 +109,12 @@ class LocationDetailcontroller: ButtonBarPagerTabStripViewController {
         
         
     }
+    func navigationTap(){
+        let offset = CGPoint(x: 0,y :0)
+        self.myscrollView.setContentOffset(offset, animated: true)
+        
+    }
+    
     func centerImagetap(){
         
         let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)

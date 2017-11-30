@@ -145,11 +145,84 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         self.navigationController?.navigationBar.titleTextAttributes =
             [NSForegroundColorAttributeName: UIColor.black,
              NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
-       
+        
+            cityTableView.layer.shadowColor = UIColor.darkGray.cgColor
+            cityTableView.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha:0.5)
+            cityTableView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+            cityTableView.layer.shadowOpacity = 2.0
+            cityTableView.layer.shadowRadius = 5
+            cityTableView.layer.cornerRadius = 10
+            cityTableView.clipsToBounds = true
+            cityTableView.layer.masksToBounds = false
+        
+        dropdownTableView.layer.shadowColor = UIColor.darkGray.cgColor
+        dropdownTableView.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 0.5)
+        dropdownTableView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+        dropdownTableView.layer.shadowOpacity = 2.0
+        dropdownTableView.layer.shadowRadius = 5
+        dropdownTableView.layer.cornerRadius = 10
+        dropdownTableView.clipsToBounds = true
+        dropdownTableView.layer.masksToBounds = false
+
+        
         // Checking users login
         /***********************Api login******************************/
         apiClient = ApiClient()
     }
+    
+    func focusEdittext(textfield : UITextField,focus:Bool) {
+        
+        switch textfield {
+            
+        case nameTextfield:
+            
+            nameLabel.textColor       = focus ? UIColor.textfieldFocus() : UIColor.labelunfocus()
+            nameview.backgroundColor  = focus ? UIColor.textfieldFocus() : UIColor.textfieldUnfocus()
+            
+        case emailaddress:
+            
+            emailaddresslabel.textColor       = focus ? UIColor.textfieldFocus() : UIColor.labelunfocus()
+            emailaddressview.backgroundColor  = focus ? UIColor.textfieldFocus() : UIColor.textfieldUnfocus()
+            
+        case cityTextfield:
+            
+            citylabel.textColor       = focus ? UIColor.textfieldFocus() : UIColor.labelunfocus()
+            cityview.backgroundColor  = focus ? UIColor.textfieldFocus() : UIColor.textfieldUnfocus()
+            
+        case genderTextfield:
+            
+            genderlabel.textColor       = focus ? UIColor.textfieldFocus() : UIColor.labelunfocus()
+            genderview.backgroundColor  = focus ? UIColor.textfieldFocus() : UIColor.textfieldUnfocus()
+            
+        case birthTextfield:
+            
+            birthlabel.textColor       = focus ? UIColor.textfieldFocus() : UIColor.labelunfocus()
+            birthview.backgroundColor  = focus ? UIColor.textfieldFocus() : UIColor.textfieldUnfocus()
+            
+        case foodTextfield:
+            
+            foodlabel.textColor       = focus ? UIColor.textfieldFocus() : UIColor.labelunfocus()
+            foodview.backgroundColor  = focus ? UIColor.textfieldFocus() : UIColor.textfieldUnfocus()
+            
+        case usernameTextField:
+            
+            usernamelabel.textColor       = focus ? UIColor.textfieldFocus() : UIColor.labelunfocus()
+            usernameview.backgroundColor  = focus ? UIColor.textfieldFocus() : UIColor.textfieldUnfocus()
+            
+        case descriptionTextField:
+            
+            descriptionlabel.textColor       = focus ? UIColor.textfieldFocus() : UIColor.labelunfocus()
+            descriptionview.backgroundColor  = focus ? UIColor.textfieldFocus() : UIColor.textfieldUnfocus()
+            
+        default:
+            
+            nameLabel.textColor       = focus ? UIColor.textfieldFocus() : UIColor.labelunfocus()
+            nameview.backgroundColor  = focus ? UIColor.textfieldFocus() : UIColor.textfieldUnfocus()
+            
+        }
+        
+    }
+    
     func navigationTap(){
         let offset = CGPoint(x: 0,y :0)
         myscrollView.setContentOffset(offset, animated: true)
@@ -324,6 +397,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
+       
         if textField == birthTextfield {
             showDatePicker()
             birthTextfield.resignFirstResponder()
@@ -634,9 +708,10 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
             }
             cell?.selectionStyle = .none
-            self.dropdownTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 60)
             cell?.textLabel?.text = tagnamearray[indexPath.row]
-            
+//            cell?.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1.0)
+            cell?.textLabel?.textColor = UIColor(red: 129/255.0, green: 135/255.0, blue: 155/255.0, alpha: 1.0)
+
             return cell!
             
             
@@ -648,8 +723,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
             }
             cell?.selectionStyle = .none
-            self.cityTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 60)
+//            cell?.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1.0)
             cell?.textLabel?.text = autocompleteplaceArray[indexPath.row]
+            cell?.textLabel?.textColor = UIColor(red: 129/255.0, green: 135/255.0, blue: 155/255.0, alpha: 1.0)
             
             return cell!
             
