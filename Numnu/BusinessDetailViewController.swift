@@ -71,13 +71,16 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
             newCell?.label.textColor = UIColor.appBlackColor()
             
         }
-        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(BusinessDetailViewController.navigationTap))
-        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
-        self.navigationController?.navigationBar.isUserInteractionEnabled = true
+        let businesstap = UITapGestureRecognizer(target: self, action: #selector(BusinessDetailViewController.businesstap))
+        buseventLabel.addGestureRecognizer(businesstap)
+        buseventLabel.isUserInteractionEnabled = true
         /**********************set Nav bar****************************/
         
         setNavBar()
-    
+        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(BusinessDetailViewController.navigationTap))
+        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+        self.navigationController?.navigationBar.isUserInteractionEnabled = true
+
         
         /**********************Tap registration****************************/
         
@@ -106,6 +109,12 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
        
 
         
+    }
+    func businesstap(){
+     
+        let storyboard      = UIStoryboard(name: Constants.Event, bundle: nil)
+        let vc              = storyboard.instantiateViewController(withIdentifier: "eventstoryid")
+        self.navigationController!.pushViewController(vc, animated: true)
     }
     func navigationTap(){
         let offset = CGPoint(x: 0,y :0)
