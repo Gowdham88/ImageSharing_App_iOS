@@ -25,9 +25,17 @@ class DefaultHomeController: UIViewController,IndicatorInfoProvider {
         ImagesArray = [UIImage(named: "1.png")!,UIImage(named: "2.png")!,UIImage(named: "3.png")!,UIImage(named: "4.png")!]
         namesArray = ["Flatron","Masuike","Umami Burger","Ada Salad"]
        locationArray = ["Montreal","Miami","New Orleans","Miami"]
+        
+        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(Edit_ProfileVC.navigationTap))
+        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+        self.navigationController?.navigationBar.isUserInteractionEnabled = true
         // Do any additional setup after loading the view.
     }
-
+    func navigationTap(){
+        let offset = CGPoint(x: 0,y :0)
+        self.eventDefaultTableview.setContentOffset(offset, animated: true)
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -80,7 +88,6 @@ extension DefaultHomeController : UICollectionViewDataSource,UICollectionViewDel
         cell.eventImage.image = ImagesArray[indexPath.row]
         cell.eventLabelname.text = namesArray[indexPath.row]
         cell.eventLocationname.text = locationArray[indexPath.row]
-
         return cell
    
     }

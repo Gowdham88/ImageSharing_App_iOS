@@ -11,6 +11,7 @@ import XLPagerTabStrip
 
 class EventViewController: ButtonBarPagerTabStripViewController {
     
+    @IBOutlet weak var myscrollView: UIScrollView!
     @IBOutlet weak var eventImageView: ImageExtender!
     @IBOutlet weak var eventTitleLabel: UILabel!
     
@@ -52,7 +53,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
         settings.style.selectedBarHeight = 3.0
          settings.style.buttonBarItemFont = UIFont(name: "Avenir-Medium", size: 14)!
         super.viewDidLoad()
-        
+        myscrollView.delegate = self
         settings.style.buttonBarBackgroundColor = .white
         settings.style.buttonBarItemBackgroundColor = .white
         settings.style.selectedBarBackgroundColor = UIColor.appBlackColor()
@@ -69,10 +70,15 @@ class EventViewController: ButtonBarPagerTabStripViewController {
             guard changeCurrentIndex == true else { return }
             oldCell?.label.textColor = UIColor.textlightDark()
             newCell?.label.textColor = UIColor.appBlackColor()
-            
+         
+          
           
             
         }
+        let navigationOnTap = UITapGestureRecognizer(target:self,action:#selector(EventViewController.navigationTap))
+        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+        self.navigationController?.navigationBar.isUserInteractionEnabled = true
+        
         let centerImagetap = UITapGestureRecognizer(target: self, action: #selector(EventViewController.centerImagetap))
         eventImageView.addGestureRecognizer(centerImagetap)
         eventImageView.isUserInteractionEnabled = true
@@ -105,6 +111,11 @@ class EventViewController: ButtonBarPagerTabStripViewController {
            
         }
         
+        
+    }
+    func navigationTap(){
+        let offset = CGPoint(x: 0,y :0)
+        self.myscrollView.setContentOffset(offset, animated: true)
         
     }
     func centerImagetap(){
@@ -285,7 +296,7 @@ extension EventViewController {
     
     func backButtonClicked() {
         
-        _ = self.navigationController?.popToRootViewController(animated: true)
+        _ = self.navigationController?.popViewController(animated: true)
         
     }
     

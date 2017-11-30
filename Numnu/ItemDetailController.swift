@@ -18,6 +18,7 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
     @IBOutlet weak var ItDescriptionLabel: UILabel!
     @IBOutlet weak var readMoreButton: UIButton!
     
+    @IBOutlet weak var myscrollView: UIScrollView!
     
     @IBOutlet weak var TabBarView: ButtonBarView!
     @IBOutlet weak var pagerView: UIScrollView!
@@ -48,7 +49,7 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
         settings.style.selectedBarHeight = 3.0
         settings.style.buttonBarItemFont = UIFont(name: "Avenir-Medium", size: 14)!
         super.viewDidLoad()
-        
+        myscrollView.delegate = self
         settings.style.buttonBarBackgroundColor = .white
         settings.style.buttonBarItemBackgroundColor = .white
         settings.style.selectedBarBackgroundColor = UIColor.appBlackColor()
@@ -66,6 +67,10 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
             newCell?.label.textColor = UIColor.appBlackColor()
             
         }
+        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(ItemDetailController.navigationTap))
+        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+        self.navigationController?.navigationBar.isUserInteractionEnabled = true
+        
         
         let centerImagetap = UITapGestureRecognizer(target: self, action: #selector(EventViewController.centerImagetap))
         ItImageView.addGestureRecognizer(centerImagetap)
@@ -99,6 +104,11 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
        
 
         // Do any additional setup after loading the view.
+    }
+    func navigationTap(){
+        let offset = CGPoint(x: 0,y :0)
+        self.myscrollView.setContentOffset(offset, animated: true)
+        
     }
     func centerImagetap(){
         

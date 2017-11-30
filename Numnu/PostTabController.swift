@@ -22,7 +22,7 @@ class PostTabController: UIViewController,IndicatorInfoProvider {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+      
         postEventTableView.delegate   = self
         postEventTableView.dataSource = self
 

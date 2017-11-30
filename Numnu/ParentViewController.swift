@@ -370,7 +370,6 @@ extension ParentViewController : UITableViewDataSource,UITableViewDelegate {
             editsearchbyLocation.text = autocompleteplaceArray[indexPath.row]
 
         }
-//        editsearchbyLocation.text = autocompleteplaceArray[indexPath.row]
         dismissKeyboard()
    //     setNavBar()
         

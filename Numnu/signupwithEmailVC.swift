@@ -184,7 +184,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
   
                     self.authenticationError(error: "Oops! Invalid login.")
                     HUD.hide()
-
+                    print("signup error:::::::",error?.localizedDescription)
                     return
                     
                 }

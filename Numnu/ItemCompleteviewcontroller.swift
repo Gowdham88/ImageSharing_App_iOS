@@ -14,6 +14,7 @@ class ItemCompleteviewcontroller : ButtonBarPagerTabStripViewController {
     @IBOutlet weak var ItImageView: ImageExtender!
     @IBOutlet weak var ItTitleLabel: UILabel!
     
+    @IBOutlet weak var myscrollView: UIScrollView!
     
     @IBOutlet weak var ItDescriptionLabel: UILabel!
     @IBOutlet weak var readMoreButton: UIButton!
@@ -43,7 +44,7 @@ class ItemCompleteviewcontroller : ButtonBarPagerTabStripViewController {
         settings.style.selectedBarHeight = 3.0
         settings.style.buttonBarItemFont = UIFont(name: "Avenir-Medium", size: 14)!
         super.viewDidLoad()
-        
+        myscrollView.delegate = self
         settings.style.buttonBarBackgroundColor = .white
         settings.style.buttonBarItemBackgroundColor = .white
         settings.style.selectedBarBackgroundColor = UIColor.appBlackColor()
@@ -62,6 +63,9 @@ class ItemCompleteviewcontroller : ButtonBarPagerTabStripViewController {
             
         }
         
+        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(ItemCompleteviewcontroller.navigationTap))
+        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+        self.navigationController?.navigationBar.isUserInteractionEnabled = true
         
         /**********************set Nav bar****************************/
         
@@ -94,7 +98,11 @@ class ItemCompleteviewcontroller : ButtonBarPagerTabStripViewController {
         
         // Do any additional setup after loading the view.
     }
-    
+    func navigationTap(){
+        let offset = CGPoint(x: 0,y :0)
+        self.myscrollView.setContentOffset(offset, animated: true)
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
