@@ -19,6 +19,8 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     var tagArray = [String] ()
     var selectedIndex = Int()
     var autocompleteUrls = [String]()
+    
+    @IBOutlet weak var cancelDatePicker: UIButton!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var doneButotn: UIButton!
     @IBOutlet weak var doneView: UIView!
@@ -108,6 +110,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         genderdropButton.addTarget(self, action: #selector(genderClicked), for: UIControlEvents.allTouchEvents)
         doneButotn.addTarget(self, action: #selector(doneClick), for: UIControlEvents.allTouchEvents)
         addButton.addTarget(self, action: #selector(addClicked), for: UIControlEvents.allTouchEvents)
+        cancelDatePicker.addTarget(self, action: #selector(datecancelClicked), for: UIControlEvents.allTouchEvents)
         
         foodTextfield.addTarget(self, action: #selector(textFieldActive), for: UIControlEvents.allTouchEvents)
         
@@ -129,9 +132,18 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             [NSForegroundColorAttributeName: UIColor.black,
              NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
         
+        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(Edit_ProfileVC.navigationTap))
+        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+        self.navigationController?.navigationBar.isUserInteractionEnabled = true
+        
         // Checking users login
         /***********************Api login******************************/
         apiClient = ApiClient()
+    }
+    func navigationTap(){
+        let offset = CGPoint(x: 0,y :0)
+        self.myscrollView.setContentOffset(offset, animated: true)
+        
     }
     //     @objc override func dismissKeyboard{
     //
@@ -155,7 +167,9 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         let offset = CGPoint(x: 0,y :0)
         myscrollView.setContentOffset(offset, animated: true)
     }
-    
+    func datecancelClicked () {
+        datePicker.isHidden = true
+    }
     func addClicked() {
         if foodTextfield.text == "" {
             print("could not add empty fields")
@@ -497,7 +511,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     }
     
     func backButtonClicked() {
-        _ = self.navigationController?.popToRootViewController(animated: true)
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
     /// collectionView for food preferences ///

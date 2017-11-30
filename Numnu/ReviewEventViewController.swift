@@ -68,13 +68,37 @@ extension ReviewEventViewController : UITableViewDelegate,UITableViewDataSource 
         cell.postDtEventBookMark.tag = indexPath.row
         cell.setHeight(heightview : Float(UIScreen.main.bounds.size.height))
         
+        let posteventImagetap = UITapGestureRecognizer(target: self, action: #selector(getter: postEventDetailTableViewCell.postDtEventImage))
+        cell.postDtEventImage.addGestureRecognizer(posteventImagetap)
+        cell.postDtEventImage.isUserInteractionEnabled = true
+        
+        let posteventplacetap = UITapGestureRecognizer(target: self, action:#selector(getter: postEventDetailTableViewCell.postDtEventPlace))
+        cell.postDtEventPlace.addGestureRecognizer(posteventplacetap)
+        cell.postDtEventPlace.isUserInteractionEnabled = true
+        
+        let posteventdishtap = UITapGestureRecognizer(target: self, action:#selector(getter: postEventDetailTableViewCell.postDtEventDishLabel))
+        cell.postDtEventDishLabel.addGestureRecognizer(posteventdishtap)
+        cell.postDtEventDishLabel.isUserInteractionEnabled = true
+        
+        let posteventnametap = UITapGestureRecognizer(target: self, action:#selector(getter: postEventDetailTableViewCell.postDtEventName))
+        cell.postDtEventName.addGestureRecognizer(posteventnametap)
+        cell.postDtEventName.isUserInteractionEnabled = true
+        
+        let profiletap = UITapGestureRecognizer(target: self, action:#selector(getter: postEventDetailTableViewCell.postDtUserImage))
+        cell.postDtUserImage.addGestureRecognizer(profiletap)
+        cell.postDtUserImage.isUserInteractionEnabled = true
+        
+        let profileusernametap = UITapGestureRecognizer(target: self, action:#selector(getter: postEventDetailTableViewCell.postDtUsernameLabel))
+        cell.postDtUsernameLabel.addGestureRecognizer(profileusernametap)
+        cell.postDtUsernameLabel.isUserInteractionEnabled = true
+        
         return cell
         
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        openStoryBoard()
+  //      openStoryBoard()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -100,7 +124,44 @@ extension ReviewEventViewController : UITableViewDelegate,UITableViewDataSource 
         }
     }
    
-    
+    func postDtEventImage() {
+        let storyboard = UIStoryboard(name: Constants.PostDetail, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: "postdetailid")
+        self.navigationController!.pushViewController(vc, animated: true)
+        
+    }
+    func postDtEventPlace(){
+        let storyboard = UIStoryboard(name: Constants.ItemDetail, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId)
+        self.navigationController!.pushViewController(vc, animated: true)
+        
+    }
+    func postDtEventDishLabel(){
+        let storyboard = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId)
+        self.navigationController!.pushViewController(vc, animated: true)
+        
+    }
+    func postDtEventName(){
+        
+        let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
+    func postDtUserImage(){
+        
+        let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
+        vc.boolForBack = false
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
+    func postDtUsernameLabel(){
+        
+        let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
+        vc.boolForBack = false
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
     
 }
 

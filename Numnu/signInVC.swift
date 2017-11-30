@@ -27,12 +27,16 @@ class signInVC: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var passwordReveal: UIButton!
     
+    @IBOutlet weak var passwordTitleLabel: UILabel!
+    @IBOutlet weak var emailLineView: UIView!
     
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var lbl: UILabel!
     @IBOutlet weak var emailAddressTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
+    @IBOutlet weak var passwordLineview: UIView!
     
+    @IBOutlet weak var emailtitleLAbel: UILabel!
     @IBOutlet var passwordInfoLabel: UILabel!
     
     override func viewDidLoad() {
@@ -156,6 +160,26 @@ class signInVC: UIViewController, UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         passwordInfoLabel.isHidden = true
+        
+        if textField == emailAddressTF  {
+            emailtitleLAbel.textColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
+            emailLineView.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
+        }else {
+            passwordTitleLabel.textColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
+            passwordTitleLabel.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
+        }
+        
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == emailAddressTF {
+            emailtitleLAbel.textColor = UIColor(red: 129/255.0, green: 125/255.0, blue: 144/255.0, alpha: 1.0)
+            emailLineView.backgroundColor = UIColor(red: 229/255.0, green: 229/255.0, blue: 229/255.0, alpha: 1.0)
+        }else{
+            passwordTitleLabel.textColor = UIColor(red: 129/255.0, green: 125/255.0, blue: 144/255.0, alpha: 1.0)
+            passwordTitleLabel.backgroundColor = UIColor(red: 229/255.0, green: 229/255.0, blue: 229/255.0, alpha: 1.0)
+        }
+
     }
     
     

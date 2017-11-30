@@ -21,13 +21,15 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var navigationItemList: UINavigationItem!
+    @IBOutlet weak var myScrollView: UIScrollView!
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var mainViewBottom: NSLayoutConstraint! 
     @IBOutlet weak var mainViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var shareview: UIView!
-    
+    var boolForBack : Bool = true
+
     @IBOutlet weak var EventverticalConstraint: NSLayoutConstraint!
     var itemArray = [String]()
     var delegate : Profile_PostViewControllerDelegae?
@@ -37,6 +39,7 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
 
         // Do any additional setup after loading the view.
         setNavBar()
+        myScrollView.delegate = self
         self.navigationController?.navigationBar.titleTextAttributes =
             [NSForegroundColorAttributeName: UIColor.black,
              NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
@@ -44,8 +47,15 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         userImage.clipsToBounds = true
         alertTapRegister()
         itemArray = ["Festival","Wine","Party","Meeting","conference","Family function"]
+        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(Edit_ProfileVC.navigationTap))
+        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+        self.navigationController?.navigationBar.isUserInteractionEnabled = true
     }
-    
+    func navigationTap(){
+        let offset = CGPoint(x: 0,y :0)
+        self.myScrollView.setContentOffset(offset, animated: true)
+        
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
@@ -59,7 +69,12 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         
         let button: UIButton = UIButton(type: UIButtonType.custom)
         //set image for button
-        button.setImage(UIImage(named: "ic_arrow_back"), for: UIControlState.normal)
+        if  boolForBack == false {
+            button.setImage(UIImage(named: "ic_arrow_back"), for: UIControlState.normal)
+
+        }else{
+            button.setImage(UIImage(named: ""), for: UIControlState.normal)
+        }
         //add function for button
         button.addTarget(self, action: #selector(EventViewController.backButtonClicked), for: UIControlEvents.touchUpInside)
         //set frame
@@ -76,6 +91,7 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         button2.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
         
         // Create left and right button for navigation item
+       
         let leftButton =  UIBarButtonItem(customView:button)
         leftButton.isEnabled = true
         
@@ -93,7 +109,7 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
   
     func backButtonClicked() {
         
-        _ = self.navigationController?.popToRootViewController(animated: true)
+        _ = self.navigationController?.popViewController(animated: true)
         
     }
     

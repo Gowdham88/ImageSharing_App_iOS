@@ -19,7 +19,7 @@ class PostTabController: UIViewController,IndicatorInfoProvider {
     @IBOutlet weak var postEventTableView: UITableView!
     var window : UIWindow?
     var popdelegate : PostTabControllerDelegate?
-   
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,6 +61,33 @@ extension PostTabController : UITableViewDelegate,UITableViewDataSource {
         cell.postEventBookMark.tag = indexPath.row
         cell.setHeight(heightview : Float(UIScreen.main.bounds.size.height))
        
+        let posteventImagetap = UITapGestureRecognizer(target: self, action: #selector(getter: PostEventTableViewCell.postEventImage))
+        cell.postEventImage.addGestureRecognizer(posteventImagetap)
+        cell.postEventImage.isUserInteractionEnabled = true
+        
+        let posteventplacetap = UITapGestureRecognizer(target: self, action:#selector(getter: PostEventTableViewCell.postEventPlace))
+        cell.postEventPlace.addGestureRecognizer(posteventplacetap)
+        cell.postEventPlace.isUserInteractionEnabled = true
+        
+        let posteventdishtap = UITapGestureRecognizer(target: self, action:#selector(getter: PostEventTableViewCell.postEventDishLabel))
+        cell.postEventDishLabel.addGestureRecognizer(posteventdishtap)
+        cell.postEventDishLabel.isUserInteractionEnabled = true
+        
+        let posteventnametap = UITapGestureRecognizer(target: self, action:#selector(getter: PostEventTableViewCell.postEventName))
+        cell.postEventName.addGestureRecognizer(posteventnametap)
+        cell.postEventName.isUserInteractionEnabled = true
+        
+        let profiletap = UITapGestureRecognizer(target: self, action:#selector(getter: PostEventTableViewCell.postUserImage))
+        cell.postUserImage.addGestureRecognizer(profiletap)
+        cell.postUserImage.isUserInteractionEnabled = true
+        
+        let profileusernametap = UITapGestureRecognizer(target: self, action:#selector(getter: PostEventTableViewCell.postUsernameLabel))
+        cell.postUsernameLabel.addGestureRecognizer(profileusernametap)
+        cell.postUsernameLabel.isUserInteractionEnabled = true
+        
+        
+        
+        
         return cell
         
     }
@@ -83,6 +110,43 @@ extension PostTabController : UITableViewDelegate,UITableViewDataSource {
             return 402
         }
         
+    }
+    func postEventImage() {
+        let storyboard = UIStoryboard(name: Constants.PostDetail, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: "postdetailid")
+        self.navigationController!.pushViewController(vc, animated: true)
+        
+    }
+    func postEventPlace(){
+        let storyboard = UIStoryboard(name: Constants.ItemDetail, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId)
+        self.navigationController!.pushViewController(vc, animated: true)
+        
+    }
+    func postEventDishLabel(){
+        let storyboard = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId)
+        self.navigationController!.pushViewController(vc, animated: true)
+        
+    }
+    func postEventName(){
+        
+        let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
+    func postUserImage(){
+        let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
+        vc.boolForBack = false
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    func postUsernameLabel(){
+        
+        let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
+        vc.boolForBack = false
+        self.navigationController!.pushViewController(vc, animated: true)
     }
     
 }

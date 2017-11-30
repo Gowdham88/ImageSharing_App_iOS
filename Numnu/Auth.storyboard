@@ -276,10 +276,11 @@
                                 <rect key="frame" x="243" y="439.5" width="40" height="27"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="27" id="1ss-Mn-aqk"/>
+                                    <constraint firstAttribute="width" constant="40" id="our-TQ-V1G"/>
                                 </constraints>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
-                                        <fragment content="Sign In">
+                                        <fragment content="Log in">
                                             <attributes>
                                                 <font key="NSFont" size="13" name="Avenir-Medium"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
@@ -659,7 +660,7 @@
                                     <constraint firstAttribute="width" constant="60" id="ybw-1g-aRW"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign In" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6is-6C-Xdu">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6is-6C-Xdu">
                                 <rect key="frame" x="20" y="117" width="280" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="280" id="8Zh-55-SzC"/>
@@ -760,7 +761,7 @@
                                     <constraint firstAttribute="height" constant="50" id="Om5-v7-AuQ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
-                                <state key="normal" title="Sign In">
+                                <state key="normal" title="Log in">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -857,7 +858,7 @@
                                     <constraint firstAttribute="height" constant="50" id="8Na-EO-iJq"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
-                                <state key="normal" title="  Sign In with Facebook" image="fShape">
+                                <state key="normal" title="  Log in with Facebook" image="fShape">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -914,9 +915,13 @@
                     </view>
                     <connections>
                         <outlet property="emailAddressTF" destination="Y8f-XD-BVK" id="HIa-cH-Axi"/>
+                        <outlet property="emailLineView" destination="5BK-vR-k7Z" id="gEI-hs-ZCC"/>
+                        <outlet property="emailtitleLAbel" destination="Ima-4g-Ssp" id="5FI-Ga-p71"/>
                         <outlet property="passwordInfoLabel" destination="ISg-wM-MbH" id="e10-0n-8Bb"/>
+                        <outlet property="passwordLineview" destination="yYk-3I-mdY" id="7vE-s7-Mku"/>
                         <outlet property="passwordReveal" destination="mC4-rY-bg2" id="aZb-s8-SQc"/>
                         <outlet property="passwordTF" destination="NHS-8c-dU0" id="FyA-O4-dRq"/>
+                        <outlet property="passwordTitleLabel" destination="pSY-0N-S87" id="DS9-6d-rCH"/>
                         <outlet property="signInButton" destination="X5P-k8-vQy" id="ddL-aP-zLF"/>
                         <segue destination="03o-a8-Dx6" kind="show" identifier="forgotPassword" id="2Zo-UJ-olt"/>
                     </connections>

@@ -98,7 +98,9 @@ class MenuEventViewController: UIViewController,IndicatorInfoProvider,UITableVie
             return cell
             
         }
-        
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(MenuEventViewController.imageTapped))
+//        cell.postDEventImage.addGestureRecognizer(tap)
+//        cell.postDEventImage.isUserInteractionEnabled = true
         
     }
     
@@ -111,7 +113,11 @@ class MenuEventViewController: UIViewController,IndicatorInfoProvider,UITableVie
             viewState = false
         }
     }
-   
+//    func imageTapped() {
+//        let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
+//        let vc         = storyboard.instantiateViewController(withIdentifier: "PostImageZoomViewController")
+//        self.navigationController?.present(vc, animated: true, completion: nil)
+//    }
 }
 
 extension MenuEventViewController   {
