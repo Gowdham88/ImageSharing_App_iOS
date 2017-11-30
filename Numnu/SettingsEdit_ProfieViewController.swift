@@ -35,17 +35,39 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var editButton: UIButton!
     @IBOutlet weak var profileImage: UIImageView!
+    
     @IBOutlet weak var nameTextfield: UITextField!
     @IBOutlet weak var emailaddress: UITextField!
-    @IBOutlet var cityTextfield: UITextField!
+    @IBOutlet var cityTextfield    : UITextField!
     @IBOutlet var genderTextfield: UITextField!
     @IBOutlet var birthTextfield: UITextField!
     @IBOutlet var foodTextfield: UITextField!
+    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var descriptionTextField: UITextField!
+    
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var emailaddresslabel : UILabel!
+    @IBOutlet var citylabel    : UILabel!
+    @IBOutlet var genderlabel  : UILabel!
+    @IBOutlet var birthlabel   : UILabel!
+    @IBOutlet var foodlabel    : UILabel!
+    @IBOutlet weak var usernamelabel : UILabel!
+    @IBOutlet weak var descriptionlabel: UILabel!
+    
+    @IBOutlet weak var nameview: UIView!
+    @IBOutlet weak var emailaddressview : UIView!
+    @IBOutlet var cityview    : UIView!
+    @IBOutlet var genderview  : UIView!
+    @IBOutlet var birthview   : UIView!
+    @IBOutlet var foodview    : UIView!
+    @IBOutlet weak var usernameview : UIView!
+    @IBOutlet weak var descriptionview : UIView!
+    
     @IBOutlet weak var navigationItemList: UINavigationItem!
     var show : Bool = false
     var boolForTitle: Bool = false
     @IBOutlet var myscrollView: UIScrollView!
-    @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet var saveButton: UIButton!
     let locationManager = CLLocationManager()
     var Alert = UIAlertController()
@@ -288,6 +310,9 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+           focusEdittext(textfield: textField,focus: true)
+        
         if textField == birthTextfield {
             showDatePicker()
             birthTextfield.resignFirstResponder()
@@ -314,6 +339,9 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        focusEdittext(textfield: textField,focus: false)
+        
         if textField == usernameTextField {
             let parameters: Parameters = ["checkusername": usernameTextField.text!]
             let userNameRequest: ApiClient = ApiClient()
@@ -609,6 +637,7 @@ extension SettingsEdit_ProfieViewController : Profile_PostViewControllerDelegae 
 }
 
 extension SettingsEdit_ProfieViewController {
+    
     func loadTagList(tag : String) {
         tagidArray.removeAll()
         tagnamearray.removeAll()
@@ -633,6 +662,59 @@ extension SettingsEdit_ProfieViewController {
                 }
             }
         })
+    }
+    
+    func focusEdittext(textfield : UITextField,focus:Bool) {
+       
+        switch textfield {
+            
+        case nameTextfield:
+            
+            nameLabel.textColor       = focus ? UIColor.textfieldFocus() : UIColor.labelunfocus()
+            nameview.backgroundColor  = focus ? UIColor.textfieldFocus() : UIColor.textfieldUnfocus()
+            
+        case emailaddress:
+            
+            emailaddresslabel.textColor       = focus ? UIColor.textfieldFocus() : UIColor.labelunfocus()
+            emailaddressview.backgroundColor  = focus ? UIColor.textfieldFocus() : UIColor.textfieldUnfocus()
+            
+        case cityTextfield:
+            
+            citylabel.textColor       = focus ? UIColor.textfieldFocus() : UIColor.labelunfocus()
+            cityview.backgroundColor  = focus ? UIColor.textfieldFocus() : UIColor.textfieldUnfocus()
+            
+        case genderTextfield:
+            
+            genderlabel.textColor       = focus ? UIColor.textfieldFocus() : UIColor.labelunfocus()
+            genderview.backgroundColor  = focus ? UIColor.textfieldFocus() : UIColor.textfieldUnfocus()
+            
+        case birthTextfield:
+            
+            birthlabel.textColor       = focus ? UIColor.textfieldFocus() : UIColor.labelunfocus()
+            birthview.backgroundColor  = focus ? UIColor.textfieldFocus() : UIColor.textfieldUnfocus()
+            
+        case foodTextfield:
+            
+            foodlabel.textColor       = focus ? UIColor.textfieldFocus() : UIColor.labelunfocus()
+            foodview.backgroundColor  = focus ? UIColor.textfieldFocus() : UIColor.textfieldUnfocus()
+            
+        case usernameTextField:
+            
+            usernamelabel.textColor       = focus ? UIColor.textfieldFocus() : UIColor.labelunfocus()
+            usernameview.backgroundColor  = focus ? UIColor.textfieldFocus() : UIColor.textfieldUnfocus()
+            
+        case descriptionTextField:
+            
+            descriptionlabel.textColor       = focus ? UIColor.textfieldFocus() : UIColor.labelunfocus()
+            descriptionview.backgroundColor  = focus ? UIColor.textfieldFocus() : UIColor.textfieldUnfocus()
+            
+        default:
+            
+            nameLabel.textColor       = focus ? UIColor.textfieldFocus() : UIColor.labelunfocus()
+            nameview.backgroundColor  = focus ? UIColor.textfieldFocus() : UIColor.textfieldUnfocus()
+            
+        }
+   
     }
 }
 
