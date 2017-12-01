@@ -53,7 +53,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4" translatesAutoresizingMaskIntoConstraints="NO" id="sJV-kG-cov" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="6" translatesAutoresizingMaskIntoConstraints="NO" id="sJV-kG-cov" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
                                                 <rect key="frame" x="10" y="10" width="300" height="179"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="179" id="viL-qM-JVs"/>
@@ -460,7 +460,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="4" width="1280" height="824"/>
+        <image name="6" width="1280" height="853"/>
         <image name="Bookmark" width="14" height="24"/>
         <image name="Shape_new@1x" width="8" height="12"/>
         <image name="date_time_ico" width="23" height="23"/>
