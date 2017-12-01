@@ -608,7 +608,7 @@
                                                     <constraint firstAttribute="height" constant="22" id="kol-1z-bVb"/>
                                                 </constraints>
                                             </scrollView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Cottage house  dskjdsjl dksjdksd dskd jskdj" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="beU-Vf-sSS">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cottage house  dskjdsjl dksjdksd dskd jskdj" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="beU-Vf-sSS">
                                                 <rect key="frame" x="120" y="65" width="192" height="17"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="33.5" id="Igp-d4-sWf"/>
@@ -690,7 +690,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Event name  " lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EDd-mz-7je">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event name  " lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EDd-mz-7je">
                                                 <rect key="frame" x="119" y="88" width="193" height="17"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="33.5" id="CEs-uK-rRB"/>
@@ -721,7 +721,7 @@
                                                     <action selector="ButtonReadMore:" destination="1LO-rA-EOL" eventType="touchUpInside" id="mec-ld-hq1"/>
                                                 </connections>
                                             </button>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="event_ico" translatesAutoresizingMaskIntoConstraints="NO" id="XUb-hN-ryp" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="event_ico" translatesAutoresizingMaskIntoConstraints="NO" id="XUb-hN-ryp" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
                                                 <rect key="frame" x="100" y="88" width="14" height="15"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="14" id="dv3-3C-SfX"/>
@@ -761,7 +761,7 @@
                                             <constraint firstItem="bAb-vn-mBc" firstAttribute="top" secondItem="KPP-zS-WtN" secondAttribute="bottom" constant="5" id="WJP-61-x52"/>
                                             <constraint firstItem="PBX-Yr-1C5" firstAttribute="leading" secondItem="3R6-mb-egl" secondAttribute="leading" id="XFa-h6-On5"/>
                                             <constraint firstItem="8vv-oB-nKf" firstAttribute="top" secondItem="3R6-mb-egl" secondAttribute="top" constant="8" id="YUx-E5-Xnh"/>
-                                            <constraint firstItem="PDJ-Mg-Fhj" firstAttribute="top" secondItem="EDd-mz-7je" secondAttribute="bottom" constant="14" id="buW-59-dn2"/>
+                                            <constraint firstItem="PDJ-Mg-Fhj" firstAttribute="top" secondItem="EDd-mz-7je" secondAttribute="bottom" constant="13" id="buW-59-dn2"/>
                                             <constraint firstItem="hVN-ok-w9U" firstAttribute="top" secondItem="bAb-vn-mBc" secondAttribute="bottom" constant="8" id="bwa-bZ-iwf"/>
                                             <constraint firstItem="bAb-vn-mBc" firstAttribute="leading" secondItem="8vv-oB-nKf" secondAttribute="trailing" constant="8" id="fSV-vk-99E"/>
                                             <constraint firstAttribute="trailing" secondItem="PBX-Yr-1C5" secondAttribute="trailing" id="iRK-Kp-mTG"/>
@@ -872,6 +872,7 @@
                         <outlet property="ItImageView" destination="8vv-oB-nKf" id="wi7-Ie-BVh"/>
                         <outlet property="ItTitleLabel" destination="KPP-zS-WtN" id="apz-b3-c45"/>
                         <outlet property="TabBarView" destination="SOi-oT-o6c" id="PeA-6m-wj1"/>
+                        <outlet property="businessName" destination="beU-Vf-sSS" id="9c4-29-iGY"/>
                         <outlet property="buttonBarView" destination="SOi-oT-o6c" id="M6a-9m-tSp"/>
                         <outlet property="completemainview" destination="PBX-Yr-1C5" id="kzE-q5-7qo"/>
                         <outlet property="containerView" destination="0qr-rh-9g4" id="mvw-i8-ILj"/>

@@ -149,9 +149,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
 
         foodTextfield.addTarget(self, action: #selector(textFieldActive), for: UIControlEvents.allTouchEvents)
         
-        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(Edit_ProfileVC.navigationTap))
-        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
-        self.navigationController?.navigationBar.isUserInteractionEnabled = true
+//        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(Edit_ProfileVC.navigationTap))
+//        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+//        self.navigationController?.navigationBar.isUserInteractionEnabled = true
         
         
         dropdownArray = ["Chicken","Chicken chilli","Chicken manjurian","Chicken 65","Chicken fried rice","Grill chicken","Pizza","Burger","Sandwich","Mutton","Mutton chukka","Mutton masala","Mutton fry","Prawn","Gobi chilli","Panneer","Noodles","Mutton soup","Fish fry","Dry fish"]
@@ -260,6 +260,10 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+            let navigationOnTap = UITapGestureRecognizer(target:self,action:#selector(EventViewController.navigationTap))
+            self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+            self.navigationController?.navigationBar.isUserInteractionEnabled = true
         // Hide the navigation bar on the this view controller
         showPopup(table1: true, table2: true)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
@@ -332,8 +336,13 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         Alert.addAction(FemaleAction)
         Alert.addAction(MaleAction)
         Alert.addAction(cancelAction)
-        present(Alert, animated: true, completion:nil )
-       
+        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad) {
+            Alert.popoverPresentationController?.sourceView = self.view
+            Alert.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
+            present(Alert, animated: true, completion:nil )
+        }else{
+            present(Alert, animated: true, completion:nil )
+        }
     }
     func handleTap(recognizer: UITapGestureRecognizer){
         dismiss(animated: true, completion: nil)
@@ -644,7 +653,15 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         Alert.addAction(CameraAction)
         Alert.addAction(GalleryAction)
         Alert.addAction(CancelAction)
-        present(Alert, animated: true, completion: nil)
+//        present(Alert, animated: true, completion: nil)
+        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad) {
+            Alert.popoverPresentationController?.sourceView = self.view
+            Alert.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
+            present(Alert, animated: true, completion:nil )
+        }else{
+            present(Alert, animated: true, completion:nil )
+        }
+        
         present(imagePicker, animated: true, completion: nil)
     }
     

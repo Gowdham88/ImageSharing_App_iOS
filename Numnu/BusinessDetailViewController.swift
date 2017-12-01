@@ -77,9 +77,7 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
         /**********************set Nav bar****************************/
         
         setNavBar()
-        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(BusinessDetailViewController.navigationTap))
-        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
-        self.navigationController?.navigationBar.isUserInteractionEnabled = true
+      
 
         
         /**********************Tap registration****************************/
@@ -109,6 +107,11 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
        
 
         
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        let navigationOnTap = UITapGestureRecognizer(target:self,action:#selector(EventViewController.navigationTap))
+        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+        self.navigationController?.navigationBar.isUserInteractionEnabled = true
     }
     func businesstap(){
      

@@ -157,9 +157,9 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             [NSForegroundColorAttributeName: UIColor.black,
              NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
         
-        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(Edit_ProfileVC.navigationTap))
-        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
-        self.navigationController?.navigationBar.isUserInteractionEnabled = true
+//        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(Edit_ProfileVC.navigationTap))
+//        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+//        self.navigationController?.navigationBar.isUserInteractionEnabled = true
         
         citytableview.layer.shadowColor = UIColor.darkGray.cgColor
         citytableview.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha:1.0)
@@ -183,6 +183,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         /***********************Api login******************************/
         apiClient = ApiClient()
     }
+    
     func navigationTap(){
         let offset = CGPoint(x: 0,y :0)
         self.myscrollView.setContentOffset(offset, animated: true)
@@ -193,6 +194,9 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     //    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+            let navigationOnTap = UITapGestureRecognizer(target:self,action:#selector(EventViewController.navigationTap))
+            self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+            self.navigationController?.navigationBar.isUserInteractionEnabled = true
         // Hide the navigation bar on the this view controller
          showPopup(table1: true, table2: true)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)

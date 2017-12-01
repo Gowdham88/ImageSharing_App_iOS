@@ -1042,7 +1042,7 @@
                                         </cells>
                                     </collectionView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Past Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="103-ut-mdO">
-                                        <rect key="frame" x="10" y="175" width="86" height="30"/>
+                                        <rect key="frame" x="10" y="175" width="90.5" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="bkp-e5-x09"/>
                                         </constraints>
@@ -1288,6 +1288,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="tHq-Ji-rKJ" firstAttribute="top" secondItem="7q6-ER-6Yg" secondAttribute="bottom" constant="8" id="EWd-fr-eJV"/>
+                                                <constraint firstItem="tHq-Ji-rKJ" firstAttribute="width" secondItem="bBV-hW-bhV" secondAttribute="width" id="Gog-Ka-u2G"/>
                                                 <constraint firstItem="37c-3v-jRx" firstAttribute="leading" secondItem="bBV-hW-bhV" secondAttribute="leading" constant="10" id="H6c-Zt-nDO"/>
                                                 <constraint firstItem="7q6-ER-6Yg" firstAttribute="top" secondItem="bBV-hW-bhV" secondAttribute="top" constant="8" id="NvQ-tL-MNI"/>
                                                 <constraint firstAttribute="trailing" secondItem="7q6-ER-6Yg" secondAttribute="trailing" id="TAX-yt-lPJ"/>

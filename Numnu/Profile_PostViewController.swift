@@ -47,9 +47,9 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         userImage.clipsToBounds = true
         alertTapRegister()
         itemArray = ["Festival","Wine","Party","Meeting","conference","Family function"]
-        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(Edit_ProfileVC.navigationTap))
-        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
-        self.navigationController?.navigationBar.isUserInteractionEnabled = true
+//        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(Edit_ProfileVC.navigationTap))
+//        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+//        self.navigationController?.navigationBar.isUserInteractionEnabled = true
     }
     func navigationTap(){
         let offset = CGPoint(x: 0,y :0)
@@ -59,6 +59,9 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+            let navigationOnTap = UITapGestureRecognizer(target:self,action:#selector(EventViewController.navigationTap))
+            self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+            self.navigationController?.navigationBar.isUserInteractionEnabled = true
         // Hide the navigation bar on the this view controller
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
