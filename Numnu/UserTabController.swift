@@ -36,7 +36,7 @@ imagesArray = [UIImage(named: "p7.png")!,UIImage(named: "p8.png")!,UIImage(named
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
-vc.boolForBack = false
+        vc.boolForBack = false
         self.navigationController!.pushViewController(vc, animated: true)
     }
     override func didReceiveMemoryWarning() {
@@ -49,6 +49,7 @@ vc.boolForBack = false
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
 //        return IndicatorInfo(title: Constants.Tabid5)
         return IndicatorInfo(title: "Users")
+
 
     }
     

@@ -507,6 +507,12 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         if textField == genderTextfield {
             genderTextfield.tintColor = .clear
         }
+        
+        if textField == foodTextfield {
+            
+            foodTextfield.text = ""
+            
+        }
     }
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         

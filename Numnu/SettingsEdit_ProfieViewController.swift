@@ -163,7 +163,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
 //        self.navigationController?.navigationBar.isUserInteractionEnabled = true
         
         citytableview.layer.shadowColor = UIColor.darkGray.cgColor
-        citytableview.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha:1.0)
+        citytableview.backgroundColor = UIColor.clear
         citytableview.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
         citytableview.layer.shadowOpacity = 2.0
         citytableview.layer.shadowRadius = 5
@@ -172,6 +172,8 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         citytableview.layer.masksToBounds = false
         
         dropdownTableView.layer.shadowColor = UIColor.darkGray.cgColor
+        dropdownTableView.backgroundColor = UIColor.clear
+
         dropdownTableView.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1.0)
         dropdownTableView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
         dropdownTableView.layer.shadowOpacity = 2.0
@@ -409,6 +411,11 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         if textField == genderTextfield {
             genderTextfield.tintColor = .clear
         }
+        if textField == foodTextfield {
+            
+            foodTextfield.text = ""
+            
+        }
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
@@ -613,7 +620,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagArray[indexPath.row], fontname: "Avenir-Book", size: 13)
-        return CGSize(width: textSize.width+50, height: 22)
+        return CGSize(width: textSize.width+30, height: 22)
     }
     func buttonClicked(sender: Any){
         let tag = (sender as AnyObject).tag
@@ -646,6 +653,8 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             }
             cell?.selectionStyle = .none
             cell?.textLabel?.text = tagnamearray[indexPath.row]
+            dropdownTableView.transform = CGAffineTransform(scaleX: 1, y: -1)
+            cell?.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
             //            cell?.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1.0)
             cell?.textLabel?.textColor = UIColor(red: 129/255.0, green: 135/255.0, blue: 155/255.0, alpha: 1.0)
             
@@ -660,6 +669,8 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
                 cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
             }
             cell?.selectionStyle = .none
+            citytableview.transform = CGAffineTransform(scaleX: 1, y: -1)
+            cell?.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
             //            cell?.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1.0)
             cell?.textLabel?.text = autocompleteplaceArray[indexPath.row]
             cell?.textLabel?.textColor = UIColor(red: 129/255.0, green: 135/255.0, blue: 155/255.0, alpha: 1.0)

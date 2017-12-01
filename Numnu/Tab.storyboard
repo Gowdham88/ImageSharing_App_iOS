@@ -491,6 +491,10 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="AUe-yO-5vQ" id="jCt-Fu-EsZ"/>
+                                    <outlet property="delegate" destination="AUe-yO-5vQ" id="nPc-k8-qtD"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -641,6 +645,10 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="LoV-Wn-UGD" id="cbA-ff-dIw"/>
+                                    <outlet property="delegate" destination="LoV-Wn-UGD" id="8j2-1e-B9m"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="sWr-Q7-VnN"/>
@@ -1288,7 +1296,6 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="tHq-Ji-rKJ" firstAttribute="top" secondItem="7q6-ER-6Yg" secondAttribute="bottom" constant="8" id="EWd-fr-eJV"/>
-                                                <constraint firstItem="tHq-Ji-rKJ" firstAttribute="width" secondItem="bBV-hW-bhV" secondAttribute="width" id="Gog-Ka-u2G"/>
                                                 <constraint firstItem="37c-3v-jRx" firstAttribute="leading" secondItem="bBV-hW-bhV" secondAttribute="leading" constant="10" id="H6c-Zt-nDO"/>
                                                 <constraint firstItem="7q6-ER-6Yg" firstAttribute="top" secondItem="bBV-hW-bhV" secondAttribute="top" constant="8" id="NvQ-tL-MNI"/>
                                                 <constraint firstAttribute="trailing" secondItem="7q6-ER-6Yg" secondAttribute="trailing" id="TAX-yt-lPJ"/>
