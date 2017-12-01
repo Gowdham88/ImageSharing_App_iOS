@@ -62,7 +62,7 @@ class OnboardingVC: UIViewController {
     func openStoryBoard(name: String,id : String) {
         
         window         = UIWindow(frame: UIScreen.main.bounds)
-       
+
         let storyboard                  = UIStoryboard(name: name, bundle: nil)
         let initialViewController       = storyboard.instantiateViewController(withIdentifier: id)
         self.present(initialViewController, animated: false, completion: nil)
