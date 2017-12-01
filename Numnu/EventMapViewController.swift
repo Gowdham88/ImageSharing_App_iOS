@@ -77,10 +77,10 @@ class EventMapViewController: UIViewController {
     
     func setNavBar() {
         if boolForMapTitle == true{
-            navigationItemList.title = "Event Map view"
+            navigationItemList.title = "Event Map"
 
         }else{
-            navigationItemList.title = "Location Map view"
+            navigationItemList.title = "Location Map"
 
         }
         

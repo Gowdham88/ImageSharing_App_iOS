@@ -205,18 +205,18 @@ extension EventViewController {
     
     func webLink1(sender:UITapGestureRecognizer) {
     
-        openWebBoard(url: "https://www.apple.com")
+        openWebBoard(url: "http://www.totc.ca")
     }
     
     func webLink2(sender:UITapGestureRecognizer) {
         
-        openWebBoard(url: "https://www.apple.com")
+        openWebBoard(url: "http://www.totc.ca")
         
     }
     
     func webLink3(sender:UITapGestureRecognizer) {
         
-        openWebBoard(url: "https://www.apple.com")
+        openWebBoard(url: "http://www.totc.ca")
         
     }
     

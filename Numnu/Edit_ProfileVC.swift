@@ -177,8 +177,11 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             [NSForegroundColorAttributeName: UIColor.black,
              NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
         
+        
+        
             cityTableView.layer.shadowColor = UIColor.darkGray.cgColor
-            cityTableView.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha:1.0)
+            cityTableView.isUserInteractionEnabled = true
+            cityTableView.backgroundColor = UIColor.clear
             cityTableView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
             cityTableView.layer.shadowOpacity = 2.0
             cityTableView.layer.shadowRadius = 5
@@ -187,7 +190,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             cityTableView.layer.masksToBounds = false
         
         dropdownTableView.layer.shadowColor = UIColor.darkGray.cgColor
-        dropdownTableView.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1.0)
+        dropdownTableView.isUserInteractionEnabled = true
+        dropdownTableView.backgroundColor = UIColor.clear
         dropdownTableView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
         dropdownTableView.layer.shadowOpacity = 2.0
         dropdownTableView.layer.shadowRadius = 5
@@ -282,7 +286,11 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                     addProfileContainer()
                 } else{
                     
-//                addCollectionContainer()
+
+
+
+                addCollectionContainer()
+
             }
         }
     }
@@ -411,8 +419,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 getPlaceApi(place_Str: "\(place)\(string)" as String)
                 
             }
-          
-            
+        
             cityTableView.isHidden  = false
             
         } else {
@@ -729,7 +736,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagArray[indexPath.row], fontname: "Avenir-Book", size: 13)
-        return CGSize(width: textSize.width+50, height: 22)
+        return CGSize(width: textSize.width+30, height: 22)
     }
     func buttonClicked(sender: Any){
         let tag = (sender as AnyObject).tag
@@ -762,6 +769,11 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             }
             cell?.selectionStyle = .none
             cell?.textLabel?.text = tagnamearray[indexPath.row]
+            
+            dropdownTableView.transform = CGAffineTransform(scaleX: 1, y: -1)
+            cell?.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
+//            tableView.transform = CGAffineTransform(rotationAngle: (-.pi))
+//            cell?.transform = CGAffineTransform(rotationAngle: (-.pi))
 //            cell?.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1.0)
             cell?.textLabel?.textColor = UIColor(red: 129/255.0, green: 135/255.0, blue: 155/255.0, alpha: 1.0)
 
@@ -779,7 +791,11 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
 //            cell?.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1.0)
             cell?.textLabel?.text = autocompleteplaceArray[indexPath.row]
             cell?.textLabel?.textColor = UIColor(red: 129/255.0, green: 135/255.0, blue: 155/255.0, alpha: 1.0)
+//            tableView.transform = CGAffineTransform(rotationAngle: (-.pi))
+//            cell?.transform = CGAffineTransform(rotationAngle: (-.pi))
             
+            cityTableView.transform = CGAffineTransform(scaleX: 1, y: -1)
+            cell?.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
             return cell!
             
             

@@ -47,7 +47,9 @@ vc.boolForBack = false
      // Tab intialliaze
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: Constants.Tabid5)
+//        return IndicatorInfo(title: Constants.Tabid5)
+        return IndicatorInfo(title: "Users")
+
     }
     
 

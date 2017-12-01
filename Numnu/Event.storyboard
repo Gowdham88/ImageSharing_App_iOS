@@ -53,7 +53,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4" translatesAutoresizingMaskIntoConstraints="NO" id="sJV-kG-cov" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="6" translatesAutoresizingMaskIntoConstraints="NO" id="sJV-kG-cov" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
                                                 <rect key="frame" x="10" y="10" width="300" height="179"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="179" id="viL-qM-JVs"/>
@@ -202,9 +202,9 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4rU-V5-StF">
-                                                <rect key="frame" x="10" y="369" width="300" height="75"/>
+                                                <rect key="frame" x="10" y="369" width="300" height="74"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="75" id="Pbs-jB-hTE"/>
+                                                    <constraint firstAttribute="height" constant="74" id="Pbs-jB-hTE"/>
                                                 </constraints>
                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolfdfdfdfdfdfdfdfdfdfdfdf fdfdf</string>
                                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="13"/>
@@ -212,9 +212,9 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WMp-Up-FUj">
-                                                <rect key="frame" x="10" y="444" width="300" height="20"/>
+                                                <rect key="frame" x="10" y="443" width="300" height="19"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="20" id="FIk-fX-NYh"/>
+                                                    <constraint firstAttribute="height" constant="19" id="FIk-fX-NYh"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="13"/>
                                                 <state key="normal" title="more">
@@ -238,11 +238,11 @@
                                             <constraint firstItem="WMp-Up-FUj" firstAttribute="top" secondItem="4rU-V5-StF" secondAttribute="bottom" id="0I5-Wl-TIg"/>
                                             <constraint firstItem="U0Z-Mj-lZB" firstAttribute="leading" secondItem="g0V-rF-TMW" secondAttribute="leading" constant="20" id="0MU-wN-nf0"/>
                                             <constraint firstItem="3NW-yD-oxA" firstAttribute="leading" secondItem="g0V-rF-TMW" secondAttribute="leading" constant="10" id="2ma-sr-jSL"/>
-                                            <constraint firstItem="Qgo-S0-0CV" firstAttribute="top" secondItem="4rU-V5-StF" secondAttribute="bottom" constant="28" id="3Bn-dk-BjB"/>
+                                            <constraint firstItem="Qgo-S0-0CV" firstAttribute="top" secondItem="4rU-V5-StF" secondAttribute="bottom" constant="29" id="3Bn-dk-BjB"/>
                                             <constraint firstItem="Aos-pn-hej" firstAttribute="leading" secondItem="g0V-rF-TMW" secondAttribute="leading" constant="10" id="7JQ-Ka-HvH"/>
                                             <constraint firstAttribute="trailing" secondItem="RPa-ch-qag" secondAttribute="trailing" id="7MN-yR-TzQ"/>
                                             <constraint firstAttribute="trailing" secondItem="4rU-V5-StF" secondAttribute="trailing" constant="10" id="A0W-r4-dIM"/>
-                                            <constraint firstItem="cgp-wT-7F1" firstAttribute="top" secondItem="4rU-V5-StF" secondAttribute="bottom" constant="28" id="A1r-xE-hgH"/>
+                                            <constraint firstItem="cgp-wT-7F1" firstAttribute="top" secondItem="4rU-V5-StF" secondAttribute="bottom" constant="29" id="A1r-xE-hgH"/>
                                             <constraint firstAttribute="trailing" secondItem="VVk-vg-G9v" secondAttribute="trailing" constant="13" id="AG2-la-vzB"/>
                                             <constraint firstItem="5iE-8T-Lm3" firstAttribute="leading" secondItem="e0U-hc-Duc" secondAttribute="trailing" constant="8" id="Baa-qf-w2Z"/>
                                             <constraint firstItem="gAt-qt-Cww" firstAttribute="top" secondItem="8Se-ej-wg2" secondAttribute="bottom" constant="5" id="CGH-60-SXd"/>
@@ -460,7 +460,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="4" width="1280" height="824"/>
+        <image name="6" width="1280" height="853"/>
         <image name="Bookmark" width="14" height="24"/>
         <image name="Shape_new@1x" width="8" height="12"/>
         <image name="date_time_ico" width="23" height="23"/>
