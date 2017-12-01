@@ -199,6 +199,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         // Checking users login
         /***********************Api login******************************/
         apiClient = ApiClient()
+        /************************getFirebaseToken*************************************/
         getFirebaseToken()
     }
     
@@ -281,7 +282,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                     addProfileContainer()
                 } else{
                     
-                addCollectionContainer()
+//                addCollectionContainer()
             }
         }
     }
@@ -479,7 +480,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 }
             })
         }
-        if textField == foodTextfield || textField == birthTextfield  {
+        if  textField == birthTextfield  {
             foodTextfield.text = ""
             animateViewMoving(up: false, moveValue: 0)
             showPopup(table1: true, table2: true)
@@ -797,24 +798,35 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let indexPath = dropdownTableView.indexPathForSelectedRow  {
-            let currentCell = dropdownTableView.cellForRow(at: indexPath)
-            dropdownString = (currentCell?.textLabel?.text)!
-            if tagArray.contains(dropdownString) {
-                print("already exist")
-            }else{
-                tagArray.append(dropdownString)
+        
+        if tableView == dropdownTableView {
+            
+            if let indexPath = dropdownTableView.indexPathForSelectedRow  {
+                let currentCell = dropdownTableView.cellForRow(at: indexPath)
+                dropdownString = (currentCell?.textLabel?.text)!
+                if tagArray.contains(dropdownString) {
+                    print("already exist")
+                }else{
+                    tagArray.append(dropdownString)
+                }
+                collectionView.reloadData()
+                dropdownTableView.isHidden = true
+                foodTextfield.resignFirstResponder()
             }
-            collectionView.reloadData()
-            dropdownTableView.isHidden = true
-            foodTextfield.resignFirstResponder()
-        } else if let indexPath = cityTableView.indexPathForSelectedRow  {
-            let currentCell = cityTableView.cellForRow(at: indexPath)
-            cityTextfield.text = (currentCell?.textLabel?.text)!
-            cityTableView.isHidden = true
-            cityTextfield.resignFirstResponder()
+            
+        } else {
+            
+            if let indexPath = cityTableView.indexPathForSelectedRow  {
+                let currentCell = cityTableView.cellForRow(at: indexPath)
+                cityTextfield.text = (currentCell?.textLabel?.text)!
+                cityTableView.isHidden = true
+                cityTextfield.resignFirstResponder()
+                
+            }
             
         }
+        
+        
     }
 }
 
