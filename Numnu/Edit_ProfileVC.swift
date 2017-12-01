@@ -13,6 +13,8 @@ import GooglePlaces
 import Alamofire
 import IQKeyboardManagerSwift
 import SwiftyJSON
+import Firebase
+import FirebaseAuth
 
 class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,UICollectionViewDelegateFlowLayout {
     var dropdownArray = [String] ()
@@ -91,6 +93,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
 
     var tagidArray   = [Int]()
     var tagnamearray = [String]()
+    var token_str : String = "empty"
 /*
     // place autocomplete //
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
@@ -115,6 +118,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
  */
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+       
     
         
         imagePicker.delegate = self
@@ -194,6 +199,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         // Checking users login
         /***********************Api login******************************/
         apiClient = ApiClient()
+        getFirebaseToken()
     }
     
     func focusEdittext(textfield : UITextField,focus:Bool) {
@@ -816,7 +822,7 @@ extension Edit_ProfileVC {
         tagidArray.removeAll()
         tagnamearray.removeAll()
         let parameters : Parameters = ["beginWith" : tag]
-        let header     : HTTPHeaders = ["Accept-Language" : "en-US"]
+        let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
         apiClient.getTagsApi(parameters: parameters, headers: header, completion: { status,taglist in
             if status == "success" {
                 if let tagList = taglist {
@@ -836,6 +842,16 @@ extension Edit_ProfileVC {
                 }
             }
         })
+    }
+    
+    func getFirebaseToken() {
+        
+        apiClient.getFireBaseToken(completion:{ token in
+            
+            self.token_str = token
+            
+        })
+     
     }
     
     

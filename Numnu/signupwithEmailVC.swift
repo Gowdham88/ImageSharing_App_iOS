@@ -188,6 +188,11 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                     return
                     
                 }
+                
+               
+                
+               
+                
              /*
                 if self.currentReachabilityStatus != .notReachable {
                     
