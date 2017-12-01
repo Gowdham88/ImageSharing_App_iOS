@@ -360,6 +360,7 @@ extension signupwithEmailVC {
                     if let user = userlist {
                         
                         self.getUserDetails(user: user)
+                        print("details from user :::::",user)
                         
                     }
                     

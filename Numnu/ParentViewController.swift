@@ -60,10 +60,7 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
             
         }
         
-        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(ParentViewController.navigationTap))
-        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
-        self.navigationController?.navigationBar.isUserInteractionEnabled = true
-
+     
         
         hideKeyboardWhenTappedAround()
         buttonTabBarView.isHidden = true
@@ -94,7 +91,12 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
     
         
     }
-    
+    override func viewWillAppear(_ animated: Bool){
+        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(ParentViewController.navigationTap))
+        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+        self.navigationController?.navigationBar.isUserInteractionEnabled = true
+
+    }
     @IBAction func ButtonSearach(_ sender: UIButton) {
         
 //        let top = CGAffineTransform(translationX: 0, y: 0)
