@@ -84,6 +84,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     
     var tagidArray   = [Int]()
     var tagnamearray = [String]()
+    var token_str    : String = "empty"
     
     // place autocomplete //
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
@@ -182,6 +183,9 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         // Checking users login
         /***********************Api login******************************/
         apiClient = ApiClient()
+        /************************getFirebaseToken*************************************/
+        getFirebaseToken()
+        
     }
     
     func navigationTap(){
@@ -391,7 +395,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
                 }
             })
         }
-        if textField == foodTextfield || textField == birthTextfield {
+        if  textField == birthTextfield {
             foodTextfield.text = ""
             animateViewMoving(up: false, moveValue: 0)
             showPopup(table1: true, table2: true)
@@ -678,22 +682,30 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let indexPath = dropdownTableView.indexPathForSelectedRow  {
-            let currentCell = dropdownTableView.cellForRow(at: indexPath)
-            dropdownString = (currentCell?.textLabel?.text)!
-            if tagArray.contains(dropdownString) {
-                print("already exist")
-            }else{
-                tagArray.append(dropdownString)
+        if tableView == dropdownTableView {
+            
+            if let indexPath = dropdownTableView.indexPathForSelectedRow  {
+                let currentCell = dropdownTableView.cellForRow(at: indexPath)
+                dropdownString = (currentCell?.textLabel?.text)!
+                if tagArray.contains(dropdownString) {
+                    print("already exist")
+                }else{
+                    tagArray.append(dropdownString)
+                }
+                collectionView.reloadData()
+                dropdownTableView.isHidden = true
+                foodTextfield.resignFirstResponder()
             }
-            collectionView.reloadData()
-            dropdownTableView.isHidden = true
-            foodTextfield.resignFirstResponder()
-        } else if let indexPath = citytableview.indexPathForSelectedRow  {
-            let currentCell = citytableview.cellForRow(at: indexPath)
-            cityTextfield.text = (currentCell?.textLabel?.text)!
-            citytableview.isHidden = true
-            cityTextfield.resignFirstResponder()
+            
+        } else {
+            
+            if let indexPath = citytableview.indexPathForSelectedRow  {
+                let currentCell = citytableview.cellForRow(at: indexPath)
+                cityTextfield.text = (currentCell?.textLabel?.text)!
+                citytableview.isHidden = true
+                cityTextfield.resignFirstResponder()
+                
+            }
             
         }
     }
@@ -719,7 +731,7 @@ extension SettingsEdit_ProfieViewController {
         tagidArray.removeAll()
         tagnamearray.removeAll()
         let parameters : Parameters = ["beginWith" : tag]
-        let header     : HTTPHeaders = ["Accept-Language" : "en-US"]
+        let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
         apiClient.getTagsApi(parameters: parameters, headers: header, completion: { status,taglist in
             if status == "success" {
                 if let tagList = taglist {
@@ -739,6 +751,16 @@ extension SettingsEdit_ProfieViewController {
                 }
             }
         })
+    }
+    
+    func getFirebaseToken() {
+        
+        apiClient.getFireBaseToken(completion:{ token in
+            
+            self.token_str = token
+            
+        })
+        
     }
     
    
