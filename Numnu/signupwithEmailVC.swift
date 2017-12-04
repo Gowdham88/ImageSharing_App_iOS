@@ -13,6 +13,7 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import PKHUD
 import Alamofire
+import IQKeyboardManagerSwift
 
 class signupwithEmailVC: UIViewController, UITextFieldDelegate {
 
@@ -45,6 +46,8 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         labelcredentials.isHidden = true
         signUpButton.layer.cornerRadius = 25
         signUpButton.clipsToBounds = true
+        IQKeyboardManager.sharedManager().enableAutoToolbar = false
+
 
 //        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
 //        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
@@ -301,6 +304,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         fbLoginmanager.logIn(withReadPermissions: ["public_profile", "email"], from: self) { (result, error) in
             if let error = error {
                 print("Failed to login: \(error.localizedDescription)")
+                HUD.hide()
                 return
             }
             
@@ -314,6 +318,8 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
             let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
             
             // Perform login by calling Firebase APIs
+            HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
+
             Auth.auth().signIn(with: credential, completion: { (user, error) in
                 if let error = error {
                     
@@ -323,6 +329,9 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                 }
                 
                 self.userLoginApi(uid: (user?.uid)!)
+
+                self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId)
+
               
             })
             

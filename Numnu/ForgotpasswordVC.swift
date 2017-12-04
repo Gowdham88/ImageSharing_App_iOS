@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
-
+import IQKeyboardManagerSwift
 
 class ForgotpasswordVC: UIViewController {
 
@@ -20,6 +20,8 @@ class ForgotpasswordVC: UIViewController {
         super.viewDidLoad()
         
         errorLabel.isHidden = true
+        IQKeyboardManager.sharedManager().enableAutoToolbar = false
+
         
         // Do any additional setup after loading the view.
     }

@@ -129,6 +129,8 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         Alert.view.isUserInteractionEnabled = true
         Alert.view.addGestureRecognizer(sampleTapGesture)
         IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
+        IQKeyboardManager.sharedManager().enableAutoToolbar = false
+
         //        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard (_:))as Selector)
         //        self.view.addGestureRecognizer(tapGesture)
         //

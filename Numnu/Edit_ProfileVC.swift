@@ -15,6 +15,7 @@ import IQKeyboardManagerSwift
 import SwiftyJSON
 import Firebase
 import FirebaseAuth
+import PKHUD
 
 class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,UICollectionViewDelegateFlowLayout {
     var dropdownArray = [String] ()
@@ -120,7 +121,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         super.viewDidLoad()
         
        
-    
+        HUD.hide()
         
         imagePicker.delegate = self
         profileImage.isUserInteractionEnabled = true
@@ -140,7 +141,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
        
         Alert.view.isUserInteractionEnabled = true
         Alert.view.addGestureRecognizer(sampleTapGesture)
-    IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
+        IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
+        IQKeyboardManager.sharedManager().enableAutoToolbar = false
+
 //        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard (_:))as Selector)
 //        self.view.addGestureRecognizer(tapGesture)
 //
@@ -330,6 +333,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     func genderClicked(){
         genderTextfield.resignFirstResponder()
        showGenderActionsheet()
+
     
     }
   
@@ -395,6 +399,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == foodTextfield {
             dropdownTableView.isHidden = true
+            datePicker.isHidden = true
+            doneView.isHidden = true
             
         } else if textField == cityTextfield {
             
@@ -459,17 +465,18 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         }else if textField == cityTextfield {
             showPopup(table1: false, table2: true)
             
-          
 
         } else if textField == genderTextfield {
             showPopup(table1: true, table2: true)
 
            genderTextfield.resignFirstResponder()
            showGenderActionsheet()
+            
         }else if textField == foodTextfield {
             showPopup(table1: true, table2: false)
-        }else{
+                    }else{
             showPopup(table1: true, table2: true)
+           
         }
 }
     
