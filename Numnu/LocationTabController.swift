@@ -28,10 +28,15 @@ class LocationTabController: UIViewController,IndicatorInfoProvider {
         locationTableView.delegate   = self
         locationTableView.dataSource = self
         locationTableView.isScrollEnabled = false
-        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(LocationTabController.navigationTap))
+//        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(LocationTabController.navigationTap))
+//        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+//        self.navigationController?.navigationBar.isUserInteractionEnabled = true
+        // Do any additional setup after loading the view.
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        let navigationOnTap = UITapGestureRecognizer(target:self,action:#selector(EventViewController.navigationTap))
         self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
         self.navigationController?.navigationBar.isUserInteractionEnabled = true
-        // Do any additional setup after loading the view.
     }
     func navigationTap(){
         let offset = CGPoint(x: 0,y :0)

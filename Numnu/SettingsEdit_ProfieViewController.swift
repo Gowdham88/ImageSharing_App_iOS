@@ -84,6 +84,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     
     var tagidArray   = [Int]()
     var tagnamearray = [String]()
+    var token_str    : String = "empty"
     
     // place autocomplete //
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
@@ -157,12 +158,12 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             [NSForegroundColorAttributeName: UIColor.black,
              NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
         
-        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(Edit_ProfileVC.navigationTap))
-        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
-        self.navigationController?.navigationBar.isUserInteractionEnabled = true
+//        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(Edit_ProfileVC.navigationTap))
+//        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+//        self.navigationController?.navigationBar.isUserInteractionEnabled = true
         
         citytableview.layer.shadowColor = UIColor.darkGray.cgColor
-        citytableview.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha:1.0)
+        citytableview.backgroundColor = UIColor.clear
         citytableview.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
         citytableview.layer.shadowOpacity = 2.0
         citytableview.layer.shadowRadius = 5
@@ -171,6 +172,8 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         citytableview.layer.masksToBounds = false
         
         dropdownTableView.layer.shadowColor = UIColor.darkGray.cgColor
+        dropdownTableView.backgroundColor = UIColor.clear
+
         dropdownTableView.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1.0)
         dropdownTableView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
         dropdownTableView.layer.shadowOpacity = 2.0
@@ -182,7 +185,11 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         // Checking users login
         /***********************Api login******************************/
         apiClient = ApiClient()
+        /************************getFirebaseToken*************************************/
+        getFirebaseToken()
+        
     }
+    
     func navigationTap(){
         let offset = CGPoint(x: 0,y :0)
         self.myscrollView.setContentOffset(offset, animated: true)
@@ -193,6 +200,9 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     //    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+            let navigationOnTap = UITapGestureRecognizer(target:self,action:#selector(EventViewController.navigationTap))
+            self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+            self.navigationController?.navigationBar.isUserInteractionEnabled = true
         // Hide the navigation bar on the this view controller
          showPopup(table1: true, table2: true)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
@@ -387,7 +397,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
                 }
             })
         }
-        if textField == foodTextfield || textField == birthTextfield {
+        if  textField == birthTextfield {
             foodTextfield.text = ""
             animateViewMoving(up: false, moveValue: 0)
             showPopup(table1: true, table2: true)
@@ -400,6 +410,11 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         }
         if textField == genderTextfield {
             genderTextfield.tintColor = .clear
+        }
+        if textField == foodTextfield {
+            
+            foodTextfield.text = ""
+            
         }
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -605,7 +620,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagArray[indexPath.row], fontname: "Avenir-Book", size: 13)
-        return CGSize(width: textSize.width+50, height: 22)
+        return CGSize(width: textSize.width+30, height: 22)
     }
     func buttonClicked(sender: Any){
         let tag = (sender as AnyObject).tag
@@ -638,6 +653,8 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             }
             cell?.selectionStyle = .none
             cell?.textLabel?.text = tagnamearray[indexPath.row]
+            dropdownTableView.transform = CGAffineTransform(scaleX: 1, y: -1)
+            cell?.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
             //            cell?.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1.0)
             cell?.textLabel?.textColor = UIColor(red: 129/255.0, green: 135/255.0, blue: 155/255.0, alpha: 1.0)
             
@@ -652,6 +669,8 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
                 cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
             }
             cell?.selectionStyle = .none
+            citytableview.transform = CGAffineTransform(scaleX: 1, y: -1)
+            cell?.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
             //            cell?.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1.0)
             cell?.textLabel?.text = autocompleteplaceArray[indexPath.row]
             cell?.textLabel?.textColor = UIColor(red: 129/255.0, green: 135/255.0, blue: 155/255.0, alpha: 1.0)
@@ -674,22 +693,30 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let indexPath = dropdownTableView.indexPathForSelectedRow  {
-            let currentCell = dropdownTableView.cellForRow(at: indexPath)
-            dropdownString = (currentCell?.textLabel?.text)!
-            if tagArray.contains(dropdownString) {
-                print("already exist")
-            }else{
-                tagArray.append(dropdownString)
+        if tableView == dropdownTableView {
+            
+            if let indexPath = dropdownTableView.indexPathForSelectedRow  {
+                let currentCell = dropdownTableView.cellForRow(at: indexPath)
+                dropdownString = (currentCell?.textLabel?.text)!
+                if tagArray.contains(dropdownString) {
+                    print("already exist")
+                }else{
+                    tagArray.append(dropdownString)
+                }
+                collectionView.reloadData()
+                dropdownTableView.isHidden = true
+                foodTextfield.resignFirstResponder()
             }
-            collectionView.reloadData()
-            dropdownTableView.isHidden = true
-            foodTextfield.resignFirstResponder()
-        } else if let indexPath = citytableview.indexPathForSelectedRow  {
-            let currentCell = citytableview.cellForRow(at: indexPath)
-            cityTextfield.text = (currentCell?.textLabel?.text)!
-            citytableview.isHidden = true
-            cityTextfield.resignFirstResponder()
+            
+        } else {
+            
+            if let indexPath = citytableview.indexPathForSelectedRow  {
+                let currentCell = citytableview.cellForRow(at: indexPath)
+                cityTextfield.text = (currentCell?.textLabel?.text)!
+                citytableview.isHidden = true
+                cityTextfield.resignFirstResponder()
+                
+            }
             
         }
     }
@@ -715,7 +742,7 @@ extension SettingsEdit_ProfieViewController {
         tagidArray.removeAll()
         tagnamearray.removeAll()
         let parameters : Parameters = ["beginWith" : tag]
-        let header     : HTTPHeaders = ["Accept-Language" : "en-US"]
+        let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
         apiClient.getTagsApi(parameters: parameters, headers: header, completion: { status,taglist in
             if status == "success" {
                 if let tagList = taglist {
@@ -735,6 +762,16 @@ extension SettingsEdit_ProfieViewController {
                 }
             }
         })
+    }
+    
+    func getFirebaseToken() {
+        
+        apiClient.getFireBaseToken(completion:{ token in
+            
+            self.token_str = token
+            
+        })
+        
     }
     
    

@@ -14,6 +14,7 @@ import FBSDKCoreKit
 import PKHUD
 import FBSDKLoginKit
 import Alamofire
+import IQKeyboardManagerSwift
 
 var closed = String()
 
@@ -50,7 +51,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
         self.view.addGestureRecognizer(tapGesture)
         // Do any additional setup after loading the view.
         
-       
+    IQKeyboardManager.sharedManager().enableAutoToolbar = false
         
     }
     func dismissKeyboard (_ sender: UITapGestureRecognizer) {
@@ -72,7 +73,8 @@ class signInVC: UIViewController, UITextFieldDelegate {
     @IBAction func signinPressed(_ sender: Any) {
         
         if self.currentReachabilityStatus != .notReachable {
-            
+            HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
+
               login()
             
         } else {
@@ -105,22 +107,26 @@ class signInVC: UIViewController, UITextFieldDelegate {
                 }
                 
                 self.idprim.removeAll()
-               
-                if self.currentReachabilityStatus != .notReachable {
-                    
-                    self.userLoginApi(uid: (user?.uid)!)
-                    
-                } else {
-                    
-                    DispatchQueue.main.async {
-                        
-                        AlertProvider.Instance.showInternetAlert(vc: self)
-                    }
-                    
-                    
-                }
-               
                 
+               
+//                if self.currentReachabilityStatus != .notReachable {
+//
+//                    self.userLoginApi(uid: (user?.uid)!)
+//
+//
+//
+//                } else {
+//
+//                    DispatchQueue.main.async {
+//
+//                        AlertProvider.Instance.showInternetAlert(vc: self)
+//                    }
+//
+//
+//                }
+                self.openStoryBoard(name: Constants.Main, id: Constants.Profile_PostViewController)
+                
+
                 print("firebase id is:::",user?.uid as Any)
             })
                 
@@ -166,7 +172,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
             emailLineView.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
         }else {
             passwordTitleLabel.textColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
-            passwordTitleLabel.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
+            passwordLineview.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
         }
         
     }
@@ -177,7 +183,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
             emailLineView.backgroundColor = UIColor(red: 229/255.0, green: 229/255.0, blue: 229/255.0, alpha: 1.0)
         }else{
             passwordTitleLabel.textColor = UIColor(red: 129/255.0, green: 125/255.0, blue: 144/255.0, alpha: 1.0)
-            passwordTitleLabel.backgroundColor = UIColor(red: 229/255.0, green: 229/255.0, blue: 229/255.0, alpha: 1.0)
+            passwordLineview.backgroundColor = UIColor(red: 229/255.0, green: 229/255.0, blue: 229/255.0, alpha: 1.0)
         }
 
     }
@@ -235,16 +241,17 @@ class signInVC: UIViewController, UITextFieldDelegate {
     }
     
     func openStoryBoard(name: String,id : String) {
-        
-        window                          = UIWindow(frame: UIScreen.main.bounds)
+
+//        window                          = UIWindow(frame: UIScreen.main.bounds)
         let storyboard                  = UIStoryboard(name: name, bundle: nil)
-        let initialViewController       = storyboard.instantiateViewController(withIdentifier: id) as! Edit_ProfileVC
-        initialViewController.boolForTitle  = true
+        let initialViewController       = storyboard.instantiateViewController(withIdentifier: id) as! Profile_PostViewController
+//        initialViewController.boolForTitle  = true
         self.navigationController!.pushViewController(initialViewController, animated: true)
 //        window?.rootViewController = initialViewController
 //        window?.makeKeyAndVisible()
-        
+
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -328,12 +335,14 @@ extension signInVC {
                         
                         print(user.firebaseuid!)
                         self.getUserDetails(user: user)
+                      
                     
                     }
                     
                     HUD.hide()
                     
-//                    self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId)
+//                  self.openStoryBoard(name: Constants.Main, id: Constants.Profile_PostViewController)
+                    
 
                     self.emailAddressTF.text = ""
                     self.passwordTF.text     = ""
