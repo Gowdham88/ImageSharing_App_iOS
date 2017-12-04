@@ -288,8 +288,11 @@ class signInVC: UIViewController, UITextFieldDelegate {
                 let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
                 
                 // Perform login by calling Firebase APIs
+                HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
+
                 Auth.auth().signIn(with: credential, completion: { (user, error) in
                     if let error = error {
+                        HUD.hide()
                         print("Login error: \(error.localizedDescription)")
                         let alertController = UIAlertController(title: "Login Error", message: error.localizedDescription, preferredStyle: .alert)
                         let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
@@ -299,6 +302,8 @@ class signInVC: UIViewController, UITextFieldDelegate {
                         return
                     }
                     self.userLoginApi(uid: (user?.uid)!)
+
+                     self.openStoryBoard(name: Constants.Main, id: Constants.Profile_PostViewController)
                    
                 })
                 

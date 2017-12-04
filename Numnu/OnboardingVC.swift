@@ -9,6 +9,7 @@
 import UIKit
 import GoogleMaps
 
+
 class OnboardingVC: UIViewController {
    
     @IBOutlet var letmeinButtonoutlet: UIButton!
@@ -30,7 +31,9 @@ class OnboardingVC: UIViewController {
         
         shadowview.isHidden = true
         notificationsAlert.isHidden = true
+        
         self.openStoryBoard(name: Constants.Main, id: Constants.TabStoryId)
+
     
     }
     
@@ -66,7 +69,13 @@ class OnboardingVC: UIViewController {
         let storyboard                  = UIStoryboard(name: name, bundle: nil)
         let initialViewController       = storyboard.instantiateViewController(withIdentifier: id)
         self.present(initialViewController, animated: false, completion: nil)
-        
+//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//
+//
+//        UIView.transition(with: appDelegate.window!, duration: 0.5, options: UIViewAnimationOptions.curveEaseOut, animations: { () -> Void in
+//            appDelegate.window!.rootViewController = initialViewController
+//        }, completion:nil)
+//
     }
     
 

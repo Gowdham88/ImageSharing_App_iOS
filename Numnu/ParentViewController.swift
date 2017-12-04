@@ -11,6 +11,7 @@ import XLPagerTabStrip
 import GooglePlaces
 import SwiftyJSON
 import Alamofire
+import IQKeyboardManagerSwift
 
 class ParentViewController: ButtonBarPagerTabStripViewController {
     
@@ -57,6 +58,8 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
             guard changeCurrentIndex == true else { return }
             oldCell?.label.textColor = UIColor.textlightDark()
             newCell?.label.textColor = UIColor.appBlackColor()
+            IQKeyboardManager.sharedManager().enableAutoToolbar = false
+
             
         }
         
