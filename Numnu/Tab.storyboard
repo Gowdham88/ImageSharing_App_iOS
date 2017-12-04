@@ -840,17 +840,17 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="eventcell" rowHeight="110" id="MRD-DW-MFv" customClass="EventTableViewCell" customModule="Numnu" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="110"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="eventcell" rowHeight="107" id="MRD-DW-MFv" customClass="EventTableViewCell" customModule="Numnu" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="107"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MRD-DW-MFv" id="IWY-aZ-vak">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MRD-DW-MFv" id="IWY-aZ-vak">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="107"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9rh-kg-N9i">
+                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9rh-kg-N9i">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="2rW-U3-DAu" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="2rW-U3-DAu" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
                                                             <rect key="frame" x="8" y="10" width="80" height="80"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="80" id="puk-B9-kfJ"/>
@@ -862,8 +862,8 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flatron South Beach Wine &amp; Food Festival" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vFJ-eq-bHU">
-                                                            <rect key="frame" x="98" y="8" width="187" height="38.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Flatron South Beach Wine &amp; Food Festival" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vFJ-eq-bHU">
+                                                            <rect key="frame" x="98" y="7" width="187" height="38.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="45" id="46U-Tg-0eo"/>
                                                             </constraints>
@@ -871,8 +871,8 @@
                                                             <color key="textColor" red="0.1529197991" green="0.15295344590000001" blue="0.15291768310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="mSr-uw-chr">
-                                                            <rect key="frame" x="98" y="51.5" width="187" height="22"/>
+                                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="mSr-uw-chr">
+                                                            <rect key="frame" x="98" y="49.5" width="187" height="22"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="22" id="BPt-ye-1bW"/>
@@ -911,8 +911,8 @@
                                                                 <outlet property="delegate" destination="zsI-ft-QpU" id="s8A-Ub-bcw"/>
                                                             </connections>
                                                         </collectionView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="August 30,Montreal " lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FmM-7i-LBP">
-                                                            <rect key="frame" x="98" y="78.5" width="187" height="19.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="August 30,Montreal " lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FmM-7i-LBP">
+                                                            <rect key="frame" x="98" y="74.5" width="187" height="19.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="39" id="mbR-Df-wCR"/>
                                                             </constraints>
