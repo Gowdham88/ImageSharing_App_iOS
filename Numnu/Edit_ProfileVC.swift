@@ -697,7 +697,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     }
     
     func setNavBar() {
-        navigationItemList.title = "Complete Signup"
+        navigationItemList.title = "Complete Sign up"
         let button: UIButton = UIButton(type: UIButtonType.custom)
         button.setImage(UIImage(named: "ic_arrow_back"), for: UIControlState.normal)
         button.addTarget(self, action: #selector(EventViewController.backButtonClicked), for: UIControlEvents.touchUpInside)
