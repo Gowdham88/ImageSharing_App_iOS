@@ -13,6 +13,8 @@ import GooglePlaces
 import Alamofire
 import IQKeyboardManagerSwift
 import SwiftyJSON
+import Firebase
+import FirebaseAuth
 
 class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,UICollectionViewDelegateFlowLayout {
     var dropdownArray = [String] ()
@@ -91,6 +93,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
 
     var tagidArray   = [Int]()
     var tagnamearray = [String]()
+    var token_str : String = "empty"
 /*
     // place autocomplete //
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
@@ -115,6 +118,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
  */
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+       
     
         
         imagePicker.delegate = self
@@ -149,9 +154,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
 
         foodTextfield.addTarget(self, action: #selector(textFieldActive), for: UIControlEvents.allTouchEvents)
         
-        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(Edit_ProfileVC.navigationTap))
-        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
-        self.navigationController?.navigationBar.isUserInteractionEnabled = true
+//        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(Edit_ProfileVC.navigationTap))
+//        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+//        self.navigationController?.navigationBar.isUserInteractionEnabled = true
         
         
         dropdownArray = ["Chicken","Chicken chilli","Chicken manjurian","Chicken 65","Chicken fried rice","Grill chicken","Pizza","Burger","Sandwich","Mutton","Mutton chukka","Mutton masala","Mutton fry","Prawn","Gobi chilli","Panneer","Noodles","Mutton soup","Fish fry","Dry fish"]
@@ -172,8 +177,11 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             [NSForegroundColorAttributeName: UIColor.black,
              NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
         
+        
+        
             cityTableView.layer.shadowColor = UIColor.darkGray.cgColor
-            cityTableView.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha:1.0)
+            cityTableView.isUserInteractionEnabled = true
+            cityTableView.backgroundColor = UIColor.clear
             cityTableView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
             cityTableView.layer.shadowOpacity = 2.0
             cityTableView.layer.shadowRadius = 5
@@ -182,7 +190,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             cityTableView.layer.masksToBounds = false
         
         dropdownTableView.layer.shadowColor = UIColor.darkGray.cgColor
-        dropdownTableView.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1.0)
+        dropdownTableView.isUserInteractionEnabled = true
+        dropdownTableView.backgroundColor = UIColor.clear
         dropdownTableView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
         dropdownTableView.layer.shadowOpacity = 2.0
         dropdownTableView.layer.shadowRadius = 5
@@ -194,6 +203,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         // Checking users login
         /***********************Api login******************************/
         apiClient = ApiClient()
+        /************************getFirebaseToken*************************************/
+        getFirebaseToken()
     }
     
     func focusEdittext(textfield : UITextField,focus:Bool) {
@@ -260,6 +271,10 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+            let navigationOnTap = UITapGestureRecognizer(target:self,action:#selector(EventViewController.navigationTap))
+            self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+            self.navigationController?.navigationBar.isUserInteractionEnabled = true
         // Hide the navigation bar on the this view controller
         showPopup(table1: true, table2: true)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
@@ -271,7 +286,11 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                     addProfileContainer()
                 } else{
                     
+
+
+
                 addCollectionContainer()
+
             }
         }
     }
@@ -332,8 +351,13 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         Alert.addAction(FemaleAction)
         Alert.addAction(MaleAction)
         Alert.addAction(cancelAction)
-        present(Alert, animated: true, completion:nil )
-       
+        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad) {
+            Alert.popoverPresentationController?.sourceView = self.view
+            Alert.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
+            present(Alert, animated: true, completion:nil )
+        }else{
+            present(Alert, animated: true, completion:nil )
+        }
     }
     func handleTap(recognizer: UITapGestureRecognizer){
         dismiss(animated: true, completion: nil)
@@ -395,8 +419,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 getPlaceApi(place_Str: "\(place)\(string)" as String)
                 
             }
-          
-            
+        
             cityTableView.isHidden  = false
             
         } else {
@@ -464,7 +487,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 }
             })
         }
-        if textField == foodTextfield || textField == birthTextfield  {
+        if  textField == birthTextfield  {
             foodTextfield.text = ""
             animateViewMoving(up: false, moveValue: 0)
             showPopup(table1: true, table2: true)
@@ -483,6 +506,12 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         }
         if textField == genderTextfield {
             genderTextfield.tintColor = .clear
+        }
+        
+        if textField == foodTextfield {
+            
+            foodTextfield.text = ""
+            
         }
     }
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
@@ -644,7 +673,15 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         Alert.addAction(CameraAction)
         Alert.addAction(GalleryAction)
         Alert.addAction(CancelAction)
-        present(Alert, animated: true, completion: nil)
+//        present(Alert, animated: true, completion: nil)
+        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad) {
+            Alert.popoverPresentationController?.sourceView = self.view
+            Alert.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
+            present(Alert, animated: true, completion:nil )
+        }else{
+            present(Alert, animated: true, completion:nil )
+        }
+        
         present(imagePicker, animated: true, completion: nil)
     }
     
@@ -660,7 +697,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     }
     
     func setNavBar() {
-        navigationItemList.title = "Complete Signup"
+        navigationItemList.title = "Complete Sign up"
         let button: UIButton = UIButton(type: UIButtonType.custom)
         button.setImage(UIImage(named: "ic_arrow_back"), for: UIControlState.normal)
         button.addTarget(self, action: #selector(EventViewController.backButtonClicked), for: UIControlEvents.touchUpInside)
@@ -705,7 +742,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagArray[indexPath.row], fontname: "Avenir-Book", size: 13)
-        return CGSize(width: textSize.width+50, height: 22)
+        return CGSize(width: textSize.width+30, height: 22)
     }
     func buttonClicked(sender: Any){
         let tag = (sender as AnyObject).tag
@@ -738,6 +775,11 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             }
             cell?.selectionStyle = .none
             cell?.textLabel?.text = tagnamearray[indexPath.row]
+            
+            dropdownTableView.transform = CGAffineTransform(scaleX: 1, y: -1)
+            cell?.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
+//            tableView.transform = CGAffineTransform(rotationAngle: (-.pi))
+//            cell?.transform = CGAffineTransform(rotationAngle: (-.pi))
 //            cell?.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1.0)
             cell?.textLabel?.textColor = UIColor(red: 129/255.0, green: 135/255.0, blue: 155/255.0, alpha: 1.0)
 
@@ -755,7 +797,11 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
 //            cell?.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1.0)
             cell?.textLabel?.text = autocompleteplaceArray[indexPath.row]
             cell?.textLabel?.textColor = UIColor(red: 129/255.0, green: 135/255.0, blue: 155/255.0, alpha: 1.0)
+//            tableView.transform = CGAffineTransform(rotationAngle: (-.pi))
+//            cell?.transform = CGAffineTransform(rotationAngle: (-.pi))
             
+            cityTableView.transform = CGAffineTransform(scaleX: 1, y: -1)
+            cell?.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
             return cell!
             
             
@@ -774,24 +820,35 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let indexPath = dropdownTableView.indexPathForSelectedRow  {
-            let currentCell = dropdownTableView.cellForRow(at: indexPath)
-            dropdownString = (currentCell?.textLabel?.text)!
-            if tagArray.contains(dropdownString) {
-                print("already exist")
-            }else{
-                tagArray.append(dropdownString)
+        
+        if tableView == dropdownTableView {
+            
+            if let indexPath = dropdownTableView.indexPathForSelectedRow  {
+                let currentCell = dropdownTableView.cellForRow(at: indexPath)
+                dropdownString = (currentCell?.textLabel?.text)!
+                if tagArray.contains(dropdownString) {
+                    print("already exist")
+                }else{
+                    tagArray.append(dropdownString)
+                }
+                collectionView.reloadData()
+                dropdownTableView.isHidden = true
+                foodTextfield.resignFirstResponder()
             }
-            collectionView.reloadData()
-            dropdownTableView.isHidden = true
-            foodTextfield.resignFirstResponder()
-        } else if let indexPath = cityTableView.indexPathForSelectedRow  {
-            let currentCell = cityTableView.cellForRow(at: indexPath)
-            cityTextfield.text = (currentCell?.textLabel?.text)!
-            cityTableView.isHidden = true
-            cityTextfield.resignFirstResponder()
+            
+        } else {
+            
+            if let indexPath = cityTableView.indexPathForSelectedRow  {
+                let currentCell = cityTableView.cellForRow(at: indexPath)
+                cityTextfield.text = (currentCell?.textLabel?.text)!
+                cityTableView.isHidden = true
+                cityTextfield.resignFirstResponder()
+                
+            }
             
         }
+        
+        
     }
 }
 
@@ -804,8 +861,10 @@ extension Edit_ProfileVC : Profile_PostViewControllerDelegae {
     }
     
     func logout() {
+        
         PrefsManager.sharedinstance.isLoginned = false
         addCollectionContainer()
+     
     }
 }
 
@@ -814,7 +873,7 @@ extension Edit_ProfileVC {
         tagidArray.removeAll()
         tagnamearray.removeAll()
         let parameters : Parameters = ["beginWith" : tag]
-        let header     : HTTPHeaders = ["Accept-Language" : "en-US"]
+        let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
         apiClient.getTagsApi(parameters: parameters, headers: header, completion: { status,taglist in
             if status == "success" {
                 if let tagList = taglist {
@@ -834,6 +893,16 @@ extension Edit_ProfileVC {
                 }
             }
         })
+    }
+    
+    func getFirebaseToken() {
+        
+        apiClient.getFireBaseToken(completion:{ token in
+            
+            self.token_str = token
+            
+        })
+     
     }
     
     

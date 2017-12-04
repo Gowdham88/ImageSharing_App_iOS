@@ -9,6 +9,8 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import Firebase
+import FirebaseAuth
 
 class  ApiClient {
     
@@ -197,6 +199,31 @@ class  ApiClient {
                 
             }
         }
+        
+    }
+    
+    func getFireBaseToken(completion : @escaping (String) -> Void) {
+    
+     if let currentUser = Auth.auth().currentUser {
+        
+        currentUser.getTokenForcingRefresh(true) {idToken, error in
+            if let error = error {
+              print(error.localizedDescription)
+                completion(error.localizedDescription)
+              return;
+            }
+            
+            print(idToken ?? "empty")
+            completion(idToken ?? "empty")
+          
+        }
+            
+            
+        } else {
+        
+        completion("empty")
+        
+      }
         
     }
     

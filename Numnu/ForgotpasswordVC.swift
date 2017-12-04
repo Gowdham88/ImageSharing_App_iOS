@@ -31,12 +31,20 @@ class ForgotpasswordVC: UIViewController {
           Auth.auth().sendPasswordReset(withEmail: email) { error in
             
                 if let error = error {
-    
+                    print("forgot password error:::::::",error.localizedDescription)
+
                 } else {
-                
-                 self.showAlertMessagepop(title: "Password reset email sent")
-                 sender.isEnabled = false
-                 self.dismiss(animated: true, completion: nil)
+                    sender.isEnabled = false
+
+//                 self.showAlertMessagepop(title: "Password reset email sent")
+                   let Alert = UIAlertController(title: "Success", message: "Password reset link sent to email", preferredStyle: UIAlertControllerStyle.alert)
+                    let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) { _ in
+                        self.popNav()
+                    }
+                    Alert.addAction(okAction)
+                    self.present(Alert, animated: true, completion:nil )
+                    
+//                 self.dismiss(animated: true, completion: nil)
                 }
             }
             
@@ -47,7 +55,11 @@ class ForgotpasswordVC: UIViewController {
   
         
     }
-    
+    func popNav () {
+        
+        self.navigationController?.popViewController(animated: true)
+
+    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         self.view.endEditing(true)

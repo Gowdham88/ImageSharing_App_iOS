@@ -19,6 +19,7 @@ class ItemCompleteviewcontroller : ButtonBarPagerTabStripViewController {
     @IBOutlet weak var ItDescriptionLabel: UILabel!
     @IBOutlet weak var readMoreButton: UIButton!
     
+    @IBOutlet weak var businessName: UILabel!
     @IBOutlet weak var eventname: UILabel!
     
     @IBOutlet weak var TabBarView: ButtonBarView!
@@ -64,9 +65,9 @@ class ItemCompleteviewcontroller : ButtonBarPagerTabStripViewController {
             
         }
         
-        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(ItemCompleteviewcontroller.navigationTap))
-        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
-        self.navigationController?.navigationBar.isUserInteractionEnabled = true
+//        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(ItemCompleteviewcontroller.navigationTap))
+//        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+//        self.navigationController?.navigationBar.isUserInteractionEnabled = true
         
         /**********************set Nav bar****************************/
         
@@ -79,9 +80,14 @@ class ItemCompleteviewcontroller : ButtonBarPagerTabStripViewController {
         
         tagViewUpdate()
         
-        let businesstap = UITapGestureRecognizer(target: self, action: #selector(ItemCompleteviewcontroller.businesstap))
-        eventname.addGestureRecognizer(businesstap)
+        let eventtap = UITapGestureRecognizer(target: self, action: #selector(ItemCompleteviewcontroller.eventtap))
+        eventname.addGestureRecognizer(eventtap)
         eventname.isUserInteractionEnabled = true
+        
+        let businesstap = UITapGestureRecognizer(target: self, action: #selector(ItemCompleteviewcontroller.businesstap))
+        businessName.addGestureRecognizer(businesstap)
+        businessName.isUserInteractionEnabled = true
+        
         ItDescriptionLabel.text = Constants.dummy
         
         /****************Checking number of lines************************/
@@ -101,10 +107,21 @@ class ItemCompleteviewcontroller : ButtonBarPagerTabStripViewController {
         
         // Do any additional setup after loading the view.
     }
-    func businesstap(){
+    override func viewWillAppear(_ animated: Bool) {
+        let navigationOnTap = UITapGestureRecognizer(target:self,action:#selector(EventViewController.navigationTap))
+        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+        self.navigationController?.navigationBar.isUserInteractionEnabled = true
+    }
+    func eventtap(){
         
         let storyboard      = UIStoryboard(name: Constants.Event, bundle: nil)
         let vc              = storyboard.instantiateViewController(withIdentifier: "eventstoryid")
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
+    func businesstap(){
+        
+        let storyboard = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId)
         self.navigationController!.pushViewController(vc, animated: true)
     }
     func navigationTap(){

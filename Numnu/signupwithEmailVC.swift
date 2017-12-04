@@ -188,6 +188,11 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                     return
                     
                 }
+                
+               
+                
+               
+                
              /*
                 if self.currentReachabilityStatus != .notReachable {
                     
@@ -360,6 +365,7 @@ extension signupwithEmailVC {
                     if let user = userlist {
                         
                         self.getUserDetails(user: user)
+                        print("details from user :::::",user)
                         
                     }
                     

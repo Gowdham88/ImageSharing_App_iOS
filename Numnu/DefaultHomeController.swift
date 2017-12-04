@@ -26,10 +26,15 @@ class DefaultHomeController: UIViewController,IndicatorInfoProvider {
         namesArray = ["Flatron","Masuike","Umami Burger","Ada Salad"]
        locationArray = ["Montreal","Miami","New Orleans","Miami"]
         
-        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(Edit_ProfileVC.navigationTap))
+//        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(Edit_ProfileVC.navigationTap))
+//        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+//        self.navigationController?.navigationBar.isUserInteractionEnabled = true
+        // Do any additional setup after loading the view.
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        let navigationOnTap = UITapGestureRecognizer(target:self,action:#selector(EventViewController.navigationTap))
         self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
         self.navigationController?.navigationBar.isUserInteractionEnabled = true
-        // Do any additional setup after loading the view.
     }
     func navigationTap(){
         let offset = CGPoint(x: 0,y :0)

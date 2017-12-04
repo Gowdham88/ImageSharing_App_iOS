@@ -24,8 +24,8 @@ class FoodPreferenceCollectionViewCell: UICollectionViewCell {
         foodtagLabel.layer.cornerRadius  = 4
         foodtagLabel.layer.masksToBounds = true
         foodtagLabel.textAlignment = .center
-        foodtagLabel.frame = CGRect(x: 0, y: 0, width: size.width+20, height: 22)
-        removetagButton.frame.origin.x = size.width+20
+        foodtagLabel.frame = CGRect(x: 0, y: 0, width: size.width+10, height: 22)
+        removetagButton.frame.origin.x = size.width+7
 
     }
 }
