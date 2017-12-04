@@ -628,8 +628,8 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0qr-rh-9g4">
-                                                <rect key="frame" x="0.0" y="225" width="320" height="626"/>
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0qr-rh-9g4">
+                                                <rect key="frame" x="0.0" y="225" width="320" height="625"/>
                                             </scrollView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PBX-Yr-1C5">
                                                 <rect key="frame" x="0.0" y="225" width="320" height="50"/>
