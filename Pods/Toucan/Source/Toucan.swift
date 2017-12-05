@@ -1,6 +1,6 @@
 // Toucan.swift
 //
-// Copyright (c) 2014-2016 Gavin Bunney, Simple Labs (http://thesimplelab.co)
+// Copyright (c) 2014-2017 Gavin Bunney
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -37,7 +37,7 @@ import CoreGraphics
  */
 public class Toucan : NSObject {
     
-    public var image : UIImage
+    public var image : UIImage?
     
     public init(image withImage: UIImage) {
         self.image = withImage
@@ -57,7 +57,9 @@ public class Toucan : NSObject {
      - returns: Self, allowing method chaining
      */
     public func resize(_ size: CGSize, fitMode: Toucan.Resize.FitMode = .clip) -> Toucan {
-        self.image = Toucan.Resize.resizeImage(self.image, size: size, fitMode: fitMode)
+        if let image = self.image {
+            self.image = Toucan.Resize.resizeImage(image, size: size, fitMode: fitMode)
+        }
         return self
     }
     
@@ -73,7 +75,9 @@ public class Toucan : NSObject {
      */
     @objc
     public func resizeByClipping(_ size: CGSize) -> Toucan {
-        self.image = Toucan.Resize.resizeImage(self.image, size: size, fitMode: .clip)
+        if let image = self.image {
+            self.image = Toucan.Resize.resizeImage(image, size: size, fitMode: .clip)
+        }
         return self
     }
     
@@ -90,7 +94,9 @@ public class Toucan : NSObject {
      */
     @objc
     public func resizeByCropping(_ size: CGSize) -> Toucan {
-        self.image = Toucan.Resize.resizeImage(self.image, size: size, fitMode: .crop)
+        if let image = self.image {
+            self.image = Toucan.Resize.resizeImage(image, size: size, fitMode: .crop)
+        }
         return self
     }
     
@@ -106,7 +112,9 @@ public class Toucan : NSObject {
      */
     @objc
     public func resizeByScaling(_ size: CGSize) -> Toucan {
-        self.image = Toucan.Resize.resizeImage(self.image, size: size, fitMode: .scale)
+        if let image = self.image {
+            self.image = Toucan.Resize.resizeImage(image, size: size, fitMode: .scale)
+        }
         return self
     }
     
@@ -155,7 +163,7 @@ public class Toucan : NSObject {
          
          - returns: Resized image
          */
-        public static func resizeImage(_ image: UIImage, size: CGSize, fitMode: FitMode = .clip) -> UIImage {
+        public static func resizeImage(_ image: UIImage, size: CGSize, fitMode: FitMode = .clip) -> UIImage? {
             
             let imgRef = Util.CGImageWithCorrectOrientation(image)
             let originalWidth  = CGFloat(imgRef.width)
@@ -163,21 +171,24 @@ public class Toucan : NSObject {
             let widthRatio = size.width / originalWidth
             let heightRatio = size.height / originalHeight
             
-            let scaleRatio = widthRatio > heightRatio ? widthRatio : heightRatio
+            let scaleRatio = fitMode == .clip ? min(heightRatio, widthRatio) : max(heightRatio, widthRatio)
             
             let resizedImageBounds = CGRect(x: 0, y: 0, width: round(originalWidth * scaleRatio), height: round(originalHeight * scaleRatio))
             let resizedImage = Util.drawImageInBounds(image, bounds: resizedImageBounds)
+            guard resizedImage != nil else {
+                return nil
+            }
             
             switch (fitMode) {
             case .clip:
                 return resizedImage
             case .crop:
-                let croppedRect = CGRect(x: (resizedImage.size.width - size.width) / 2,
-                                         y: (resizedImage.size.height - size.height) / 2,
+                let croppedRect = CGRect(x: (resizedImage!.size.width - size.width) / 2,
+                                         y: (resizedImage!.size.height - size.height) / 2,
                                          width: size.width, height: size.height)
-                return Util.croppedImageWithRect(resizedImage, rect: croppedRect)
+                return Util.croppedImageWithRect(resizedImage!, rect: croppedRect)
             case .scale:
-                return Util.drawImageInBounds(resizedImage, bounds: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+                return Util.drawImageInBounds(resizedImage!, bounds: CGRect(x: 0, y: 0, width: size.width, height: size.height))
             }
         }
     }
@@ -195,8 +206,10 @@ public class Toucan : NSObject {
      
      - returns: Self, allowing method chaining
      */
-    public func maskWithImage(maskImage : UIImage)  -> Toucan {
-        self.image = Toucan.Mask.maskImageWithImage(self.image, maskImage: maskImage)
+    public func maskWithImage(maskImage : UIImage) -> Toucan {
+        if let image = self.image {
+            self.image = Toucan.Mask.maskImageWithImage(image, maskImage: maskImage)
+        }
         return self
     }
     
@@ -211,7 +224,9 @@ public class Toucan : NSObject {
      - returns: Self, allowing method chaining
      */
     public func maskWithEllipse(borderWidth: CGFloat = 0, borderColor: UIColor = UIColor.white) -> Toucan {
-        self.image = Toucan.Mask.maskImageWithEllipse(self.image, borderWidth: borderWidth, borderColor: borderColor)
+        if let image = self.image {
+            self.image = Toucan.Mask.maskImageWithEllipse(image, borderWidth: borderWidth, borderColor: borderColor)
+        }
         return self
     }
     
@@ -223,7 +238,9 @@ public class Toucan : NSObject {
      - returns: Self, allowing method chaining
      */
     public func maskWithPath(path: UIBezierPath) -> Toucan {
-        self.image = Toucan.Mask.maskImageWithPath(self.image, path: path)
+        if let image = self.image {
+            self.image = Toucan.Mask.maskImageWithPath(image, path: path)
+        }
         return self
     }
     
@@ -235,7 +252,9 @@ public class Toucan : NSObject {
      - returns: Self, allowing method chaining
      */
     public func maskWithPathClosure(path: (_ rect: CGRect) -> (UIBezierPath)) -> Toucan {
-        self.image = Toucan.Mask.maskImageWithPathClosure(self.image, pathInRect: path)
+        if let image = self.image {
+            self.image = Toucan.Mask.maskImageWithPathClosure(image, pathInRect: path)
+        }
         return self
     }
     
@@ -250,7 +269,9 @@ public class Toucan : NSObject {
      - returns: Self, allowing method chaining
      */
     public func maskWithRoundedRect(cornerRadius: CGFloat, borderWidth: CGFloat = 0, borderColor: UIColor = UIColor.white) -> Toucan {
-        self.image = Toucan.Mask.maskImageWithRoundedRect(self.image, cornerRadius: cornerRadius, borderWidth: borderWidth, borderColor: borderColor)
+        if let image = self.image {
+            self.image = Toucan.Mask.maskImageWithRoundedRect(image, cornerRadius: cornerRadius, borderWidth: borderWidth, borderColor: borderColor)
+        }
         return self
     }
     
@@ -271,7 +292,7 @@ public class Toucan : NSObject {
          
          - returns: Masked image
          */
-        public static func maskImageWithImage(_ image: UIImage, maskImage: UIImage) -> UIImage {
+        public static func maskImageWithImage(_ image: UIImage, maskImage: UIImage) -> UIImage? {
             
             let imgRef = Util.CGImageWithCorrectOrientation(image)
             let maskRef = maskImage.cgImage
@@ -285,7 +306,7 @@ public class Toucan : NSObject {
             
             let masked = imgRef.masking(mask!);
             
-            return Util.drawImageWithClosure(size: image.size) { (size: CGSize, context: CGContext) -> () in
+            return Util.drawImageWithClosure(size: image.size, scale: image.scale) { (size: CGSize, context: CGContext) -> () in
                 
                 // need to flip the transform matrix, CoreGraphics has (0,0) in lower left when drawing image
                 context.scaleBy(x: 1, y: -1)
@@ -307,12 +328,12 @@ public class Toucan : NSObject {
          - returns: Masked image
          */
         public static func maskImageWithEllipse(_ image: UIImage,
-                                                borderWidth: CGFloat = 0, borderColor: UIColor = UIColor.white) -> UIImage {
+                                                borderWidth: CGFloat = 0, borderColor: UIColor = UIColor.white) -> UIImage? {
             
             let imgRef = Util.CGImageWithCorrectOrientation(image)
             let size = CGSize(width: CGFloat(imgRef.width) / image.scale, height: CGFloat(imgRef.height) / image.scale)
             
-            return Util.drawImageWithClosure(size: size) { (size: CGSize, context: CGContext) -> () in
+            return Util.drawImageWithClosure(size: size, scale: image.scale) { (size: CGSize, context: CGContext) -> () in
                 
                 let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
                 
@@ -341,12 +362,12 @@ public class Toucan : NSObject {
          - returns: Masked image
          */
         public static func maskImageWithPath(_ image: UIImage,
-                                             path: UIBezierPath) -> UIImage {
+                                             path: UIBezierPath) -> UIImage? {
             
             let imgRef = Util.CGImageWithCorrectOrientation(image)
             let size = CGSize(width: CGFloat(imgRef.width) / image.scale, height: CGFloat(imgRef.height) / image.scale)
             
-            return Util.drawImageWithClosure(size: size) { (size: CGSize, context: CGContext) -> () in
+            return Util.drawImageWithClosure(size: size, scale: image.scale) { (size: CGSize, context: CGContext) -> () in
                 
                 let boundSize = path.bounds.size
                 
@@ -383,7 +404,7 @@ public class Toucan : NSObject {
          - returns: Masked image
          */
         public static func maskImageWithPathClosure(_ image: UIImage,
-                                                    pathInRect:(_ rect: CGRect) -> (UIBezierPath)) -> UIImage {
+                                                    pathInRect:(_ rect: CGRect) -> (UIBezierPath)) -> UIImage? {
             
             let imgRef = Util.CGImageWithCorrectOrientation(image)
             let size = CGSize(width: CGFloat(imgRef.width) / image.scale, height: CGFloat(imgRef.height) / image.scale)
@@ -403,12 +424,12 @@ public class Toucan : NSObject {
          - returns: Masked image
          */
         public static func maskImageWithRoundedRect(_ image: UIImage, cornerRadius: CGFloat,
-                                                    borderWidth: CGFloat = 0, borderColor: UIColor = UIColor.white) -> UIImage {
+                                                    borderWidth: CGFloat = 0, borderColor: UIColor = UIColor.white) -> UIImage? {
             
             let imgRef = Util.CGImageWithCorrectOrientation(image)
             let size = CGSize(width: CGFloat(imgRef.width) / image.scale, height: CGFloat(imgRef.height) / image.scale)
             
-            return Util.drawImageWithClosure(size: size) { (size: CGSize, context: CGContext) -> () in
+            return Util.drawImageWithClosure(size: size, scale: image.scale) { (size: CGSize, context: CGContext) -> () in
                 
                 let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
                 
@@ -442,7 +463,9 @@ public class Toucan : NSObject {
      - returns: Self, allowing method chaining
      */
     public func layerWithOverlayImage(_ overlayImage: UIImage, overlayFrame: CGRect) -> Toucan {
-        self.image = Toucan.Layer.overlayImage(self.image, overlayImage:overlayImage, overlayFrame:overlayFrame)
+        if let image = self.image {
+            self.image = Toucan.Layer.overlayImage(image, overlayImage:overlayImage, overlayFrame:overlayFrame)
+        }
         return self
     }
     
@@ -460,12 +483,11 @@ public class Toucan : NSObject {
          
          - returns: Masked image
          */
-        public static func overlayImage(_ image: UIImage, overlayImage: UIImage, overlayFrame: CGRect) -> UIImage {
-            
+        public static func overlayImage(_ image: UIImage, overlayImage: UIImage, overlayFrame: CGRect) -> UIImage? {
             let imgRef = Util.CGImageWithCorrectOrientation(image)
             let size = CGSize(width: CGFloat(imgRef.width) / image.scale, height: CGFloat(imgRef.height) / image.scale)
             
-            return Util.drawImageWithClosure(size: size) { (size: CGSize, context: CGContext) -> () in
+            return Util.drawImageWithClosure(size: size, scale: image.scale) { (size: CGSize, context: CGContext) -> () in
                 
                 let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
                 
@@ -500,15 +522,15 @@ public class Toucan : NSObject {
             switch (image.imageOrientation) {
             case UIImageOrientation.right, UIImageOrientation.rightMirrored:
                 transform = transform.translatedBy(x: 0, y: image.size.height)
-                transform = transform.rotated(by: CGFloat(-1.0 * M_PI_2))
+                transform = transform.rotated(by: .pi / -2.0)
                 break
             case UIImageOrientation.left, UIImageOrientation.leftMirrored:
                 transform = transform.translatedBy(x: image.size.width, y: 0)
-                transform = transform.rotated(by: CGFloat(M_PI_2))
+                transform = transform.rotated(by: .pi / 2.0)
                 break
             case UIImageOrientation.down, UIImageOrientation.downMirrored:
                 transform = transform.translatedBy(x: image.size.width, y: image.size.height)
-                transform = transform.rotated(by: CGFloat(M_PI))
+                transform = transform.rotated(by: .pi)
                 break
             default:
                 break
@@ -544,7 +566,7 @@ public class Toucan : NSObject {
             
             let context : CGContext = CGContext(data: nil, width: contextWidth, height: contextHeight,
                                                 bitsPerComponent: image.cgImage!.bitsPerComponent,
-                                                bytesPerRow: image.cgImage!.bytesPerRow,
+                                                bytesPerRow: 0,
                                                 space: image.cgImage!.colorSpace!,
                                                 bitmapInfo: image.cgImage!.bitmapInfo.rawValue)!;
             
@@ -563,8 +585,8 @@ public class Toucan : NSObject {
          
          - returns: Resized image within bounds
          */
-        static func drawImageInBounds(_ image: UIImage, bounds : CGRect) -> UIImage {
-            return drawImageWithClosure(size: bounds.size) { (size: CGSize, context: CGContext) -> () in
+        static func drawImageInBounds(_ image: UIImage, bounds : CGRect) -> UIImage? {
+            return drawImageWithClosure(size: bounds.size, scale: image.scale) { (size: CGSize, context: CGContext) -> () in
                 image.draw(in: bounds)
             };
         }
@@ -577,8 +599,8 @@ public class Toucan : NSObject {
          
          - returns: Resized and cropped image
          */
-        static func croppedImageWithRect(_ image: UIImage, rect: CGRect) -> UIImage {
-            return drawImageWithClosure(size: rect.size) { (size: CGSize, context: CGContext) -> () in
+        static func croppedImageWithRect(_ image: UIImage, rect: CGRect) -> UIImage? {
+            return drawImageWithClosure(size: rect.size, scale: image.scale) { (size: CGSize, context: CGContext) -> () in
                 let drawRect = CGRect(x: -rect.origin.x, y: -rect.origin.y, width: image.size.width, height: image.size.height)
                 context.clip(to: CGRect(x: 0, y: 0, width: rect.size.width, height: rect.size.height))
                 image.draw(in: drawRect)
@@ -593,9 +615,20 @@ public class Toucan : NSObject {
          
          - returns: Image pulled from the end of the closure
          */
-        static func drawImageWithClosure(size: CGSize!, closure: (_ size: CGSize, _ context: CGContext) -> ()) -> UIImage {
-            UIGraphicsBeginImageContextWithOptions(size, false, 0)
-            closure(size, UIGraphicsGetCurrentContext()!)
+        static func drawImageWithClosure(size: CGSize!, scale: CGFloat, closure: (_ size: CGSize, _ context: CGContext) -> ()) -> UIImage? {
+            
+            guard size.width > 0.0 && size.height > 0.0 else {
+                print("WARNING: Invalid size requested: \(size.width) x \(size.height) - must not be 0.0 in any dimension")
+                return nil
+            }
+            
+            UIGraphicsBeginImageContextWithOptions(size, false, scale)
+            guard let context = UIGraphicsGetCurrentContext() else {
+                print("WARNING: Graphics context is nil!")
+                return nil
+            }
+            
+            closure(size, context)
             let image : UIImage = UIGraphicsGetImageFromCurrentImageContext()!
             UIGraphicsEndImageContext()
             return image
