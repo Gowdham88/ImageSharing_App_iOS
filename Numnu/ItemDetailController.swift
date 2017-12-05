@@ -48,6 +48,7 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
     override func viewDidLoad() {
         settings.style.selectedBarHeight = 3.0
         settings.style.buttonBarItemFont = UIFont(name: "Avenir-Medium", size: 14)!
+        settings.style.buttonBarItemsShouldFillAvailiableWidth = true
         super.viewDidLoad()
         myscrollView.delegate = self
         settings.style.buttonBarBackgroundColor = .white
@@ -56,7 +57,7 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
          
         settings.style.buttonBarMinimumLineSpacing = 0
         settings.style.buttonBarItemTitleColor = .black
-        settings.style.buttonBarItemsShouldFillAvailiableWidth = true
+        
         settings.style.buttonBarLeftContentInset = 0
         settings.style.buttonBarRightContentInset = 0
         buttonBarView.selectedBar.backgroundColor = UIColor.appThemeColor()
@@ -115,6 +116,12 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
         self.myscrollView.setContentOffset(offset, animated: true)
         
     }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        reloadPagerTabStripView()
+    }
+    
     func centerImagetap(){
         
         let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)

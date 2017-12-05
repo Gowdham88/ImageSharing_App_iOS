@@ -468,14 +468,23 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
 
         } else if textField == genderTextfield {
             showPopup(table1: true, table2: true)
+            self.datePickerValueChanged(sender: datePicker)
+            datePicker.isHidden = true
+            superVieww.isHidden = true
+            doneView.isHidden   = true
 
            genderTextfield.resignFirstResponder()
            showGenderActionsheet()
             
         }else if textField == foodTextfield {
             showPopup(table1: true, table2: false)
-                    }else{
+            
+        } else {
             showPopup(table1: true, table2: true)
+            self.datePickerValueChanged(sender: datePicker)
+            datePicker.isHidden = true
+            superVieww.isHidden = true
+            doneView.isHidden = true
            
         }
 }
@@ -494,11 +503,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 }
             })
         }
-        if  textField == birthTextfield  {
-            foodTextfield.text = ""
-            animateViewMoving(up: false, moveValue: 0)
-            showPopup(table1: true, table2: true)
-        }
+       
         if textField == birthTextfield {
             if cancelBool == true {
                 birthTextfield.text = ""
@@ -969,6 +974,15 @@ extension Edit_ProfileVC {
     
         cityTableView.isHidden      = table1
         dropdownTableView.isHidden  = table2
+        
+        if table1 == false || table2 == false {
+            
+            self.datePickerValueChanged(sender: datePicker)
+            datePicker.isHidden = true
+            superVieww.isHidden = true
+            doneView.isHidden = true
+            
+        }
      
     }
 }

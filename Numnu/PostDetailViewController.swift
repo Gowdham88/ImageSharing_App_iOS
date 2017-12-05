@@ -33,6 +33,7 @@ class PostDetailViewController : UIViewController {
     @IBOutlet weak var alertView: UIView!
     @IBOutlet weak var navigationItemList: UINavigationItem!
     var window : UIWindow?
+    var coverView : UIView?
     
     @IBOutlet weak var eventTopHeight: NSLayoutConstraint!
     @IBOutlet weak var alertviewBottomConstraints: NSLayoutConstraint!
@@ -66,6 +67,10 @@ class PostDetailViewController : UIViewController {
         postDUserImage.addGestureRecognizer(userimagetap)
         postDUserImage.isUserInteractionEnabled = true
         // Do any additional setup after loading the view.
+        
+        let profileusernametagtap = UITapGestureRecognizer(target: self, action:#selector(PostDetailViewController.postDUserImagetap))
+        postDUserplaceLabbel.addGestureRecognizer(profileusernametagtap)
+        postDUserplaceLabbel.isUserInteractionEnabled = true
         
         if (postDEventDishLabel.numberOfVisibleLines > 1) {
             
@@ -158,6 +163,7 @@ extension PostDetailViewController {
         navigationItemList.rightBarButtonItem = rightButton
         
         
+        
     }
     
     func backButtonClicked() {
@@ -218,7 +224,7 @@ extension PostDetailViewController {
     
     func closePopup(sender : UITapGestureRecognizer) {
         
-        self.alertViewHide.alpha                 = 0
+        alertViewHide.alpha = 0
         
         UIView.animate(withDuration: 2, animations: {
             
@@ -233,7 +239,7 @@ extension PostDetailViewController {
     
     func openPopup() {
         
-         self.alertViewHide.alpha   = 1
+         alertViewHide.alpha = 1
         
         UIView.animate(withDuration: 2, animations: {
             

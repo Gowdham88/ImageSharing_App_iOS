@@ -131,6 +131,12 @@ class LocationDetailcontroller: ButtonBarPagerTabStripViewController {
         pagerView.setContentOffset(desiredOffset, animated: true)
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        reloadPagerTabStripView()
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

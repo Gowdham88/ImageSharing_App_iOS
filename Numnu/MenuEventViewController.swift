@@ -38,6 +38,12 @@ class MenuEventViewController: UIViewController,IndicatorInfoProvider,UITableVie
         
         menuCategoryTableview.isScrollEnabled = false
         menuEventTableview.isScrollEnabled    = false
+        
+        let when = DispatchTime.now() + 1
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            
+             self.menuDelegate?.menuTableHeight(height: self.menuCategoryTableview.contentSize.height)
+        }
 
         // Do any additional setup after loading the view.
     }
