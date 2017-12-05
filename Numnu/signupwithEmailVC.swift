@@ -299,6 +299,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func fbSignup(_ sender: Any) {
+
         
         let fbLoginmanager : FBSDKLoginManager = FBSDKLoginManager()
         fbLoginmanager.logIn(withReadPermissions: ["public_profile", "email"], from: self) { (result, error) in
@@ -308,29 +309,29 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                 return
             } else if(result?.isCancelled)! {
                 
-                
+                HUD.hide()
                 FBSDKLoginManager().logOut()
                 
                 
             }
             
-            
             guard let accessToken = FBSDKAccessToken.current() else {
                 print("Failed to get access token")
+                 HUD.hide()
                 return
             }
-            
-            
+
             let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
-            
+
             // Perform login by calling Firebase APIs
             HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
+            let prevUser = Auth.auth().currentUser
 
             Auth.auth().signIn(with: credential, completion: { (user, error) in
                 if let error = error {
-                    
+
                     AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Facebook login failed.", vc: self)
-                   
+                    HUD.hide()
                     return
                 }
                 
@@ -338,10 +339,13 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
 
                 self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId)
 
-              
+
             })
             
+            
+            
         }
+
 
     }
 }
