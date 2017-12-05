@@ -68,14 +68,14 @@ class OnboardingVC: UIViewController {
 
         let storyboard                  = UIStoryboard(name: name, bundle: nil)
         let initialViewController       = storyboard.instantiateViewController(withIdentifier: id)
-        self.present(initialViewController, animated: false, completion: nil)
-//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//
-//
-//        UIView.transition(with: appDelegate.window!, duration: 0.5, options: UIViewAnimationOptions.curveEaseOut, animations: { () -> Void in
-//            appDelegate.window!.rootViewController = initialViewController
-//        }, completion:nil)
-//
+//        self.present(initialViewController, animated: false, completion: nil)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+
+
+        UIView.transition(with: appDelegate.window!, duration: 0.5, options: UIViewAnimationOptions.transitionCurlDown, animations: { () -> Void in
+            appDelegate.window!.rootViewController = initialViewController
+        }, completion:nil)
+
     }
     
 
