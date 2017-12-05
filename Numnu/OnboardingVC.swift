@@ -29,8 +29,8 @@ class OnboardingVC: UIViewController {
 
     @IBAction func okPressed(_ sender: Any) {
         
-        shadowview.isHidden = true
-        notificationsAlert.isHidden = true
+//        shadowview.isHidden = true
+//        notificationsAlert.isHidden = true
         
         self.openStoryBoard(name: Constants.Main, id: Constants.TabStoryId)
 
@@ -69,13 +69,12 @@ class OnboardingVC: UIViewController {
         let storyboard                  = UIStoryboard(name: name, bundle: nil)
         let initialViewController       = storyboard.instantiateViewController(withIdentifier: id)
 //        self.present(initialViewController, animated: false, completion: nil)
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-
-
-        UIView.transition(with: appDelegate.window!, duration: 0.5, options: UIViewAnimationOptions.transitionCurlDown, animations: { () -> Void in
-            appDelegate.window!.rootViewController = initialViewController
-        }, completion:nil)
-
+        let wnd = UIApplication.shared.keyWindow
+        var options = UIWindow.TransitionOptions()
+        options.direction = .toRight
+        options.duration = 0.2
+        options.style = .easeOut
+        wnd?.setRootViewController(initialViewController, options: options)
     }
     
 
