@@ -371,6 +371,10 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
            showPopup(table1: true, table2: true)
         }else if textField == cityTextfield {
             showPopup(table1: false, table2: true)
+            self.datePickerValueChanged(sender: datePicker)
+            datePicker.isHidden = true
+            superVieww.isHidden = true
+            doneView.isHidden   = true
             
         }else if textField == genderTextfield {
             showPopup(table1: true, table2: true)
@@ -380,7 +384,11 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         }else if textField == foodTextfield {
              showPopup(table1: true, table2: false)
         }else{
-             showPopup(table1: true, table2: true)
+            showPopup(table1: true, table2: true)
+            self.datePickerValueChanged(sender: datePicker)
+            datePicker.isHidden = true
+            superVieww.isHidden = true
+            doneView.isHidden   = true
         }
     }
     
@@ -399,11 +407,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
                 }
             })
         }
-        if  textField == birthTextfield {
-            foodTextfield.text = ""
-            animateViewMoving(up: false, moveValue: 0)
-            showPopup(table1: true, table2: true)
-        }
+        
         if textField == birthTextfield {
             self.datePickerValueChanged(sender: datePicker)
             datePicker.isHidden = true
@@ -887,6 +891,17 @@ extension SettingsEdit_ProfieViewController {
         
         citytableview.isHidden      = table1
         dropdownTableView.isHidden  = table2
+        
+        if table1 == false || table2 == false {
+            
+            self.datePickerValueChanged(sender: datePicker)
+            datePicker.isHidden = true
+            superVieww.isHidden = true
+            doneView.isHidden = true
+            
+        }
+        
+        
         
     }
 }

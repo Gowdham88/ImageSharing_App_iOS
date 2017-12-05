@@ -113,6 +113,14 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
         self.myscrollView.setContentOffset(offset, animated: true)
         
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        reloadPagerTabStripView()
+    }
+    
+    
     func centerImagetap(){
         
         let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)

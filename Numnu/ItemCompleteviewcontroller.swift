@@ -9,7 +9,7 @@
 import UIKit
 import XLPagerTabStrip
 
-class ItemCompleteviewcontroller : ButtonBarPagerTabStripViewController {
+class ItemCompleteviewcontroller : UIViewController {
     
     @IBOutlet weak var ItImageView: ImageExtender!
     @IBOutlet weak var ItTitleLabel: UILabel!
@@ -22,8 +22,7 @@ class ItemCompleteviewcontroller : ButtonBarPagerTabStripViewController {
     @IBOutlet weak var businessName: UILabel!
     @IBOutlet weak var eventname: UILabel!
     
-    @IBOutlet weak var TabBarView: ButtonBarView!
-    @IBOutlet weak var pagerView: UIScrollView!
+    
     @IBOutlet weak var tagScrollView: UIScrollView!
     
     @IBOutlet weak var navigationItemList: UINavigationItem!
@@ -39,35 +38,13 @@ class ItemCompleteviewcontroller : ButtonBarPagerTabStripViewController {
     @IBOutlet weak var eventDescriptionHeight : NSLayoutConstraint!
     
     @IBOutlet weak var containerviewtop: NSLayoutConstraint!
+    @IBOutlet weak var postTableview: UITableView!
     
     var isLabelAtMaxHeight = false
     
     override func viewDidLoad() {
-        settings.style.selectedBarHeight = 3.0
-        settings.style.buttonBarItemFont = UIFont(name: "Avenir-Medium", size: 14)!
-        super.viewDidLoad()
-        myscrollView.delegate = self
-        settings.style.buttonBarBackgroundColor = .white
-        settings.style.buttonBarItemBackgroundColor = .white
-        settings.style.selectedBarBackgroundColor = UIColor.appBlackColor()
+       super.viewDidLoad()
         
-        settings.style.buttonBarMinimumLineSpacing = 0
-        settings.style.buttonBarItemTitleColor = .black
-        settings.style.buttonBarItemsShouldFillAvailiableWidth = true
-        settings.style.buttonBarLeftContentInset = 0
-        settings.style.buttonBarRightContentInset = 0
-        buttonBarView.selectedBar.backgroundColor = UIColor.appThemeColor()
-        
-        changeCurrentIndexProgressive = { [weak self] (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
-            guard changeCurrentIndex == true else { return }
-            oldCell?.label.textColor = UIColor.textlightDark()
-            newCell?.label.textColor = UIColor.appBlackColor()
-            
-        }
-        
-//        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(ItemCompleteviewcontroller.navigationTap))
-//        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
-//        self.navigationController?.navigationBar.isUserInteractionEnabled = true
         
         /**********************set Nav bar****************************/
         
@@ -103,7 +80,11 @@ class ItemCompleteviewcontroller : ButtonBarPagerTabStripViewController {
             containerviewtop.constant = 8
         }
         
-        pagerView.alpha = 1
+        postTableview.delegate   = self
+        postTableview.dataSource = self
+        postTableview.isScrollEnabled = false
+        
+        
         
         // Do any additional setup after loading the view.
     }
@@ -129,18 +110,20 @@ class ItemCompleteviewcontroller : ButtonBarPagerTabStripViewController {
         self.myscrollView.setContentOffset(offset, animated: true)
         
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+        mainContainerView.constant = 347 + postTableview.contentSize.height
+        mainContainerViewBottom.constant = 0
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-        
-        let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3) as! ReviewEventViewController
-        child_1.popdelegate = self
-        return [child_1]
-        
-    }
+   
     
     @IBAction func ButtonReadMore(_ sender: UIButton) {
         
@@ -308,21 +291,124 @@ extension ItemCompleteviewcontroller {
     
 }
 
-extension ItemCompleteviewcontroller : ReviewEventViewControllerDelegate {
+
+
+extension ItemCompleteviewcontroller : UITableViewDelegate,UITableViewDataSource {
     
-    func postTableHeight(height: CGFloat) {
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        mainContainerView.constant = 347 + height
-        mainContainerViewBottom.constant = 0
+        return 6
         
     }
     
-    
-    func popupClick() {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        openPopup()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "postEventCell", for: indexPath) as! PostEventTableViewCell
+        
+        cell.delegate = self
+        cell.postEventBookMark.tag = indexPath.row
+        cell.setHeight(heightview : Float(UIScreen.main.bounds.size.height))
+        
+        let posteventImagetap = UITapGestureRecognizer(target: self, action: #selector(getter: PostEventTableViewCell.postEventImage))
+        cell.postEventImage.addGestureRecognizer(posteventImagetap)
+        cell.postEventImage.isUserInteractionEnabled = true
+        
+        let posteventplacetap = UITapGestureRecognizer(target: self, action:#selector(getter: PostEventTableViewCell.postEventPlace))
+        cell.postEventPlace.addGestureRecognizer(posteventplacetap)
+        cell.postEventPlace.isUserInteractionEnabled = true
+        
+        let posteventdishtap = UITapGestureRecognizer(target: self, action:#selector(getter: PostEventTableViewCell.postEventDishLabel))
+        cell.postEventDishLabel.addGestureRecognizer(posteventdishtap)
+        cell.postEventDishLabel.isUserInteractionEnabled = true
+        
+        let posteventnametap = UITapGestureRecognizer(target: self, action:#selector(getter: PostEventTableViewCell.postEventName))
+        cell.postEventName.addGestureRecognizer(posteventnametap)
+        cell.postEventName.isUserInteractionEnabled = true
+        
+        let profiletap = UITapGestureRecognizer(target: self, action:#selector(getter: PostEventTableViewCell.postUserImage))
+        cell.postUserImage.addGestureRecognizer(profiletap)
+        cell.postUserImage.isUserInteractionEnabled = true
+        
+        let profileusernametap = UITapGestureRecognizer(target: self, action:#selector(getter: PostEventTableViewCell.postUsernameLabel))
+        cell.postUsernameLabel.addGestureRecognizer(profileusernametap)
+        cell.postUsernameLabel.isUserInteractionEnabled = true
+        
+        
+        
+        
+        return cell
+        
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       
+        openStoryBoard()
+    }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if TextSize.sharedinstance.getNumberoflines(text: Constants.dummy, width: tableView.frame.width, font: UIFont(name: "Avenir-Book", size: 16)!) > 1 {
+            
+            return 428
+            
+        } else {
+            
+            return 402
+        }
+        
+    }
+    func postEventImage() {
+        let storyboard = UIStoryboard(name: Constants.PostDetail, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: "postdetailid")
+        self.navigationController!.pushViewController(vc, animated: true)
+        
+    }
+    func postEventPlace(){
+        let storyboard = UIStoryboard(name: Constants.ItemDetail, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId)
+        self.navigationController!.pushViewController(vc, animated: true)
+        
+    }
+    func postEventDishLabel(){
+        let storyboard = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId)
+        self.navigationController!.pushViewController(vc, animated: true)
+        
+    }
+    func postEventName(){
+        
+        let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
+    func postUserImage(){
+        let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
+        vc.boolForBack = false
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    func postUsernameLabel(){
+        
+        let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
+        vc.boolForBack = false
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
+    
+}
+
+
+/**************custom delegate******************/
+
+extension ItemCompleteviewcontroller : PostEventTableViewCellDelegate {
+    
+    func bookmarkPost(tag: Int) {
+        
+       openPopup()
+        
+    }
+
 }
 

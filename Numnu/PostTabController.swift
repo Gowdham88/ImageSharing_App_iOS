@@ -85,7 +85,9 @@ extension PostTabController : UITableViewDelegate,UITableViewDataSource {
         cell.postUsernameLabel.addGestureRecognizer(profileusernametap)
         cell.postUsernameLabel.isUserInteractionEnabled = true
         
-        
+        let profileusernametagtap = UITapGestureRecognizer(target: self, action:#selector(getter: PostEventTableViewCell.postUsernameLabel))
+        cell.postUserplaceLabbel.addGestureRecognizer(profileusernametagtap)
+        cell.postUserplaceLabbel.isUserInteractionEnabled = true
         
         
         return cell

@@ -65,6 +65,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
         settings.style.buttonBarRightContentInset = 0
         settings.style.buttonBarHeight = 1
         buttonBarView.selectedBar.backgroundColor = UIColor.appThemeColor()
+        buttonBarView.moveTo(index: 0, animated: true, swipeDirection: .none, pagerScroll: .yes)
         
         changeCurrentIndexProgressive = { [weak self] (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
             guard changeCurrentIndex == true else { return }
@@ -110,11 +111,14 @@ class EventViewController: ButtonBarPagerTabStripViewController {
         }
         
         
+        
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         let navigationOnTap = UITapGestureRecognizer(target:self,action:#selector(EventViewController.navigationTap))
         self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
         self.navigationController?.navigationBar.isUserInteractionEnabled = true
+        
     }
     func navigationTap(){
         let offset = CGPoint(x: 0,y :0)
@@ -148,10 +152,17 @@ class EventViewController: ButtonBarPagerTabStripViewController {
         
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        reloadPagerTabStripView()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
         self.tabBarController?.tabBar.isHidden = false
+        
        
     }
     

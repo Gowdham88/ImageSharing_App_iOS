@@ -159,6 +159,12 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
         return [child_1, child_2]
         
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        reloadPagerTabStripView()
+    }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
