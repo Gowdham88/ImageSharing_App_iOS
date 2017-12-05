@@ -307,6 +307,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
                         
                         return
                     }
+                    
                     self.userLoginApi(uid: (user?.uid)!)
 
                      self.openStoryBoard(name: Constants.Main, id: Constants.Profile_PostViewController)
