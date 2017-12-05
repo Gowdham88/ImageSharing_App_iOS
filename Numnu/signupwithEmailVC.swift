@@ -306,6 +306,12 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                 print("Failed to login: \(error.localizedDescription)")
                 HUD.hide()
                 return
+            } else if(result?.isCancelled)! {
+                
+                
+                FBSDKLoginManager().logOut()
+                
+                
             }
             
             
