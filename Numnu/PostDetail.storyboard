@@ -212,7 +212,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BarBados food and rum festival " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ubE-a4-hnC">
-                                        <rect key="frame" x="31" y="335" width="263" height="18"/>
+                                        <rect key="frame" x="32" y="335" width="263" height="18"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="263" id="8Aw-wW-vd5"/>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="40" id="ztO-Nc-ohA"/>
@@ -300,7 +300,7 @@
                                     <constraint firstItem="GiX-XL-MSl" firstAttribute="top" secondItem="r9a-im-5f4" secondAttribute="bottom" constant="8" id="ogv-Kk-PmM"/>
                                     <constraint firstItem="7EP-vb-NJn" firstAttribute="leading" secondItem="S26-95-fXa" secondAttribute="trailing" constant="8" id="rUX-8i-PF7"/>
                                     <constraint firstItem="r9a-im-5f4" firstAttribute="leading" secondItem="emq-kw-nq5" secondAttribute="leading" constant="10" id="soc-zz-VYO"/>
-                                    <constraint firstItem="ubE-a4-hnC" firstAttribute="leading" secondItem="S8b-G0-oRa" secondAttribute="trailing" constant="7" id="wkl-11-O7x"/>
+                                    <constraint firstItem="ubE-a4-hnC" firstAttribute="leading" secondItem="S8b-G0-oRa" secondAttribute="trailing" constant="8" id="wkl-11-O7x"/>
                                     <constraint firstAttribute="trailing" secondItem="RM3-2w-pIx" secondAttribute="trailing" constant="10" id="zUo-Ik-QWX"/>
                                 </constraints>
                             </view>

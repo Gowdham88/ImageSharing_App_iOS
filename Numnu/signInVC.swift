@@ -276,6 +276,12 @@ class signInVC: UIViewController, UITextFieldDelegate {
                 if let error = error {
                     print("Failed to login: \(error.localizedDescription)")
                     return
+                } else if(result?.isCancelled)! {
+                    
+                    
+                    FBSDKLoginManager().logOut()
+                    
+                    
                 }
                 
                 
