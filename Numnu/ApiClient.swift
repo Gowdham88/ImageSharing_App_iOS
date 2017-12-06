@@ -14,12 +14,44 @@ import FirebaseAuth
 
 class  ApiClient {
     
-    /*********************Login Api*****************************/
+//    /*********************Login Api*****************************/
+//
+//    func userLogin(parameters : Parameters,completion : @escaping (String,UserList?) -> Void) {
+//
+//        Alamofire.request(Constants.LoginApiUrl, method: .post, parameters: parameters).validate().responseJSON { response in
+//
+//            switch response.result {
+//
+//            case .success:
+//
+//                if let value = response.result.value {
+//
+//                    let json = JSON(value)
+//                    if let userList = UserList(json: json) {
+//
+//                        completion("success",userList)
+//                    }
+//
+//
+//                }
+//
+//
+//            case .failure(let error):
+//
+//                print(error)
+//                completion(error.localizedDescription,nil)
+//
+//            }
+//       }
+//
+//    }
     
-    func userLogin(parameters : Parameters,completion : @escaping (String,UserList?) -> Void) {
+     /*********************Login Api*****************************/
+    
+    func userLogin(parameters : Parameters,headers : HTTPHeaders,completion : @escaping (String,UserList?) -> Void) {
         
-        Alamofire.request(Constants.LoginApiUrl, method: .post, parameters: parameters).validate().responseJSON { response in
-       
+        Alamofire.request(Constants.LoginApiUrl, method: .get, parameters: parameters, headers: headers).validate().responseJSON { response in
+            
             switch response.result {
                 
             case .success:
@@ -31,10 +63,10 @@ class  ApiClient {
                         
                         completion("success",userList)
                     }
-                 
+                    
                     
                 }
-           
+                
                 
             case .failure(let error):
                 
@@ -42,12 +74,12 @@ class  ApiClient {
                 completion(error.localizedDescription,nil)
                 
             }
-       }
-    
+        }
+        
     }
     
-    func usernameexists(parameters : Parameters, completion : @escaping (String,Bool?) -> Void) {
-        Alamofire.request(Constants.CheckUserName, method: .get, parameters: parameters).validate().responseJSON { response in
+    func usernameexists(parameters : Parameters,headers : HTTPHeaders,completion : @escaping (String,Bool?) -> Void) {
+        Alamofire.request(Constants.CheckUserName, method: .get, parameters: parameters,headers : headers).validate().responseJSON { response in
             
             switch response.result {
                 
@@ -172,15 +204,24 @@ class  ApiClient {
     
     /*********************Complete Signup Api*****************************/
     
-       func completeSignup(parameters : Parameters,completion : @escaping (String,UserList?) -> Void) {
+       func completeSignup(parameters : Parameters,headers : HTTPHeaders,completion : @escaping (String,UserList?) -> Void) {
         
-        Alamofire.request(Constants.completeSignup, method: .post, parameters: parameters).validate().responseJSON { response in
+        
+        
+        Alamofire.request(Constants.completeSignup, method: .post, parameters: parameters,encoding: JSONEncoding.default,headers: headers).validate().responseJSON { response in
+            
+           
+            print(response.result)
             
             switch response.result {
                 
             case .success:
                 
+               
+                
                 if let value = response.result.value {
+                    
+                    print(value)
                     
                     let json = JSON(value)
                     if let userList = UserList(json: json) {
@@ -195,10 +236,13 @@ class  ApiClient {
             case .failure(let error):
                 
                 print(error)
+                print(error.localizedDescription)
                 completion(error.localizedDescription,nil)
                 
             }
         }
+        
+       
         
     }
     
