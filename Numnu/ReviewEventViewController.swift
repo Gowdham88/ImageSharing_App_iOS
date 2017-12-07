@@ -70,13 +70,30 @@ extension ReviewEventViewController : UITableViewDelegate,UITableViewDataSource 
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "postEventCell", for: indexPath) as! postEventDetailTableViewCell
         
-        cell.delegate = self
+        cell.delegate = self as! postEventDetailTableViewCellDelegate
         cell.postDtEventBookMark.tag = indexPath.row
         cell.setHeight(heightview : Float(UIScreen.main.bounds.size.height))
         
         let posteventImagetap = UITapGestureRecognizer(target: self, action: #selector(getter: postEventDetailTableViewCell.postDtEventImage))
         cell.postDtEventImage.addGestureRecognizer(posteventImagetap)
         cell.postDtEventImage.isUserInteractionEnabled = true
+        
+        //icon tap dish
+        let itemImageTap = UITapGestureRecognizer(target: self, action: #selector(getter: postEventDetailTableViewCell.itemImageTap))
+        cell.itemImageTap.addGestureRecognizer(itemImageTap)
+        cell.itemImageTap.isUserInteractionEnabled = true
+        
+        //icon business tap
+        let businessImageTap = UITapGestureRecognizer(target: self, action: #selector(getter: postEventDetailTableViewCell.businessImageTap))
+        cell.businessImageTap.addGestureRecognizer(businessImageTap)
+        cell.businessImageTap.isUserInteractionEnabled = true
+        
+        //icon event tap
+        let eventImageTap = UITapGestureRecognizer(target: self, action: #selector(getter: postEventDetailTableViewCell.eventImageTap))
+        cell.eventImageTap.addGestureRecognizer(eventImageTap)
+        cell.eventImageTap.isUserInteractionEnabled = true
+        
+        
         
         let posteventplacetap = UITapGestureRecognizer(target: self, action:#selector(getter: postEventDetailTableViewCell.postDtEventPlace))
         cell.postDtEventPlace.addGestureRecognizer(posteventplacetap)
@@ -146,13 +163,36 @@ extension ReviewEventViewController : UITableViewDelegate,UITableViewDataSource 
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
+    func itemImageTap(){
+            let storyboard = UIStoryboard(name: Constants.ItemDetail, bundle: nil)
+            let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId)
+            self.navigationController!.pushViewController(vc, animated: true)
+        
+    }
+    
     func postDtEventDishLabel(){
         let storyboard = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId)
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
+    
+    
+    func businessImageTap(){
+        let storyboard = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId)
+        self.navigationController!.pushViewController(vc, animated: true)
+        
+    }
     func postDtEventName(){
+        
+        let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
+    
+    
+    func eventImageTap(){
         
         let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)

@@ -56,6 +56,7 @@ class loginMainVC: UIViewController, UIWebViewDelegate {
     @IBAction func signInPressed(_ sender: Any) {
         
         self.performSegue(withIdentifier: "signIn", sender: self)
+        
     }
     
     @IBAction func facebookLoginPressed(_ sender: Any) {

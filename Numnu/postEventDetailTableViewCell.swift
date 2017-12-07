@@ -28,6 +28,9 @@ class postEventDetailTableViewCell : UITableViewCell {
     @IBOutlet weak var postDtEventDishLabel: UILabel!
     @IBOutlet weak var postDtEventBookMark: UIButton!
     
+    @IBOutlet var itemImageTap: ImageExtender!
+    @IBOutlet var businessImageTap: ImageExtender!
+    @IBOutlet var eventImageTap: ImageExtender!
     @IBOutlet weak var postusernametag: UILabel!
     @IBOutlet weak var mainDtContentview: UIView!
     @IBOutlet weak var postDtdishwidthConstaint: NSLayoutConstraint!
