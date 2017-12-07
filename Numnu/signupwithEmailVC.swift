@@ -13,6 +13,7 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import PKHUD
 import Alamofire
+import IQKeyboardManagerSwift
 
 class signupwithEmailVC: UIViewController, UITextFieldDelegate {
 
@@ -45,13 +46,22 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         labelcredentials.isHidden = true
         signUpButton.layer.cornerRadius = 25
         signUpButton.clipsToBounds = true
-
+        IQKeyboardManager.sharedManager().enableAutoToolbar = false
+        let firebaseAuth = Auth.auth()
+        
+        
+        do {
+            try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+       
 //        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
 //        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
-//
+
 
     }
-    func animateViewMoving (up:Bool, moveValue :CGFloat){
+    func animateViewMoving (up:Bool, moveValue :CGFloat) {
         
         let movementDuration:TimeInterval = 0.3
         let movement:CGFloat = ( up ? -moveValue : moveValue)
@@ -80,7 +90,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
 //                        passwordReveal.setBackgroundImage(UIImage(named:"eye-off.png"), for: .normal)
 
 
-        }else if iconClick == false {
+        } else if iconClick == false {
             
             passwordTextfield.isSecureTextEntry = true
             iconClick = true
@@ -188,28 +198,9 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                     return
                     
                 }
-                
-               
-                
-               
-                
-             /*
-                if self.currentReachabilityStatus != .notReachable {
-                    
-                    self.userLoginApi(uid: (user?.uid)!)
-                    
-                } else {
-                    
-                    DispatchQueue.main.async {
-                        
-                        AlertProvider.Instance.showInternetAlert(vc: self)
-                    }
-                
-                    
-                }
- */
-                HUD.hide()
-                    self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId)
+  
+                    HUD.hide()
+                self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId,firebaseid: (user?.uid)!)
 
                 
                }
@@ -262,21 +253,12 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         
     }
     
-    func openStoryBoard(name: String,id : String) {
-        
-//        window                          = UIWindow(frame: UIScreen.main.bounds)
-//        let storyboard                  = UIStoryboard(name: name, bundle: nil)
-//        let initialViewController       = storyboard.instantiateViewController(withIdentifier: "profileid") as! Edit_ProfileVC
-//        initialViewController.show      = true
-//        self.navigationController!.pushViewController(initialViewController, animated: true)
-//        window?.rootViewController = initialViewController
-//        window?.makeKeyAndVisible()
-        
-        
-//        window                        = UIWindow(frame: UIScreen.main.bounds)
+    func openStoryBoard(name: String,id : String,firebaseid : String) {
+
         let storyboard                  = UIStoryboard(name: name, bundle: nil)
         let initialViewController       = storyboard.instantiateViewController(withIdentifier: id) as! Edit_ProfileVC
         initialViewController.boolForTitle = true
+        initialViewController.firebaseid   = firebaseid
         self.navigationController!.pushViewController(initialViewController, animated: true)
      
     }
@@ -296,37 +278,35 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func fbSignup(_ sender: Any) {
+
         
         let fbLoginmanager : FBSDKLoginManager = FBSDKLoginManager()
         fbLoginmanager.logIn(withReadPermissions: ["public_profile", "email"], from: self) { (result, error) in
             if let error = error {
                 print("Failed to login: \(error.localizedDescription)")
+                HUD.hide()
                 return
+            } else if(result?.isCancelled)! {
+                
+                HUD.hide()
+                FBSDKLoginManager().logOut()
+                
+                
             }
-            
             
             guard let accessToken = FBSDKAccessToken.current() else {
                 print("Failed to get access token")
+                 HUD.hide()
                 return
             }
-            
-            
+
             let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
+
             
-            // Perform login by calling Firebase APIs
-            Auth.auth().signIn(with: credential, completion: { (user, error) in
-                if let error = error {
-                    
-                    AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Facebook login failed.", vc: self)
-                   
-                    return
-                }
-                
-                self.userLoginApi(uid: (user?.uid)!)
-              
-            })
+        
             
         }
+
 
     }
 }
@@ -349,79 +329,9 @@ extension UITextField {
 
 extension signupwithEmailVC {
     
-    func userLoginApi(uid:String) {
-        
-        let clientIp = IPChecker.getIP() ?? "1.0.1"
-        
-        let parameters : Parameters = ["firebaseuid" : uid,"createdByUserId" : "","updatedByUserId" : "","createdTimestamp" : "","updatedTimestamp" : "","clientApp": "iosapp","clientIP":clientIp]
-        
-        let loginRequest : ApiClient  = ApiClient()
-        loginRequest.userLogin(parameters: parameters, completion: { status,userlist in
-            
-            if status == "success" {
-                
-                DispatchQueue.main.async {
-                    
-                    if let user = userlist {
-                        
-                        self.getUserDetails(user: user)
-                        print("details from user :::::",user)
-                        
-                    }
-                    
-                    HUD.hide()
-//                    self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId)
-                   
-                    
-                }
-                
-            } else {
-                
-                HUD.hide()
-                
-            }
-            
-            
-        })
-        
-        
-    }
     
-    func getUserDetails(user:UserList) {
-        
-        if let firebaseid = user.firebaseuid {
-            
-            PrefsManager.sharedinstance.UIDfirebase = firebaseid
-            
-        }
-        
-        if let username = user.username {
-            
-            PrefsManager.sharedinstance.username = username
-            
-        }
-        if let gender = user.gender {
-            
-            PrefsManager.sharedinstance.gender = gender
-            
-        }
-        
-//        if let dateofbirth = user.dateOfBirth {
-//
-//            PrefsManager.sharedinstance.dateOfBirth = dateofbirth
-//
-//        }
-        //        if let userid = user.id {
-        //
-        //            PrefsManager.sharedinstance.userId = userid
-        //
-        //        }
-        
-       
-        
-        
-        
-    }
+    
+    
     
     
 }

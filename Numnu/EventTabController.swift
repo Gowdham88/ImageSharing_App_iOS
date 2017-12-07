@@ -56,6 +56,7 @@ class EventTabController: UIViewController,IndicatorInfoProvider {
         
         viewState = true
         eventTableView.reloadData()
+        
     }
     
     

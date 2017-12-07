@@ -9,7 +9,7 @@
 import UIKit
 import XLPagerTabStrip
 
-protocol ReviewEventViewControllerDelegate{
+protocol ReviewEventViewControllerDelegate {
     
     func popupClick()
     func postTableHeight(height : CGFloat)
@@ -31,6 +31,12 @@ class ReviewEventViewController: UIViewController,IndicatorInfoProvider {
         postEventTableview.dataSource = self
         postEventTableview.isScrollEnabled = false
         
+        let when = DispatchTime.now() + 1
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            
+             self.popdelegate?.postTableHeight(height: self.postEventTableview.contentSize.height)
+        }
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -38,7 +44,7 @@ class ReviewEventViewController: UIViewController,IndicatorInfoProvider {
         
        viewState = true
        postEventTableview.reloadData()
-        
+      
     }
 
     override func didReceiveMemoryWarning() {
@@ -92,26 +98,30 @@ extension ReviewEventViewController : UITableViewDelegate,UITableViewDataSource 
         cell.postDtUsernameLabel.addGestureRecognizer(profileusernametap)
         cell.postDtUsernameLabel.isUserInteractionEnabled = true
         
+        let profileusernametagtap = UITapGestureRecognizer(target: self, action:#selector(getter: postEventDetailTableViewCell.postDtUsernameLabel))
+        cell.postDtUserplaceLabbel.addGestureRecognizer(profileusernametagtap)
+        cell.postDtUserplaceLabbel.isUserInteractionEnabled = true
+        
         return cell
         
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-  //      openStoryBoard()
+  
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
+
         if TextSize.sharedinstance.getNumberoflines(text: Constants.dummy, width: tableView.frame.width, font: UIFont(name: "Avenir-Book", size: 16)!) > 1 {
-            
+
             return 428
-            
+
         } else {
-            
+
             return 402
         }
-        
+
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -119,7 +129,7 @@ extension ReviewEventViewController : UITableViewDelegate,UITableViewDataSource 
         let lastRowIndex = tableView.numberOfRows(inSection: 0)
         if indexPath.row == lastRowIndex - 1 && viewState {
             
-            popdelegate?.postTableHeight(height: postEventTableview.contentSize.height)
+            self.popdelegate?.postTableHeight(height: self.postEventTableview.contentSize.height)
             viewState = false
         }
     }

@@ -12,7 +12,7 @@ target 'Numnu' do
   pod 'Nuke', '~> 4.0'
   pod 'Toucan'
   pod 'PKHUD', '~> 4.0’
-  pod 'XLPagerTabStrip', '~> 8.0'
+  pod 'XLPagerTabStrip'
   pod 'Bolts'
   pod 'FBSDKCoreKit'
   pod 'FBSDKLoginKit'

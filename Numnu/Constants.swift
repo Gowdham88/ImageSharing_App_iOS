@@ -134,4 +134,7 @@ class Constants {
     
    static let completeSignup =  "https://numnu-server-dev.appspot.com/users"
     
+   static let clientApp = "iOS"
+    
+    
 }

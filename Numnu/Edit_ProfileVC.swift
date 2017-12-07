@@ -15,8 +15,9 @@ import IQKeyboardManagerSwift
 import SwiftyJSON
 import Firebase
 import FirebaseAuth
+import PKHUD
 
-class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,UICollectionViewDelegateFlowLayout {
+class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegateFlowLayout {
     var dropdownArray = [String] ()
     var dropdownString = String ()
     var tagArray = [String] ()
@@ -24,6 +25,17 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     var autocompleteUrls = [String]()
     var cancelBool : Bool = true
     
+    
+    /*************Parameters************************/
+    
+    var firebaseid : String = "empty"
+    var cityDictonary : [String : Any]?
+    var tagsDictonary = [[String: Any]]()
+    
+     /*************Location************************/
+    
+    var locationManager = CLLocationManager()
+    var currentLocation: CLLocation?
     
     @IBOutlet weak var nameview: UIView!
     @IBOutlet weak var namelabel: UILabel!
@@ -46,9 +58,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     @IBOutlet weak var birthview: UIView!
     @IBOutlet weak var descriptionview: UIView!
 
-
-
-    
     
     @IBOutlet weak var cityTableView: UITableView!
     @IBOutlet weak var cancelDatePicker: UIButton!
@@ -80,7 +89,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     @IBOutlet var myscrollView: UIScrollView!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet var saveButton: UIButton!
-    let locationManager = CLLocationManager()
+   
     var Alert = UIAlertController()
     //Upload Image Declaration
     let imagePicker = UIImagePickerController()
@@ -89,38 +98,17 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     var localPath: String?
     var apiClient : ApiClient!
     var autocompleteplaceArray = [String]()
+    var autocompleteplaceID    = [String]()
     /***************Tags array*****************/
 
     var tagidArray   = [Int]()
     var tagnamearray = [String]()
     var token_str : String = "empty"
-/*
-    // place autocomplete //
-    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
-        dismiss(animated: true, completion: nil)
-        self.cityTextfield.text = place.name
-    }
 
-    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
-        print("Error: ", error.localizedDescription)
-    }
-
-    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
-        dismiss(animated: true, completion: nil)
-    }
-    func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-    }
-
-    func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-    }
- */
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-       
-    
+
+        HUD.hide()
         
         imagePicker.delegate = self
         profileImage.isUserInteractionEnabled = true
@@ -140,7 +128,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
        
         Alert.view.isUserInteractionEnabled = true
         Alert.view.addGestureRecognizer(sampleTapGesture)
-    IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
+        IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
+        IQKeyboardManager.sharedManager().enableAutoToolbar = false
+
 //        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard (_:))as Selector)
 //        self.view.addGestureRecognizer(tapGesture)
 //
@@ -272,6 +262,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        PrefsManager.sharedinstance.isLoginned = false
+        
             let navigationOnTap = UITapGestureRecognizer(target:self,action:#selector(EventViewController.navigationTap))
             self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
             self.navigationController?.navigationBar.isUserInteractionEnabled = true
@@ -281,18 +273,30 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
 //        if PrefsManager.sharedinstance.isLoginned {
 //            addProfileContainer()
 //        } else {
-            if boolForTitle == false {
-                if PrefsManager.sharedinstance.isLoginned {
-                    addProfileContainer()
-                } else{
-                    
-
-
-
-                addCollectionContainer()
-
-            }
+//        addCollectionContainer()
+        
+        /*************************getting location******************************/
+        locationManager = CLLocationManager()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled()
+        {
+            locationManager.distanceFilter = 50
+            locationManager.startUpdatingLocation()
+            locationManager.delegate = self
+            
         }
+//            if boolForTitle == false {
+//                if PrefsManager.sharedinstance.isLoginned {
+//                    addProfileContainer()
+//                } else {
+//
+//
+//
+//               }
+//        }
     }
     override func viewDidAppear(_ animated: Bool) {
        showPopup(table1: true, table2: true)
@@ -301,26 +305,38 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         myscrollView.setContentOffset(offset, animated: true)
     }
     func dateCancelClicked() {
-        cancelBool == true
+        cancelBool = true
         datePicker.isHidden = true
         doneView.isHidden = true
         superVieww.isHidden = true
         birthTextfield.text = ""
     }
     func addClicked() {
+        
         if foodTextfield.text == "" {
           print("could not add empty fields")
         }else{
-            if tagArray.contains(foodTextfield.text!){
+            if tagArray.contains(foodTextfield.text!) {
+                
                 print("already added in collectionview")
-            }else{
+                
+            } else {
+                
                 tagArray.append(foodTextfield.text!)
                 dropdownTableView.isHidden = true
+                
+                /************Adding to dictonary**********************/
+                let tagItem = ["text": foodTextfield.text!,"displayorder":tagArray.count] as [String : Any]
+                tagsDictonary.append(tagItem)
+                
             }
             print("the appended item is:::::",foodTextfield.text!)
             //        tagArray.remove(at: 1)
             if let index = tagArray.index(of:"") {
+                
                 tagArray.remove(at: index)
+                tagsDictonary.remove(at: index)
+                
             }
             collectionView.reloadData()
             foodTextfield.resignFirstResponder()
@@ -330,6 +346,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     func genderClicked(){
         genderTextfield.resignFirstResponder()
        showGenderActionsheet()
+
     
     }
   
@@ -395,6 +412,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == foodTextfield {
             dropdownTableView.isHidden = true
+            datePicker.isHidden = true
+            doneView.isHidden = true
             
         } else if textField == cityTextfield {
             
@@ -459,17 +478,27 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         }else if textField == cityTextfield {
             showPopup(table1: false, table2: true)
             
-          
 
         } else if textField == genderTextfield {
             showPopup(table1: true, table2: true)
+            self.datePickerValueChanged(sender: datePicker)
+            datePicker.isHidden = true
+            superVieww.isHidden = true
+            doneView.isHidden   = true
 
            genderTextfield.resignFirstResponder()
            showGenderActionsheet()
+            
         }else if textField == foodTextfield {
             showPopup(table1: true, table2: false)
-        }else{
+            
+        } else {
             showPopup(table1: true, table2: true)
+            self.datePickerValueChanged(sender: datePicker)
+            datePicker.isHidden = true
+            superVieww.isHidden = true
+            doneView.isHidden = true
+           
         }
 }
     
@@ -478,8 +507,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
 
         if textField == usernameTextField {
             let parameters: Parameters = ["checkusername": usernameTextField.text!]
+            let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
             let userNameRequest: ApiClient = ApiClient()
-            userNameRequest.usernameexists(parameters: parameters, completion:{status, Exists in
+            userNameRequest.usernameexists(parameters: parameters,headers: header, completion:{status, Exists in
                 if Exists == true {
                     print("the username already exists")
                 }else{
@@ -487,11 +517,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 }
             })
         }
-        if  textField == birthTextfield  {
-            foodTextfield.text = ""
-            animateViewMoving(up: false, moveValue: 0)
-            showPopup(table1: true, table2: true)
-        }
+       
         if textField == birthTextfield {
             if cancelBool == true {
                 birthTextfield.text = ""
@@ -524,6 +550,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         
         if textField == cityTextfield {
             
+            cityDictonary = nil
             cityTextfield.text = ""
             
         }
@@ -601,27 +628,28 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     }
     
     @IBAction func didTappedSave(_ sender: Any) {
-        upload(image: profileImage.image!, completion: { URL in
-        })
+        
+       
+        
         let Email:NSString = emailaddress.text! as NSString
         if nameTextfield.text == "" || emailaddress.text == ""  || cityTextfield.text == "" || genderTextfield.text == "" || usernameTextField.text == ""  {
             AlertProvider.Instance.showAlert(title: "Oops", subtitle: "Fields Cannot be empty", vc: self)
         } else {
             if isValidEmail(testStr: Email as String) == true {
-                PrefsManager.sharedinstance.isLoginned = true
-                let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
-                let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
-                vc.boolForBack = false
-                vc.delegate    = self
-                self.navigationController!.pushViewController(vc, animated: true)
-                let parameters: Parameters = ["username": usernameTextField.text!, "firstname":nameTextfield.text! , "lastname" : "" ,"firebaseuid" : "bIBh7fZXL1OP7NkGJIsPHucAPQA3" ,"dateofbirth": birthTextfield.text! , "gender": genderTextfield.text! ,"isbusinessuser": "0" , "email": emailaddress.text! ,  "citylocationid": "1", "createdby": "2" , "updatedby": "2" , "clientApp": "iosapp"  , "clientip": "765.768.7868.8888"  ]
-                let completeSignupApi: ApiClient = ApiClient()
-                completeSignupApi.completeSignup(parameters: parameters, completion:{status, Values in
-                    if status == "success" {
-                        print("Values from json:::::::",Values!)
-                    }else {
+                
+                if cityDictonary == nil {
+                    
+                    if let latlong = currentLocation {
+                        
+                        cityDictonary = ["name":cityTextfield.text!,"address":cityTextfield.text!,"isgoogleplace":false,"lattitude":latlong.coordinate.latitude,"longitude":latlong.coordinate.longitude]
+                        
                     }
-                })
+                    
+                    
+                }
+                
+                completeSignupApi()
+               
             }else {
                 AlertProvider.Instance.showAlert(title: "Oops", subtitle: "Please Enter Valid Email ID", vc: self)
             }
@@ -744,10 +772,13 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagArray[indexPath.row], fontname: "Avenir-Book", size: 13)
         return CGSize(width: textSize.width+30, height: 22)
     }
-    func buttonClicked(sender: Any){
+    func buttonClicked(sender: Any) {
+        
         let tag = (sender as AnyObject).tag
         tagArray.remove(at: tag!)
+        tagsDictonary.remove(at: tag!)
         collectionView.reloadData()
+        
     }
     
     /// TableView Delegates and Datasources ///
@@ -830,10 +861,13 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                     print("already exist")
                 }else{
                     tagArray.append(dropdownString)
+                    let tagItem = ["id": tagidArray[indexPath.row],"displayorder":tagArray.count]
+                    tagsDictonary.append(tagItem)
                 }
                 collectionView.reloadData()
                 dropdownTableView.isHidden = true
                 foodTextfield.resignFirstResponder()
+               
             }
             
         } else {
@@ -843,7 +877,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 cityTextfield.text = (currentCell?.textLabel?.text)!
                 cityTableView.isHidden = true
                 cityTextfield.resignFirstResponder()
-                
+                cityDictonary = ["name": autocompleteplaceArray[indexPath.row],"address":autocompleteplaceArray[indexPath.row],"isgoogleplace":true,"googleplaceid":autocompleteplaceID[indexPath.row],"googleplacetype":"geocode"]
+             
             }
             
         }
@@ -869,7 +904,9 @@ extension Edit_ProfileVC : Profile_PostViewControllerDelegae {
 }
 
 extension Edit_ProfileVC {
+    
     func loadTagList(tag : String) {
+        
         tagidArray.removeAll()
         tagnamearray.removeAll()
         let parameters : Parameters = ["beginWith" : tag]
@@ -911,6 +948,7 @@ extension Edit_ProfileVC {
     func getPlaceApi(place_Str:String) {
         
         autocompleteplaceArray.removeAll()
+        autocompleteplaceID.removeAll()
         
         let parameters: Parameters = ["input": place_Str ,"types" : "geocode" , "key" : "AIzaSyDmfYE1gIA6UfjrmOUkflK9kw0nLZf0nYw"]
         
@@ -927,12 +965,13 @@ extension Edit_ProfileVC {
                             for item in place_dic {
                                 
                                 let placeName = item["description"].string ?? "empty"
+                                let placeid   = item["place_id"].string ?? "empty"
                                 self.autocompleteplaceArray.append(placeName)
-                                
+                                self.autocompleteplaceID.append(placeid)
                             }
                             
                             DispatchQueue.main.async {
-                                
+                            
                                 self.cityTableView.reloadData()
                                 
                             }
@@ -958,10 +997,108 @@ extension Edit_ProfileVC {
         
     }
     
+    /****************************************complete signup******************************************************/
+    
+    func completeSignupApi() {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-mm-dd"
+        let birthdate : String = dateFormatter.string(from: self.datePicker.date)
+        
+        print(tagsDictonary)
+        print(cityDictonary!)
+        print(usernameTextField.text!)
+        print(nameTextfield.text!)
+        print(descriptionTextfield.text!)
+        print(birthdate)
+        print(emailaddress.text!)
+      
+        let clientIp = ValidationHelper.Instance.getIPAddress() ?? "1.0.1"
+        var gender : Int = 0
+        if genderTextfield.text == "Female" {
+            
+            gender = 1
+            
+        }
+      
+        let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
+        let parameters: Parameters = ["username": usernameTextField.text!, "name":nameTextfield.text! , "description" : descriptionTextfield.text! ,"firebaseuid" : firebaseid,"dateofbirth": birthdate, "gender": gender as Int,"tags":tagsDictonary,"isbusinessuser": false as Bool,"email": emailaddress.text! ,"citylocation":cityDictonary! ,"clientip": clientIp, "clientapp": Constants.clientApp]
+        
+       
+        apiClient.completeSignup(parameters: parameters,headers: header,completion:{status, Values in
+            
+            if status == "success" {
+                
+                let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
+                let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
+                vc.boolForBack = false
+                vc.delegate    = self
+                self.navigationController!.pushViewController(vc, animated: true)
+                
+               
+            } else {
+                
+            }
+        })
+        
+        
+    }
+    
+    
+    
+    
     func showPopup(table1: Bool,table2 : Bool){
     
         cityTableView.isHidden      = table1
         dropdownTableView.isHidden  = table2
+        
+        if table1 == false || table2 == false {
+            
+            self.datePickerValueChanged(sender: datePicker)
+            datePicker.isHidden = true
+            superVieww.isHidden = true
+            doneView.isHidden = true
+            
+        }
      
+    }
+    
+}
+
+extension Edit_ProfileVC : CLLocationManagerDelegate {
+    
+    // Handle incoming location events.
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        if let location: CLLocation = locations.last {
+            
+            currentLocation = location
+            
+        }
+   
+    }
+    
+    // Handle authorization for the location manager.
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        
+        switch status {
+        case .restricted:
+            print("Location access was restricted.")
+        case .denied:
+            print("User denied access to location.")
+            
+        case .notDetermined:
+            print("Location status not determined.")
+        case .authorizedAlways: fallthrough
+        case .authorizedWhenInUse:
+            print("Location status is OK.")
+        }
+        
+    }
+    
+    // Handle location manager errors.
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        locationManager.stopUpdatingLocation()
+        print("Error: \(error)")
     }
 }

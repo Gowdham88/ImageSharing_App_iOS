@@ -34,6 +34,13 @@ class BusinessEventViewController: UIViewController,IndicatorInfoProvider {
         
         businessCategoryTableView.delegate   = self
         businessCategoryTableView.dataSource = self
+        businessCategoryTableView.reloadData()
+        
+        let when = DispatchTime.now() + 1
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            
+            self.businesdelegate?.BusinessTableHeight(height: self.businessEventTableView.contentSize.height)
+        }
        
     }
   
@@ -76,7 +83,7 @@ extension BusinessEventViewController : UITableViewDelegate,UITableViewDataSourc
         
         if tableView == businessEventTableView {
             
-            return 6
+            return 10
             
         } else {
             
