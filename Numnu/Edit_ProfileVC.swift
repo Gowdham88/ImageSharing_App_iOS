@@ -443,6 +443,13 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
         focusEdittext(textfield: textField,focus: true)
+        
+        if !(textField == birthTextfield) {
+            datePicker.isHidden = true
+            superVieww.isHidden = true
+            doneView.isHidden   = true
+            
+        }
 
         if textField == birthTextfield {
             showDatePicker()

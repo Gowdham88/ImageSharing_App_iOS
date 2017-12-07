@@ -45,6 +45,7 @@ class PostDetailViewController : UIViewController {
         alertviewBottomConstraints.constant = self.view.frame.height + 600
         alertViewHide.alpha = 0
         alertTapRegister()
+        
 
         let tap = UITapGestureRecognizer(target: self, action: #selector(PostDetailViewController.imageTapped))
         postDEventImage.addGestureRecognizer(tap)
@@ -218,7 +219,7 @@ extension PostDetailViewController {
     
     func closePopup(sender : UITapGestureRecognizer) {
         
-        self.alertViewHide.alpha                 = 0
+        self.alertViewHide.alpha                 = 1
         
         UIView.animate(withDuration: 2, animations: {
             
@@ -233,7 +234,7 @@ extension PostDetailViewController {
     
     func openPopup() {
         
-         self.alertViewHide.alpha   = 1
+         self.alertViewHide.alpha   = 0
         
         UIView.animate(withDuration: 2, animations: {
             
