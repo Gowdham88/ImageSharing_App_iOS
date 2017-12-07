@@ -215,8 +215,7 @@ class  ApiClient {
                 
             case .success:
                 
-               
-                
+     
                 if let value = response.result.value {
                     
                     print(value)

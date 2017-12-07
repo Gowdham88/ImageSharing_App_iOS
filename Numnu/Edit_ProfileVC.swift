@@ -270,10 +270,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         // Hide the navigation bar on the this view controller
         showPopup(table1: true, table2: true)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
-//        if PrefsManager.sharedinstance.isLoginned {
-//            addProfileContainer()
-//        } else {
-//        addCollectionContainer()
+
         
         /*************************getting location******************************/
         locationManager = CLLocationManager()
@@ -281,22 +278,22 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         locationManager.requestAlwaysAuthorization()
         locationManager.requestWhenInUseAuthorization()
         
-        if CLLocationManager.locationServicesEnabled()
-        {
-            locationManager.distanceFilter = 50
-            locationManager.startUpdatingLocation()
-            locationManager.delegate = self
-            
+      
+            if boolForTitle == false {
+                if PrefsManager.sharedinstance.isLoginned {
+                    addProfileContainer()
+                } else {
+                      addCollectionContainer()
+                    if CLLocationManager.locationServicesEnabled()
+                    {
+                        locationManager.distanceFilter = 50
+                        locationManager.startUpdatingLocation()
+                        locationManager.delegate = self
+                        
+                    }
+
+               }
         }
-//            if boolForTitle == false {
-//                if PrefsManager.sharedinstance.isLoginned {
-//                    addProfileContainer()
-//                } else {
-//
-//
-//
-//               }
-//        }
     }
     override func viewDidAppear(_ animated: Bool) {
        showPopup(table1: true, table2: true)
@@ -485,9 +482,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             datePicker.isHidden = true
             superVieww.isHidden = true
             doneView.isHidden   = true
-
+            
+            showGenderActionsheet()
            genderTextfield.resignFirstResponder()
-           showGenderActionsheet()
             
         }else if textField == foodTextfield {
             showPopup(table1: true, table2: false)

@@ -9,7 +9,9 @@
 import UIKit
 import XLPagerTabStrip
 
-class UserTabController: UIViewController,IndicatorInfoProvider,UITableViewDelegate,UITableViewDataSource {
+class UserTabController: UIViewController,IndicatorInfoProvider,UITableViewDataSource,UITableViewDelegate {
+  
+    
     var nameArray = [String]()
     var imagesArray = [UIImage]()
 
@@ -23,7 +25,7 @@ imagesArray = [UIImage(named: "p7.png")!,UIImage(named: "p8.png")!,UIImage(named
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return nameArray.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = userTableView.dequeueReusableCell(withIdentifier: "Cell" ) as! UserTableViewCell
         cell.userLabel.text = nameArray [indexPath.row]
@@ -47,8 +49,7 @@ imagesArray = [UIImage(named: "p7.png")!,UIImage(named: "p8.png")!,UIImage(named
      // Tab intialliaze
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-//        return IndicatorInfo(title: Constants.Tabid5)
-        return IndicatorInfo(title: "Users")
+        return IndicatorInfo(title: Constants.Tab5)
 
 
     }

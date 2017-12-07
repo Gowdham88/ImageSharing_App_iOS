@@ -55,6 +55,8 @@ class Constants {
     static let Tab5  = "Users"
     static let Tab6  = "Lists"
     static let Tab7  = "Locations"
+    static let Tab8  = "Dummy1"
+    static let Tab9  = "Dummy2"
     
     // Home Tab id
     static let Tabid1  = "EventTab"

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -293,17 +293,15 @@
         <!--User Tab Controller-->
         <scene sceneID="Qeq-Ym-ebW">
             <objects>
-                <viewController storyboardIdentifier="UserTab" automaticallyAdjustsScrollViewInsets="NO" id="CSC-z9-K5P" customClass="UserTabController" customModule="Numnu" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UserTab" id="CSC-z9-K5P" customClass="UserTabController" customModule="Numnu" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BXS-rI-J3y">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Afq-lf-ZHu">
-                                <rect key="frame" x="0.0" y="84" width="320" height="484"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Afq-lf-ZHu">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="484" id="qx9-eh-scM"/>
-                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" rowHeight="70" id="Ge3-ar-Gge" customClass="UserTableViewCell" customModule="Numnu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="70"/>
@@ -345,22 +343,16 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="CSC-z9-K5P" id="FSd-sL-NE0"/>
-                                    <outlet property="delegate" destination="CSC-z9-K5P" id="FmA-qd-dv9"/>
+                                    <outlet property="dataSource" destination="CSC-z9-K5P" id="01F-56-Fij"/>
+                                    <outlet property="delegate" destination="CSC-z9-K5P" id="NOc-Gs-qWI"/>
                                 </connections>
                             </tableView>
                         </subviews>
-                        <constraints>
-                            <constraint firstItem="6va-Sa-Drn" firstAttribute="trailing" secondItem="Afq-lf-ZHu" secondAttribute="trailing" id="4FQ-og-oOm"/>
-                            <constraint firstItem="6va-Sa-Drn" firstAttribute="top" secondItem="Afq-lf-ZHu" secondAttribute="top" constant="-64" id="76b-Tl-OZj"/>
-                            <constraint firstItem="Afq-lf-ZHu" firstAttribute="leading" secondItem="6va-Sa-Drn" secondAttribute="leading" id="dFM-PI-7cx"/>
-                            <constraint firstItem="6va-Sa-Drn" firstAttribute="bottom" secondItem="Afq-lf-ZHu" secondAttribute="bottom" id="inw-G9-6dh"/>
-                            <constraint firstItem="Afq-lf-ZHu" firstAttribute="width" secondItem="BXS-rI-J3y" secondAttribute="width" id="yZT-Yr-P53"/>
-                        </constraints>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="6va-Sa-Drn"/>
                     </view>
                     <connections>
-                        <outlet property="userTableView" destination="Afq-lf-ZHu" id="GJO-3Z-FHp"/>
+                        <outlet property="userTableView" destination="Afq-lf-ZHu" id="dEA-DO-dur"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="shv-HB-WoF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1050,7 +1042,7 @@
                                         </cells>
                                     </collectionView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Past Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="103-ut-mdO">
-                                        <rect key="frame" x="10" y="175" width="90.5" height="30"/>
+                                        <rect key="frame" x="10" y="175" width="86" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="bkp-e5-x09"/>
                                         </constraints>
