@@ -24,6 +24,9 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
     @IBOutlet var navigationItemList: UINavigationItem!
     @IBOutlet weak var myScrollView: UIScrollView!
     
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var descriptionlabel: UILabel!
+    @IBOutlet weak var userNamelabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var mainViewBottom: NSLayoutConstraint! 
     @IBOutlet weak var mainViewConstraint: NSLayoutConstraint!
@@ -32,7 +35,7 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
     var boolForBack : Bool = true
 
     @IBOutlet weak var EventverticalConstraint: NSLayoutConstraint!
-    var itemArray = [String]()
+    var itemArray = [TagList]()
     var delegate : Profile_PostViewControllerDelegae?
     
     override func viewDidLoad() {
@@ -48,7 +51,9 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         userImage.layer.cornerRadius = self.userImage.frame.size.height/2
         userImage.clipsToBounds = true
         alertTapRegister()
-        itemArray = ["Festival","Wine","Party","Meeting","conference","Family function"]
+        /***********************Setuserdetails****************************/
+        setUserDetails()
+        
 //        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(Edit_ProfileVC.navigationTap))
 //        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
 //        self.navigationController?.navigationBar.isUserInteractionEnabled = true
@@ -205,31 +210,47 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ccell", for: indexPath as IndexPath) as! UserProfileTagCollectionViewCell
-        let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: itemArray[indexPath.row], fontname: "Avenir-Book", size: 13)
-        cell.tagLabel.text = itemArray[indexPath.row]
-        cell.setLabelSize(size: textSize)
-
+        
+        if let tagName = itemArray[indexPath.row].text_str {
+            
+            let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagName, fontname: "Avenir-Book", size: 13)
+            cell.tagLabel.text = tagName
+            cell.setLabelSize(size: textSize)
+            
+        }
+  
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: itemArray[indexPath.row], fontname: "Avenir-Book", size: 13)
+        if let tagName = itemArray[indexPath.row].text_str {
+            
+            let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagName, fontname: "Avenir-Book", size: 13)
+            
+            return CGSize(width: textSize.width+20, height: 22)
+            
+        } else {
+            
+            return CGSize(width: 0, height: 22)
+            
+        }
         
-        return CGSize(width: textSize.width+20, height: 22)
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+   
+    /***********************Setuserdetails****************************/
+    
+    func setUserDetails(){
+        
+        userNamelabel.text = PrefsManager.sharedinstance.username
+        addressLabel.text  = PrefsManager.sharedinstance.userCity
+        descriptionlabel.text = PrefsManager.sharedinstance.description
+        
     }
-    */
 
 }
 

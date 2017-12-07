@@ -301,10 +301,21 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
             }
 
             let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
-
-            
-        
-            
+            Auth.auth().signIn(with: credential, completion: { (user, error) in
+                if let error = error {
+                    HUD.hide()
+                    print("Login error: \(error.localizedDescription)")
+                    let alertController = UIAlertController(title: "Login Error", message: error.localizedDescription, preferredStyle: .alert)
+                    let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                    alertController.addAction(okayAction)
+                    self.present(alertController, animated: true, completion: nil)
+                    
+                    return
+                }
+             
+                
+            })
+          
         }
 
 

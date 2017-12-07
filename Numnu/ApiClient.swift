@@ -48,9 +48,11 @@ class  ApiClient {
     
      /*********************Login Api*****************************/
     
-    func userLogin(parameters : Parameters,headers : HTTPHeaders,completion : @escaping (String,UserList?) -> Void) {
+    func userLogin(headers : HTTPHeaders,completion : @escaping (String,UserList?) -> Void) {
         
-        Alamofire.request(Constants.LoginApiUrl, method: .get, parameters: parameters, headers: headers).validate().responseJSON { response in
+        Alamofire.request(Constants.LoginApiUrl, method: .get, headers: headers).validate().responseJSON { response in
+            
+            print(response.result.value)
             
             switch response.result {
                 
@@ -79,6 +81,9 @@ class  ApiClient {
     }
     
     func usernameexists(parameters : Parameters,headers : HTTPHeaders,completion : @escaping (String,Bool?) -> Void) {
+        
+        
+        
         Alamofire.request(Constants.CheckUserName, method: .get, parameters: parameters,headers : headers).validate().responseJSON { response in
             
             switch response.result {
@@ -104,7 +109,6 @@ class  ApiClient {
                 
             }
             
-            
         }
     }
     
@@ -112,7 +116,7 @@ class  ApiClient {
     
     func getTagsApi(parameters : Parameters,headers : HTTPHeaders,completion : @escaping (String,TagList?) -> Void) {
         
-        Alamofire.request(Constants.TagApiUrl, method: .get, parameters: parameters, headers: headers).validate().responseJSON { response in
+        Alamofire.request(Constants.TagApiUrl, method: .get, parameters: parameters,headers: headers).validate().responseJSON { response in
             
             switch response.result {
                 
@@ -143,7 +147,7 @@ class  ApiClient {
      /************************Events Api**********************************/
     func getEventsApi(parameters : Parameters,completion : @escaping (String,EventModelList?) -> Void) {
         
-        Alamofire.request(Constants.EventApiUrl, method: .get, parameters: parameters).validate().responseJSON { response in
+        Alamofire.request(Constants.EventApiUrl, method: .get, parameters: parameters,encoding: JSONEncoding.default).validate().responseJSON { response in
             
             switch response.result {
                 
@@ -174,7 +178,7 @@ class  ApiClient {
     /************************Items Api**********************************/
     func getItemsApi(parameters : Parameters,completion : @escaping (String,ItemList?) -> Void) {
         
-        Alamofire.request(Constants.ItemsApiUrl, method: .get, parameters: parameters).validate().responseJSON { response in
+        Alamofire.request(Constants.ItemsApiUrl, method: .get, parameters: parameters,encoding: JSONEncoding.default).validate().responseJSON { response in
             
             switch response.result {
                 
@@ -209,13 +213,11 @@ class  ApiClient {
         Alamofire.request(Constants.completeSignup, method: .post, parameters: parameters,encoding: JSONEncoding.default,headers: headers).validate().responseJSON { response in
             
            
-            print(response.result)
+            print(response.result.value)
             
             switch response.result {
                 
             case .success:
-                
-               
                 
                 if let value = response.result.value {
                     
@@ -232,8 +234,7 @@ class  ApiClient {
                 
                 
             case .failure(let error):
-                
-                print(error)
+             
                 print(error.localizedDescription)
                 completion(error.localizedDescription,nil)
                 
