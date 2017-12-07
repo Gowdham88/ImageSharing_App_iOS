@@ -58,12 +58,7 @@ class LocList {
                 let tag_updatedat = item["updatedat"].string ?? "empty"
                 let tag_createdby = item["createdby"].int ?? 0
                 let tag_updatedby = item["updatedby"].int ?? 0
-
-
-
-
-                
-                
+          
                 if id == nil {
                     id = []
                 }
@@ -145,7 +140,7 @@ class LocList {
         
     }
     //    *********************************************************
-    init(array : JSON) {
+    init?(array : JSON) {
         
         if let id = array["id"].int {
             
