@@ -206,8 +206,6 @@ class  ApiClient {
     
        func completeSignup(parameters : Parameters,headers : HTTPHeaders,completion : @escaping (String,UserList?) -> Void) {
         
-        
-        
         Alamofire.request(Constants.completeSignup, method: .post, parameters: parameters,encoding: JSONEncoding.default,headers: headers).validate().responseJSON { response in
             
            
@@ -241,8 +239,7 @@ class  ApiClient {
                 
             }
         }
-        
-       
+    
         
     }
     
