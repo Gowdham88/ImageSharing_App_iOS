@@ -26,6 +26,7 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     @IBOutlet weak var topHeaderView: UIView!
     @IBOutlet var navigationItemList: UINavigationItem!
     
+    @IBOutlet weak var usernamelabel: UILabel!
     @IBOutlet var editButton: UIButton!
     @IBOutlet var profileImageview: UIImageView!
     @IBOutlet var settingsTableView: UITableView!
@@ -47,6 +48,8 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         itemArray = ["Share the app","Rate the app","Terms of service","Privacy policy"]
         itemArray2 = ["Events","Business","Items","Posts","Users","Logout"]
 //        topHeaderView.backgroundColor = UIColor(red: 216/255.0, green: 216/255.0, blue: 216/255.0, alpha: 1.0)
+        
+        usernamelabel.text = PrefsManager.sharedinstance.username
 
     }
 

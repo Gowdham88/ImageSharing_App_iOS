@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Numnu/signupwithEmailVC.swift"
-            timestampString = "534264822.792689"
+            filePath = "Numnu/ApiClient.swift"
+            timestampString = "534337492.504643"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "258"
-            endingLineNumber = "258"
-            landmarkName = "openStoryBoard(name:id:firebaseid:)"
+            startingLineNumber = "266"
+            endingLineNumber = "266"
+            landmarkName = "getFireBaseToken(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

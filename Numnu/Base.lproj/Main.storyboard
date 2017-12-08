@@ -1610,8 +1610,8 @@
                                     <constraint firstItem="y8B-eX-gI7" firstAttribute="top" secondItem="U0h-hS-p8G" secondAttribute="top" id="l4x-Jt-h5Q"/>
                                 </constraints>
                             </scrollView>
-                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zA6-uZ-mSl">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="1000"/>
+                            <view alpha="0.0" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zA6-uZ-mSl">
+                                <rect key="frame" x="400" y="0.0" width="320" height="1000"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1qU-TU-ULL">
                                         <rect key="frame" x="0.0" y="870" width="320" height="130"/>
@@ -1692,7 +1692,9 @@
                     <navigationItem key="navigationItem" id="fA9-zp-X8D"/>
                     <size key="freeformSize" width="320" height="1000"/>
                     <connections>
+                        <outlet property="addressLabel" destination="XJC-Kz-2dW" id="U4A-dd-bCY"/>
                         <outlet property="collectionView" destination="zuu-5r-4Mo" id="oM0-Q6-8Xk"/>
+                        <outlet property="descriptionlabel" destination="AFp-QT-wBR" id="39u-8I-FpF"/>
                         <outlet property="mainViewBottom" destination="1Id-H3-5Rc" id="gMU-Mp-Sjz"/>
                         <outlet property="mainViewConstraint" destination="4Ow-d5-Sh3" id="x9J-oO-kJd"/>
                         <outlet property="myScrollView" destination="U0h-hS-p8G" id="Kmj-Ke-hnZ"/>
@@ -1700,6 +1702,7 @@
                         <outlet property="shareview" destination="zA6-uZ-mSl" id="f6u-pS-z0e"/>
                         <outlet property="tableView" destination="HGh-Az-pvx" id="EKS-ON-H7m"/>
                         <outlet property="userImage" destination="G1O-Dp-bM8" id="ZLc-dw-l2J"/>
+                        <outlet property="userNamelabel" destination="Rcj-SC-09A" id="SDJ-pB-PmM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SjK-qH-tv5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1848,6 +1851,7 @@
                         <outlet property="profileImageview" destination="ed3-Wf-Alf" id="tcF-o8-Bhh"/>
                         <outlet property="settingsTableView" destination="H41-IW-NXr" id="7Nk-26-bnt"/>
                         <outlet property="topHeaderView" destination="bgr-TL-zUa" id="2vK-0j-2vn"/>
+                        <outlet property="usernamelabel" destination="aNM-pB-bIX" id="ByG-QW-d3E"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sPm-Eu-CTI" userLabel="First Responder" sceneMemberID="firstResponder"/>
