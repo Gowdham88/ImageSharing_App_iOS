@@ -53,19 +53,19 @@ struct PrefsManager {
     
     
     
-    var userId : String {
+    var userId : Int {
         
         get {
             
 
             if checkprefsobject(object: Constants.id) {
                 
-                return UserDefaults.standard.string(forKey: Constants.id)!
+                return UserDefaults.standard.integer(forKey: Constants.id)
 
                 
             } else {
                 
-                return "empty"
+                return 0
             }
             
             
@@ -100,6 +100,27 @@ struct PrefsManager {
         }
     }
     
+    var name : String {
+        
+        get {
+            
+            if checkprefsobject(object: Constants.name) {
+                
+                return UserDefaults.standard.string(forKey: Constants.name)!
+            } else {
+                
+                return "empty"
+            }
+            
+        }
+        
+        set {
+            
+            UserDefaults.standard.set(newValue, forKey: Constants.name)
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
     var username : String {
         
         get {
@@ -121,47 +142,8 @@ struct PrefsManager {
         }
     }
     
-//    var firstname : String {
-//
-//        get {
-//
-//            if checkprefsobject(object: Constants.firstName) {
-//
-//                return UserDefaults.standard.string(forKey: Constants.firstName)!
-//            } else {
-//
-//                return "empty"
-//            }
-//
-//        }
-//
-//        set {
-//
-//            UserDefaults.standard.set(newValue, forKey: Constants.firstName)
-//            UserDefaults.standard.synchronize()
-//        }
-//    }
 
-    var lastname : String {
-        
-        get {
-            
-            if checkprefsobject(object: Constants.lastName) {
-                
-                return UserDefaults.standard.string(forKey: Constants.lastName)!
-            } else {
-                
-                return "empty"
-            }
-            
-        }
-        
-        set {
-            
-            UserDefaults.standard.set(newValue, forKey: Constants.lastName)
-            UserDefaults.standard.synchronize()
-        }
-    }
+    
     
     var UIDfirebase : String {
         
@@ -235,6 +217,7 @@ struct PrefsManager {
             if checkprefsobject(object: Constants.gender) {
                 
                 return UserDefaults.standard.integer(forKey: Constants.gender)
+                
             } else {
                 
                 return 0
@@ -245,6 +228,50 @@ struct PrefsManager {
         set {
             
             UserDefaults.standard.set(newValue, forKey: Constants.gender)
+            
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    var userCity : String {
+        
+        get {
+            
+            if checkprefsobject(object: Constants.userCity) {
+                
+                return UserDefaults.standard.string(forKey: Constants.userCity)!
+            } else {
+                
+                return "empty"
+            }
+            
+        }
+        
+        set {
+            
+            UserDefaults.standard.set(newValue, forKey: Constants.userCity)
+            
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    var description : String {
+        
+        get {
+            
+            if checkprefsobject(object: Constants.userCity) {
+                
+                return UserDefaults.standard.string(forKey: Constants.description)!
+            } else {
+                
+                return "empty"
+            }
+            
+        }
+        
+        set {
+            
+            UserDefaults.standard.set(newValue, forKey: Constants.description)
             
             UserDefaults.standard.synchronize()
         }

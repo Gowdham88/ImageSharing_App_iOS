@@ -85,6 +85,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     var tagidArray   = [Int]()
     var tagnamearray = [String]()
     var token_str    : String = "empty"
+    var setdatebirth : Bool   = false
     
     // place autocomplete //
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
@@ -189,6 +190,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         apiClient = ApiClient()
         /************************getFirebaseToken*************************************/
         getFirebaseToken()
+        setUserDetails()
         
     }
     
@@ -472,9 +474,15 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         let month: String = dateFormatter.string(from: self.datePicker.date)
         dateFormatter.dateFormat = "dd"
         let day: String = dateFormatter.string(from: self.datePicker.date)
-        dateLabel.text = day
-        monthLabel.text = month
-        yearLabel.text = year
+        
+        if setdatebirth {
+            
+            dateLabel.text = day
+            monthLabel.text = month
+            yearLabel.text = year
+            
+        }
+        
     }
     func addCollectionContainer(){
         let storyboard        = UIStoryboard(name: Constants.Auth, bundle: nil)
@@ -900,5 +908,55 @@ extension SettingsEdit_ProfieViewController {
         }
    
     }
+    
+    /*********************************setuserdetails********************************************/
+
+    
+    func setUserDetails(){
+        
+        nameTextfield.text = PrefsManager.sharedinstance.name
+        emailaddress.text  = PrefsManager.sharedinstance.userEmail
+        cityTextfield.text = PrefsManager.sharedinstance.userCity
+        descriptionTextField.text = PrefsManager.sharedinstance.description
+        usernameTextField.text    = PrefsManager.sharedinstance.username
+        
+        if PrefsManager.sharedinstance.gender == 0 {
+            
+            genderTextfield.text = "Male"
+            
+        } else {
+            
+             genderTextfield.text = "Female"
+            
+        }
+        
+            let date = DateFormatterManager.sharedinstance.stringtoDate(format: "yyyy-MM-dd", date: PrefsManager.sharedinstance.dateOfBirth)
+            
+            if let dateStr = DateFormatterManager.sharedinstance.datetoString(format: "dd", date: date) {
+                
+               
+                
+                dateLabel.text = dateStr
+                
+            }
+            
+            if let monthStr = DateFormatterManager.sharedinstance.datetoString(format: "MM", date: date) {
+                
+                monthLabel.text = monthStr
+                
+            }
+            
+            if let yearStr = DateFormatterManager.sharedinstance.datetoString(format: "yyyy", date: date) {
+                
+                yearLabel.text = yearStr
+                
+            }
+            
+            
+        
+        
+    }
+    
+    
 }
 

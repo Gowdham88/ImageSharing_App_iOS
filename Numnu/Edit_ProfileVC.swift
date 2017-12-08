@@ -169,15 +169,15 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         
         
         
-            cityTableView.layer.shadowColor = UIColor.darkGray.cgColor
-            cityTableView.isUserInteractionEnabled = true
-            cityTableView.backgroundColor = UIColor.clear
-            cityTableView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
-            cityTableView.layer.shadowOpacity = 2.0
-            cityTableView.layer.shadowRadius = 5
-            cityTableView.layer.cornerRadius = 10
-            cityTableView.clipsToBounds = true
-            cityTableView.layer.masksToBounds = false
+        cityTableView.layer.shadowColor = UIColor.darkGray.cgColor
+        cityTableView.isUserInteractionEnabled = true
+        cityTableView.backgroundColor = UIColor.clear
+        cityTableView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+        cityTableView.layer.shadowOpacity = 2.0
+        cityTableView.layer.shadowRadius = 5
+        cityTableView.layer.cornerRadius = 10
+        cityTableView.clipsToBounds = true
+        cityTableView.layer.masksToBounds = false
         
         dropdownTableView.layer.shadowColor = UIColor.darkGray.cgColor
         dropdownTableView.isUserInteractionEnabled = true
@@ -270,10 +270,15 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         // Hide the navigation bar on the this view controller
         showPopup(table1: true, table2: true)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
-//        if PrefsManager.sharedinstance.isLoginned {
-//            addProfileContainer()
-//        } else {
-//        addCollectionContainer()
+        
+        if boolForTitle == false {
+        if PrefsManager.sharedinstance.isLoginned {
+            
+                addProfileContainer()
+            
+        } else {
+        
+            addCollectionContainer()
         
         /*************************getting location******************************/
         locationManager = CLLocationManager()
@@ -288,15 +293,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             locationManager.delegate = self
             
         }
-//            if boolForTitle == false {
-//                if PrefsManager.sharedinstance.isLoginned {
-//                    addProfileContainer()
-//                } else {
-//
-//
-//
-//               }
-//        }
+
+           }
+        }
     }
     override func viewDidAppear(_ animated: Bool) {
        showPopup(table1: true, table2: true)
@@ -506,19 +505,25 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         focusEdittext(textfield: textField,focus: false)
 
         if textField == usernameTextField {
-            let parameters: Parameters = ["checkusername": usernameTextField.text!]
+            print(usernameTextField.text!)
+            let parameters : Parameters = ["checkusername": "dsdsddddd"]
             let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
-            let userNameRequest: ApiClient = ApiClient()
-            userNameRequest.usernameexists(parameters: parameters,headers: header, completion:{status, Exists in
+            apiClient.usernameexists(parameters: parameters,headers: header, completion:{status, Exists in
                 if Exists == true {
+                    
                     print("the username already exists")
-                }else{
+                    
+                } else {
+                    
                     print("the username available")
+                    
                 }
             })
+            
         }
        
         if textField == birthTextfield {
+            
             if cancelBool == true {
                 birthTextfield.text = ""
             }else{
@@ -656,20 +661,47 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         }
     }
     
-    func upload(image: UIImage, completion: (URL?) -> Void) {
+    func uploadImage(image: UIImage,id : Int, completion:@escaping (String?) -> Void) {
         guard let data = UIImageJPEGRepresentation(image, 0.9) else {
             return
         }
+        
+        let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
+        
         Alamofire.upload(multipartFormData: { (form) in
+            
             form.append(data, withName: "file", fileName: "file.jpg", mimeType: "image/jpg")
-        }, to: "https://numnu-server-dev.appspot.com/users/1/images", encodingCompletion: { result in
+            
+        }, to: "https://numnu-server-dev.appspot.com/users/\(id)/images",method: .post, headers: header,encodingCompletion: { result in
             switch result {
             case .success(let upload, _, _):
                 upload.responseString { response in
-                    print(response.value)
+                    print(response.value ?? "dsdks")
+                    
+                    if let value = response.result.value {
+                  
+                        let json = JSON(value)
+                        if let imageurl = json["imageurl"].string {
+                            
+                            completion(imageurl)
+                           
+                        } else {
+                            
+                            completion(nil)
+                        }
+                        
+                        
+                    } else {
+                        
+                        completion(nil)
+                        
+                    }
+                    
+                    
                 }
             case .failure(let encodingError):
                 print(encodingError)
+                completion(nil)
             }
         })
     }
@@ -717,7 +749,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.profileImage.contentMode = .scaleAspectFill
             self.profileImage.image = pickedImage
-        }
+         }
         dismiss(animated: true, completion: nil)
     }
     private func imagePickerControllerDidCancel(picker: UIImagePickerController) {
@@ -982,7 +1014,7 @@ extension Edit_ProfileVC {
                     
                 }
                 
-            case .failure(let error):
+            case .failure(let error) :
                 print(error)
                 
                 DispatchQueue.main.async {
@@ -1002,7 +1034,7 @@ extension Edit_ProfileVC {
     func completeSignupApi() {
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-mm-dd"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         let birthdate : String = dateFormatter.string(from: self.datePicker.date)
         
         print(tagsDictonary)
@@ -1023,18 +1055,36 @@ extension Edit_ProfileVC {
       
         let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
         let parameters: Parameters = ["username": usernameTextField.text!, "name":nameTextfield.text! , "description" : descriptionTextfield.text! ,"firebaseuid" : firebaseid,"dateofbirth": birthdate, "gender": gender as Int,"tags":tagsDictonary,"isbusinessuser": false as Bool,"email": emailaddress.text! ,"citylocation":cityDictonary! ,"clientip": clientIp, "clientapp": Constants.clientApp]
-        
        
         apiClient.completeSignup(parameters: parameters,headers: header,completion:{status, Values in
             
             if status == "success" {
                 
-                let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
-                let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
-                vc.boolForBack = false
-                vc.delegate    = self
-                self.navigationController!.pushViewController(vc, animated: true)
-                
+                if let user = Values {
+                    
+                    self.getUserDetails(user: user)
+                    
+                    self.uploadImage(image: self.profileImage.image!, id: user.id ?? 0, completion: { imageurl in
+                        
+                        if imageurl != nil {
+                            
+                            let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
+                            let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
+                            vc.boolForBack = false
+                            vc.delegate    = self
+                            self.navigationController!.pushViewController(vc, animated: true)
+                            
+                        } else {
+                            
+                            
+                            
+                        }
+                    
+                        
+                    })
+                   
+                }
+          
                
             } else {
                 
@@ -1044,10 +1094,62 @@ extension Edit_ProfileVC {
         
     }
     
+    func getUserDetails(user:UserList) {
+        
+        if let firebaseid = user.firebaseuid {
+            
+            PrefsManager.sharedinstance.UIDfirebase = firebaseid
+            
+        }
+        
+        if let userid = user.id {
+            
+            PrefsManager.sharedinstance.userId = userid
+            
+        }
+        
+        if let username = user.username {
+            
+            PrefsManager.sharedinstance.username = username
+            
+        }
+        
+        if let dateofbirth = user.dateofbirth {
+            
+            PrefsManager.sharedinstance.dateOfBirth = dateofbirth
+            
+        }
+        
+        if let gender = user.gender {
+            
+            PrefsManager.sharedinstance.gender = gender
+            
+        }
+        
+        if let desc = user.description {
+            
+            PrefsManager.sharedinstance.description = desc
+            
+        }
+        
+        if let name = user.name {
+            
+            PrefsManager.sharedinstance.name = name
+            
+        }
+        
+        if let userEmail = user.email {
+            
+            PrefsManager.sharedinstance.userEmail = userEmail
+            
+        }
+    
+    }
     
     
     
-    func showPopup(table1: Bool,table2 : Bool){
+    
+    func showPopup(table1: Bool,table2 : Bool) {
     
         cityTableView.isHidden      = table1
         dropdownTableView.isHidden  = table2
@@ -1082,6 +1184,7 @@ extension Edit_ProfileVC : CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         
         switch status {
+            
         case .restricted:
             print("Location access was restricted.")
         case .denied:
