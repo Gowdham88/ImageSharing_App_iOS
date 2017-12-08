@@ -1137,14 +1137,19 @@ extension Edit_ProfileVC {
             PrefsManager.sharedinstance.name = name
             
         }
-    
         
+        if let userEmail = user.email {
+            
+            PrefsManager.sharedinstance.userEmail = userEmail
+            
+        }
+    
     }
     
     
     
     
-    func showPopup(table1: Bool,table2 : Bool){
+    func showPopup(table1: Bool,table2 : Bool) {
     
         cityTableView.isHidden      = table1
         dropdownTableView.isHidden  = table2

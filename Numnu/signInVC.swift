@@ -381,6 +381,12 @@ extension signInVC {
 
         }
         
+        if let userEmail = user.email {
+            
+            PrefsManager.sharedinstance.userEmail = userEmail
+            
+        }
+        
         if let gender = user.gender {
             
             PrefsManager.sharedinstance.gender = gender
