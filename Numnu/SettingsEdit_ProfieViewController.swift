@@ -398,8 +398,9 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         
         if textField == usernameTextField {
             let parameters: Parameters = ["checkusername": usernameTextField.text!]
+            let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer"]
             let userNameRequest: ApiClient = ApiClient()
-            userNameRequest.usernameexists(parameters: parameters, completion:{status, Exists in
+            userNameRequest.usernameexists(parameters: parameters,headers: header,completion:{status, Exists in
                 if Exists == true {
                     print("the username already exists")
                 }else{
@@ -506,14 +507,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
                 let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
                 vc.delegate    = self
                 self.navigationController!.pushViewController(vc, animated: true)
-                let parameters: Parameters = ["username": usernameTextField.text!, "firstname":nameTextfield.text! , "lastname" : "" ,"firebaseuid" : "bIBh7fZXL1OP7NkGJIsPHucAPQA3" ,"dateofbirth": birthTextfield.text! , "gender": genderTextfield.text! ,"isbusinessuser": "0" , "email": emailaddress.text! ,  "citylocationid": "1", "createdby": "2" , "updatedby": "2" , "clientApp": "iosapp"  , "clientip": "765.768.7868.8888"  ]
-                let completeSignupApi: ApiClient = ApiClient()
-                completeSignupApi.completeSignup(parameters: parameters, completion:{status, Values in
-                    if status == "success" {
-                        print("Values from json:::::::",Values!)
-                    }else {
-                    }
-                })
+                
             }else {
                 AlertProvider.Instance.showAlert(title: "Oops", subtitle: "Please Enter Valid Email ID", vc: self)
             }
@@ -745,12 +739,14 @@ extension SettingsEdit_ProfieViewController : Profile_PostViewControllerDelegae 
 extension SettingsEdit_ProfieViewController {
     
     func loadTagList(tag : String) {
+        
         tagidArray.removeAll()
         tagnamearray.removeAll()
         let parameters : Parameters = ["beginWith" : tag]
         let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
         apiClient.getTagsApi(parameters: parameters, headers: header, completion: { status,taglist in
             if status == "success" {
+                
                 if let tagList = taglist {
                     if tagList.id != nil {
                         self.tagidArray = tagList.id!
@@ -762,12 +758,16 @@ extension SettingsEdit_ProfieViewController {
                         self.dropdownTableView.reloadData()
                     }
                 }
+                
             } else {
+                
                 DispatchQueue.main.async {
                     self.dropdownTableView.reloadData()
                 }
+                
             }
         })
+        
     }
     
     func getFirebaseToken() {
@@ -779,9 +779,7 @@ extension SettingsEdit_ProfieViewController {
         })
         
     }
-    
    
-    
     func focusEdittext(textfield : UITextField,focus:Bool) {
        
         switch textfield {
@@ -887,7 +885,7 @@ extension SettingsEdit_ProfieViewController {
         
     }
     
-    func showPopup(table1: Bool,table2 : Bool){
+    func showPopup(table1: Bool,table2 : Bool) {
         
         citytableview.isHidden      = table1
         dropdownTableView.isHidden  = table2
@@ -900,9 +898,7 @@ extension SettingsEdit_ProfieViewController {
             doneView.isHidden = true
             
         }
-        
-        
-        
+   
     }
 }
 

@@ -107,26 +107,9 @@ class signInVC: UIViewController, UITextFieldDelegate {
                 }
                 
                 self.idprim.removeAll()
-                
-               
-//                if self.currentReachabilityStatus != .notReachable {
-//
-//                    self.userLoginApi(uid: (user?.uid)!)
-//
-//
-//
-//                } else {
-//
-//                    DispatchQueue.main.async {
-//
-//                        AlertProvider.Instance.showInternetAlert(vc: self)
-//                    }
-//
-//
-//                }
+  
                 self.openStoryBoard(name: Constants.Main, id: Constants.Profile_PostViewController)
-                
-
+  
                 print("firebase id is:::",user?.uid as Any)
             })
                 
@@ -242,13 +225,9 @@ class signInVC: UIViewController, UITextFieldDelegate {
     
     func openStoryBoard(name: String,id : String) {
 
-//        window                          = UIWindow(frame: UIScreen.main.bounds)
         let storyboard                  = UIStoryboard(name: name, bundle: nil)
         let initialViewController       = storyboard.instantiateViewController(withIdentifier: id) as! Profile_PostViewController
-//        initialViewController.boolForTitle  = true
         self.navigationController!.pushViewController(initialViewController, animated: true)
-//        window?.rootViewController = initialViewController
-//        window?.makeKeyAndVisible()
 
     }
     
@@ -307,9 +286,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
                         
                         return
                     }
-                    
-                    self.userLoginApi(uid: (user?.uid)!)
-
+        
                      self.openStoryBoard(name: Constants.Main, id: Constants.Profile_PostViewController)
                    
                 })
@@ -336,39 +313,39 @@ extension signInVC {
         
         let parameters : Parameters = ["firebaseuid" : uid,"createdByUserId" : "","updatedByUserId" : "","createdTimestamp" : "","updatedTimestamp" : "","clientApp": "iosapp","clientIP":clientIp]
         
-        let loginRequest : ApiClient  = ApiClient()
-        loginRequest.userLogin(parameters: parameters, completion: { status,userlist in
-            
-            if status == "success" {
-                
-                DispatchQueue.main.async {
-                   
-                    if let user = userlist {
-                        
-                        print(user.firebaseuid!)
-                        self.getUserDetails(user: user)
-                      
-                    
-                    }
-                    
-                    HUD.hide()
-                    
-//                  self.openStoryBoard(name: Constants.Main, id: Constants.Profile_PostViewController)
-                    
-
-                    self.emailAddressTF.text = ""
-                    self.passwordTF.text     = ""
-                    
-                }
-                
-            } else {
-                
-                 HUD.hide()
-                
-            }
-            
-            
-        })
+//        let loginRequest : ApiClient  = ApiClient()
+//        loginRequest.userLogin(parameters: parameters, completion: { status,userlist in
+//            
+//            if status == "success" {
+//                
+//                DispatchQueue.main.async {
+//                   
+//                    if let user = userlist {
+//                        
+//                        print(user.firebaseuid!)
+//                        self.getUserDetails(user: user)
+//                      
+//                    
+//                    }
+//                    
+//                    HUD.hide()
+//                    
+////                  self.openStoryBoard(name: Constants.Main, id: Constants.Profile_PostViewController)
+//                    
+//
+//                    self.emailAddressTF.text = ""
+//                    self.passwordTF.text     = ""
+//                    
+//                }
+//                
+//            } else {
+//                
+//                 HUD.hide()
+//                
+//            }
+//            
+//            
+//        })
         
         
     }
