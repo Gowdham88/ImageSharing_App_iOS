@@ -660,11 +660,10 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                         cityDictonary = ["name":cityTextfield.text!,"address":cityTextfield.text!,"isgoogleplace":false,"lattitude":latlong.coordinate.latitude,"longitude":latlong.coordinate.longitude]
                         
                     }
-                    
-                    
                 }
                 
                 completeSignupApi()
+                addProfileContainer()
                
             }else {
                 AlertProvider.Instance.showAlert(title: "Oops", subtitle: "Please Enter Valid Email ID", vc: self)
@@ -849,12 +848,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             }
             cell?.selectionStyle = .none
             cell?.textLabel?.text = tagnamearray[indexPath.row]
-            
             dropdownTableView.transform = CGAffineTransform(scaleX: 1, y: -1)
             cell?.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
-//            tableView.transform = CGAffineTransform(rotationAngle: (-.pi))
-//            cell?.transform = CGAffineTransform(rotationAngle: (-.pi))
-//            cell?.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1.0)
             cell?.textLabel?.textColor = UIColor(red: 129/255.0, green: 135/255.0, blue: 155/255.0, alpha: 1.0)
 
             return cell!
@@ -868,12 +863,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
             }
             cell?.selectionStyle = .none
-//            cell?.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1.0)
             cell?.textLabel?.text = autocompleteplaceArray[indexPath.row]
             cell?.textLabel?.textColor = UIColor(red: 129/255.0, green: 135/255.0, blue: 155/255.0, alpha: 1.0)
-//            tableView.transform = CGAffineTransform(rotationAngle: (-.pi))
-//            cell?.transform = CGAffineTransform(rotationAngle: (-.pi))
-            
             cityTableView.transform = CGAffineTransform(scaleX: 1, y: -1)
             cell?.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
             return cell!
@@ -1048,13 +1039,13 @@ extension Edit_ProfileVC {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let birthdate : String = dateFormatter.string(from: self.datePicker.date)
         
-        print(tagsDictonary)
-        print(cityDictonary!)
-        print(usernameTextField.text!)
-        print(nameTextfield.text!)
-        print(descriptionTextfield.text!)
-        print(birthdate)
-        print(emailaddress.text!)
+        print("printing tags::::",tagsDictonary)
+        print("printing city::::",cityDictonary!)
+        print("printing username::::",usernameTextField.text!)
+        print("printing nametext::::",nameTextfield.text!)
+        print("printing description::::",descriptionTextfield.text!)
+        print("printing birthdate::::",birthdate)
+        print("printing mailID::::",emailaddress.text!)
       
         let clientIp = ValidationHelper.Instance.getIPAddress() ?? "1.0.1"
         var gender : Int = 0

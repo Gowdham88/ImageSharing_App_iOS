@@ -63,7 +63,6 @@ class DateFormatterManager: NSObject {
         
         if let datePic = date {
             
-            
             return datePic
             
         } else {

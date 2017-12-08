@@ -8,9 +8,13 @@
 
 import UIKit
 import XLPagerTabStrip
+import Alamofire
+import SwiftyJSON
 
 class EventViewController: ButtonBarPagerTabStripViewController {
-    
+    var token_str : String = "empty"
+    var apiClient : ApiClient!
+
     @IBOutlet weak var myscrollView: UIScrollView!
     @IBOutlet weak var eventImageView: ImageExtender!
     @IBOutlet weak var eventTitleLabel: UILabel!
@@ -73,11 +77,9 @@ class EventViewController: ButtonBarPagerTabStripViewController {
             newCell?.label.textColor = UIColor.appBlackColor()
          
           
-          
             
         }
-       
-        
+
         let centerImagetap = UITapGestureRecognizer(target: self, action: #selector(EventViewController.centerImagetap))
         eventImageView.addGestureRecognizer(centerImagetap)
         eventImageView.isUserInteractionEnabled = true
@@ -109,11 +111,75 @@ class EventViewController: ButtonBarPagerTabStripViewController {
             eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
            
         }
+        apiClient = ApiClient()
         
+        getFirebaseToken()
+        
+//        MethodToCallApi()
+
+
+     
+    }
+    func getFirebaseToken() {
+        
+        apiClient.getFireBaseToken(completion:{ token in
+            
+            self.token_str = token
+             self.MethodToCallApi()
+            
+        })
+        
+    }
+    func MethodToCallApi(){
+        
+        let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
+        
+        apiClient.getEventsDetailsApi(headers: header, completion: { status,Values in
+            if status == "success" {
+                if let response = Values {
+                    self.getDetails(response:response)
+                }
+                
+            } else {
+                print("json respose failure:::::::")
+                
+            }
+        })
         
         
         
     }
+    func getDetails(response:EventList){
+        if let id = response.id {
+            PrefsManager.sharedinstance.userId = id
+        }
+   
+        if let name = response.name {
+            PrefsManager.sharedinstance.name = name
+            eventTitleLabel.text = name
+        }
+        
+        if let description = response.description {
+            PrefsManager.sharedinstance.description = description
+            eventDescriptionLabel.text = description
+        }
+        
+        if let startsat = response.startsat {
+            PrefsManager.sharedinstance.startsat = startsat
+            
+        }
+        
+        if let endsat = response.endsat {
+            PrefsManager.sharedinstance.endsat = endsat
+//            eventDateLabel.text = PrefsManager.sharedinstance.startsat \ PrefsManager.sharedinstance.endsat
+        }
+        
+    
+    }
+    
+    
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         let navigationOnTap = UITapGestureRecognizer(target:self,action:#selector(EventViewController.navigationTap))
         self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
@@ -406,6 +472,7 @@ extension EventViewController : MenuEventViewControllerDelegate {
     }
     
 }
+
 
 
 

@@ -277,6 +277,46 @@ struct PrefsManager {
         }
     }
     
+    var startsat : String {
+        
+        get {
+            
+            if checkprefsobject(object: Constants.startsat) {
+                
+                return UserDefaults.standard.string(forKey: Constants.startsat)!
+            } else {
+                
+                return "empty"
+            }
+            
+        }
+        
+        set {
+            
+            UserDefaults.standard.set(newValue, forKey: Constants.startsat)
+            UserDefaults.standard.synchronize()
+        }
+    }
     
+    var endsat : String {
+        
+        get {
+            
+            if checkprefsobject(object: Constants.endsat) {
+                
+                return UserDefaults.standard.string(forKey: Constants.endsat)!
+            } else {
+                
+                return "empty"
+            }
+            
+        }
+        
+        set {
+            
+            UserDefaults.standard.set(newValue, forKey: Constants.endsat)
+            UserDefaults.standard.synchronize()
+        }
+    }
     
 } // Struct

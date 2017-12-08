@@ -145,9 +145,9 @@ class  ApiClient {
     }
     
      /************************Events Api**********************************/
-    func getEventsApi(parameters : Parameters,completion : @escaping (String,EventModelList?) -> Void) {
+    func getEventsApi(headers : HTTPHeaders,completion : @escaping (String,EventModelList?) -> Void) {
         
-        Alamofire.request(Constants.EventApiUrl, method: .get, parameters: parameters,encoding: JSONEncoding.default).validate().responseJSON { response in
+        Alamofire.request(Constants.EventApiUrl, encoding: JSONEncoding.default,headers: headers).validate().responseJSON { response in
             
             switch response.result {
                 
@@ -157,6 +157,37 @@ class  ApiClient {
                     
                     let json = JSON(value)
                     if let eventList = EventModelList(json: json) {
+                        
+                        completion("success",eventList)
+                    }
+                    
+                }
+                
+                
+            case .failure(let error):
+                
+                print(error)
+                completion(error.localizedDescription,nil)
+                
+            }
+            
+        }
+        
+    }
+    
+    /************************Event Detail*******************************/
+    func getEventsDetailsApi(headers : HTTPHeaders,completion : @escaping (String,EventList?) -> Void) {
+        
+        Alamofire.request(Constants.EventApiUrl, encoding: JSONEncoding.default,headers: headers).validate().responseJSON { response in
+            
+            switch response.result {
+                
+            case .success:
+                
+                if let value = response.result.value {
+                    
+                    let json = JSON(value)
+                    if let eventList = EventList(json: json) {
                         
                         completion("success",eventList)
                     }
@@ -213,7 +244,7 @@ class  ApiClient {
         Alamofire.request(Constants.completeSignup, method: .post, parameters: parameters,encoding: JSONEncoding.default,headers: headers).validate().responseJSON { response in
             
            
-            print(response.result.value)
+            print(response.result.value as Any)
             
             switch response.result {
                 

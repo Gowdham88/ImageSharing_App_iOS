@@ -190,7 +190,9 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         apiClient = ApiClient()
         /************************getFirebaseToken*************************************/
         getFirebaseToken()
+        
         setUserDetails()
+
         
     }
     
@@ -204,19 +206,15 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     //    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
             let navigationOnTap = UITapGestureRecognizer(target:self,action:#selector(EventViewController.navigationTap))
             self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
             self.navigationController?.navigationBar.isUserInteractionEnabled = true
+        
         // Hide the navigation bar on the this view controller
          showPopup(table1: true, table2: true)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
-        if PrefsManager.sharedinstance.isLoginned {
-//            addProfileContainer()
-        } else {
-            if boolForTitle == false {
-                //                addCollectionContainer()
-            }
-        }
+        
     }
     override func viewDidAppear(_ animated: Bool) {
         showPopup(table1: true, table2: true)
@@ -475,14 +473,11 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         dateFormatter.dateFormat = "dd"
         let day: String = dateFormatter.string(from: self.datePicker.date)
         
-        if setdatebirth {
-            
+        if setdatebirth == false {
             dateLabel.text = day
             monthLabel.text = month
             yearLabel.text = year
-            
         }
-        
     }
     func addCollectionContainer(){
         let storyboard        = UIStoryboard(name: Constants.Auth, bundle: nil)
@@ -495,7 +490,6 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     }
     
     func addProfileContainer(){
-        
         let storyboard        = UIStoryboard(name: Constants.Main, bundle: nil)
         let controller        = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
         controller.delegate   = self
@@ -663,7 +657,6 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             cell?.textLabel?.text = tagnamearray[indexPath.row]
             dropdownTableView.transform = CGAffineTransform(scaleX: 1, y: -1)
             cell?.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
-            //            cell?.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1.0)
             cell?.textLabel?.textColor = UIColor(red: 129/255.0, green: 135/255.0, blue: 155/255.0, alpha: 1.0)
             
             return cell!
@@ -913,28 +906,28 @@ extension SettingsEdit_ProfieViewController {
 
     
     func setUserDetails(){
-        
-        nameTextfield.text = PrefsManager.sharedinstance.name
-        emailaddress.text  = PrefsManager.sharedinstance.userEmail
-        cityTextfield.text = PrefsManager.sharedinstance.userCity
+
+        nameTextfield.text        = PrefsManager.sharedinstance.name
+        emailaddress.text         = PrefsManager.sharedinstance.userEmail
+        cityTextfield.text        = PrefsManager.sharedinstance.userCity
         descriptionTextField.text = PrefsManager.sharedinstance.description
         usernameTextField.text    = PrefsManager.sharedinstance.username
-        
+
         if PrefsManager.sharedinstance.gender == 0 {
-            
+
             genderTextfield.text = "Male"
-            
+
         } else {
-            
+
              genderTextfield.text = "Female"
-            
+
         }
         
+       
             let date = DateFormatterManager.sharedinstance.stringtoDate(format: "yyyy-MM-dd", date: PrefsManager.sharedinstance.dateOfBirth)
+        
             
             if let dateStr = DateFormatterManager.sharedinstance.datetoString(format: "dd", date: date) {
-                
-               
                 
                 dateLabel.text = dateStr
                 
@@ -949,12 +942,11 @@ extension SettingsEdit_ProfieViewController {
             if let yearStr = DateFormatterManager.sharedinstance.datetoString(format: "yyyy", date: date) {
                 
                 yearLabel.text = yearStr
-                
-            }
-            
-            
         
+        }
+
         
+
     }
     
     
