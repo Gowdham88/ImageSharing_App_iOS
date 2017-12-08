@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -105,7 +105,7 @@
                                 <rect key="frame" x="0.0" y="20" width="320" height="504"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="r9a-im-5f4" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
-                                        <rect key="frame" x="10" y="102" width="300" height="200"/>
+                                        <rect key="frame" x="10" y="103" width="300" height="200"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="200" id="dvd-t3-n34"/>
                                         </constraints>
@@ -128,7 +128,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Suraj Balachandran" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o8O-Eg-dsa">
-                                        <rect key="frame" x="56" y="15" width="254" height="23.5"/>
+                                        <rect key="frame" x="56" y="15" width="254" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="25" id="mrC-Jz-dNf"/>
                                         </constraints>
@@ -137,7 +137,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@suarj" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sab-nU-cTw">
-                                        <rect key="frame" x="56" y="41.5" width="165" height="21"/>
+                                        <rect key="frame" x="56" y="42" width="165" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="21" id="WSL-Sg-Mwi"/>
                                         </constraints>
@@ -146,7 +146,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 hrs" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2HT-QO-BFJ">
-                                        <rect key="frame" x="230" y="41.5" width="82" height="21"/>
+                                        <rect key="frame" x="230" y="42" width="82" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="3DI-Lr-mgT"/>
                                             <constraint firstAttribute="width" constant="82" id="ryb-NZ-FUB"/>
@@ -156,7 +156,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="love_ico" translatesAutoresizingMaskIntoConstraints="NO" id="GiX-XL-MSl" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
-                                        <rect key="frame" x="250" y="310" width="24" height="22"/>
+                                        <rect key="frame" x="250" y="311" width="24" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="8CH-Ol-MHQ"/>
                                             <constraint firstAttribute="width" constant="24" id="IrF-Sv-HJ1"/>
@@ -168,7 +168,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dish_ico" translatesAutoresizingMaskIntoConstraints="NO" id="aYw-38-4Gt" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
-                                        <rect key="frame" x="10" y="313" width="15" height="16"/>
+                                        <rect key="frame" x="10" y="314" width="15" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="16" id="0j0-mb-4hb"/>
                                             <constraint firstAttribute="width" constant="15" id="SOY-Ho-0JL"/>
@@ -180,7 +180,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Barbaque  Side platter" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c2D-wh-xbf">
-                                        <rect key="frame" x="33" y="310" width="75" height="36"/>
+                                        <rect key="frame" x="33" y="311" width="75" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="36" id="A5G-VI-tzk"/>
                                             <constraint firstAttribute="width" constant="75" id="Rsm-62-fT5"/>
@@ -190,7 +190,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wf4-FV-Y9d">
-                                        <rect key="frame" x="280" y="310" width="24" height="24"/>
+                                        <rect key="frame" x="280" y="311" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="KpA-zE-i7f"/>
                                             <constraint firstAttribute="width" constant="24" id="Xyy-0p-iyI"/>
@@ -203,7 +203,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="It was Amazing festival!.Great food and party." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MzI-xt-bC5">
-                                        <rect key="frame" x="10" y="74.5" width="300" height="19.5"/>
+                                        <rect key="frame" x="10" y="75" width="300" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="44" id="WaJ-Hh-Cw5"/>
                                         </constraints>
@@ -212,7 +212,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BarBados food and rum festival " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ubE-a4-hnC">
-                                        <rect key="frame" x="32" y="335" width="263" height="18"/>
+                                        <rect key="frame" x="32" y="336" width="263" height="18"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="263" id="8Aw-wW-vd5"/>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="40" id="ztO-Nc-ohA"/>
@@ -221,15 +221,15 @@
                                         <color key="textColor" red="0.45882352941176469" green="0.47843137254901957" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view alpha="0.0" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RM3-2w-pIx">
-                                        <rect key="frame" x="10" y="403" width="300" height="1"/>
+                                    <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RM3-2w-pIx">
+                                        <rect key="frame" x="10" y="404" width="300" height="1"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="B5j-bU-6Ks"/>
                                         </constraints>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="restaurant_ico" translatesAutoresizingMaskIntoConstraints="NO" id="S26-95-fXa" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
-                                        <rect key="frame" x="114" y="313" width="19" height="19"/>
+                                        <rect key="frame" x="114" y="314" width="19" height="19"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="19" id="Uer-4U-JhN"/>
                                             <constraint firstAttribute="width" constant="19" id="okf-Tl-LAq"/>
@@ -241,7 +241,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="event_ico" translatesAutoresizingMaskIntoConstraints="NO" id="S8b-G0-oRa" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
-                                        <rect key="frame" x="10" y="336" width="14" height="15"/>
+                                        <rect key="frame" x="10" y="337" width="14" height="15"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="15" id="gFP-BM-bOn"/>
                                             <constraint firstAttribute="width" constant="14" id="p7p-Jo-Ad8"/>
@@ -253,7 +253,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cottage house" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7EP-vb-NJn">
-                                        <rect key="frame" x="141" y="310" width="75" height="36"/>
+                                        <rect key="frame" x="141" y="311" width="75" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="75" id="Og4-Ou-x6C"/>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="36" id="ZfJ-yk-TKZ"/>
@@ -295,6 +295,7 @@
                                     <constraint firstAttribute="trailing" secondItem="r9a-im-5f4" secondAttribute="trailing" constant="10" id="iHR-PS-CSf"/>
                                     <constraint firstItem="o8O-Eg-dsa" firstAttribute="top" secondItem="emq-kw-nq5" secondAttribute="top" constant="15" id="kEo-DN-OIs"/>
                                     <constraint firstItem="2HT-QO-BFJ" firstAttribute="leading" secondItem="sab-nU-cTw" secondAttribute="trailing" constant="9" id="lQT-hN-xhl"/>
+                                    <constraint firstItem="RM3-2w-pIx" firstAttribute="top" secondItem="ubE-a4-hnC" secondAttribute="bottom" constant="50" id="nG2-je-Ur6"/>
                                     <constraint firstAttribute="trailing" secondItem="MzI-xt-bC5" secondAttribute="trailing" constant="10" id="np4-dq-3Iq"/>
                                     <constraint firstItem="Wf4-FV-Y9d" firstAttribute="top" secondItem="r9a-im-5f4" secondAttribute="bottom" constant="8" id="oec-eR-MY5"/>
                                     <constraint firstItem="GiX-XL-MSl" firstAttribute="top" secondItem="r9a-im-5f4" secondAttribute="bottom" constant="8" id="ogv-Kk-PmM"/>
@@ -383,8 +384,11 @@
                         <outlet property="alertView" destination="mTc-GP-fFl" id="j7g-bf-v4D"/>
                         <outlet property="alertViewHide" destination="tM9-9p-dVI" id="00h-Ps-a55"/>
                         <outlet property="alertviewBottomConstraints" destination="rcv-Jf-mfa" id="MuW-ig-wMy"/>
+                        <outlet property="businessTap" destination="S26-95-fXa" id="TPf-QU-HzK"/>
                         <outlet property="dishwidthDConstaint" destination="Rsm-62-fT5" id="dIE-IH-o7a"/>
+                        <outlet property="eventTap" destination="S8b-G0-oRa" id="qUh-Gc-PkA"/>
                         <outlet property="eventTopHeight" destination="fsk-U8-ll3" id="JDF-dL-9Jq"/>
+                        <outlet property="itemTap" destination="aYw-38-4Gt" id="BbK-Ww-XJd"/>
                         <outlet property="mainPostView" destination="emq-kw-nq5" id="d7n-XF-mwr"/>
                         <outlet property="navigationItemList" destination="hq0-4z-tGK" id="Btt-To-RpV"/>
                         <outlet property="placeWidthDConstraint" destination="Og4-Ou-x6C" id="zwc-u4-oqm"/>
@@ -402,7 +406,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l2N-MO-vj6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="15" y="92.957746478873247"/>
+            <point key="canvasLocation" x="-56" y="54"/>
         </scene>
     </scenes>
     <resources>
