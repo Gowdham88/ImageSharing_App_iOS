@@ -262,7 +262,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        PrefsManager.sharedinstance.isLoginned = false
+        
         
             let navigationOnTap = UITapGestureRecognizer(target:self,action:#selector(EventViewController.navigationTap))
             self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
@@ -1143,6 +1143,8 @@ extension Edit_ProfileVC {
             PrefsManager.sharedinstance.userEmail = userEmail
             
         }
+        
+        PrefsManager.sharedinstance.isLoginned = true
     
     }
     

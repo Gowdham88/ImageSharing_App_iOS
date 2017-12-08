@@ -8,6 +8,7 @@
 
 import UIKit
 import PKHUD
+import Nuke
 
 protocol Profile_PostViewControllerDelegae {
     
@@ -53,6 +54,7 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         alertTapRegister()
         /***********************Setuserdetails****************************/
         setUserDetails()
+        
         
 //        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(Edit_ProfileVC.navigationTap))
 //        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
@@ -249,7 +251,22 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         userNamelabel.text = PrefsManager.sharedinstance.username
         addressLabel.text  = PrefsManager.sharedinstance.userCity
         descriptionlabel.text = PrefsManager.sharedinstance.description
+        print(PrefsManager.sharedinstance.tagList)
+        itemArray  = PrefsManager.sharedinstance.tagList
+        collectionView.reloadData()
         
+        let apiclient : ApiClient = ApiClient()
+        apiclient.getFireBaseImageUrl(imagepath: PrefsManager.sharedinstance.imageURL, completion: { url in
+            
+            if url != "empty" {
+                
+                Manager.shared.loadImage(with:URL(string:url)!, into: self.userImage)
+                
+            }
+            
+            
+        })
+       
     }
 
 }

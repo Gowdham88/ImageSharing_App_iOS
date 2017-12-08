@@ -8,6 +8,7 @@
 
 import UIKit
 import XLPagerTabStrip
+import Alamofire
 
 protocol  BusinessEventViewControllerDelegate {
     
@@ -26,7 +27,13 @@ class BusinessEventViewController: UIViewController,IndicatorInfoProvider {
     var businesdelegate : BusinessEventViewControllerDelegate?
     var viewState       : Bool = false
     
+    /************************Api***************************/
+    
+    var apiClient : ApiClient!
+    var bussinessList = [BussinessEventList]()
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         businessEventTableView.delegate   = self
@@ -41,6 +48,9 @@ class BusinessEventViewController: UIViewController,IndicatorInfoProvider {
             
             self.businesdelegate?.BusinessTableHeight(height: self.businessEventTableView.contentSize.height)
         }
+        
+        apiClient = ApiClient()
+        getBussinessevent()
        
     }
   
@@ -83,7 +93,7 @@ extension BusinessEventViewController : UITableViewDelegate,UITableViewDataSourc
         
         if tableView == businessEventTableView {
             
-            return 10
+            return bussinessList.count
             
         } else {
             
@@ -100,6 +110,7 @@ extension BusinessEventViewController : UITableViewDelegate,UITableViewDataSourc
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "businessEventCell", for: indexPath) as! businessEventTableViewCell
         
+        cell.item = bussinessList[indexPath.row]
         cell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.row)
             
         return cell
@@ -157,30 +168,93 @@ extension BusinessEventViewController : UICollectionViewDelegate,UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return tagarray.count
+        if let tagItem = bussinessList[collectionView.tag].tagList {
+            
+            return tagItem.count
+       
+        }
+        
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "eventBusTagCell", for: indexPath) as! EventTagCollectionCell
         
-        let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagarray[indexPath.row], fontname: "Avenir-Medium", size: 12)
-        
-        cell.tagnamelabel.text = tagarray[indexPath.row]
-        
-        cell.setLabelSize(size: textSize)
-        
-        
+        if let tagItem = bussinessList[collectionView.tag].tagList {
+            
+            let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagItem[indexPath.row].text_str ?? "", fontname: "Avenir-Medium", size: 12)
+            
+            cell.tagnamelabel.text = tagItem[indexPath.row].text_str ?? ""
+            
+            cell.setLabelSize(size: textSize)
+            
+        }
+     
         return cell
         
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagarray[indexPath.row], fontname: "Avenir-Medium", size: 12)
-        
-        return CGSize(width: textSize.width+20, height: 22)
+        if let tagItem = bussinessList[collectionView.tag].tagList {
+           
+            let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagItem[indexPath.row].text_str ?? "", fontname: "Avenir-Medium", size: 12)
+            
+            return CGSize(width: textSize.width+20, height: 22)
+            
+        }
+       
+        return CGSize(width:0, height: 0)
     }
+    
+    
+    
+}
+
+extension BusinessEventViewController {
+    
+    func getBussinessevent(){
+        
+        apiClient.getFireBaseToken(completion: { token in
+            
+            let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
+            
+            self.apiClient.getBussinessEvent(id: 34, headers: header, completion: { status,bussinesslist in
+                
+                if status == "success" {
+                    
+                    if let itemlist = bussinesslist {
+                        
+                        self.bussinessList = itemlist
+                    }
+                    
+                    DispatchQueue.main.async {
+                        
+                        self.businessEventTableView.reloadData()
+                    }
+                    
+                    let when = DispatchTime.now() + 1
+                    DispatchQueue.main.asyncAfter(deadline: when) {
+                        
+                        self.businesdelegate?.BusinessTableHeight(height: self.businessEventTableView.contentSize.height)
+                    }
+                    
+                } else {
+                    
+                    
+                    
+                }
+                
+                
+            })
+            
+            
+        })
+  
+        
+    }
+    
     
     
     

@@ -39,20 +39,26 @@ class MenuEventViewController: UIViewController,IndicatorInfoProvider,UITableVie
         menuCategoryTableview.isScrollEnabled = false
         menuEventTableview.isScrollEnabled    = false
         
-        let when = DispatchTime.now() + 1
-        DispatchQueue.main.asyncAfter(deadline: when) {
-            
-             self.menuDelegate?.menuTableHeight(height: self.menuCategoryTableview.contentSize.height)
-        }
+       
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
-       viewState = true
-       menuCategoryTableview.reloadData()
+        viewState = true
+        menuCategoryTableview.reloadData()
+        let when = DispatchTime.now() + 1
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            
+            self.menuDelegate?.menuTableHeight(height: self.menuCategoryTableview.contentSize.height)
+        }
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {

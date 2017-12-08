@@ -47,14 +47,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         signUpButton.layer.cornerRadius = 25
         signUpButton.clipsToBounds = true
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
-        let firebaseAuth = Auth.auth()
         
-        
-        do {
-            try firebaseAuth.signOut()
-        } catch let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
-        }
        
 //        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
 //        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)

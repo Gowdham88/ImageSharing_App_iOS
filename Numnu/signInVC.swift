@@ -226,9 +226,6 @@ class signInVC: UIViewController, UITextFieldDelegate {
 
         let storyboard                  = UIStoryboard(name: name, bundle: nil)
         let initialViewController       = storyboard.instantiateViewController(withIdentifier: id) as! Profile_PostViewController
-        if let taglist = user.tagList {
-            initialViewController.itemArray = taglist
-        }
         self.navigationController!.pushViewController(initialViewController, animated: true)
     }
     
@@ -413,6 +410,11 @@ extension signInVC {
                 
             }
          
+        }
+        
+        if let taglist = user.tagList {
+            
+            PrefsManager.sharedinstance.tagList = taglist
         }
         
         if let locitem = user.locItem {

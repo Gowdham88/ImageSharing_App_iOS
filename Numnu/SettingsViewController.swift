@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Nuke
 
 //var itemArray :Array = String
 var itemArray = [String]()
@@ -31,6 +32,7 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     @IBOutlet var profileImageview: UIImageView!
     @IBOutlet var settingsTableView: UITableView!
     var delegate : SettingsViewControllerDelegate?
+    var tagArray = [TagList]()
     override func viewDidLoad() {
         super.viewDidLoad()
        setNavBar()
@@ -48,8 +50,8 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         itemArray = ["Share the app","Rate the app","Terms of service","Privacy policy"]
         itemArray2 = ["Events","Business","Items","Posts","Users","Logout"]
 //        topHeaderView.backgroundColor = UIColor(red: 216/255.0, green: 216/255.0, blue: 216/255.0, alpha: 1.0)
+        setUserDetails()
         
-        usernamelabel.text = PrefsManager.sharedinstance.username
 
     }
 
@@ -112,6 +114,7 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         
         if indexPath.section == 1 && indexPath.row == 5 {
             
+            DBProvider.Instance.firebaseLogout()
             delegate?.logout()
             _ = self.navigationController?.popToRootViewController(animated: true)
         }
@@ -186,15 +189,24 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
 //
  
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+   
+    func setUserDetails(){
+        
+        usernamelabel.text = PrefsManager.sharedinstance.username
+        
+        let apiclient : ApiClient = ApiClient()
+        apiclient.getFireBaseImageUrl(imagepath: PrefsManager.sharedinstance.imageURL, completion: { url in
+            
+            if url != "empty" {
+                
+                Manager.shared.loadImage(with:URL(string:url)!, into: self.profileImageview)
+                
+            }
+            
+            
+        })
+        
     }
-    */
     
     
     

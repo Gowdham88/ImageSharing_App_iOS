@@ -277,6 +277,33 @@ struct PrefsManager {
         }
     }
     
+    var tagList : [TagList] {
+        
+        get {
+            
+            if checkprefsobject(object: Constants.taglist) {
+                
+                let array         = UserDefaults.standard.object(forKey: Constants.taglist) as! NSData
+                return   NSKeyedUnarchiver.unarchiveObject(with: array as Data) as! [TagList]
+                
+                
+            } else {
+                
+                return []
+            }
+            
+        }
+        
+        set {
+            
+            let defaults = UserDefaults.standard
+            let encodedData = NSKeyedArchiver.archivedData(withRootObject: newValue)
+            defaults.set(encodedData, forKey: Constants.taglist)
+            defaults.synchronize()
+            
+        }
+    }
+    
     
     
 } // Struct

@@ -298,6 +298,11 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
         containerView.contentOffset = CGPoint(x: pageOffsetForChild(at: currentIndex), y: 0)
         updateContent()
     }
+    
+    open func reloadStripView() {
+        guard isViewLoaded else { return }
+       
+    }
 
     // MARK: - UIScrollDelegate
 
