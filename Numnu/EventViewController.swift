@@ -16,6 +16,9 @@ struct MyVariables {
     static var fetchedLat  = String()
     static var fetchedLong = String()
     static var markerTitle = String()
+    static var link1 = String()
+    static var link2 = String()
+    
 }
 class EventViewController: ButtonBarPagerTabStripViewController {
     var token_str     : String = "empty"
@@ -189,11 +192,14 @@ class EventViewController: ButtonBarPagerTabStripViewController {
         
         if let eventLinkList = response.eventLinkList {
             if  eventLinkList.count > 0 {
-                EventLinkLabel1.text = eventLinkList[0].weblink
+                EventLinkLabel1.text = eventLinkList[0].linktext
+                MyVariables.link1 = eventLinkList[0].weblink!
                 
             }
             if eventLinkList.count > 1 {
-                eventLinkLabel2.text = eventLinkList[1].weblink
+                eventLinkLabel2.text = eventLinkList[1].linktext
+                MyVariables.link2 = eventLinkList[1].weblink!
+
 
             }
         }
@@ -340,13 +346,13 @@ extension EventViewController {
     
     func webLink1(sender:UITapGestureRecognizer) {
     
-        openWebBoard(url: EventLinkLabel1.text!)
+        openWebBoard(url: MyVariables.link1)
 
     }
     
     func webLink2(sender:UITapGestureRecognizer) {
         
-        openWebBoard(url: eventLinkLabel2.text!)
+        openWebBoard(url: MyVariables.link2)
         
     }
     
