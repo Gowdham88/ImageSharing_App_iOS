@@ -259,7 +259,7 @@ struct PrefsManager {
         
         get {
             
-            if checkprefsobject(object: Constants.userCity) {
+            if checkprefsobject(object: Constants.description) {
                 
                 return UserDefaults.standard.string(forKey: Constants.description)!
             } else {
@@ -318,5 +318,26 @@ struct PrefsManager {
             UserDefaults.standard.synchronize()
         }
     }
+    
+//    var eventLinkList : Array<Any> {
+//        
+//        get {
+//            
+//            if checkprefsobject(object: Constants.eventLinkList) {
+//                
+//                return UserDefaults.standard.array(forKey: Constants.eventLinkList)!
+//            } else {
+//                
+//                return ""
+//            }
+//            
+//        }
+//        
+//        set {
+//            
+//            UserDefaults.standard.set(newValue, forKey: Constants.eventLinkList)
+//            UserDefaults.standard.synchronize()
+//        }
+//    }
     
 } // Struct

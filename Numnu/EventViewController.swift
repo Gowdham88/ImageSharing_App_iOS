@@ -11,9 +11,17 @@ import XLPagerTabStrip
 import Alamofire
 import SwiftyJSON
 
+struct MyVariables {
+    
+    static var fetchedLat  = String()
+    static var fetchedLong = String()
+    static var markerTitle = String()
+}
 class EventViewController: ButtonBarPagerTabStripViewController {
-    var token_str : String = "empty"
-    var apiClient : ApiClient!
+    var token_str     : String = "empty"
+    var apiClient     : ApiClient!
+    let textLabel : UILabel = UILabel()
+
 
     @IBOutlet weak var myscrollView: UIScrollView!
     @IBOutlet weak var eventImageView: ImageExtender!
@@ -117,6 +125,20 @@ class EventViewController: ButtonBarPagerTabStripViewController {
         
 //        MethodToCallApi()
 
+//        eventDateLabel.text = (PrefsManager.sharedinstance.startsat)  "-" \ (PrefsManager.sharedinstance.endsat)
+//        let formatter = DateFormatter()
+//        formatter.locale = Locale(identifier: "en_US_POSIX")
+//        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+//        let date = formatter.date(from: "2017-12-07T10:04:10.000Z")
+//        print("date: \(date)")
+//
+//        //                let components = NSDateComponents()
+//        //                let calendarFormat = NSCalendar.current.date(from: components as DateComponents)
+//
+//        formatter.dateFormat = "MMM dd,h:mm a"
+//        let dateString = formatter.string(from: date!)
+//        print("datestring:::::",dateString)
+
 
      
     }
@@ -150,36 +172,92 @@ class EventViewController: ButtonBarPagerTabStripViewController {
         
     }
     func getDetails(response:EventList){
-        if let id = response.id {
-            PrefsManager.sharedinstance.userId = id
-        }
-   
+      
         if let name = response.name {
-            PrefsManager.sharedinstance.name = name
-            eventTitleLabel.text = name
-        }
-        
-        if let description = response.description {
-            PrefsManager.sharedinstance.description = description
-            eventDescriptionLabel.text = description
-        }
-        
-        if let startsat = response.startsat {
-            PrefsManager.sharedinstance.startsat = startsat
+          eventTitleLabel.text = name
             
         }
         
-        if let endsat = response.endsat {
-            PrefsManager.sharedinstance.endsat = endsat
-//            eventDateLabel.text = PrefsManager.sharedinstance.startsat \ PrefsManager.sharedinstance.endsat
+        if let description = response.description {
+            eventDescriptionLabel.text = description
+
         }
         
-    
+        if let startsat = response.startsat {
+            print(startsat)
+            if response.startsat != nil {
+//                eventDateLabel.text = PrefsManager.sharedinstance.startsat + "-" + (PrefsManager.sharedinstance.endsat)
+            }
+        }
+        
+        if let endsat = response.endsat {
+            print(endsat)
+            if response.endsat != nil {
+                
+                
+                let formatter = DateFormatter()
+                formatter.locale = Locale(identifier: "en_US_POSIX")
+                formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                let date = formatter.date(from: endsat)
+                let date2 = formatter.date(from: response.startsat!)
+
+                
+                print("date: \(String(describing: date))")
+                print("date: \(String(describing: date2))")
+
+
+//                let components = NSDateComponents()
+//                let calendarFormat = NSCalendar.current.date(from: components as DateComponents)
+
+                formatter.dateFormat = "MMM dd,h:mm a"
+                let dateString = formatter.string(from: date!)
+                let dateString2 = formatter.string(from: date2!)
+
+                eventDateLabel.text = dateString2 + "-" + dateString
+
+                print("datestring:::::",dateString,dateString2)
+
+            
+            }
+        }
+        
+        
+        if let eventLinkList = response.eventLinkList {
+            if  eventLinkList.count > 0 {
+                EventLinkLabel1.text = eventLinkList[0].weblink
+                
+            }
+            if eventLinkList.count > 1 {
+                eventLinkLabel2.text = eventLinkList[1].weblink
+
+            }
+        }
+ 
+        
+        if let taglist = response.taglist {
+            if taglist.count > 0 {
+                tagarray.removeAll()
+                for item in taglist {
+                    if tagarray != nil {
+                        tagarray.append(item.text_str!)
+                    }
+                }
+                tagViewUpdate()
+            }
+        }
+        
+        if let loclist = response.loclist {
+            if response.loclist != nil {
+                eventPlaceLabel.text    = loclist.name_str
+                MyVariables.fetchedLat  = loclist.lattitude_str!
+                MyVariables.fetchedLong = loclist.longitude_str!
+                MyVariables.markerTitle = loclist.name_str!
+                print("lat and lon values are:::::",MyVariables.fetchedLat,MyVariables.fetchedLong)
+            }
+        }
     }
     
-    
-    
-    
+   
     override func viewWillAppear(_ animated: Bool) {
         let navigationOnTap = UITapGestureRecognizer(target:self,action:#selector(EventViewController.navigationTap))
         self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
@@ -282,12 +360,13 @@ extension EventViewController {
     
     func webLink1(sender:UITapGestureRecognizer) {
     
-        openWebBoard(url: "http://www.totc.ca")
+        openWebBoard(url: EventLinkLabel1.text!)
+
     }
     
     func webLink2(sender:UITapGestureRecognizer) {
         
-        openWebBoard(url: "http://www.totc.ca")
+        openWebBoard(url: eventLinkLabel2.text!)
         
     }
     
@@ -310,7 +389,6 @@ extension EventViewController {
         
         for (i,text) in tagarray.enumerated() {
             
-            let textLabel : UILabel = UILabel()
             let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: text, fontname: "Avenir-Medium", size: 12)
             textLabel.font = UIFont(name: "Avenir-Medium", size: 12)
             textLabel.text = text
@@ -393,6 +471,9 @@ extension EventViewController {
         
         let storyboard      = UIStoryboard(name: Constants.Event, bundle: nil)
         let vc              = storyboard.instantiateViewController(withIdentifier: Constants.MapStoryId) as! EventMapViewController
+//        vc.latitude         = MyVariables.fetchedLat
+//        vc.longtitude       = MyVariables.fetchedLong
+        
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
