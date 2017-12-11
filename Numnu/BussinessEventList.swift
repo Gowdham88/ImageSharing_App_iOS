@@ -21,6 +21,7 @@ struct  BussinessEventList {
     var businessusername   : String?
     var businessuserphone  : String?
     var businessdescription : String?
+    var businessname        : String?
     
     var tagList            :   [TagList]?
     var imgList            :   [ImgList]?
@@ -80,6 +81,12 @@ struct  BussinessEventList {
         if let businessdescription = json["businessdescription"].string {
             
             self.businessdescription = businessdescription
+            
+        }
+        
+        if let businessname = json["businessname"].string {
+            
+            self.businessname = businessname
             
         }
         

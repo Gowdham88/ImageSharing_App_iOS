@@ -101,46 +101,11 @@ class EventViewController: ButtonBarPagerTabStripViewController {
         
         tapRegistration()
         
-        tagViewUpdate()
         
-        eventDescriptionLabel.text = Constants.dummy
-        
-       /****************Checking number of lines************************/
-     
-        if (eventDescriptionLabel.numberOfVisibleLines > 4) {
-            
-            readMoreButton.isHidden = false
-      
-        } else {
-        
-            readMoreButton.isHidden   = true
-            containerViewTop.constant = 8
-            barButtonTop.constant     = 8
-            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
-           
-        }
         apiClient = ApiClient()
         
         getFirebaseToken()
-        
-//        MethodToCallApi()
-
-//        eventDateLabel.text = (PrefsManager.sharedinstance.startsat)  "-" \ (PrefsManager.sharedinstance.endsat)
-//        let formatter = DateFormatter()
-//        formatter.locale = Locale(identifier: "en_US_POSIX")
-//        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-//        let date = formatter.date(from: "2017-12-07T10:04:10.000Z")
-//        print("date: \(date)")
-//
-//        //                let components = NSDateComponents()
-//        //                let calendarFormat = NSCalendar.current.date(from: components as DateComponents)
-//
-//        formatter.dateFormat = "MMM dd,h:mm a"
-//        let dateString = formatter.string(from: date!)
-//        print("datestring:::::",dateString)
-
-
-     
+   
     }
     func getFirebaseToken() {
         
@@ -156,7 +121,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
         
         let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
         
-        apiClient.getEventsDetailsApi(headers: header, completion: { status,Values in
+        apiClient.getEventsDetailsApi(id : 34,headers: header, completion: { status,Values in
             if status == "success" {
                 if let response = Values {
                     self.getDetails(response:response)
@@ -213,7 +178,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
                 let dateString = formatter.string(from: date!)
                 let dateString2 = formatter.string(from: date2!)
 
-                eventDateLabel.text = dateString2 + "-" + dateString
+                eventDateLabel.text = dateString2 + " - " + dateString
 
                 print("datestring:::::",dateString,dateString2)
 
@@ -254,6 +219,21 @@ class EventViewController: ButtonBarPagerTabStripViewController {
                 MyVariables.markerTitle = loclist.name_str!
                 print("lat and lon values are:::::",MyVariables.fetchedLat,MyVariables.fetchedLong)
             }
+        }
+        
+        /****************Checking number of lines************************/
+        
+        if (eventDescriptionLabel.numberOfVisibleLines > 4) {
+            
+            readMoreButton.isHidden = false
+            
+        } else {
+            
+            readMoreButton.isHidden   = true
+            containerViewTop.constant = 8
+            barButtonTop.constant     = 8
+            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
+            
         }
     }
     
