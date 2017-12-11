@@ -55,6 +55,8 @@ class Constants {
     static let Tab5  = "Users"
     static let Tab6  = "Lists"
     static let Tab7  = "Locations"
+    static let Tab8  = "Dummy1"
+    static let Tab9  = "Dummy2"
     
     // Home Tab id
     static let Tabid1  = "EventTab"
@@ -94,6 +96,11 @@ class Constants {
     
     static let loginstatus  = "loginstatus"
 
+
+    static let startsat      = "startsat"
+    static let endsat        = "endsat"
+    static let eventLinkList = "eventLinkList"
+
     static let id           = "id"
     static let useremail    = "useremail"
     static let userName     = "userName"
@@ -105,6 +112,7 @@ class Constants {
     static let userCity     = "userCity"
     static let description  = "description"
     static let taglist      = "taglist"
+
 
     static let dummy   = "This much-talked-about festival brings all your favorite Food Network personalities and celebrity chefs to Miami for five days of events, from intimate dinners cooked by Sean Brock to a late-night Tacos After Dark session with Aarón Sanchez. If you've always dreamed of drinking tiki cocktails with Guy Fieri or having a rosé brunch with Martha Stewart, the South Beach Wine & Food Festival can make your wishes come true."
     
@@ -128,7 +136,7 @@ class Constants {
     
     static let LoginApiUrl = "https://numnu-server-dev.appspot.com/users/signin"
     static let TagApiUrl   = "https://numnu-server-dev.appspot.com/tags"
-    static let EventApiUrl = "https://numnu-server-dev.appspot.com/events"
+    static let EventApiUrl = "https://numnu-server-dev.appspot.com/events/34"
     static let ItemsApiUrl = "https://numnu-server-dev.appspot.com/items"
     static let EventTypeApiUrl = "https://numnu-server-dev.appspot.com/eventtypes"
     

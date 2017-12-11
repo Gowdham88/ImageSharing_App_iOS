@@ -26,6 +26,8 @@ struct  EventList {
     var createdat       : String?
     var updatedat       : String?
     var eventLinkList   : [EventlinkList]?
+    var taglist         : [TagList]?
+    var loclist         : LocList?
     
     
     init?(json: JSON) {
@@ -111,6 +113,30 @@ struct  EventList {
                 
                 
             }
+            
+        }
+        
+        if let tagitems = json["tags"].array {
+            
+            for item in tagitems {
+                
+                 let taglistItem = TagList(array: item)
+                    
+                    if taglist == nil {
+                        taglist = []
+                        
+                    }
+                    
+                    taglist?.append(taglistItem)
+                    
+                }
+            
+        }
+        
+        let jsoncity = JSON(json["location"])
+        if let citylocation = LocList(array: jsoncity) {
+            
+            self.loclist = citylocation
             
         }
         

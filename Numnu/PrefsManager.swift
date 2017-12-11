@@ -259,7 +259,7 @@ struct PrefsManager {
         
         get {
             
-            if checkprefsobject(object: Constants.userCity) {
+            if checkprefsobject(object: Constants.description) {
                 
                 return UserDefaults.standard.string(forKey: Constants.description)!
             } else {
@@ -277,6 +277,48 @@ struct PrefsManager {
         }
     }
     
+
+    var startsat : String {
+        
+        get {
+            
+            if checkprefsobject(object: Constants.startsat) {
+                
+                return UserDefaults.standard.string(forKey: Constants.startsat)!
+            } else {
+                
+                return "empty"
+            }
+            
+        }
+        
+        set {
+            
+            UserDefaults.standard.set(newValue, forKey: Constants.startsat)
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    var endsat : String {
+        
+        get {
+            
+            if checkprefsobject(object: Constants.endsat) {
+                
+                return UserDefaults.standard.string(forKey: Constants.endsat)!
+            } else {
+                
+                return "empty"
+            }
+            
+        } set {
+                
+                
+                UserDefaults.standard.set(newValue, forKey: Constants.endsat)
+                UserDefaults.standard.synchronize()
+            }
+        }
+
     var tagList : [TagList] {
         
         get {
@@ -290,12 +332,10 @@ struct PrefsManager {
             } else {
                 
                 return []
+
             }
-            
-        }
+            } set {
         
-        set {
-            
             let defaults = UserDefaults.standard
             let encodedData = NSKeyedArchiver.archivedData(withRootObject: newValue)
             defaults.set(encodedData, forKey: Constants.taglist)
@@ -304,6 +344,27 @@ struct PrefsManager {
         }
     }
     
+
     
+//    var eventLinkList : Array<Any> {
+//        
+//        get {
+//            
+//            if checkprefsobject(object: Constants.eventLinkList) {
+//                
+//                return UserDefaults.standard.array(forKey: Constants.eventLinkList)!
+//            } else {
+//                
+//                return ""
+//            }
+//            
+//        }
+//        
+//        set {
+//            
+//            UserDefaults.standard.set(newValue, forKey: Constants.eventLinkList)
+//            UserDefaults.standard.synchronize()
+//        }
+//    }
     
 } // Struct
