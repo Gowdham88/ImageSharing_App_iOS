@@ -179,9 +179,9 @@ class  ApiClient {
     }
     
     /************************Event Detail*******************************/
-    func getEventsDetailsApi(headers : HTTPHeaders,completion : @escaping (String,EventList?) -> Void) {
+    func getEventsDetailsApi(id:Int,headers : HTTPHeaders,completion : @escaping (String,EventList?) -> Void) {
         
-        Alamofire.request(Constants.EventApiUrl, encoding: JSONEncoding.default,headers: headers).validate().responseJSON { response in
+        Alamofire.request("\(Constants.EventApiUrl)/\(id)", encoding: JSONEncoding.default,headers: headers).validate().responseJSON { response in
             
             switch response.result {
                 

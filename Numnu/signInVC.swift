@@ -56,8 +56,10 @@ class signInVC: UIViewController, UITextFieldDelegate {
         
     }
     func dismissKeyboard (_ sender: UITapGestureRecognizer) {
+        
         emailAddressTF.resignFirstResponder()
         passwordTF.resignFirstResponder()
+        
     }
     @IBAction func dismissPressed(_ sender: Any) {
         

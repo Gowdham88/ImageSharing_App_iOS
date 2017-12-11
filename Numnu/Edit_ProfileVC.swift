@@ -688,15 +688,20 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             case .success(let upload, _, _):
                 upload.responseString { response in
                     print(response.value ?? "dsdks")
+                    
+                }
+                upload.responseJSON { response in
+                    
                     HUD.hide()
                     
                     if let value = response.result.value {
-                  
+                        
                         let json = JSON(value)
+                        
                         if let imageurl = json["imageurl"].string {
                             
                             completion(imageurl)
-                           
+                            
                         } else {
                             
                             completion(nil)
@@ -704,17 +709,17 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                         
                         
                     } else {
-                       
+                        
                         completion(nil)
                         
                     }
                     
-                    
                 }
+                
             case .failure(let encodingError):
                 print(encodingError)
-                HUD.hide()
                 completion(nil)
+                HUD.hide()
             }
         })
     }
