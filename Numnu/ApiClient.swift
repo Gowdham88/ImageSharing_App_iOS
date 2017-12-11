@@ -11,6 +11,9 @@ import Alamofire
 import SwiftyJSON
 import Firebase
 import FirebaseAuth
+import FirebaseStorage
+
+
 
 class  ApiClient {
     
@@ -255,6 +258,7 @@ class  ApiClient {
                     print(value)
                     
                     let json = JSON(value)
+                    
                     if let userList = UserList(json: json) {
                         
                         completion("success",userList)
@@ -275,11 +279,134 @@ class  ApiClient {
         
     }
     
+    /********************************getBussinessbasedEvent*************************************************/
+    
+    func getBussinessEvent(id : Int,headers : HTTPHeaders,completion : @escaping (String,[BussinessEventList]?)-> Void) {
+        
+        Alamofire.request("\(Constants.EventApiUrl)/\(id)/businesses", method: .get,encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            
+            print(response.request as Any)
+            print(response.result.value as Any)
+            
+            switch response.result {
+                
+            case .success :
+                
+                if let value = response.result.value {
+                    
+                    var bussinessary : [BussinessEventList]?
+                    
+                    let json = JSON(value)
+                    
+                    if let array = json.array {
+                        
+                        for item in array {
+                            
+                            if let list = BussinessEventList(json: item) {
+                                
+                                bussinessary = [BussinessEventList]()
+                                bussinessary?.append(list)
+                                
+                               
+                            }
+                         
+                        }
+                        
+                        completion("success",bussinessary)
+                        
+                    } else {
+                        
+                         completion("success",nil)
+                        
+                    }
+                
+                }
+                
+                
+            case .failure(let error):
+                
+                print(error.localizedDescription)
+                completion(error.localizedDescription,nil)
+                
+                }
+            
+            }
+            
+     }
+        
+    /********************************getItemsbasedid*************************************************/
+    
+    func getItemById(id : Int,headers : HTTPHeaders,completion : @escaping (String,ItemList?)-> Void) {
+        
+        Alamofire.request("\(Constants.ItemsApiUrl)/\(id)", method: .get,encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            
+            print(response.request as Any)
+            print(response.result.value as Any)
+            
+            switch response.result {
+                
+            case .success :
+                
+                if let value = response.result.value {
+                    
+                    let json = JSON(value)
+                    if let itemList = ItemList(json: json) {
+                        
+                        completion("success",itemList)
+                    }
+                  
+                }
+                
+                
+            case .failure(let error):
+                
+                print(error.localizedDescription)
+                completion(error.localizedDescription,nil)
+                
+            }
+            
+        }
+        
+    }
+    
+    /************************Events Api**********************************/
+    func getEventsTypesApi(parameters : Parameters,completion : @escaping (String,EventTypeList?) -> Void) {
+        
+        Alamofire.request(Constants.EventTypeApiUrl, method: .get, parameters: parameters,encoding: JSONEncoding.default).validate().responseJSON { response in
+            
+            switch response.result {
+                
+            case .success:
+                
+                if let value = response.result.value {
+                    
+                    let json = JSON(value)
+                    if let eventList = EventTypeList(json: json) {
+                        
+                        completion("success",eventList)
+                    }
+                    
+                }
+                
+                
+            case .failure(let error):
+                
+                print(error)
+                completion(error.localizedDescription,nil)
+                
+            }
+            
+        }
+        
+    }
+    
+    
+    
     func getFireBaseToken(completion : @escaping (String) -> Void) {
     
      if let currentUser = Auth.auth().currentUser {
         
-        currentUser.getTokenForcingRefresh(true) {idToken, error in
+         currentUser.getTokenForcingRefresh(true) {idToken, error in
             if let error = error {
               print(error.localizedDescription)
                 completion(error.localizedDescription)
@@ -289,15 +416,73 @@ class  ApiClient {
             print(idToken ?? "empty")
             completion(idToken ?? "empty")
           
+         }
+            
+            
+     } else {
+        
+        Auth.auth().signInAnonymously() { (user, error) in
+            
+            if error != nil {
+                
+                completion("empty")
+            }
+            
+            if let annoymususer = user {
+                
+                annoymususer.getTokenForcingRefresh(true) {idToken, error in
+                    if let error = error {
+                        print(error.localizedDescription)
+                        completion(error.localizedDescription)
+                        return;
+                    }
+                    
+                    print(idToken ?? "empty")
+                    completion(idToken ?? "empty")
+                    
+                }
+                
+                
+            } else {
+                
+                completion("empty")
+            }
+            
+            
         }
-            
-            
-        } else {
-        
-        completion("empty")
-        
-      }
+  	
+        }
         
     }
+    
+    func getFireBaseImageUrl(imagepath : String,completion : @escaping (String) -> Void) {
+        
+        // Get a reference to the storage service using the default Firebase App
+        let storage = Storage.storage()
+        
+        // Create a storage reference from our storage service
+        let storageRef = storage.reference()
+        
+        // Create a reference to the file you want to download
+        let starsRef = storageRef.child(imagepath)
+        
+        // Fetch the download URL
+        starsRef.downloadURL { url, error in
+            if let error = error {
+                print(error.localizedDescription)
+                completion("empty")
+                
+            } else {
+                
+                completion((url?.absoluteString)!)
+                
+            }
+        }
+        
+        
+        
+    }
+    
+    
     
 }

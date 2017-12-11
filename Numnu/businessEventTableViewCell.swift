@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Nuke
 
 class businessEventTableViewCell : UITableViewCell {
 
@@ -34,6 +35,28 @@ class businessEventTableViewCell : UITableViewCell {
         eventBusCollectionView.tag        = row
         eventBusCollectionView.reloadData()
         
+    }
+    
+    var item : BussinessEventList! {
+        didSet {
+            eventBusLabel.text = item.businessusername
+            
+            if let userimageList = item.imgList {
+                
+                if userimageList.count > 0 {
+                    
+                    let apiclient = ApiClient()
+                    apiclient.getFireBaseImageUrl(imagepath: userimageList[userimageList.count-1].imageurl_str!, completion: { url in
+                        
+                        Manager.shared.loadImage(with: URL(string : url)!, into: self.eventBusImageView)
+                        
+                    })
+                    
+                }
+                
+            }
+           
+        }
     }
 
 }

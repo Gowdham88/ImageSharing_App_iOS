@@ -23,6 +23,9 @@ class PostDetailViewController : UIViewController {
     @IBOutlet weak var postDEventPlace: UILabel!
     @IBOutlet weak var postDEventDishLabel: UILabel!
     
+    @IBOutlet var itemTap: ImageExtender!
+    @IBOutlet var businessTap: ImageExtender!
+    @IBOutlet var eventTap: ImageExtender!
     
     @IBOutlet weak var dishwidthDConstaint: NSLayoutConstraint!
     @IBOutlet weak var placeWidthDConstraint: NSLayoutConstraint!
@@ -59,9 +62,24 @@ class PostDetailViewController : UIViewController {
         postDEventDishLabel.addGestureRecognizer(posteventdishlabeltap)
         postDEventDishLabel.isUserInteractionEnabled = true
         
+        
+        let userEventTap = UITapGestureRecognizer(target: self, action: #selector(PostDetailViewController.userEventTap))
+        eventTap.addGestureRecognizer(userEventTap)
+        eventTap.isUserInteractionEnabled = true
+        
         let posteventlabeltap = UITapGestureRecognizer(target: self, action: #selector(PostDetailViewController.posteventlabeltap))
         postDEventName.addGestureRecognizer(posteventlabeltap)
         postDEventName.isUserInteractionEnabled = true
+        
+        let userBusiTap = UITapGestureRecognizer(target: self, action: #selector(PostDetailViewController.userBusiTap))
+        businessTap.addGestureRecognizer(userBusiTap)
+        businessTap.isUserInteractionEnabled = true
+        
+        
+        let userItemTap = UITapGestureRecognizer(target: self, action: #selector(PostDetailViewController.userItemTap))
+        itemTap.addGestureRecognizer(userItemTap)
+        itemTap.isUserInteractionEnabled = true
+        
         
         let userimagetap = UITapGestureRecognizer(target: self, action: #selector(PostDetailViewController.postDUserImagetap))
         postDUserImage.addGestureRecognizer(userimagetap)
@@ -102,7 +120,16 @@ class PostDetailViewController : UIViewController {
         let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId)
         self.navigationController!.pushViewController(vc, animated: true)
     }
-   
+    
+    func userItemTap(){
+        
+        let storyboard = UIStoryboard(name: Constants.ItemDetail, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId)
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
+    
+    
+   //business page
     func posteventdishlabeltap(){
         
         let storyboard = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
@@ -110,11 +137,26 @@ class PostDetailViewController : UIViewController {
         self.navigationController!.pushViewController(vc, animated: true)
     }
     
+    //Event tap icon
+    func userEventTap(){
+        
+        let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
+    //Event page ..
     func posteventlabeltap(){
         let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)
         self.navigationController!.pushViewController(vc, animated: true)
        
+    }
+    //business tap icon
+    func userBusiTap(){
+        let storyboard = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId)
+        self.navigationController!.pushViewController(vc, animated: true)
+        
     }
     func imageTapped() {
         let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)

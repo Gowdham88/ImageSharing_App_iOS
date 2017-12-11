@@ -8,6 +8,8 @@
 
 import UIKit
 import XLPagerTabStrip
+import PKHUD
+import Alamofire
 
 protocol  EventTabControllerDelegate {
     
@@ -28,6 +30,11 @@ class EventTabController: UIViewController,IndicatorInfoProvider {
     var viewState     : Bool = false
     var scrolltableview : Bool = true
     
+    /******************Event Api******************************/
+    
+    var apiClient : ApiClient!
+    var eventList = [EventTypeList]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -42,6 +49,11 @@ class EventTabController: UIViewController,IndicatorInfoProvider {
             setNavBar()
             
         }
+        
+        /******************EventList******************************/
+        
+        apiClient = ApiClient()
+        
    
         
     }
@@ -191,6 +203,47 @@ extension EventTabController {
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
+    
+//    func getEvent() {
+//
+//        HUD.show(.progress)
+//
+//        apiClient.getFireBaseToken(completion: { token in
+//
+//            let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
+//
+//            self.apiClient.getBussinessEvent(id: 34, headers: header, completion: { status,bussinesslist in
+//
+//                if status == "success" {
+//
+//                    if let itemlist = bussinesslist {
+//
+//                        self.bussinessList = itemlist
+//                    }
+//
+//                    DispatchQueue.main.async {
+//
+//                        self.businessEventTableView.reloadData()
+//
+//                    }
+//
+//                    self.reloadTable()
+//
+//                } else {
+//
+//                    HUD.hide()
+//                    self.reloadTable()
+//
+//                }
+//
+//
+//            })
+//
+//
+//        })
+//
+//
+//    }
     
     
 }

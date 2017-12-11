@@ -8,6 +8,9 @@
 
 import UIKit
 import XLPagerTabStrip
+import PKHUD
+import Alamofire
+import Nuke
 
 class ItemDetailController : ButtonBarPagerTabStripViewController {
     
@@ -44,6 +47,10 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
     /***************Read more variable*********************/
     
     var isLabelAtMaxHeight = false
+    
+    /**********************************************/
+    
+    var apiClient : ApiClient!
 
     override func viewDidLoad() {
         settings.style.selectedBarHeight = 3.0
@@ -68,10 +75,7 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
             newCell?.label.textColor = UIColor.appBlackColor()
             
         }
-//        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(ItemDetailController.navigationTap))
-//        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
-//        self.navigationController?.navigationBar.isUserInteractionEnabled = true
-        
+
         
         let centerImagetap = UITapGestureRecognizer(target: self, action: #selector(EventViewController.centerImagetap))
         ItImageView.addGestureRecognizer(centerImagetap)
@@ -84,23 +88,12 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
         
         tapRegistration()
         alertTapRegister()
-        tagViewUpdate()
-        entitytagUpdate()
         
-        ItDescriptionLabel.text = Constants.dummy
+      
+        /******************Api**************************/
         
-        /****************Checking number of lines************************/
-        
-        if (ItDescriptionLabel.numberOfVisibleLines > 4) {
-            
-            readMoreButton.isHidden = false
-            
-        } else {
-            
-            readMoreButton.isHidden         = true
-            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: ItDescriptionLabel.frame.width, font: ItDescriptionLabel.font)
-            containerViewTop.constant = 8
-        }
+        apiClient = ApiClient()
+        getItemIdApi()
         
        
 
@@ -387,6 +380,128 @@ extension ItemDetailController : LocationTabControllerDelegate {
         mainContainerViewBottom.constant = 0
     }
   
+    
+}
+
+extension ItemDetailController {
+    
+    func getItemIdApi() {
+        
+        HUD.show(.progress)
+        
+        apiClient.getFireBaseToken(completion: { token in
+            
+            let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
+            
+            self.apiClient.getItemById(id: 115, headers: header, completion: { status,item in
+                
+                if status == "success" {
+                    
+                    HUD.hide()
+                    
+                    if let itemlist = item {
+                        
+                        DispatchQueue.main.async {
+                            
+                            self.getItemDetails(item: itemlist)
+                        }
+                        
+                    }
+                   
+                    
+                } else {
+                    
+                    HUD.hide()
+                   
+                    
+                }
+                
+                
+            })
+            
+            
+        })
+        
+    }
+    
+    func getItemDetails(item : ItemList) {
+        
+        /****************Name************************/
+        
+        if let itemname = item.name {
+            
+            ItTitleLabel.text = itemname
+        
+        }
+        
+        /****************Imagee************************/
+        
+        if let imageList = item.itemImageList {
+            
+            if imageList.count > 0 {
+                
+                if let url = imageList[imageList.count-1].imageurl {
+                    
+                    apiClient.getFireBaseImageUrl(imagepath: url, completion: { imageUrl in
+                        
+                        if imageUrl != "empty" {
+                            
+                            Manager.shared.loadImage(with: URL(string : imageUrl)!, into: self.ItImageView)
+                        }
+                        
+                    })
+                    
+                    
+                }
+      
+                
+            }
+        }
+        
+        /****************Description************************/
+        
+        if let itemDes = item.description {
+            
+            ItDescriptionLabel.text = itemDes
+        }
+        
+        /****************Checking number of lines************************/
+        
+        if (ItDescriptionLabel.numberOfVisibleLines > 4) {
+            
+            readMoreButton.isHidden = false
+            
+        } else {
+            
+            readMoreButton.isHidden         = true
+            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: ItDescriptionLabel.frame.width, font: ItDescriptionLabel.font)
+            containerViewTop.constant = 8
+        }
+        
+         /****************Tags************************/
+        
+        if let itemTag = item.tagList {
+            
+            if itemTag.count > 0 {
+                
+                tagarray.removeAll()
+                
+                for tag in itemTag {
+                    
+                    tagarray.append(tag.text_str ?? "")
+                    
+                }
+                
+                tagViewUpdate()
+                entitytagUpdate()
+            }
+            
+            
+        }
+        
+        
+    }
+    
     
 }
 

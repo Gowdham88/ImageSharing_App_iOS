@@ -13,6 +13,8 @@ import GooglePlaces
 import Alamofire
 import IQKeyboardManagerSwift
 import SwiftyJSON
+import Nuke
+import PKHUD
 
 class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,GMSAutocompleteViewControllerDelegate,UICollectionViewDelegateFlowLayout {
     var dropdownArray = [String] ()
@@ -20,6 +22,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     var tagArray = [String] ()
     var selectedIndex = Int()
     var autocompleteUrls = [String]()
+    var tagArrayList = [TagList]()
     
     @IBOutlet weak var cancelDatePicker: UIButton!
     @IBOutlet weak var addButton: UIButton!
@@ -36,6 +39,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var editButton: UIButton!
     @IBOutlet weak var profileImage: UIImageView!
+    
     
     @IBOutlet weak var nameTextfield: UITextField!
     @IBOutlet weak var emailaddress: UITextField!
@@ -190,9 +194,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         apiClient = ApiClient()
         /************************getFirebaseToken*************************************/
         getFirebaseToken()
-        
         setUserDetails()
-
         
     }
     
@@ -206,15 +208,19 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     //    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
             let navigationOnTap = UITapGestureRecognizer(target:self,action:#selector(EventViewController.navigationTap))
             self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
             self.navigationController?.navigationBar.isUserInteractionEnabled = true
-        
         // Hide the navigation bar on the this view controller
          showPopup(table1: true, table2: true)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
-        
+        if PrefsManager.sharedinstance.isLoginned {
+//            addProfileContainer()
+        } else {
+            if boolForTitle == false {
+                //                addCollectionContainer()
+            }
+        }
     }
     override func viewDidAppear(_ animated: Bool) {
         showPopup(table1: true, table2: true)
@@ -473,11 +479,14 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         dateFormatter.dateFormat = "dd"
         let day: String = dateFormatter.string(from: self.datePicker.date)
         
-        if setdatebirth == false {
+        if setdatebirth {
+            
             dateLabel.text = day
             monthLabel.text = month
             yearLabel.text = year
+            
         }
+        
     }
     func addCollectionContainer(){
         let storyboard        = UIStoryboard(name: Constants.Auth, bundle: nil)
@@ -490,6 +499,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     }
     
     func addProfileContainer(){
+        
         let storyboard        = UIStoryboard(name: Constants.Main, bundle: nil)
         let controller        = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
         controller.delegate   = self
@@ -497,8 +507,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     }
     
     @IBAction func didTappedSave(_ sender: Any) {
-        upload(image: profileImage.image!, completion: { URL in
-        })
+      
         let Email:NSString = emailaddress.text! as NSString
         if nameTextfield.text == "" || emailaddress.text == ""  || cityTextfield.text == "" || genderTextfield.text == "" || usernameTextField.text == ""  {
             AlertProvider.Instance.showAlert(title: "Oops", subtitle: "Fields Cannot be empty", vc: self)
@@ -516,23 +525,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         }
     }
     
-    func upload(image: UIImage, completion: (URL?) -> Void) {
-        guard let data = UIImageJPEGRepresentation(image, 0.9) else {
-            return
-        }
-        Alamofire.upload(multipartFormData: { (form) in
-            form.append(data, withName: "file", fileName: "file.jpg", mimeType: "image/jpg")
-        }, to: "https://numnu-server-dev.appspot.com/users/1/images", encodingCompletion: { result in
-            switch result {
-            case .success(let upload, _, _):
-                upload.responseString { response in
-                    print(response.value)
-                }
-            case .failure(let encodingError):
-                print(encodingError)
-            }
-        })
-    }
+   
     
     // Image Picker //
     @IBAction func editPicture(_ sender: Any) {
@@ -568,7 +561,32 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.profileImage.contentMode = .scaleAspectFill
-            self.profileImage.image = pickedImage
+            
+            /***********************Image upload api*******************************/
+            getFirebaseToken()
+            self.uploadImage(image: pickedImage, id: PrefsManager.sharedinstance.userId, completion: { url in
+                
+                if let url_str = url {
+                    
+                    PrefsManager.sharedinstance.imageURL = url_str
+                    let apiclient : ApiClient = ApiClient()
+                    apiclient.getFireBaseImageUrl(imagepath: url_str, completion: { url in
+                        
+                        if url != "empty" {
+                            
+                            Manager.shared.loadImage(with:URL(string:url)!, into: self.profileImage)
+                            
+                        }
+                        
+                    })
+                    
+                } else {
+                    
+                    AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Image upload failed", vc: self)
+                }
+                
+                
+            })
         }
         dismiss(animated: true, completion: nil)
     }
@@ -657,6 +675,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             cell?.textLabel?.text = tagnamearray[indexPath.row]
             dropdownTableView.transform = CGAffineTransform(scaleX: 1, y: -1)
             cell?.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
+            //            cell?.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1.0)
             cell?.textLabel?.textColor = UIColor(red: 129/255.0, green: 135/255.0, blue: 155/255.0, alpha: 1.0)
             
             return cell!
@@ -905,27 +924,25 @@ extension SettingsEdit_ProfieViewController {
     /*********************************setuserdetails********************************************/
 
     
-    func setUserDetails(){
-
-        nameTextfield.text        = PrefsManager.sharedinstance.name
-        emailaddress.text         = PrefsManager.sharedinstance.userEmail
-        cityTextfield.text        = PrefsManager.sharedinstance.userCity
+    func setUserDetails() {
+        
+        nameTextfield.text = PrefsManager.sharedinstance.name
+        emailaddress.text  = PrefsManager.sharedinstance.userEmail
+        cityTextfield.text = PrefsManager.sharedinstance.userCity
         descriptionTextField.text = PrefsManager.sharedinstance.description
         usernameTextField.text    = PrefsManager.sharedinstance.username
-
+        
         if PrefsManager.sharedinstance.gender == 0 {
-
+            
             genderTextfield.text = "Male"
-
+            
         } else {
-
+            
              genderTextfield.text = "Female"
-
+            
         }
         
-       
             let date = DateFormatterManager.sharedinstance.stringtoDate(format: "yyyy-MM-dd", date: PrefsManager.sharedinstance.dateOfBirth)
-        
             
             if let dateStr = DateFormatterManager.sharedinstance.datetoString(format: "dd", date: date) {
                 
@@ -942,11 +959,96 @@ extension SettingsEdit_ProfieViewController {
             if let yearStr = DateFormatterManager.sharedinstance.datetoString(format: "yyyy", date: date) {
                 
                 yearLabel.text = yearStr
+                
+            }
         
+            let apiclient : ApiClient = ApiClient()
+            apiclient.getFireBaseImageUrl(imagepath: PrefsManager.sharedinstance.imageURL, completion: { url in
+            
+            if url != "empty" {
+                
+                Manager.shared.loadImage(with:URL(string:url)!, into: self.profileImage)
+                
+            }
+            
+           })
+        
+        /**************/
+        tagArray.removeAll()
+        tagArrayList = PrefsManager.sharedinstance.tagList
+        if tagArrayList.count > 0 {
+            
+            for item in tagArrayList {
+                
+                if let tagName = item.text_str {
+                    
+                    tagArray.append(tagName)
+                    
+                }
+                
+            }
+            
+            collectionView.reloadData()
+            
+          }
+        
+        /**********/
+        
+     }
+    
+    func uploadImage(image: UIImage,id : Int, completion:@escaping (String?) -> Void) {
+        
+        guard let data = UIImageJPEGRepresentation(image, 0.9) else {
+            return
         }
-
         
-
+        let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
+        
+        HUD.show(.labeledProgress(title: "Uploading...", subtitle: ""))
+        
+        Alamofire.upload(multipartFormData: { (form) in
+            
+            form.append(data, withName: "file", fileName: "file.jpg", mimeType: "image/jpg")
+            
+        }, to: "https://numnu-server-dev.appspot.com/users/\(id)/images",method: .post, headers: header,encodingCompletion: { result in
+            switch result {
+            case .success(let upload, _, _):
+                upload.responseString { response in
+                    print(response.value ?? "dsdks")
+                    
+                }
+                upload.responseJSON { response in
+                    
+                    HUD.hide()
+                    
+                    if let value = response.result.value {
+                        
+                        let json = JSON(value)
+                        
+                        if let imageurl = json["imageurl"].string {
+                            
+                            completion(imageurl)
+                            
+                        } else {
+                            
+                            completion(nil)
+                        }
+                        
+                        
+                    } else {
+                        
+                        completion(nil)
+                        
+                    }
+                    
+                }
+                
+            case .failure(let encodingError):
+                print(encodingError)
+                completion(nil)
+                HUD.hide()
+            }
+        })
     }
     
     
