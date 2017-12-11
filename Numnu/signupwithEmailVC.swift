@@ -42,33 +42,34 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         passwordReveal.tintColor = UIColor(red: 136/255.0, green: 143/255.0, blue: 158/255.0, alpha: 1.0)
         
         navigationController?.tabBarController?.tabBar.isHidden = true
-
+        IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
         labelcredentials.isHidden = true
         signUpButton.layer.cornerRadius = 25
         signUpButton.clipsToBounds = true
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
-        
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+
        
 //        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
 //        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
 
 
     }
-    func animateViewMoving (up:Bool, moveValue :CGFloat) {
-        
-        let movementDuration:TimeInterval = 0.3
-        let movement:CGFloat = ( up ? -moveValue : moveValue)
-        
-        UIView.beginAnimations("animateView", context: nil)
-        UIView.setAnimationBeginsFromCurrentState(true)
-        UIView.setAnimationDuration(movementDuration)
-        
-        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
-        
-        //        self.view.frame = offsetBy(self.view.frame, 0, movement)
-        
-        UIView.commitAnimations()
-    }
+//    func animateViewMoving (up:Bool, moveValue :CGFloat) {
+//
+//        let movementDuration:TimeInterval = 0.3
+//        let movement:CGFloat = ( up ? -moveValue : moveValue)
+//
+//        UIView.beginAnimations("animateView", context: nil)
+//        UIView.setAnimationBeginsFromCurrentState(true)
+//        UIView.setAnimationDuration(movementDuration)
+//
+//        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+//
+//        //        self.view.frame = offsetBy(self.view.frame, 0, movement)
+//
+//        UIView.commitAnimations()
+//    }
     
     var iconClick = Bool()
     
@@ -126,6 +127,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
+        
         if textField == emailTextfield {
             emailtitleLAbel.textColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
             emailLineView.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
@@ -139,8 +141,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
         
-        textField.resignFirstResponder()
-        animateViewMoving(up: false, moveValue: 0)
+//        animateViewMoving(up: false, moveValue: 0)
         if textField == emailTextfield {
             emailtitleLAbel.textColor = UIColor(red: 129/255.0, green: 125/255.0, blue: 144/255.0, alpha: 1.0)
             emailLineView.backgroundColor = UIColor(red: 229/255.0, green: 229/255.0, blue: 229/255.0, alpha: 1.0)
@@ -148,6 +149,8 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
             passwordtitleLabel.textColor = UIColor(red: 129/255.0, green: 125/255.0, blue: 144/255.0, alpha: 1.0)
             passwordLineView.backgroundColor = UIColor(red: 229/255.0, green: 229/255.0, blue: 229/255.0, alpha: 1.0)
         }
+//        textField.resignFirstResponder()
+
 
     }
     @IBAction func signupPressed(_ sender: Any) {
@@ -260,9 +263,12 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         super.viewWillAppear(animated)
         
         // Hide the navigation bar on the this view controller
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
-    
+    override func viewDidLayoutSubviews() {
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+
+    }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         

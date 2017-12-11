@@ -457,8 +457,7 @@ extension EventViewController {
         
         let storyboard      = UIStoryboard(name: Constants.Event, bundle: nil)
         let vc              = storyboard.instantiateViewController(withIdentifier: Constants.MapStoryId) as! EventMapViewController
-//        vc.latitude         = MyVariables.fetchedLat
-//        vc.longtitude       = MyVariables.fetchedLong
+
         
         self.navigationController!.pushViewController(vc, animated: true)
         
