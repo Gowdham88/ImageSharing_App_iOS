@@ -9,6 +9,7 @@
 import UIKit
 import XLPagerTabStrip
 import Alamofire
+import PKHUD
 
 protocol  BusinessEventViewControllerDelegate {
     
@@ -43,15 +44,15 @@ class BusinessEventViewController: UIViewController,IndicatorInfoProvider {
         businessCategoryTableView.dataSource = self
         businessCategoryTableView.reloadData()
         
-        let when = DispatchTime.now() + 1
-        DispatchQueue.main.asyncAfter(deadline: when) {
-            
-            self.businesdelegate?.BusinessTableHeight(height: self.businessEventTableView.contentSize.height)
-        }
-        
         apiClient = ApiClient()
         getBussinessevent()
        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        reloadTable()
     }
   
     override func viewDidAppear(_ animated: Bool) {
@@ -214,7 +215,9 @@ extension BusinessEventViewController : UICollectionViewDelegate,UICollectionVie
 
 extension BusinessEventViewController {
     
-    func getBussinessevent(){
+    func getBussinessevent() {
+        
+        HUD.show(.progress)
         
         apiClient.getFireBaseToken(completion: { token in
             
@@ -232,17 +235,15 @@ extension BusinessEventViewController {
                     DispatchQueue.main.async {
                         
                         self.businessEventTableView.reloadData()
-                    }
-                    
-                    let when = DispatchTime.now() + 1
-                    DispatchQueue.main.asyncAfter(deadline: when) {
                         
-                        self.businesdelegate?.BusinessTableHeight(height: self.businessEventTableView.contentSize.height)
                     }
+                  
+                    self.reloadTable()
                     
                 } else {
                     
-                    
+                    HUD.hide()
+                    self.reloadTable()
                     
                 }
                 
@@ -256,6 +257,18 @@ extension BusinessEventViewController {
     }
     
     
+    func reloadTable(){
+        
+        let when = DispatchTime.now() + 1
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            
+            self.businesdelegate?.BusinessTableHeight(height: self.businessEventTableView.contentSize.height)
+            HUD.hide()
+        }
+            
+        
+        
+    }
     
     
 }

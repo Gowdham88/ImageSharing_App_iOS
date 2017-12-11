@@ -74,7 +74,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
     @IBAction func signinPressed(_ sender: Any) {
         
         if self.currentReachabilityStatus != .notReachable {
-            HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
+            
 
               login()
             
@@ -93,9 +93,11 @@ class signInVC: UIViewController, UITextFieldDelegate {
             
            if ValidationHelper.Instance.isValidEmail(email:email) && pwd.count > 2 {
             
+            HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
+            
             Auth.auth().signIn(withEmail: email, password: pwd, completion: { (user, error) in
                 
-                HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
+                
                 print(error.debugDescription)
                 
                 if user != nil {
@@ -283,6 +285,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
                         return
                     }
         
+                    HUD.hide()
                     self.getFirebaseToken()
                    
                 })
@@ -304,6 +307,8 @@ class signInVC: UIViewController, UITextFieldDelegate {
 extension signInVC {
    
     func userLoginApi() {
+        
+        HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
         
         let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
         let loginRequest : ApiClient  = ApiClient()

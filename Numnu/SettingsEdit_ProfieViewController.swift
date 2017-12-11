@@ -14,6 +14,7 @@ import Alamofire
 import IQKeyboardManagerSwift
 import SwiftyJSON
 import Nuke
+import PKHUD
 
 class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,GMSAutocompleteViewControllerDelegate,UICollectionViewDelegateFlowLayout {
     var dropdownArray = [String] ()
@@ -945,8 +946,6 @@ extension SettingsEdit_ProfieViewController {
             
             if let dateStr = DateFormatterManager.sharedinstance.datetoString(format: "dd", date: date) {
                 
-               
-                
                 dateLabel.text = dateStr
                 
             }
@@ -998,11 +997,14 @@ extension SettingsEdit_ProfieViewController {
      }
     
     func uploadImage(image: UIImage,id : Int, completion:@escaping (String?) -> Void) {
+        
         guard let data = UIImageJPEGRepresentation(image, 0.9) else {
             return
         }
         
         let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
+        
+        HUD.show(.labeledProgress(title: "Uploading...", subtitle: ""))
         
         Alamofire.upload(multipartFormData: { (form) in
             
@@ -1014,11 +1016,10 @@ extension SettingsEdit_ProfieViewController {
                 upload.responseString { response in
                     print(response.value ?? "dsdks")
                     
-                    
-                    
-                    
                 }
                 upload.responseJSON { response in
+                    
+                    HUD.hide()
                     
                     if let value = response.result.value {
                         
@@ -1045,6 +1046,7 @@ extension SettingsEdit_ProfieViewController {
             case .failure(let encodingError):
                 print(encodingError)
                 completion(nil)
+                HUD.hide()
             }
         })
     }

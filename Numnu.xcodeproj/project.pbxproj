@@ -72,6 +72,8 @@
 		B4470EE11FBEE0AC00DC2625 /* AlertProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4470EE01FBEE0AC00DC2625 /* AlertProvider.swift */; };
 		B4470EE31FBEEACC00DC2625 /* ValidationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4470EE21FBEEACC00DC2625 /* ValidationHelper.swift */; };
 		B4470EE51FBEF0B300DC2625 /* PrefsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4470EE41FBEF0B300DC2625 /* PrefsManager.swift */; };
+		B4483EFE1FDEA4CA00D99E0E /* EventTypeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4483EFD1FDEA4CA00D99E0E /* EventTypeList.swift */; };
+		B4483F001FDEA4E500D99E0E /* EventTypeListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4483EFF1FDEA4E500D99E0E /* EventTypeListItem.swift */; };
 		B44E1D4C1FA1B21D001F754E /* BusinessEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44E1D4B1FA1B21D001F754E /* BusinessEventViewController.swift */; };
 		B44E1D4E1FA1B249001F754E /* MenuEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44E1D4D1FA1B249001F754E /* MenuEventViewController.swift */; };
 		B44E1D511FA1B3ED001F754E /* businessEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44E1D501FA1B3ED001F754E /* businessEventTableViewCell.swift */; };
@@ -220,6 +222,8 @@
 		B4470EE01FBEE0AC00DC2625 /* AlertProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertProvider.swift; sourceTree = "<group>"; };
 		B4470EE21FBEEACC00DC2625 /* ValidationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationHelper.swift; sourceTree = "<group>"; };
 		B4470EE41FBEF0B300DC2625 /* PrefsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefsManager.swift; sourceTree = "<group>"; };
+		B4483EFD1FDEA4CA00D99E0E /* EventTypeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTypeList.swift; sourceTree = "<group>"; };
+		B4483EFF1FDEA4E500D99E0E /* EventTypeListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTypeListItem.swift; sourceTree = "<group>"; };
 		B44E1D4B1FA1B21D001F754E /* BusinessEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessEventViewController.swift; sourceTree = "<group>"; };
 		B44E1D4D1FA1B249001F754E /* MenuEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuEventViewController.swift; sourceTree = "<group>"; };
 		B44E1D501FA1B3ED001F754E /* businessEventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = businessEventTableViewCell.swift; sourceTree = "<group>"; };
@@ -449,6 +453,15 @@
 			name = LocationDetailController;
 			sourceTree = "<group>";
 		};
+		B4483EFC1FDEA3FD00D99E0E /* TabModel */ = {
+			isa = PBXGroup;
+			children = (
+				B4483EFD1FDEA4CA00D99E0E /* EventTypeList.swift */,
+				B4483EFF1FDEA4E500D99E0E /* EventTypeListItem.swift */,
+			);
+			name = TabModel;
+			sourceTree = "<group>";
+		};
 		B44E1D4A1FA1B1DF001F754E /* EventTabControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -560,6 +573,7 @@
 		B4BD9EEB1F6FA54400C43182 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B4483EFC1FDEA3FD00D99E0E /* TabModel */,
 				601D46781F8F3B1C00832BDD /* UserList.swift */,
 				6FC0A9C21FCEA1F500D91B0C /* ImgList.swift */,
 				6FC0A9C41FCEAEE300D91B0C /* LocList.swift */,
@@ -972,6 +986,7 @@
 				601D46791F8F3B1C00832BDD /* UserList.swift in Sources */,
 				B49ABD8C1F9F28690091C5D1 /* EventDefaulCollectionCell2.swift in Sources */,
 				6FEB33851FC42BF300E13505 /* EventlinkList.swift in Sources */,
+				B4483F001FDEA4E500D99E0E /* EventTypeListItem.swift in Sources */,
 				B41842391F8FCBF100CBBA57 /* Edit_ProfileVC.swift in Sources */,
 				3FC6CEBA1F6F744700DF2A12 /* AppDelegate.swift in Sources */,
 				B43F16CB1FC4364200BBBF87 /* EventModelList.swift in Sources */,
@@ -1002,6 +1017,7 @@
 				B4470EE11FBEE0AC00DC2625 /* AlertProvider.swift in Sources */,
 				B418423F1F8FD1B000CBBA57 /* NotificationsVC.swift in Sources */,
 				B44E1D551FA1CF00001F754E /* BusinessCategoryEventViewCellTableViewCell.swift in Sources */,
+				B4483EFE1FDEA4CA00D99E0E /* EventTypeList.swift in Sources */,
 				B42201B21F8E661E0058A4ED /* ImageExtender.swift in Sources */,
 				3F0006491FD6CDBB0098B132 /* Package.swift in Sources */,
 				B45CD8721F9CDA99009262B8 /* UILabel.swift in Sources */,

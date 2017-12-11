@@ -52,13 +52,8 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         userImage.layer.cornerRadius = self.userImage.frame.size.height/2
         userImage.clipsToBounds = true
         alertTapRegister()
-        /***********************Setuserdetails****************************/
-        setUserDetails()
-        
-        
-//        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(Edit_ProfileVC.navigationTap))
-//        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
-//        self.navigationController?.navigationBar.isUserInteractionEnabled = true
+       
+    
     }
     func navigationTap(){
         let offset = CGPoint(x: 0,y :0)
@@ -73,6 +68,9 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
             self.navigationController?.navigationBar.isUserInteractionEnabled = true
         // Hide the navigation bar on the this view controller
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        
+        /***********************Setuserdetails****************************/
+        setUserDetails()
     }
     
     func setNavBar() {

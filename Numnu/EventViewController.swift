@@ -161,8 +161,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
         super.viewDidAppear(true)
         
         self.tabBarController?.tabBar.isHidden = false
-        
-       
+     
     }
     
 
