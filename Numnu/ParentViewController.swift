@@ -93,7 +93,7 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        reloadPagerTabStripView()
+        reloadStripView()
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -117,11 +117,11 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        reloadPagerTabStripView()
+        reloadStripView()
     }
     
     
-    func centerImagetap(){
+    func centerImagetap() {
         
         let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: "PostImageZoomViewController")

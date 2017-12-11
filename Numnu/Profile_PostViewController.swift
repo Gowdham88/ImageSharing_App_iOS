@@ -8,6 +8,7 @@
 
 import UIKit
 import PKHUD
+import Nuke
 
 protocol Profile_PostViewControllerDelegae {
     
@@ -51,12 +52,8 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         userImage.layer.cornerRadius = self.userImage.frame.size.height/2
         userImage.clipsToBounds = true
         alertTapRegister()
-        /***********************Setuserdetails****************************/
-        setUserDetails()
-        
-//        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(Edit_ProfileVC.navigationTap))
-//        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
-//        self.navigationController?.navigationBar.isUserInteractionEnabled = true
+       
+    
     }
     func navigationTap(){
         let offset = CGPoint(x: 0,y :0)
@@ -71,6 +68,9 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
             self.navigationController?.navigationBar.isUserInteractionEnabled = true
         // Hide the navigation bar on the this view controller
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        
+        /***********************Setuserdetails****************************/
+        setUserDetails()
     }
     
     func setNavBar() {
@@ -249,7 +249,22 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         userNamelabel.text = PrefsManager.sharedinstance.username
         addressLabel.text  = PrefsManager.sharedinstance.userCity
         descriptionlabel.text = PrefsManager.sharedinstance.description
+        print(PrefsManager.sharedinstance.tagList)
+        itemArray  = PrefsManager.sharedinstance.tagList
+        collectionView.reloadData()
         
+        let apiclient : ApiClient = ApiClient()
+        apiclient.getFireBaseImageUrl(imagepath: PrefsManager.sharedinstance.imageURL, completion: { url in
+            
+            if url != "empty" {
+                
+                Manager.shared.loadImage(with:URL(string:url)!, into: self.userImage)
+                
+            }
+            
+            
+        })
+       
     }
 
 }

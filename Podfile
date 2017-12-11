@@ -9,7 +9,8 @@ target 'Numnu' do
   pod 'Firebase/Auth'
   pod 'Firebase/Core'
   pod 'Firebase/Database'
-  pod 'Nuke', '~> 4.0'
+  pod 'Firebase/Storage'
+  pod 'Nuke', '~> 5.0'
   pod 'Toucan'
   pod 'PKHUD', '~> 4.0’
   pod 'XLPagerTabStrip'

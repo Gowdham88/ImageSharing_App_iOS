@@ -259,43 +259,47 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         let offset = CGPoint(x: 0,y :0)
         myscrollView.setContentOffset(offset, animated: true)
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if boolForTitle == false {
+            if PrefsManager.sharedinstance.isLoginned {
+                
+                addProfileContainer()
+                
+            } else {
+                
+                addCollectionContainer()
+                
+                /*************************getting location******************************/
+                locationManager = CLLocationManager()
+                locationManager.desiredAccuracy = kCLLocationAccuracyBest
+                locationManager.requestAlwaysAuthorization()
+                locationManager.requestWhenInUseAuthorization()
+                
+                if CLLocationManager.locationServicesEnabled()
+                {
+                    locationManager.distanceFilter = 50
+                    locationManager.startUpdatingLocation()
+                    locationManager.delegate = self
+                    
+                }
+                
+            }
+        }
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        PrefsManager.sharedinstance.isLoginned = false
-        
-            let navigationOnTap = UITapGestureRecognizer(target:self,action:#selector(EventViewController.navigationTap))
-            self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
-            self.navigationController?.navigationBar.isUserInteractionEnabled = true
+       
+        let navigationOnTap = UITapGestureRecognizer(target:self,action:#selector(EventViewController.navigationTap))
+        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+        self.navigationController?.navigationBar.isUserInteractionEnabled = true
         // Hide the navigation bar on the this view controller
         showPopup(table1: true, table2: true)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
         
-        if boolForTitle == false {
-        if PrefsManager.sharedinstance.isLoginned {
-            
-                addProfileContainer()
-            
-        } else {
         
-            addCollectionContainer()
-        
-        /*************************getting location******************************/
-        locationManager = CLLocationManager()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestAlwaysAuthorization()
-        locationManager.requestWhenInUseAuthorization()
-        
-        if CLLocationManager.locationServicesEnabled()
-        {
-            locationManager.distanceFilter = 50
-            locationManager.startUpdatingLocation()
-            locationManager.delegate = self
-            
-        }
-
-           }
-        }
     }
     override func viewDidAppear(_ animated: Bool) {
        showPopup(table1: true, table2: true)
@@ -634,7 +638,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     @IBAction func didTappedSave(_ sender: Any) {
         
-       
+       if self.currentReachabilityStatus != .notReachable {
         
         let Email:NSString = emailaddress.text! as NSString
         if nameTextfield.text == "" || emailaddress.text == ""  || cityTextfield.text == "" || genderTextfield.text == "" || usernameTextField.text == ""  {
@@ -659,6 +663,12 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 AlertProvider.Instance.showAlert(title: "Oops", subtitle: "Please Enter Valid Email ID", vc: self)
             }
         }
+        
+       } else {
+        
+          AlertProvider.Instance.showInternetAlert(vc: self)
+        
+       }
     }
     
     func uploadImage(image: UIImage,id : Int, completion:@escaping (String?) -> Void) {
@@ -667,6 +677,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         }
         
         let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
+        HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
         
         Alamofire.upload(multipartFormData: { (form) in
             
@@ -677,6 +688,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             case .success(let upload, _, _):
                 upload.responseString { response in
                     print(response.value ?? "dsdks")
+                    HUD.hide()
                     
                     if let value = response.result.value {
                   
@@ -692,7 +704,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                         
                         
                     } else {
-                        
+                       
                         completion(nil)
                         
                     }
@@ -701,6 +713,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 }
             case .failure(let encodingError):
                 print(encodingError)
+                HUD.hide()
                 completion(nil)
             }
         })
@@ -1052,6 +1065,8 @@ extension Edit_ProfileVC {
             gender = 1
             
         }
+        
+        HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
       
         let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
         let parameters: Parameters = ["username": usernameTextField.text!, "name":nameTextfield.text! , "description" : descriptionTextfield.text! ,"firebaseuid" : firebaseid,"dateofbirth": birthdate, "gender": gender as Int,"tags":tagsDictonary,"isbusinessuser": false as Bool,"email": emailaddress.text! ,"citylocation":cityDictonary! ,"clientip": clientIp, "clientapp": Constants.clientApp]
@@ -1059,6 +1074,8 @@ extension Edit_ProfileVC {
         apiClient.completeSignup(parameters: parameters,headers: header,completion:{status, Values in
             
             if status == "success" {
+                
+                HUD.hide()
                 
                 if let user = Values {
                     
@@ -1083,10 +1100,18 @@ extension Edit_ProfileVC {
                         
                     })
                    
+                } else {
+                    
+                    HUD.hide()
+                    AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Signup failed", vc: self)
+                    
                 }
           
                
             } else {
+                
+                HUD.hide()
+                AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Signup failed", vc: self)
                 
             }
         })
@@ -1143,6 +1168,8 @@ extension Edit_ProfileVC {
             PrefsManager.sharedinstance.userEmail = userEmail
             
         }
+        
+        PrefsManager.sharedinstance.isLoginned = true
     
     }
     

@@ -9,13 +9,31 @@
 import Foundation
 import SwiftyJSON
 
-class TagList {
+class TagList: NSObject,NSCoding {
+    
+    public func encode(with aCoder: NSCoder) {
+        
+        aCoder.encode(id_str,   forKey: "id_str")
+        aCoder.encode(text_str, forKey: "text_str")
+    
+    }
     
     var id    : [Int]?
     var text  : [String]?
     
     var id_str   : Int?
     var text_str : String?
+    
+    override init() {
+        
+    }
+    
+    init(id_str : Int, text_str : String) {
+        
+        self.id_str     = id_str
+        self.text_str   = text_str
+     
+    }
     
     /***************Tag Auto complete Api**********************/
   
@@ -64,6 +82,12 @@ class TagList {
     }
     
     
-    
-
+    required convenience init(coder aDecoder: NSCoder) {
+        
+        let id_str      = aDecoder.decodeObject(forKey: "id_str") as! Int
+        let text_str    = aDecoder.decodeObject(forKey: "text_str") as! String
+        self.init(id_str: id_str, text_str: text_str)
+        
+    }
+  
 }

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-struct  EventList{
+struct  EventList {
     
     var id              : Int?
     var businessuserid  : Int?

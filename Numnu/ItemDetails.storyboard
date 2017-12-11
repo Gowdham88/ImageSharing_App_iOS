@@ -167,10 +167,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hPy-br-hTK">
-                                                <rect key="frame" x="0.0" y="484" width="320" height="666"/>
+                                                <rect key="frame" x="0.0" y="480.5" width="320" height="669.5"/>
                                             </scrollView>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5Zj-U8-6qn" customClass="ButtonBarView" customModule="XLPagerTabStrip">
-                                                <rect key="frame" x="0.0" y="484" width="320" height="64"/>
+                                                <rect key="frame" x="0.0" y="480.5" width="320" height="64"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="64" id="Zmi-ki-BR8"/>
@@ -211,9 +211,9 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rgb-xP-UYt">
-                                                <rect key="frame" x="10" y="261" width="300" height="75"/>
+                                                <rect key="frame" x="10" y="261" width="300" height="71.5"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="75" id="UIp-wp-ThP"/>
+                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="75" id="UIp-wp-ThP"/>
                                                 </constraints>
                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolfdfdfdfdfdfdfdfdfdfdfdf fdfdf</string>
                                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="13"/>
@@ -221,7 +221,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OSA-us-qK6">
-                                                <rect key="frame" x="10" y="336" width="300" height="22"/>
+                                                <rect key="frame" x="10" y="332.5" width="300" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="22" id="ycp-gd-gid"/>
                                                 </constraints>
@@ -234,7 +234,7 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xAC-LR-yqq">
-                                                <rect key="frame" x="0.0" y="374" width="320" height="100"/>
+                                                <rect key="frame" x="0.0" y="370.5" width="320" height="100"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2" translatesAutoresizingMaskIntoConstraints="NO" id="lSM-Je-UDZ" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
                                                         <rect key="frame" x="8" y="10" width="80" height="80"/>
@@ -361,8 +361,8 @@
                                     <constraint firstItem="q7q-vD-aPP" firstAttribute="leading" secondItem="VRI-eP-ARI" secondAttribute="leading" id="wt5-hA-z6w"/>
                                 </constraints>
                             </scrollView>
-                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EK7-jI-jXn">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="1100"/>
+                            <view alpha="0.0" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EK7-jI-jXn">
+                                <rect key="frame" x="400" y="0.0" width="320" height="1100"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fph-GD-sXd">
                                         <rect key="frame" x="0.0" y="970" width="320" height="130"/>

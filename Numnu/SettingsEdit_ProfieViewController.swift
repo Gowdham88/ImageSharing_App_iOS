@@ -13,6 +13,8 @@ import GooglePlaces
 import Alamofire
 import IQKeyboardManagerSwift
 import SwiftyJSON
+import Nuke
+import PKHUD
 
 class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,GMSAutocompleteViewControllerDelegate,UICollectionViewDelegateFlowLayout {
     var dropdownArray = [String] ()
@@ -20,6 +22,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     var tagArray = [String] ()
     var selectedIndex = Int()
     var autocompleteUrls = [String]()
+    var tagArrayList = [TagList]()
     
     @IBOutlet weak var cancelDatePicker: UIButton!
     @IBOutlet weak var addButton: UIButton!
@@ -36,6 +39,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var editButton: UIButton!
     @IBOutlet weak var profileImage: UIImageView!
+    
     
     @IBOutlet weak var nameTextfield: UITextField!
     @IBOutlet weak var emailaddress: UITextField!
@@ -503,8 +507,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     }
     
     @IBAction func didTappedSave(_ sender: Any) {
-        upload(image: profileImage.image!, completion: { URL in
-        })
+      
         let Email:NSString = emailaddress.text! as NSString
         if nameTextfield.text == "" || emailaddress.text == ""  || cityTextfield.text == "" || genderTextfield.text == "" || usernameTextField.text == ""  {
             AlertProvider.Instance.showAlert(title: "Oops", subtitle: "Fields Cannot be empty", vc: self)
@@ -522,23 +525,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         }
     }
     
-    func upload(image: UIImage, completion: (URL?) -> Void) {
-        guard let data = UIImageJPEGRepresentation(image, 0.9) else {
-            return
-        }
-        Alamofire.upload(multipartFormData: { (form) in
-            form.append(data, withName: "file", fileName: "file.jpg", mimeType: "image/jpg")
-        }, to: "https://numnu-server-dev.appspot.com/users/1/images", encodingCompletion: { result in
-            switch result {
-            case .success(let upload, _, _):
-                upload.responseString { response in
-                    print(response.value)
-                }
-            case .failure(let encodingError):
-                print(encodingError)
-            }
-        })
-    }
+   
     
     // Image Picker //
     @IBAction func editPicture(_ sender: Any) {
@@ -574,7 +561,32 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.profileImage.contentMode = .scaleAspectFill
-            self.profileImage.image = pickedImage
+            
+            /***********************Image upload api*******************************/
+            getFirebaseToken()
+            self.uploadImage(image: pickedImage, id: PrefsManager.sharedinstance.userId, completion: { url in
+                
+                if let url_str = url {
+                    
+                    PrefsManager.sharedinstance.imageURL = url_str
+                    let apiclient : ApiClient = ApiClient()
+                    apiclient.getFireBaseImageUrl(imagepath: url_str, completion: { url in
+                        
+                        if url != "empty" {
+                            
+                            Manager.shared.loadImage(with:URL(string:url)!, into: self.profileImage)
+                            
+                        }
+                        
+                    })
+                    
+                } else {
+                    
+                    AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Image upload failed", vc: self)
+                }
+                
+                
+            })
         }
         dismiss(animated: true, completion: nil)
     }
@@ -912,7 +924,7 @@ extension SettingsEdit_ProfieViewController {
     /*********************************setuserdetails********************************************/
 
     
-    func setUserDetails(){
+    func setUserDetails() {
         
         nameTextfield.text = PrefsManager.sharedinstance.name
         emailaddress.text  = PrefsManager.sharedinstance.userEmail
@@ -934,8 +946,6 @@ extension SettingsEdit_ProfieViewController {
             
             if let dateStr = DateFormatterManager.sharedinstance.datetoString(format: "dd", date: date) {
                 
-               
-                
                 dateLabel.text = dateStr
                 
             }
@@ -951,10 +961,94 @@ extension SettingsEdit_ProfieViewController {
                 yearLabel.text = yearStr
                 
             }
-            
-            
         
+            let apiclient : ApiClient = ApiClient()
+            apiclient.getFireBaseImageUrl(imagepath: PrefsManager.sharedinstance.imageURL, completion: { url in
+            
+            if url != "empty" {
+                
+                Manager.shared.loadImage(with:URL(string:url)!, into: self.profileImage)
+                
+            }
+            
+           })
         
+        /**************/
+        tagArray.removeAll()
+        tagArrayList = PrefsManager.sharedinstance.tagList
+        if tagArrayList.count > 0 {
+            
+            for item in tagArrayList {
+                
+                if let tagName = item.text_str {
+                    
+                    tagArray.append(tagName)
+                    
+                }
+                
+            }
+            
+            collectionView.reloadData()
+            
+          }
+        
+        /**********/
+        
+     }
+    
+    func uploadImage(image: UIImage,id : Int, completion:@escaping (String?) -> Void) {
+        
+        guard let data = UIImageJPEGRepresentation(image, 0.9) else {
+            return
+        }
+        
+        let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
+        
+        HUD.show(.labeledProgress(title: "Uploading...", subtitle: ""))
+        
+        Alamofire.upload(multipartFormData: { (form) in
+            
+            form.append(data, withName: "file", fileName: "file.jpg", mimeType: "image/jpg")
+            
+        }, to: "https://numnu-server-dev.appspot.com/users/\(id)/images",method: .post, headers: header,encodingCompletion: { result in
+            switch result {
+            case .success(let upload, _, _):
+                upload.responseString { response in
+                    print(response.value ?? "dsdks")
+                    
+                }
+                upload.responseJSON { response in
+                    
+                    HUD.hide()
+                    
+                    if let value = response.result.value {
+                        
+                        let json = JSON(value)
+                        
+                        if let imageurl = json["imageurl"].string {
+                            
+                            completion(imageurl)
+                            
+                        } else {
+                            
+                            completion(nil)
+                        }
+                        
+                        
+                    } else {
+                        
+                        completion(nil)
+                        
+                    }
+                    
+                }
+                
+            case .failure(let encodingError):
+                print(encodingError)
+                completion(nil)
+                HUD.hide()
+            }
+        })
     }
     
     

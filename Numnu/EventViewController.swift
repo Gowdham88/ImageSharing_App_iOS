@@ -51,8 +51,9 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     
     override func viewDidLoad() {
         settings.style.selectedBarHeight = 3.0
-         settings.style.buttonBarItemFont = UIFont(name: "Avenir-Medium", size: 14)!
-        super.viewDidLoad()
+        settings.style.buttonBarItemFont = UIFont(name: "Avenir-Medium", size: 14)!
+        settings.style.buttonBarItemsShouldFillAvailiableWidth = true
+       super.viewDidLoad()
         myscrollView.delegate = self
         settings.style.buttonBarBackgroundColor = .white
         settings.style.buttonBarItemBackgroundColor = .white
@@ -60,20 +61,16 @@ class EventViewController: ButtonBarPagerTabStripViewController {
         
         settings.style.buttonBarMinimumLineSpacing = 0
         settings.style.buttonBarItemTitleColor = .black
-        settings.style.buttonBarItemsShouldFillAvailiableWidth = true
-        settings.style.buttonBarLeftContentInset = 0
-        settings.style.buttonBarRightContentInset = 0
         settings.style.buttonBarHeight = 1
         buttonBarView.selectedBar.backgroundColor = UIColor.appThemeColor()
-        buttonBarView.moveTo(index: 0, animated: true, swipeDirection: .none, pagerScroll: .yes)
+        
         
         changeCurrentIndexProgressive = { [weak self] (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
             guard changeCurrentIndex == true else { return }
             oldCell?.label.textColor = UIColor.textlightDark()
             newCell?.label.textColor = UIColor.appBlackColor()
          
-          
-          
+       
             
         }
        
@@ -110,6 +107,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
            
         }
         
+       
         
         
         
@@ -155,15 +153,15 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        reloadPagerTabStripView()
+        reloadStripView()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
         self.tabBarController?.tabBar.isHidden = false
-        
-       
+     
     }
     
 
