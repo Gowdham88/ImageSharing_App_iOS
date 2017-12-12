@@ -262,7 +262,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+
         if boolForTitle == false {
             if PrefsManager.sharedinstance.isLoginned {
                 
