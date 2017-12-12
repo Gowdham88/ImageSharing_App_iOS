@@ -29,6 +29,7 @@ class DateFormatterManager: NSObject {
     func stringtoDate(format : String,date : String) -> Date {
         
         dateformat.dateFormat = format
+    
         
         if let dateCon = dateformat.date(from: date) {
             
