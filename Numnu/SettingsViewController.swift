@@ -116,6 +116,7 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
             
             DBProvider.Instance.firebaseLogout()
             delegate?.logout()
+            PrefsManager.sharedinstance.isLoginned = false
             _ = self.navigationController?.popToRootViewController(animated: true)
         }
         
