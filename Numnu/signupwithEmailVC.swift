@@ -41,6 +41,8 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.isHidden = true
+
         passwordReveal.setImage(UIImage(named: "Show password icon"), for: .normal)
         passwordReveal.tintColor = UIColor(red: 136/255.0, green: 143/255.0, blue: 158/255.0, alpha: 1.0)
         
@@ -53,7 +55,6 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         labelcredentials.isHidden = true
         signUpButton.layer.cornerRadius = 25
         signUpButton.clipsToBounds = true
-        self.navigationController?.navigationBar.isHidden = true
         emailTextfield.autocorrectionType = .no
         passwordTextfield.autocorrectionType = .no
         
@@ -284,14 +285,13 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 //        self.navigationController?.setNavigationBarHidden(true, animated: true)
-        self.navigationController?.navigationBar.isHidden = true
 
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         // Show the navigation bar on other view controllers
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        self.navigationController?.navigationBar.isHidden = false
     }
     
     @IBAction func fbSignup(_ sender: Any) {

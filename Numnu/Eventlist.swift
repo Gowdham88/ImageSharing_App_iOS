@@ -28,6 +28,7 @@ struct  EventList {
     var eventLinkList   : [EventlinkList]?
     var taglist         : [TagList]?
     var loclist         : LocList?
+    var imagelist       : [ImgList]?
     
     
     init?(json: JSON) {
@@ -130,6 +131,23 @@ struct  EventList {
                     taglist?.append(taglistItem)
                     
                 }
+            
+        }
+        
+        if let imgitems = json["eventimages"].array {
+            
+            for item in imgitems {
+                
+                let imglistItem = ImgList(array: item)
+                
+                if imagelist == nil {
+                    imagelist = []
+                    
+                }
+                
+                imagelist?.append(imglistItem)
+                
+            }
             
         }
         
