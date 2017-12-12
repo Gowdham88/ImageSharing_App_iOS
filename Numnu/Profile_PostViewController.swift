@@ -52,6 +52,9 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         userImage.layer.cornerRadius = self.userImage.frame.size.height/2
         userImage.clipsToBounds = true
         alertTapRegister()
+        
+        /***********************Setuserdetails****************************/
+        setUserDetails()
        
     
     }
@@ -75,7 +78,7 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
     
     func setNavBar() {
         
-        navigationItemList.title = "@Suraj Balachandran"
+        navigationItemList.title = "@\(PrefsManager.sharedinstance.username)"
         
         let button: UIButton = UIButton(type: UIButtonType.custom)
         //set image for button

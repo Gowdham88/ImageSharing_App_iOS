@@ -10,6 +10,7 @@ import UIKit
 import XLPagerTabStrip
 import Alamofire
 import SwiftyJSON
+import PKHUD
 
 struct MyVariables {
     
@@ -103,7 +104,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
         /****************event label tap function************************/
         
         tapRegistration()
-        
+        myscrollView.isHidden = true
         
         apiClient = ApiClient()
         
@@ -122,16 +123,32 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     }
     func MethodToCallApi(){
         
+        HUD.show(.progress)
+        
         let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
         
         apiClient.getEventsDetailsApi(id : 34,headers: header, completion: { status,Values in
             if status == "success" {
                 if let response = Values {
-                    self.getDetails(response:response)
+                    
+                    HUD.hide()
+                    
+                    DispatchQueue.main.async {
+                        
+                        self.getDetails(response:response)
+                        
+                    }
+                    
                 }
                 
             } else {
                 print("json respose failure:::::::")
+                 HUD.hide()
+                DispatchQueue.main.async {
+                    
+                    self.myscrollView.isHidden = true
+                    
+                }
                 
             }
         })
@@ -241,6 +258,8 @@ class EventViewController: ButtonBarPagerTabStripViewController {
             eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
             
         }
+        
+        self.myscrollView.isHidden = false
     }
     
    

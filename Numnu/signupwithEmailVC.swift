@@ -194,6 +194,9 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                     return
                     
                 }
+                
+                self.emailTextfield.text = ""
+                self.passwordTextfield.text = ""
   
                     HUD.hide()
                 self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId,firebaseid: (user?.uid)!)
@@ -310,6 +313,8 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                     return
                 }
              
+                HUD.hide()
+                self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId,firebaseid: (user?.uid)!)
                 
             })
           

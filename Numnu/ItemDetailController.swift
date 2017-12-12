@@ -88,14 +88,14 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
         
         tapRegistration()
         alertTapRegister()
-        
+        myscrollView.isHidden = true
       
         /******************Api**************************/
         
         apiClient = ApiClient()
         getItemIdApi()
         
-       
+      
 
         // Do any additional setup after loading the view.
     }
@@ -412,6 +412,11 @@ extension ItemDetailController {
                 } else {
                     
                     HUD.hide()
+                    
+                    DispatchQueue.main.async {
+                        
+                       self.myscrollView.isHidden = true
+                    }
                    
                     
                 }
@@ -498,6 +503,8 @@ extension ItemDetailController {
             
             
         }
+        
+        self.myscrollView.isHidden = false
         
         
     }

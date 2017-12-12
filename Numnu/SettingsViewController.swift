@@ -51,7 +51,7 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         itemArray2 = ["Events","Business","Items","Posts","Users","Logout"]
 //        topHeaderView.backgroundColor = UIColor(red: 216/255.0, green: 216/255.0, blue: 216/255.0, alpha: 1.0)
         
-        
+        setUserDetails()
 
     }
 
