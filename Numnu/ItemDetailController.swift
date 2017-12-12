@@ -112,7 +112,7 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        reloadPagerTabStripView()
+        reloadStripView()
     }
     
     func centerImagetap(){

@@ -44,10 +44,7 @@ class MenuEventViewController: UIViewController,IndicatorInfoProvider,UITableVie
         /********************Api client********************************/
         apiClient = ApiClient()
         
-        itemTagList.removeAll()
-        pageno  = 1
-        limitno = 25
-        getItemTag(pageno: pageno, limit: limitno)
+        
        
     }
     
@@ -59,6 +56,10 @@ class MenuEventViewController: UIViewController,IndicatorInfoProvider,UITableVie
         super.viewDidAppear(true)
         
         viewState = true
+        itemTagList.removeAll()
+        pageno  = 1
+        limitno = 25
+        getItemTag(pageno: pageno, limit: limitno)
         
         
     }

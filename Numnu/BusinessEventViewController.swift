@@ -29,9 +29,15 @@ class BusinessEventViewController: UIViewController,IndicatorInfoProvider {
     var viewState       : Bool = false
     
     /************************Api***************************/
-    
+    /********************Api client********************************/
     var apiClient : ApiClient!
     var bussinessList = [BussinessEventList]()
+    var bussinessModel  : BusinessEventModel?
+    var pageno  : Int = 1
+    var limitno : Int = 25
+    
+   
+    
     
     override func viewDidLoad() {
         
@@ -45,7 +51,11 @@ class BusinessEventViewController: UIViewController,IndicatorInfoProvider {
         
         
         apiClient = ApiClient()
-        getBussinessevent()
+        bussinessList.removeAll()
+        pageno  = 1
+        limitno = 25
+        getBussinessevent(pageno: pageno, limit: limitno)
+        
        
     }
     
@@ -59,6 +69,10 @@ class BusinessEventViewController: UIViewController,IndicatorInfoProvider {
         super.viewDidAppear(true)
         
         viewState = true
+        bussinessList.removeAll()
+        pageno  = 1
+        limitno = 25
+        getBussinessevent(pageno: pageno, limit: limitno)
        
     }
 
@@ -155,10 +169,18 @@ extension BusinessEventViewController : UITableViewDelegate,UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        let lastRowIndex = tableView.numberOfRows(inSection: 0)
-        if indexPath.row == lastRowIndex - 1 && viewState {
-           businesdelegate?.BusinessTableHeight(height: businessEventTableView.contentSize.height)
-           viewState = false
+        if indexPath.row == bussinessList.count - 1 && viewState {
+            
+            if let pageItem = bussinessModel {
+                
+                if bussinessList.count  < pageItem.totalRows ?? 0 {
+                    pageno += 1
+                    limitno = 25 * pageno
+                    getBussinessevent(pageno: pageno, limit: limitno)
+                }
+                
+            }
+            
         }
     }
     
@@ -214,21 +236,27 @@ extension BusinessEventViewController : UICollectionViewDelegate,UICollectionVie
 
 extension BusinessEventViewController {
     
-    func getBussinessevent() {
+    func getBussinessevent(pageno:Int,limit:Int) {
         
         HUD.show(.progress)
         
         apiClient.getFireBaseToken(completion: { token in
             
             let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
+            let param  : String  = "page=\(pageno)&limit\(limit)"
             
-            self.apiClient.getBussinessEvent(id: 34, headers: header, completion: { status,bussinesslist in
+            self.apiClient.getBussinessEvent(id: 34,page:param,headers: header, completion: { status,bussinesslist in
                 
                 if status == "success" {
                     
                     if let itemlist = bussinesslist {
                         
-                        self.bussinessList = itemlist
+                        self.bussinessModel = itemlist
+                        
+                        if let list = itemlist.businessItemList {
+                            
+                            self.bussinessList += list
+                        }
                     }
                     
                     DispatchQueue.main.async {

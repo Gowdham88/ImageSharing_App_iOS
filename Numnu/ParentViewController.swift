@@ -253,7 +253,6 @@ extension ParentViewController {
         
         navigationItemList.title = "Numnu"
         searchClick = false
-        reloadPagerTabStripView()
         buttonTabBarView.reloadData()
         buttonTabBarView.isHidden        = true
         tabScrollView.isScrollEnabled    = false

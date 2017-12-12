@@ -258,7 +258,7 @@ class  ApiClient {
     
     func getItemTagEvent(id : Int,page : String,headers : HTTPHeaders,completion : @escaping (String,EventItemTagModel?)-> Void) {
         
-        Alamofire.request("\(Constants.EventApiUrl)/\(id)/itemtags", method: .get,encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+        Alamofire.request("\(Constants.EventApiUrl)/\(id)/itemtags?\(page)", method: .get,encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             
             print(response.request as Any)
             print(response.result.value as Any)
@@ -292,9 +292,9 @@ class  ApiClient {
     
     /********************************getBussiness based Event*************************************************/
     
-    func getBussinessEvent(id : Int,headers : HTTPHeaders,completion : @escaping (String,[BussinessEventList]?)-> Void) {
+    func getBussinessEvent(id : Int,page : String,headers : HTTPHeaders,completion : @escaping (String,BusinessEventModel?)-> Void) {
         
-        Alamofire.request("\(Constants.EventApiUrl)/\(id)/businesses", method: .get,encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+        Alamofire.request("\(Constants.EventApiUrl)/\(id)/businesses?\(page)", method: .get,encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             
             print(response.request as Any)
             print(response.result.value as Any)
@@ -305,35 +305,15 @@ class  ApiClient {
                 
                 if let value = response.result.value {
                     
-                    var bussinessary : [BussinessEventList]?
-                    
-                    let json = JSON(value)
-                    
-                    if let array = json.array {
-                        
-                        for item in array {
+                        let json = JSON(value)
+                        if let list = BusinessEventModel(json: json) {
                             
-                            if let list = BussinessEventList(json: item) {
-                                
-                                bussinessary = [BussinessEventList]()
-                                bussinessary?.append(list)
-                                
-                                
-                            }
+                            completion("success",list)
                             
                         }
-                        
-                        completion("success",bussinessary)
-                        
-                    } else {
-                        
-                        completion("success",nil)
-                        
-                    }
                     
                 }
-                
-                
+            
             case .failure(let error):
                 
                 print(error.localizedDescription)
