@@ -42,7 +42,7 @@ class BusinessEventViewController: UIViewController,IndicatorInfoProvider {
         
         businessCategoryTableView.delegate   = self
         businessCategoryTableView.dataSource = self
-        businessCategoryTableView.reloadData()
+        
         
         apiClient = ApiClient()
         getBussinessevent()
@@ -59,8 +59,7 @@ class BusinessEventViewController: UIViewController,IndicatorInfoProvider {
         super.viewDidAppear(true)
         
         viewState = true
-        businessCategoryTableView.reloadData()
-        
+       
     }
 
     override func didReceiveMemoryWarning() {

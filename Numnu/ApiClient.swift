@@ -17,37 +17,45 @@ import FirebaseStorage
 
 class  ApiClient {
     
-//    /*********************Login Api*****************************/
-//
-//    func userLogin(parameters : Parameters,completion : @escaping (String,UserList?) -> Void) {
-//
-//        Alamofire.request(Constants.LoginApiUrl, method: .post, parameters: parameters).validate().responseJSON { response in
-//
-//            switch response.result {
-//
-//            case .success:
-//
-//                if let value = response.result.value {
-//
-//                    let json = JSON(value)
-//                    if let userList = UserList(json: json) {
-//
-//                        completion("success",userList)
-//                    }
-//
-//
-//                }
-//
-//
-//            case .failure(let error):
-//
-//                print(error)
-//                completion(error.localizedDescription,nil)
-//
-//            }
-//       }
-//
-//    }
+    
+    /*********************Complete Signup Api*****************************/
+    
+    func completeSignup(parameters : Parameters,headers : HTTPHeaders,completion : @escaping (String,UserList?) -> Void) {
+        
+        Alamofire.request(Constants.completeSignup, method: .post, parameters: parameters,encoding: JSONEncoding.default,headers: headers).validate().responseJSON { response in
+            
+            
+            print(response.result.value as Any)
+            
+            switch response.result {
+                
+            case .success:
+                
+                if let value = response.result.value {
+                    
+                    print(value)
+                    
+                    let json = JSON(value)
+                    
+                    if let userList = UserList(json: json) {
+                        
+                        completion("success",userList)
+                    }
+                    
+                    
+                }
+                
+                
+            case .failure(let error):
+                
+                print(error.localizedDescription)
+                completion(error.localizedDescription,nil)
+                
+            }
+        }
+        
+        
+    }
     
      /*********************Login Api*****************************/
     
@@ -82,6 +90,8 @@ class  ApiClient {
         }
         
     }
+    
+    /************************Username check Api**********************************/
     
     func usernameexists(parameters : Parameters,headers : HTTPHeaders,completion : @escaping (String,Bool?) -> Void) {
         
@@ -242,46 +252,45 @@ class  ApiClient {
         
     }
     
-    /*********************Complete Signup Api*****************************/
     
-       func completeSignup(parameters : Parameters,headers : HTTPHeaders,completion : @escaping (String,UserList?) -> Void) {
+    
+    /********************************getItemTag based Event*************************************************/
+    
+    func getItemTagEvent(id : Int,page : String,headers : HTTPHeaders,completion : @escaping (String,EventItemTagModel?)-> Void) {
         
-        Alamofire.request(Constants.completeSignup, method: .post, parameters: parameters,encoding: JSONEncoding.default,headers: headers).validate().responseJSON { response in
+        Alamofire.request("\(Constants.EventApiUrl)/\(id)/itemtags", method: .get,encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             
-           
+            print(response.request as Any)
             print(response.result.value as Any)
             
             switch response.result {
                 
-            case .success:
+            case .success :
                 
                 if let value = response.result.value {
                     
-                    print(value)
-                    
                     let json = JSON(value)
-                    
-                    if let userList = UserList(json: json) {
+                    if let list = EventItemTagModel(json: json) {
                         
-                        completion("success",userList)
+                        completion("success",list)
+                        
                     }
-                    
-                    
+                  
                 }
                 
                 
             case .failure(let error):
-             
+                
                 print(error.localizedDescription)
                 completion(error.localizedDescription,nil)
                 
+                }
+            
             }
-        }
+            
+     }
     
-        
-    }
-    
-    /********************************getBussinessbasedEvent*************************************************/
+    /********************************getBussiness based Event*************************************************/
     
     func getBussinessEvent(id : Int,headers : HTTPHeaders,completion : @escaping (String,[BussinessEventList]?)-> Void) {
         
@@ -309,19 +318,19 @@ class  ApiClient {
                                 bussinessary = [BussinessEventList]()
                                 bussinessary?.append(list)
                                 
-                               
+                                
                             }
-                         
+                            
                         }
                         
                         completion("success",bussinessary)
                         
                     } else {
                         
-                         completion("success",nil)
+                        completion("success",nil)
                         
                     }
-                
+                    
                 }
                 
                 
@@ -330,11 +339,11 @@ class  ApiClient {
                 print(error.localizedDescription)
                 completion(error.localizedDescription,nil)
                 
-                }
-            
             }
             
-     }
+        }
+        
+    }
         
     /********************************getItemsbasedid*************************************************/
     
