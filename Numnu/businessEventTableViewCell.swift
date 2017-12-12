@@ -39,7 +39,7 @@ class businessEventTableViewCell : UITableViewCell {
     
     var item : BussinessEventList! {
         didSet {
-            eventBusLabel.text = item.businessusername
+            eventBusLabel.text = item.businessname
             
             if let userimageList = item.imgList {
                 

@@ -17,37 +17,45 @@ import FirebaseStorage
 
 class  ApiClient {
     
-//    /*********************Login Api*****************************/
-//
-//    func userLogin(parameters : Parameters,completion : @escaping (String,UserList?) -> Void) {
-//
-//        Alamofire.request(Constants.LoginApiUrl, method: .post, parameters: parameters).validate().responseJSON { response in
-//
-//            switch response.result {
-//
-//            case .success:
-//
-//                if let value = response.result.value {
-//
-//                    let json = JSON(value)
-//                    if let userList = UserList(json: json) {
-//
-//                        completion("success",userList)
-//                    }
-//
-//
-//                }
-//
-//
-//            case .failure(let error):
-//
-//                print(error)
-//                completion(error.localizedDescription,nil)
-//
-//            }
-//       }
-//
-//    }
+    
+    /*********************Complete Signup Api*****************************/
+    
+    func completeSignup(parameters : Parameters,headers : HTTPHeaders,completion : @escaping (String,UserList?) -> Void) {
+        
+        Alamofire.request(Constants.completeSignup, method: .post, parameters: parameters,encoding: JSONEncoding.default,headers: headers).validate().responseJSON { response in
+            
+            
+            print(response.result.value as Any)
+            
+            switch response.result {
+                
+            case .success:
+                
+                if let value = response.result.value {
+                    
+                    print(value)
+                    
+                    let json = JSON(value)
+                    
+                    if let userList = UserList(json: json) {
+                        
+                        completion("success",userList)
+                    }
+                    
+                    
+                }
+                
+                
+            case .failure(let error):
+                
+                print(error.localizedDescription)
+                completion(error.localizedDescription,nil)
+                
+            }
+        }
+        
+        
+    }
     
      /*********************Login Api*****************************/
     
@@ -82,6 +90,8 @@ class  ApiClient {
         }
         
     }
+    
+    /************************Username check Api**********************************/
     
     func usernameexists(parameters : Parameters,headers : HTTPHeaders,completion : @escaping (String,Bool?) -> Void) {
         
@@ -242,50 +252,13 @@ class  ApiClient {
         
     }
     
-    /*********************Complete Signup Api*****************************/
     
-       func completeSignup(parameters : Parameters,headers : HTTPHeaders,completion : @escaping (String,UserList?) -> Void) {
+    
+    /********************************getItemTag based Event*************************************************/
+    
+    func getItemTagEvent(id : Int,page : String,headers : HTTPHeaders,completion : @escaping (String,EventItemTagModel?)-> Void) {
         
-        Alamofire.request(Constants.completeSignup, method: .post, parameters: parameters,encoding: JSONEncoding.default,headers: headers).validate().responseJSON { response in
-            
-           
-            print(response.result.value as Any)
-            
-            switch response.result {
-                
-            case .success:
-                
-                if let value = response.result.value {
-                    
-                    print(value)
-                    
-                    let json = JSON(value)
-                    
-                    if let userList = UserList(json: json) {
-                        
-                        completion("success",userList)
-                    }
-                    
-                    
-                }
-                
-                
-            case .failure(let error):
-             
-                print(error.localizedDescription)
-                completion(error.localizedDescription,nil)
-                
-            }
-        }
-    
-        
-    }
-    
-    /********************************getBussinessbasedEvent*************************************************/
-    
-    func getBussinessEvent(id : Int,headers : HTTPHeaders,completion : @escaping (String,[BussinessEventList]?)-> Void) {
-        
-        Alamofire.request("\(Constants.EventApiUrl)/\(id)/businesses", method: .get,encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+        Alamofire.request("\(Constants.EventApiUrl)/\(id)/itemtags?\(page)", method: .get,encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             
             print(response.request as Any)
             print(response.result.value as Any)
@@ -296,32 +269,13 @@ class  ApiClient {
                 
                 if let value = response.result.value {
                     
-                    var bussinessary : [BussinessEventList]?
-                    
                     let json = JSON(value)
-                    
-                    if let array = json.array {
+                    if let list = EventItemTagModel(json: json) {
                         
-                        for item in array {
-                            
-                            if let list = BussinessEventList(json: item) {
-                                
-                                bussinessary = [BussinessEventList]()
-                                bussinessary?.append(list)
-                                
-                               
-                            }
-                         
-                        }
-                        
-                        completion("success",bussinessary)
-                        
-                    } else {
-                        
-                         completion("success",nil)
+                        completion("success",list)
                         
                     }
-                
+                  
                 }
                 
                 
@@ -335,6 +289,41 @@ class  ApiClient {
             }
             
      }
+    
+    /********************************getBussiness based Event*************************************************/
+    
+    func getBussinessEvent(id : Int,page : String,headers : HTTPHeaders,completion : @escaping (String,BusinessEventModel?)-> Void) {
+        
+        Alamofire.request("\(Constants.EventApiUrl)/\(id)/businesses?\(page)", method: .get,encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            
+            print(response.request as Any)
+            print(response.result.value as Any)
+            
+            switch response.result {
+                
+            case .success :
+                
+                if let value = response.result.value {
+                    
+                        let json = JSON(value)
+                        if let list = BusinessEventModel(json: json) {
+                            
+                            completion("success",list)
+                            
+                        }
+                    
+                }
+            
+            case .failure(let error):
+                
+                print(error.localizedDescription)
+                completion(error.localizedDescription,nil)
+                
+            }
+            
+        }
+        
+    }
         
     /********************************getItemsbasedid*************************************************/
     

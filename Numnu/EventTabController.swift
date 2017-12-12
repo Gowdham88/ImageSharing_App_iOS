@@ -129,8 +129,7 @@ extension EventTabController : UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
-        
+         
         if indexPath.row == eventList.count - 1 && viewState {
            
             if let pageItem = eventItem {

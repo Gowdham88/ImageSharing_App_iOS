@@ -96,6 +96,9 @@
 		B464D78F1F8D1F3E002A1FDC /* EventCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B464D78E1F8D1F3E002A1FDC /* EventCollectionCell.swift */; };
 		B474C5481FA070BB00201B6A /* EventDetailTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B474C5471FA070BB00201B6A /* EventDetailTab.storyboard */; };
 		B475CDE11FDAB4060067612E /* BussinessEventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B475CDE01FDAB4060067612E /* BussinessEventList.swift */; };
+		B478334B1FE0052700970412 /* EventItemTagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B478334A1FE0052700970412 /* EventItemTagModel.swift */; };
+		B478334D1FE005CF00970412 /* EventItemtag.swift in Sources */ = {isa = PBXBuildFile; fileRef = B478334C1FE005CF00970412 /* EventItemtag.swift */; };
+		B478334F1FE0151E00970412 /* BusinessEventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B478334E1FE0151E00970412 /* BusinessEventModel.swift */; };
 		B47BD4011F8A26A30099061C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B47BD4001F8A26A30099061C /* GoogleService-Info.plist */; };
 		B47BD4031F8A48010099061C /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47BD4021F8A48010099061C /* OnboardingVC.swift */; };
 		B47BD4051F8A615C0099061C /* loginMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47BD4041F8A615C0099061C /* loginMainVC.swift */; };
@@ -247,6 +250,9 @@
 		B464D78E1F8D1F3E002A1FDC /* EventCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionCell.swift; sourceTree = "<group>"; };
 		B474C5471FA070BB00201B6A /* EventDetailTab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EventDetailTab.storyboard; sourceTree = "<group>"; };
 		B475CDE01FDAB4060067612E /* BussinessEventList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BussinessEventList.swift; sourceTree = "<group>"; };
+		B478334A1FE0052700970412 /* EventItemTagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventItemTagModel.swift; sourceTree = "<group>"; };
+		B478334C1FE005CF00970412 /* EventItemtag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventItemtag.swift; sourceTree = "<group>"; };
+		B478334E1FE0151E00970412 /* BusinessEventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessEventModel.swift; sourceTree = "<group>"; };
 		B47BD4001F8A26A30099061C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B47BD4021F8A48010099061C /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
 		B47BD4041F8A615C0099061C /* loginMainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginMainVC.swift; sourceTree = "<group>"; };
@@ -496,6 +502,17 @@
 			name = ItemDetailController;
 			sourceTree = "<group>";
 		};
+		B47833491FE004FF00970412 /* EventTabModel */ = {
+			isa = PBXGroup;
+			children = (
+				B478334A1FE0052700970412 /* EventItemTagModel.swift */,
+				B478334C1FE005CF00970412 /* EventItemtag.swift */,
+				B475CDE01FDAB4060067612E /* BussinessEventList.swift */,
+				B478334E1FE0151E00970412 /* BusinessEventModel.swift */,
+			);
+			name = EventTabModel;
+			sourceTree = "<group>";
+		};
 		B47F639F1F88D697001D7A18 /* CustomFont */ = {
 			isa = PBXGroup;
 			children = (
@@ -573,6 +590,7 @@
 		B4BD9EEB1F6FA54400C43182 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B47833491FE004FF00970412 /* EventTabModel */,
 				B4483EFC1FDEA3FD00D99E0E /* TabModel */,
 				601D46781F8F3B1C00832BDD /* UserList.swift */,
 				6FC0A9C21FCEA1F500D91B0C /* ImgList.swift */,
@@ -585,7 +603,6 @@
 				B43F16CC1FC4415B00BBBF87 /* ItemList.swift */,
 				B43F16CE1FC442E100BBBF87 /* ItemImageList.swift */,
 				B43F16D01FC443AB00BBBF87 /* ItemLinkList.swift */,
-				B475CDE01FDAB4060067612E /* BussinessEventList.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -948,6 +965,7 @@
 				B484B8E21FA8822D00B32F7A /* BusinessCompleteViewController.swift in Sources */,
 				B464D78D1F8D0FEC002A1FDC /* UIColor.swift in Sources */,
 				B426C68E1F9E0A6B008D586B /* SplashViewController.swift in Sources */,
+				B478334F1FE0151E00970412 /* BusinessEventModel.swift in Sources */,
 				6043865E1FB09E970049F971 /* Profile_PostViewController.swift in Sources */,
 				B4BD9EF91F6FB3E700C43182 /* PostViewModel.swift in Sources */,
 				B4C5158A1FA085D100348E2A /* BusinessTabController.swift in Sources */,
@@ -972,6 +990,7 @@
 				3F00064B1FD6CDC70098B132 /* UIWindowTransitions.swift in Sources */,
 				3FC6CEEA1F6FA25600DF2A12 /* feedTableViewCell.swift in Sources */,
 				B42201B41F8E70DA0058A4ED /* EventTableViewCell.swift in Sources */,
+				B478334D1FE005CF00970412 /* EventItemtag.swift in Sources */,
 				6FC0A9C51FCEAEE300D91B0C /* LocList.swift in Sources */,
 				B406DE2B1FA762BA0092E2B4 /* busDetailMenuTableviewcell.swift in Sources */,
 				B41530941F8BBCD9000FB369 /* EventTabController.swift in Sources */,
@@ -1020,6 +1039,7 @@
 				B4483EFE1FDEA4CA00D99E0E /* EventTypeList.swift in Sources */,
 				B42201B21F8E661E0058A4ED /* ImageExtender.swift in Sources */,
 				3F0006491FD6CDBB0098B132 /* Package.swift in Sources */,
+				B478334B1FE0052700970412 /* EventItemTagModel.swift in Sources */,
 				B45CD8721F9CDA99009262B8 /* UILabel.swift in Sources */,
 				3FC6CEE81F6FA17300DF2A12 /* HomeViewController.swift in Sources */,
 				6FC0A9C31FCEA1F500D91B0C /* ImgList.swift in Sources */,
