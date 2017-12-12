@@ -148,9 +148,11 @@ class  ApiClient {
     }
     
      /************************Events Api**********************************/
-    func getEventsApi(headers : HTTPHeaders,completion : @escaping (String,EventModelList?) -> Void) {
+    func getEventsApi(headers : HTTPHeaders,parameter : String,completion : @escaping (String,EventTypeList?) -> Void) {
         
-        Alamofire.request(Constants.EventApiUrl, encoding: JSONEncoding.default,headers: headers).validate().responseJSON { response in
+        Alamofire.request("\(Constants.EventApiUrl)?/\(parameter)",encoding: JSONEncoding.default,headers: headers).validate().responseJSON { response in
+            
+            print(response.request as Any)
             
             switch response.result {
                 
@@ -159,7 +161,7 @@ class  ApiClient {
                 if let value = response.result.value {
                     
                     let json = JSON(value)
-                    if let eventList = EventModelList(json: json) {
+                    if let eventList = EventTypeList(json: json) {
                         
                         completion("success",eventList)
                     }

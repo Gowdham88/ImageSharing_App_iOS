@@ -505,8 +505,7 @@ extension ItemDetailController {
         }
         
         self.myscrollView.isHidden = false
-        
-        
+       
     }
     
     

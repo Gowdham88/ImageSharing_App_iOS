@@ -22,7 +22,6 @@ class DateFormatterManager: NSObject {
         dateformat.dateFormat = format
         return dateformat.string(from: date!)
     
-      
     }
     
     

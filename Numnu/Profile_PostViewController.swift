@@ -334,7 +334,39 @@ extension Profile_PostViewController :SettingsViewControllerDelegate {
     
     func logout() {
         
-        delegate?.logout()
+        
+        addProfileContainer()
+        
+    }
+    
+    func addProfileContainer() {
+        
+        /**************************Setting tabs*********************************/
+        
+        let nav1              = UINavigationController()
+        let storyboard        = UIStoryboard(name: Constants.Main, bundle: nil)
+        let controller        = storyboard.instantiateViewController(withIdentifier: Constants.ProfileId) as! Edit_ProfileVC
+        controller.boolForTitle = false
+        nav1.viewControllers = [controller]
+        self.tabBarController?.viewControllers?.append(nav1)
+        var myImage = UIImage(named: "profileunselected")!
+        let myInsets : UIEdgeInsets = UIEdgeInsetsMake(6, -6, 0, 0)
+        myImage = myImage.resizableImage(withCapInsets: myInsets)
+        controller.tabBarItem = UITabBarItem(
+            title: "",
+            image: myImage,
+            tag: 3)
+        
+        /**************************Removing tabs*********************************/
+        
+        if let tabBarController = self.tabBarController {
+            let indexToRemove = 2
+            if indexToRemove < (tabBarController.viewControllers?.count)! {
+                var viewControllers = tabBarController.viewControllers
+                viewControllers?.remove(at: indexToRemove)
+                tabBarController.viewControllers = viewControllers
+            }
+        }
         
     }
 }

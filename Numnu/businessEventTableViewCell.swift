@@ -48,6 +48,7 @@ class businessEventTableViewCell : UITableViewCell {
                     let apiclient = ApiClient()
                     apiclient.getFireBaseImageUrl(imagepath: userimageList[userimageList.count-1].imageurl_str!, completion: { url in
                         
+                        self.eventBusImageView.image = nil
                         Manager.shared.loadImage(with: URL(string : url)!, into: self.eventBusImageView)
                         
                     })

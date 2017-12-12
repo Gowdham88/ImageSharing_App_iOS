@@ -153,7 +153,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
             }
         })
     }
-    func getDetails(response:EventList){
+    func getDetails(response:EventList) {
       
         if let name = response.name {
           eventTitleLabel.text = name
