@@ -51,7 +51,7 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         itemArray2 = ["Events","Business","Items","Posts","Users","Logout"]
 //        topHeaderView.backgroundColor = UIColor(red: 216/255.0, green: 216/255.0, blue: 216/255.0, alpha: 1.0)
         
-        
+        setUserDetails()
 
     }
 
@@ -96,7 +96,7 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 1 {
-            return "Bookmarks"
+            return "          Bookmarks"
         }else if section == 2 {
             return ""
         }
