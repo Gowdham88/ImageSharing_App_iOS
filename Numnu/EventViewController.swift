@@ -11,6 +11,7 @@ import XLPagerTabStrip
 import Alamofire
 import SwiftyJSON
 import PKHUD
+import Nuke
 
 struct MyVariables {
     
@@ -52,7 +53,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     
     @IBOutlet weak var mainContainerViewBottom: NSLayoutConstraint!
     @IBOutlet weak var mainContainerView: NSLayoutConstraint!
-    var tagarray = ["Festival","Wine","Party","Rum","Barbaque","Pasta","Sandwich","Burger"]
+    var tagarray = [String]()
     @IBOutlet weak var shareView: UIView!
     /***************contraints***********************/
     
@@ -209,11 +210,10 @@ class EventViewController: ButtonBarPagerTabStripViewController {
         
         if let taglist = response.taglist {
             if taglist.count > 0 {
-                tagarray.removeAll()
                 for item in taglist {
-                    if tagarray != nil {
-                        tagarray.append(item.text_str!)
-                    }
+                        if let tagname = item.text_str {
+                            tagarray.append(tagname)
+                        }
                 }
                 tagViewUpdate()
             }
@@ -226,6 +226,24 @@ class EventViewController: ButtonBarPagerTabStripViewController {
                 MyVariables.fetchedLong = loclist.longitude_str!
                 MyVariables.markerTitle = loclist.name_str!
                 print("lat and lon values are:::::",MyVariables.fetchedLat,MyVariables.fetchedLong)
+            }
+        }
+        
+        if let imglist = response.imagelist {
+            if imglist.count > 0 {
+                if let url = imglist[imglist.count-1].imageurl_str {
+                    
+                    apiClient.getFireBaseImageUrl(imagepath: url, completion: { imageUrl in
+                        
+                        if imageUrl != "empty" {
+                            
+                            Manager.shared.loadImage(with: URL(string : imageUrl)!, into: self.eventImageView)
+                        }
+                        
+                    })
+                    
+                    
+                }
             }
         }
         
