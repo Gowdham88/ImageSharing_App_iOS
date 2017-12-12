@@ -262,11 +262,22 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        
 
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+       
+        let navigationOnTap = UITapGestureRecognizer(target:self,action:#selector(EventViewController.navigationTap))
+        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+        self.navigationController?.navigationBar.isUserInteractionEnabled = true
+        // Hide the navigation bar on the this view controller
+        showPopup(table1: true, table2: true)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
         if boolForTitle == false {
             if PrefsManager.sharedinstance.isLoginned {
-                
+              
                 addProfileContainer()
                 
             } else {
@@ -289,16 +300,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 
             }
         }
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-       
-        let navigationOnTap = UITapGestureRecognizer(target:self,action:#selector(EventViewController.navigationTap))
-        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
-        self.navigationController?.navigationBar.isUserInteractionEnabled = true
-        // Hide the navigation bar on the this view controller
-        showPopup(table1: true, table2: true)
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
         
         
     }
@@ -629,12 +630,34 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         controller.didMove(toParentViewController: self)
     }
     
-    func addProfileContainer(){
+    func addProfileContainer() {
         
+        /**************************Setting tabs*********************************/
+        
+        let nav1              = UINavigationController()
         let storyboard        = UIStoryboard(name: Constants.Main, bundle: nil)
         let controller        = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
-        controller.delegate   = self
-        self.navigationController!.pushViewController(controller, animated: true)
+        nav1.viewControllers = [controller]
+        self.tabBarController?.viewControllers?.append(nav1)
+        var myImage = UIImage(named: "profileunselected")!
+        let myInsets : UIEdgeInsets = UIEdgeInsetsMake(6, -6, 0, 0)
+        myImage = myImage.resizableImage(withCapInsets: myInsets)
+        controller.tabBarItem = UITabBarItem(
+            title: "",
+            image: myImage,
+            tag: 3)
+        
+        /**************************Removing tabs*********************************/
+        
+        if let tabBarController = self.tabBarController {
+            let indexToRemove = 2
+            if indexToRemove < (tabBarController.viewControllers?.count)! {
+                var viewControllers = tabBarController.viewControllers
+                viewControllers?.remove(at: indexToRemove)
+                tabBarController.viewControllers = viewControllers
+            }
+        }
+
     }
     
     @IBAction func didTappedSave(_ sender: Any) {
@@ -1098,9 +1121,7 @@ extension Edit_ProfileVC {
                             self.navigationController!.pushViewController(vc, animated: true)
                             
                         } else {
-                            
-                            
-                            
+                          
                         }
                     
                         

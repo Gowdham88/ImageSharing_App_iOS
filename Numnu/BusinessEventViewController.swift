@@ -257,7 +257,7 @@ extension BusinessEventViewController {
     }
     
     
-    func reloadTable(){
+    func reloadTable() {
         
         let when = DispatchTime.now() + 1
         DispatchQueue.main.asyncAfter(deadline: when) {
@@ -265,9 +265,7 @@ extension BusinessEventViewController {
             self.businesdelegate?.BusinessTableHeight(height: self.businessEventTableView.contentSize.height)
             HUD.hide()
         }
-            
-        
-        
+     
     }
     
     
