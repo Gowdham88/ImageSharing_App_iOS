@@ -942,7 +942,7 @@ extension SettingsEdit_ProfieViewController {
             
         }
         
-            let date = DateFormatterManager.sharedinstance.stringtoDate(format: "yyyy-MM-dd", date: PrefsManager.sharedinstance.dateOfBirth)
+            let date = DateFormatterManager.sharedinstance.stringtoDate(format: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", date: PrefsManager.sharedinstance.dateOfBirth)
             
             if let dateStr = DateFormatterManager.sharedinstance.datetoString(format: "dd", date: date) {
                 

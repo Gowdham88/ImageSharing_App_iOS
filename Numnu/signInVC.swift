@@ -51,8 +51,12 @@ class signInVC: UIViewController, UITextFieldDelegate {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
         self.view.addGestureRecognizer(tapGesture)
         // Do any additional setup after loading the view.
-        
+        IQKeyboardManager.sharedManager().enable = false
     IQKeyboardManager.sharedManager().enableAutoToolbar = false
+        if #available(iOS 11, *) {
+            emailAddressTF.textContentType = UITextContentType.emailAddress
+            passwordTF.textContentType = UITextContentType("")
+        }
         
     }
     func dismissKeyboard (_ sender: UITapGestureRecognizer) {
@@ -154,27 +158,43 @@ class signInVC: UIViewController, UITextFieldDelegate {
         passwordInfoLabel.isHidden = true
         
         if textField == emailAddressTF  {
+
             emailtitleLAbel.textColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
             emailLineView.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
-        }else {
+        }else if textField == passwordTF {
+
             passwordTitleLabel.textColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
             passwordLineview.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
-        }
+        }else{}
         
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == emailAddressTF {
+
             emailtitleLAbel.textColor = UIColor(red: 129/255.0, green: 125/255.0, blue: 144/255.0, alpha: 1.0)
             emailLineView.backgroundColor = UIColor(red: 229/255.0, green: 229/255.0, blue: 229/255.0, alpha: 1.0)
-        }else{
+        }else if textField == passwordTF {
+
             passwordTitleLabel.textColor = UIColor(red: 129/255.0, green: 125/255.0, blue: 144/255.0, alpha: 1.0)
             passwordLineview.backgroundColor = UIColor(red: 229/255.0, green: 229/255.0, blue: 229/255.0, alpha: 1.0)
-        }
+        }else{}
 
     }
-    
-    
+//
+//    func animateViewMoving(up:Bool, moveValue :CGFloat) {
+//
+//        let movementDuration:TimeInterval = 0.3
+//        let movement:CGFloat = ( up ? -moveValue : moveValue)
+//
+//        UIView.beginAnimations("animateView", context: nil)
+//        UIView.setAnimationBeginsFromCurrentState(true)
+//        UIView.setAnimationDuration(movementDuration)
+//
+//        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+//
+//        UIView.commitAnimations()
+//    }
     
     @IBAction func showPassword(_ sender: Any) {
         

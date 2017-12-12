@@ -177,10 +177,10 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         }
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-    }
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+//        self.navigationController?.setNavigationBarHidden(false, animated: true)
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

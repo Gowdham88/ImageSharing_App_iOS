@@ -152,20 +152,15 @@ class EventViewController: ButtonBarPagerTabStripViewController {
                 
             }
         })
-        
-        
-        
     }
     func getDetails(response:EventList) {
       
         if let name = response.name {
           eventTitleLabel.text = name
-            
         }
         
         if let description = response.description {
             eventDescriptionLabel.text = description
-
         }
         
         if let startsat = response.startsat {
@@ -178,31 +173,21 @@ class EventViewController: ButtonBarPagerTabStripViewController {
         if let endsat = response.endsat {
             print(endsat)
             if response.endsat != nil {
-                
-                
+            
                 let formatter = DateFormatter()
                 formatter.locale = Locale(identifier: "en_US_POSIX")
                 formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
                 let date = formatter.date(from: endsat)
                 let date2 = formatter.date(from: response.startsat!)
 
-                
                 print("date: \(String(describing: date))")
                 print("date: \(String(describing: date2))")
-
-
-//                let components = NSDateComponents()
-//                let calendarFormat = NSCalendar.current.date(from: components as DateComponents)
 
                 formatter.dateFormat = "MMM dd,h:mm a"
                 let dateString = formatter.string(from: date!)
                 let dateString2 = formatter.string(from: date2!)
-
                 eventDateLabel.text = dateString2 + " - " + dateString
-
                 print("datestring:::::",dateString,dateString2)
-
-            
             }
         }
         
