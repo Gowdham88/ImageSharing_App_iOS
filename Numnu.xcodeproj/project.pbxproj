@@ -123,6 +123,7 @@
 		B4C5158A1FA085D100348E2A /* BusinessTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C515891FA085D100348E2A /* BusinessTabController.swift */; };
 		B4C515911FA0AC1700348E2A /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C515901FA0AC1600348E2A /* WebViewController.swift */; };
 		B4C7BCEB1F9F74E500B2BEC4 /* PostEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C7BCEA1F9F74E500B2BEC4 /* PostEventTableViewCell.swift */; };
+		B4CFB51D1FE0FA2100DE0817 /* ItemListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4CFB51C1FE0FA2100DE0817 /* ItemListModel.swift */; };
 		BE2E37EC1FCD6ED8000BEE63 /* LuanchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2E37EB1FCD6ED8000BEE63 /* LuanchScreenViewController.swift */; };
 		BE5201F41FBDE82E00462B0E /* UserProfileTagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5201F31FBDE82E00462B0E /* UserProfileTagCollectionViewCell.swift */; };
 		BE57DEF71FBB0BCD00A9C93B /* PostImageZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE57DEF61FBB0BCD00A9C93B /* PostImageZoomViewController.swift */; };
@@ -281,6 +282,7 @@
 		B4C515891FA085D100348E2A /* BusinessTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessTabController.swift; sourceTree = "<group>"; };
 		B4C515901FA0AC1600348E2A /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		B4C7BCEA1F9F74E500B2BEC4 /* PostEventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEventTableViewCell.swift; sourceTree = "<group>"; };
+		B4CFB51C1FE0FA2100DE0817 /* ItemListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListModel.swift; sourceTree = "<group>"; };
 		BE2E37EB1FCD6ED8000BEE63 /* LuanchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuanchScreenViewController.swift; sourceTree = "<group>"; };
 		BE5201F31FBDE82E00462B0E /* UserProfileTagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileTagCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE57DEF61FBB0BCD00A9C93B /* PostImageZoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImageZoomViewController.swift; sourceTree = "<group>"; };
@@ -509,6 +511,7 @@
 				B478334C1FE005CF00970412 /* EventItemtag.swift */,
 				B475CDE01FDAB4060067612E /* BussinessEventList.swift */,
 				B478334E1FE0151E00970412 /* BusinessEventModel.swift */,
+				B4CFB51C1FE0FA2100DE0817 /* ItemListModel.swift */,
 			);
 			name = EventTabModel;
 			sourceTree = "<group>";
@@ -571,8 +574,8 @@
 		B4BD9EEA1F6FA4E500C43182 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				BE5201F31FBDE82E00462B0E /* UserProfileTagCollectionViewCell.swift */,
 				6043865F1FB0A9480049F971 /* Profile_postTableViewCell.swift */,
+				BE5201F31FBDE82E00462B0E /* UserProfileTagCollectionViewCell.swift */,
 				6043865B1FB052860049F971 /* FoodPreferenceCollectionViewCell.swift */,
 				60B4EA431FAB190300C1A6C9 /* SettingsTableViewCell.swift */,
 				B406DE291FA762510092E2B4 /* BusinessTableViewCell */,
@@ -978,6 +981,7 @@
 				B410DF9E1F94E01400858E4E /* EventViewController.swift in Sources */,
 				B45CBCE81FA9A166004B6E66 /* DefaultHomeTableViewCell.swift in Sources */,
 				3FC6CEBC1F6F744700DF2A12 /* ViewController.swift in Sources */,
+				B4CFB51D1FE0FA2100DE0817 /* ItemListModel.swift in Sources */,
 				B4470EE31FBEEACC00DC2625 /* ValidationHelper.swift in Sources */,
 				B4C515861FA0800000348E2A /* MenuEventTableViewCell.swift in Sources */,
 				B4C7BCEB1F9F74E500B2BEC4 /* PostEventTableViewCell.swift in Sources */,

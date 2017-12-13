@@ -1114,6 +1114,7 @@ extension Edit_ProfileVC {
                         
                         if imageurl != nil {
                             
+                            PrefsManager.sharedinstance.imageURL = imageurl ?? "empty"
                             let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
                             let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
                             vc.boolForBack = false
@@ -1193,6 +1194,27 @@ extension Edit_ProfileVC {
         if let userEmail = user.email {
             
             PrefsManager.sharedinstance.userEmail = userEmail
+            
+        }
+        
+        if let userImagesList = user.imgList {
+            
+            if userImagesList.count > 0 {
+                
+                PrefsManager.sharedinstance.imageURL = userImagesList[userImagesList.count-1].imageurl_str ?? "empty"
+                
+            }
+            
+        }
+        
+        if let taglist = user.tagList {
+            
+            PrefsManager.sharedinstance.tagList = taglist
+        }
+        
+        if let locitem = user.locItem {
+            
+            PrefsManager.sharedinstance.userCity = "\(locitem.address_str ?? "Address")"
             
         }
         

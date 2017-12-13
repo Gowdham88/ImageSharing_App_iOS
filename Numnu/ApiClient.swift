@@ -160,7 +160,7 @@ class  ApiClient {
      /************************Events Api**********************************/
     func getEventsApi(headers : HTTPHeaders,parameter : String,completion : @escaping (String,EventTypeList?) -> Void) {
         
-        Alamofire.request("\(Constants.EventApiUrl)?/\(parameter)",encoding: JSONEncoding.default,headers: headers).validate().responseJSON { response in
+        Alamofire.request("\(Constants.EventTypeApiUrl)?/\(parameter)",encoding: JSONEncoding.default,headers: headers).validate().responseJSON { response in
             
             print(response.request as Any)
             
@@ -314,6 +314,41 @@ class  ApiClient {
                     
                 }
             
+            case .failure(let error):
+                
+                print(error.localizedDescription)
+                completion(error.localizedDescription,nil)
+                
+            }
+            
+        }
+        
+    }
+    
+    /********************************getItemList based Item Tag id*************************************************/
+    
+    func getItemListByTagId(eventid : Int,tagid : Int,page : String,headers : HTTPHeaders,completion : @escaping (String,ItemListModel?)-> Void) {
+        
+        Alamofire.request("\(Constants.EventApiUrl)/\(eventid)/itemtags/\(tagid)/items?\(page)", method: .get,encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            
+            print(response.request as Any)
+            print(response.result.value as Any)
+            
+            switch response.result {
+                
+            case .success :
+                
+                if let value = response.result.value {
+                    
+                    let json = JSON(value)
+                    if let list = ItemListModel(json: json) {
+                        
+                        completion("success",list)
+                        
+                    }
+                    
+                }
+                
             case .failure(let error):
                 
                 print(error.localizedDescription)

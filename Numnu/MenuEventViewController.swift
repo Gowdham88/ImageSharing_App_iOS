@@ -118,7 +118,7 @@ extension MenuEventViewController   {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        openStoryBoard(name: Constants.EventDetail, id: Constants.MenuItemId,heading: tagarray[indexPath.row])
+        openStoryBoard(name: Constants.EventDetail, id: Constants.MenuItemId,heading: itemTagList[indexPath.row].tagtext ?? "Title")
         
     }
     
