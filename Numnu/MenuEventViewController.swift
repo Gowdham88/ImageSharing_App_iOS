@@ -118,15 +118,17 @@ extension MenuEventViewController   {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        openStoryBoard(name: Constants.EventDetail, id: Constants.MenuItemId,heading: itemTagList[indexPath.row].tagtext ?? "Title")
+        openStoryBoard(name: Constants.EventDetail, id: Constants.MenuItemId,heading: itemTagList[indexPath.row].tagtext ?? "Title", eventid: 34,tagid: itemTagList[indexPath.row].tagid ?? 0)
         
     }
     
-    func openStoryBoard (name : String,id : String,heading : String) {
+    func openStoryBoard (name : String,id : String,heading : String,eventid : Int,tagid : Int) {
         
         let storyboard      = UIStoryboard(name: name, bundle: nil)
         let vc              = storyboard.instantiateViewController(withIdentifier: id) as! MenuItemViewController
         vc.heading          = heading
+        vc.event_id         = eventid
+        vc.tag_id           = tagid
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
@@ -171,7 +173,7 @@ extension MenuEventViewController {
     
     func getItemTag(pageno:Int,limit:Int) {
         
-        HUD.show(.progress)
+        HUD.show(.labeledProgress(title: "Loading", subtitle: ""))
         
         apiClient.getFireBaseToken(completion: { token in
             

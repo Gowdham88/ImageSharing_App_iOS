@@ -236,7 +236,7 @@ extension BusinessEventViewController {
     
     func getBussinessevent(pageno:Int,limit:Int) {
         
-        HUD.show(.progress)
+        HUD.show(.labeledProgress(title: "Loading", subtitle: ""))
         
         apiClient.getFireBaseToken(completion: { token in
             

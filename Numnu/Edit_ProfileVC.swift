@@ -1112,19 +1112,13 @@ extension Edit_ProfileVC {
                     
                     self.uploadImage(image: self.profileImage.image!, id: user.id ?? 0, completion: { imageurl in
                         
-                        if imageurl != nil {
-                            
                             PrefsManager.sharedinstance.imageURL = imageurl ?? "empty"
                             let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
                             let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
                             vc.boolForBack = false
                             vc.delegate    = self
                             self.navigationController!.pushViewController(vc, animated: true)
-                            
-                        } else {
-                          
-                        }
-                    
+                
                         
                     })
                    

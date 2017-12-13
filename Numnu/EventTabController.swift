@@ -134,7 +134,7 @@ extension EventTabController : UITableViewDelegate,UITableViewDataSource {
            
             if let pageItem = eventItem {
                 
-                if eventList.count  <= pageItem.totalRows ?? 0{
+                if eventList.count  < pageItem.totalRows ?? 0{
                     pageno += 1
                     limitno = 25 * pageno
                     getEvent(pageno: pageno, limit: limitno)
@@ -235,7 +235,7 @@ extension EventTabController {
     
     func getEvent(pageno:Int,limit:Int) {
 
-        HUD.show(.progress)
+        HUD.show(.labeledProgress(title: "Loading", subtitle: ""))
 
         apiClient.getFireBaseToken(completion: { token in
 

@@ -83,7 +83,7 @@ class  ApiClient {
                 
             case .failure(let error):
                 
-                print(error)
+                print(error.localizedDescription)
                 completion(error.localizedDescription,nil)
                 
             }
