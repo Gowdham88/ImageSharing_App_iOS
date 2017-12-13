@@ -16,6 +16,7 @@ import SwiftyJSON
 import Firebase
 import FirebaseAuth
 import PKHUD
+import Nuke
 
 class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegateFlowLayout {
     var dropdownArray = [String] ()
@@ -299,6 +300,10 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 }
                 
             }
+        } else {
+            
+            setdetailsfromlogin()
+            
         }
         
         
@@ -1233,6 +1238,35 @@ extension Edit_ProfileVC {
             
         }
      
+    }
+    
+    func setdetailsfromlogin(){
+        
+        let user = Auth.auth().currentUser
+        if let user = user {
+            
+            
+            if let email = user.email {
+                
+                emailaddress.text = email
+                
+            }
+            if let photoURL = user.photoURL {
+                
+                 Manager.shared.loadImage(with:photoURL, into: profileImage)
+                
+            }
+            
+            if let name = user.displayName {
+                
+                usernameTextField.text = name
+                nameTextfield.text     = name
+                
+            }
+            
+            
+           
+        }
     }
     
 }
