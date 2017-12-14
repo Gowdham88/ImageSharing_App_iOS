@@ -644,9 +644,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         let controller        = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
         nav1.viewControllers = [controller]
         self.tabBarController?.viewControllers?.append(nav1)
-        var myImage = UIImage(named: "profileunselected")!
-        let myInsets : UIEdgeInsets = UIEdgeInsetsMake(6, -6, 0, 0)
-        myImage = myImage.resizableImage(withCapInsets: myInsets)
+        let myImage = UIImage(named: "profileunselected")!
+        controller.tabBarItem.title        = ""
+        controller.tabBarItem.imageInsets  = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
         controller.tabBarItem = UITabBarItem(
             title: "",
             image: myImage,

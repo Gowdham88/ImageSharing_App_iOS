@@ -432,17 +432,17 @@ class  ApiClient {
     
      if let currentUser = Auth.auth().currentUser {
         
-         currentUser.getTokenForcingRefresh(true) {idToken, error in
+        currentUser.getIDToken{ idToken, error in
             if let error = error {
-              print(error.localizedDescription)
+                print(error.localizedDescription)
                 completion(error.localizedDescription)
-              return;
+                return;
             }
             
             print(idToken ?? "empty")
             completion(idToken ?? "empty")
-          
-         }
+            
+        }
             
             
      } else {
@@ -456,7 +456,7 @@ class  ApiClient {
             
             if let annoymususer = user {
                 
-                annoymususer.getTokenForcingRefresh(true) {idToken, error in
+                annoymususer.getIDToken{ idToken, error in
                     if let error = error {
                         print(error.localizedDescription)
                         completion(error.localizedDescription)
@@ -467,6 +467,8 @@ class  ApiClient {
                     completion(idToken ?? "empty")
                     
                 }
+                
+               
                 
                 
             } else {
