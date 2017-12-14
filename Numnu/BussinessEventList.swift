@@ -23,6 +23,9 @@ struct  BussinessEventList {
     var businessdescription : String?
     var businessname        : String?
     
+    var name_Str : String?
+    var id_Str   : Int?
+    
     var tagList            :   [TagList]?
     var imgList            :   [ImgList]?
     
@@ -118,6 +121,20 @@ struct  BussinessEventList {
                 
                 
             }
+        }
+        
+    }
+    
+    init?(array : JSON) {
+        
+        if let name_Str = array["name"].string {
+            
+            self.name_Str = name_Str
+        }
+        
+        if let id_Str = array["id"].int {
+            
+            self.id_Str = id_Str
         }
         
     }
