@@ -18,6 +18,9 @@
 		3FC6CEDA1F6F744700DF2A12 /* NumnuUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6CED91F6F744700DF2A12 /* NumnuUITests.swift */; };
 		3FC6CEE81F6FA17300DF2A12 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6CEE71F6FA17300DF2A12 /* HomeViewController.swift */; };
 		3FC6CEEA1F6FA25600DF2A12 /* feedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6CEE91F6FA25600DF2A12 /* feedTableViewCell.swift */; };
+		472A91DA1FE2945B0070FE0B /* PostListByEventId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472A91D91FE2945B0070FE0B /* PostListByEventId.swift */; };
+		472A91DC1FE2972F0070FE0B /* PostListDataItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472A91DB1FE2972F0070FE0B /* PostListDataItems.swift */; };
+		472A91DE1FE2A7FB0070FE0B /* PostCreatorList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472A91DD1FE2A7FB0070FE0B /* PostCreatorList.swift */; };
 		601D46771F8D205E00832BDD /* signInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601D46761F8D205E00832BDD /* signInVC.swift */; };
 		601D46791F8F3B1C00832BDD /* UserList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601D46781F8F3B1C00832BDD /* UserList.swift */; };
 		6043865C1FB052860049F971 /* FoodPreferenceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6043865B1FB052860049F971 /* FoodPreferenceCollectionViewCell.swift */; };
@@ -166,6 +169,9 @@
 		3FC6CEDB1F6F744700DF2A12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FC6CEE71F6FA17300DF2A12 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		3FC6CEE91F6FA25600DF2A12 /* feedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = feedTableViewCell.swift; sourceTree = "<group>"; };
+		472A91D91FE2945B0070FE0B /* PostListByEventId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListByEventId.swift; sourceTree = "<group>"; };
+		472A91DB1FE2972F0070FE0B /* PostListDataItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListDataItems.swift; sourceTree = "<group>"; };
+		472A91DD1FE2A7FB0070FE0B /* PostCreatorList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreatorList.swift; sourceTree = "<group>"; };
 		601D46761F8D205E00832BDD /* signInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signInVC.swift; sourceTree = "<group>"; };
 		601D46781F8F3B1C00832BDD /* UserList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserList.swift; sourceTree = "<group>"; };
 		601D467A1F8FAF4B00832BDD /* Numnu.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Numnu.entitlements; sourceTree = "<group>"; };
@@ -466,6 +472,9 @@
 			children = (
 				B4483EFD1FDEA4CA00D99E0E /* EventTypeList.swift */,
 				B4483EFF1FDEA4E500D99E0E /* EventTypeListItem.swift */,
+				472A91D91FE2945B0070FE0B /* PostListByEventId.swift */,
+				472A91DB1FE2972F0070FE0B /* PostListDataItems.swift */,
+				472A91DD1FE2A7FB0070FE0B /* PostCreatorList.swift */,
 			);
 			name = TabModel;
 			sourceTree = "<group>";
@@ -1001,9 +1010,11 @@
 				6FEB33831FC41A6F00E13505 /* Eventlist.swift in Sources */,
 				B44E1D4E1FA1B249001F754E /* MenuEventViewController.swift in Sources */,
 				B43F16CD1FC4415B00BBBF87 /* ItemList.swift in Sources */,
+				472A91DC1FE2972F0070FE0B /* PostListDataItems.swift in Sources */,
 				B44E1D531FA1BECE001F754E /* ReviewEventViewController.swift in Sources */,
 				604386601FB0A9480049F971 /* Profile_postTableViewCell.swift in Sources */,
 				B42F2A261FA9EA96002419AB /* LocationDetailcontroller.swift in Sources */,
+				472A91DE1FE2A7FB0070FE0B /* PostCreatorList.swift in Sources */,
 				B4C515881FA085BB00348E2A /* ListTabController.swift in Sources */,
 				BEF026A61FC2B5D300100392 /* SettingsEdit_ProfieViewController.swift in Sources */,
 				601D46791F8F3B1C00832BDD /* UserList.swift in Sources */,
@@ -1033,6 +1044,7 @@
 				B41530961F8BBCF1000FB369 /* UserTabController.swift in Sources */,
 				BE2E37EC1FCD6ED8000BEE63 /* LuanchScreenViewController.swift in Sources */,
 				60B4EA441FAB190300C1A6C9 /* SettingsTableViewCell.swift in Sources */,
+				472A91DA1FE2945B0070FE0B /* PostListByEventId.swift in Sources */,
 				B4B0A7DA1FD973C200566507 /* DateFormatterManager.swift in Sources */,
 				B42214951FC2CDAB00FD56B0 /* IPChecker.m in Sources */,
 				BE76CD221FCC219700F6811C /* UserTableViewCell.swift in Sources */,

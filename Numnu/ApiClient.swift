@@ -253,6 +253,37 @@ class  ApiClient {
     }
     
     
+    /*********************************PostsByEventId********************************************************/
+    func PostsByEventId(parameters : Parameters,completion : @escaping (String,PostListByEventId?) -> Void) {
+        
+        Alamofire.request(Constants.PostsByEventId, method: .get, parameters: parameters,encoding: JSONEncoding.default).validate().responseJSON { response in
+            
+            switch response.result {
+                
+            case .success:
+                
+                if let value = response.result.value {
+                    
+                    let json = JSON(value)
+                    if let itemList = PostListByEventId(json: json) {
+                        
+                        completion("success",itemList)
+                    }
+                    
+                }
+                
+                
+            case .failure(let error):
+                
+                print(error)
+                completion(error.localizedDescription,nil)
+                
+            }
+            
+        }
+        
+    }
+    
     
     /********************************getItemTag based Event*************************************************/
     
