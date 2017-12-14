@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Nuke
 
 protocol postEventDetailTableViewCellDelegate {
     
@@ -104,6 +105,89 @@ class postEventDetailTableViewCell : UITableViewCell {
             
         }
         
+    }
+    
+    var item : PostListDataItems! {
+        didSet {
+            
+            if let posttag = item.postcreator{
+                if let postusername = posttag.name {
+                    postDtUsernameLabel.text = postusername
+
+                }
+                if let userimageList = posttag.userimages {
+                    
+                    if userimageList.count > 0 {
+                        
+                        let apiclient = ApiClient()
+                        apiclient.getFireBaseImageUrl(imagepath: userimageList[userimageList.count-1].imageurl_str!, completion: { url in
+                            
+                            self.postDtUserImage.image = nil
+                            Manager.shared.loadImage(with: URL(string : url)!, into: self.postDtUserImage)
+                            
+                        })
+                        
+                    }
+                    
+                }
+                
+            }
+            if let location = item.location{
+                if let locationame = location.name_str {
+                    postDtUserplaceLabbel.text = locationame
+                    
+                }
+            }
+
+          
+            if let postimagelist = item.postimages {
+                
+                if postimagelist.count > 0 {
+                    
+                    let apiclient = ApiClient()
+                    apiclient.getFireBaseImageUrl(imagepath: postimagelist[postimagelist.count-1].imageurl_str!, completion: { url in
+                        
+                        self.postDtEventImage.image = nil
+                        Manager.shared.loadImage(with: URL(string : url)!, into: self.postDtEventImage)
+                        
+                    })
+                    
+                }
+                
+            }
+            
+            if let rating = item.rating {
+                
+                
+            }
+            
+            if let event = item.event{
+                if let eventname = event.name {
+                    postDtEventPlace.text = eventname
+                    
+                }
+            }
+            
+            if let business = item.business{
+                if let businessname = business.businessname {
+                    postDtEventName.text = businessname
+                    
+                }
+            }
+            
+            if let taggeditem = item.taggedItemName{
+               
+                    postDtEventDishLabel.text = taggeditem
+                    
+                
+            }
+            
+            if let commentname = item.comment {
+                postDtvCommentLabel.text = commentname
+                
+            }
+            
+        }
     }
 
 }
