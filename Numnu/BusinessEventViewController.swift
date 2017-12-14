@@ -35,9 +35,7 @@ class BusinessEventViewController: UIViewController,IndicatorInfoProvider {
     var bussinessModel  : BusinessEventModel?
     var pageno  : Int = 1
     var limitno : Int = 25
-    
    
-    
     
     override func viewDidLoad() {
         
@@ -238,7 +236,7 @@ extension BusinessEventViewController {
     
     func getBussinessevent(pageno:Int,limit:Int) {
         
-        HUD.show(.progress)
+        HUD.show(.labeledProgress(title: "Loading", subtitle: ""))
         
         apiClient.getFireBaseToken(completion: { token in
             

@@ -357,7 +357,10 @@ extension signInVC {
                 
             } else {
                 
-                 HUD.hide()
+                 DispatchQueue.main.async {
+                    HUD.hide()
+                    self.authenticationError(error: "Login failed.")
+                }
                 
             }
             

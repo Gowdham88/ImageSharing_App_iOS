@@ -16,6 +16,7 @@ import SwiftyJSON
 import Firebase
 import FirebaseAuth
 import PKHUD
+import Nuke
 
 class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegateFlowLayout {
     var dropdownArray = [String] ()
@@ -299,6 +300,10 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 }
                 
             }
+        } else {
+            
+            setdetailsfromlogin()
+            
         }
         
         
@@ -639,9 +644,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         let controller        = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
         nav1.viewControllers = [controller]
         self.tabBarController?.viewControllers?.append(nav1)
-        var myImage = UIImage(named: "profileunselected")!
-        let myInsets : UIEdgeInsets = UIEdgeInsetsMake(6, -6, 0, 0)
-        myImage = myImage.resizableImage(withCapInsets: myInsets)
+        let myImage = UIImage(named: "profileunselected")!
+        controller.tabBarItem.title        = ""
+        controller.tabBarItem.imageInsets  = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
         controller.tabBarItem = UITabBarItem(
             title: "",
             image: myImage,
@@ -1112,18 +1117,13 @@ extension Edit_ProfileVC {
                     
                     self.uploadImage(image: self.profileImage.image!, id: user.id ?? 0, completion: { imageurl in
                         
-                        if imageurl != nil {
-                            
+                            PrefsManager.sharedinstance.imageURL = imageurl ?? "empty"
                             let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
                             let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
                             vc.boolForBack = false
                             vc.delegate    = self
                             self.navigationController!.pushViewController(vc, animated: true)
-                            
-                        } else {
-                          
-                        }
-                    
+                
                         
                     })
                    
@@ -1196,6 +1196,27 @@ extension Edit_ProfileVC {
             
         }
         
+        if let userImagesList = user.imgList {
+            
+            if userImagesList.count > 0 {
+                
+                PrefsManager.sharedinstance.imageURL = userImagesList[userImagesList.count-1].imageurl_str ?? "empty"
+                
+            }
+            
+        }
+        
+        if let taglist = user.tagList {
+            
+            PrefsManager.sharedinstance.tagList = taglist
+        }
+        
+        if let locitem = user.locItem {
+            
+            PrefsManager.sharedinstance.userCity = "\(locitem.address_str ?? "Address")"
+            
+        }
+        
         PrefsManager.sharedinstance.isLoginned = true
     
     }
@@ -1217,6 +1238,35 @@ extension Edit_ProfileVC {
             
         }
      
+    }
+    
+    func setdetailsfromlogin(){
+        
+        let user = Auth.auth().currentUser
+        if let user = user {
+            
+            
+            if let email = user.email {
+                
+                emailaddress.text = email
+                
+            }
+            if let photoURL = user.photoURL {
+                
+                 Manager.shared.loadImage(with:photoURL, into: profileImage)
+                
+            }
+            
+            if let name = user.displayName {
+                
+                usernameTextField.text = name
+                nameTextfield.text     = name
+                
+            }
+            
+            
+           
+        }
     }
     
 }

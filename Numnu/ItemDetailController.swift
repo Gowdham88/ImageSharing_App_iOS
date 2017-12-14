@@ -387,7 +387,7 @@ extension ItemDetailController {
     
     func getItemIdApi() {
         
-        HUD.show(.progress)
+        HUD.show(.labeledProgress(title: "Loading", subtitle: ""))
         
         apiClient.getFireBaseToken(completion: { token in
             

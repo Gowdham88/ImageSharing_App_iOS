@@ -17,6 +17,7 @@ struct ItemList {
     var description     : String?
     var displayorder    : Int?
     var businessuserid  : Int?
+    var businessname    : String?
     var updatedat       : String?
     var createdat       : String?
     var createdby       : Int?
@@ -53,6 +54,11 @@ struct ItemList {
         if let businessuserid = json["businessuserid"].int {
             
             self.businessuserid = businessuserid
+        }
+        
+        if let businessname  = json["businessname"].string {
+            
+            self.businessname = businessname
         }
         
         if let createdat = json["createdat"].string {

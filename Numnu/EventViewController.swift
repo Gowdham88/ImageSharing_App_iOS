@@ -124,7 +124,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     }
     func MethodToCallApi(){
         
-        HUD.show(.progress)
+        HUD.show(.labeledProgress(title: "Loading", subtitle: ""))
         
         let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
         
