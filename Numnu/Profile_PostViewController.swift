@@ -50,6 +50,7 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
             [NSForegroundColorAttributeName: UIColor.black,
              NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
         userImage.layer.cornerRadius = self.userImage.frame.size.height/2
+        userImage.contentMode = .scaleAspectFill
         userImage.clipsToBounds = true
         alertTapRegister()
         
