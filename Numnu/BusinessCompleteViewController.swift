@@ -8,6 +8,9 @@
 
 import UIKit
 import XLPagerTabStrip
+import Nuke
+import Alamofire
+import PKHUD
 
 class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
     
@@ -29,7 +32,7 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
     @IBOutlet weak var shareView: UIView!
     @IBOutlet weak var mainContainerViewBottom: NSLayoutConstraint!
     @IBOutlet weak var mainContainerView: NSLayoutConstraint!
-    var tagarray = ["Festival","Wine","Party","Rum","Barbaque","Pasta","Sandwich","Burger"]
+    var tagarray = [String]()
     
     /***************contraints***********************/
     
@@ -40,6 +43,9 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
     /***************Read more variable*********************/
     
     var isLabelAtMaxHeight = false
+    
+    var token_str     : String = "empty"
+    var apiClient     : ApiClient!
 
     override func viewDidLoad() {
        settings.style.selectedBarHeight = 3.0
@@ -80,25 +86,14 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
         
         tapRegistration()
         alertTapRegister()
+        myscrollView.isHidden = true
         
-        tagViewUpdate()
         
-        BcDescriptionLabel.text = Constants.dummy
         
-        /****************Checking number of lines************************/
+        apiClient = ApiClient()
         
-        if (BcDescriptionLabel.numberOfVisibleLines > 4) {
-            
-            readMoreButton.isHidden = false
-            
-        } else {
-            
-            readMoreButton.isHidden         = true
-            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: BcDescriptionLabel.frame.width, font: BcDescriptionLabel.font)
-            containerViewTop.constant  = 8
-            barButtonTop.constant      = 8
-        }
-        
+        getFirebaseToken()
+
        
 
         // Do any additional setup after loading the view.
@@ -158,7 +153,8 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
             
             readMoreButton.setTitle("less", for: .normal)
             isLabelAtMaxHeight = true
-            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: BcDescriptionLabel.frame.width, font: BcDescriptionLabel.font)
+           
+            
             
         }
         
@@ -355,4 +351,113 @@ extension BusinessCompleteViewController : EventTabControllerDelegate {
     }
     
     
+}
+
+extension BusinessCompleteViewController {
+    
+    func getFirebaseToken() {
+        
+        apiClient.getFireBaseToken(completion:{ token in
+            
+            self.token_str = token
+            self.MethodToCallApi()
+            
+        })
+        
+    }
+    func MethodToCallApi(){
+        
+        HUD.show(.labeledProgress(title: "Loading", subtitle: ""))
+        
+        let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
+        
+        apiClient.getBusinessById(id : 50,headers: header, completion: { status,Values in
+            
+            if status == "success" {
+                if let response = Values {
+                    
+                    HUD.hide()
+                    
+                    DispatchQueue.main.async {
+                        
+                        self.getDetails(response:response)
+                        
+                    }
+                    
+                }
+                
+            } else {
+                print("json respose failure:::::::")
+                HUD.hide()
+                DispatchQueue.main.async {
+                    
+                    self.myscrollView.isHidden = true
+                    
+                }
+                
+            }
+        })
+    }
+    func getDetails(response:BusinessDetailModel) {
+        
+        if let name = response.businessname {
+            BcTitleLabel.text = name
+        }
+        
+        if let description = response.businessdescription {
+            BcDescriptionLabel.text = description
+        }
+        
+       
+        
+        if let taglist = response.taglist {
+            if taglist.count > 0 {
+                for item in taglist {
+                    if let tagname = item.text_str {
+                        tagarray.append(tagname)
+                    }
+                }
+                tagViewUpdate()
+            }
+        }
+        
+       
+        if let imglist = response.imagelist {
+            if imglist.count > 0 {
+                if let url = imglist[imglist.count-1].imageurl_str {
+                    
+                    apiClient.getFireBaseImageUrl(imagepath: url, completion: { imageUrl in
+                        
+                        if imageUrl != "empty" {
+                            
+                            Manager.shared.loadImage(with: URL(string : imageUrl)!, into: self.BcImageView)
+                        }
+                        
+                    })
+                    
+                    
+                }
+            }
+        }
+        
+        /****************Checking number of lines************************/
+        
+        if (BcDescriptionLabel.numberOfVisibleLines > 4) {
+            
+            readMoreButton.isHidden = false
+            
+        } else {
+            
+            readMoreButton.isHidden   = true
+            containerViewTop.constant = 8
+            barButtonTop.constant     = 8
+            if let description = response.businessdescription {
+                eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: description, width: BcDescriptionLabel.frame.width, font: BcDescriptionLabel.font)
+            }
+            
+            
+        }
+        
+        self.myscrollView.isHidden = false
+    }
 }

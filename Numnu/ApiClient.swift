@@ -426,6 +426,41 @@ class  ApiClient {
         
     }
     
+    /********************************getItemsbasedid*************************************************/
+    
+    func getBusinessById(id : Int,headers : HTTPHeaders,completion : @escaping (String,BusinessDetailModel?)-> Void) {
+        
+        Alamofire.request("\(Constants.BusinessDetailApi)/\(id)", method: .get,encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            
+            print(response.request as Any)
+            print(response.result.value as Any)
+            
+            switch response.result {
+                
+            case .success :
+                
+                if let value = response.result.value {
+                    
+                    let json = JSON(value)
+                    if let businesList = BusinessDetailModel(json: json) {
+                        
+                        completion("success",businesList)
+                    }
+                    
+                }
+                
+                
+            case .failure(let error):
+                
+                print(error.localizedDescription)
+                completion(error.localizedDescription,nil)
+                
+            }
+            
+        }
+        
+    }
+    
     /************************Events Api**********************************/
     func getEventsTypesApi(parameters : Parameters,completion : @escaping (String,EventTypeList?) -> Void) {
         

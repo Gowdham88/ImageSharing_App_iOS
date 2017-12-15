@@ -140,6 +140,7 @@ class Constants {
     static let ItemsApiUrl     = "https://numnu-server-dev.appspot.com/items"
     static let EventTypeApiUrl = "https://numnu-server-dev.appspot.com/eventtypes"
     static let PostsByEventId  = "https://numnu-server-dev.appspot.com/events/34/posts"
+    static let BusinessDetailApi  = "https://numnu-server-dev.appspot.com/businesses"
     
     static let CheckUserName = "https://numnu-server-dev.appspot.com/users"
     
