@@ -108,6 +108,20 @@ struct  BussinessEventList {
             }
         }
         
+        /**********************************   business image   *********************************************************/
+        if let imgArray = json["businessimages"].array {
+            
+            for item in imgArray {
+                
+                let imgItem = ImgList(array: item)
+                if imgList == nil {
+                    imgList = []
+                }
+                imgList?.append(imgItem)
+                
+            }
+        }
+        
         /****************************************** tag *********************************************************/
         if let tagArray = json["tags"].array {
             

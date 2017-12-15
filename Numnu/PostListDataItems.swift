@@ -51,9 +51,7 @@ struct PostListDataItems {
             
         }
         
-       
-    
-    
+      
         if let tagitems = json["tags"].array {
             
             for item in tagitems {
@@ -111,14 +109,14 @@ struct PostListDataItems {
         }
         
         let event = JSON(json["event"])
-        if let event = EventList(array: event) {
+        if let event = EventList(json: event) {
             
             self.event = event
             
         }
         
         let business = JSON(json["business"])
-        if let business = BussinessEventList(array: business) {
+        if let business = BussinessEventList(json: business) {
             
             self.business = business
             

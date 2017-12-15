@@ -69,8 +69,6 @@ class ReviewEventViewController: UIViewController,IndicatorInfoProvider {
 //        apiClient.getEventsDetailsApi(headers: header, completion: { status,Values in
             self.apiClient.PostsByEventId(id: 34, page: param, headers: header, completion: { status,Values in
     
-           
-                    
                     if status == "success" {
                         
                         if let itemlist = Values {
@@ -159,8 +157,9 @@ extension ReviewEventViewController : UITableViewDelegate,UITableViewDataSource 
         cell.postDtEventBookMark.tag = indexPath.row
         cell.setHeight(heightview : Float(UIScreen.main.bounds.size.height))
         
-        let posteventImagetap = UITapGestureRecognizer(target: self, action: #selector(getter: postEventDetailTableViewCell.postDtEventImage))
+        let posteventImagetap = UITapGestureRecognizer(target: self, action: #selector(postDtEventImages(sender:)))
         cell.postDtEventImage.addGestureRecognizer(posteventImagetap)
+        cell.postDtEventImage.tag = indexPath.row
         cell.postDtEventImage.isUserInteractionEnabled = true
         
         //icon tap dish
@@ -177,9 +176,7 @@ extension ReviewEventViewController : UITableViewDelegate,UITableViewDataSource 
         let eventImageTap = UITapGestureRecognizer(target: self, action: #selector(getter: postEventDetailTableViewCell.eventImageTap))
         cell.eventImageTap.addGestureRecognizer(eventImageTap)
         cell.eventImageTap.isUserInteractionEnabled = true
-        
-        
-        
+  
         let posteventplacetap = UITapGestureRecognizer(target: self, action:#selector(getter: postEventDetailTableViewCell.postDtEventPlace))
         cell.postDtEventPlace.addGestureRecognizer(posteventplacetap)
         cell.postDtEventPlace.isUserInteractionEnabled = true
@@ -243,9 +240,11 @@ extension ReviewEventViewController : UITableViewDelegate,UITableViewDataSource 
         }
     }
    
-    func postDtEventImage() {
+    func postDtEventImages(sender: UITapGestureRecognizer) {
+        var tag        = sender.view!.tag
         let storyboard = UIStoryboard(name: Constants.PostDetail, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: "postdetailid")
+        let vc         = storyboard.instantiateViewController(withIdentifier: "postdetailid") as! PostDetailViewController
+        vc.item        = postList[tag]
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
@@ -368,4 +367,5 @@ extension ReviewEventViewController : postEventDetailTableViewCellDelegate {
         self.present(optionMenu, animated: true, completion: nil)
         
     }
+    
 }

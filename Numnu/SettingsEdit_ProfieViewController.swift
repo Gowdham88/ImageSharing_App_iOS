@@ -515,8 +515,8 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             if isValidEmail(testStr: Email as String) == true {
                 PrefsManager.sharedinstance.isLoginned = true
                 let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
-                let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
-                vc.delegate    = self
+                let vc         = storyboard.instantiateViewController(withIdentifier: "SettingsVC") as! SettingsViewController
+                vc.delegate    = self as? SettingsViewControllerDelegate
                 self.navigationController!.pushViewController(vc, animated: true)
                 
             }else {

@@ -28,7 +28,7 @@ class postEventDetailTableViewCell : UITableViewCell {
     @IBOutlet weak var postDtEventPlace: UILabel!
     @IBOutlet weak var postDtEventDishLabel: UILabel!
     @IBOutlet weak var postDtEventBookMark: UIButton!
-    
+    var getList = [String]()
     @IBOutlet var itemImageTap: ImageExtender!
     @IBOutlet var businessImageTap: ImageExtender!
     @IBOutlet var eventImageTap: ImageExtender!
@@ -111,9 +111,13 @@ class postEventDetailTableViewCell : UITableViewCell {
         didSet {
             
             if let posttag = item.postcreator{
-                if let postusername = posttag.name {
-                    postDtUsernameLabel.text = postusername
+                if let postuser = posttag.name {
+                    postDtUsernameLabel.text = postuser
 
+                }
+                if let postusername = posttag.username {
+                    postDtUserplaceLabbel.text = "@\(postusername)"
+                    
                 }
                 if let userimageList = posttag.userimages {
                     
@@ -132,12 +136,12 @@ class postEventDetailTableViewCell : UITableViewCell {
                 }
                 
             }
-            if let location = item.location{
-                if let locationame = location.name_str {
-                    postDtUserplaceLabbel.text = locationame
-                    
-                }
-            }
+//            if let location = item.location{
+//                if let locationame = location.name_str {
+//                    postDtUserplaceLabbel.text = locationame
+//
+//                }
+//            }
 
           
             if let postimagelist = item.postimages {
@@ -157,28 +161,38 @@ class postEventDetailTableViewCell : UITableViewCell {
             }
             
             if let rating = item.rating {
-                
-                
+                if rating == 1 {
+                    postDtLikeImage.image = UIImage(named:"rating1")
+
+                }else if rating == 2 {
+                    postDtLikeImage.image = UIImage(named:"rating2")
+                }else if rating == 3 {
+                    postDtLikeImage.image = UIImage(named:"rating3")
+
+                }else{
+                    
+                }
+
             }
             
             if let event = item.event{
                 if let eventname = event.name {
-                    postDtEventPlace.text = eventname
+                    postDtEventName.text = eventname
                     
                 }
             }
             
             if let business = item.business{
                 if let businessname = business.businessname {
-                    postDtEventName.text = businessname
+                    postDtEventDishLabel.text = businessname
                     
                 }
             }
             
             if let taggeditem = item.taggedItemName{
                
-                    postDtEventDishLabel.text = taggeditem
-                    
+                    postDtEventPlace.text = taggeditem
+                
                 
             }
             
