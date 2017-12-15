@@ -254,9 +254,9 @@ class  ApiClient {
     
     
     /*********************************PostsByEventId********************************************************/
-    func PostsByEventId(parameters : Parameters,completion : @escaping (String,PostListByEventId?) -> Void) {
+    func PostsByEventId(id : Int,page : String,headers: HTTPHeaders,completion : @escaping (String,PostListByEventId?) -> Void) {
         
-        Alamofire.request(Constants.PostsByEventId, method: .get, parameters: parameters,encoding: JSONEncoding.default).validate().responseJSON { response in
+        Alamofire.request("\(Constants.EventApiUrl)/\(id)/posts?\(page)", method: .get, encoding: JSONEncoding.default,headers: headers).validate().responseJSON { response in
             
             switch response.result {
                 

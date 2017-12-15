@@ -21,6 +21,9 @@ struct PostListDataItems {
     var postimages : [ImgList]?
     var event : EventList?
     var business : BussinessEventList?
+    var postcreator : PostCreatorList?
+    var taggedItemName : String?
+    var taggedItemId   : Int?
     
     init?(json: JSON) {
     
@@ -48,9 +51,7 @@ struct PostListDataItems {
             
         }
         
-       
-    
-    
+      
         if let tagitems = json["tags"].array {
             
             for item in tagitems {
@@ -63,6 +64,24 @@ struct PostListDataItems {
                 }
                 
                 tags?.append(taglistItem)
+                
+            }
+            
+        }
+        if let tagitemname = json["taggeditems"].array {
+            
+            for item in tagitemname {
+                
+                if let name = item["name"].string {
+                    
+                    self.taggedItemName = name
+                    
+                }
+                if let taggedid = item["id"].int {
+                    
+                    self.taggedItemId = taggedid
+                    
+                }
                 
             }
             
@@ -90,19 +109,24 @@ struct PostListDataItems {
         }
         
         let event = JSON(json["event"])
-        if let event = EventList(array: event) {
+        if let event = EventList(json: event) {
             
             self.event = event
             
         }
         
         let business = JSON(json["business"])
-        if let business = BussinessEventList(array: business) {
+        if let business = BussinessEventList(json: business) {
             
             self.business = business
             
         }
-    
+        let postr = JSON(json["postcreator"])
+        if let postcreator = PostCreatorList(json: postr) {
+            
+            self.postcreator = postcreator
+            
+        }
     
     
     }

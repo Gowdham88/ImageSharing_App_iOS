@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Nuke
 
 protocol postEventDetailTableViewCellDelegate {
     
@@ -27,7 +28,7 @@ class postEventDetailTableViewCell : UITableViewCell {
     @IBOutlet weak var postDtEventPlace: UILabel!
     @IBOutlet weak var postDtEventDishLabel: UILabel!
     @IBOutlet weak var postDtEventBookMark: UIButton!
-    
+    var getList = [String]()
     @IBOutlet var itemImageTap: ImageExtender!
     @IBOutlet var businessImageTap: ImageExtender!
     @IBOutlet var eventImageTap: ImageExtender!
@@ -104,6 +105,103 @@ class postEventDetailTableViewCell : UITableViewCell {
             
         }
         
+    }
+    
+    var item : PostListDataItems! {
+        didSet {
+            
+            if let posttag = item.postcreator{
+                if let postuser = posttag.name {
+                    postDtUsernameLabel.text = postuser
+
+                }
+                if let postusername = posttag.username {
+                    postDtUserplaceLabbel.text = "@\(postusername)"
+                    
+                }
+                if let userimageList = posttag.userimages {
+                    
+                    if userimageList.count > 0 {
+                        
+                        let apiclient = ApiClient()
+                        apiclient.getFireBaseImageUrl(imagepath: userimageList[userimageList.count-1].imageurl_str!, completion: { url in
+                            
+                            self.postDtUserImage.image = nil
+                            Manager.shared.loadImage(with: URL(string : url)!, into: self.postDtUserImage)
+                            
+                        })
+                        
+                    }
+                    
+                }
+                
+            }
+//            if let location = item.location{
+//                if let locationame = location.name_str {
+//                    postDtUserplaceLabbel.text = locationame
+//
+//                }
+//            }
+
+          
+            if let postimagelist = item.postimages {
+                
+                if postimagelist.count > 0 {
+                    
+                    let apiclient = ApiClient()
+                    apiclient.getFireBaseImageUrl(imagepath: postimagelist[postimagelist.count-1].imageurl_str!, completion: { url in
+                        
+                        self.postDtEventImage.image = nil
+                        Manager.shared.loadImage(with: URL(string : url)!, into: self.postDtEventImage)
+                        
+                    })
+                    
+                }
+                
+            }
+            
+            if let rating = item.rating {
+                if rating == 1 {
+                    postDtLikeImage.image = UIImage(named:"rating1")
+
+                }else if rating == 2 {
+                    postDtLikeImage.image = UIImage(named:"rating2")
+                }else if rating == 3 {
+                    postDtLikeImage.image = UIImage(named:"rating3")
+
+                }else{
+                    
+                }
+
+            }
+            
+            if let event = item.event{
+                if let eventname = event.name {
+                    postDtEventName.text = eventname
+                    
+                }
+            }
+            
+            if let business = item.business{
+                if let businessname = business.businessname {
+                    postDtEventDishLabel.text = businessname
+                    
+                }
+            }
+            
+            if let taggeditem = item.taggedItemName{
+               
+                    postDtEventPlace.text = taggeditem
+                
+                
+            }
+            
+            if let commentname = item.comment {
+                postDtvCommentLabel.text = commentname
+                
+            }
+            
+        }
     }
 
 }

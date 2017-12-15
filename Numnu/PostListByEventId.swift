@@ -22,33 +22,34 @@ struct  PostListByEventId {
     var data  : [PostListDataItems]?
     
     init?(json: JSON) {
+        let jsonpage = JSON(json["pagination"])
   
-        if let currentPage = json["currentPage"].int {
+        if let currentPage = jsonpage["currentPage"].int {
             
             self.currentPage  = currentPage
         }
     
-        if let limit = json["limit"].int {
+        if let limit = jsonpage["limit"].int {
             
             self.limit  = limit
         }
         
-        if let hasPreviousPages = json["hasPreviousPages"].bool {
+        if let hasPreviousPages = jsonpage["hasPreviousPages"].bool {
             
             self.hasPreviousPages  = hasPreviousPages
         }
         
-        if let hasMore = json["hasMore"].bool {
+        if let hasMore = jsonpage["hasMore"].bool {
             
             self.hasMore  = hasMore
         }
         
-        if let totalRows = json["totalRows"].int {
+        if let totalRows = jsonpage["totalRows"].int {
             
             self.totalRows  = totalRows
         }
         
-        if let totalPages = json["totalPages"].int {
+        if let totalPages = jsonpage["totalPages"].int {
             
             self.totalPages  = totalPages
         }

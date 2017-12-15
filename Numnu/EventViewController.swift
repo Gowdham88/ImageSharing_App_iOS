@@ -129,6 +129,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
         let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
         
         apiClient.getEventsDetailsApi(id : 34,headers: header, completion: { status,Values in
+            
             if status == "success" {
                 if let response = Values {
                     
