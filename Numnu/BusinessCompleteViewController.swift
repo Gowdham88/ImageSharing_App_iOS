@@ -119,7 +119,8 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
     func centerImagetap() {
         
         let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: "PostImageZoomViewController")
+        let vc         = storyboard.instantiateViewController(withIdentifier: "PostImageZoomViewController") as! PostImageZoomViewController
+        vc.imagePassed = BcImageView.image!
         self.navigationController?.present(vc, animated: true, completion: nil)
     }
     override func didReceiveMemoryWarning() {

@@ -15,17 +15,19 @@ class ForgotpasswordVC: UIViewController {
 
     @IBOutlet weak var forgotpassEmail: UITextField!
     @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet var forgotview: UIView!
+    @IBOutlet var emaillabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         errorLabel.isHidden = true
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
-
         
         // Do any additional setup after loading the view.
     }
-
+    
+    
     @IBAction func resetPassword(_ sender: UIButton) {
                self.view.endEditing(true)
           if let email = forgotpassEmail.text, email != "" {
@@ -39,7 +41,7 @@ class ForgotpasswordVC: UIViewController {
                     sender.isEnabled = false
 
 //                 self.showAlertMessagepop(title: "Password reset email sent")
-                   let Alert = UIAlertController(title: "Success", message: "Password reset link sent to email", preferredStyle: UIAlertControllerStyle.alert)
+                   let Alert = UIAlertController(title: "Success", message: "A reset link has been sent to your email", preferredStyle: UIAlertControllerStyle.alert)
                     let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) { _ in
                         self.popNav()
                     }
@@ -76,7 +78,24 @@ class ForgotpasswordVC: UIViewController {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         errorLabel.isHidden = true
+        
+        //        passwordInfoLabel.isHidden = true
+        
+        if textField == forgotpassEmail  {
+            
+            emaillabel.textColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
+            forgotview.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
+        }else{}
     }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == forgotpassEmail {
+            
+            emaillabel.textColor = UIColor(red: 129/255.0, green: 125/255.0, blue: 144/255.0, alpha: 1.0)
+            forgotview.backgroundColor = UIColor(red: 229/255.0, green: 229/255.0, blue: 229/255.0, alpha: 1.0)
+        } else{}
+        
+    }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
