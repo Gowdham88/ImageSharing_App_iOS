@@ -112,159 +112,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
         getFirebaseToken()
    
     }
-    func getFirebaseToken() {
-        
-        apiClient.getFireBaseToken(completion:{ token in
-            
-            self.token_str = token
-             self.MethodToCallApi()
-            
-        })
-        
-    }
-    func MethodToCallApi(){
-        
-        HUD.show(.labeledProgress(title: "Loading", subtitle: ""))
-        
-        let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
-        
-        apiClient.getEventsDetailsApi(id : 34,headers: header, completion: { status,Values in
-            
-            if status == "success" {
-                if let response = Values {
-                    
-                    HUD.hide()
-                    
-                    DispatchQueue.main.async {
-                        
-                        self.getDetails(response:response)
-                        
-                    }
-                    
-                }
-                
-            } else {
-                print("json respose failure:::::::")
-                 HUD.hide()
-                DispatchQueue.main.async {
-                    
-                    self.myscrollView.isHidden = true
-                    
-                }
-                
-            }
-        })
-    }
-    func getDetails(response:EventList) {
-      
-        if let name = response.name {
-          eventTitleLabel.text = name
-        }
-        
-        if let description = response.description {
-            eventDescriptionLabel.text = description
-        }
-        
-        if let startsat = response.startsat {
-            print(startsat)
-            if response.startsat != nil {
-//                eventDateLabel.text = PrefsManager.sharedinstance.startsat + "-" + (PrefsManager.sharedinstance.endsat)
-            }
-        }
-        
-        if let endsat = response.endsat {
-            print(endsat)
-            if response.endsat != nil {
-            
-                let formatter = DateFormatter()
-                formatter.locale = Locale(identifier: "en_US_POSIX")
-                formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-                let date = formatter.date(from: endsat)
-                let date2 = formatter.date(from: response.startsat!)
-
-                print("date: \(String(describing: date))")
-                print("date: \(String(describing: date2))")
-
-                formatter.dateFormat = "MMM dd,h:mm a"
-                let dateString = formatter.string(from: date!)
-                let dateString2 = formatter.string(from: date2!)
-                eventDateLabel.text = dateString2 + " - " + dateString
-                print("datestring:::::",dateString,dateString2)
-            }
-        }
-        
-        
-        if let eventLinkList = response.eventLinkList {
-            if  eventLinkList.count > 0 {
-                EventLinkLabel1.text = eventLinkList[0].linktext
-                MyVariables.link1 = eventLinkList[0].weblink!
-                
-            }
-            if eventLinkList.count > 1 {
-                eventLinkLabel2.text = eventLinkList[1].linktext
-                MyVariables.link2 = eventLinkList[1].weblink!
-
-
-            }
-        }
- 
-        
-        if let taglist = response.taglist {
-            if taglist.count > 0 {
-                for item in taglist {
-                        if let tagname = item.text_str {
-                            tagarray.append(tagname)
-                        }
-                }
-                tagViewUpdate()
-            }
-        }
-        
-        if let loclist = response.loclist {
-            if response.loclist != nil {
-                eventPlaceLabel.text    = loclist.name_str
-                MyVariables.fetchedLat  = loclist.lattitude_str!
-                MyVariables.fetchedLong = loclist.longitude_str!
-                MyVariables.markerTitle = loclist.name_str!
-                print("lat and lon values are:::::",MyVariables.fetchedLat,MyVariables.fetchedLong)
-            }
-        }
-        
-        if let imglist = response.imagelist {
-            if imglist.count > 0 {
-                if let url = imglist[imglist.count-1].imageurl_str {
-                    
-                    apiClient.getFireBaseImageUrl(imagepath: url, completion: { imageUrl in
-                        
-                        if imageUrl != "empty" {
-                            
-                            Manager.shared.loadImage(with: URL(string : imageUrl)!, into: self.eventImageView)
-                        }
-                        
-                    })
-                    
-                    
-                }
-            }
-        }
-        
-        /****************Checking number of lines************************/
-        
-        if (eventDescriptionLabel.numberOfVisibleLines > 4) {
-            
-            readMoreButton.isHidden = false
-            
-        } else {
-            
-            readMoreButton.isHidden   = true
-            containerViewTop.constant = 8
-            barButtonTop.constant     = 8
-            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
-            
-        }
-        
-        self.myscrollView.isHidden = false
-    }
+    
     
    
     override func viewWillAppear(_ animated: Bool) {
@@ -333,7 +181,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
             
             readMoreButton.setTitle("less", for: .normal)
             isLabelAtMaxHeight = true
-            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
+            
            
         }
         
@@ -560,6 +408,164 @@ extension EventViewController : MenuEventViewControllerDelegate {
         mainContainerViewBottom.constant = 0
     }
     
+}
+
+extension EventViewController {
+    
+    func getFirebaseToken() {
+        
+        apiClient.getFireBaseToken(completion:{ token in
+            
+            self.token_str = token
+            self.MethodToCallApi()
+            
+        })
+        
+    }
+    func MethodToCallApi(){
+        
+        HUD.show(.labeledProgress(title: "Loading", subtitle: ""))
+        
+        let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
+        
+        apiClient.getEventsDetailsApi(id : 34,headers: header, completion: { status,Values in
+            
+            if status == "success" {
+                if let response = Values {
+                    
+                    HUD.hide()
+                    
+                    DispatchQueue.main.async {
+                        
+                        self.getDetails(response:response)
+                        
+                    }
+                    
+                }
+                
+            } else {
+                print("json respose failure:::::::")
+                HUD.hide()
+                DispatchQueue.main.async {
+                    
+                    self.myscrollView.isHidden = true
+                    
+                }
+                
+            }
+        })
+    }
+    func getDetails(response:EventList) {
+        
+        if let name = response.name {
+            eventTitleLabel.text = name
+        }
+        
+        if let description = response.description {
+            eventDescriptionLabel.text = description
+        }
+        
+        if let startsat = response.startsat {
+            print(startsat)
+            if response.startsat != nil {
+                //                eventDateLabel.text = PrefsManager.sharedinstance.startsat + "-" + (PrefsManager.sharedinstance.endsat)
+            }
+        }
+        
+        if let endsat = response.endsat {
+            print(endsat)
+            if response.endsat != nil {
+                
+                let formatter = DateFormatter()
+                formatter.locale = Locale(identifier: "en_US_POSIX")
+                formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                let date = formatter.date(from: endsat)
+                let date2 = formatter.date(from: response.startsat!)
+                
+                print("date: \(String(describing: date))")
+                print("date: \(String(describing: date2))")
+                
+                formatter.dateFormat = "MMM dd,h:mm a"
+                let dateString = formatter.string(from: date!)
+                let dateString2 = formatter.string(from: date2!)
+                eventDateLabel.text = dateString2 + " - " + dateString
+                print("datestring:::::",dateString,dateString2)
+            }
+        }
+        
+        
+        if let eventLinkList = response.eventLinkList {
+            if  eventLinkList.count > 0 {
+                EventLinkLabel1.text = eventLinkList[0].linktext
+                MyVariables.link1 = eventLinkList[0].weblink!
+                
+            }
+            if eventLinkList.count > 1 {
+                eventLinkLabel2.text = eventLinkList[1].linktext
+                MyVariables.link2 = eventLinkList[1].weblink!
+                
+                
+            }
+        }
+        
+        
+        if let taglist = response.taglist {
+            if taglist.count > 0 {
+                for item in taglist {
+                    if let tagname = item.text_str {
+                        tagarray.append(tagname)
+                    }
+                }
+                tagViewUpdate()
+            }
+        }
+        
+        if let loclist = response.loclist {
+            if response.loclist != nil {
+                eventPlaceLabel.text    = loclist.name_str
+                MyVariables.fetchedLat  = loclist.lattitude_str!
+                MyVariables.fetchedLong = loclist.longitude_str!
+                MyVariables.markerTitle = loclist.name_str!
+                print("lat and lon values are:::::",MyVariables.fetchedLat,MyVariables.fetchedLong)
+            }
+        }
+        
+        if let imglist = response.imagelist {
+            if imglist.count > 0 {
+                if let url = imglist[imglist.count-1].imageurl_str {
+                    
+                    apiClient.getFireBaseImageUrl(imagepath: url, completion: { imageUrl in
+                        
+                        if imageUrl != "empty" {
+                            
+                            Manager.shared.loadImage(with: URL(string : imageUrl)!, into: self.eventImageView)
+                        }
+                        
+                    })
+                    
+                    
+                }
+            }
+        }
+        
+        /****************Checking number of lines************************/
+        
+        if (eventDescriptionLabel.numberOfVisibleLines > 4) {
+            
+            readMoreButton.isHidden = false
+            
+        } else {
+            
+            readMoreButton.isHidden   = true
+            containerViewTop.constant = 8
+            barButtonTop.constant     = 8
+            if let description = response.description {
+            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: description, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
+            }
+        }
+        
+        self.myscrollView.isHidden = false
+    }
 }
 
 
