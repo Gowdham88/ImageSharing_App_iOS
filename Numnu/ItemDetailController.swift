@@ -51,6 +51,7 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
     /**********************************************/
     
     var apiClient : ApiClient!
+    var description_txt : String = ""
 
     override func viewDidLoad() {
         settings.style.selectedBarHeight = 3.0
@@ -151,7 +152,7 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
             
             readMoreButton.setTitle("less", for: .normal)
             isLabelAtMaxHeight = true
-            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: ItDescriptionLabel.frame.width, font: ItDescriptionLabel.font)
+            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: description_txt, width: ItDescriptionLabel.frame.width, font: ItDescriptionLabel.font)
            
         }
         
@@ -479,7 +480,11 @@ extension ItemDetailController {
         } else {
             
             readMoreButton.isHidden         = true
-            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: ItDescriptionLabel.frame.width, font: ItDescriptionLabel.font)
+            if let description = item.description {
+                eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: description, width: ItDescriptionLabel.frame.width, font: ItDescriptionLabel.font)
+                 description_txt = description
+            }
+            
             containerViewTop.constant = 8
         }
         
