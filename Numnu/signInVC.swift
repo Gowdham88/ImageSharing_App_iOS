@@ -52,7 +52,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
         self.view.addGestureRecognizer(tapGesture)
         // Do any additional setup after loading the view.
         IQKeyboardManager.sharedManager().enable = false
-    IQKeyboardManager.sharedManager().enableAutoToolbar = false
+        IQKeyboardManager.sharedManager().enableAutoToolbar = false
         if #available(iOS 11, *) {
             emailAddressTF.textContentType = UITextContentType.emailAddress
             passwordTF.textContentType = UITextContentType("")
@@ -104,8 +104,6 @@ class signInVC: UIViewController, UITextFieldDelegate {
             Auth.auth().signIn(withEmail: email, password: pwd, completion: { (user, error) in
                 
                 
-                print(error.debugDescription)
-                
                 if user != nil {
              
                     HUD.hide()
@@ -115,7 +113,9 @@ class signInVC: UIViewController, UITextFieldDelegate {
                     
                 }
                 
-                
+                print(error.debugDescription)
+                HUD.hide()
+                AlertProvider.Instance.showAlert(title: "Oops", subtitle: "Incorrect password", vc: self)
              
                 
             })
@@ -198,6 +198,22 @@ class signInVC: UIViewController, UITextFieldDelegate {
     
     @IBAction func showPassword(_ sender: Any) {
         
+        if(iconClick == true) {
+            passwordTF.isSecureTextEntry = false
+            iconClick = false
+            passwordReveal.setImage(UIImage(named: "eye-off.png"), for: .normal)
+            passwordReveal.tintColor = UIColor(red: 42/255.0, green: 42/255.0, blue: 42/255.0, alpha: 1.0)
+        } else if iconClick == false {
+            passwordTF.isSecureTextEntry = true
+            iconClick = true
+            passwordReveal.setImage(UIImage(named: "Show password icon.png"), for: .normal)
+            passwordReveal.tintColor = UIColor(red: 136/255.0, green: 143/255.0, blue: 158/255.0, alpha: 1.0)
+        }
+        
+    }
+    
+    
+    @IBAction func passwordhideTouchout(_ sender: Any) {
         if(iconClick == true) {
             passwordTF.isSecureTextEntry = false
             iconClick = false

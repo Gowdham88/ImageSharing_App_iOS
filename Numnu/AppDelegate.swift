@@ -21,6 +21,7 @@ import IQKeyboardManagerSwift
  
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    var orientationLock = UIInterfaceOrientationMask.portrait
 
     var window: UIWindow?
 
@@ -41,7 +42,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
   }
     
- 
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        return self.orientationLock
+    }
+    
+    struct AppUtility {
+        static func lockOrientation(_ orientation: UIInterfaceOrientationMask) {
+            if let delegate = UIApplication.shared.delegate as? AppDelegate {
+                delegate.orientationLock = orientation
+            }
+        }
+        
+        static func lockOrientation(_ orientation: UIInterfaceOrientationMask, andRotateTo rotateOrientation:UIInterfaceOrientation) {
+            self.lockOrientation(orientation)
+            UIDevice.current.setValue(rotateOrientation.rawValue, forKey: "orientation")
+        }
+    }
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -196,7 +212,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
  }
- 
+/*
  extension UIApplication{
     class func topViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
     
@@ -265,4 +281,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
  }
+  */
  
