@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Nuke
 
 class PostDetailViewController : UIViewController {
     
@@ -22,11 +23,9 @@ class PostDetailViewController : UIViewController {
     @IBOutlet weak var postDEventName: UILabel!
     @IBOutlet weak var postDEventPlace: UILabel!
     @IBOutlet weak var postDEventDishLabel: UILabel!
-    
     @IBOutlet var itemTap: ImageExtender!
     @IBOutlet var businessTap: ImageExtender!
     @IBOutlet var eventTap: ImageExtender!
-    
     @IBOutlet weak var dishwidthDConstaint: NSLayoutConstraint!
     @IBOutlet weak var placeWidthDConstraint: NSLayoutConstraint!
     @IBOutlet weak var dishRightDLayoutConstraint: NSLayoutConstraint!
@@ -37,6 +36,7 @@ class PostDetailViewController : UIViewController {
     @IBOutlet weak var navigationItemList: UINavigationItem!
     var window : UIWindow?
     var coverView : UIView?
+    var item : PostListDataItems!
     
     @IBOutlet weak var eventTopHeight: NSLayoutConstraint!
     @IBOutlet weak var alertviewBottomConstraints: NSLayoutConstraint!
@@ -101,10 +101,103 @@ class PostDetailViewController : UIViewController {
             eventTopHeight.constant = 52
             
         }
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = false
         self.tabBarController?.tabBar.isHidden = false
+        
+        getData()
+    }
+    func getData() {
+
+        if let posttag = item.postcreator{
+                if let postuser = posttag.name {
+                self.postDUsernameLabel.text! = postuser
+            
+                }
+            if let postusername = posttag.username {
+                self.postDUserplaceLabbel.text! = "@\(postusername)"
+                
+            }
+            
+                if let userimageList = posttag.userimages {
+            
+                    if userimageList.count > 0 {
+            
+                            let apiclient = ApiClient()
+                                    apiclient.getFireBaseImageUrl(imagepath: userimageList[userimageList.count-1].imageurl_str!, completion: { url in
+            
+                            self.postDUserImage.image = nil
+                                        Manager.shared.loadImage(with: URL(string : url)!, into: self.postDUserImage)
+            
+                                    })
+            
+                                }
+            
+                            }
+            
+                    }
+//                        if let location = item.location{
+//                            if let locationame = location.name_str {
+//                                self.postDUserplaceLabbel.text = locationame
+//            
+//                            }
+//                        }
+        
+        
+                        if let postimagelist = item.postimages {
+            
+                            if postimagelist.count > 0 {
+            
+                                let apiclient = ApiClient()
+                                apiclient.getFireBaseImageUrl(imagepath: postimagelist[postimagelist.count-1].imageurl_str!, completion: { url in
+            
+                                   self.postDEventImage.image = nil
+                                    Manager.shared.loadImage(with: URL(string : url)!, into: self.postDEventImage)
+                                })
+            
+                            }
+            
+                        }
+        
+                        if let rating = item.rating {
+                            if rating == 1 {
+                                postDLikeImage.image = UIImage(named:"rating1")
+                                
+                            }else if rating == 2 {
+                                postDLikeImage.image = UIImage(named:"rating2")
+                            }else if rating == 3 {
+                                postDLikeImage.image = UIImage(named:"rating3")
+                                
+                            }else{
+                                
+                            }
+
+            
+                        }
+        
+                        if let event = item.event{
+                            if let eventname = event.name  {
+                                print("postDEventName is",eventname)
+                                self.postDEventName.text = eventname
+            
+                            }
+                        }
+        
+                        if let business = item.business{
+                            if let businessname = business.businessname  {
+                                self.postDEventDishLabel.text = businessname
+                            }
+                        }
+        
+                        if let taggeditem = item.taggedItemName  {
+                            self.postDEventPlace.text = taggeditem
+                        }
+        
+                        if let commentname = item.comment  {
+                            self.postDCommentLabel.text = commentname
+                        }
     }
     func postDUserImagetap(){
         
@@ -159,8 +252,11 @@ class PostDetailViewController : UIViewController {
         
     }
     func imageTapped() {
+        
+//        self.postDEventImage.image = item.postimages
         let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: "PostImageZoomViewController")
+        let vc         = storyboard.instantiateViewController(withIdentifier: "PostImageZoomViewController") as! PostImageZoomViewController
+        vc.imagePassed = postDEventImage.image!
         self.navigationController?.present(vc, animated: true, completion: nil)
     }
     override func didReceiveMemoryWarning() {
@@ -173,10 +269,89 @@ class PostDetailViewController : UIViewController {
         openPopup()
     }
     
-    
+   
+//    var item : PostListDataItems! {
+
+//        didSet {
+
+//            if let posttag = item.postcreator{
+//                if let postusername = posttag.name {
+//                    self.postDUsernameLabel.text! = postusername
+//
+//                }
+//                if let userimageList = posttag.userimages {
+//
+//                    if userimageList.count > 0 {
+//
+//                        let apiclient = ApiClient()
+//                        apiclient.getFireBaseImageUrl(imagepath: userimageList[userimageList.count-1].imageurl_str!, completion: { url in
+//
+//                            self.postDUserImage.image = nil
+//                            Manager.shared.loadImage(with: URL(string : url)!, into: self.postDUserImage)
+//
+//                        })
+//
+//                    }
+//
+//                }
+//
+//            }
+//            if let location = item.location{
+//                if let locationame = location.name_str {
+//                    self.postDUserplaceLabbel.text = locationame
+//
+//                }
+//            }
+//
+//
+//            if let postimagelist = item.postimages {
+//
+//                if postimagelist.count > 0 {
+//
+//                    let apiclient = ApiClient()
+//                    apiclient.getFireBaseImageUrl(imagepath: postimagelist[postimagelist.count-1].imageurl_str!, completion: { url in
+//
+//                        self.postDEventImage.image = nil
+//                        Manager.shared.loadImage(with: URL(string : url)!, into: self.postDEventImage)
+//
+//                    })
+//
+//                }
+//
+//            }
+//
+//            if let rating = item.rating {
+//
+//
+//            }
+//
+//            if let event = item.event{
+//                if let eventname = event.name  {
+//                    print("postDEventName is",eventname)
+//                    self.postDEventDishLabel.text = eventname
+//
+//                }
+//            }
+//
+//            if let business = item.business{
+//                if let businessname = business.businessname  {
+//                    self.postDEventName.text = businessname
+//                }
+//            }
+//
+//            if let taggeditem = item.taggedItemName  {
+//                self.postDEventPlace.text = taggeditem
+//            }
+//
+//            if let commentname = item.comment  {
+//                self.postDCommentLabel.text = commentname
+//            }
+
+//        }
+    }
    
 
-}
+//}
 
 
 extension PostDetailViewController {
@@ -329,6 +504,7 @@ extension PostDetailViewController {
         }
         
     }
+    
     
     
 }

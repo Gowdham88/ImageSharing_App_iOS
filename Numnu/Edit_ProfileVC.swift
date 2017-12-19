@@ -16,6 +16,7 @@ import SwiftyJSON
 import Firebase
 import FirebaseAuth
 import PKHUD
+import Nuke
 
 class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegateFlowLayout {
     var dropdownArray = [String] ()
@@ -107,9 +108,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.navigationController?.navigationBar.isHidden = false
         HUD.hide()
-        
+
         imagePicker.delegate = self
         profileImage.isUserInteractionEnabled = true
         datePicker.isHidden = true
@@ -128,8 +129,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
        
         Alert.view.isUserInteractionEnabled = true
         Alert.view.addGestureRecognizer(sampleTapGesture)
+        IQKeyboardManager.sharedManager().enable                     = true
         IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
-        IQKeyboardManager.sharedManager().enableAutoToolbar = false
+        IQKeyboardManager.sharedManager().enableAutoToolbar          = false
 
 //        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard (_:))as Selector)
 //        self.view.addGestureRecognizer(tapGesture)
@@ -169,15 +171,15 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         
         
         
-            cityTableView.layer.shadowColor = UIColor.darkGray.cgColor
-            cityTableView.isUserInteractionEnabled = true
-            cityTableView.backgroundColor = UIColor.clear
-            cityTableView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
-            cityTableView.layer.shadowOpacity = 2.0
-            cityTableView.layer.shadowRadius = 5
-            cityTableView.layer.cornerRadius = 10
-            cityTableView.clipsToBounds = true
-            cityTableView.layer.masksToBounds = false
+        cityTableView.layer.shadowColor = UIColor.darkGray.cgColor
+        cityTableView.isUserInteractionEnabled = true
+        cityTableView.backgroundColor = UIColor.clear
+        cityTableView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+        cityTableView.layer.shadowOpacity = 2.0
+        cityTableView.layer.shadowRadius = 5
+        cityTableView.layer.cornerRadius = 10
+        cityTableView.clipsToBounds = true
+        cityTableView.layer.masksToBounds = false
         
         dropdownTableView.layer.shadowColor = UIColor.darkGray.cgColor
         dropdownTableView.isUserInteractionEnabled = true
@@ -259,44 +261,52 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         let offset = CGPoint(x: 0,y :0)
         myscrollView.setContentOffset(offset, animated: true)
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+
+        
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        PrefsManager.sharedinstance.isLoginned = false
-        
-            let navigationOnTap = UITapGestureRecognizer(target:self,action:#selector(EventViewController.navigationTap))
-            self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
-            self.navigationController?.navigationBar.isUserInteractionEnabled = true
+        self.navigationController?.navigationBar.isHidden = false
+        let navigationOnTap = UITapGestureRecognizer(target:self,action:#selector(EventViewController.navigationTap))
+        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+        self.navigationController?.navigationBar.isUserInteractionEnabled = true
         // Hide the navigation bar on the this view controller
         showPopup(table1: true, table2: true)
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
-//        if PrefsManager.sharedinstance.isLoginned {
-//            addProfileContainer()
-//        } else {
-//        addCollectionContainer()
-        
-        /*************************getting location******************************/
-        locationManager = CLLocationManager()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestAlwaysAuthorization()
-        locationManager.requestWhenInUseAuthorization()
-        
-        if CLLocationManager.locationServicesEnabled()
-        {
-            locationManager.distanceFilter = 50
-            locationManager.startUpdatingLocation()
-            locationManager.delegate = self
+        if boolForTitle == false {
+            if PrefsManager.sharedinstance.isLoginned {
+              
+                addProfileContainer()
+                
+            } else {
+                
+                addCollectionContainer()
+                
+                /*************************getting location******************************/
+                locationManager = CLLocationManager()
+                locationManager.desiredAccuracy = kCLLocationAccuracyBest
+                locationManager.requestAlwaysAuthorization()
+                locationManager.requestWhenInUseAuthorization()
+                
+                if CLLocationManager.locationServicesEnabled()
+                {
+                    locationManager.distanceFilter = 50
+                    locationManager.startUpdatingLocation()
+                    locationManager.delegate = self
+                    
+                }
+                
+            }
+        } else {
+            
+            setdetailsfromlogin()
             
         }
-//            if boolForTitle == false {
-//                if PrefsManager.sharedinstance.isLoginned {
-//                    addProfileContainer()
-//                } else {
-//
-//
-//
-//               }
-//        }
+        
+        
     }
     override func viewDidAppear(_ animated: Bool) {
        showPopup(table1: true, table2: true)
@@ -506,19 +516,25 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         focusEdittext(textfield: textField,focus: false)
 
         if textField == usernameTextField {
-            let parameters: Parameters = ["checkusername": usernameTextField.text!]
+            print(usernameTextField.text!)
+            let parameters : Parameters = ["checkusername": "dsdsddddd"]
             let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
-            let userNameRequest: ApiClient = ApiClient()
-            userNameRequest.usernameexists(parameters: parameters,headers: header, completion:{status, Exists in
+            apiClient.usernameexists(parameters: parameters,headers: header, completion:{status, Exists in
                 if Exists == true {
+                    
                     print("the username already exists")
-                }else{
+                    
+                } else {
+                    
                     print("the username available")
+                    
                 }
             })
+            
         }
        
         if textField == birthTextfield {
+            
             if cancelBool == true {
                 birthTextfield.text = ""
             }else{
@@ -619,17 +635,39 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         controller.didMove(toParentViewController: self)
     }
     
-    func addProfileContainer(){
+    func addProfileContainer() {
         
+        /**************************Setting tabs*********************************/
+        
+        let nav1              = UINavigationController()
         let storyboard        = UIStoryboard(name: Constants.Main, bundle: nil)
         let controller        = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
-        controller.delegate   = self
-        self.navigationController!.pushViewController(controller, animated: true)
+        nav1.viewControllers = [controller]
+        self.tabBarController?.viewControllers?.append(nav1)
+        var myImage = UIImage(named: "profileunselected")!
+        controller.tabBarItem.title        = ""
+        controller.tabBarItem.imageInsets  = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
+////        let myInsets : UIEdgeInsets = UIEdgeInsetsMake(6, 0, -6, 0)
+////        myImage = myImage.resizableImage(withCapInsets: myInsets)
+        controller.tabBarItem = UITabBarItem(title: nil, image: myImage, selectedImage: myImage)
+        
+        
+        /**************************Removing tabs*********************************/
+        
+        if let tabBarController = self.tabBarController {
+            let indexToRemove = 2
+            if indexToRemove < (tabBarController.viewControllers?.count)! {
+                var viewControllers = tabBarController.viewControllers
+                viewControllers?.remove(at: indexToRemove)
+                tabBarController.viewControllers = viewControllers
+            }
+        }
+
     }
     
     @IBAction func didTappedSave(_ sender: Any) {
         
-       
+       if self.currentReachabilityStatus != .notReachable {
         
         let Email:NSString = emailaddress.text! as NSString
         if nameTextfield.text == "" || emailaddress.text == ""  || cityTextfield.text == "" || genderTextfield.text == "" || usernameTextField.text == ""  {
@@ -654,22 +692,63 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 AlertProvider.Instance.showAlert(title: "Oops", subtitle: "Please Enter Valid Email ID", vc: self)
             }
         }
+        
+       } else {
+        
+          AlertProvider.Instance.showInternetAlert(vc: self)
+        
+       }
     }
     
-    func upload(image: UIImage, completion: (URL?) -> Void) {
+    func uploadImage(image: UIImage,id : Int, completion:@escaping (String?) -> Void) {
         guard let data = UIImageJPEGRepresentation(image, 0.9) else {
             return
         }
+        
+        let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
+        HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
+        
         Alamofire.upload(multipartFormData: { (form) in
+            
             form.append(data, withName: "file", fileName: "file.jpg", mimeType: "image/jpg")
-        }, to: "https://numnu-server-dev.appspot.com/users/1/images", encodingCompletion: { result in
+            
+        }, to: "https://numnu-server-dev.appspot.com/users/\(id)/images",method: .post, headers: header,encodingCompletion: { result in
             switch result {
             case .success(let upload, _, _):
                 upload.responseString { response in
-                    print(response.value)
+                    print(response.value ?? "dsdks")
+                    
                 }
+                upload.responseJSON { response in
+                    
+                    HUD.hide()
+                    
+                    if let value = response.result.value {
+                        
+                        let json = JSON(value)
+                        
+                        if let imageurl = json["imageurl"].string {
+                            
+                            completion(imageurl)
+                            
+                        } else {
+                            
+                            completion(nil)
+                        }
+                        
+                        
+                    } else {
+                        
+                        completion(nil)
+                        
+                    }
+                    
+                }
+                
             case .failure(let encodingError):
                 print(encodingError)
+                completion(nil)
+                HUD.hide()
             }
         })
     }
@@ -717,7 +796,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.profileImage.contentMode = .scaleAspectFill
             self.profileImage.image = pickedImage
-        }
+         }
         dismiss(animated: true, completion: nil)
     }
     private func imagePickerControllerDidCancel(picker: UIImagePickerController) {
@@ -982,7 +1061,7 @@ extension Edit_ProfileVC {
                     
                 }
                 
-            case .failure(let error):
+            case .failure(let error) :
                 print(error)
                 
                 DispatchQueue.main.async {
@@ -1002,7 +1081,7 @@ extension Edit_ProfileVC {
     func completeSignupApi() {
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-mm-dd"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         let birthdate : String = dateFormatter.string(from: self.datePicker.date)
         
         print(tagsDictonary)
@@ -1012,6 +1091,7 @@ extension Edit_ProfileVC {
         print(descriptionTextfield.text!)
         print(birthdate)
         print(emailaddress.text!)
+        print(profileImage)
       
         let clientIp = ValidationHelper.Instance.getIPAddress() ?? "1.0.1"
         var gender : Int = 0
@@ -1020,23 +1100,48 @@ extension Edit_ProfileVC {
             gender = 1
             
         }
+        
+        HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
       
         let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
         let parameters: Parameters = ["username": usernameTextField.text!, "name":nameTextfield.text! , "description" : descriptionTextfield.text! ,"firebaseuid" : firebaseid,"dateofbirth": birthdate, "gender": gender as Int,"tags":tagsDictonary,"isbusinessuser": false as Bool,"email": emailaddress.text! ,"citylocation":cityDictonary! ,"clientip": clientIp, "clientapp": Constants.clientApp]
-        
        
         apiClient.completeSignup(parameters: parameters,headers: header,completion:{status, Values in
             
+            
+            print("statusfb: \(status)")
             if status == "success" {
                 
-                let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
-                let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
-                vc.boolForBack = false
-                vc.delegate    = self
-                self.navigationController!.pushViewController(vc, animated: true)
+                HUD.hide()
                 
+                if let user = Values {
+                    
+                    self.getUserDetails(user: user)
+                    
+                    self.uploadImage(image: self.profileImage.image!, id: user.id ?? 0, completion: { imageurl in
+                        
+                            PrefsManager.sharedinstance.imageURL = imageurl ?? "empty"
+                            let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
+                            let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
+                            vc.boolForBack = false
+                            vc.delegate    = self
+                            self.navigationController!.pushViewController(vc, animated: true)
+                
+                        
+                    })
+                   
+                } else {
+                    
+                    HUD.hide()
+                    AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Signup failed", vc: self)
+                    
+                }
+          
                
             } else {
+                
+                HUD.hide()
+                AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Signup failed", vc: self)
                 
             }
         })
@@ -1044,10 +1149,85 @@ extension Edit_ProfileVC {
         
     }
     
+    func getUserDetails(user:UserList) {
+        
+        if let firebaseid = user.firebaseuid {
+            
+            PrefsManager.sharedinstance.UIDfirebase = firebaseid
+            
+        }
+        
+        if let userid = user.id {
+            
+            PrefsManager.sharedinstance.userId = userid
+            
+        }
+        
+        if let username = user.username {
+            
+            PrefsManager.sharedinstance.username = username
+            
+        }
+        
+        if let dateofbirth = user.dateofbirth {
+            
+            PrefsManager.sharedinstance.dateOfBirth = dateofbirth
+            
+        }
+        
+        if let gender = user.gender {
+            
+            PrefsManager.sharedinstance.gender = gender
+            
+        }
+        
+        if let desc = user.description {
+            
+            PrefsManager.sharedinstance.description = desc
+            
+        }
+        
+        if let name = user.name {
+            
+            PrefsManager.sharedinstance.name = name
+            
+        }
+        
+        if let userEmail = user.email {
+            
+            PrefsManager.sharedinstance.userEmail = userEmail
+            
+        }
+        
+        if let userImagesList = user.imgList {
+            
+            if userImagesList.count > 0 {
+                
+                PrefsManager.sharedinstance.imageURL = userImagesList[userImagesList.count-1].imageurl_str ?? "empty"
+                
+            }
+            
+        }
+        
+        if let taglist = user.tagList {
+            
+            PrefsManager.sharedinstance.tagList = taglist
+        }
+        
+        if let locitem = user.locItem {
+            
+            PrefsManager.sharedinstance.userCity = "\(locitem.address_str ?? "Address")"
+            
+        }
+        
+        PrefsManager.sharedinstance.isLoginned = true
+    
+    }
     
     
     
-    func showPopup(table1: Bool,table2 : Bool){
+    
+    func showPopup(table1: Bool,table2 : Bool) {
     
         cityTableView.isHidden      = table1
         dropdownTableView.isHidden  = table2
@@ -1061,6 +1241,35 @@ extension Edit_ProfileVC {
             
         }
      
+    }
+    
+    func setdetailsfromlogin(){
+        
+        let user = Auth.auth().currentUser
+        if let user = user {
+            
+            
+            if let email = user.email {
+                
+                emailaddress.text = email
+                
+            }
+            if let photoURL = user.photoURL {
+                
+                 Manager.shared.loadImage(with:photoURL, into: profileImage)
+                
+            }
+            
+            if let name = user.displayName {
+                
+                usernameTextField.text = name
+                nameTextfield.text     = name
+                
+            }
+            
+            
+           
+        }
     }
     
 }
@@ -1082,6 +1291,7 @@ extension Edit_ProfileVC : CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         
         switch status {
+            
         case .restricted:
             print("Location access was restricted.")
         case .denied:

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Nuke
 
 class MenuItemEventCell: UITableViewCell {
     
@@ -31,6 +32,34 @@ class MenuItemEventCell: UITableViewCell {
         eventMenCollectionView.dataSource = dataSourceDelegate
         eventMenCollectionView.tag        = row
         eventMenCollectionView.reloadData()
+        
+    }
+    
+    var item : ItemList! {
+        
+        didSet {
+            
+            eventMenLabel.text = item.businessname ?? ""
+            
+            if let userimageList = item.itemImageList {
+                
+                if userimageList.count > 0 {
+                    
+                    let apiclient = ApiClient()
+                    apiclient.getFireBaseImageUrl(imagepath: userimageList[userimageList.count-1].imageurl!, completion: { url in
+                        
+                        self.eventMenImageView.image = nil
+                        Manager.shared.loadImage(with: URL(string : url)!, into: self.eventMenImageView)
+                        
+                    })
+                    
+                }
+                
+            }
+            
+            
+        }
+        
         
     }
 

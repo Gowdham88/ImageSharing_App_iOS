@@ -28,6 +28,8 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
     @IBOutlet weak var buttonTabBarView: ButtonBarView!
     var searchClick : Bool = false
     var hideDropdown : Bool = false
+    var selectedIndex = 0
+
    
     @IBOutlet weak var tabScrollView: UIScrollView!
     
@@ -36,6 +38,7 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
     @IBOutlet weak var shareView : UIView!
     
     @IBOutlet weak var collectionContainerView: UIView!
+  
     override func viewDidLoad() {
         settings.style.selectedBarHeight = 3.0
         settings.style.buttonBarItemFont = UIFont(name: "Avenir-Medium", size: 14)!
@@ -46,8 +49,8 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
         settings.style.buttonBarBackgroundColor = .white
         settings.style.buttonBarItemBackgroundColor = .white
         settings.style.selectedBarBackgroundColor = purpleInspireColor
-        
-        
+        settings.style.buttonBarItemsShouldFillAvailiableWidth = true
+
         settings.style.buttonBarMinimumLineSpacing = 0
         settings.style.buttonBarItemTitleColor = .black
         
@@ -57,15 +60,13 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
         
         changeCurrentIndexProgressive = { [weak self] (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
             guard changeCurrentIndex == true else { return }
+            
             oldCell?.label.textColor = UIColor.textlightDark()
             newCell?.label.textColor = UIColor.appBlackColor()
             IQKeyboardManager.sharedManager().enableAutoToolbar = false
 
-            
         }
-        
-     
-        
+    
         hideKeyboardWhenTappedAround()
         buttonTabBarView.isHidden = true
         
@@ -79,6 +80,7 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
         filtertable.dataSource = self
         
     }
+  
     func navigationTap(){
         let offset = CGPoint(x: 0,y :0)
         self.containerView.setContentOffset(offset, animated: true)
@@ -86,21 +88,17 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        
-        
+     
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        reloadPagerTabStripView()
+        reloadStripView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
-        
-    
         
     }
     override func viewWillAppear(_ animated: Bool){
@@ -111,22 +109,11 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
 
     }
     @IBAction func ButtonSearach(_ sender: UIButton) {
-        
-//        let top = CGAffineTransform(translationX: 0, y: 0)
-//        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-//            self.filtertableView.transform = top
-//            self.filtertableView.isHidden = false
-//        }, completion: nil)
-        
+ 
         
     }
     @IBAction func ButtonLocation(_ sender: UIButton) {
-        
-//        let top = CGAffineTransform(translationX: 0, y: 0)
-//        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-//            self.filtertableView.transform = top
-//            self.filtertableView.isHidden = false
-//        }, completion: nil)
+
        
     }
     // Tab controllers switch func
@@ -143,10 +130,7 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
             let child_6 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid6)
             return [child_1, child_2,child_3,child_4,child_5]
     
-       
     }
-  
-
 }
 
 extension ParentViewController : UITextFieldDelegate {
@@ -158,11 +142,6 @@ extension ParentViewController : UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
        
-//        if let place = textField.text {
-//
-//            getPlaceApi(place_Str: place)
-//
-//        }
         if textField == editsearchbyItem {
             setNavBar()
         }
@@ -274,7 +253,6 @@ extension ParentViewController {
         
         navigationItemList.title = "Numnu"
         searchClick = false
-        reloadPagerTabStripView()
         buttonTabBarView.reloadData()
         buttonTabBarView.isHidden        = true
         tabScrollView.isScrollEnabled    = false

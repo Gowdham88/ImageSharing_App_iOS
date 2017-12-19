@@ -8,6 +8,8 @@
 
 import UIKit
 import XLPagerTabStrip
+import Alamofire
+import PKHUD
 
 protocol  BusinessEventViewControllerDelegate {
     
@@ -26,7 +28,17 @@ class BusinessEventViewController: UIViewController,IndicatorInfoProvider {
     var businesdelegate : BusinessEventViewControllerDelegate?
     var viewState       : Bool = false
     
+    /************************Api***************************/
+    /********************Api client********************************/
+    var apiClient : ApiClient!
+    var bussinessList = [BussinessEventList]()
+    var bussinessModel  : BusinessEventModel?
+    var pageno  : Int = 1
+    var limitno : Int = 25
+   
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         businessEventTableView.delegate   = self
@@ -34,22 +46,32 @@ class BusinessEventViewController: UIViewController,IndicatorInfoProvider {
         
         businessCategoryTableView.delegate   = self
         businessCategoryTableView.dataSource = self
-        businessCategoryTableView.reloadData()
         
-        let when = DispatchTime.now() + 1
-        DispatchQueue.main.asyncAfter(deadline: when) {
-            
-            self.businesdelegate?.BusinessTableHeight(height: self.businessEventTableView.contentSize.height)
-        }
+        
+        apiClient = ApiClient()
+        bussinessList.removeAll()
+        pageno  = 1
+        limitno = 25
+        getBussinessevent(pageno: pageno, limit: limitno)
+        
        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        reloadTable()
     }
   
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
         viewState = true
-        businessCategoryTableView.reloadData()
-        
+        bussinessList.removeAll()
+        pageno  = 1
+        limitno = 25
+        getBussinessevent(pageno: pageno, limit: limitno)
+       
     }
 
     override func didReceiveMemoryWarning() {
@@ -83,7 +105,7 @@ extension BusinessEventViewController : UITableViewDelegate,UITableViewDataSourc
         
         if tableView == businessEventTableView {
             
-            return 10
+            return bussinessList.count
             
         } else {
             
@@ -100,6 +122,7 @@ extension BusinessEventViewController : UITableViewDelegate,UITableViewDataSourc
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "businessEventCell", for: indexPath) as! businessEventTableViewCell
         
+        cell.item = bussinessList[indexPath.row]
         cell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.row)
             
         return cell
@@ -144,10 +167,18 @@ extension BusinessEventViewController : UITableViewDelegate,UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        let lastRowIndex = tableView.numberOfRows(inSection: 0)
-        if indexPath.row == lastRowIndex - 1 && viewState {
-           businesdelegate?.BusinessTableHeight(height: businessEventTableView.contentSize.height)
-           viewState = false
+        if indexPath.row == bussinessList.count - 1 && viewState {
+            
+            if let pageItem = bussinessModel {
+                
+                if bussinessList.count  < pageItem.totalRows ?? 0 {
+                    pageno += 1
+                    limitno = 25 * pageno
+                    getBussinessevent(pageno: pageno, limit: limitno)
+                }
+                
+            }
+            
         }
     }
     
@@ -157,31 +188,110 @@ extension BusinessEventViewController : UICollectionViewDelegate,UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return tagarray.count
+        if let tagItem = bussinessList[collectionView.tag].tagList {
+            
+            return tagItem.count
+       
+        }
+        
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "eventBusTagCell", for: indexPath) as! EventTagCollectionCell
         
-        let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagarray[indexPath.row], fontname: "Avenir-Medium", size: 12)
-        
-        cell.tagnamelabel.text = tagarray[indexPath.row]
-        
-        cell.setLabelSize(size: textSize)
-        
-        
+        if let tagItem = bussinessList[collectionView.tag].tagList {
+            
+            let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagItem[indexPath.row].text_str ?? "", fontname: "Avenir-Medium", size: 12)
+            
+            cell.tagnamelabel.text = tagItem[indexPath.row].text_str ?? ""
+            
+            cell.setLabelSize(size: textSize)
+            
+        }
+     
         return cell
         
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagarray[indexPath.row], fontname: "Avenir-Medium", size: 12)
-        
-        return CGSize(width: textSize.width+20, height: 22)
+        if let tagItem = bussinessList[collectionView.tag].tagList {
+           
+            let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagItem[indexPath.row].text_str ?? "", fontname: "Avenir-Medium", size: 12)
+            
+            return CGSize(width: textSize.width+20, height: 22)
+            
+        }
+       
+        return CGSize(width:0, height: 0)
     }
     
+    
+    
+}
+
+extension BusinessEventViewController {
+    
+    func getBussinessevent(pageno:Int,limit:Int) {
+        
+        HUD.show(.labeledProgress(title: "Loading", subtitle: ""))
+        
+        apiClient.getFireBaseToken(completion: { token in
+            
+            let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
+            let param  : String  = "page=\(pageno)&limit\(limit)"
+            
+            self.apiClient.getBussinessEvent(id: 34,page:param,headers: header, completion: { status,bussinesslist in
+                
+                if status == "success" {
+                    
+                    if let itemlist = bussinesslist {
+                        
+                        self.bussinessModel = itemlist
+                        
+                        if let list = itemlist.businessItemList {
+                            
+                            self.bussinessList += list
+                        }
+                    }
+                    
+                    DispatchQueue.main.async {
+                        
+                        self.businessEventTableView.reloadData()
+                        
+                    }
+                  
+                    self.reloadTable()
+                    
+                } else {
+                    
+                    HUD.hide()
+                    self.reloadTable()
+                    
+                }
+                
+                
+            })
+            
+            
+        })
+  
+        
+    }
+    
+    
+    func reloadTable() {
+        
+        let when = DispatchTime.now() + 1
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            
+            self.businesdelegate?.BusinessTableHeight(height: self.businessEventTableView.contentSize.height)
+            HUD.hide()
+        }
+     
+    }
     
     
 }

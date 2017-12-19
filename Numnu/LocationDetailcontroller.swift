@@ -134,7 +134,7 @@ class LocationDetailcontroller: ButtonBarPagerTabStripViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        reloadPagerTabStripView()
+        reloadStripView()
     }
     
 

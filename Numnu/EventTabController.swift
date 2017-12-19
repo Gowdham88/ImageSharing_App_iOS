@@ -8,6 +8,8 @@
 
 import UIKit
 import XLPagerTabStrip
+import PKHUD
+import Alamofire
 
 protocol  EventTabControllerDelegate {
     
@@ -28,6 +30,14 @@ class EventTabController: UIViewController,IndicatorInfoProvider {
     var viewState     : Bool = false
     var scrolltableview : Bool = true
     
+    /******************Event Api******************************/
+    
+    var apiClient : ApiClient!
+    var eventList = [EventTypeListItem]()
+    var eventItem : EventTypeList?
+    var pageno : Int = 1
+    var limitno : Int = 25
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -42,6 +52,11 @@ class EventTabController: UIViewController,IndicatorInfoProvider {
             setNavBar()
             
         }
+        
+        /******************EventList******************************/
+        
+        apiClient = ApiClient()
+        
    
         
     }
@@ -51,12 +66,20 @@ class EventTabController: UIViewController,IndicatorInfoProvider {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        eventList.removeAll()
+        pageno  = 1
+        limitno = 25
+        getEvent(pageno: pageno, limit: limitno)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
         viewState = true
-        eventTableView.reloadData()
-        
+    
     }
     
     
@@ -85,7 +108,7 @@ extension EventTabController : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 6
+        return eventList.count
         
     }
     
@@ -94,7 +117,7 @@ extension EventTabController : UITableViewDelegate,UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventcell", for: indexPath) as! EventTableViewCell
         
         cell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.row)
-        
+        cell.item = eventList[indexPath.row]
         return cell
         
     }
@@ -106,11 +129,19 @@ extension EventTabController : UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
-        let lastRowIndex = tableView.numberOfRows(inSection: 0)
-        if indexPath.row == lastRowIndex - 1 && viewState {
-            eventdelegate?.eventTableHeight(height: eventTableView.contentSize.height)
-            viewState = false
+         
+        if indexPath.row == eventList.count - 1 && viewState {
+           
+            if let pageItem = eventItem {
+                
+                if eventList.count  < pageItem.totalRows ?? 0{
+                    pageno += 1
+                    limitno = 25 * pageno
+                    getEvent(pageno: pageno, limit: limitno)
+                }
+                
+            }
+            
         }
     }
     
@@ -121,29 +152,39 @@ extension EventTabController : UICollectionViewDelegate,UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return tagarray.count
+        return eventList[collectionView.tag].taglist?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "tagcell", for: indexPath) as! EventTagCollectionCell
         
-        let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagarray[indexPath.row], fontname: "Avenir-Medium", size: 12)
-        
-        cell.tagnamelabel.text = tagarray[indexPath.row]
-        
-        cell.setLabelSize(size: textSize)
-        
-        
+        if let tagname = eventList[collectionView.tag].taglist?[indexPath.row].text_str {
+            
+            let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagname, fontname: "Avenir-Medium", size: 12)
+            
+            cell.tagnamelabel.text = tagname
+            
+            cell.setLabelSize(size: textSize)
+            
+        }
+     
         return cell
         
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagarray[indexPath.row], fontname: "Avenir-Medium", size: 12)
+        if let tagname = eventList[collectionView.tag].taglist?[indexPath.row].text_str {
+        
+        let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagname, fontname: "Avenir-Medium", size: 12)
         
         return CGSize(width: textSize.width+20, height: 22)
+            
+        } else {
+            
+            return CGSize(width: 0, height: 22)
+        }
     }
     
     
@@ -189,6 +230,64 @@ extension EventTabController {
         let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)
         self.navigationController!.pushViewController(vc, animated: true)
+        
+    }
+    
+    func getEvent(pageno:Int,limit:Int) {
+
+        HUD.show(.labeledProgress(title: "Loading", subtitle: ""))
+
+        apiClient.getFireBaseToken(completion: { token in
+
+            let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
+            let param  : String  = "page=\(pageno)&limit\(limit)"
+
+            self.apiClient.getEventsApi(headers: header,parameter: param, completion: { status,eventlist in
+
+                if status == "success" {
+
+                    if let item = eventlist {
+                        
+                        self.eventItem = item
+
+                        if let itemlist = item.eventtyItem {
+                            
+                            self.eventList += itemlist
+                        }
+                    }
+
+                    DispatchQueue.main.async {
+
+                        self.eventTableView.reloadData()
+
+                    }
+
+                    self.reloadTable()
+
+                } else {
+
+                    HUD.hide()
+                    self.reloadTable()
+
+                }
+
+
+            })
+
+
+        })
+
+
+    }
+    
+    func reloadTable() {
+        
+        let when = DispatchTime.now() + 1
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            
+            self.eventdelegate?.eventTableHeight(height: self.eventTableView.contentSize.height)
+            HUD.hide()
+        }
         
     }
     

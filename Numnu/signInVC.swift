@@ -25,6 +25,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
     var credential: AuthCredential?
     var userprofilename : String = ""
     var userprofileimage : String = ""
+    var token_str : String = "empty"
 
     @IBOutlet weak var passwordReveal: UIButton!
     
@@ -50,13 +51,19 @@ class signInVC: UIViewController, UITextFieldDelegate {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
         self.view.addGestureRecognizer(tapGesture)
         // Do any additional setup after loading the view.
-        
+        IQKeyboardManager.sharedManager().enable = false
     IQKeyboardManager.sharedManager().enableAutoToolbar = false
+        if #available(iOS 11, *) {
+            emailAddressTF.textContentType = UITextContentType.emailAddress
+            passwordTF.textContentType = UITextContentType("")
+        }
         
     }
     func dismissKeyboard (_ sender: UITapGestureRecognizer) {
+        
         emailAddressTF.resignFirstResponder()
         passwordTF.resignFirstResponder()
+        
     }
     @IBAction func dismissPressed(_ sender: Any) {
         
@@ -73,7 +80,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
     @IBAction func signinPressed(_ sender: Any) {
         
         if self.currentReachabilityStatus != .notReachable {
-            HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
+            
 
               login()
             
@@ -92,25 +99,25 @@ class signInVC: UIViewController, UITextFieldDelegate {
             
            if ValidationHelper.Instance.isValidEmail(email:email) && pwd.count > 2 {
             
+            HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
+            
             Auth.auth().signIn(withEmail: email, password: pwd, completion: { (user, error) in
                 
-                HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
                 
-                if user == nil {
-                    
-                    self.authenticationError(error: "Oops! Invalid login.")
-                    
+                print(error.debugDescription)
+                
+                if user != nil {
+             
                     HUD.hide()
+                    self.getFirebaseToken()
                     
                     return
                     
                 }
                 
-                self.idprim.removeAll()
-  
-                self.openStoryBoard(name: Constants.Main, id: Constants.Profile_PostViewController)
-  
-                print("firebase id is:::",user?.uid as Any)
+                
+             
+                
             })
                 
            } else {
@@ -151,27 +158,43 @@ class signInVC: UIViewController, UITextFieldDelegate {
         passwordInfoLabel.isHidden = true
         
         if textField == emailAddressTF  {
+
             emailtitleLAbel.textColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
             emailLineView.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
-        }else {
+        }else if textField == passwordTF {
+
             passwordTitleLabel.textColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
             passwordLineview.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
-        }
+        }else{}
         
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == emailAddressTF {
+
             emailtitleLAbel.textColor = UIColor(red: 129/255.0, green: 125/255.0, blue: 144/255.0, alpha: 1.0)
             emailLineView.backgroundColor = UIColor(red: 229/255.0, green: 229/255.0, blue: 229/255.0, alpha: 1.0)
-        }else{
+        }else if textField == passwordTF {
+
             passwordTitleLabel.textColor = UIColor(red: 129/255.0, green: 125/255.0, blue: 144/255.0, alpha: 1.0)
             passwordLineview.backgroundColor = UIColor(red: 229/255.0, green: 229/255.0, blue: 229/255.0, alpha: 1.0)
-        }
+        }else{}
 
     }
-    
-    
+//
+//    func animateViewMoving(up:Bool, moveValue :CGFloat) {
+//
+//        let movementDuration:TimeInterval = 0.3
+//        let movement:CGFloat = ( up ? -moveValue : moveValue)
+//
+//        UIView.beginAnimations("animateView", context: nil)
+//        UIView.setAnimationBeginsFromCurrentState(true)
+//        UIView.setAnimationDuration(movementDuration)
+//
+//        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+//
+//        UIView.commitAnimations()
+//    }
     
     @IBAction func showPassword(_ sender: Any) {
         
@@ -223,12 +246,11 @@ class signInVC: UIViewController, UITextFieldDelegate {
         
     }
     
-    func openStoryBoard(name: String,id : String) {
+    func openStoryBoard(name: String,id : String,user:UserList) {
 
         let storyboard                  = UIStoryboard(name: name, bundle: nil)
         let initialViewController       = storyboard.instantiateViewController(withIdentifier: id) as! Profile_PostViewController
         self.navigationController!.pushViewController(initialViewController, animated: true)
-
     }
     
     
@@ -276,18 +298,17 @@ class signInVC: UIViewController, UITextFieldDelegate {
                 HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
 
                 Auth.auth().signIn(with: credential, completion: { (user, error) in
+                    
                     if let error = error {
                         HUD.hide()
                         print("Login error: \(error.localizedDescription)")
-                        let alertController = UIAlertController(title: "Login Error", message: error.localizedDescription, preferredStyle: .alert)
-                        let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                        alertController.addAction(okayAction)
-                        self.present(alertController, animated: true, completion: nil)
+                        AlertProvider.Instance.showAlert(title: "Oops!", subtitle: error.localizedDescription, vc: self)
                         
                         return
                     }
         
-                     self.openStoryBoard(name: Constants.Main, id: Constants.Profile_PostViewController)
+                    HUD.hide()
+                    self.getFirebaseToken()
                    
                 })
                 
@@ -307,46 +328,57 @@ class signInVC: UIViewController, UITextFieldDelegate {
 
 extension signInVC {
    
-    func userLoginApi(uid:String) {
+    func userLoginApi() {
         
-        let clientIp = ValidationHelper.Instance.getIPAddress() ?? "1.0.1"
+        HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
         
-        let parameters : Parameters = ["firebaseuid" : uid,"createdByUserId" : "","updatedByUserId" : "","createdTimestamp" : "","updatedTimestamp" : "","clientApp": "iosapp","clientIP":clientIp]
+        let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
+        let loginRequest : ApiClient  = ApiClient()
+        loginRequest.userLogin(headers: header, completion: { status,userlist in
+            
+            if status == "success" {
+                
+                DispatchQueue.main.async {
+                   
+                    if let user = userlist {
+                        
+                        print(user.firebaseuid!)
+                        self.getUserDetails(user: user)
+                        self.openStoryBoard(name: Constants.Main, id: Constants.Profile_PostViewController,user: user)
+                   
+                    }
+                    
+                    HUD.hide()
+                   
+                    self.emailAddressTF.text = ""
+                    self.passwordTF.text     = ""
+                    
+                }
+                
+            } else {
+                
+                 DispatchQueue.main.async {
+                    HUD.hide()
+                    self.authenticationError(error: "Login failed.")
+                }
+                
+            }
+            
+            
+        })
         
-//        let loginRequest : ApiClient  = ApiClient()
-//        loginRequest.userLogin(parameters: parameters, completion: { status,userlist in
-//            
-//            if status == "success" {
-//                
-//                DispatchQueue.main.async {
-//                   
-//                    if let user = userlist {
-//                        
-//                        print(user.firebaseuid!)
-//                        self.getUserDetails(user: user)
-//                      
-//                    
-//                    }
-//                    
-//                    HUD.hide()
-//                    
-////                  self.openStoryBoard(name: Constants.Main, id: Constants.Profile_PostViewController)
-//                    
-//
-//                    self.emailAddressTF.text = ""
-//                    self.passwordTF.text     = ""
-//                    
-//                }
-//                
-//            } else {
-//                
-//                 HUD.hide()
-//                
-//            }
-//            
-//            
-//        })
         
+    }
+    
+    func getFirebaseToken() {
+        
+        let Request : ApiClient  = ApiClient()
+        Request.getFireBaseToken(completion:{ token in
+            
+            self.token_str = token
+            self.userLoginApi()
+            
+        })
         
     }
     
@@ -358,11 +390,11 @@ extension signInVC {
             
         }
         
-//        if let userid = user.id {
+        if let userid = user.id {
         
-//            PrefsManager.sharedinstance.userid = userid
+            PrefsManager.sharedinstance.userId = userid
             
-//        }
+        }
         
         if let username = user.username {
             
@@ -370,18 +402,59 @@ extension signInVC {
             
         }
         
-//        if let dateofbirth = user.dateOfBirth {
-//
-//            PrefsManager.sharedinstance.dateOfBirth = dateofbirth
-//
-//        }
+        if let dateofbirth = user.dateofbirth {
+
+            PrefsManager.sharedinstance.dateOfBirth = dateofbirth
+
+        }
+        
+        if let userEmail = user.email {
+            
+            PrefsManager.sharedinstance.userEmail = userEmail
+            
+        }
         
         if let gender = user.gender {
+            
             PrefsManager.sharedinstance.gender = gender
             
         }
         
-       
+        if let desc = user.description {
+            
+            PrefsManager.sharedinstance.description = desc
+            
+        }
+        
+        if let name = user.name {
+            
+            PrefsManager.sharedinstance.name = name
+            
+        }
+        
+        if let userImagesList = user.imgList {
+            
+            if userImagesList.count > 0 {
+                
+                PrefsManager.sharedinstance.imageURL = userImagesList[userImagesList.count-1].imageurl_str ?? "empty"
+                
+            }
+         
+        }
+        
+        if let taglist = user.tagList {
+            
+            PrefsManager.sharedinstance.tagList = taglist
+        }
+        
+        if let locitem = user.locItem {
+            
+            PrefsManager.sharedinstance.userCity = "\(locitem.address_str ?? "Address")"
+            
+        }
+        
+        PrefsManager.sharedinstance.isLoginned = true
+    
         
     }
  

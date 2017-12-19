@@ -8,9 +8,26 @@
 
 import UIKit
 import XLPagerTabStrip
+import Alamofire
+import SwiftyJSON
+import PKHUD
+import Nuke
 
-class EventViewController: ButtonBarPagerTabStripViewController {
+struct MyVariables {
     
+    static var fetchedLat  = String()
+    static var fetchedLong = String()
+    static var markerTitle = String()
+    static var link1 = String()
+    static var link2 = String()
+    
+}
+class EventViewController: ButtonBarPagerTabStripViewController {
+    var token_str     : String = "empty"
+    var apiClient     : ApiClient!
+    let textLabel : UILabel = UILabel()
+
+
     @IBOutlet weak var myscrollView: UIScrollView!
     @IBOutlet weak var eventImageView: ImageExtender!
     @IBOutlet weak var eventTitleLabel: UILabel!
@@ -36,7 +53,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     
     @IBOutlet weak var mainContainerViewBottom: NSLayoutConstraint!
     @IBOutlet weak var mainContainerView: NSLayoutConstraint!
-    var tagarray = ["Festival","Wine","Party","Rum","Barbaque","Pasta","Sandwich","Burger"]
+    var tagarray = [String]()
     @IBOutlet weak var shareView: UIView!
     /***************contraints***********************/
     
@@ -73,11 +90,9 @@ class EventViewController: ButtonBarPagerTabStripViewController {
             newCell?.label.textColor = UIColor.appBlackColor()
          
           
-          
             
         }
-       
-        
+
         let centerImagetap = UITapGestureRecognizer(target: self, action: #selector(EventViewController.centerImagetap))
         eventImageView.addGestureRecognizer(centerImagetap)
         eventImageView.isUserInteractionEnabled = true
@@ -90,30 +105,16 @@ class EventViewController: ButtonBarPagerTabStripViewController {
         /****************event label tap function************************/
         
         tapRegistration()
+        myscrollView.isHidden = true
         
-        tagViewUpdate()
+        apiClient = ApiClient()
         
-        eventDescriptionLabel.text = Constants.dummy
-        
-       /****************Checking number of lines************************/
-     
-        if (eventDescriptionLabel.numberOfVisibleLines > 4) {
-            
-            readMoreButton.isHidden = false
-      
-        } else {
-        
-            readMoreButton.isHidden   = true
-            containerViewTop.constant = 8
-            barButtonTop.constant     = 8
-            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
-           
-        }
-        
-        
-        
-        
+        getFirebaseToken()
+   
     }
+    
+    
+   
     override func viewWillAppear(_ animated: Bool) {
         let navigationOnTap = UITapGestureRecognizer(target:self,action:#selector(EventViewController.navigationTap))
         self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
@@ -128,7 +129,8 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     func centerImagetap(){
         
         let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: "PostImageZoomViewController")
+        let vc         = storyboard.instantiateViewController(withIdentifier: "PostImageZoomViewController") as! PostImageZoomViewController
+        vc.imagePassed = eventImageView.image!
         self.navigationController?.present(vc, animated: true, completion: nil)
     }
     override func didReceiveMemoryWarning() {
@@ -155,7 +157,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        reloadPagerTabStripView()
+        reloadStripView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -180,7 +182,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
             
             readMoreButton.setTitle("less", for: .normal)
             isLabelAtMaxHeight = true
-            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
+            
            
         }
         
@@ -216,12 +218,13 @@ extension EventViewController {
     
     func webLink1(sender:UITapGestureRecognizer) {
     
-        openWebBoard(url: "http://www.totc.ca")
+        openWebBoard(url: MyVariables.link1)
+
     }
     
     func webLink2(sender:UITapGestureRecognizer) {
         
-        openWebBoard(url: "http://www.totc.ca")
+        openWebBoard(url: MyVariables.link2)
         
     }
     
@@ -244,7 +247,6 @@ extension EventViewController {
         
         for (i,text) in tagarray.enumerated() {
             
-            let textLabel : UILabel = UILabel()
             let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: text, fontname: "Avenir-Medium", size: 12)
             textLabel.font = UIFont(name: "Avenir-Medium", size: 12)
             textLabel.text = text
@@ -327,6 +329,8 @@ extension EventViewController {
         
         let storyboard      = UIStoryboard(name: Constants.Event, bundle: nil)
         let vc              = storyboard.instantiateViewController(withIdentifier: Constants.MapStoryId) as! EventMapViewController
+
+        
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
@@ -406,6 +410,165 @@ extension EventViewController : MenuEventViewControllerDelegate {
     }
     
 }
+
+extension EventViewController {
+    
+    func getFirebaseToken() {
+        
+        apiClient.getFireBaseToken(completion:{ token in
+            
+            self.token_str = token
+            self.MethodToCallApi()
+            
+        })
+        
+    }
+    func MethodToCallApi(){
+        
+        HUD.show(.labeledProgress(title: "Loading", subtitle: ""))
+        
+        let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
+        
+        apiClient.getEventsDetailsApi(id : 34,headers: header, completion: { status,Values in
+            
+            if status == "success" {
+                if let response = Values {
+                    
+                    HUD.hide()
+                    
+                    DispatchQueue.main.async {
+                        
+                        self.getDetails(response:response)
+                        
+                    }
+                    
+                }
+                
+            } else {
+                print("json respose failure:::::::")
+                HUD.hide()
+                DispatchQueue.main.async {
+                    
+                    self.myscrollView.isHidden = true
+                    
+                }
+                
+            }
+        })
+    }
+    func getDetails(response:EventList) {
+        
+        if let name = response.name {
+            eventTitleLabel.text = name
+        }
+        
+        if let description = response.description {
+            eventDescriptionLabel.text = description
+        }
+        
+        if let startsat = response.startsat {
+            print(startsat)
+            if response.startsat != nil {
+                //                eventDateLabel.text = PrefsManager.sharedinstance.startsat + "-" + (PrefsManager.sharedinstance.endsat)
+            }
+        }
+        
+        if let endsat = response.endsat {
+            print(endsat)
+            if response.endsat != nil {
+                
+                let formatter = DateFormatter()
+                formatter.locale = Locale(identifier: "en_US_POSIX")
+                formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                let date = formatter.date(from: endsat)
+                let date2 = formatter.date(from: response.startsat!)
+                
+                print("date: \(String(describing: date))")
+                print("date: \(String(describing: date2))")
+                
+                formatter.dateFormat = "MMM dd,h:mm a"
+                let dateString = formatter.string(from: date!)
+                let dateString2 = formatter.string(from: date2!)
+                eventDateLabel.text = dateString2 + " - " + dateString
+                print("datestring:::::",dateString,dateString2)
+            }
+        }
+        
+        
+        if let eventLinkList = response.eventLinkList {
+            if  eventLinkList.count > 0 {
+                EventLinkLabel1.text = eventLinkList[0].linktext
+                MyVariables.link1 = eventLinkList[0].weblink!
+                
+            }
+            if eventLinkList.count > 1 {
+                eventLinkLabel2.text = eventLinkList[1].linktext
+                MyVariables.link2 = eventLinkList[1].weblink!
+                
+                
+            }
+        }
+        
+        
+        if let taglist = response.taglist {
+            if taglist.count > 0 {
+                for item in taglist {
+                    if let tagname = item.text_str {
+                        tagarray.append(tagname)
+                    }
+                }
+                tagViewUpdate()
+            }
+        }
+        
+        if let loclist = response.loclist {
+            if response.loclist != nil {
+                eventPlaceLabel.text    = loclist.name_str
+                MyVariables.fetchedLat  = loclist.lattitude_str!
+                MyVariables.fetchedLong = loclist.longitude_str!
+                MyVariables.markerTitle = loclist.name_str!
+                print("lat and lon values are:::::",MyVariables.fetchedLat,MyVariables.fetchedLong)
+            }
+        }
+        
+        if let imglist = response.imagelist {
+            if imglist.count > 0 {
+                if let url = imglist[imglist.count-1].imageurl_str {
+                    
+                    apiClient.getFireBaseImageUrl(imagepath: url, completion: { imageUrl in
+                        
+                        if imageUrl != "empty" {
+                            
+                            Manager.shared.loadImage(with: URL(string : imageUrl)!, into: self.eventImageView)
+                        }
+                        
+                    })
+                    
+                    
+                }
+            }
+        }
+        
+        /****************Checking number of lines************************/
+        
+        if (eventDescriptionLabel.numberOfVisibleLines > 4) {
+            
+            readMoreButton.isHidden = false
+            
+        } else {
+            
+            readMoreButton.isHidden   = true
+            containerViewTop.constant = 8
+            barButtonTop.constant     = 8
+            if let description = response.description {
+            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: description, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
+            }
+        }
+        
+        self.myscrollView.isHidden = false
+    }
+}
+
 
 
 

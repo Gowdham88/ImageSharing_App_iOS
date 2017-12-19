@@ -8,6 +8,8 @@
 
 import UIKit
 import XLPagerTabStrip
+import Alamofire
+import PKHUD
 
 protocol MenuEventViewControllerDelegate {
    
@@ -18,41 +20,48 @@ class MenuEventViewController: UIViewController,IndicatorInfoProvider,UITableVie
     
     var tagarray = ["Festival","Wine","Party","Rum","Barbaque","Pasta","Sandwich","Burger"]
     
-    @IBOutlet weak var menuEventTableview: UITableView!
+    
     @IBOutlet weak var menuCategoryTableview: UITableView!
     var showentity : Bool = false
     var menuDelegate : MenuEventViewControllerDelegate?
     var viewState    : Bool = false
     
+    /********************Api client********************************/
+    var apiClient : ApiClient!
+    var itemTagList = [EventItemtag]()
+    var tagModel  : EventItemTagModel?
+    var pageno  : Int = 1
+    var limitno : Int = 25
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        menuEventTableview.delegate   = self
-        menuEventTableview.dataSource = self
-        
         menuCategoryTableview.delegate   = self
         menuCategoryTableview.dataSource = self
-        
         menuCategoryTableview.isHidden = false
-        menuEventTableview.isHidden    = true
-        
         menuCategoryTableview.isScrollEnabled = false
-        menuEventTableview.isScrollEnabled    = false
         
-        let when = DispatchTime.now() + 1
-        DispatchQueue.main.asyncAfter(deadline: when) {
-            
-             self.menuDelegate?.menuTableHeight(height: self.menuCategoryTableview.contentSize.height)
-        }
-
-        // Do any additional setup after loading the view.
+        /********************Api client********************************/
+        apiClient = ApiClient()
+        
+        
+       
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
-       viewState = true
-       menuCategoryTableview.reloadData()
+        viewState = true
+        itemTagList.removeAll()
+        pageno  = 1
+        limitno = 25
+        getItemTag(pageno: pageno, limit: limitno)
+        
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -67,63 +76,41 @@ class MenuEventViewController: UIViewController,IndicatorInfoProvider,UITableVie
     }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        
         return IndicatorInfo(title: Constants.EventTab2)
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if tableView == self.menuEventTableview {
-            
-            return 6
-            
-        } else {
-            
-            return 8
-            
-        }
-        
+        return itemTagList.count
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if tableView == self.menuEventTableview {
-            
-            let cell = tableView.dequeueReusableCell(withIdentifier: "menuEventCell", for: indexPath) as! MenuItemEventCell
-            
-            cell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.row)
-            
-            return cell
-            
-        } else {
-            
-            let cell = tableView.dequeueReusableCell(withIdentifier: "menucategoryCell", for: indexPath) as! MenuCategoryItemCell
-            
-            cell.eventCategoryLabel.text = tagarray[indexPath.row]
-            
-            return cell
-            
-        }
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(MenuEventViewController.imageTapped))
-//        cell.postDEventImage.addGestureRecognizer(tap)
-//        cell.postDEventImage.isUserInteractionEnabled = true
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "menucategoryCell", for: indexPath) as! MenuCategoryItemCell
+        cell.item = itemTagList[indexPath.row]
+        return cell
+      
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        let lastRowIndex = self.menuCategoryTableview.numberOfRows(inSection: 0)
-        if indexPath.row == lastRowIndex - 1 && viewState {
-
-            menuDelegate?.menuTableHeight(height: menuCategoryTableview.contentSize.height)
-            viewState = false
+        if indexPath.row == itemTagList.count - 1 && viewState {
+            
+            if let pageItem = tagModel {
+                
+                if itemTagList.count  < pageItem.totalRows ?? 0 {
+                    pageno += 1
+                    limitno = 25 * pageno
+                    getItemTag(pageno: pageno, limit: limitno)
+                }
+                
+            }
+            
         }
     }
-//    func imageTapped() {
-//        let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
-//        let vc         = storyboard.instantiateViewController(withIdentifier: "PostImageZoomViewController")
-//        self.navigationController?.present(vc, animated: true, completion: nil)
-//    }
 }
 
 extension MenuEventViewController   {
@@ -131,40 +118,17 @@ extension MenuEventViewController   {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        
-        openStoryBoard(name: Constants.EventDetail, id: Constants.MenuItemId,heading: tagarray[indexPath.row])
-        
-        
-//        if tableView == menuEventTableview {
-//
-//            menuEventTableview.isHidden    = true
-//            menuCategoryTableview.isHidden = false
-//            if showentity {
-//
-//
-//
-//            } else {
-//
-//                openStoryBoard(name: Constants.ItemDetail, id: Constants.ItemDetailId)
-//
-//            }
-//
-//
-//        } else {
-//
-//            menuEventTableview.isHidden    = false
-//            menuCategoryTableview.isHidden = true
-//
-//
-//        }
+        openStoryBoard(name: Constants.EventDetail, id: Constants.MenuItemId,heading: itemTagList[indexPath.row].tagtext ?? "Title", eventid: 34,tagid: itemTagList[indexPath.row].tagid ?? 0)
         
     }
     
-    func openStoryBoard (name : String,id : String,heading : String) {
+    func openStoryBoard (name : String,id : String,heading : String,eventid : Int,tagid : Int) {
         
         let storyboard      = UIStoryboard(name: name, bundle: nil)
         let vc              = storyboard.instantiateViewController(withIdentifier: id) as! MenuItemViewController
         vc.heading          = heading
+        vc.event_id         = eventid
+        vc.tag_id           = tagid
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
@@ -201,6 +165,70 @@ extension MenuEventViewController : UICollectionViewDelegate,UICollectionViewDat
         return CGSize(width: textSize.width+20, height: 22)
     }
     
+    
+    
+}
+
+extension MenuEventViewController {
+    
+    func getItemTag(pageno:Int,limit:Int) {
+        
+        HUD.show(.labeledProgress(title: "Loading", subtitle: ""))
+        
+        apiClient.getFireBaseToken(completion: { token in
+            
+            let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
+            let param  : String  = "page=\(pageno)&limit\(limit)"
+            
+            self.apiClient.getItemTagEvent(id: 34, page: param, headers: header, completion: { status,taglist in
+                
+                if status == "success" {
+                    
+                    if let item = taglist {
+                        
+                        self.tagModel = item
+                        
+                        if let list = item.tagItemList {
+                            
+                            self.itemTagList += list
+                        }
+                    }
+                    
+                    DispatchQueue.main.async {
+                        
+                        self.menuCategoryTableview.reloadData()
+                        
+                    }
+                    
+                    self.reloadTable()
+                    
+                } else {
+                    
+                    HUD.hide()
+                    self.reloadTable()
+                    
+                }
+                
+                
+            })
+            
+            
+        })
+        
+        
+    }
+    
+    
+    func reloadTable() {
+        
+        let when = DispatchTime.now() + 1
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            
+            self.menuDelegate?.menuTableHeight(height: self.menuCategoryTableview.contentSize.height)
+            HUD.hide()
+        }
+        
+    }
     
     
 }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -181,7 +181,7 @@
                                 </constraints>
                                 <color key="textColor" red="0.16470588235294117" green="0.16470588235294117" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" textContentType="nickname"/>
                                 <connections>
                                     <action selector="emailTextField:" destination="xzY-CQ-uLZ" eventType="editingDidEnd" id="VfX-P3-jEt"/>
                                     <outlet property="delegate" destination="URX-2s-g1Q" id="P0o-mk-MzU"/>
@@ -199,9 +199,9 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="kvF-fN-dti"/>
                                 </constraints>
-                                <color key="textColor" red="0.16470588235294117" green="0.16470588235294117" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES" textContentType="nickname"/>
                                 <connections>
                                     <outlet property="delegate" destination="URX-2s-g1Q" id="e1Z-sg-S00"/>
                                 </connections>
@@ -541,8 +541,10 @@
                         <viewLayoutGuide key="safeArea" id="nnN-ul-saF"/>
                     </view>
                     <connections>
+                        <outlet property="emaillabel" destination="QIj-h5-Oxs" id="9Tg-qg-UNs"/>
                         <outlet property="errorLabel" destination="qkU-Xv-38c" id="bha-MY-O25"/>
                         <outlet property="forgotpassEmail" destination="Rj1-gw-OMe" id="hPQ-Mk-QuD"/>
+                        <outlet property="forgotview" destination="Ybg-8c-TpO" id="FDk-4s-hgb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g37-Ps-Lt5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -711,7 +713,7 @@
                                 </constraints>
                                 <color key="textColor" red="0.16470588235294117" green="0.16470588235294117" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" textContentType="name"/>
                                 <connections>
                                     <outlet property="delegate" destination="WUv-D2-SgJ" id="MBu-Nm-6Q1"/>
                                 </connections>
@@ -730,7 +732,7 @@
                                 </constraints>
                                 <color key="textColor" red="0.16470588235294117" green="0.16470588235294117" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES" textContentType="nickname"/>
                                 <connections>
                                     <outlet property="delegate" destination="WUv-D2-SgJ" id="Ppc-QY-6tw"/>
                                 </connections>
@@ -771,7 +773,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CYl-ol-x7t" customClass="ButtonExtender" customModule="Numnu" customModuleProvider="target">
-                                <rect key="frame" x="20" y="445" width="280" height="50"/>
+                                <rect key="frame" x="20" y="440" width="280" height="50"/>
                                 <color key="backgroundColor" red="0.91764705882352937" green="0.12941176470588234" blue="0.14509803921568626" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Om5-v7-AuQ"/>
@@ -800,13 +802,13 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5x1-EU-zBR">
-                                <rect key="frame" x="20" y="501" width="280" height="40"/>
+                                <rect key="frame" x="20" y="496" width="280" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zS4-JB-Eh1">
-                                        <rect key="frame" x="192" y="0.0" width="48" height="30"/>
+                                        <rect key="frame" x="192" y="1" width="48" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="48" id="tJI-dY-JUv"/>
-                                            <constraint firstAttribute="height" constant="30" id="vUE-vw-lC9"/>
+                                            <constraint firstAttribute="height" constant="25" id="vUE-vw-lC9"/>
                                         </constraints>
                                         <state key="normal">
                                             <attributedString key="attributedTitle">
@@ -824,9 +826,9 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account? " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V7j-g7-VVD">
-                                        <rect key="frame" x="32" y="0.0" width="152" height="30"/>
+                                        <rect key="frame" x="32" y="2" width="152" height="24"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="aKc-h6-OUT"/>
+                                            <constraint firstAttribute="height" constant="24" id="aKc-h6-OUT"/>
                                             <constraint firstAttribute="width" constant="152" id="w3m-mO-YJF"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="13"/>
@@ -836,13 +838,13 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="zS4-JB-Eh1" secondAttribute="bottom" constant="10" id="2vE-Od-WA0"/>
+                                    <constraint firstAttribute="bottom" secondItem="zS4-JB-Eh1" secondAttribute="bottom" constant="14" id="2vE-Od-WA0"/>
                                     <constraint firstItem="zS4-JB-Eh1" firstAttribute="leading" secondItem="V7j-g7-VVD" secondAttribute="trailing" constant="8" id="8FP-5Z-QJe"/>
-                                    <constraint firstAttribute="bottom" secondItem="V7j-g7-VVD" secondAttribute="bottom" constant="10" id="LMT-yp-tvR"/>
+                                    <constraint firstAttribute="bottom" secondItem="V7j-g7-VVD" secondAttribute="bottom" constant="14" id="LMT-yp-tvR"/>
                                     <constraint firstItem="V7j-g7-VVD" firstAttribute="leading" secondItem="5x1-EU-zBR" secondAttribute="leading" constant="32" id="VLO-X1-m2U"/>
-                                    <constraint firstItem="V7j-g7-VVD" firstAttribute="top" secondItem="5x1-EU-zBR" secondAttribute="top" id="YpK-nd-Fi3"/>
+                                    <constraint firstItem="V7j-g7-VVD" firstAttribute="top" secondItem="5x1-EU-zBR" secondAttribute="top" constant="2" id="YpK-nd-Fi3"/>
                                     <constraint firstAttribute="height" constant="40" id="ay6-Qr-D67"/>
-                                    <constraint firstItem="zS4-JB-Eh1" firstAttribute="top" secondItem="5x1-EU-zBR" secondAttribute="top" id="dIS-6o-MPm"/>
+                                    <constraint firstItem="zS4-JB-Eh1" firstAttribute="top" secondItem="5x1-EU-zBR" secondAttribute="top" constant="1" id="dIS-6o-MPm"/>
                                     <constraint firstAttribute="trailing" secondItem="zS4-JB-Eh1" secondAttribute="trailing" constant="40" id="yYn-87-CAN"/>
                                     <constraint firstAttribute="width" constant="280" id="yZp-PV-0F6"/>
                                 </constraints>
@@ -923,7 +925,7 @@
                             <constraint firstItem="6is-6C-Xdu" firstAttribute="centerX" secondItem="sSb-ht-0oK" secondAttribute="centerX" id="oS1-a5-uN8"/>
                             <constraint firstItem="sSb-ht-0oK" firstAttribute="trailing" secondItem="NHS-8c-dU0" secondAttribute="trailing" constant="20" id="pCg-tE-xKb"/>
                             <constraint firstItem="NHS-8c-dU0" firstAttribute="leading" secondItem="sSb-ht-0oK" secondAttribute="leading" constant="20" id="pKX-OI-V52"/>
-                            <constraint firstItem="CYl-ol-x7t" firstAttribute="top" secondItem="ISg-wM-MbH" secondAttribute="bottom" constant="13" id="ssM-j4-wSK"/>
+                            <constraint firstItem="CYl-ol-x7t" firstAttribute="top" secondItem="ISg-wM-MbH" secondAttribute="bottom" constant="8" id="ssM-j4-wSK"/>
                             <constraint firstItem="pSY-0N-S87" firstAttribute="leading" secondItem="sSb-ht-0oK" secondAttribute="leading" constant="20" id="uAY-p1-e79"/>
                             <constraint firstItem="X5P-k8-vQy" firstAttribute="leading" secondItem="sSb-ht-0oK" secondAttribute="leading" constant="20" id="uBj-vq-SM9"/>
                         </constraints>

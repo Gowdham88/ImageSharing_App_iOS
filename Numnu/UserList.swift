@@ -25,7 +25,7 @@ struct  UserList {
     var email              :    String?
     var isemailverified    :    String?
     var isbusiness         :    Int?
-    var businessusername   :    String?
+    var name               :    String?
     var businessuserphone  :    String?
     var businessdescription:    String?
     var createdat          :    String?
@@ -90,9 +90,9 @@ struct  UserList {
             self.isbusiness = isbusiness
             
         }
-        if let businessusername = json["businessusername"].string {
+        if let name = json["name"].string {
             
-            self.businessusername = businessusername
+            self.name = name
             
         }
         if let businessuserphone = json["businessuserphone"].string {
@@ -146,7 +146,7 @@ struct  UserList {
             }
         }
 
-/****************************************** tag *********************************************************/
+   /****************************************** tag *********************************************************/
         if let tagArray = json["tags"].array {
             
             for item in tagArray {

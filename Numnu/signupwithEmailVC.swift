@@ -15,6 +15,9 @@ import PKHUD
 import Alamofire
 import IQKeyboardManagerSwift
 
+@available(iOS 10.0, *)
+@available(iOS 10.0, *)
+@available(iOS 10.0, *)
 class signupwithEmailVC: UIViewController, UITextFieldDelegate {
 
     var idprim = [String]()
@@ -38,66 +41,70 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.isHidden = true
+
         passwordReveal.setImage(UIImage(named: "Show password icon"), for: .normal)
         passwordReveal.tintColor = UIColor(red: 136/255.0, green: 143/255.0, blue: 158/255.0, alpha: 1.0)
         
         navigationController?.tabBarController?.tabBar.isHidden = true
+        IQKeyboardManager.sharedManager().enable = false
+        IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = false
+        IQKeyboardManager.sharedManager().enableAutoToolbar = false
+        IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 10
 
         labelcredentials.isHidden = true
         signUpButton.layer.cornerRadius = 25
         signUpButton.clipsToBounds = true
-        IQKeyboardManager.sharedManager().enableAutoToolbar = false
-        let firebaseAuth = Auth.auth()
+        emailTextfield.autocorrectionType = .no
+        passwordTextfield.autocorrectionType = .no
         
-        
-        do {
-            try firebaseAuth.signOut()
-        } catch let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
+        if #available(iOS 11, *) {
+            emailTextfield.textContentType = UITextContentType.emailAddress
+            passwordTextfield.textContentType = UITextContentType("")
         }
+       
+
+
+
        
 //        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
 //        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
 
 
     }
-    func animateViewMoving (up:Bool, moveValue :CGFloat) {
-        
-        let movementDuration:TimeInterval = 0.3
-        let movement:CGFloat = ( up ? -moveValue : moveValue)
-        
-        UIView.beginAnimations("animateView", context: nil)
-        UIView.setAnimationBeginsFromCurrentState(true)
-        UIView.setAnimationDuration(movementDuration)
-        
-        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
-        
-        //        self.view.frame = offsetBy(self.view.frame, 0, movement)
-        
-        UIView.commitAnimations()
-    }
+//    func animateViewMoving(up:Bool, moveValue :CGFloat) {
+//
+//        let movementDuration:TimeInterval = 0.3
+//        let movement:CGFloat = ( up ? -moveValue : moveValue)
+//
+//        UIView.beginAnimations("animateView", context: nil)
+//        UIView.setAnimationBeginsFromCurrentState(true)
+//        UIView.setAnimationDuration(movementDuration)
+//
+//        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+//
+//        //        self.view.frame = offsetBy(self.view.frame, 0, movement)
+//
+//        UIView.commitAnimations()
+//    }
     
     var iconClick = Bool()
     
     @IBAction func passwordHideButton(_ sender: Any) {
         
         if(iconClick == true) {
-            
+
             passwordTextfield.isSecureTextEntry = false
             iconClick = false
             passwordReveal.setImage(UIImage(named: "eye-off.png"), for: .normal)
             passwordReveal.tintColor = UIColor(red: 42/255.0, green: 42/255.0, blue: 42/255.0, alpha: 1.0)
-//                        passwordReveal.setBackgroundImage(UIImage(named:"eye-off.png"), for: .normal)
-
 
         } else if iconClick == false {
-            
+
             passwordTextfield.isSecureTextEntry = true
             iconClick = true
             passwordReveal.setImage(UIImage(named: "Show password icon.png"), for: .normal)
             passwordReveal.tintColor = UIColor(red: 136/255.0, green: 143/255.0, blue: 158/255.0, alpha: 1.0)
-
-//            passwordReveal.setBackgroundImage(UIImage(named:"Show password icon.png"), for: .normal)
 
         }
         
@@ -121,10 +128,10 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         self.view.endEditing(true)
+        dismissKeyboard()
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
         textField.resignFirstResponder()
         
         return true
@@ -132,6 +139,8 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+//        animateViewMoving(up: true, moveValue: 0)
+
         
         if textField == emailTextfield {
             emailtitleLAbel.textColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
@@ -146,8 +155,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
         
-        textField.resignFirstResponder()
-        animateViewMoving(up: false, moveValue: 0)
+//        animateViewMoving(up: false, moveValue: 0)
         if textField == emailTextfield {
             emailtitleLAbel.textColor = UIColor(red: 129/255.0, green: 125/255.0, blue: 144/255.0, alpha: 1.0)
             emailLineView.backgroundColor = UIColor(red: 229/255.0, green: 229/255.0, blue: 229/255.0, alpha: 1.0)
@@ -155,6 +163,8 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
             passwordtitleLabel.textColor = UIColor(red: 129/255.0, green: 125/255.0, blue: 144/255.0, alpha: 1.0)
             passwordLineView.backgroundColor = UIColor(red: 229/255.0, green: 229/255.0, blue: 229/255.0, alpha: 1.0)
         }
+        textField.resignFirstResponder()
+
 
     }
     @IBAction func signupPressed(_ sender: Any) {
@@ -198,8 +208,11 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                     return
                     
                 }
+                
+                self.emailTextfield.text = ""
+                self.passwordTextfield.text = ""
   
-                    HUD.hide()
+                HUD.hide()
                 self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId,firebaseid: (user?.uid)!)
 
                 
@@ -267,14 +280,18 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         super.viewWillAppear(animated)
         
         // Hide the navigation bar on the this view controller
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        self.navigationController?.navigationBar.isHidden = true
     }
-    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+//        self.navigationController?.setNavigationBarHidden(true, animated: true)
+
+    }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         // Show the navigation bar on other view controllers
-//        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        self.navigationController?.navigationBar.isHidden = false
     }
     
     @IBAction func fbSignup(_ sender: Any) {
@@ -301,10 +318,21 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
             }
 
             let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
-
-            
-        
-            
+            Auth.auth().signIn(with: credential, completion: { (user, error) in
+                if let error = error {
+                    HUD.hide()
+                    AlertProvider.Instance.showAlert(title: "", subtitle: error.localizedDescription, vc: self)
+                    print("Login error: \(error.localizedDescription)")
+                    
+                    
+                    return
+                }
+             
+                HUD.hide()
+                self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId,firebaseid: (user?.uid)!)
+                
+            })
+          
         }
 
 
@@ -327,13 +355,6 @@ extension UITextField {
     }
 }
 
-extension signupwithEmailVC {
-    
-    
-    
-    
-    
-    
-}
+
 
 
