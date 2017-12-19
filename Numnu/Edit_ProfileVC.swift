@@ -757,30 +757,18 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
      @IBAction func editPicture(_ sender: Any) {
         imagePicker.allowsEditing = false
         let Alert = UIAlertController(title: "Select Source Type", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+       
+        
         let CameraAction = UIAlertAction(title: "Camera", style: UIAlertActionStyle.default) { ACTION in
-            if !UIImagePickerController.isSourceTypeAvailable(.camera){
-                let alertController = UIAlertController.init(title: nil, message: "Device has no camera.", preferredStyle: .alert)
-                let okAction = UIAlertAction.init(title: "Alright", style: .default, handler: {(alert: UIAlertAction!) in
-                })
-                alertController.addAction(okAction)
-                self.present(alertController, animated: true, completion: nil)
-            }
-            else{
-                self.imagePicker.sourceType = .camera
-                self.present(self.imagePicker, animated: true, completion: nil)
-            }
+            self.showCamera()
         }
         let GalleryAction = UIAlertAction(title: "Gallery", style: UIAlertActionStyle.default) { ACTION in
        
-            self.imagePicker.sourceType = .photoLibrary
-            self.present(self.imagePicker, animated: true, completion: nil)
+           self.showGallery()
         }
         let CancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) {_ in
         }
-        Alert.addAction(CameraAction)
-        Alert.addAction(GalleryAction)
-        Alert.addAction(CancelAction)
-//        present(Alert, animated: true, completion: nil)
+       
         if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad) {
             Alert.popoverPresentationController?.sourceView = self.view
             Alert.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
@@ -788,8 +776,28 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         }else{
             present(Alert, animated: true, completion:nil )
         }
-        
-        present(imagePicker, animated: true, completion: nil)
+        Alert.addAction(CameraAction)
+        Alert.addAction(GalleryAction)
+        Alert.addAction(CancelAction)
+    }
+    
+    func showCamera() {
+        if(UIImagePickerController .isSourceTypeAvailable(.camera))
+        {
+            self.imagePicker.sourceType = .camera
+            self.imagePicker.delegate = self
+            
+        }
+            present(imagePicker, animated: true, completion: nil)
+    }
+    func showGallery () {
+        if(UIImagePickerController .isSourceTypeAvailable(.photoLibrary))
+        {
+            self.imagePicker.sourceType = .photoLibrary
+            self.imagePicker.delegate = self
+            
+        }
+        self.present(self.imagePicker, animated: true, completion: nil)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {

@@ -532,22 +532,11 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         imagePicker.allowsEditing = false
         let Alert = UIAlertController(title: "Select Source Type", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
         let CameraAction = UIAlertAction(title: "Camera", style: UIAlertActionStyle.default) { ACTION in
-            if !UIImagePickerController.isSourceTypeAvailable(.camera){
-                let alertController = UIAlertController.init(title: nil, message: "Device has no camera.", preferredStyle: .alert)
-                let okAction = UIAlertAction.init(title: "Alright", style: .default, handler: {(alert: UIAlertAction!) in
-                })
-                alertController.addAction(okAction)
-                self.present(alertController, animated: true, completion: nil)
+            self.showCamera()
             }
-            else{
-                self.imagePicker.sourceType = .camera
-                self.present(self.imagePicker, animated: true, completion: nil)
-            }
-        }
+    
         let GalleryAction = UIAlertAction(title: "Gallery", style: UIAlertActionStyle.default) { ACTION in
-            
-            self.imagePicker.sourceType = .photoLibrary
-            self.present(self.imagePicker, animated: true, completion: nil)
+            self.showGallery()
         }
         let CancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) {_ in
         }
@@ -555,7 +544,26 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         Alert.addAction(GalleryAction)
         Alert.addAction(CancelAction)
         present(Alert, animated: true, completion: nil)
+    }
+    
+    
+    func showCamera() {
+        if(UIImagePickerController .isSourceTypeAvailable(.camera))
+        {
+            self.imagePicker.sourceType = .camera
+            self.imagePicker.delegate = self
+            
+        }
         present(imagePicker, animated: true, completion: nil)
+    }
+    func showGallery () {
+        if(UIImagePickerController .isSourceTypeAvailable(.photoLibrary))
+        {
+            self.imagePicker.sourceType = .photoLibrary
+            self.imagePicker.delegate = self
+            
+        }
+        self.present(self.imagePicker, animated: true, completion: nil)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
