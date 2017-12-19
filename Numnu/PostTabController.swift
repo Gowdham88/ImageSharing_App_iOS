@@ -65,17 +65,32 @@ extension PostTabController : UITableViewDelegate,UITableViewDataSource {
         cell.postEventImage.addGestureRecognizer(posteventImagetap)
         cell.postEventImage.isUserInteractionEnabled = true
         
+        //item page
         let posteventplacetap = UITapGestureRecognizer(target: self, action:#selector(getter: PostEventTableViewCell.postEventPlace))
         cell.postEventPlace.addGestureRecognizer(posteventplacetap)
         cell.postEventPlace.isUserInteractionEnabled = true
         
+        let postEventPlaceIcontap = UITapGestureRecognizer(target: self, action:#selector(getter: PostEventTableViewCell.postEventPlaceIcon))
+        cell.postEventPlaceIcon.addGestureRecognizer(postEventPlaceIcontap)
+        cell.postEventPlaceIcon.isUserInteractionEnabled = true
+        
+        //Business page Icon
         let posteventdishtap = UITapGestureRecognizer(target: self, action:#selector(getter: PostEventTableViewCell.postEventDishLabel))
         cell.postEventDishLabel.addGestureRecognizer(posteventdishtap)
         cell.postEventDishLabel.isUserInteractionEnabled = true
         
+        let postEventDishIcontap = UITapGestureRecognizer(target: self, action:#selector(getter: PostEventTableViewCell.postEventDishIcon))
+        cell.postEventDishIcon.addGestureRecognizer(postEventDishIcontap)
+        cell.postEventDishIcon.isUserInteractionEnabled = true
+        
+        //Event page Icon
         let posteventnametap = UITapGestureRecognizer(target: self, action:#selector(getter: PostEventTableViewCell.postEventName))
         cell.postEventName.addGestureRecognizer(posteventnametap)
         cell.postEventName.isUserInteractionEnabled = true
+        
+        let postEventNameIcontap = UITapGestureRecognizer(target: self, action:#selector(getter: PostEventTableViewCell.postEventNameIcon))
+        cell.postEventNameIcon.addGestureRecognizer(postEventNameIcontap)
+        cell.postEventNameIcon.isUserInteractionEnabled = true
         
         let profiletap = UITapGestureRecognizer(target: self, action:#selector(getter: PostEventTableViewCell.postUserImage))
         cell.postUserImage.addGestureRecognizer(profiletap)
@@ -128,13 +143,32 @@ extension PostTabController : UITableViewDelegate,UITableViewDataSource {
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
+    func postEventPlaceIcon(){
+        let storyboard = UIStoryboard(name: Constants.ItemDetail, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId)
+        self.navigationController!.pushViewController(vc, animated: true)
+        
+    }
     func postEventDishLabel(){
         let storyboard = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId)
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
+    
+    func postEventDishIcon(){
+        let storyboard = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId)
+        self.navigationController!.pushViewController(vc, animated: true)
+        
+    }
     func postEventName(){
+        
+        let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
+    func postEventNameIcon(){
         
         let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)

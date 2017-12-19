@@ -154,13 +154,27 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         cell.postEventPlace.addGestureRecognizer(posteventplacetap)
         cell.postEventPlace.isUserInteractionEnabled = true
         
+        //Item page Icon Tapping
+        let posteventplaceIcontap = UITapGestureRecognizer(target: self, action:#selector(getter: Profile_postTableViewCell.postEventPlaceIcon))
+        cell.postEventPlaceIcon.addGestureRecognizer(posteventplaceIcontap)
+        cell.postEventPlaceIcon.isUserInteractionEnabled = true
+        
         let posteventdishtap = UITapGestureRecognizer(target: self, action:#selector(getter: Profile_postTableViewCell.postEventDishLabel))
         cell.postEventDishLabel.addGestureRecognizer(posteventdishtap)
         cell.postEventDishLabel.isUserInteractionEnabled = true
         
+        //Icon dish page
+        let postEventDishIcontap = UITapGestureRecognizer(target: self, action:#selector(getter: Profile_postTableViewCell.postEventDishIcon))
+        cell.postEventDishIcon.addGestureRecognizer(postEventDishIcontap)
+        cell.postEventDishIcon.isUserInteractionEnabled = true
+        
         let posteventnametap = UITapGestureRecognizer(target: self, action:#selector(getter: Profile_postTableViewCell.postEventName))
         cell.postEventName.addGestureRecognizer(posteventnametap)
         cell.postEventName.isUserInteractionEnabled = true
+        
+        let postEventNameIcontap = UITapGestureRecognizer(target: self, action:#selector(getter: Profile_postTableViewCell.postEventNameIcon))
+        cell.postEventNameIcon.addGestureRecognizer(postEventNameIcontap)
+        cell.postEventNameIcon.isUserInteractionEnabled = true
         return cell
     }
     
@@ -198,6 +212,12 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         let storyboard = UIStoryboard(name: Constants.ItemDetail, bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId)
         self.navigationController!.pushViewController(vc, animated: true)
+    }
+        
+    func postEventPlaceIcon(){
+            let storyboard = UIStoryboard(name: Constants.ItemDetail, bundle: nil)
+            let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId)
+            self.navigationController!.pushViewController(vc, animated: true)
         
     }
     func postEventDishLabel(){
@@ -206,7 +226,19 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
+    
+    func postEventDishIcon(){
+        let storyboard = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId)
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
     func postEventName(){
+        
+        let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
+    func postEventNameIcon(){
         
         let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)
