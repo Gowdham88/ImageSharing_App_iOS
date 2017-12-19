@@ -321,7 +321,7 @@ class  ApiClient {
             
      }
     
-    /********************************getItemTag based Event*************************************************/
+    /********************************getItemTag based Business*************************************************/
     
     func getItemTagBusiness(id : Int,page : String,headers : HTTPHeaders,completion : @escaping (String,BusinessItemTagModel?)-> Void) {
         
@@ -394,9 +394,22 @@ class  ApiClient {
     
     /********************************getItemList based Item Tag id*************************************************/
     
-    func getItemListByTagId(eventid : Int,tagid : Int,page : String,headers : HTTPHeaders,completion : @escaping (String,ItemListModel?)-> Void) {
+    func getItemListByTagId(primaryid : Int,tagid : Int,type:String,page : String,headers : HTTPHeaders,completion : @escaping (String,ItemListModel?)-> Void) {
         
-        Alamofire.request("\(Constants.EventApiUrl)/\(eventid)/itemtags/\(tagid)/items?\(page)", method: .get,encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+        var BaseUrl :String?
+        
+        switch type {
+        case "Event":
+            BaseUrl = Constants.EventApiUrl
+            
+        case "Business":
+            BaseUrl = Constants.BusinessDetailApi
+            
+        default:
+            BaseUrl = Constants.EventApiUrl
+        }
+        
+        Alamofire.request("\(BaseUrl!)/\(primaryid)/itemtags/\(tagid)/items?\(page)", method: .get,encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             
             print(response.request as Any)
             print(response.result.value as Any)
@@ -419,6 +432,37 @@ class  ApiClient {
             case .failure(let error):
                 
                 print(error.localizedDescription)
+                completion(error.localizedDescription,nil)
+                
+            }
+            
+        }
+        
+    }
+    
+    /************************get Events By Businessid**********************************/
+    func getEventsByBusinessApi(id : Int,page : String,headers : HTTPHeaders,completion : @escaping (String,EventTypeList?) -> Void) {
+        
+        Alamofire.request("\(Constants.EventTypeApiUrl)/\(id)/events?\(page)", method: .get,encoding: JSONEncoding.default,headers: headers).validate().responseJSON { response in
+            
+            switch response.result {
+                
+            case .success:
+                
+                if let value = response.result.value {
+                    
+                    let json = JSON(value)
+                    if let eventList = EventTypeList(json: json) {
+                        
+                        completion("success",eventList)
+                    }
+                    
+                }
+                
+                
+            case .failure(let error):
+                
+                print(error)
                 completion(error.localizedDescription,nil)
                 
             }

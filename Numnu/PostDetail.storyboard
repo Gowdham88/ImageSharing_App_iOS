@@ -24,37 +24,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lpk-Kh-Pcv">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lpk-Kh-Pcv">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sJK-vH-G1D">
-                                        <rect key="frame" x="0.0" y="184" width="320" height="200"/>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sJK-vH-G1D">
+                                        <rect key="frame" x="0.0" y="140" width="320" height="300"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="5" translatesAutoresizingMaskIntoConstraints="NO" id="g5y-2m-2RR">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="220"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="220" id="2nA-zk-710"/>
-                                                    <constraint firstAttribute="width" constant="320" id="piX-2P-eML"/>
-                                                </constraints>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="5" translatesAutoresizingMaskIntoConstraints="NO" id="g5y-2m-2RR">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="330"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="g5y-2m-2RR" secondAttribute="trailing" id="4g0-eb-aKV"/>
-                                            <constraint firstItem="g5y-2m-2RR" firstAttribute="width" secondItem="sJK-vH-G1D" secondAttribute="width" id="E3P-qV-W0h"/>
-                                            <constraint firstItem="g5y-2m-2RR" firstAttribute="leading" secondItem="sJK-vH-G1D" secondAttribute="leading" id="EdG-lT-aCs"/>
-                                            <constraint firstAttribute="bottom" secondItem="g5y-2m-2RR" secondAttribute="bottom" constant="-20" id="QNf-yd-pJs"/>
-                                            <constraint firstItem="g5y-2m-2RR" firstAttribute="top" secondItem="sJK-vH-G1D" secondAttribute="top" id="rCF-sK-O3S"/>
-                                        </constraints>
                                         <connections>
                                             <outlet property="delegate" destination="Dwa-XP-O8w" id="S4A-Us-wlm"/>
                                         </connections>
                                     </scrollView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bin-3c-Fwj">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bin-3c-Fwj">
                                         <rect key="frame" x="20" y="20" width="25" height="25"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="25" id="0EM-1m-ctR"/>
-                                            <constraint firstAttribute="width" constant="25" id="x4K-u1-BwE"/>
-                                        </constraints>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="closebtn">
                                             <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
@@ -64,26 +53,12 @@
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="sJK-vH-G1D" firstAttribute="width" secondItem="lpk-Kh-Pcv" secondAttribute="width" id="0TO-x6-YhN"/>
-                                    <constraint firstItem="sJK-vH-G1D" firstAttribute="top" secondItem="lpk-Kh-Pcv" secondAttribute="top" constant="184" id="7Rs-8h-teP"/>
-                                    <constraint firstItem="sJK-vH-G1D" firstAttribute="leading" secondItem="lpk-Kh-Pcv" secondAttribute="leading" id="8CX-hE-hqn"/>
-                                    <constraint firstAttribute="trailing" secondItem="sJK-vH-G1D" secondAttribute="trailing" id="AeO-zs-2ug"/>
-                                    <constraint firstAttribute="bottom" secondItem="sJK-vH-G1D" secondAttribute="bottom" constant="184" id="DGh-k7-idJ"/>
-                                    <constraint firstItem="bin-3c-Fwj" firstAttribute="top" secondItem="lpk-Kh-Pcv" secondAttribute="top" constant="20" id="I6g-ra-QyZ"/>
-                                    <constraint firstItem="bin-3c-Fwj" firstAttribute="leading" secondItem="lpk-Kh-Pcv" secondAttribute="leading" constant="20" id="vq8-Ud-Mhr"/>
-                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="XVu-Wj-aRs" firstAttribute="top" secondItem="lpk-Kh-Pcv" secondAttribute="top" constant="20" id="4gr-z8-9aQ"/>
-                            <constraint firstItem="lpk-Kh-Pcv" firstAttribute="leading" secondItem="XVu-Wj-aRs" secondAttribute="leading" id="fCg-bC-HIi"/>
-                            <constraint firstItem="XVu-Wj-aRs" firstAttribute="trailing" secondItem="lpk-Kh-Pcv" secondAttribute="trailing" id="fqm-z1-cg3"/>
-                            <constraint firstItem="XVu-Wj-aRs" firstAttribute="bottom" secondItem="lpk-Kh-Pcv" secondAttribute="bottom" id="s6A-aJ-cts"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="XVu-Wj-aRs"/>
                     </view>
+                    <size key="freeformSize" width="320" height="568"/>
                     <connections>
                         <outlet property="imagePhoto" destination="g5y-2m-2RR" id="amA-im-mip"/>
                         <outlet property="scrollView" destination="sJK-vH-G1D" id="BIZ-2N-FPA"/>
@@ -104,7 +79,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="emq-kw-nq5">
                                 <rect key="frame" x="0.0" y="20" width="320" height="504"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="r9a-im-5f4" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="r9a-im-5f4" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
                                         <rect key="frame" x="10" y="103" width="300" height="200"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="200" id="dvd-t3-n34"/>
@@ -155,7 +130,7 @@
                                         <color key="textColor" red="0.50588235294117645" green="0.52941176470588236" blue="0.56470588235294117" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="love_ico" translatesAutoresizingMaskIntoConstraints="NO" id="GiX-XL-MSl" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rating1" translatesAutoresizingMaskIntoConstraints="NO" id="GiX-XL-MSl" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
                                         <rect key="frame" x="250" y="311" width="24" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="8CH-Ol-MHQ"/>
@@ -410,6 +385,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="1" width="1280" height="853"/>
         <image name="5" width="1280" height="853"/>
         <image name="Bookmark" width="14" height="24"/>
         <image name="Numnu_appicon" width="122" height="122"/>
@@ -417,8 +393,7 @@
         <image name="dish_ico" width="22" height="23"/>
         <image name="eventDots" width="24" height="24"/>
         <image name="event_ico" width="25" height="27"/>
-        <image name="image_placeholder" width="960" height="796"/>
-        <image name="love_ico" width="32" height="29"/>
+        <image name="rating1" width="32" height="29"/>
         <image name="restaurant_ico" width="26" height="26"/>
         <image name="share" width="18" height="20"/>
     </resources>

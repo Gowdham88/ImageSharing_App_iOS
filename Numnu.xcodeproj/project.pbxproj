@@ -526,12 +526,9 @@
 			children = (
 				B478334A1FE0052700970412 /* EventItemTagModel.swift */,
 				B478334C1FE005CF00970412 /* EventItemtag.swift */,
-				B4483EFC1FDEA3FD00D99E0E /* TabModel */,
 				B475CDE01FDAB4060067612E /* BussinessEventList.swift */,
 				B478334E1FE0151E00970412 /* BusinessEventModel.swift */,
 				B4CFB51C1FE0FA2100DE0817 /* ItemListModel.swift */,
-				3F065CB51FE7C17600483718 /* BusinessItemtag.swift */,
-				3F065CB71FE7C1D400483718 /* BusinessItemTagModel.swift */,
 			);
 			name = EventTabModel;
 			sourceTree = "<group>";
@@ -564,6 +561,15 @@
 				B45CBCED1FA9BA4B004B6E66 /* LocationDetail.storyboard */,
 			);
 			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		B4A8FECC1FE90B4C00D8A7CB /* BusinessTabModel */ = {
+			isa = PBXGroup;
+			children = (
+				3F065CB51FE7C17600483718 /* BusinessItemtag.swift */,
+				3F065CB71FE7C1D400483718 /* BusinessItemTagModel.swift */,
+			);
+			name = BusinessTabModel;
 			sourceTree = "<group>";
 		};
 		B4BD9EE91F6FA4AF00C43182 /* Controller */ = {
@@ -613,6 +619,8 @@
 		B4BD9EEB1F6FA54400C43182 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B4A8FECC1FE90B4C00D8A7CB /* BusinessTabModel */,
+				B4483EFC1FDEA3FD00D99E0E /* TabModel */,
 				B47833491FE004FF00970412 /* EventTabModel */,
 				601D46781F8F3B1C00832BDD /* UserList.swift */,
 				6FC0A9C21FCEA1F500D91B0C /* ImgList.swift */,

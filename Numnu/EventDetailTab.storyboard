@@ -347,7 +347,7 @@
                                                             <color key="textColor" red="0.50505858659744263" green="0.52885383367538452" blue="0.56627702713012695" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="love_ico" translatesAutoresizingMaskIntoConstraints="NO" id="ZHV-Ji-sMb" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZHV-Ji-sMb" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
                                                             <rect key="frame" x="250" y="303" width="24" height="22"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="24" id="mAR-Wa-Gqg"/>
@@ -682,7 +682,6 @@
         <image name="eventDots" width="24" height="24"/>
         <image name="event_ico" width="25" height="27"/>
         <image name="image_placeholder" width="960" height="796"/>
-        <image name="love_ico" width="32" height="29"/>
         <image name="restaurant_ico" width="26" height="26"/>
     </resources>
 </document>

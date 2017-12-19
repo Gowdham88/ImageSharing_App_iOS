@@ -94,7 +94,7 @@
                                                             <color key="textColor" red="0.50588235294117645" green="0.52941176470588236" blue="0.56470588235294117" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="love_ico" translatesAutoresizingMaskIntoConstraints="NO" id="Xgc-Zh-vj3" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rating1" translatesAutoresizingMaskIntoConstraints="NO" id="Xgc-Zh-vj3" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
                                                             <rect key="frame" x="250" y="302.5" width="24" height="22"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="22" id="P4X-0Q-8SC"/>
@@ -1336,10 +1336,10 @@
         <image name="ic_chat_bubble_outline" width="12" height="11"/>
         <image name="in-love" width="24" height="22"/>
         <image name="location_ico" width="16" height="23"/>
-        <image name="love_ico" width="32" height="29"/>
         <image name="onboard" width="375" height="667"/>
         <image name="onboardbg" width="2225" height="1348"/>
         <image name="profile" width="512" height="512"/>
+        <image name="rating1" width="32" height="29"/>
         <image name="restaurant_ico" width="26" height="26"/>
     </resources>
 </document>

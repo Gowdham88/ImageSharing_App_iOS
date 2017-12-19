@@ -184,7 +184,7 @@
                                                             <color key="textColor" red="0.44705882349999998" green="0.45098039220000002" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="love_ico" translatesAutoresizingMaskIntoConstraints="NO" id="ob1-Rr-edJ" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rating1" translatesAutoresizingMaskIntoConstraints="NO" id="ob1-Rr-edJ" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
                                                             <rect key="frame" x="250" y="341" width="24" height="22"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="24" id="MDp-hY-L2s"/>
@@ -760,8 +760,8 @@
         <image name="event_ico" width="25" height="27"/>
         <image name="image_placeholder" width="960" height="796"/>
         <image name="location_ico" width="16" height="23"/>
-        <image name="love_ico" width="32" height="29"/>
         <image name="map_ico" width="25" height="25"/>
+        <image name="rating1" width="32" height="29"/>
         <image name="restaurant_ico" width="26" height="26"/>
         <image name="share" width="18" height="20"/>
     </resources>

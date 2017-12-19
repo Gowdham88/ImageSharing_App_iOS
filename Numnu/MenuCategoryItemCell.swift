@@ -34,5 +34,16 @@ class MenuCategoryItemCell: UITableViewCell {
         }
         
     }
+    
+    var itemBusiness : BusinessItemtag! {
+        
+        didSet {
+            
+            eventCategoryLabel.text = itemBusiness.tagtext ?? "Tag"
+            eventCategoryCount.text = "\(itemBusiness.itemcount ?? 0)"
+            
+        }
+        
+    }
 
 }
