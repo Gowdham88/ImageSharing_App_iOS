@@ -84,7 +84,8 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         let button: UIButton = UIButton(type: UIButtonType.custom)
         //set image for button
         if  boolForBack == false {
-            button.setImage(UIImage(named: "ic_arrow_back"), for: UIControlState.normal)
+//            button.setImage(UIImage(named: "ic_arrow_back"), for: UIControlState.normal)
+            button.setImage(UIImage(named: ""), for: UIControlState.normal)
 
         }else{
             button.setImage(UIImage(named: ""), for: UIControlState.normal)
