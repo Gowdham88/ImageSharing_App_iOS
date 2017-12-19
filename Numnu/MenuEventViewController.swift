@@ -44,6 +44,9 @@ class MenuEventViewController: UIViewController,IndicatorInfoProvider,UITableVie
     
     var itemType : String = "default"
     
+    var primayId : Int = 34
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -228,7 +231,7 @@ extension MenuEventViewController   {
         let storyboard      = UIStoryboard(name: name, bundle: nil)
         let vc              = storyboard.instantiateViewController(withIdentifier: id) as! MenuItemViewController
         vc.heading          = heading
-        vc.event_id         = primid
+        vc.primaryid        = primid
         vc.tag_id           = tagid
         vc.itemType         = type
         self.navigationController!.pushViewController(vc, animated: true)
@@ -282,7 +285,7 @@ extension MenuEventViewController {
             let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
             let param  : String  = "page=\(pageno)&limit\(limit)"
             
-            self.apiClient.getItemTagEvent(id: 34, page: param, headers: header, completion: { status,taglist in
+            self.apiClient.getItemTagEvent(id: self.primayId, page: param, headers: header, completion: { status,taglist in
                 
                 if status == "success" {
                     
@@ -329,7 +332,7 @@ extension MenuEventViewController {
             let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
             let param  : String  = "page=\(pageno)&limit\(limit)"
             
-            self.apiClient.getItemTagBusiness(id: 51, page: param, headers: header, completion: { status,taglist in
+            self.apiClient.getItemTagBusiness(id: self.primayId, page: param, headers: header, completion: { status,taglist in
                 
                 if status == "success" {
                     

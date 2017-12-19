@@ -524,9 +524,11 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                     
                     print("the username already exists")
                     
+                    
                 } else {
                     
                     print("the username available")
+                    AlertProvider.Instance.showAlert(title: "Hey!", subtitle: "Username already exists", vc: self)
                     
                 }
             })
@@ -1149,7 +1151,21 @@ extension Edit_ProfileVC {
             } else {
                 
                 HUD.hide()
-                AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Signup failed", vc: self)
+                
+                    if let user = Values {
+                        
+                        if let meassage = user.errormessage {
+                            
+                            AlertProvider.Instance.showAlert(title: "Oops!", subtitle: meassage, vc: self)
+                            return
+                        }
+                   
+                    }
+                    
+                    AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Signup failed", vc: self)
+               
+                
+                
                 
             }
         })

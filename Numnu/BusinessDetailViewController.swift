@@ -50,6 +50,7 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
     var token_str     : String = "empty"
     var apiClient     : ApiClient!
     var description_txt : String = ""
+    var businessprimaryid : Int  = 50
     
 
     override func viewDidLoad() {
@@ -144,9 +145,12 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
         let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid2) as! MenuEventViewController
         child_1.menuDelegate = self
         child_1.itemType     = "Business"
+        child_1.primayId     = businessprimaryid
         
         let child_2 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3) as! ReviewEventViewController
         child_2.popdelegate = self
+        child_2.apiType     = "Business"
+        child_2.primaryid   = businessprimaryid
         return [child_1, child_2]
         
     }
@@ -276,7 +280,8 @@ extension BusinessDetailViewController {
     func openStoryBoard () {
         
         let storyboard      = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
-        let vc              = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId)
+        let vc              = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId) as! BusinessCompleteViewController
+        vc.businessprimaryid = 50
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
@@ -365,7 +370,7 @@ extension BusinessDetailViewController {
         
         let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
         
-        apiClient.getBusinessById(id : 50,headers: header, completion: { status,Values in
+        apiClient.getBusinessById(id : self.businessprimaryid,headers: header, completion: { status,Values in
             
             if status == "success" {
                 if let response = Values {

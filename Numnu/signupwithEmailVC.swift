@@ -204,7 +204,19 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
   
                     self.authenticationError(error: "Oops! Invalid login.")
                     HUD.hide()
-                    print("signup error:::::::",error?.localizedDescription)
+                    
+                    if let errorcontent = error {
+                        print("signup error:::::::",errorcontent.localizedDescription)
+                        
+                        if  errorcontent.localizedDescription == "The email address is already in use by another account."  {
+                            
+                            AlertProvider.Instance.showAlert(title: "Oops!", subtitle: errorcontent.localizedDescription, vc: self)
+                            
+                        }
+                        
+                     
+                        
+                    }
                     return
                     
                 }

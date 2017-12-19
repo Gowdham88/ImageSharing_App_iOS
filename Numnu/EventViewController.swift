@@ -23,10 +23,12 @@ struct MyVariables {
     
 }
 class EventViewController: ButtonBarPagerTabStripViewController {
+    
     var token_str     : String = "empty"
     var apiClient     : ApiClient!
     let textLabel : UILabel = UILabel()
     var description_txt : String = ""
+    var eventprimaryid  : Int    = 34
 
     @IBOutlet weak var myscrollView: UIScrollView!
     @IBOutlet weak var eventImageView: ImageExtender!
@@ -143,14 +145,18 @@ class EventViewController: ButtonBarPagerTabStripViewController {
         let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid1) as! BusinessEventViewController
         child_1.showentity      = true
         child_1.businesdelegate = self
+        child_1.primaryId       = eventprimaryid
         
         let child_2 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid2) as! MenuEventViewController
         child_2.showentity   = true
         child_2.menuDelegate = self
         child_2.itemType     = "Event"
+        child_2.primayId     = eventprimaryid
         
         let child_3 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3) as! ReviewEventViewController
         child_3.popdelegate = self
+        child_3.apiType     = "Event"
+        child_3.primaryid   = eventprimaryid
         return [child_1,child_2,child_3]
         
     }
@@ -430,7 +436,7 @@ extension EventViewController {
         
         let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
         
-        apiClient.getEventsDetailsApi(id : 34,headers: header, completion: { status,Values in
+        apiClient.getEventsDetailsApi(id : eventprimaryid,headers: header, completion: { status,Values in
             
             if status == "success" {
                 if let response = Values {
