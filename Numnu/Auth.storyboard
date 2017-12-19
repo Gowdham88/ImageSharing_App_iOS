@@ -541,8 +541,10 @@
                         <viewLayoutGuide key="safeArea" id="nnN-ul-saF"/>
                     </view>
                     <connections>
+                        <outlet property="emaillabel" destination="QIj-h5-Oxs" id="9Tg-qg-UNs"/>
                         <outlet property="errorLabel" destination="qkU-Xv-38c" id="bha-MY-O25"/>
                         <outlet property="forgotpassEmail" destination="Rj1-gw-OMe" id="hPQ-Mk-QuD"/>
+                        <outlet property="forgotview" destination="Ybg-8c-TpO" id="FDk-4s-hgb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g37-Ps-Lt5" userLabel="First Responder" sceneMemberID="firstResponder"/>

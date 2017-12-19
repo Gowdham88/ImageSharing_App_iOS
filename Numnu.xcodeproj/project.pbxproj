@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3F0006491FD6CDBB0098B132 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0006481FD6CDBB0098B132 /* Package.swift */; };
 		3F00064B1FD6CDC70098B132 /* UIWindowTransitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F00064A1FD6CDC70098B132 /* UIWindowTransitions.swift */; };
+		3F065CB61FE7C17600483718 /* BusinessItemtag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F065CB51FE7C17600483718 /* BusinessItemtag.swift */; };
+		3F065CB81FE7C1D400483718 /* BusinessItemTagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F065CB71FE7C1D400483718 /* BusinessItemTagModel.swift */; };
 		3FC6CEBA1F6F744700DF2A12 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6CEB91F6F744700DF2A12 /* AppDelegate.swift */; };
 		3FC6CEBC1F6F744700DF2A12 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6CEBB1F6F744700DF2A12 /* ViewController.swift */; };
 		3FC6CEBF1F6F744700DF2A12 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FC6CEBD1F6F744700DF2A12 /* Main.storyboard */; };
@@ -156,6 +158,8 @@
 /* Begin PBXFileReference section */
 		3F0006481FD6CDBB0098B132 /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		3F00064A1FD6CDC70098B132 /* UIWindowTransitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIWindowTransitions.swift; sourceTree = "<group>"; };
+		3F065CB51FE7C17600483718 /* BusinessItemtag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessItemtag.swift; sourceTree = "<group>"; };
+		3F065CB71FE7C1D400483718 /* BusinessItemTagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessItemTagModel.swift; sourceTree = "<group>"; };
 		3FC6CEB61F6F744700DF2A12 /* Numnu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Numnu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FC6CEB91F6F744700DF2A12 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FC6CEBB1F6F744700DF2A12 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -526,6 +530,8 @@
 				B475CDE01FDAB4060067612E /* BussinessEventList.swift */,
 				B478334E1FE0151E00970412 /* BusinessEventModel.swift */,
 				B4CFB51C1FE0FA2100DE0817 /* ItemListModel.swift */,
+				3F065CB51FE7C17600483718 /* BusinessItemtag.swift */,
+				3F065CB71FE7C1D400483718 /* BusinessItemTagModel.swift */,
 			);
 			name = EventTabModel;
 			sourceTree = "<group>";
@@ -983,6 +989,7 @@
 				B484B8E21FA8822D00B32F7A /* BusinessCompleteViewController.swift in Sources */,
 				B464D78D1F8D0FEC002A1FDC /* UIColor.swift in Sources */,
 				B426C68E1F9E0A6B008D586B /* SplashViewController.swift in Sources */,
+				3F065CB61FE7C17600483718 /* BusinessItemtag.swift in Sources */,
 				B478334F1FE0151E00970412 /* BusinessEventModel.swift in Sources */,
 				6043865E1FB09E970049F971 /* Profile_PostViewController.swift in Sources */,
 				B4BD9EF91F6FB3E700C43182 /* PostViewModel.swift in Sources */,
@@ -1065,6 +1072,7 @@
 				3F0006491FD6CDBB0098B132 /* Package.swift in Sources */,
 				B478334B1FE0052700970412 /* EventItemTagModel.swift in Sources */,
 				B45CD8721F9CDA99009262B8 /* UILabel.swift in Sources */,
+				3F065CB81FE7C1D400483718 /* BusinessItemTagModel.swift in Sources */,
 				3FC6CEE81F6FA17300DF2A12 /* HomeViewController.swift in Sources */,
 				6FC0A9C31FCEA1F500D91B0C /* ImgList.swift in Sources */,
 				B406DE261FA730B30092E2B4 /* BusinessDetailViewController.swift in Sources */,

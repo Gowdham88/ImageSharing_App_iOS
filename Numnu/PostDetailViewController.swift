@@ -153,9 +153,8 @@ class PostDetailViewController : UIViewController {
                                 let apiclient = ApiClient()
                                 apiclient.getFireBaseImageUrl(imagepath: postimagelist[postimagelist.count-1].imageurl_str!, completion: { url in
             
-                                    self.postDEventImage.image = nil
+                                   self.postDEventImage.image = nil
                                     Manager.shared.loadImage(with: URL(string : url)!, into: self.postDEventImage)
-            
                                 })
             
                             }
@@ -253,8 +252,11 @@ class PostDetailViewController : UIViewController {
         
     }
     func imageTapped() {
+        
+//        self.postDEventImage.image = item.postimages
         let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: "PostImageZoomViewController")
+        let vc         = storyboard.instantiateViewController(withIdentifier: "PostImageZoomViewController") as! PostImageZoomViewController
+        vc.imagePassed = postDEventImage.image!
         self.navigationController?.present(vc, animated: true, completion: nil)
     }
     override func didReceiveMemoryWarning() {
