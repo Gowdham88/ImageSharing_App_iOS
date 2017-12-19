@@ -1091,6 +1091,7 @@ extension Edit_ProfileVC {
         print(descriptionTextfield.text!)
         print(birthdate)
         print(emailaddress.text!)
+        print(profileImage)
       
         let clientIp = ValidationHelper.Instance.getIPAddress() ?? "1.0.1"
         var gender : Int = 0
@@ -1107,6 +1108,8 @@ extension Edit_ProfileVC {
        
         apiClient.completeSignup(parameters: parameters,headers: header,completion:{status, Values in
             
+            
+            print("statusfb: \(status)")
             if status == "success" {
                 
                 HUD.hide()

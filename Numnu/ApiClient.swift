@@ -321,6 +321,42 @@ class  ApiClient {
             
      }
     
+    /********************************getItemTag based Event*************************************************/
+    
+    func getItemTagBusiness(id : Int,page : String,headers : HTTPHeaders,completion : @escaping (String,BusinessItemTagModel?)-> Void) {
+        
+        Alamofire.request("\(Constants.BusinessDetailApi)/\(id)/itemtags?\(page)", method: .get,encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            
+            print(response.request as Any)
+            print(response.result.value as Any)
+            
+            switch response.result {
+                
+            case .success :
+                
+                if let value = response.result.value {
+                    
+                    let json = JSON(value)
+                    if let list = BusinessItemTagModel(json: json) {
+                        
+                        completion("success",list)
+                        
+                    }
+                    
+                }
+                
+                
+            case .failure(let error):
+                
+                print(error.localizedDescription)
+                completion(error.localizedDescription,nil)
+                
+            }
+            
+        }
+        
+    }
+    
     /********************************getBussiness based Event*************************************************/
     
     func getBussinessEvent(id : Int,page : String,headers : HTTPHeaders,completion : @escaping (String,BusinessEventModel?)-> Void) {
