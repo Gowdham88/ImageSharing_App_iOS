@@ -22,7 +22,6 @@ class PostImageZoomViewController: UIViewController,UIScrollViewDelegate {
         // Do any additional setup after loading the view.
         self.imagePhoto.image = self.imagePassed
         imagePhoto.isUserInteractionEnabled = true
-        
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
         swipeUp.direction = UISwipeGestureRecognizerDirection.up
         self.view.addGestureRecognizer(swipeUp)
@@ -31,21 +30,23 @@ class PostImageZoomViewController: UIViewController,UIScrollViewDelegate {
         swipeDown.direction = UISwipeGestureRecognizerDirection.down
         self.view.addGestureRecognizer(swipeDown)
         
-        let value = UIInterfaceOrientation.landscapeLeft.rawValue
-        UIDevice.current.setValue(value, forKey: "orientation")
+//        let value = UIInterfaceOrientation.landscapeLeft.rawValue
+//        UIDevice.current.setValue(value, forKey: "orientation")
     }
     
-    private func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.landscapeLeft
-    }
-    
-    private func shouldAutorotate() -> Bool {
-        return true
-    }
+//    private func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+//        return UIInterfaceOrientationMask.landscapeLeft
+//    }
+//    
+//    private func shouldAutorotate() -> Bool {
+//        return true
+//    }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
         self.tabBarController?.tabBar.isHidden = true
+        isPresented = true
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
