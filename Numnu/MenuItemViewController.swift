@@ -24,6 +24,8 @@ class MenuItemViewController: UIViewController {
     var limitno : Int = 25
     var event_id : Int = 0
     var tag_id   : Int = 0
+    /********************variable which select which api ************************/
+    var itemType : String = "Event"
     
     @IBOutlet weak var navigationItemList: UINavigationItem!
     override func viewDidLoad() {
@@ -200,7 +202,7 @@ extension MenuItemViewController {
             let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
             let param  : String  = "page=\(pageno)&limit\(limit)"
             
-            self.apiClient.getItemListByTagId(eventid: self.event_id, tagid: self.tag_id, page: param, headers: header, completion: { status,itemlists in
+            self.apiClient.getItemListByTagId(primaryid: self.event_id, tagid: self.tag_id,type: self.itemType,page: param, headers: header, completion: { status,itemlists in
                 
                 if status == "success" {
                     

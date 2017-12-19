@@ -32,7 +32,7 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
     @IBOutlet weak var mainContainerViewBottom: NSLayoutConstraint!
     @IBOutlet weak var mainContainerView: NSLayoutConstraint!
     
-    var tagarray = ["Festival","Wine","Party","Rum","Barbaque","Pasta","Sandwich","Burger"]
+    var tagarray = [String]()
     
     /***************contraints***********************/
     
@@ -49,6 +49,7 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
     
     var token_str     : String = "empty"
     var apiClient     : ApiClient!
+    var description_txt : String = ""
     
 
     override func viewDidLoad() {
@@ -88,28 +89,10 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
         
         tapRegistration()
         alertTapRegister()
+        myscrollView.isHidden = true
         
-        tagViewUpdate()
-        
-        eventDescriptionLabel.text = Constants.dummy
-        
-        /****************Checking number of lines************************/
-        
-        if (eventDescriptionLabel.numberOfVisibleLines > 4) {
-            
-            readMoreButton.isHidden = false
-            
-            
-        } else {
-            
-            readMoreButton.isHidden = true
-            containerViewTop.constant = 8
-            busDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
-            
-        }
-        
-       
         apiClient = ApiClient()
+        getFirebaseToken()
         
        
         
@@ -143,7 +126,7 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
             
             readMoreButton.setTitle("less", for: .normal)
             isLabelAtMaxHeight = true
-            busDescriptionHeight.constant   = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
+            busDescriptionHeight.constant   = TextSize.sharedinstance.getLabelHeight(text: description_txt, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
             
             
         }
@@ -160,6 +143,8 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
         
         let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid2) as! MenuEventViewController
         child_1.menuDelegate = self
+        child_1.itemType     = "Business"
+        
         let child_2 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3) as! ReviewEventViewController
         child_2.popdelegate = self
         return [child_1, child_2]
@@ -360,161 +345,115 @@ extension BusinessDetailViewController : MenuEventViewControllerDelegate {
     
 }
 
-//extension BusinessDetailViewController {
-//    
-//    func getFirebaseToken() {
-//        
-//        apiClient.getFireBaseToken(completion:{ token in
-//            
-//            self.token_str = token
-//            self.MethodToCallApi()
-//            
-//        })
-//        
-//    }
-//    func MethodToCallApi(){
-//        
-//        HUD.show(.labeledProgress(title: "Loading", subtitle: ""))
-//        
-//        let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
-//        
-//        apiClient.getBusinessById(id : 34,headers: header, completion: { status,Values in
-//            
-//            if status == "success" {
-//                if let response = Values {
-//                    
-//                    HUD.hide()
-//                    
-//                    DispatchQueue.main.async {
-//                        
-//                        self.getDetails(response:response)
-//                        
-//                    }
-//                    
-//                }
-//                
-//            } else {
-//                print("json respose failure:::::::")
-//                HUD.hide()
-//                DispatchQueue.main.async {
-//                    
-//                    self.myscrollView.isHidden = true
-//                    
-//                }
-//                
-//            }
-//        })
-//    }
-//    func getDetails(response:BusinessDetailModel) {
-//        
-//        
-//        if let name = response.businessname {
-//            bu.text = name
-//        }
-//        
-//        if let description = response.description {
-//            eventDescriptionLabel.text = description
-//        }
-//        
-//        if let startsat = response.startsat {
-//            print(startsat)
-//            if response.startsat != nil {
-//                //                eventDateLabel.text = PrefsManager.sharedinstance.startsat + "-" + (PrefsManager.sharedinstance.endsat)
-//            }
-//        }
-//        
-//        if let endsat = response.endsat {
-//            print(endsat)
-//            if response.endsat != nil {
-//                
-//                let formatter = DateFormatter()
-//                formatter.locale = Locale(identifier: "en_US_POSIX")
-//                formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-//                let date = formatter.date(from: endsat)
-//                let date2 = formatter.date(from: response.startsat!)
-//                
-//                print("date: \(String(describing: date))")
-//                print("date: \(String(describing: date2))")
-//                
-//                formatter.dateFormat = "MMM dd,h:mm a"
-//                let dateString = formatter.string(from: date!)
-//                let dateString2 = formatter.string(from: date2!)
-//                eventDateLabel.text = dateString2 + " - " + dateString
-//                print("datestring:::::",dateString,dateString2)
-//            }
-//        }
-//        
-//        
-//        if let eventLinkList = response.eventLinkList {
-//            if  eventLinkList.count > 0 {
-//                EventLinkLabel1.text = eventLinkList[0].linktext
-//                MyVariables.link1 = eventLinkList[0].weblink!
-//                
-//            }
-//            if eventLinkList.count > 1 {
-//                eventLinkLabel2.text = eventLinkList[1].linktext
-//                MyVariables.link2 = eventLinkList[1].weblink!
-//                
-//                
-//            }
-//        }
-//        
-//        
-//        if let taglist = response.taglist {
-//            if taglist.count > 0 {
-//                for item in taglist {
-//                    if let tagname = item.text_str {
-//                        tagarray.append(tagname)
-//                    }
-//                }
-//                tagViewUpdate()
-//            }
-//        }
-//        
-//        if let loclist = response.loclist {
-//            if response.loclist != nil {
-//                eventPlaceLabel.text    = loclist.name_str
-//                MyVariables.fetchedLat  = loclist.lattitude_str!
-//                MyVariables.fetchedLong = loclist.longitude_str!
-//                MyVariables.markerTitle = loclist.name_str!
-//                print("lat and lon values are:::::",MyVariables.fetchedLat,MyVariables.fetchedLong)
-//            }
-//        }
-//        
-//        if let imglist = response.imagelist {
-//            if imglist.count > 0 {
-//                if let url = imglist[imglist.count-1].imageurl_str {
-//                    
-//                    apiClient.getFireBaseImageUrl(imagepath: url, completion: { imageUrl in
-//                        
-//                        if imageUrl != "empty" {
-//                            
-//                            Manager.shared.loadImage(with: URL(string : imageUrl)!, into: self.eventImageView)
-//                        }
-//                        
-//                    })
-//                    
-//                    
-//                }
-//            }
-//        }
-//        
-//        /****************Checking number of lines************************/
-//        
-//        if (eventDescriptionLabel.numberOfVisibleLines > 4) {
-//            
-//            readMoreButton.isHidden = false
-//            
-//        } else {
-//            
-//            readMoreButton.isHidden   = true
-//            containerViewTop.constant = 8
-//            barButtonTop.constant     = 8
-//            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
-//            
-//        }
-//        
-//        self.myscrollView.isHidden = false
-//    }
-//}
+extension BusinessDetailViewController {
+    
+    func getFirebaseToken() {
+        
+        apiClient.getFireBaseToken(completion:{ token in
+            
+            self.token_str = token
+            self.MethodToCallApi()
+            
+        })
+        
+    }
+    func MethodToCallApi(){
+        
+        
+        
+        HUD.show(.labeledProgress(title: "Loading", subtitle: ""))
+        
+        let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
+        
+        apiClient.getBusinessById(id : 50,headers: header, completion: { status,Values in
+            
+            if status == "success" {
+                if let response = Values {
+                    
+                    HUD.hide()
+                    
+                    DispatchQueue.main.async {
+                        
+                        self.getDetails(response:response)
+                        
+                    }
+                    
+                }
+                
+            } else {
+                print("json respose failure:::::::")
+                HUD.hide()
+                DispatchQueue.main.async {
+                    
+                    self.myscrollView.isHidden = true
+                    
+                }
+                
+            }
+        })
+    }
+    func getDetails(response:BusinessDetailModel) {
+        
+        if let name = response.businessname {
+            busTitleLabel.text = name
+        }
+        
+        if let description = response.businessdescription {
+            eventDescriptionLabel.text = description
+        }
+        
+        
+        
+        if let taglist = response.taglist {
+            if taglist.count > 0 {
+                for item in taglist {
+                    if let tagname = item.text_str {
+                        tagarray.append(tagname)
+                    }
+                }
+                tagViewUpdate()
+            }
+        }
+        
+        
+        if let imglist = response.imagelist {
+            if imglist.count > 0 {
+                if let url = imglist[imglist.count-1].imageurl_str {
+                    
+                    apiClient.getFireBaseImageUrl(imagepath: url, completion: { imageUrl in
+                        
+                        if imageUrl != "empty" {
+                            
+                            Manager.shared.loadImage(with: URL(string : imageUrl)!, into: self.busImageView)
+                        }
+                        
+                    })
+                    
+                    
+                }
+            }
+        }
+        
+        /****************Checking number of lines************************/
+        
+        if (eventDescriptionLabel.numberOfVisibleLines > 4) {
+            
+            readMoreButton.isHidden = false
+            
+        } else {
+            
+            readMoreButton.isHidden   = true
+            containerViewTop.constant = 8
+            
+            if let description = response.businessdescription {
+                busDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: description, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
+                description_txt = description
+            }
+            
+            
+        }
+        
+        self.myscrollView.isHidden = false
+    }
+}
 

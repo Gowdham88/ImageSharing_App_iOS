@@ -28,10 +28,21 @@ class MenuEventViewController: UIViewController,IndicatorInfoProvider,UITableVie
     
     /********************Api client********************************/
     var apiClient : ApiClient!
+    
+    /*********************Event*********************************/
     var itemTagList = [EventItemtag]()
     var tagModel  : EventItemTagModel?
+    
+    /*********************Business*********************************/
+    var itemBusinessTagList = [BusinessItemtag]()
+    var tagBusinessModel    : BusinessItemTagModel?
+    
     var pageno  : Int = 1
     var limitno : Int = 25
+    
+    /********************variable which select which api ************************/
+    
+    var itemType : String = "default"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +55,13 @@ class MenuEventViewController: UIViewController,IndicatorInfoProvider,UITableVie
         /********************Api client********************************/
         apiClient = ApiClient()
         
+        /**********************For Business tab***********************************/
+    
+        if itemType == "Business" {
+       
+            getItemTagBusiness(pageno: pageno, limit: limitno)
+            
+        }
         
        
     }
@@ -57,9 +75,25 @@ class MenuEventViewController: UIViewController,IndicatorInfoProvider,UITableVie
         
         viewState = true
         itemTagList.removeAll()
+        itemBusinessTagList.removeAll()
         pageno  = 1
         limitno = 25
-        getItemTag(pageno: pageno, limit: limitno)
+        switch itemType {
+            
+        case "Event":
+            
+           getItemTag(pageno: pageno, limit: limitno)
+            
+        case "Business":
+            
+           getItemTagBusiness(pageno: pageno, limit: limitno)
+            
+        default:
+            
+           break
+            
+        }
+        
         
         
     }
@@ -83,33 +117,86 @@ class MenuEventViewController: UIViewController,IndicatorInfoProvider,UITableVie
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return itemTagList.count
+        switch itemType {
+            
+        case "Event":
+             return itemTagList.count
+            
+        case "Business":
+            return itemBusinessTagList.count
+            
+        default:
+            return 0
+            
+        }
+        
+       
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "menucategoryCell", for: indexPath) as! MenuCategoryItemCell
-        cell.item = itemTagList[indexPath.row]
+        switch itemType {
+            
+        case "Event":
+            
+            cell.item = itemTagList[indexPath.row]
+            
+        case "Business":
+            cell.itemBusiness = itemBusinessTagList[indexPath.row]
+            
+        default:
+            
+            return cell
+            
+        }
+        
         return cell
       
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        if indexPath.row == itemTagList.count - 1 && viewState {
+        switch itemType {
             
-            if let pageItem = tagModel {
+        case "Event":
+            
+            if indexPath.row == itemTagList.count - 1 && viewState {
                 
-                if itemTagList.count  < pageItem.totalRows ?? 0 {
-                    pageno += 1
-                    limitno = 25 * pageno
-                    getItemTag(pageno: pageno, limit: limitno)
+                if let pageItem = tagModel {
+                    
+                    if itemTagList.count  < pageItem.totalRows ?? 0 {
+                        pageno += 1
+                        limitno = 25 * pageno
+                        getItemTag(pageno: pageno, limit: limitno)
+                    }
+                    
                 }
                 
             }
+
             
+        case "Business":
+            if indexPath.row == itemBusinessTagList.count - 1 && viewState {
+                
+                if let pageItem = tagBusinessModel {
+                    
+                    if itemBusinessTagList.count  < pageItem.totalRows ?? 0 {
+                        pageno += 1
+                        limitno = 25 * pageno
+                        getItemTagBusiness(pageno: pageno, limit: limitno)
+                    }
+                    
+                }
+                
+            }
+
+            
+        default:
+            break
         }
+        
     }
 }
 
@@ -118,17 +205,32 @@ extension MenuEventViewController   {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        openStoryBoard(name: Constants.EventDetail, id: Constants.MenuItemId,heading: itemTagList[indexPath.row].tagtext ?? "Title", eventid: 34,tagid: itemTagList[indexPath.row].tagid ?? 0)
+        switch itemType {
+            
+        case "Event":
+            
+            openStoryBoard(name: Constants.EventDetail, id: Constants.MenuItemId,heading: itemTagList[indexPath.row].tagtext ?? "Title", primid: 34,tagid: itemTagList[indexPath.row].tagid ?? 0,type: "Event")
+            
+        case "Business":
+            openStoryBoard(name: Constants.EventDetail, id: Constants.MenuItemId,heading: itemBusinessTagList[indexPath.row].tagtext ?? "Title", primid: 51,tagid: itemBusinessTagList[indexPath.row].tagid ?? 0,type: "Business")
+            
+        default:
+     
+            break
+            
+        }
+        
         
     }
     
-    func openStoryBoard (name : String,id : String,heading : String,eventid : Int,tagid : Int) {
+    func openStoryBoard (name : String,id : String,heading : String,primid : Int,tagid : Int,type : String) {
         
         let storyboard      = UIStoryboard(name: name, bundle: nil)
         let vc              = storyboard.instantiateViewController(withIdentifier: id) as! MenuItemViewController
         vc.heading          = heading
-        vc.event_id         = eventid
+        vc.event_id         = primid
         vc.tag_id           = tagid
+        vc.itemType         = type
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
@@ -191,6 +293,53 @@ extension MenuEventViewController {
                         if let list = item.tagItemList {
                             
                             self.itemTagList += list
+                        }
+                    }
+                    
+                    DispatchQueue.main.async {
+                        
+                        self.menuCategoryTableview.reloadData()
+                        
+                    }
+                    
+                    self.reloadTable()
+                    
+                } else {
+                    
+                    HUD.hide()
+                    self.reloadTable()
+                    
+                }
+                
+                
+            })
+            
+            
+        })
+        
+        
+    }
+    
+    func getItemTagBusiness(pageno:Int,limit:Int) {
+        
+        HUD.show(.labeledProgress(title: "Loading", subtitle: ""))
+        
+        apiClient.getFireBaseToken(completion: { token in
+            
+            let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
+            let param  : String  = "page=\(pageno)&limit\(limit)"
+            
+            self.apiClient.getItemTagBusiness(id: 51, page: param, headers: header, completion: { status,taglist in
+                
+                if status == "success" {
+                    
+                    if let item = taglist {
+                        
+                        self.tagBusinessModel = item
+                        
+                        if let list = item.tagItemList {
+                            
+                            self.itemBusinessTagList += list
                         }
                     }
                     

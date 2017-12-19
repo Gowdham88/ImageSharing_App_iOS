@@ -45,6 +45,7 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
     var isLabelAtMaxHeight = false
     
     var token_str     : String = "empty"
+    var description_txt : String = ""
     var apiClient     : ApiClient!
 
     override func viewDidLoad() {
@@ -132,6 +133,8 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
         
         let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid2) as! MenuEventViewController
         child_1.menuDelegate    = self
+        child_1.itemType        = "Business"
+        
         let child_2 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3) as! ReviewEventViewController
         child_2.popdelegate     = self
         let child_3 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1) as! EventTabController
@@ -154,8 +157,7 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
             
             readMoreButton.setTitle("less", for: .normal)
             isLabelAtMaxHeight = true
-           
-            
+            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: description_txt, width: BcDescriptionLabel.frame.width, font: BcDescriptionLabel.font)
             
         }
         
@@ -274,7 +276,7 @@ extension BusinessCompleteViewController {
         
     }
     
-    func alertTapRegister(){
+    func alertTapRegister() {
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.closePopup(sender:)))
         self.shareView.addGestureRecognizer(tap)
@@ -454,6 +456,7 @@ extension BusinessCompleteViewController {
             barButtonTop.constant     = 8
             if let description = response.businessdescription {
                 eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: description, width: BcDescriptionLabel.frame.width, font: BcDescriptionLabel.font)
+                description_txt = description
             }
             
             
