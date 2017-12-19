@@ -26,7 +26,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     var token_str     : String = "empty"
     var apiClient     : ApiClient!
     let textLabel : UILabel = UILabel()
-
+    var description_txt : String = ""
 
     @IBOutlet weak var myscrollView: UIScrollView!
     @IBOutlet weak var eventImageView: ImageExtender!
@@ -145,8 +145,9 @@ class EventViewController: ButtonBarPagerTabStripViewController {
         child_1.businesdelegate = self
         
         let child_2 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid2) as! MenuEventViewController
-        child_2.showentity = true
+        child_2.showentity   = true
         child_2.menuDelegate = self
+        child_2.itemType     = "Event"
         
         let child_3 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3) as! ReviewEventViewController
         child_3.popdelegate = self
@@ -182,7 +183,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
             
             readMoreButton.setTitle("less", for: .normal)
             isLabelAtMaxHeight = true
-            
+            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: description_txt, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
            
         }
         
@@ -562,6 +563,7 @@ extension EventViewController {
             barButtonTop.constant     = 8
             if let description = response.description {
             eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: description, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
+            description_txt = description
             }
         }
         
