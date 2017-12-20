@@ -109,6 +109,22 @@ class postEventDetailTableViewCell : UITableViewCell {
     
     var item : PostListDataItems! {
         didSet {
+            if let startsat = item.createdat {
+                if item.createdat != nil {
+                    print("startat time:::",startsat)
+                    let formatter = DateFormatter()
+                    formatter.locale = Locale(identifier: "en_US_POSIX")
+                    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                    let date = formatter.date(from: startsat)
+                    
+                    print("date: \(String(describing: date))")
+                    
+                    formatter.dateFormat = "h "
+                    let dateString = formatter.string(from: date!)
+                    postDtvUserTime.text =  dateString + "hrs"
+                    print("datestring:::::",dateString)
+                }
+            }
             
             if let posttag = item.postcreator{
                 if let postuser = posttag.name {

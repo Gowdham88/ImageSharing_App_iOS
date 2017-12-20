@@ -650,11 +650,12 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         nav1.viewControllers = [controller]
         self.tabBarController?.viewControllers?.append(nav1)
         var myImage = UIImage(named: "profileunselected")!
-        controller.tabBarItem.title        = ""
-        controller.tabBarItem.imageInsets  = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
-////        let myInsets : UIEdgeInsets = UIEdgeInsetsMake(6, 0, -6, 0)
-////        myImage = myImage.resizableImage(withCapInsets: myInsets)
+        self.tabBarItem.title        = nil
+//        let myInsets : UIEdgeInsets = UIEdgeInsetsMake(-10, 0, 0, 0)
+//        myImage = myImage.resizableImage(withCapInsets: myInsets)
         controller.tabBarItem = UITabBarItem(title: nil, image: myImage, selectedImage: myImage)
+        controller.tabBarItem.imageInsets  = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
+
         
         
         /**************************Removing tabs*********************************/
