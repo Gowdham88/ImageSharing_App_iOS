@@ -1887,7 +1887,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="awc-M2-HxH" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="wew-e9-xW7">
-                        <rect key="frame" x="0.0" y="20" width="320" height="48"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1908,7 +1908,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3yN-G4-Paf">
-                        <rect key="frame" x="0.0" y="20" width="320" height="48"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1953,7 +1953,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Z8v-ld-KTw">
-                        <rect key="frame" x="0.0" y="20" width="320" height="48"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1979,7 +1979,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="P3U-sk-3du">
-                        <rect key="frame" x="0.0" y="20" width="320" height="48"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -2002,7 +2002,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GTE-OS-OAA" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="g5A-RK-83j">
-                        <rect key="frame" x="0.0" y="20" width="320" height="48"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
@@ -2450,7 +2450,7 @@
                                         </constraints>
                                     </view>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KEC-P9-Mwt">
-                                        <rect key="frame" x="30" y="735.5" width="250" height="30"/>
+                                        <rect key="frame" x="35" y="735.5" width="245" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="9kq-NA-WqH"/>
                                         </constraints>
@@ -2577,7 +2577,7 @@
                                     <constraint firstItem="eK2-4g-O0g" firstAttribute="trailing" secondItem="naX-py-RqI" secondAttribute="trailing" constant="-2" id="q2W-9S-nux"/>
                                     <constraint firstItem="AfZ-Z6-ECu" firstAttribute="top" secondItem="8IX-pb-AAD" secondAttribute="bottom" constant="3" id="q8m-1f-TFF"/>
                                     <constraint firstItem="KEC-P9-Mwt" firstAttribute="top" secondItem="PA7-vX-R83" secondAttribute="bottom" constant="6" id="qd3-Kh-Jja"/>
-                                    <constraint firstItem="KEC-P9-Mwt" firstAttribute="leading" secondItem="6bE-sH-Glz" secondAttribute="leading" constant="30" id="rli-oU-Z6i"/>
+                                    <constraint firstItem="KEC-P9-Mwt" firstAttribute="leading" secondItem="6bE-sH-Glz" secondAttribute="leading" constant="35" id="rli-oU-Z6i"/>
                                     <constraint firstAttribute="trailing" secondItem="oup-Mh-8Kb" secondAttribute="trailing" constant="35" id="sJ4-bw-0XO"/>
                                     <constraint firstItem="z6s-PT-awV" firstAttribute="leading" secondItem="6bE-sH-Glz" secondAttribute="leading" constant="35" id="sWP-8K-Y1S"/>
                                     <constraint firstItem="an4-45-ZLB" firstAttribute="leading" secondItem="AUb-WM-3op" secondAttribute="trailing" constant="70" id="sin-PJ-BXG"/>

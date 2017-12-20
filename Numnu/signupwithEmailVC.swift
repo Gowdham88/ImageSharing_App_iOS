@@ -321,37 +321,49 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         fbLoginmanager.logIn(withReadPermissions: ["public_profile", "email"], from: self) { (result, error) in
             if let error = error {
                 print("Failed to login: \(error.localizedDescription)")
-                AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Login failed.", vc: self)
+                DispatchQueue.main.async {
+                    
+                  AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Login failed.", vc: self)
+               
+                }
+                
                 FBSDKLoginManager().logOut()
-                HUD.hide()
+               
                 return
             } else if(result?.isCancelled)! {
                 
-                HUD.hide()
                 FBSDKLoginManager().logOut()
-                
                 
             }
             
             guard let accessToken = FBSDKAccessToken.current() else {
                 print("Failed to get access token")
-                 HUD.hide()
                 return
+            }
+            
+            DispatchQueue.main.async {
+                
+                HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
             }
 
             let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
             Auth.auth().signIn(with: credential, completion: { (user, error) in
                 if let error = error {
+                    DispatchQueue.main.async {
                     HUD.hide()
                     AlertProvider.Instance.showAlert(title: "", subtitle: error.localizedDescription, vc: self)
+                    
+                    }
                     print("Login error: \(error.localizedDescription)")
-                    
-                    
                     return
                 }
              
-                HUD.hide()
-                self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId,firebaseid: (user?.uid)!)
+                DispatchQueue.main.async {
+                    
+                    HUD.hide()
+                    self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId,firebaseid: (user?.uid)!)
+                }
+                
                 
             })
           
