@@ -49,6 +49,20 @@ class  ApiClient {
             case .failure(let error):
                 
                 print(error.localizedDescription)
+                
+                if let httpStatusCode = response.response?.statusCode {
+                    
+                    if let value = response.data,httpStatusCode == 400 {
+                        let json = JSON(value)
+                        if let message = UserList(json: json) {
+                            
+                            completion("400",message)
+                        }
+                        
+                    }
+                   
+                }
+               
                 completion(error.localizedDescription,nil)
                 
             }
@@ -63,7 +77,7 @@ class  ApiClient {
         
         Alamofire.request(Constants.LoginApiUrl, method: .get, headers: headers).validate().responseJSON { response in
             
-            print(response.result.value)
+            print(response.result.value as Any)
             
             switch response.result {
                 
@@ -94,9 +108,7 @@ class  ApiClient {
     /************************Username check Api**********************************/
     
     func usernameexists(parameters : Parameters,headers : HTTPHeaders,completion : @escaping (String,Bool?) -> Void) {
-        
-        
-        
+       
         Alamofire.request(Constants.CheckUserName, method: .get, parameters: parameters,headers : headers).validate().responseJSON { response in
             
             switch response.result {
@@ -108,6 +120,7 @@ class  ApiClient {
                     let json = JSON(value)
                     if let usernameexists = json["usernameexists"].bool {
                         
+                        print(json)
                         completion("success",usernameexists)
                     }
                     
@@ -254,9 +267,23 @@ class  ApiClient {
     
     
     /*********************************PostsByEventId********************************************************/
-    func PostsByEventId(id : Int,page : String,headers: HTTPHeaders,completion : @escaping (String,PostListByEventId?) -> Void) {
+    func getPostList(id : Int,page : String,type : String,headers: HTTPHeaders,completion : @escaping (String,PostListByEventId?) -> Void) {
         
-        Alamofire.request("\(Constants.EventApiUrl)/\(id)/posts?\(page)", method: .get, encoding: JSONEncoding.default,headers: headers).validate().responseJSON { response in
+        var Baseurl : String?
+        
+        switch  type {
+            case "Event":
+            Baseurl = Constants.EventApiUrl
+            
+            case "Business":
+            Baseurl = Constants.BusinessDetailApi
+            
+            default:
+            Baseurl = Constants.EventApiUrl
+        }
+        
+        
+        Alamofire.request("\(Baseurl!)/\(id)/posts?\(page)", method: .get, encoding: JSONEncoding.default,headers: headers).validate().responseJSON { response in
             
             switch response.result {
                 
@@ -443,7 +470,7 @@ class  ApiClient {
     /************************get Events By Businessid**********************************/
     func getEventsByBusinessApi(id : Int,page : String,headers : HTTPHeaders,completion : @escaping (String,EventTypeList?) -> Void) {
         
-        Alamofire.request("\(Constants.EventTypeApiUrl)/\(id)/events?\(page)", method: .get,encoding: JSONEncoding.default,headers: headers).validate().responseJSON { response in
+        Alamofire.request("\(Constants.BusinessDetailApi)/\(id)/events?\(page)", method: .get,encoding: JSONEncoding.default,headers: headers).validate().responseJSON { response in
             
             switch response.result {
                 

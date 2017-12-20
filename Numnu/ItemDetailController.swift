@@ -52,6 +52,7 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
     
     var apiClient : ApiClient!
     var description_txt : String = ""
+    var itemprimaryid   : Int  = 0
 
     override func viewDidLoad() {
         settings.style.selectedBarHeight = 3.0
@@ -131,6 +132,7 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
         
         let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3) as! ReviewEventViewController
         child_1.popdelegate = self
+        child_1.apiType     = "Item"
         let child_2 = UIStoryboard(name: Constants.ItemDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid7)  as! LocationTabController
         child_2.locationdelegate = self
         let child_3 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1) as! EventTabController
@@ -394,7 +396,7 @@ extension ItemDetailController {
             
             let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
             
-            self.apiClient.getItemById(id: 115, headers: header, completion: { status,item in
+            self.apiClient.getItemById(id: self.itemprimaryid, headers: header, completion: { status,item in
                 
                 if status == "success" {
                     

@@ -42,16 +42,19 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
     
     /***************Read more variable*********************/
     
-    var isLabelAtMaxHeight = false
+    var isLabelAtMaxHeight   = false
     
-    var token_str     : String = "empty"
-    var description_txt : String = ""
-    var apiClient     : ApiClient!
+    var token_str       : String   = "empty"
+    var description_txt : String   = ""
+    var apiClient       : ApiClient!
+    var businessprimaryid : Int    = 50
+    
 
     override func viewDidLoad() {
        settings.style.selectedBarHeight = 3.0
        settings.style.buttonBarItemFont = UIFont(name: "Avenir-Medium", size: 14)!
        super.viewDidLoad()
+        
         myscrollView.delegate = self
         settings.style.buttonBarBackgroundColor     = .white
         settings.style.buttonBarItemBackgroundColor = .white
@@ -89,10 +92,7 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
         alertTapRegister()
         myscrollView.isHidden = true
         
-        
-        
         apiClient = ApiClient()
-        
         getFirebaseToken()
 
        
@@ -134,12 +134,18 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
         let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid2) as! MenuEventViewController
         child_1.menuDelegate    = self
         child_1.itemType        = "Business"
+        child_1.primayId        = 50
         
         let child_2 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3) as! ReviewEventViewController
         child_2.popdelegate     = self
+        child_2.apiType         = "Business"
+        child_2.primaryid       = 50
+        
         let child_3 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1) as! EventTabController
         child_3.scrolltableview = false
         child_3.eventdelegate   = self
+        child_3.apiType         = "Business"
+        
         return [child_1,child_2,child_3]
         
     }
@@ -374,7 +380,7 @@ extension BusinessCompleteViewController {
         
         let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
         
-        apiClient.getBusinessById(id : 50,headers: header, completion: { status,Values in
+        apiClient.getBusinessById(id : self.businessprimaryid,headers: header, completion: { status,Values in
             
             if status == "success" {
                 if let response = Values {

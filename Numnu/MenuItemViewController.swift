@@ -22,7 +22,7 @@ class MenuItemViewController: UIViewController {
     var itemModel  : ItemListModel?
     var pageno  : Int = 1
     var limitno : Int = 25
-    var event_id : Int = 0
+    var primaryid : Int = 0
     var tag_id   : Int = 0
     /********************variable which select which api ************************/
     var itemType : String = "Event"
@@ -140,7 +140,8 @@ extension MenuItemViewController : UITableViewDelegate,UITableViewDataSource {
     func openStoryBoard (name : String,id : String) {
         
         let storyboard      = UIStoryboard(name: name, bundle: nil)
-        let vc              = storyboard.instantiateViewController(withIdentifier: id)
+        let vc              = storyboard.instantiateViewController(withIdentifier: id) as! ItemCompleteviewcontroller
+        vc.itemprimaryid    = 115
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
@@ -202,7 +203,7 @@ extension MenuItemViewController {
             let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
             let param  : String  = "page=\(pageno)&limit\(limit)"
             
-            self.apiClient.getItemListByTagId(primaryid: self.event_id, tagid: self.tag_id,type: self.itemType,page: param, headers: header, completion: { status,itemlists in
+            self.apiClient.getItemListByTagId(primaryid: self.primaryid, tagid: self.tag_id,type: self.itemType,page: param, headers: header, completion: { status,itemlists in
                 
                 if status == "success" {
                     

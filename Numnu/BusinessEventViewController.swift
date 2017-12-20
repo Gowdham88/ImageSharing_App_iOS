@@ -35,7 +35,7 @@ class BusinessEventViewController: UIViewController,IndicatorInfoProvider {
     var bussinessModel  : BusinessEventModel?
     var pageno  : Int = 1
     var limitno : Int = 25
-   
+    var primaryId : Int = 34
     
     override func viewDidLoad() {
         
@@ -88,7 +88,8 @@ class BusinessEventViewController: UIViewController,IndicatorInfoProvider {
     func openStoryBoard (name : String,id : String) {
         
         let storyboard      = UIStoryboard(name: name, bundle: nil)
-        let vc              = storyboard.instantiateViewController(withIdentifier: id)
+        let vc              = storyboard.instantiateViewController(withIdentifier: id) as! BusinessDetailViewController
+        vc.businessprimaryid = 50
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
@@ -243,7 +244,7 @@ extension BusinessEventViewController {
             let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
             let param  : String  = "page=\(pageno)&limit\(limit)"
             
-            self.apiClient.getBussinessEvent(id: 34,page:param,headers: header, completion: { status,bussinesslist in
+            self.apiClient.getBussinessEvent(id: self.primaryId,page:param,headers: header, completion: { status,bussinesslist in
                 
                 if status == "success" {
                     

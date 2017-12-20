@@ -33,6 +33,8 @@ struct  UserList {
     var createdby          :    String?
     var updatedby          :    String?
     var businessuseraddresslocationid: String?
+    
+    var errormessage : String?
   
     init?(json: JSON) {
         if let id = json["id"].int {
@@ -128,6 +130,12 @@ struct  UserList {
         if let updatedby = json["updatedby"].string {
             
             self.updatedby = updatedby
+            
+        }
+        
+        if let message = json["message"].string {
+            
+            self.errormessage = message
             
         }
     
