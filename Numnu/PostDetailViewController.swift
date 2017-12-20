@@ -256,7 +256,7 @@ class PostDetailViewController : UIViewController {
 //        self.postDEventImage.image = item.postimages
         let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: "PostImageZoomViewController") as! PostImageZoomViewController
-        vc.imagePassed = postDEventImage.image!
+        vc.imagePassed = postDEventImage.image as! UIImage
         self.navigationController?.present(vc, animated: true, completion: nil)
     }
     override func didReceiveMemoryWarning() {

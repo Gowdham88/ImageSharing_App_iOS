@@ -213,18 +213,18 @@
                                     <constraint firstAttribute="height" constant="1" id="UfA-IT-ekg"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="utT-Fx-rdy">
-                                <rect key="frame" x="270" y="337.5" width="20" height="20"/>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="utT-Fx-rdy">
+                                <rect key="frame" x="272" y="333.5" width="22" height="22"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="YYq-1N-4z8"/>
-                                    <constraint firstAttribute="width" constant="20" id="tcM-dO-CJe"/>
+                                    <constraint firstAttribute="height" constant="22" id="YYq-1N-4z8"/>
+                                    <constraint firstAttribute="width" constant="22" id="tcM-dO-CJe"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="17"/>
                                 <state key="normal">
                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="passwordHideButton:" destination="URX-2s-g1Q" eventType="touchUpInside" id="IyJ-Kw-RHe"/>
+                                    <action selector="passwordhideTouchout:" destination="URX-2s-g1Q" eventType="touchUpOutside" id="ifV-ze-UgA"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By signing up, you agree to our Terms of Service &amp; Privacy Policy" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EAU-HF-xBF">
@@ -362,7 +362,7 @@
                             <constraint firstItem="f3z-ur-6gs" firstAttribute="trailing" secondItem="h6X-V3-3ha" secondAttribute="trailing" constant="20" id="BjL-dc-ChC"/>
                             <constraint firstItem="f3z-ur-6gs" firstAttribute="trailing" secondItem="vFc-8d-c7i" secondAttribute="trailing" constant="30" id="EJ6-y3-9vL"/>
                             <constraint firstItem="ypX-7D-CMz" firstAttribute="top" secondItem="HcA-is-X0E" secondAttribute="bottom" constant="14" id="ElK-aG-fj5"/>
-                            <constraint firstItem="utT-Fx-rdy" firstAttribute="trailing" secondItem="gt3-3P-gNM" secondAttribute="trailing" constant="-10" id="Eym-F8-wkE"/>
+                            <constraint firstItem="utT-Fx-rdy" firstAttribute="trailing" secondItem="gt3-3P-gNM" secondAttribute="trailing" constant="-6" id="Eym-F8-wkE"/>
                             <constraint firstItem="LQH-ZK-Wj1" firstAttribute="leading" secondItem="f3z-ur-6gs" secondAttribute="leading" constant="20" id="G9U-YC-G7r"/>
                             <constraint firstItem="liL-eP-XHP" firstAttribute="top" secondItem="f3z-ur-6gs" secondAttribute="top" constant="10" id="GR6-Aw-FMO"/>
                             <constraint firstItem="IYu-nF-6Nb" firstAttribute="leading" secondItem="f3z-ur-6gs" secondAttribute="leading" constant="20" id="IyA-4u-knE"/>
@@ -384,7 +384,7 @@
                             <constraint firstItem="f3z-ur-6gs" firstAttribute="trailing" secondItem="gt3-3P-gNM" secondAttribute="trailing" constant="20" id="ckA-Zj-k1E"/>
                             <constraint firstItem="f3z-ur-6gs" firstAttribute="trailing" secondItem="QFP-6L-TOV" secondAttribute="trailing" constant="20" id="coc-9V-rQq"/>
                             <constraint firstItem="f3z-ur-6gs" firstAttribute="trailing" secondItem="IYu-nF-6Nb" secondAttribute="trailing" constant="20" id="dIm-g8-8uJ"/>
-                            <constraint firstItem="utT-Fx-rdy" firstAttribute="centerY" secondItem="gt3-3P-gNM" secondAttribute="centerY" constant="4" id="dhy-Su-w19"/>
+                            <constraint firstItem="utT-Fx-rdy" firstAttribute="centerY" secondItem="gt3-3P-gNM" secondAttribute="centerY" constant="1" id="dhy-Su-w19"/>
                             <constraint firstItem="HcA-is-X0E" firstAttribute="top" secondItem="h6X-V3-3ha" secondAttribute="bottom" constant="2" id="djd-EK-y10"/>
                             <constraint firstItem="f3z-ur-6gs" firstAttribute="trailing" secondItem="EAU-HF-xBF" secondAttribute="trailing" constant="20" id="fuf-VZ-pJU"/>
                             <constraint firstItem="f3z-ur-6gs" firstAttribute="trailing" secondItem="ypX-7D-CMz" secondAttribute="trailing" constant="20" id="fyK-Md-nzV"/>
@@ -745,16 +745,17 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mC4-rY-bg2">
-                                <rect key="frame" x="270" y="358" width="20" height="20"/>
+                                <rect key="frame" x="272" y="358" width="22" height="22"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="20" id="lAy-Vs-hN0"/>
-                                    <constraint firstAttribute="height" constant="20" id="qeA-Sw-Z9w"/>
+                                    <constraint firstAttribute="width" constant="22" id="lAy-Vs-hN0"/>
+                                    <constraint firstAttribute="height" constant="22" id="qeA-Sw-Z9w"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="17"/>
                                 <state key="normal">
                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="passwordhideTouchout:" destination="WUv-D2-SgJ" eventType="touchUpOutside" id="0EM-ab-gVN"/>
                                     <action selector="showPassword:" destination="WUv-D2-SgJ" eventType="touchUpInside" id="vcu-gG-FvB"/>
                                 </connections>
                             </button>
@@ -911,7 +912,7 @@
                             <constraint firstItem="yYk-3I-mdY" firstAttribute="top" secondItem="NHS-8c-dU0" secondAttribute="bottom" constant="2" id="Vpi-fo-Wee"/>
                             <constraint firstItem="sSb-ht-0oK" firstAttribute="trailing" secondItem="X5P-k8-vQy" secondAttribute="trailing" constant="20" id="Vvy-aV-9bf"/>
                             <constraint firstItem="5BK-vR-k7Z" firstAttribute="top" secondItem="Y8f-XD-BVK" secondAttribute="bottom" constant="2" id="Wms-U2-Pjv"/>
-                            <constraint firstItem="sSb-ht-0oK" firstAttribute="trailing" secondItem="mC4-rY-bg2" secondAttribute="trailing" constant="30" id="Xgc-Nt-FXl"/>
+                            <constraint firstItem="sSb-ht-0oK" firstAttribute="trailing" secondItem="mC4-rY-bg2" secondAttribute="trailing" constant="26" id="Xgc-Nt-FXl"/>
                             <constraint firstItem="5BK-vR-k7Z" firstAttribute="leading" secondItem="xT3-Qd-Eaf" secondAttribute="leadingMargin" constant="4" id="Xmc-ed-2SG"/>
                             <constraint firstItem="fgV-KE-jwu" firstAttribute="centerX" secondItem="sSb-ht-0oK" secondAttribute="centerX" id="YaW-xh-gOF"/>
                             <constraint firstItem="fyo-Fg-6qQ" firstAttribute="centerX" secondItem="sSb-ht-0oK" secondAttribute="centerX" id="ZV5-CR-3Au"/>

@@ -107,16 +107,25 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
             passwordReveal.tintColor = UIColor(red: 136/255.0, green: 143/255.0, blue: 158/255.0, alpha: 1.0)
 
         }
-        
-//        if passwordTextfield.isSecureTextEntry == false {
-//            passwordReveal.setImage(UIImage(named: "eye-off.png"), for: .normal)
-//        }else {
-//            iconClick = true
-//            passwordReveal.setImage(UIImage(named: "Show password icon.png"), for: .normal)
-//            passwordReveal.setBackgroundImage(UIImage(named:"Show password icon.png"), for: .normal)
-//        }
     }
     
+    @IBAction func passwordhideTouchout(_ sender: Any) {
+        if(iconClick == true) {
+            
+            passwordTextfield.isSecureTextEntry = false
+            iconClick = false
+            passwordReveal.setImage(UIImage(named: "eye-off.png"), for: .normal)
+            passwordReveal.tintColor = UIColor(red: 42/255.0, green: 42/255.0, blue: 42/255.0, alpha: 1.0)
+            
+        } else if iconClick == false {
+            
+            passwordTextfield.isSecureTextEntry = true
+            iconClick = true
+            passwordReveal.setImage(UIImage(named: "Show password icon.png"), for: .normal)
+            passwordReveal.tintColor = UIColor(red: 136/255.0, green: 143/255.0, blue: 158/255.0, alpha: 1.0)
+            
+        }
+    }
     @IBAction func signinPressed(_ sender: Any) {
         
         let storyboard = UIStoryboard(name: Constants.Auth, bundle: nil)
@@ -203,8 +212,12 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                 if user == nil {
   
                     self.authenticationError(error: "Oops! Invalid login.")
-                    HUD.hide()
                     print("signup error:::::::",error?.localizedDescription)
+                    if error?.localizedDescription == "The email address is already in use by another account." {
+                        HUD.hide()
+                        AlertProvider.Instance.showAlert(title: "Email already exists", subtitle: "The email address is already in use by another account", vc: self)
+
+                    }
                     return
                     
                 }
