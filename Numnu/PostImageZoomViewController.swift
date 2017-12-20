@@ -13,7 +13,7 @@ class PostImageZoomViewController: UIViewController,UIScrollViewDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imagePhoto: UIImageView!
     var imagePassed = UIImage()
-//    var isPresented: Bool = true
+    var isPresented: Bool = true
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.minimumZoomScale = 1.0
@@ -33,7 +33,13 @@ class PostImageZoomViewController: UIViewController,UIScrollViewDelegate {
 //        let value = UIInterfaceOrientation.landscapeLeft.rawValue
 //        UIDevice.current.setValue(value, forKey: "orientation")
     }
-    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDevice.current.orientation.isLandscape {
+            print("landscape mode on")
+        }else{
+            print("potrait mode on")
+        }
+    }
 //    private func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
 //        return UIInterfaceOrientationMask.landscapeLeft
 //    }
@@ -44,10 +50,10 @@ class PostImageZoomViewController: UIViewController,UIScrollViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
 //        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight, andRotateTo: UIInterfaceOrientation.landscapeRight)
-getOrientaion()
+//          getOrientaion()
         self.navigationController?.isNavigationBarHidden = true
         self.tabBarController?.tabBar.isHidden = true
-//        isPresented = true
+        isPresented = true
 
     }
     func getOrientaion(){
@@ -62,40 +68,34 @@ getOrientaion()
 //
 //        }
         
-        if UIDevice.current.orientation == .landscapeRight {
-        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight, andRotateTo: UIInterfaceOrientation.landscapeRight)
-
-        }else{
-           AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight, andRotateTo: UIInterfaceOrientation.portrait)
-
-        }
     }
-//    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
-//        var text=""
-//        switch UIDevice.current.orientation{
-//        case .portrait:
-//            text="Portrait"
-//        case .portraitUpsideDown:
-//            text="PortraitUpsideDown"
-//        case .landscapeLeft:
-//            text="LandscapeLeft"
-//        case .landscapeRight:
-//            text="LandscapeRight"
-//        default:
-//            text="Another"
-//        }
-//        print("You have moved: \(text)")
-//    }
+    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
+        var text=""
+        switch UIDevice.current.orientation{
+        case .portrait:
+            text="Portrait"
+        case .portraitUpsideDown:
+            text="PortraitUpsideDown"
+        case .landscapeLeft:
+            text="LandscapeLeft"
+        case .landscapeRight:
+            text="LandscapeRight"
+        default:
+            text="Another"
+        }
+        print("You have moved: \(text)")
+    }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
+//        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
 
-//        isPresented = false
+        isPresented = false
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
+//        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
+        isPresented = false
 
     }
     
@@ -110,7 +110,6 @@ getOrientaion()
             case UISwipeGestureRecognizerDirection.left:
                 print("Swiped left")
             case UISwipeGestureRecognizerDirection.up:
-                dismiss(animated: true, completion: nil)
                 print("Swiped up")
                 
             default:
