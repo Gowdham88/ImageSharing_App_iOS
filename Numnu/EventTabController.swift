@@ -35,8 +35,9 @@ class EventTabController: UIViewController,IndicatorInfoProvider {
     var apiClient : ApiClient!
     var eventList = [EventTypeListItem]()
     var eventItem : EventTypeList?
-    var pageno : Int = 1
+    var pageno : Int  = 1
     var limitno : Int = 25
+    var apiType : String = "Event"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +73,15 @@ class EventTabController: UIViewController,IndicatorInfoProvider {
         eventList.removeAll()
         pageno  = 1
         limitno = 25
-        getEvent(pageno: pageno, limit: limitno)
+        switch apiType {
+        case "Event":
+            getEvent(pageno: pageno, limit: limitno)
+        case "Business":
+            getBusinessEvent(pageno: pageno, limit: limitno)
+        default:
+            getEvent(pageno: pageno, limit: limitno)
+        }
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -124,7 +133,13 @@ extension EventTabController : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        openStoryBoard()
+        if let id = eventList[indexPath.row].id {
+            
+            openStoryBoard(primaryid: id)
+            
+        }
+        
+        
         
     }
     
@@ -137,7 +152,14 @@ extension EventTabController : UITableViewDelegate,UITableViewDataSource {
                 if eventList.count  < pageItem.totalRows ?? 0{
                     pageno += 1
                     limitno = 25 * pageno
-                    getEvent(pageno: pageno, limit: limitno)
+                    switch apiType {
+                    case "Event":
+                        getEvent(pageno: pageno, limit: limitno)
+                    case "Business":
+                        getBusinessEvent(pageno: pageno, limit: limitno)
+                    default:
+                        getEvent(pageno: pageno, limit: limitno)
+                    }
                 }
                 
             }
@@ -225,10 +247,11 @@ extension EventTabController {
         
     }
     
-    func  openStoryBoard() {
+    func  openStoryBoard(primaryid : Int) {
         
-        let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)
+        let storyboard    = UIStoryboard(name: Constants.Event, bundle: nil)
+        let vc            = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId) as! EventViewController
+        vc.eventprimaryid = 34
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
@@ -288,6 +311,55 @@ extension EventTabController {
             self.eventdelegate?.eventTableHeight(height: self.eventTableView.contentSize.height)
             HUD.hide()
         }
+        
+    }
+    
+    /*************************get events by business id****************************************/
+    
+    func getBusinessEvent(pageno:Int,limit:Int) {
+        
+        HUD.show(.labeledProgress(title: "Loading", subtitle: ""))
+        
+        apiClient.getFireBaseToken(completion: { token in
+            
+            let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
+            let param  : String  = "page=\(pageno)&limit\(limit)"
+            
+            self.apiClient.getEventsByBusinessApi(id: 50, page: param,headers: header, completion: { status,eventlist in
+                
+                if status == "success" {
+                    
+                    if let item = eventlist {
+                        
+                        self.eventItem = item
+                        
+                        if let itemlist = item.eventtyItem {
+                            
+                            self.eventList += itemlist
+                        }
+                    }
+                    
+                    DispatchQueue.main.async {
+                        
+                        self.eventTableView.reloadData()
+                        
+                    }
+                    
+                    self.reloadTable()
+                    
+                } else {
+                    
+                    HUD.hide()
+                    self.reloadTable()
+                    
+                }
+                
+                
+            })
+            
+            
+        })
+        
         
     }
     

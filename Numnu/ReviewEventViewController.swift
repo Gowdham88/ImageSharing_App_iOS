@@ -31,6 +31,8 @@ class ReviewEventViewController: UIViewController,IndicatorInfoProvider {
     var window : UIWindow?
     var popdelegate : ReviewEventViewControllerDelegate?
     var viewState       : Bool = false
+    var primaryid       : Int = 34
+    var apiType         : String = "Event"
     
     @IBOutlet weak var businesslabelwidth: NSLayoutConstraint!
     override func viewDidLoad() {
@@ -47,18 +49,13 @@ class ReviewEventViewController: UIViewController,IndicatorInfoProvider {
         }
         apiClient = ApiClient()
         
+        if apiType == "Item" || apiType == "Location" {
+            
+            methodToCallApi(pageno: pageno, limit: limitno)
+        }
       
     }
-//    func getFirebaseToken() {
-//
-//        apiClient.getFireBaseToken(completion:{ token in
-//
-//            self.token_str = token
-//            self.methodToCallApi()
-//
-//        })
-//
-//    }
+
     func methodToCallApi(pageno:Int,limit:Int){
         
         HUD.show(.labeledProgress(title: "Loading", subtitle: ""))
@@ -66,8 +63,8 @@ class ReviewEventViewController: UIViewController,IndicatorInfoProvider {
         
         let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
         let param  : String  = "page=\(pageno)&limit\(limit)"
-//        apiClient.getEventsDetailsApi(headers: header, completion: { status,Values in
-            self.apiClient.PostsByEventId(id: 34, page: param, headers: header, completion: { status,Values in
+
+            self.apiClient.getPostList(id: self.primaryid, page: param, type: self.apiType, headers: header, completion: { status,Values in
     
                     if status == "success" {
                         
@@ -97,8 +94,8 @@ class ReviewEventViewController: UIViewController,IndicatorInfoProvider {
             }
                 
            
-        })
             })
+        })
         
         
     }
@@ -112,16 +109,11 @@ class ReviewEventViewController: UIViewController,IndicatorInfoProvider {
         }
         
     }
-    func getDetails(response:PostListByEventId){
-//        if let name = response.username {
-//            postDtUsernameLabel.text = name
-//        }
-    
-    }
+   
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
-       viewState = true
+        viewState = true
         postList.removeAll()
         pageno  = 1
         limitno = 25
@@ -248,7 +240,7 @@ extension ReviewEventViewController : UITableViewDelegate,UITableViewDataSource 
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
-    func postDtEventPlace(){
+    func postDtEventPlace() {
         let storyboard = UIStoryboard(name: Constants.ItemDetail, bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId)
         self.navigationController!.pushViewController(vc, animated: true)

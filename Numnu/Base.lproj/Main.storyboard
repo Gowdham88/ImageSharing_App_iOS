@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -1568,10 +1568,13 @@
                                                             <outlet property="placeWidthConstraint" destination="CEk-ha-gNC" id="1I2-UC-SOR"/>
                                                             <outlet property="postCommentLabel" destination="bjC-BU-wyc" id="ybc-3b-1DH"/>
                                                             <outlet property="postEventBookMark" destination="bnt-iy-K0k" id="RQC-q0-5nK"/>
+                                                            <outlet property="postEventDishIcon" destination="yP1-v5-DFc" id="8DN-6Z-5nt"/>
                                                             <outlet property="postEventDishLabel" destination="DyH-Kt-0X3" id="n49-LR-ycb"/>
                                                             <outlet property="postEventImage" destination="fEy-p6-I89" id="4kl-x0-zIb"/>
                                                             <outlet property="postEventName" destination="ztf-kS-XSy" id="ZdD-bV-kGy"/>
+                                                            <outlet property="postEventNameIcon" destination="fUa-2v-F3f" id="4fY-Bw-2pn"/>
                                                             <outlet property="postEventPlace" destination="2Ed-sH-DzQ" id="O00-Af-mpA"/>
+                                                            <outlet property="postEventPlaceIcon" destination="Dy9-pT-3ig" id="mh4-3Y-d1N"/>
                                                             <outlet property="postLikeImage" destination="76K-Sf-htS" id="m8R-A1-CwF"/>
                                                             <outlet property="postUserImage" destination="fEy-p6-I89" id="fYe-3L-Mek"/>
                                                             <outlet property="postUserTime" destination="Kpd-X5-3zI" id="CmZ-y8-Odb"/>
@@ -1707,7 +1710,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SjK-qH-tv5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2715" y="1266.5492957746478"/>
+            <point key="canvasLocation" x="2705.625" y="1085.9154929577464"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="bq3-B6-yTC">

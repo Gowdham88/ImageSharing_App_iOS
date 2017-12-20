@@ -24,8 +24,11 @@ class Profile_postTableViewCell: UITableViewCell {
     @IBOutlet weak var postEventImage: ImageExtender!
     @IBOutlet weak var postLikeImage: ImageExtender!
     @IBOutlet weak var postEventName: UILabel!
+    @IBOutlet var postEventNameIcon: ImageExtender!
     @IBOutlet weak var postEventPlace: UILabel!
+    @IBOutlet var postEventPlaceIcon: ImageExtender!
     @IBOutlet weak var postEventDishLabel: UILabel!
+    @IBOutlet var postEventDishIcon: ImageExtender!
     @IBOutlet weak var postEventBookMark: UIButton!
     
     @IBOutlet weak var ProfileEventveticalConstaint: NSLayoutConstraint!
