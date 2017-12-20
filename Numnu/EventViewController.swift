@@ -432,7 +432,9 @@ extension EventViewController {
     }
     func MethodToCallApi(){
         
-        HUD.show(.labeledProgress(title: "Loading", subtitle: ""))
+        let image  = UIImage(named: "splash_appicon")
+        
+        HUD.show(.labeledImage(image: image, title: "Loading..", subtitle: ""))
         
         let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
         
@@ -441,7 +443,7 @@ extension EventViewController {
             if status == "success" {
                 if let response = Values {
                     
-                    HUD.hide()
+//                    HUD.hide()
                     
                     DispatchQueue.main.async {
                         

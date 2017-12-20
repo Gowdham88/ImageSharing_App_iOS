@@ -321,6 +321,8 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         fbLoginmanager.logIn(withReadPermissions: ["public_profile", "email"], from: self) { (result, error) in
             if let error = error {
                 print("Failed to login: \(error.localizedDescription)")
+                AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Login failed.", vc: self)
+                FBSDKLoginManager().logOut()
                 HUD.hide()
                 return
             } else if(result?.isCancelled)! {

@@ -115,7 +115,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
                 
                 print(error.debugDescription)
                 HUD.hide()
-                AlertProvider.Instance.showAlert(title: "Oops", subtitle: "Incorrect password", vc: self)
+                AlertProvider.Instance.showAlert(title: "Oops", subtitle: error.debugDescription, vc: self)
              
                 
             })
@@ -292,6 +292,8 @@ class signInVC: UIViewController, UITextFieldDelegate {
             fbLoginManager.logIn(withReadPermissions: ["public_profile", "email"], from: self) { (result, error) in
                 if let error = error {
                     print("Failed to login: \(error.localizedDescription)")
+                    AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Login failed.", vc: self)
+                    FBSDKLoginManager().logOut()
                     return
                 } else if(result?.isCancelled)! {
                     

@@ -519,23 +519,26 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         focusEdittext(textfield: textField,focus: false)
 
         if textField == usernameTextField {
-            print(usernameTextField.text!)
-            let parameters : Parameters = ["checkusername": "dsdsddddd"]
-            let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
-            apiClient.usernameexists(parameters: parameters,headers: header, completion:{status, Exists in
-                if Exists == true {
-                    
-                    print("the username already exists")
-                    
-                    
-                } else {
-                    
-                    print("the username available")
-                    AlertProvider.Instance.showAlert(title: "Hey!", subtitle: "Username already exists", vc: self)
-                    
-                }
-            })
-            
+            if let userNamefield = textField.text {
+                
+                
+                let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
+                apiClient.usernameexists(parameters: userNamefield,headers: header, completion:{status, Exists in
+                    if Exists == true {
+                        
+                        print("the username already exists")
+                        AlertProvider.Instance.showAlert(title: "Hey!", subtitle: "Username already exists", vc: self)
+                        
+                    } else {
+                        
+                        print("the username available")
+                        
+                        
+                    }
+                })
+                
+            }
+          
         }
        
         if textField == birthTextfield {
@@ -651,7 +654,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         self.tabBarController?.viewControllers?.append(nav1)
         var myImage = UIImage(named: "profileunselected")!
         controller.tabBarItem.title        = ""
-        controller.tabBarItem.imageInsets  = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
+        controller.tabBarItem.imageInsets  = UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 0)
 ////        let myInsets : UIEdgeInsets = UIEdgeInsetsMake(6, 0, -6, 0)
 ////        myImage = myImage.resizableImage(withCapInsets: myInsets)
         controller.tabBarItem = UITabBarItem(title: nil, image: myImage, selectedImage: myImage)
@@ -969,7 +972,12 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 cityTextfield.text = (currentCell?.textLabel?.text)!
                 cityTableView.isHidden = true
                 cityTextfield.resignFirstResponder()
-                cityDictonary = ["name": autocompleteplaceArray[indexPath.row],"address":autocompleteplaceArray[indexPath.row],"isgoogleplace":true,"googleplaceid":autocompleteplaceID[indexPath.row],"googleplacetype":"geocode"]
+                apiClient.getPlaceCordinates(placeid_Str: autocompleteplaceID[indexPath.row], completion: { lat,lang in
+                    
+                    self.cityDictonary = ["name":self.autocompleteplaceArray[indexPath.row],"address":self.autocompleteplaceArray[indexPath.row],"isgoogleplace":true,"googleplaceid":self.autocompleteplaceID[indexPath.row],"googleplacetype":"geocode","lattitude":lat,"longitude":lang]
+                    
+                })
+               
              
             }
             
@@ -1058,8 +1066,13 @@ extension Edit_ProfileVC {
                                 
                                 let placeName = item["description"].string ?? "empty"
                                 let placeid   = item["place_id"].string ?? "empty"
-                                self.autocompleteplaceArray.append(placeName)
-                                self.autocompleteplaceID.append(placeid)
+                                if self.autocompleteplaceArray.count < 6 {
+                                    
+                                    self.autocompleteplaceArray.append(placeName)
+                                    self.autocompleteplaceID.append(placeid)
+                                    
+                                }
+                               
                             }
                             
                             DispatchQueue.main.async {

@@ -13,7 +13,7 @@ class PostImageZoomViewController: UIViewController,UIScrollViewDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imagePhoto: UIImageView!
     var imagePassed = UIImage()
-//    var isPresented: Bool = true
+    var isPresented: Bool = true
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.minimumZoomScale = 1.0

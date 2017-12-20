@@ -131,6 +131,7 @@ class Constants {
     // Web Api key
     
     static let PlaceApiUrl = "https://maps.googleapis.com/maps/api/place/autocomplete/json"
+    static let PlaceDetailApi = "https://maps.googleapis.com/maps/api/place/details/json"
     
     /*********Api **********/
     

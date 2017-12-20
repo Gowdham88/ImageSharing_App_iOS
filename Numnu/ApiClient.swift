@@ -12,7 +12,7 @@ import SwiftyJSON
 import Firebase
 import FirebaseAuth
 import FirebaseStorage
-
+import CoreLocation
 
 
 class  ApiClient {
@@ -107,9 +107,11 @@ class  ApiClient {
     
     /************************Username check Api**********************************/
     
-    func usernameexists(parameters : Parameters,headers : HTTPHeaders,completion : @escaping (String,Bool?) -> Void) {
+    func usernameexists(parameters : String,headers : HTTPHeaders,completion : @escaping (String,Bool?) -> Void) {
        
-        Alamofire.request(Constants.CheckUserName, method: .get, parameters: parameters,headers : headers).validate().responseJSON { response in
+        Alamofire.request("\(Constants.CheckUserName)?checkusername=\(parameters)",encoding: JSONEncoding.default,headers : headers).validate().responseJSON { response in
+            
+            print(response.result.value as Any)
             
             switch response.result {
                 
@@ -120,10 +122,13 @@ class  ApiClient {
                     let json = JSON(value)
                     if let usernameexists = json["usernameexists"].bool {
                         
-                        print(json)
                         completion("success",usernameexists)
                     }
                     
+                    if let usernameexistsno = json["usernameexists"].int {
+                        
+                        completion("success",usernameexistsno == 1 ? true : false)
+                    }
                     
                 }
                 
@@ -684,6 +689,40 @@ class  ApiClient {
         
     }
     
+    
+    /**********************************getPlace Lat long*************************************************/
+    
+    /************************City Api****************************/
+    
+    func getPlaceCordinates(placeid_Str:String,completion : @escaping (Double,Double) -> Void) {
+        
+        let parameters: Parameters = ["placeid": placeid_Str , "key" : "AIzaSyDmfYE1gIA6UfjrmOUkflK9kw0nLZf0nYw"]
+        
+        Alamofire.request(Constants.PlaceDetailApi, parameters: parameters).validate().responseJSON { response in
+            
+            switch response.result {
+            case .success:
+                if let value = response.result.value {
+                    let json = JSON(value)
+                    let resultjson = json["result"]["geometry"]["location"]
+                    
+                    if let lat = resultjson["lat"].double,let lng = resultjson["lng"].double{
+                        
+                        completion(lat,lng)
+                    }
+                    
+                     completion(0,0)
+                }
+                
+            case .failure(let error) :
+                print(error)
+                completion(0,0)
+            
+            }
+            
+        }
+        
+    }
     
     
 }
