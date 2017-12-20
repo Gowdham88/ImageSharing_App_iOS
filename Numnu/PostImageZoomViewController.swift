@@ -13,7 +13,7 @@ class PostImageZoomViewController: UIViewController,UIScrollViewDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imagePhoto: UIImageView!
     var imagePassed = UIImage()
-    var isPresented: Bool = true
+//    var isPresented: Bool = true
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.minimumZoomScale = 1.0
@@ -22,38 +22,81 @@ class PostImageZoomViewController: UIViewController,UIScrollViewDelegate {
         // Do any additional setup after loading the view.
         self.imagePhoto.image = self.imagePassed
         imagePhoto.isUserInteractionEnabled = true
-        
-        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
-        swipeUp.direction = UISwipeGestureRecognizerDirection.up
-        self.view.addGestureRecognizer(swipeUp)
+//        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+//        swipeUp.direction = UISwipeGestureRecognizerDirection.up
+//        self.view.addGestureRecognizer(swipeUp)
         
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
         swipeDown.direction = UISwipeGestureRecognizerDirection.down
-        self.view.addGestureRecognizer(swipeDown)
+        self.scrollView.addGestureRecognizer(swipeDown)
         
-        let value = UIInterfaceOrientation.landscapeLeft.rawValue
-        UIDevice.current.setValue(value, forKey: "orientation")
+//        let value = UIInterfaceOrientation.landscapeLeft.rawValue
+//        UIDevice.current.setValue(value, forKey: "orientation")
     }
     
-    private func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.landscapeLeft
-    }
-    
-    private func shouldAutorotate() -> Bool {
-        return true
-    }
+//    private func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+//        return UIInterfaceOrientationMask.landscapeLeft
+//    }
+//    
+//    private func shouldAutorotate() -> Bool {
+//        return true
+//    }
     
     override func viewWillAppear(_ animated: Bool) {
+//        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight, andRotateTo: UIInterfaceOrientation.landscapeRight)
+getOrientaion()
         self.navigationController?.isNavigationBarHidden = true
         self.tabBarController?.tabBar.isHidden = true
+//        isPresented = true
+
     }
-    
+    func getOrientaion(){
+//        switch UIDevice.current.orientation {
+//        case .portrait:
+//            AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight, andRotateTo: UIInterfaceOrientation.portrait)
+//        case .landscapeRight:
+//            AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight, andRotateTo: UIInterfaceOrientation.landscapeRight)
+//
+//        default:
+//            AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight, andRotateTo: UIInterfaceOrientation.portrait)
+//
+//        }
+        
+        if UIDevice.current.orientation == .landscapeRight {
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight, andRotateTo: UIInterfaceOrientation.landscapeRight)
+
+        }else{
+           AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight, andRotateTo: UIInterfaceOrientation.portrait)
+
+        }
+    }
+//    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
+//        var text=""
+//        switch UIDevice.current.orientation{
+//        case .portrait:
+//            text="Portrait"
+//        case .portraitUpsideDown:
+//            text="PortraitUpsideDown"
+//        case .landscapeLeft:
+//            text="LandscapeLeft"
+//        case .landscapeRight:
+//            text="LandscapeRight"
+//        default:
+//            text="Another"
+//        }
+//        print("You have moved: \(text)")
+//    }
     override func viewWillDisappear(_ animated: Bool) {
-        isPresented = false
+        super.viewWillDisappear(animated)
+
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
+
+//        isPresented = false
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        isPresented = false
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
+
     }
     
     func respondToSwipeGesture(gesture: UIGestureRecognizer) {

@@ -504,6 +504,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             
         } else {
             showPopup(table1: true, table2: true)
+            genderTextfield.resignFirstResponder()
+            birthTextfield.resignFirstResponder()
+
             self.datePickerValueChanged(sender: datePicker)
             datePicker.isHidden = true
             superVieww.isHidden = true
@@ -1133,7 +1136,7 @@ extension Edit_ProfileVC {
                             PrefsManager.sharedinstance.imageURL = imageurl ?? "empty"
                             let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
                             let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
-                            vc.boolForBack = false
+                            vc.boolForBack = true
                             vc.delegate    = self
                             self.navigationController!.pushViewController(vc, animated: true)
                 
