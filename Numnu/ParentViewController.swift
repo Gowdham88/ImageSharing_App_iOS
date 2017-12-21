@@ -392,7 +392,11 @@ extension ParentViewController : UITableViewDataSource,UITableViewDelegate {
                             for item in place_dic {
                                 
                                 let placeName = item["description"].string ?? "empty"
-                                self.autocompleteplaceArray.append(placeName)
+                                if self.autocompleteplaceArray.count < 6 {
+                                    
+                                    self.autocompleteplaceArray.append(placeName)
+                                }
+                                
                                 
                             }
                             

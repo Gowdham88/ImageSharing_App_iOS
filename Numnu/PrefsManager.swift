@@ -345,6 +345,16 @@ struct PrefsManager {
     }
     
 
+    func logoutprefences() {
+        
+        for key in Array(UserDefaults.standard.dictionaryRepresentation().keys) {
+                
+                UserDefaults.standard.removeObject(forKey: key)
+        }
+        
+        UserDefaults.standard.synchronize()
+          
+    }
     
 //    var eventLinkList : Array<Any> {
 //        

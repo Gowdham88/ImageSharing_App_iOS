@@ -403,16 +403,27 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         focusEdittext(textfield: textField,focus: false)
         
         if textField == usernameTextField {
-            let parameters: Parameters = ["checkusername": usernameTextField.text!]
-            let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer"]
-            let userNameRequest: ApiClient = ApiClient()
-            userNameRequest.usernameexists(parameters: parameters,headers: header,completion:{status, Exists in
-                if Exists == true {
-                    print("the username already exists")
-                }else{
-                    print("the username available")
-                }
-            })
+            
+            if let userNamefield = textField.text,userNamefield != PrefsManager.sharedinstance.username {
+                
+                let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
+                apiClient.usernameexists(parameters: userNamefield,headers: header, completion:{status, Exists in
+                    if Exists == true {
+                        
+                        print("the username already exists")
+                        AlertProvider.Instance.showAlert(title: "Hey!", subtitle: "Username already exists", vc: self)
+                        
+                    } else {
+                        
+                        print("the username available")
+                        
+                        
+                    }
+                })
+                
+            }
+            
+           
         }
         
         if textField == birthTextfield {
@@ -576,13 +587,21 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
                 
                 if let url_str = url {
                     
-                    PrefsManager.sharedinstance.imageURL = url_str
+                    HUD.show(.labeledProgress(title: "Uploading...", subtitle: ""))
+                    
                     let apiclient : ApiClient = ApiClient()
                     apiclient.getFireBaseImageUrl(imagepath: url_str, completion: { url in
                         
+                        HUD.hide()
+                        
                         if url != "empty" {
                             
+                            PrefsManager.sharedinstance.imageURL = url_str
                             Manager.shared.loadImage(with:URL(string:url)!, into: self.profileImage)
+                            
+                        } else {
+                            
+                            AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Image upload failed", vc: self)
                             
                         }
                         
@@ -590,6 +609,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
                     
                 } else {
                     
+                    HUD.hide()
                     AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Image upload failed", vc: self)
                 }
                 
@@ -882,7 +902,12 @@ extension SettingsEdit_ProfieViewController {
                             for item in place_dic {
                                 
                                 let placeName = item["description"].string ?? "empty"
-                                self.autocompleteplaceArray.append(placeName)
+                                
+                                if self.autocompleteplaceArray.count < 6 {
+                                    
+                                    self.autocompleteplaceArray.append(placeName)
+                                }
+                                
                                 
                             }
                             

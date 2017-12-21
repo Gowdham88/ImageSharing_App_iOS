@@ -384,13 +384,9 @@ extension Profile_PostViewController :SettingsViewControllerDelegate {
         nav1.viewControllers = [controller]
         self.tabBarController?.viewControllers?.append(nav1)
         let myImage = UIImage(named: "profileunselected")!
-        let myInsets : UIEdgeInsets = UIEdgeInsetsMake(6, 0, -6, 0)
-        controller.tabBarItem.title        = ""
-        controller.tabBarItem = UITabBarItem(
-            title: "",
-            image: myImage,
-            tag: 3)
-        controller.tabBarItem.imageInsets  = UIEdgeInsets(top: -6, left: 0, bottom: 6, right: 0)
+        self.tabBarItem.title        = nil
+        controller.tabBarItem = UITabBarItem(title: nil, image: myImage, selectedImage: myImage)
+        controller.tabBarItem.imageInsets  = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
 
         /**************************Removing tabs*********************************/
         

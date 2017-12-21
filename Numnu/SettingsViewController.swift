@@ -8,6 +8,9 @@
 
 import UIKit
 import Nuke
+import FBSDKLoginKit
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 //var itemArray :Array = String
 var itemArray = [String]()
@@ -116,6 +119,8 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
             
             DBProvider.Instance.firebaseLogout()
             delegate?.logout()
+            FBSDKLoginManager().logOut()
+            PrefsManager.sharedinstance.logoutprefences()
             PrefsManager.sharedinstance.isLoginned = false
             _ = self.navigationController?.popToRootViewController(animated: true)
         }

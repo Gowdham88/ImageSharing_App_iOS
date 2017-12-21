@@ -52,7 +52,7 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
     
     var apiClient : ApiClient!
     var description_txt : String = ""
-    var itemprimaryid   : Int  = 0
+    var itemprimaryid   : Int  = 115
 
     override func viewDidLoad() {
         settings.style.selectedBarHeight = 3.0

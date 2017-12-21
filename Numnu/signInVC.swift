@@ -115,7 +115,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
                 
                 print(error.debugDescription)
                 HUD.hide()
-                AlertProvider.Instance.showAlert(title: "Oops", subtitle: "Incorrect password", vc: self)
+                AlertProvider.Instance.showAlert(title: "Oops", subtitle: error.debugDescription, vc: self)
              
                 
             })
@@ -292,6 +292,12 @@ class signInVC: UIViewController, UITextFieldDelegate {
             fbLoginManager.logIn(withReadPermissions: ["public_profile", "email"], from: self) { (result, error) in
                 if let error = error {
                     print("Failed to login: \(error.localizedDescription)")
+                    DispatchQueue.main.async {
+                 
+                        AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Login failed.", vc: self)
+                   
+                    }
+                    FBSDKLoginManager().logOut()
                     return
                 } else if(result?.isCancelled)! {
                     
@@ -307,23 +313,32 @@ class signInVC: UIViewController, UITextFieldDelegate {
                     return
                 }
                 
+                DispatchQueue.main.async {
+                    
+                    HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
+                }
+                
+                
                 
                 let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
-                
-                // Perform login by calling Firebase APIs
-                HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
-
+          
                 Auth.auth().signIn(with: credential, completion: { (user, error) in
                     
                     if let error = error {
-                        HUD.hide()
-                        print("Login error: \(error.localizedDescription)")
-                        AlertProvider.Instance.showAlert(title: "Oops!", subtitle: error.localizedDescription, vc: self)
                         
+                        print("Login error: \(error.localizedDescription)")
+                        DispatchQueue.main.async {
+                        AlertProvider.Instance.showAlert(title: "Oops!", subtitle: error.localizedDescription, vc: self)
+                        HUD.hide()
+                        }
                         return
                     }
         
-                    HUD.hide()
+                    DispatchQueue.main.async {
+                        
+                       HUD.hide()
+                        
+                    }
                     self.getFirebaseToken()
                    
                 })
