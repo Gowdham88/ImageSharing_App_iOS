@@ -15,7 +15,6 @@ import IQKeyboardManagerSwift
 import SwiftyJSON
 import Firebase
 import FirebaseAuth
-import PKHUD
 import Nuke
 
 class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegateFlowLayout {
@@ -109,7 +108,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = false
-        HUD.hide()
+        LoadingHepler.instance.hide()
 
         imagePicker.delegate = self
         profileImage.isUserInteractionEnabled = true
@@ -712,7 +711,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         }
         
         let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
-        HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
+        LoadingHepler.instance.show()
         
         Alamofire.upload(multipartFormData: { (form) in
             
@@ -727,7 +726,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 }
                 upload.responseJSON { response in
                     
-                    HUD.hide()
+                    LoadingHepler.instance.hide()
                     
                     if let value = response.result.value {
                         
@@ -754,7 +753,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             case .failure(let encodingError):
                 print(encodingError)
                 completion(nil)
-                HUD.hide()
+                LoadingHepler.instance.hide()
             }
         })
     }
@@ -970,8 +969,12 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 cityTextfield.text = (currentCell?.textLabel?.text)!
                 cityTableView.isHidden = true
                 cityTextfield.resignFirstResponder()
-                cityDictonary = ["name": autocompleteplaceArray[indexPath.row],"address":autocompleteplaceArray[indexPath.row],"isgoogleplace":true,"googleplaceid":autocompleteplaceID[indexPath.row],"googleplacetype":"geocode"]
-             
+                
+                apiClient.getPlaceCordinates(placeid_Str: autocompleteplaceID[indexPath.row], completion: { lat,lang in
+                
+                  self.cityDictonary = ["name":self.autocompleteplaceArray[indexPath.row],"address":self.autocompleteplaceArray[indexPath.row],"isgoogleplace":true,"googleplaceid":self.autocompleteplaceID[indexPath.row],"googleplacetype":"geocode","lattitude":lat,"longitude":lang]
+                    
+                  })
             }
             
         }
@@ -1059,8 +1062,13 @@ extension Edit_ProfileVC {
                                 
                                 let placeName = item["description"].string ?? "empty"
                                 let placeid   = item["place_id"].string ?? "empty"
-                                self.autocompleteplaceArray.append(placeName)
-                                self.autocompleteplaceID.append(placeid)
+                                if self.autocompleteplaceArray.count < 6 {
+                                    
+                                    self.autocompleteplaceArray.append(placeName)
+                                    self.autocompleteplaceID.append(placeid)
+                                    
+                                }
+                                
                             }
                             
                             DispatchQueue.main.async {
@@ -1115,7 +1123,7 @@ extension Edit_ProfileVC {
             
         }
         
-        HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
+        LoadingHepler.instance.show()
       
         let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
         let parameters: Parameters = ["username": usernameTextField.text!, "name":nameTextfield.text! , "description" : descriptionTextfield.text! ,"firebaseuid" : firebaseid,"dateofbirth": birthdate, "gender": gender as Int,"tags":tagsDictonary,"isbusinessuser": false as Bool,"email": emailaddress.text! ,"citylocation":cityDictonary! ,"clientip": clientIp, "clientapp": Constants.clientApp]
@@ -1126,7 +1134,7 @@ extension Edit_ProfileVC {
             print("statusfb: \(status)")
             if status == "success" {
                 
-                HUD.hide()
+                LoadingHepler.instance.hide()
                 
                 if let user = Values {
                     
@@ -1146,7 +1154,7 @@ extension Edit_ProfileVC {
                    
                 } else {
                     
-                    HUD.hide()
+                    LoadingHepler.instance.hide()
                     AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Signup failed", vc: self)
                     
                 }
@@ -1154,7 +1162,7 @@ extension Edit_ProfileVC {
                
             } else {
                 
-                HUD.hide()
+                    LoadingHepler.instance.hide()
                 
                     if let user = Values {
                         

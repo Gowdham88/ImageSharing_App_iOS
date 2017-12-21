@@ -9,7 +9,7 @@
 import UIKit
 import XLPagerTabStrip
 import Alamofire
-import PKHUD
+
 
 protocol  BusinessEventViewControllerDelegate {
     
@@ -59,8 +59,7 @@ class BusinessEventViewController: UIViewController,IndicatorInfoProvider {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        reloadTable()
+       
     }
   
     override func viewDidAppear(_ animated: Bool) {
@@ -68,6 +67,7 @@ class BusinessEventViewController: UIViewController,IndicatorInfoProvider {
         
         viewState = true
         bussinessList.removeAll()
+        businessEventTableView.reloadData()
         pageno  = 1
         limitno = 25
         getBussinessevent(pageno: pageno, limit: limitno)
@@ -123,6 +123,12 @@ extension BusinessEventViewController : UITableViewDelegate,UITableViewDataSourc
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "businessEventCell", for: indexPath) as! businessEventTableViewCell
         
+          guard bussinessList.count > 0 else {
+            
+            return cell
+            
+          }
+            
         cell.item = bussinessList[indexPath.row]
         cell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.row)
             
@@ -237,7 +243,7 @@ extension BusinessEventViewController {
     
     func getBussinessevent(pageno:Int,limit:Int) {
         
-        HUD.show(.labeledProgress(title: "Loading", subtitle: ""))
+        LoadingHepler.instance.show()
         
         apiClient.getFireBaseToken(completion: { token in
             
@@ -268,7 +274,7 @@ extension BusinessEventViewController {
                     
                 } else {
                     
-                    HUD.hide()
+                    LoadingHepler.instance.hide()
                     self.reloadTable()
                     
                 }
@@ -289,7 +295,7 @@ extension BusinessEventViewController {
         DispatchQueue.main.asyncAfter(deadline: when) {
             
             self.businesdelegate?.BusinessTableHeight(height: self.businessEventTableView.contentSize.height)
-            HUD.hide()
+            LoadingHepler.instance.hide()
         }
      
     }

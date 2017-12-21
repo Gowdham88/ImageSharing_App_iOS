@@ -8,7 +8,6 @@
 
 import UIKit
 import XLPagerTabStrip
-import PKHUD
 import Alamofire
 import Nuke
 
@@ -390,7 +389,7 @@ extension ItemDetailController {
     
     func getItemIdApi() {
         
-        HUD.show(.labeledProgress(title: "Loading", subtitle: ""))
+        LoadingHepler.instance.show()
         
         apiClient.getFireBaseToken(completion: { token in
             
@@ -400,7 +399,7 @@ extension ItemDetailController {
                 
                 if status == "success" {
                     
-                    HUD.hide()
+                    LoadingHepler.instance.hide()
                     
                     if let itemlist = item {
                         
@@ -414,7 +413,7 @@ extension ItemDetailController {
                     
                 } else {
                     
-                    HUD.hide()
+                    LoadingHepler.instance.hide()
                     
                     DispatchQueue.main.async {
                         

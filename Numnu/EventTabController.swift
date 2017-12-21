@@ -8,7 +8,6 @@
 
 import UIKit
 import XLPagerTabStrip
-import PKHUD
 import Alamofire
 
 protocol  EventTabControllerDelegate {
@@ -71,6 +70,7 @@ class EventTabController: UIViewController,IndicatorInfoProvider {
         super.viewWillAppear(true)
         
         eventList.removeAll()
+        eventTableView.reloadData()
         pageno  = 1
         limitno = 25
         switch apiType {
@@ -124,6 +124,11 @@ extension EventTabController : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventcell", for: indexPath) as! EventTableViewCell
+        
+        guard eventList.count > 0 else {
+            
+            return cell
+        }
         
         cell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.row)
         cell.item = eventList[indexPath.row]
@@ -258,7 +263,7 @@ extension EventTabController {
     
     func getEvent(pageno:Int,limit:Int) {
 
-        HUD.show(.labeledProgress(title: "Loading", subtitle: ""))
+        LoadingHepler.instance.show()
 
         apiClient.getFireBaseToken(completion: { token in
 
@@ -289,7 +294,7 @@ extension EventTabController {
 
                 } else {
 
-                    HUD.hide()
+                    LoadingHepler.instance.hide()
                     self.reloadTable()
 
                 }
@@ -309,7 +314,7 @@ extension EventTabController {
         DispatchQueue.main.asyncAfter(deadline: when) {
             
             self.eventdelegate?.eventTableHeight(height: self.eventTableView.contentSize.height)
-            HUD.hide()
+            LoadingHepler.instance.hide()
         }
         
     }
@@ -318,7 +323,7 @@ extension EventTabController {
     
     func getBusinessEvent(pageno:Int,limit:Int) {
         
-        HUD.show(.labeledProgress(title: "Loading", subtitle: ""))
+       LoadingHepler.instance.show()
         
         apiClient.getFireBaseToken(completion: { token in
             
@@ -349,7 +354,7 @@ extension EventTabController {
                     
                 } else {
                     
-                    HUD.hide()
+                    LoadingHepler.instance.hide()
                     self.reloadTable()
                     
                 }
