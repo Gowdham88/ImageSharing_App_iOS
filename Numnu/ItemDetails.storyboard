@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -850,7 +850,7 @@
                                                                         </label>
                                                                         <view alpha="0.0" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d2k-zW-n1g">
                                                                             <rect key="frame" x="10" y="373.5" width="300" height="1"/>
-                                                                            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="1" id="waQ-tJ-pXr"/>
                                                                             </constraints>
@@ -949,10 +949,13 @@
                                                             <outlet property="placeWidthConstraint" destination="7Bt-LE-Xlr" id="u05-Q7-Hqc"/>
                                                             <outlet property="postCommentLabel" destination="SFd-Js-P5I" id="3N9-H5-hKv"/>
                                                             <outlet property="postEventBookMark" destination="KQb-Q9-DXV" id="YpK-9a-wda"/>
+                                                            <outlet property="postEventDishIcon" destination="3vW-GF-J8z" id="oCu-9w-Unn"/>
                                                             <outlet property="postEventDishLabel" destination="kSh-cK-KBg" id="l01-Hc-YLg"/>
                                                             <outlet property="postEventImage" destination="TGL-p7-sXW" id="zRH-a1-5OC"/>
                                                             <outlet property="postEventName" destination="7fG-SG-rVN" id="hlr-R3-LuB"/>
+                                                            <outlet property="postEventNameIcon" destination="OxT-zh-ZYF" id="5ZI-Hc-Vq6"/>
                                                             <outlet property="postEventPlace" destination="KfF-SQ-AGl" id="DFQ-Ye-fKw"/>
+                                                            <outlet property="postEventPlaceIcon" destination="CYH-xa-DyP" id="OFb-vW-AVu"/>
                                                             <outlet property="postLikeImage" destination="7bf-Rr-9Xh" id="sy1-OA-Qf8"/>
                                                             <outlet property="postUserImage" destination="TGL-p7-sXW" id="PFW-ig-oTp"/>
                                                             <outlet property="postUserTime" destination="PGd-5J-bZT" id="VPs-Tn-g2Y"/>
