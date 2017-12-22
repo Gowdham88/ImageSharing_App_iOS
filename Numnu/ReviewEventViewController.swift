@@ -8,7 +8,6 @@
 
 import UIKit
 import XLPagerTabStrip
-import PKHUD
 import SwiftyJSON
 import Alamofire
 
@@ -58,7 +57,7 @@ class ReviewEventViewController: UIViewController,IndicatorInfoProvider {
 
     func methodToCallApi(pageno:Int,limit:Int){
         
-        HUD.show(.labeledProgress(title: "Loading", subtitle: ""))
+        LoadingHepler.instance.show()
         apiClient.getFireBaseToken(completion: { token in
         
         let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
@@ -79,16 +78,16 @@ class ReviewEventViewController: UIViewController,IndicatorInfoProvider {
                         }
                         
                         DispatchQueue.main.async {
-                            
+                           
                             self.postEventTableview.reloadData()
-                            
+                            print("APi\(self.postList.count)")
                         }
                         
                         self.reloadTable()
                     
                     }else {
                         
-                        HUD.hide()
+                        LoadingHepler.instance.hide()
                         self.reloadTable()
                         
             }
@@ -105,7 +104,7 @@ class ReviewEventViewController: UIViewController,IndicatorInfoProvider {
         DispatchQueue.main.asyncAfter(deadline: when) {
             
              self.popdelegate?.postTableHeight(height: self.postEventTableview.contentSize.height)
-            HUD.hide()
+             LoadingHepler.instance.hide()
         }
         
     }
@@ -115,9 +114,11 @@ class ReviewEventViewController: UIViewController,IndicatorInfoProvider {
         
         viewState = true
         postList.removeAll()
+        postEventTableview.reloadData()
         pageno  = 1
         limitno = 25
         methodToCallApi(pageno: pageno, limit: limitno)
+       
       
     }
 
@@ -143,6 +144,11 @@ extension ReviewEventViewController : UITableViewDelegate,UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "postEventCell", for: indexPath) as! postEventDetailTableViewCell
+        
+        guard postList.count > 0 else {
+            
+            return cell
+        }
         
         cell.delegate = self
         cell.item = postList[indexPath.row]

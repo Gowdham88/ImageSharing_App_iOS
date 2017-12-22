@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import PKHUD
 import Alamofire
 
 class MenuItemViewController: UIViewController {
@@ -196,7 +195,7 @@ extension MenuItemViewController {
     
     func getItemList(pageno:Int,limit:Int) {
         
-        HUD.show(.labeledProgress(title: "Loading", subtitle: ""))
+        LoadingHepler.instance.show()
         
         apiClient.getFireBaseToken(completion: { token in
             
@@ -219,7 +218,7 @@ extension MenuItemViewController {
                     
                     DispatchQueue.main.async {
                         
-                        HUD.hide()
+                        LoadingHepler.instance.hide()
                         self.menuItemTableview.reloadData()
                         
                     }
@@ -228,7 +227,7 @@ extension MenuItemViewController {
                     
                 } else {
                     
-                    HUD.hide()
+                    LoadingHepler.instance.hide()
                     DispatchQueue.main.async {
                         
                         self.menuItemTableview.reloadData()

@@ -14,7 +14,7 @@ import Alamofire
 import IQKeyboardManagerSwift
 import SwiftyJSON
 import Nuke
-import PKHUD
+
 
 class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,GMSAutocompleteViewControllerDelegate,UICollectionViewDelegateFlowLayout {
     var dropdownArray = [String] ()
@@ -587,12 +587,12 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
                 
                 if let url_str = url {
                     
-                    HUD.show(.labeledProgress(title: "Uploading...", subtitle: ""))
+                   LoadingHepler.instance.show()
                     
                     let apiclient : ApiClient = ApiClient()
                     apiclient.getFireBaseImageUrl(imagepath: url_str, completion: { url in
                         
-                        HUD.hide()
+                        LoadingHepler.instance.hide()
                         
                         if url != "empty" {
                             
@@ -609,7 +609,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
                     
                 } else {
                     
-                    HUD.hide()
+                    LoadingHepler.instance.hide()
                     AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Image upload failed", vc: self)
                 }
                 
@@ -1037,7 +1037,7 @@ extension SettingsEdit_ProfieViewController {
         
         let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
         
-        HUD.show(.labeledProgress(title: "Uploading...", subtitle: ""))
+        LoadingHepler.instance.show()
         
         Alamofire.upload(multipartFormData: { (form) in
             
@@ -1052,7 +1052,7 @@ extension SettingsEdit_ProfieViewController {
                 }
                 upload.responseJSON { response in
                     
-                    HUD.hide()
+                    LoadingHepler.instance.hide()
                     
                     if let value = response.result.value {
                         
@@ -1079,7 +1079,7 @@ extension SettingsEdit_ProfieViewController {
             case .failure(let encodingError):
                 print(encodingError)
                 completion(nil)
-                HUD.hide()
+                LoadingHepler.instance.hide()
             }
         })
     }

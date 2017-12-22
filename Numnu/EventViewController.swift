@@ -10,8 +10,9 @@ import UIKit
 import XLPagerTabStrip
 import Alamofire
 import SwiftyJSON
-import PKHUD
+
 import Nuke
+import NVActivityIndicatorView
 
 struct MyVariables {
     
@@ -432,10 +433,8 @@ extension EventViewController {
     }
     func MethodToCallApi(){
         
-        let image  = UIImage(named: "splash_appicon")
-        
-        HUD.show(.labeledImage(image: image, title: "Loading..", subtitle: ""))
-        
+       
+        LoadingHepler.instance.show()
         let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
         
         apiClient.getEventsDetailsApi(id : eventprimaryid,headers: header, completion: { status,Values in
@@ -443,7 +442,7 @@ extension EventViewController {
             if status == "success" {
                 if let response = Values {
                     
-//                    HUD.hide()
+                    LoadingHepler.instance.hide()
                     
                     DispatchQueue.main.async {
                         
@@ -455,7 +454,8 @@ extension EventViewController {
                 
             } else {
                 print("json respose failure:::::::")
-                HUD.hide()
+                LoadingHepler.instance.hide()
+                
                 DispatchQueue.main.async {
                     
                     self.myscrollView.isHidden = true

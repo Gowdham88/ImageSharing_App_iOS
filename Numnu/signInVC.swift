@@ -11,7 +11,6 @@ import FirebaseAuth
 import Firebase
 import FBSDKLoginKit
 import FBSDKCoreKit
-import PKHUD
 import FBSDKLoginKit
 import Alamofire
 import IQKeyboardManagerSwift
@@ -99,14 +98,14 @@ class signInVC: UIViewController, UITextFieldDelegate {
             
            if ValidationHelper.Instance.isValidEmail(email:email) && pwd.count > 2 {
             
-            HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
+            LoadingHepler.instance.show()
             
             Auth.auth().signIn(withEmail: email, password: pwd, completion: { (user, error) in
                 
                 
                 if user != nil {
              
-                    HUD.hide()
+                    LoadingHepler.instance.hide()
                     self.getFirebaseToken()
                     
                     return
@@ -114,7 +113,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
                 }
                 
                 print(error.debugDescription)
-                HUD.hide()
+                LoadingHepler.instance.hide()
                 AlertProvider.Instance.showAlert(title: "Oops", subtitle: error.debugDescription, vc: self)
              
                 
@@ -258,7 +257,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
         animation.fromValue = NSValue(cgPoint: CGPoint(x: self.passwordInfoLabel.center.x - 10, y: self.passwordInfoLabel.center.y))
         animation.toValue = NSValue(cgPoint: CGPoint(x: self.passwordInfoLabel.center.x + 10, y: self.passwordInfoLabel.center.y))
         self.passwordInfoLabel.layer.add(animation, forKey: "position")
-        HUD.hide()
+        LoadingHepler.instance.hide()
         
     }
     
@@ -315,7 +314,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
                 
                 DispatchQueue.main.async {
                     
-                    HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
+                    LoadingHepler.instance.show()
                 }
                 
                 
@@ -329,14 +328,14 @@ class signInVC: UIViewController, UITextFieldDelegate {
                         print("Login error: \(error.localizedDescription)")
                         DispatchQueue.main.async {
                         AlertProvider.Instance.showAlert(title: "Oops!", subtitle: error.localizedDescription, vc: self)
-                        HUD.hide()
+                        LoadingHepler.instance.hide()
                         }
                         return
                     }
         
                     DispatchQueue.main.async {
                         
-                       HUD.hide()
+                      LoadingHepler.instance.hide()
                         
                     }
                     self.getFirebaseToken()
@@ -361,7 +360,7 @@ extension signInVC {
    
     func userLoginApi() {
         
-        HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
+       LoadingHepler.instance.show()
         
         let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
         let loginRequest : ApiClient  = ApiClient()
@@ -379,7 +378,7 @@ extension signInVC {
                    
                     }
                     
-                    HUD.hide()
+                    LoadingHepler.instance.hide()
                    
                     self.emailAddressTF.text = ""
                     self.passwordTF.text     = ""
@@ -389,7 +388,7 @@ extension signInVC {
             } else {
                 
                  DispatchQueue.main.async {
-                    HUD.hide()
+                    LoadingHepler.instance.hide()
                     self.authenticationError(error: "Login failed.")
                 }
                 

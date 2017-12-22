@@ -70,6 +70,7 @@
 		B42214981FC2F84F00FD56B0 /* TagList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42214971FC2F84F00FD56B0 /* TagList.swift */; };
 		B426C68E1F9E0A6B008D586B /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B426C68D1F9E0A6B008D586B /* SplashViewController.swift */; };
 		B42F2A261FA9EA96002419AB /* LocationDetailcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42F2A251FA9EA96002419AB /* LocationDetailcontroller.swift */; };
+		B433731D1FEBBEF900B0D669 /* LoadingHepler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B433731C1FEBBEF900B0D669 /* LoadingHepler.swift */; };
 		B43F16CB1FC4364200BBBF87 /* EventModelList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43F16CA1FC4364200BBBF87 /* EventModelList.swift */; };
 		B43F16CD1FC4415B00BBBF87 /* ItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43F16CC1FC4415B00BBBF87 /* ItemList.swift */; };
 		B43F16CF1FC442E100BBBF87 /* ItemImageList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43F16CE1FC442E100BBBF87 /* ItemImageList.swift */; };
@@ -231,6 +232,7 @@
 		B42214971FC2F84F00FD56B0 /* TagList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagList.swift; sourceTree = "<group>"; };
 		B426C68D1F9E0A6B008D586B /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		B42F2A251FA9EA96002419AB /* LocationDetailcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailcontroller.swift; sourceTree = "<group>"; };
+		B433731C1FEBBEF900B0D669 /* LoadingHepler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingHepler.swift; sourceTree = "<group>"; };
 		B43F16CA1FC4364200BBBF87 /* EventModelList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModelList.swift; sourceTree = "<group>"; };
 		B43F16CC1FC4415B00BBBF87 /* ItemList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemList.swift; sourceTree = "<group>"; };
 		B43F16CE1FC442E100BBBF87 /* ItemImageList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemImageList.swift; sourceTree = "<group>"; };
@@ -671,6 +673,7 @@
 				B4470EE21FBEEACC00DC2625 /* ValidationHelper.swift */,
 				B4470EE41FBEF0B300DC2625 /* PrefsManager.swift */,
 				B4B0A7D91FD973C200566507 /* DateFormatterManager.swift */,
+				B433731C1FEBBEF900B0D669 /* LoadingHepler.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -930,8 +933,8 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
-				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Toucan/Toucan.framework",
 				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
@@ -947,8 +950,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nuke.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toucan.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
@@ -1068,6 +1071,7 @@
 				BE2E37EC1FCD6ED8000BEE63 /* LuanchScreenViewController.swift in Sources */,
 				60B4EA441FAB190300C1A6C9 /* SettingsTableViewCell.swift in Sources */,
 				472A91DA1FE2945B0070FE0B /* PostListByEventId.swift in Sources */,
+				B433731D1FEBBEF900B0D669 /* LoadingHepler.swift in Sources */,
 				B4B0A7DA1FD973C200566507 /* DateFormatterManager.swift in Sources */,
 				B42214951FC2CDAB00FD56B0 /* IPChecker.m in Sources */,
 				BE76CD221FCC219700F6811C /* UserTableViewCell.swift in Sources */,
