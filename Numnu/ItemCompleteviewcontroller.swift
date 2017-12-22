@@ -170,12 +170,14 @@ class ItemCompleteviewcontroller : UIViewController {
     }
     
     func reloadTable() {
-        
-        
-            
-            self.popdelegate?.postTableHeight(height: self.postTableview.contentSize.height)
+        let when = DispatchTime.now() + 1
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            self.mainContainerView.constant = 283 + self.postTableview.contentSize.height
+            self.mainContainerViewBottom.constant = 0
             LoadingHepler.instance.hide()
-        
+        }
+            
+          
         
     }
     
