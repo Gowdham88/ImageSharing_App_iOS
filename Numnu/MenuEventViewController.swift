@@ -9,7 +9,7 @@
 import UIKit
 import XLPagerTabStrip
 import Alamofire
-import PKHUD
+
 
 protocol MenuEventViewControllerDelegate {
    
@@ -79,6 +79,7 @@ class MenuEventViewController: UIViewController,IndicatorInfoProvider,UITableVie
         viewState = true
         itemTagList.removeAll()
         itemBusinessTagList.removeAll()
+        self.menuCategoryTableview.reloadData()
         pageno  = 1
         limitno = 25
         switch itemType {
@@ -144,9 +145,20 @@ class MenuEventViewController: UIViewController,IndicatorInfoProvider,UITableVie
             
         case "Event":
             
+            guard itemTagList.count > 0 else {
+                
+                return cell
+            }
+            
             cell.item = itemTagList[indexPath.row]
             
         case "Business":
+            
+            guard itemBusinessTagList.count > 0 else {
+                
+                return cell
+            }
+            
             cell.itemBusiness = itemBusinessTagList[indexPath.row]
             
         default:
@@ -278,7 +290,7 @@ extension MenuEventViewController {
     
     func getItemTag(pageno:Int,limit:Int) {
         
-        HUD.show(.labeledProgress(title: "Loading", subtitle: ""))
+       LoadingHepler.instance.show()
         
         apiClient.getFireBaseToken(completion: { token in
             
@@ -309,7 +321,7 @@ extension MenuEventViewController {
                     
                 } else {
                     
-                    HUD.hide()
+                    LoadingHepler.instance.hide()
                     self.reloadTable()
                     
                 }
@@ -325,7 +337,7 @@ extension MenuEventViewController {
     
     func getItemTagBusiness(pageno:Int,limit:Int) {
         
-        HUD.show(.labeledProgress(title: "Loading", subtitle: ""))
+       LoadingHepler.instance.show()
         
         apiClient.getFireBaseToken(completion: { token in
             
@@ -356,7 +368,7 @@ extension MenuEventViewController {
                     
                 } else {
                     
-                    HUD.hide()
+                    LoadingHepler.instance.hide()
                     self.reloadTable()
                     
                 }
@@ -377,7 +389,7 @@ extension MenuEventViewController {
         DispatchQueue.main.asyncAfter(deadline: when) {
             
             self.menuDelegate?.menuTableHeight(height: self.menuCategoryTableview.contentSize.height)
-            HUD.hide()
+            LoadingHepler.instance.hide()
         }
         
     }

@@ -12,7 +12,6 @@ target 'Numnu' do
   pod 'Firebase/Storage'
   pod 'Nuke', '~> 5.0'
   pod 'Toucan'
-  pod 'PKHUD', '~> 4.0’
   pod 'XLPagerTabStrip'
   pod 'Bolts'
   pod 'FBSDKCoreKit'
@@ -23,7 +22,7 @@ target 'Numnu' do
   pod 'Alamofire', '~> 4.5'
   pod 'SwiftyJSON'
   pod 'IQKeyboardManagerSwift'
-  
+  pod 'NVActivityIndicatorView'
 
 
 end

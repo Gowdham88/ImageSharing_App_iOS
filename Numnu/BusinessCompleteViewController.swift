@@ -10,7 +10,7 @@ import UIKit
 import XLPagerTabStrip
 import Nuke
 import Alamofire
-import PKHUD
+
 
 class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
     
@@ -376,7 +376,7 @@ extension BusinessCompleteViewController {
     }
     func MethodToCallApi(){
         
-        HUD.show(.labeledProgress(title: "Loading", subtitle: ""))
+        LoadingHepler.instance.show()
         
         let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
         
@@ -385,7 +385,7 @@ extension BusinessCompleteViewController {
             if status == "success" {
                 if let response = Values {
                     
-                    HUD.hide()
+                    LoadingHepler.instance.hide()
                     
                     DispatchQueue.main.async {
                         
@@ -397,7 +397,7 @@ extension BusinessCompleteViewController {
                 
             } else {
                 print("json respose failure:::::::")
-                HUD.hide()
+                LoadingHepler.instance.hide()
                 DispatchQueue.main.async {
                     
                     self.myscrollView.isHidden = true

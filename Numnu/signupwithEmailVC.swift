@@ -11,7 +11,6 @@ import FirebaseAuth
 import Firebase
 import FBSDKCoreKit
 import FBSDKLoginKit
-import PKHUD
 import Alamofire
 import IQKeyboardManagerSwift
 
@@ -204,7 +203,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
             
         if ValidationHelper.Instance.isValidEmail(email:email) && pwd.count > 2 {
             
-            HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
+            LoadingHepler.instance.hide()
             
             
             Auth.auth().createUser(withEmail: email, password: pwd) { (user: User?, error) in
@@ -213,7 +212,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
   
                     self.authenticationError(error: "Oops! Invalid login.")
 
-                    HUD.hide()
+                    LoadingHepler.instance.hide()
                     
                     if let errorcontent = error {
                         print("signup error:::::::",errorcontent.localizedDescription)
@@ -232,7 +231,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                 self.emailTextfield.text = ""
                 self.passwordTextfield.text = ""
   
-                HUD.hide()
+                LoadingHepler.instance.hide()
                 self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId,firebaseid: (user?.uid)!)
 
                 
@@ -282,7 +281,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         animation.fromValue = NSValue(cgPoint: CGPoint(x: self.labelcredentials.center.x - 10, y: self.labelcredentials.center.y))
         animation.toValue = NSValue(cgPoint: CGPoint(x: self.labelcredentials.center.x + 10, y: self.labelcredentials.center.y))
         self.labelcredentials.layer.add(animation, forKey: "position")
-        HUD.hide()
+        LoadingHepler.instance.hide()
         
     }
     
@@ -343,14 +342,14 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
             
             DispatchQueue.main.async {
                 
-                HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
+               LoadingHepler.instance.show()
             }
 
             let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
             Auth.auth().signIn(with: credential, completion: { (user, error) in
                 if let error = error {
                     DispatchQueue.main.async {
-                    HUD.hide()
+                    LoadingHepler.instance.hide()
                     AlertProvider.Instance.showAlert(title: "", subtitle: error.localizedDescription, vc: self)
                     
                     }
@@ -360,7 +359,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
              
                 DispatchQueue.main.async {
                     
-                    HUD.hide()
+                    LoadingHepler.instance.hide()
                     self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId,firebaseid: (user?.uid)!)
                 }
                 

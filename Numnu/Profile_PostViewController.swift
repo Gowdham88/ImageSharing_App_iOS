@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import PKHUD
 import Nuke
 
 protocol Profile_PostViewControllerDelegae {
@@ -44,7 +43,7 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
 
         // Do any additional setup after loading the view.
         setNavBar()
-        HUD.hide()
+        LoadingHepler.instance.hide()
         myScrollView.delegate = self
         self.navigationController?.navigationBar.titleTextAttributes =
             [NSForegroundColorAttributeName: UIColor.black,
