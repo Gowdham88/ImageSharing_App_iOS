@@ -75,6 +75,7 @@ class ReviewEventViewController: UIViewController,IndicatorInfoProvider {
                                 
                                 self.postList += list
                             }
+                            
                         }
                         
                         DispatchQueue.main.async {
