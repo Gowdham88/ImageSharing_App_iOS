@@ -283,6 +283,10 @@ class  ApiClient {
             case "Business":
             Baseurl = Constants.BusinessDetailApi
             
+            case "Item":
+            Baseurl = Constants.PostsByItemId
+
+            
             default:
             Baseurl = Constants.EventApiUrl
         }

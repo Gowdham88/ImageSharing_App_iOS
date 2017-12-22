@@ -8,9 +8,23 @@
 
 import UIKit
 import XLPagerTabStrip
+import SwiftyJSON
+import Alamofire
+import Nuke
 
-class ItemCompleteviewcontroller : UIViewController {
+protocol ItemCompleteviewcontrollerDelegate {
     
+    func popupClick()
+    func postTableHeight(height : CGFloat)
+}
+class ItemCompleteviewcontroller : UIViewController {
+    var apiClient     : ApiClient!
+    var apiType         : String = "Item"
+    var popdelegate : ItemCompleteviewcontrollerDelegate?
+    var viewState       : Bool = false
+
+
+
     @IBOutlet weak var ItImageView: ImageExtender!
     @IBOutlet weak var ItTitleLabel: UILabel!
     
@@ -30,6 +44,8 @@ class ItemCompleteviewcontroller : UIViewController {
     @IBOutlet weak var mainContainerViewBottom: NSLayoutConstraint!
     @IBOutlet weak var mainContainerView: NSLayoutConstraint!
     var tagarray = ["Festival","Wine","Party"]
+    var postList = [PostListDataItems]()
+    var postModel  : PostListByEventId?
     
     @IBOutlet weak var shareView: UIView!
     @IBOutlet var completemainview: UIView!
@@ -42,12 +58,16 @@ class ItemCompleteviewcontroller : UIViewController {
     
     var isLabelAtMaxHeight = false
     
+    var primaryid       : Int = 149
+    var pageno  : Int = 1
+    var limitno : Int = 25
+
     var itemprimaryid   : Int  = 39
     
     override func viewDidLoad() {
        super.viewDidLoad()
         
-        
+        apiClient = ApiClient()
         /**********************set Nav bar****************************/
         
         setNavBar()
@@ -85,8 +105,8 @@ class ItemCompleteviewcontroller : UIViewController {
         postTableview.delegate   = self
         postTableview.dataSource = self
         postTableview.isScrollEnabled = false
-        
-        
+//        ododToCallApi(pageno: pageno, limit: limitno)
+       
         
         // Do any additional setup after loading the view.
     }
@@ -94,7 +114,71 @@ class ItemCompleteviewcontroller : UIViewController {
         let navigationOnTap = UITapGestureRecognizer(target:self,action:#selector(EventViewController.navigationTap))
         self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
         self.navigationController?.navigationBar.isUserInteractionEnabled = true
+        viewState = true
+
+        postList.removeAll()
+        postTableview.reloadData()
+        pageno  = 1
+        limitno = 25
+        
+        methodToCallApi(pageno: pageno, limit: limitno)
+
+ 
     }
+    func methodToCallApi(pageno: Int , limit: Int) {
+        
+        LoadingHepler.instance.show()
+        apiClient.getFireBaseToken(completion: { token in
+            
+            let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
+            let param  : String  = "page=\(pageno)&limit\(limit)"
+            
+            self.apiClient.getPostList(id: self.primaryid, page: param, type: self.apiType, headers: header, completion: { status,Values in
+                
+                if status == "success" {
+                    
+                    if let itemlist = Values {
+                        
+                        self.postModel = itemlist
+                        
+                        if let list = itemlist.data {
+                            
+                            self.postList += list
+                        }
+                    }
+                    
+                    DispatchQueue.main.async {
+                        
+                        self.postTableview.reloadData()
+                        print("APi\(self.postList.count)")
+                    }
+                    
+                    self.reloadTable()
+                    
+                }else {
+                    
+                    LoadingHepler.instance.hide()
+                    self.reloadTable()
+                    
+                }
+                
+                
+            })
+        })
+        
+        
+    }
+    
+    func reloadTable() {
+        
+        
+            
+            self.popdelegate?.postTableHeight(height: self.postTableview.contentSize.height)
+            LoadingHepler.instance.hide()
+        
+        
+    }
+    
     func eventtap(){
         
         let storyboard      = UIStoryboard(name: Constants.Event, bundle: nil)
@@ -115,9 +199,9 @@ class ItemCompleteviewcontroller : UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        viewState = true
+
         
-        mainContainerView.constant = 347 + postTableview.contentSize.height
-        mainContainerViewBottom.constant = 0
     }
     
     override func didReceiveMemoryWarning() {
@@ -302,14 +386,19 @@ extension ItemCompleteviewcontroller : UITableViewDelegate,UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 6
+        return postList.count
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "postEventCell", for: indexPath) as! PostEventTableViewCell
+        guard postList.count > 0 else {
+            
+            return cell
+        }
         
+        cell.item = postList[indexPath.row]
         cell.delegate = self
         cell.postEventBookMark.tag = indexPath.row
         cell.setHeight(heightview : Float(UIScreen.main.bounds.size.height))
@@ -362,6 +451,23 @@ extension ItemCompleteviewcontroller : UITableViewDelegate,UITableViewDataSource
         }
         
     }
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        if indexPath.row == postList.count - 1 && viewState {
+            
+            if let pageItem = postModel {
+                
+                if postList.count  < pageItem.totalRows ?? 0 {
+                    pageno += 1
+                    limitno = 25 * pageno
+                    methodToCallApi(pageno: pageno, limit: limitno)
+                }
+                
+            }
+            
+        }
+    }
+    
     func postEventImage() {
         let storyboard = UIStoryboard(name: Constants.PostDetail, bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: "postdetailid")
