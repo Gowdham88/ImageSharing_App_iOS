@@ -122,7 +122,6 @@ class postEventDetailTableViewCell : UITableViewCell {
                     formatter.dateFormat = "h "
                     let dateString = formatter.string(from: date!)
                     postDtvUserTime.text =  dateString + "hrs"
-                    print("datestring:::::",dateString)
                 }
             }
             
