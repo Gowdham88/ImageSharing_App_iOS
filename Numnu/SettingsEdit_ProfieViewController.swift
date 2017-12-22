@@ -700,6 +700,10 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
                 cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
             }
             cell?.selectionStyle = .none
+            guard tagnamearray.count > 0 else {
+                
+                return cell!
+            }
             cell?.textLabel?.text = tagnamearray[indexPath.row]
             dropdownTableView.transform = CGAffineTransform(scaleX: 1, y: -1)
             cell?.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
@@ -717,6 +721,10 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
                 cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
             }
             cell?.selectionStyle = .none
+            guard autocompleteplaceArray.count > 0 else {
+                
+                return cell!
+            }
             citytableview.transform = CGAffineTransform(scaleX: 1, y: -1)
             cell?.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
             //            cell?.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1.0)

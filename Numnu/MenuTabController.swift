@@ -76,7 +76,7 @@ extension MenuTabController : UITableViewDelegate,UITableViewDataSource {
         
         let storyboard = UIStoryboard(name: Constants.ItemDetail, bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId) as! ItemDetailController
-        vc.itemprimaryid = 115
+        vc.itemprimaryid = 39
         self.navigationController!.pushViewController(vc, animated: true)
         
     }

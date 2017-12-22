@@ -42,7 +42,7 @@ class ItemCompleteviewcontroller : UIViewController {
     
     var isLabelAtMaxHeight = false
     
-    var itemprimaryid   : Int  = 115
+    var itemprimaryid   : Int  = 39
     
     override func viewDidLoad() {
        super.viewDidLoad()
@@ -255,7 +255,7 @@ extension ItemCompleteviewcontroller {
         
         let storyboard = UIStoryboard(name: Constants.ItemDetail, bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId) as! ItemDetailController
-        vc.itemprimaryid = 115
+        vc.itemprimaryid = 39
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
@@ -368,7 +368,7 @@ extension ItemCompleteviewcontroller : UITableViewDelegate,UITableViewDataSource
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
-    func postEventPlace(){
+    func postEventPlace() {
         let storyboard = UIStoryboard(name: Constants.ItemDetail, bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId)
         self.navigationController!.pushViewController(vc, animated: true)
