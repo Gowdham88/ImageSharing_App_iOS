@@ -30,7 +30,9 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
     
     @IBOutlet weak var mainContainerViewBottom: NSLayoutConstraint!
     @IBOutlet weak var mainContainerView: NSLayoutConstraint!
-    var tagarray = ["Festival","Wine","Party"]
+    
+    var tagarray = [String]()
+    var entintyTagarray = [String]()
     
     /***************contraints***********************/
     
@@ -51,7 +53,7 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
     
     var apiClient : ApiClient!
     var description_txt : String = ""
-    var itemprimaryid   : Int  = 115
+    var itemprimaryid   : Int  = 39
 
     override func viewDidLoad() {
         settings.style.selectedBarHeight = 3.0
@@ -226,7 +228,7 @@ extension ItemDetailController {
         
         var expandableWidth : CGFloat = 0
         
-        for (i,text) in tagarray.enumerated() {
+        for (i,text) in entintyTagarray.enumerated() {
             
             let textLabel : UILabel = UILabel()
             let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: text, fontname: "Avenir-Medium", size: 12)
@@ -504,13 +506,71 @@ extension ItemDetailController {
                 }
                 
                 tagViewUpdate()
-                entitytagUpdate()
+                
             }
             
             
         }
         
         self.myscrollView.isHidden = false
+        
+        /****************Business Entity************************/
+        
+        if let entinty = item.businessEntity {
+            
+            if let entintyname = entinty.businessname {
+                
+                businessEntityNameLabel.text = entintyname
+            }
+            
+            if let itemTag = entinty.taglist {
+                
+                if itemTag.count > 0 {
+                    
+                    entintyTagarray.removeAll()
+                    
+                    for tag in itemTag {
+                        
+                        entintyTagarray.append(tag.text_str ?? "")
+                        
+                    }
+                    
+                    entitytagUpdate()
+                }
+                
+                
+            }
+            
+            
+            /****************Business Entity image************************/
+            
+            if let entintyimgaelist = entinty.imagelist {
+                
+                if entintyimgaelist.count > 0 {
+                    
+                    if let url = entintyimgaelist[entintyimgaelist.count-1].imageurl_str {
+                        
+                        apiClient.getFireBaseImageUrl(imagepath: url, completion: { imageUrl in
+                            
+                            if imageUrl != "empty" {
+                                
+                                Manager.shared.loadImage(with: URL(string : imageUrl)!, into: self.businessEntityImage)
+                            }
+                            
+                        })
+                        
+                        
+                    }
+                    
+                    
+                }
+                
+            }
+            
+            
+        }
+        
+        
        
     }
     

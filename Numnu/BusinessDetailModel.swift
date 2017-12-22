@@ -181,6 +181,25 @@ struct  BusinessDetailModel {
             
         }
         
+        /*******************Business Entity for Item Detail***************************************/
+        
+        if let itemsBusiness = json["images"].array {
+            
+            for item in itemsBusiness {
+                
+                let imglistItem = ImgList(array: item)
+                
+                if imagelist == nil {
+                    imagelist = []
+                    
+                }
+                
+                imagelist?.append(imglistItem)
+                
+            }
+            
+        }
+        
         let jsoncity = JSON(json["citylocation"])
         if let citylocation = LocList(array: jsoncity) {
             
