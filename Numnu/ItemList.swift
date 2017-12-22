@@ -25,7 +25,7 @@ struct ItemList {
     var itemImageList   : [ItemImageList]?
     var itemLinkList    : [ItemLinkList]?
     var tagList         : [TagList]?
-    
+    var businessEntity  : BusinessDetailModel?
     
     init?(json: JSON) {
         
@@ -116,6 +116,15 @@ struct ItemList {
                 }
                 
             }
+            
+        }
+        
+        /********************Business Entity Model***************************/
+        
+        let jsonpage = JSON(json["business"])
+        if let businessEntityItem = BusinessDetailModel(json: jsonpage) {
+            
+            businessEntity = businessEntityItem
             
         }
         

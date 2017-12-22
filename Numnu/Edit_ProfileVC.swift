@@ -897,6 +897,12 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
             }
             cell?.selectionStyle = .none
+            
+            guard tagnamearray.count > 0 else {
+                
+                return cell!
+            }
+            
             cell?.textLabel?.text = tagnamearray[indexPath.row]
             
             dropdownTableView.transform = CGAffineTransform(scaleX: 1, y: -1)
@@ -917,6 +923,12 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
             }
             cell?.selectionStyle = .none
+            
+            guard autocompleteplaceArray.count > 0 else {
+                
+                return cell!
+            }
+            
 //            cell?.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1.0)
             cell?.textLabel?.text = autocompleteplaceArray[indexPath.row]
             cell?.textLabel?.textColor = UIColor(red: 129/255.0, green: 135/255.0, blue: 155/255.0, alpha: 1.0)
