@@ -33,7 +33,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YJ2-oM-Y9r">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="850"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4" translatesAutoresizingMaskIntoConstraints="NO" id="egJ-dm-ObJ" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="egJ-dm-ObJ" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
                                                 <rect key="frame" x="10" y="8" width="80" height="80"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="80" id="GcG-hM-GEu"/>
@@ -308,10 +308,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="4" width="1280" height="824"/>
         <image name="Bookmark" width="14" height="24"/>
         <image name="Shape_new@1x" width="8" height="12"/>
         <image name="event_ico" width="25" height="27"/>
+        <image name="image_placeholder" width="960" height="796"/>
         <image name="share" width="18" height="20"/>
     </resources>
 </document>

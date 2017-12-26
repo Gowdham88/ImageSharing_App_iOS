@@ -21,6 +21,7 @@ import IQKeyboardManagerSwift
  
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    var orientationLock = UIInterfaceOrientationMask.portrait
 
     var window: UIWindow?
 
@@ -41,7 +42,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
   }
     
- 
+//    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+//        return self.orientationLock
+//    }
+    
+    struct AppUtility {
+        static func lockOrientation(_ orientation: UIInterfaceOrientationMask) {
+            if let delegate = UIApplication.shared.delegate as? AppDelegate {
+                delegate.orientationLock = orientation
+            }
+        }
+        
+        static func lockOrientation(_ orientation: UIInterfaceOrientationMask, andRotateTo rotateOrientation:UIInterfaceOrientation) {
+            self.lockOrientation(orientation)
+            UIDevice.current.setValue(rotateOrientation.rawValue, forKey: "orientation")
+        }
+    }
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -65,6 +81,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        
+        
+        
+        if let rootViewController = UIApplication.topViewController() {
+            
+            if rootViewController is PostImageZoomViewController {
+                
+                let controller = rootViewController as! PostImageZoomViewController
+                
+                if controller.isPresented {
+                    
+                    return .all
+                    
+                }
+                
+            }
+           
+            
+        }
+        
+        
+        
+        return .portrait
+        
     }
 
  func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
@@ -196,4 +239,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
  }
+
+ extension UIApplication{
+    class func topViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+    
+    
+    if let nav = base as? UINavigationController {
+    return topViewController(base: nav.visibleViewController)
+    }
+    if let tab = base as? UITabBarController {
+    let moreNavigationController = tab.moreNavigationController
+    
+    if let top = moreNavigationController.topViewController, top.view.window != nil {
+    return topViewController(base: top)
+    } else if let selected = tab.selectedViewController {
+    return topViewController(base: selected)
+    }
+    }
+    if let presented = base?.presentedViewController {
+    return topViewController(base: presented)
+    }
+    
+    return base
+    }
+    
+   
+    
+    
+ }
+  
  

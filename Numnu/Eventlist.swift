@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-struct  EventList{
+struct  EventList {
     
     var id              : Int?
     var businessuserid  : Int?
@@ -26,6 +26,13 @@ struct  EventList{
     var createdat       : String?
     var updatedat       : String?
     var eventLinkList   : [EventlinkList]?
+    var taglist         : [TagList]?
+    var loclist         : LocList?
+    var imagelist       : [ImgList]?
+    
+    var name_Str : String?
+    var id_Str   : Int?
+    
     
     
     init?(json: JSON) {
@@ -114,6 +121,61 @@ struct  EventList{
             
         }
         
+        if let tagitems = json["tags"].array {
+            
+            for item in tagitems {
+                
+                 let taglistItem = TagList(array: item)
+                    
+                    if taglist == nil {
+                        taglist = []
+                        
+                    }
+                    
+                    taglist?.append(taglistItem)
+                    
+                }
+            
+        }
+        
+        if let imgitems = json["eventimages"].array {
+            
+            for item in imgitems {
+                
+                let imglistItem = ImgList(array: item)
+                
+                if imagelist == nil {
+                    imagelist = []
+                    
+                }
+                
+                imagelist?.append(imglistItem)
+                
+            }
+            
+        }
+        
+        let jsoncity = JSON(json["location"])
+        if let citylocation = LocList(array: jsoncity) {
+            
+            self.loclist = citylocation
+            
+        }
+        
+    }
+    
+    init?(array : JSON) {
+    
+        if let name_Str = array["name"].string {
+            
+            self.name_Str = name_Str
+        }
+        
+        if let id_Str = array["id"].int {
+            
+            self.id_Str = id_Str
+        }
+    
     }
         
 }

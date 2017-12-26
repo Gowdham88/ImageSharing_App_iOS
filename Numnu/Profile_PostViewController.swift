@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Nuke
 
 protocol Profile_PostViewControllerDelegae {
     
@@ -23,6 +24,9 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
     @IBOutlet var navigationItemList: UINavigationItem!
     @IBOutlet weak var myScrollView: UIScrollView!
     
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var descriptionlabel: UILabel!
+    @IBOutlet weak var userNamelabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var mainViewBottom: NSLayoutConstraint! 
     @IBOutlet weak var mainViewConstraint: NSLayoutConstraint!
@@ -31,7 +35,7 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
     var boolForBack : Bool = true
 
     @IBOutlet weak var EventverticalConstraint: NSLayoutConstraint!
-    var itemArray = [String]()
+    var itemArray = [TagList]()
     var delegate : Profile_PostViewControllerDelegae?
     
     override func viewDidLoad() {
@@ -39,17 +43,20 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
 
         // Do any additional setup after loading the view.
         setNavBar()
+        LoadingHepler.instance.hide()
         myScrollView.delegate = self
         self.navigationController?.navigationBar.titleTextAttributes =
             [NSForegroundColorAttributeName: UIColor.black,
              NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
         userImage.layer.cornerRadius = self.userImage.frame.size.height/2
+        userImage.contentMode = .scaleAspectFill
         userImage.clipsToBounds = true
         alertTapRegister()
-        itemArray = ["Festival","Wine","Party","Meeting","conference","Family function"]
-//        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(Edit_ProfileVC.navigationTap))
-//        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
-//        self.navigationController?.navigationBar.isUserInteractionEnabled = true
+        
+        /***********************Setuserdetails****************************/
+        setUserDetails()
+       
+    
     }
     func navigationTap(){
         let offset = CGPoint(x: 0,y :0)
@@ -64,15 +71,19 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
             self.navigationController?.navigationBar.isUserInteractionEnabled = true
         // Hide the navigation bar on the this view controller
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        
+        /***********************Setuserdetails****************************/
+        setUserDetails()
     }
     
     func setNavBar() {
         
-        navigationItemList.title = "@Suraj Balachandran"
+        navigationItemList.title = "@\(PrefsManager.sharedinstance.username)"
         
         let button: UIButton = UIButton(type: UIButtonType.custom)
         //set image for button
         if  boolForBack == false {
+//            button.setImage(UIImage(named: "ic_arrow_back"), for: UIControlState.normal)
             button.setImage(UIImage(named: "ic_arrow_back"), for: UIControlState.normal)
 
         }else{
@@ -142,13 +153,27 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         cell.postEventPlace.addGestureRecognizer(posteventplacetap)
         cell.postEventPlace.isUserInteractionEnabled = true
         
+        //Item page Icon Tapping
+        let posteventplaceIcontap = UITapGestureRecognizer(target: self, action:#selector(getter: Profile_postTableViewCell.postEventPlaceIcon))
+        cell.postEventPlaceIcon.addGestureRecognizer(posteventplaceIcontap)
+        cell.postEventPlaceIcon.isUserInteractionEnabled = true
+        
         let posteventdishtap = UITapGestureRecognizer(target: self, action:#selector(getter: Profile_postTableViewCell.postEventDishLabel))
         cell.postEventDishLabel.addGestureRecognizer(posteventdishtap)
         cell.postEventDishLabel.isUserInteractionEnabled = true
         
+        //Icon dish page
+        let postEventDishIcontap = UITapGestureRecognizer(target: self, action:#selector(getter: Profile_postTableViewCell.postEventDishIcon))
+        cell.postEventDishIcon.addGestureRecognizer(postEventDishIcontap)
+        cell.postEventDishIcon.isUserInteractionEnabled = true
+        
         let posteventnametap = UITapGestureRecognizer(target: self, action:#selector(getter: Profile_postTableViewCell.postEventName))
         cell.postEventName.addGestureRecognizer(posteventnametap)
         cell.postEventName.isUserInteractionEnabled = true
+        
+        let postEventNameIcontap = UITapGestureRecognizer(target: self, action:#selector(getter: Profile_postTableViewCell.postEventNameIcon))
+        cell.postEventNameIcon.addGestureRecognizer(postEventNameIcontap)
+        cell.postEventNameIcon.isUserInteractionEnabled = true
         return cell
     }
     
@@ -167,6 +192,11 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         }
     }
     
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+//        self.navigationController?.setNavigationBarHidden(false, animated: true)
+//    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -181,6 +211,12 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         let storyboard = UIStoryboard(name: Constants.ItemDetail, bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId)
         self.navigationController!.pushViewController(vc, animated: true)
+    }
+        
+    func postEventPlaceIcon(){
+            let storyboard = UIStoryboard(name: Constants.ItemDetail, bundle: nil)
+            let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId)
+            self.navigationController!.pushViewController(vc, animated: true)
         
     }
     func postEventDishLabel(){
@@ -189,7 +225,19 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
+    
+    func postEventDishIcon(){
+        let storyboard = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId)
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
     func postEventName(){
+        
+        let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
+    func postEventNameIcon(){
         
         let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)
@@ -203,31 +251,62 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ccell", for: indexPath as IndexPath) as! UserProfileTagCollectionViewCell
-        let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: itemArray[indexPath.row], fontname: "Avenir-Book", size: 13)
-        cell.tagLabel.text = itemArray[indexPath.row]
-        cell.setLabelSize(size: textSize)
-
+        
+        if let tagName = itemArray[indexPath.row].text_str {
+            
+            let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagName, fontname: "Avenir-Book", size: 13)
+            cell.tagLabel.text = tagName
+            cell.setLabelSize(size: textSize)
+            
+        }
+  
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: itemArray[indexPath.row], fontname: "Avenir-Book", size: 13)
+        if let tagName = itemArray[indexPath.row].text_str {
+            
+            let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagName, fontname: "Avenir-Book", size: 13)
+            
+            return CGSize(width: textSize.width+20, height: 22)
+            
+        } else {
+            
+            return CGSize(width: 0, height: 22)
+            
+        }
         
-        return CGSize(width: textSize.width+20, height: 22)
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+   
+    /***********************Setuserdetails****************************/
+    
+    func setUserDetails(){
+        
+        userNamelabel.text = PrefsManager.sharedinstance.username
+        addressLabel.text  = PrefsManager.sharedinstance.userCity
+        descriptionlabel.text = PrefsManager.sharedinstance.description
+        print(PrefsManager.sharedinstance.tagList)
+        itemArray  = PrefsManager.sharedinstance.tagList
+        collectionView.reloadData()
+        
+        let apiclient : ApiClient = ApiClient()
+        apiclient.getFireBaseImageUrl(imagepath: PrefsManager.sharedinstance.imageURL, completion: { url in
+            
+            if url != "empty" {
+                
+                Manager.shared.loadImage(with:URL(string:url)!, into: self.userImage)
+                
+            }
+            
+            
+        })
+       
     }
-    */
 
 }
 
@@ -288,7 +367,36 @@ extension Profile_PostViewController :SettingsViewControllerDelegate {
     
     func logout() {
         
-        delegate?.logout()
+        
+        addProfileContainer()
+        
+    }
+    
+    func addProfileContainer() {
+        
+        /**************************Setting tabs*********************************/
+        
+        let nav1              = UINavigationController()
+        let storyboard        = UIStoryboard(name: Constants.Main, bundle: nil)
+        let controller        = storyboard.instantiateViewController(withIdentifier: Constants.ProfileId) as! Edit_ProfileVC
+        controller.boolForTitle = false
+        nav1.viewControllers = [controller]
+        self.tabBarController?.viewControllers?.append(nav1)
+        let myImage = UIImage(named: "profileunselected")!
+        self.tabBarItem.title        = nil
+        controller.tabBarItem = UITabBarItem(title: nil, image: myImage, selectedImage: myImage)
+        controller.tabBarItem.imageInsets  = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
+
+        /**************************Removing tabs*********************************/
+        
+        if let tabBarController = self.tabBarController {
+            let indexToRemove = 2
+            if indexToRemove < (tabBarController.viewControllers?.count)! {
+                var viewControllers = tabBarController.viewControllers
+                viewControllers?.remove(at: indexToRemove)
+                tabBarController.viewControllers = viewControllers
+            }
+        }
         
     }
 }

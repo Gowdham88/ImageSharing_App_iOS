@@ -7,12 +7,24 @@
 //
 
 import UIKit
+import Alamofire
 
 class MenuItemViewController: UIViewController {
 
     @IBOutlet weak var menuItemTableview: UITableView!
     var tagarray = ["Festival","Wine","Party","Rum","Barbaque","Pasta","Sandwich","Burger"]
     var heading : String = ""
+    
+    /********************Api client********************************/
+    var apiClient : ApiClient!
+    var itemList = [ItemList]()
+    var itemModel  : ItemListModel?
+    var pageno  : Int = 1
+    var limitno : Int = 25
+    var primaryid : Int = 0
+    var tag_id   : Int = 0
+    /********************variable which select which api ************************/
+    var itemType : String = "Event"
     
     @IBOutlet weak var navigationItemList: UINavigationItem!
     override func viewDidLoad() {
@@ -23,6 +35,12 @@ class MenuItemViewController: UIViewController {
        // Do any additional setup after loading the view.
       
         setNavBar()
+        
+        apiClient = ApiClient()
+        itemList.removeAll()
+        pageno  = 1
+        limitno = 25
+        getItemList(pageno: pageno, limit: limitno)
     }
     func navigationTap(){
         let offset = CGPoint(x: 0,y :0)
@@ -79,7 +97,7 @@ extension MenuItemViewController : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-            return 6
+            return itemList.count
    
     }
     
@@ -87,8 +105,27 @@ extension MenuItemViewController : UITableViewDelegate,UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "menuEventCell", for: indexPath) as! MenuItemEventCell
         cell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.row)
+        cell.item = itemList[indexPath.row]
         return cell
     
+        
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        if indexPath.row == itemList.count - 1  {
+            
+            if let pageItem = itemModel {
+                
+                if itemList.count  < pageItem.totalRows ?? 0 {
+                    pageno += 1
+                    limitno = 25 * pageno
+                    getItemList(pageno: pageno, limit: limitno)
+                }
+                
+            }
+            
+        }
         
     }
     
@@ -102,7 +139,8 @@ extension MenuItemViewController : UITableViewDelegate,UITableViewDataSource {
     func openStoryBoard (name : String,id : String) {
         
         let storyboard      = UIStoryboard(name: name, bundle: nil)
-        let vc              = storyboard.instantiateViewController(withIdentifier: id)
+        let vc              = storyboard.instantiateViewController(withIdentifier: id) as! ItemCompleteviewcontroller
+        vc.itemprimaryid    = 39
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
@@ -114,19 +152,23 @@ extension MenuItemViewController : UICollectionViewDelegate,UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return tagarray.count
+        return itemList[collectionView.tag].tagList?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "eventMenuTagCell", for: indexPath) as! EventTagCollectionCell
         
-        let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagarray[indexPath.row], fontname: "Avenir-Medium", size: 12)
-        
-        cell.tagnamelabel.text = tagarray[indexPath.row]
-        
-        cell.setLabelSize(size: textSize)
-        
+        if let tagItem = itemList[collectionView.tag].tagList {
+            
+            let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagItem[indexPath.row].text_str ?? "", fontname: "Avenir-Medium", size: 12)
+            
+            cell.tagnamelabel.text = tagItem[indexPath.row].text_str ?? ""
+            
+            cell.setLabelSize(size: textSize)
+            
+        }
+       
         
         return cell
         
@@ -134,11 +176,77 @@ extension MenuItemViewController : UICollectionViewDelegate,UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagarray[indexPath.row], fontname: "Avenir-Medium", size: 12)
+        if let tagItem = itemList[collectionView.tag].tagList {
+            
+            let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagItem[indexPath.row].text_str ?? "", fontname: "Avenir-Medium", size: 12)
+            
+            return CGSize(width: textSize.width+20, height: 22)
+            
+        }
         
-        return CGSize(width: textSize.width+20, height: 22)
+        return CGSize(width:0, height: 0)
     }
     
+    
+    
+}
+
+extension MenuItemViewController {
+    
+    func getItemList(pageno:Int,limit:Int) {
+        
+        LoadingHepler.instance.show()
+        
+        apiClient.getFireBaseToken(completion: { token in
+            
+            let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
+            let param  : String  = "page=\(pageno)&limit\(limit)"
+            
+            self.apiClient.getItemListByTagId(primaryid: self.primaryid, tagid: self.tag_id,type: self.itemType,page: param, headers: header, completion: { status,itemlists in
+                
+                if status == "success" {
+                    
+                    if let itemlist = itemlists {
+                        
+                        self.itemModel = itemlist
+                        
+                        if let list = itemlist.itemList {
+                            
+                            self.itemList += list
+                        }
+                    }
+                    
+                    DispatchQueue.main.async {
+                        
+                        LoadingHepler.instance.hide()
+                        self.menuItemTableview.reloadData()
+                        
+                    }
+                    
+                    
+                    
+                } else {
+                    
+                    LoadingHepler.instance.hide()
+                    DispatchQueue.main.async {
+                        
+                        self.menuItemTableview.reloadData()
+                        
+                    }
+                    
+                }
+                
+                
+            })
+            
+            
+        })
+        
+        
+    }
+    
+    
+   
     
     
 }

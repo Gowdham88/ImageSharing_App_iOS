@@ -13,6 +13,8 @@ import GooglePlaces
 import Alamofire
 import IQKeyboardManagerSwift
 import SwiftyJSON
+import Nuke
+
 
 class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,GMSAutocompleteViewControllerDelegate,UICollectionViewDelegateFlowLayout {
     var dropdownArray = [String] ()
@@ -20,6 +22,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     var tagArray = [String] ()
     var selectedIndex = Int()
     var autocompleteUrls = [String]()
+    var tagArrayList = [TagList]()
     
     @IBOutlet weak var cancelDatePicker: UIButton!
     @IBOutlet weak var addButton: UIButton!
@@ -36,6 +39,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var editButton: UIButton!
     @IBOutlet weak var profileImage: UIImageView!
+    
     
     @IBOutlet weak var nameTextfield: UITextField!
     @IBOutlet weak var emailaddress: UITextField!
@@ -84,6 +88,8 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     
     var tagidArray   = [Int]()
     var tagnamearray = [String]()
+    var token_str    : String = "empty"
+    var setdatebirth : Bool   = false
     
     // place autocomplete //
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
@@ -128,6 +134,8 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         Alert.view.isUserInteractionEnabled = true
         Alert.view.addGestureRecognizer(sampleTapGesture)
         IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
+        IQKeyboardManager.sharedManager().enableAutoToolbar = false
+
         //        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard (_:))as Selector)
         //        self.view.addGestureRecognizer(tapGesture)
         //
@@ -162,7 +170,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
 //        self.navigationController?.navigationBar.isUserInteractionEnabled = true
         
         citytableview.layer.shadowColor = UIColor.darkGray.cgColor
-        citytableview.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha:1.0)
+        citytableview.backgroundColor = UIColor.clear
         citytableview.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
         citytableview.layer.shadowOpacity = 2.0
         citytableview.layer.shadowRadius = 5
@@ -171,6 +179,8 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         citytableview.layer.masksToBounds = false
         
         dropdownTableView.layer.shadowColor = UIColor.darkGray.cgColor
+        dropdownTableView.backgroundColor = UIColor.clear
+
         dropdownTableView.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1.0)
         dropdownTableView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
         dropdownTableView.layer.shadowOpacity = 2.0
@@ -182,6 +192,10 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         // Checking users login
         /***********************Api login******************************/
         apiClient = ApiClient()
+        /************************getFirebaseToken*************************************/
+        getFirebaseToken()
+        setUserDetails()
+        
     }
     
     func navigationTap(){
@@ -363,6 +377,10 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
            showPopup(table1: true, table2: true)
         }else if textField == cityTextfield {
             showPopup(table1: false, table2: true)
+            self.datePickerValueChanged(sender: datePicker)
+            datePicker.isHidden = true
+            superVieww.isHidden = true
+            doneView.isHidden   = true
             
         }else if textField == genderTextfield {
             showPopup(table1: true, table2: true)
@@ -372,7 +390,11 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         }else if textField == foodTextfield {
              showPopup(table1: true, table2: false)
         }else{
-             showPopup(table1: true, table2: true)
+            showPopup(table1: true, table2: true)
+            self.datePickerValueChanged(sender: datePicker)
+            datePicker.isHidden = true
+            superVieww.isHidden = true
+            doneView.isHidden   = true
         }
     }
     
@@ -381,21 +403,29 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         focusEdittext(textfield: textField,focus: false)
         
         if textField == usernameTextField {
-            let parameters: Parameters = ["checkusername": usernameTextField.text!]
-            let userNameRequest: ApiClient = ApiClient()
-            userNameRequest.usernameexists(parameters: parameters, completion:{status, Exists in
-                if Exists == true {
-                    print("the username already exists")
-                }else{
-                    print("the username available")
-                }
-            })
+            
+            if let userNamefield = textField.text,userNamefield != PrefsManager.sharedinstance.username {
+                
+                let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
+                apiClient.usernameexists(parameters: userNamefield,headers: header, completion:{status, Exists in
+                    if Exists == true {
+                        
+                        print("the username already exists")
+                        AlertProvider.Instance.showAlert(title: "Hey!", subtitle: "Username already exists", vc: self)
+                        
+                    } else {
+                        
+                        print("the username available")
+                        
+                        
+                    }
+                })
+                
+            }
+            
+           
         }
-        if textField == foodTextfield || textField == birthTextfield {
-            foodTextfield.text = ""
-            animateViewMoving(up: false, moveValue: 0)
-            showPopup(table1: true, table2: true)
-        }
+        
         if textField == birthTextfield {
             self.datePickerValueChanged(sender: datePicker)
             datePicker.isHidden = true
@@ -404,6 +434,11 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         }
         if textField == genderTextfield {
             genderTextfield.tintColor = .clear
+        }
+        if textField == foodTextfield {
+            
+            foodTextfield.text = ""
+            
         }
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -454,9 +489,15 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         let month: String = dateFormatter.string(from: self.datePicker.date)
         dateFormatter.dateFormat = "dd"
         let day: String = dateFormatter.string(from: self.datePicker.date)
-        dateLabel.text = day
-        monthLabel.text = month
-        yearLabel.text = year
+        
+        if setdatebirth {
+            
+            dateLabel.text = day
+            monthLabel.text = month
+            yearLabel.text = year
+            
+        }
+        
     }
     func addCollectionContainer(){
         let storyboard        = UIStoryboard(name: Constants.Auth, bundle: nil)
@@ -477,8 +518,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     }
     
     @IBAction func didTappedSave(_ sender: Any) {
-        upload(image: profileImage.image!, completion: { URL in
-        })
+      
         let Email:NSString = emailaddress.text! as NSString
         if nameTextfield.text == "" || emailaddress.text == ""  || cityTextfield.text == "" || genderTextfield.text == "" || usernameTextField.text == ""  {
             AlertProvider.Instance.showAlert(title: "Oops", subtitle: "Fields Cannot be empty", vc: self)
@@ -486,62 +526,28 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             if isValidEmail(testStr: Email as String) == true {
                 PrefsManager.sharedinstance.isLoginned = true
                 let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
-                let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
-                vc.delegate    = self
+                let vc         = storyboard.instantiateViewController(withIdentifier: "SettingsVC") as! SettingsViewController
+                vc.delegate    = self as? SettingsViewControllerDelegate
                 self.navigationController!.pushViewController(vc, animated: true)
-                let parameters: Parameters = ["username": usernameTextField.text!, "firstname":nameTextfield.text! , "lastname" : "" ,"firebaseuid" : "bIBh7fZXL1OP7NkGJIsPHucAPQA3" ,"dateofbirth": birthTextfield.text! , "gender": genderTextfield.text! ,"isbusinessuser": "0" , "email": emailaddress.text! ,  "citylocationid": "1", "createdby": "2" , "updatedby": "2" , "clientApp": "iosapp"  , "clientip": "765.768.7868.8888"  ]
-                let completeSignupApi: ApiClient = ApiClient()
-                completeSignupApi.completeSignup(parameters: parameters, completion:{status, Values in
-                    if status == "success" {
-                        print("Values from json:::::::",Values!)
-                    }else {
-                    }
-                })
+                
             }else {
                 AlertProvider.Instance.showAlert(title: "Oops", subtitle: "Please Enter Valid Email ID", vc: self)
             }
         }
     }
     
-    func upload(image: UIImage, completion: (URL?) -> Void) {
-        guard let data = UIImageJPEGRepresentation(image, 0.9) else {
-            return
-        }
-        Alamofire.upload(multipartFormData: { (form) in
-            form.append(data, withName: "file", fileName: "file.jpg", mimeType: "image/jpg")
-        }, to: "https://numnu-server-dev.appspot.com/users/1/images", encodingCompletion: { result in
-            switch result {
-            case .success(let upload, _, _):
-                upload.responseString { response in
-                    print(response.value)
-                }
-            case .failure(let encodingError):
-                print(encodingError)
-            }
-        })
-    }
+   
     
     // Image Picker //
     @IBAction func editPicture(_ sender: Any) {
         imagePicker.allowsEditing = false
         let Alert = UIAlertController(title: "Select Source Type", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
         let CameraAction = UIAlertAction(title: "Camera", style: UIAlertActionStyle.default) { ACTION in
-            if !UIImagePickerController.isSourceTypeAvailable(.camera){
-                let alertController = UIAlertController.init(title: nil, message: "Device has no camera.", preferredStyle: .alert)
-                let okAction = UIAlertAction.init(title: "Alright", style: .default, handler: {(alert: UIAlertAction!) in
-                })
-                alertController.addAction(okAction)
-                self.present(alertController, animated: true, completion: nil)
+            self.showCamera()
             }
-            else{
-                self.imagePicker.sourceType = .camera
-                self.present(self.imagePicker, animated: true, completion: nil)
-            }
-        }
+    
         let GalleryAction = UIAlertAction(title: "Gallery", style: UIAlertActionStyle.default) { ACTION in
-            
-            self.imagePicker.sourceType = .photoLibrary
-            self.present(self.imagePicker, animated: true, completion: nil)
+            self.showGallery()
         }
         let CancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) {_ in
         }
@@ -549,13 +555,66 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         Alert.addAction(GalleryAction)
         Alert.addAction(CancelAction)
         present(Alert, animated: true, completion: nil)
+    }
+    
+    
+    func showCamera() {
+        if(UIImagePickerController .isSourceTypeAvailable(.camera))
+        {
+            self.imagePicker.sourceType = .camera
+            self.imagePicker.delegate = self
+            
+        }
         present(imagePicker, animated: true, completion: nil)
+    }
+    func showGallery () {
+        if(UIImagePickerController .isSourceTypeAvailable(.photoLibrary))
+        {
+            self.imagePicker.sourceType = .photoLibrary
+            self.imagePicker.delegate = self
+            
+        }
+        self.present(self.imagePicker, animated: true, completion: nil)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.profileImage.contentMode = .scaleAspectFill
-            self.profileImage.image = pickedImage
+            
+            /***********************Image upload api*******************************/
+            getFirebaseToken()
+            self.uploadImage(image: pickedImage, id: PrefsManager.sharedinstance.userId, completion: { url in
+                
+                if let url_str = url {
+                    
+                   LoadingHepler.instance.show()
+                    
+                    let apiclient : ApiClient = ApiClient()
+                    apiclient.getFireBaseImageUrl(imagepath: url_str, completion: { url in
+                        
+                        LoadingHepler.instance.hide()
+                        
+                        if url != "empty" {
+                            
+                            PrefsManager.sharedinstance.imageURL = url_str
+                            Manager.shared.loadImage(with:URL(string:url)!, into: self.profileImage)
+                            
+                        } else {
+                            
+                            AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Image upload failed", vc: self)
+                            
+                        }
+                        
+                    })
+                    
+                } else {
+                    
+                    LoadingHepler.instance.hide()
+                    AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Image upload failed", vc: self)
+                }
+                
+                
+            })
         }
         dismiss(animated: true, completion: nil)
     }
@@ -609,7 +668,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagArray[indexPath.row], fontname: "Avenir-Book", size: 13)
-        return CGSize(width: textSize.width+50, height: 22)
+        return CGSize(width: textSize.width+30, height: 22)
     }
     func buttonClicked(sender: Any){
         let tag = (sender as AnyObject).tag
@@ -641,7 +700,13 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
                 cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
             }
             cell?.selectionStyle = .none
+            guard tagnamearray.count > 0 else {
+                
+                return cell!
+            }
             cell?.textLabel?.text = tagnamearray[indexPath.row]
+            dropdownTableView.transform = CGAffineTransform(scaleX: 1, y: -1)
+            cell?.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
             //            cell?.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1.0)
             cell?.textLabel?.textColor = UIColor(red: 129/255.0, green: 135/255.0, blue: 155/255.0, alpha: 1.0)
             
@@ -656,6 +721,12 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
                 cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
             }
             cell?.selectionStyle = .none
+            guard autocompleteplaceArray.count > 0 else {
+                
+                return cell!
+            }
+            citytableview.transform = CGAffineTransform(scaleX: 1, y: -1)
+            cell?.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
             //            cell?.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1.0)
             cell?.textLabel?.text = autocompleteplaceArray[indexPath.row]
             cell?.textLabel?.textColor = UIColor(red: 129/255.0, green: 135/255.0, blue: 155/255.0, alpha: 1.0)
@@ -678,22 +749,30 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let indexPath = dropdownTableView.indexPathForSelectedRow  {
-            let currentCell = dropdownTableView.cellForRow(at: indexPath)
-            dropdownString = (currentCell?.textLabel?.text)!
-            if tagArray.contains(dropdownString) {
-                print("already exist")
-            }else{
-                tagArray.append(dropdownString)
+        if tableView == dropdownTableView {
+            
+            if let indexPath = dropdownTableView.indexPathForSelectedRow  {
+                let currentCell = dropdownTableView.cellForRow(at: indexPath)
+                dropdownString = (currentCell?.textLabel?.text)!
+                if tagArray.contains(dropdownString) {
+                    print("already exist")
+                }else{
+                    tagArray.append(dropdownString)
+                }
+                collectionView.reloadData()
+                dropdownTableView.isHidden = true
+                foodTextfield.resignFirstResponder()
             }
-            collectionView.reloadData()
-            dropdownTableView.isHidden = true
-            foodTextfield.resignFirstResponder()
-        } else if let indexPath = citytableview.indexPathForSelectedRow  {
-            let currentCell = citytableview.cellForRow(at: indexPath)
-            cityTextfield.text = (currentCell?.textLabel?.text)!
-            citytableview.isHidden = true
-            cityTextfield.resignFirstResponder()
+            
+        } else {
+            
+            if let indexPath = citytableview.indexPathForSelectedRow  {
+                let currentCell = citytableview.cellForRow(at: indexPath)
+                cityTextfield.text = (currentCell?.textLabel?.text)!
+                citytableview.isHidden = true
+                cityTextfield.resignFirstResponder()
+                
+            }
             
         }
     }
@@ -716,12 +795,14 @@ extension SettingsEdit_ProfieViewController : Profile_PostViewControllerDelegae 
 extension SettingsEdit_ProfieViewController {
     
     func loadTagList(tag : String) {
+        
         tagidArray.removeAll()
         tagnamearray.removeAll()
         let parameters : Parameters = ["beginWith" : tag]
-        let header     : HTTPHeaders = ["Accept-Language" : "en-US"]
+        let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
         apiClient.getTagsApi(parameters: parameters, headers: header, completion: { status,taglist in
             if status == "success" {
+                
                 if let tagList = taglist {
                     if tagList.id != nil {
                         self.tagidArray = tagList.id!
@@ -733,16 +814,28 @@ extension SettingsEdit_ProfieViewController {
                         self.dropdownTableView.reloadData()
                     }
                 }
+                
             } else {
+                
                 DispatchQueue.main.async {
                     self.dropdownTableView.reloadData()
                 }
+                
             }
         })
+        
     }
     
+    func getFirebaseToken() {
+        
+        apiClient.getFireBaseToken(completion:{ token in
+            
+            self.token_str = token
+            
+        })
+        
+    }
    
-    
     func focusEdittext(textfield : UITextField,focus:Bool) {
        
         switch textfield {
@@ -817,7 +910,12 @@ extension SettingsEdit_ProfieViewController {
                             for item in place_dic {
                                 
                                 let placeName = item["description"].string ?? "empty"
-                                self.autocompleteplaceArray.append(placeName)
+                                
+                                if self.autocompleteplaceArray.count < 6 {
+                                    
+                                    self.autocompleteplaceArray.append(placeName)
+                                }
+                                
                                 
                             }
                             
@@ -848,11 +946,152 @@ extension SettingsEdit_ProfieViewController {
         
     }
     
-    func showPopup(table1: Bool,table2 : Bool){
+    func showPopup(table1: Bool,table2 : Bool) {
         
         citytableview.isHidden      = table1
         dropdownTableView.isHidden  = table2
         
+        if table1 == false || table2 == false {
+            
+            self.datePickerValueChanged(sender: datePicker)
+            datePicker.isHidden = true
+            superVieww.isHidden = true
+            doneView.isHidden = true
+            
+        }
+   
     }
+    
+    /*********************************setuserdetails********************************************/
+
+    
+    func setUserDetails() {
+        
+        nameTextfield.text = PrefsManager.sharedinstance.name
+        emailaddress.text  = PrefsManager.sharedinstance.userEmail
+        cityTextfield.text = PrefsManager.sharedinstance.userCity
+        descriptionTextField.text = PrefsManager.sharedinstance.description
+        usernameTextField.text    = PrefsManager.sharedinstance.username
+        
+        if PrefsManager.sharedinstance.gender == 0 {
+            
+            genderTextfield.text = "Male"
+            
+        } else {
+            
+             genderTextfield.text = "Female"
+            
+        }
+        
+            let date = DateFormatterManager.sharedinstance.stringtoDate(format: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", date: PrefsManager.sharedinstance.dateOfBirth)
+            
+            if let dateStr = DateFormatterManager.sharedinstance.datetoString(format: "dd", date: date) {
+                
+                dateLabel.text = dateStr
+                
+            }
+            
+            if let monthStr = DateFormatterManager.sharedinstance.datetoString(format: "MM", date: date) {
+                
+                monthLabel.text = monthStr
+                
+            }
+            
+            if let yearStr = DateFormatterManager.sharedinstance.datetoString(format: "yyyy", date: date) {
+                
+                yearLabel.text = yearStr
+                
+            }
+        
+            let apiclient : ApiClient = ApiClient()
+            apiclient.getFireBaseImageUrl(imagepath: PrefsManager.sharedinstance.imageURL, completion: { url in
+            
+            if url != "empty" {
+                
+                Manager.shared.loadImage(with:URL(string:url)!, into: self.profileImage)
+                
+            }
+            
+           })
+        
+        /**************/
+        tagArray.removeAll()
+        tagArrayList = PrefsManager.sharedinstance.tagList
+        if tagArrayList.count > 0 {
+            
+            for item in tagArrayList {
+                
+                if let tagName = item.text_str {
+                    
+                    tagArray.append(tagName)
+                    
+                }
+                
+            }
+            
+            collectionView.reloadData()
+            
+          }
+        
+        /**********/
+        
+     }
+    
+    func uploadImage(image: UIImage,id : Int, completion:@escaping (String?) -> Void) {
+        
+        guard let data = UIImageJPEGRepresentation(image, 0.9) else {
+            return
+        }
+        
+        let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
+        
+        LoadingHepler.instance.show()
+        
+        Alamofire.upload(multipartFormData: { (form) in
+            
+            form.append(data, withName: "file", fileName: "file.jpg", mimeType: "image/jpg")
+            
+        }, to: "https://numnu-server-dev.appspot.com/users/\(id)/images",method: .post, headers: header,encodingCompletion: { result in
+            switch result {
+            case .success(let upload, _, _):
+                upload.responseString { response in
+                    print(response.value ?? "dsdks")
+                    
+                }
+                upload.responseJSON { response in
+                    
+                    LoadingHepler.instance.hide()
+                    
+                    if let value = response.result.value {
+                        
+                        let json = JSON(value)
+                        
+                        if let imageurl = json["imageurl"].string {
+                            
+                            completion(imageurl)
+                            
+                        } else {
+                            
+                            completion(nil)
+                        }
+                        
+                        
+                    } else {
+                        
+                        completion(nil)
+                        
+                    }
+                    
+                }
+                
+            case .failure(let encodingError):
+                print(encodingError)
+                completion(nil)
+                LoadingHepler.instance.hide()
+            }
+        })
+    }
+    
+    
 }
 

@@ -13,7 +13,7 @@ struct  UserList {
 
     var tagList            :   [TagList]?
     var imgList            :   [ImgList]?
-    var locList            :   [LocList]?
+    var locItem            :   LocList?
     
     var id                 :    Int?
     var username           :    String?
@@ -25,7 +25,7 @@ struct  UserList {
     var email              :    String?
     var isemailverified    :    String?
     var isbusiness         :    Int?
-    var businessusername   :    String?
+    var name               :    String?
     var businessuserphone  :    String?
     var businessdescription:    String?
     var createdat          :    String?
@@ -33,9 +33,9 @@ struct  UserList {
     var createdby          :    String?
     var updatedby          :    String?
     var businessuseraddresslocationid: String?
-
     
-    
+    var errormessage : String?
+  
     init?(json: JSON) {
         if let id = json["id"].int {
             
@@ -70,9 +70,11 @@ struct  UserList {
             
         }
         
-        if let citylocationid = json["citylocationid"].int {
+        let jsoncity = JSON(json["citylocation"])
+        if let citylocation = LocList(array: jsoncity) {
             
-            self.citylocationid = citylocationid
+            self.locItem = citylocation
+            
         }
         
         if let email = json["email"].string {
@@ -90,9 +92,9 @@ struct  UserList {
             self.isbusiness = isbusiness
             
         }
-        if let businessusername = json["businessusername"].string {
+        if let name = json["name"].string {
             
-            self.businessusername = businessusername
+            self.name = name
             
         }
         if let businessuserphone = json["businessuserphone"].string {
@@ -130,8 +132,14 @@ struct  UserList {
             self.updatedby = updatedby
             
         }
+        
+        if let message = json["message"].string {
+            
+            self.errormessage = message
+            
+        }
     
-  //  ****************************************** image *********************************************************
+  /****************************************** image *********************************************************/
         
         if let imgArray = json["userimages"].array {
           
@@ -146,7 +154,7 @@ struct  UserList {
             }
         }
 
-//  ****************************************** tag *********************************************************
+   /****************************************** tag *********************************************************/
         if let tagArray = json["tags"].array {
             
             for item in tagArray {
@@ -160,21 +168,8 @@ struct  UserList {
                 
             }
         }
-//  ****************************************** location *********************************************************
-        
-        if let locArray = json["citylocation"].array {
-            
-            for item in locArray {
-                
-                let locItem = LocList(array: item)
-                if locList == nil {
-                    locList = []
-                }
-                locList?.append(locItem)
-                
-                }
-            }
-        
-         }
+ 
     
       }//class
+
+}

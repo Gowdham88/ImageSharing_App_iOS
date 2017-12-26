@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Nuke
 
 class PostDetailViewController : UIViewController {
     
@@ -22,8 +23,9 @@ class PostDetailViewController : UIViewController {
     @IBOutlet weak var postDEventName: UILabel!
     @IBOutlet weak var postDEventPlace: UILabel!
     @IBOutlet weak var postDEventDishLabel: UILabel!
-    
-    
+    @IBOutlet var itemTap: ImageExtender!
+    @IBOutlet var businessTap: ImageExtender!
+    @IBOutlet var eventTap: ImageExtender!
     @IBOutlet weak var dishwidthDConstaint: NSLayoutConstraint!
     @IBOutlet weak var placeWidthDConstraint: NSLayoutConstraint!
     @IBOutlet weak var dishRightDLayoutConstraint: NSLayoutConstraint!
@@ -33,6 +35,8 @@ class PostDetailViewController : UIViewController {
     @IBOutlet weak var alertView: UIView!
     @IBOutlet weak var navigationItemList: UINavigationItem!
     var window : UIWindow?
+    var coverView : UIView?
+    var item : PostListDataItems?
     
     @IBOutlet weak var eventTopHeight: NSLayoutConstraint!
     @IBOutlet weak var alertviewBottomConstraints: NSLayoutConstraint!
@@ -45,7 +49,6 @@ class PostDetailViewController : UIViewController {
         alertviewBottomConstraints.constant = self.view.frame.height + 600
         alertViewHide.alpha = 0
         alertTapRegister()
-        
 
         let tap = UITapGestureRecognizer(target: self, action: #selector(PostDetailViewController.imageTapped))
         postDEventImage.addGestureRecognizer(tap)
@@ -59,14 +62,33 @@ class PostDetailViewController : UIViewController {
         postDEventDishLabel.addGestureRecognizer(posteventdishlabeltap)
         postDEventDishLabel.isUserInteractionEnabled = true
         
+        
+        let userEventTap = UITapGestureRecognizer(target: self, action: #selector(PostDetailViewController.userEventTap))
+        eventTap.addGestureRecognizer(userEventTap)
+        eventTap.isUserInteractionEnabled = true
+        
         let posteventlabeltap = UITapGestureRecognizer(target: self, action: #selector(PostDetailViewController.posteventlabeltap))
         postDEventName.addGestureRecognizer(posteventlabeltap)
         postDEventName.isUserInteractionEnabled = true
+        
+        let userBusiTap = UITapGestureRecognizer(target: self, action: #selector(PostDetailViewController.userBusiTap))
+        businessTap.addGestureRecognizer(userBusiTap)
+        businessTap.isUserInteractionEnabled = true
+        
+        
+        let userItemTap = UITapGestureRecognizer(target: self, action: #selector(PostDetailViewController.userItemTap))
+        itemTap.addGestureRecognizer(userItemTap)
+        itemTap.isUserInteractionEnabled = true
+        
         
         let userimagetap = UITapGestureRecognizer(target: self, action: #selector(PostDetailViewController.postDUserImagetap))
         postDUserImage.addGestureRecognizer(userimagetap)
         postDUserImage.isUserInteractionEnabled = true
         // Do any additional setup after loading the view.
+        
+        let profileusernametagtap = UITapGestureRecognizer(target: self, action:#selector(PostDetailViewController.postDUserImagetap))
+        postDUserplaceLabbel.addGestureRecognizer(profileusernametagtap)
+        postDUserplaceLabbel.isUserInteractionEnabled = true
         
         if (postDEventDishLabel.numberOfVisibleLines > 1) {
             
@@ -79,10 +101,103 @@ class PostDetailViewController : UIViewController {
             eventTopHeight.constant = 52
             
         }
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = false
         self.tabBarController?.tabBar.isHidden = false
+        
+        getData()
+    }
+    func getData() {
+
+        if let posttag = item?.postcreator {
+                if let postuser = posttag.name {
+                self.postDUsernameLabel.text! = postuser
+            
+                }
+            if let postusername = posttag.username {
+                self.postDUserplaceLabbel.text! = "@\(postusername)"
+                
+            }
+            
+                if let userimageList = posttag.userimages {
+            
+                    if userimageList.count > 0 {
+            
+                            let apiclient = ApiClient()
+                                    apiclient.getFireBaseImageUrl(imagepath: userimageList[userimageList.count-1].imageurl_str!, completion: { url in
+            
+                            self.postDUserImage.image = nil
+                                        Manager.shared.loadImage(with: URL(string : url)!, into: self.postDUserImage)
+            
+                                    })
+            
+                                }
+            
+                            }
+            
+                    }
+//                        if let location = item.location{
+//                            if let locationame = location.name_str {
+//                                self.postDUserplaceLabbel.text = locationame
+//            
+//                            }
+//                        }
+        
+        
+                        if let postimagelist = item?.postimages {
+            
+                            if postimagelist.count > 0 {
+            
+                                let apiclient = ApiClient()
+                                apiclient.getFireBaseImageUrl(imagepath: postimagelist[postimagelist.count-1].imageurl_str!, completion: { url in
+            
+                                   self.postDEventImage.image = nil
+                                    Manager.shared.loadImage(with: URL(string : url)!, into: self.postDEventImage)
+                                })
+            
+                            }
+            
+                        }
+        
+                        if let rating = item?.rating {
+                            if rating == 1 {
+                                postDLikeImage.image = UIImage(named:"rating1")
+                                
+                            }else if rating == 2 {
+                                postDLikeImage.image = UIImage(named:"rating2")
+                            }else if rating == 3 {
+                                postDLikeImage.image = UIImage(named:"rating3")
+                                
+                            }else{
+                                
+                            }
+
+            
+                        }
+        
+                        if let event = item?.event{
+                            if let eventname = event.name  {
+                                print("postDEventName is",eventname)
+                                self.postDEventName.text = eventname
+            
+                            }
+                        }
+        
+                        if let business = item?.business{
+                            if let businessname = business.businessname  {
+                                self.postDEventDishLabel.text = businessname
+                            }
+                        }
+        
+                        if let taggeditem = item?.taggedItemName  {
+                            self.postDEventPlace.text = taggeditem
+                        }
+        
+                        if let commentname = item?.comment  {
+                            self.postDCommentLabel.text = commentname
+                        }
     }
     func postDUserImagetap(){
         
@@ -98,7 +213,16 @@ class PostDetailViewController : UIViewController {
         let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId)
         self.navigationController!.pushViewController(vc, animated: true)
     }
-   
+    
+    func userItemTap(){
+        
+        let storyboard = UIStoryboard(name: Constants.ItemDetail, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId)
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
+    
+    
+   //business page
     func posteventdishlabeltap(){
         
         let storyboard = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
@@ -106,15 +230,33 @@ class PostDetailViewController : UIViewController {
         self.navigationController!.pushViewController(vc, animated: true)
     }
     
+    //Event tap icon
+    func userEventTap(){
+        
+        let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
+    //Event page ..
     func posteventlabeltap(){
         let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)
         self.navigationController!.pushViewController(vc, animated: true)
        
     }
+    //business tap icon
+    func userBusiTap(){
+        let storyboard = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId)
+        self.navigationController!.pushViewController(vc, animated: true)
+        
+    }
     func imageTapped() {
+        
+//        self.postDEventImage.image = item.postimages
         let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: "PostImageZoomViewController")
+        let vc         = storyboard.instantiateViewController(withIdentifier: "PostImageZoomViewController") as! PostImageZoomViewController
+        vc.imagePassed = postDEventImage.image as! UIImage
         self.navigationController?.present(vc, animated: true, completion: nil)
     }
     override func didReceiveMemoryWarning() {
@@ -127,10 +269,10 @@ class PostDetailViewController : UIViewController {
         openPopup()
     }
     
-    
+    }
    
 
-}
+//}
 
 
 extension PostDetailViewController {
@@ -157,6 +299,7 @@ extension PostDetailViewController {
         // Create two buttons for the navigation item
         navigationItemList.leftBarButtonItem  = leftButton
         navigationItemList.rightBarButtonItem = rightButton
+        
         
         
     }
@@ -219,7 +362,7 @@ extension PostDetailViewController {
     
     func closePopup(sender : UITapGestureRecognizer) {
         
-        self.alertViewHide.alpha                 = 1
+        alertViewHide.alpha = 0
         
         UIView.animate(withDuration: 2, animations: {
             
@@ -234,7 +377,7 @@ extension PostDetailViewController {
     
     func openPopup() {
         
-         self.alertViewHide.alpha   = 0
+         alertViewHide.alpha = 1
         
         UIView.animate(withDuration: 2, animations: {
             
@@ -282,6 +425,7 @@ extension PostDetailViewController {
         }
         
     }
+    
     
     
 }

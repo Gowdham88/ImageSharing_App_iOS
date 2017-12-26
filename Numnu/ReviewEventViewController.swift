@@ -8,8 +8,10 @@
 
 import UIKit
 import XLPagerTabStrip
+import SwiftyJSON
+import Alamofire
 
-protocol ReviewEventViewControllerDelegate{
+protocol ReviewEventViewControllerDelegate {
     
     func popupClick()
     func postTableHeight(height : CGFloat)
@@ -17,11 +19,19 @@ protocol ReviewEventViewControllerDelegate{
 
 class ReviewEventViewController: UIViewController,IndicatorInfoProvider {
     
-    
+    var apiClient     : ApiClient!
+    var token_str     : String = "empty"
+    var postList = [PostListDataItems]()
+    var postModel  : PostListByEventId?
+    var pageno  : Int = 1
+    var limitno : Int = 25
+
     @IBOutlet weak var postEventTableview: UITableView!
     var window : UIWindow?
     var popdelegate : ReviewEventViewControllerDelegate?
     var viewState       : Bool = false
+    var primaryid       : Int = 34
+    var apiType         : String = "Event"
     
     @IBOutlet weak var businesslabelwidth: NSLayoutConstraint!
     override func viewDidLoad() {
@@ -31,14 +41,86 @@ class ReviewEventViewController: UIViewController,IndicatorInfoProvider {
         postEventTableview.dataSource = self
         postEventTableview.isScrollEnabled = false
         
+        let when = DispatchTime.now() + 1
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            
+             self.popdelegate?.postTableHeight(height: self.postEventTableview.contentSize.height)
+        }
+        apiClient = ApiClient()
+        
+        if apiType == "Item" || apiType == "Location" {
+            
+            methodToCallApi(pageno: pageno, limit: limitno)
+        }
+      
     }
+
+    func methodToCallApi(pageno:Int,limit:Int){
+        
+        LoadingHepler.instance.show()
+        apiClient.getFireBaseToken(completion: { token in
+        
+        let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
+        let param  : String  = "page=\(pageno)&limit\(limit)"
+
+            self.apiClient.getPostList(id: self.primaryid, page: param, type: self.apiType, headers: header, completion: { status,Values in
     
+                    if status == "success" {
+                        
+                        if let itemlist = Values {
+                            
+                            self.postModel = itemlist
+                            
+                            if let list = itemlist.data {
+                                
+                                self.postList += list
+                            }
+                            
+                        }
+                        
+                        DispatchQueue.main.async {
+                           
+                            self.postEventTableview.reloadData()
+                            print("APi\(self.postList.count)")
+                        }
+                        
+                        self.reloadTable()
+                    
+                    }else {
+                        
+                        LoadingHepler.instance.hide()
+                        self.reloadTable()
+                        
+            }
+                
+           
+            })
+        })
+        
+        
+    }
+    func reloadTable() {
+        
+        let when = DispatchTime.now() + 1
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            
+             self.popdelegate?.postTableHeight(height: self.postEventTableview.contentSize.height)
+             LoadingHepler.instance.hide()
+        }
+        
+    }
+   
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
-       viewState = true
-       postEventTableview.reloadData()
-        
+        viewState = true
+        postList.removeAll()
+        postEventTableview.reloadData()
+        pageno  = 1
+        limitno = 25
+        methodToCallApi(pageno: pageno, limit: limitno)
+       
+      
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,7 +138,7 @@ extension ReviewEventViewController : UITableViewDelegate,UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 6
+        return postList.count
         
     }
     
@@ -64,14 +146,36 @@ extension ReviewEventViewController : UITableViewDelegate,UITableViewDataSource 
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "postEventCell", for: indexPath) as! postEventDetailTableViewCell
         
+        guard postList.count > 0 else {
+            
+            return cell
+        }
+        
         cell.delegate = self
+        cell.item = postList[indexPath.row]
         cell.postDtEventBookMark.tag = indexPath.row
         cell.setHeight(heightview : Float(UIScreen.main.bounds.size.height))
         
-        let posteventImagetap = UITapGestureRecognizer(target: self, action: #selector(getter: postEventDetailTableViewCell.postDtEventImage))
+        let posteventImagetap = UITapGestureRecognizer(target: self, action: #selector(postDtEventImages(sender:)))
         cell.postDtEventImage.addGestureRecognizer(posteventImagetap)
+        cell.postDtEventImage.tag = indexPath.row
         cell.postDtEventImage.isUserInteractionEnabled = true
         
+        //icon tap dish
+        let itemImageTap = UITapGestureRecognizer(target: self, action: #selector(getter: postEventDetailTableViewCell.itemImageTap))
+        cell.itemImageTap.addGestureRecognizer(itemImageTap)
+        cell.itemImageTap.isUserInteractionEnabled = true
+        
+        //icon business tap
+        let businessImageTap = UITapGestureRecognizer(target: self, action: #selector(getter: postEventDetailTableViewCell.businessImageTap))
+        cell.businessImageTap.addGestureRecognizer(businessImageTap)
+        cell.businessImageTap.isUserInteractionEnabled = true
+        
+        //icon event tap
+        let eventImageTap = UITapGestureRecognizer(target: self, action: #selector(getter: postEventDetailTableViewCell.eventImageTap))
+        cell.eventImageTap.addGestureRecognizer(eventImageTap)
+        cell.eventImageTap.isUserInteractionEnabled = true
+  
         let posteventplacetap = UITapGestureRecognizer(target: self, action:#selector(getter: postEventDetailTableViewCell.postDtEventPlace))
         cell.postDtEventPlace.addGestureRecognizer(posteventplacetap)
         cell.postDtEventPlace.isUserInteractionEnabled = true
@@ -92,57 +196,93 @@ extension ReviewEventViewController : UITableViewDelegate,UITableViewDataSource 
         cell.postDtUsernameLabel.addGestureRecognizer(profileusernametap)
         cell.postDtUsernameLabel.isUserInteractionEnabled = true
         
+        let profileusernametagtap = UITapGestureRecognizer(target: self, action:#selector(getter: postEventDetailTableViewCell.postDtUsernameLabel))
+        cell.postDtUserplaceLabbel.addGestureRecognizer(profileusernametagtap)
+        cell.postDtUserplaceLabbel.isUserInteractionEnabled = true
+        
         return cell
         
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-  //      openStoryBoard()
+  
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
+
         if TextSize.sharedinstance.getNumberoflines(text: Constants.dummy, width: tableView.frame.width, font: UIFont(name: "Avenir-Book", size: 16)!) > 1 {
-            
+
             return 428
-            
+
         } else {
-            
+
             return 402
         }
-        
+
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        let lastRowIndex = tableView.numberOfRows(inSection: 0)
-        if indexPath.row == lastRowIndex - 1 && viewState {
+        if indexPath.row == postList.count - 1 && viewState {
             
-            popdelegate?.postTableHeight(height: postEventTableview.contentSize.height)
-            viewState = false
+            if let pageItem = postModel {
+                
+                if postList.count  < pageItem.totalRows ?? 0 {
+                    pageno += 1
+                    limitno = 25 * pageno
+                    methodToCallApi(pageno: pageno, limit: limitno)
+                }
+                
+            }
+            
         }
     }
    
-    func postDtEventImage() {
+    func postDtEventImages(sender: UITapGestureRecognizer) {
+        var tag        = sender.view!.tag
         let storyboard = UIStoryboard(name: Constants.PostDetail, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: "postdetailid")
+        let vc         = storyboard.instantiateViewController(withIdentifier: "postdetailid") as! PostDetailViewController
+        vc.item        = postList[tag]
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
-    func postDtEventPlace(){
+    func postDtEventPlace() {
         let storyboard = UIStoryboard(name: Constants.ItemDetail, bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId)
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
+    func itemImageTap(){
+            let storyboard = UIStoryboard(name: Constants.ItemDetail, bundle: nil)
+            let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId)
+            self.navigationController!.pushViewController(vc, animated: true)
+        
+    }
+    
     func postDtEventDishLabel(){
         let storyboard = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId)
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
+    
+    
+    func businessImageTap(){
+        let storyboard = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId)
+        self.navigationController!.pushViewController(vc, animated: true)
+        
+    }
     func postDtEventName(){
+        
+        let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
+    
+    
+    func eventImageTap(){
         
         let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)
@@ -226,4 +366,5 @@ extension ReviewEventViewController : postEventDetailTableViewCellDelegate {
         self.present(optionMenu, animated: true, completion: nil)
         
     }
+    
 }

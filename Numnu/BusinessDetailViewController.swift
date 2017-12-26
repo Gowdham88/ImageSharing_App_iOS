@@ -8,7 +8,8 @@
 
 import UIKit
 import XLPagerTabStrip
-
+import Nuke
+import Alamofire
 
 
 
@@ -31,7 +32,7 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
     @IBOutlet weak var mainContainerViewBottom: NSLayoutConstraint!
     @IBOutlet weak var mainContainerView: NSLayoutConstraint!
     
-    var tagarray = ["Festival","Wine","Party","Rum","Barbaque","Pasta","Sandwich","Burger"]
+    var tagarray = [String]()
     
     /***************contraints***********************/
     
@@ -45,6 +46,11 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
     /***************Read more variable*********************/
     
     var isLabelAtMaxHeight = false
+    
+    var token_str     : String = "empty"
+    var apiClient     : ApiClient!
+    var description_txt : String = ""
+    var businessprimaryid : Int  = 50
     
 
     override func viewDidLoad() {
@@ -84,28 +90,12 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
         
         tapRegistration()
         alertTapRegister()
+        myscrollView.isHidden = true
         
-        tagViewUpdate()
-        
-        eventDescriptionLabel.text = Constants.dummy
-        
-        /****************Checking number of lines************************/
-        
-        if (eventDescriptionLabel.numberOfVisibleLines > 4) {
-            
-            readMoreButton.isHidden = false
-            
-            
-        } else {
-            
-            readMoreButton.isHidden = true
-            containerViewTop.constant = 8
-            busDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
-            
-        }
+        apiClient = ApiClient()
+        getFirebaseToken()
         
        
-
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -137,7 +127,7 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
             
             readMoreButton.setTitle("less", for: .normal)
             isLabelAtMaxHeight = true
-            busDescriptionHeight.constant   = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
+            busDescriptionHeight.constant   = TextSize.sharedinstance.getLabelHeight(text: description_txt, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
             
             
         }
@@ -154,10 +144,21 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
         
         let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid2) as! MenuEventViewController
         child_1.menuDelegate = self
+        child_1.itemType     = "Business"
+        child_1.primayId     = businessprimaryid
+        
         let child_2 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3) as! ReviewEventViewController
         child_2.popdelegate = self
+        child_2.apiType     = "Business"
+        child_2.primaryid   = businessprimaryid
         return [child_1, child_2]
         
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        reloadStripView()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -279,7 +280,8 @@ extension BusinessDetailViewController {
     func openStoryBoard () {
         
         let storyboard      = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
-        let vc              = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId)
+        let vc              = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId) as! BusinessCompleteViewController
+        vc.businessprimaryid = 50
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
@@ -347,3 +349,114 @@ extension BusinessDetailViewController : MenuEventViewControllerDelegate {
     }
     
 }
+
+extension BusinessDetailViewController {
+    
+    func getFirebaseToken() {
+        
+        apiClient.getFireBaseToken(completion:{ token in
+            
+            self.token_str = token
+            self.MethodToCallApi()
+            
+        })
+        
+    }
+    func MethodToCallApi(){
+      
+       LoadingHepler.instance.show()
+        
+        let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
+        
+        apiClient.getBusinessById(id : self.businessprimaryid,headers: header, completion: { status,Values in
+            
+            if status == "success" {
+                if let response = Values {
+                    
+                   LoadingHepler.instance.hide()
+                    
+                    DispatchQueue.main.async {
+                        
+                        self.getDetails(response:response)
+                        
+                    }
+                    
+                }
+                
+            } else {
+                print("json respose failure:::::::")
+                LoadingHepler.instance.hide()
+                DispatchQueue.main.async {
+                    
+                    self.myscrollView.isHidden = true
+                    
+                }
+                
+            }
+        })
+    }
+    func getDetails(response:BusinessDetailModel) {
+        
+        if let name = response.businessname {
+            busTitleLabel.text = name
+        }
+        
+        if let description = response.businessdescription {
+            eventDescriptionLabel.text = description
+        }
+        
+        
+        
+        if let taglist = response.taglist {
+            if taglist.count > 0 {
+                for item in taglist {
+                    if let tagname = item.text_str {
+                        tagarray.append(tagname)
+                    }
+                }
+                tagViewUpdate()
+            }
+        }
+        
+        
+        if let imglist = response.imagelist {
+            if imglist.count > 0 {
+                if let url = imglist[imglist.count-1].imageurl_str {
+                    
+                    apiClient.getFireBaseImageUrl(imagepath: url, completion: { imageUrl in
+                        
+                        if imageUrl != "empty" {
+                            
+                            Manager.shared.loadImage(with: URL(string : imageUrl)!, into: self.busImageView)
+                        }
+                        
+                    })
+                    
+                    
+                }
+            }
+        }
+        
+        /****************Checking number of lines************************/
+        
+        if (eventDescriptionLabel.numberOfVisibleLines > 4) {
+            
+            readMoreButton.isHidden = false
+            
+        } else {
+            
+            readMoreButton.isHidden   = true
+            containerViewTop.constant = 8
+            
+            if let description = response.businessdescription {
+                busDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: description, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
+                description_txt = description
+            }
+            
+            
+        }
+        
+        self.myscrollView.isHidden = false
+    }
+}
+

@@ -16,9 +16,10 @@ class EventMapViewController: UIViewController {
     var mapView: GMSMapView!
     var zoomLevel: Float = 15.0
     @IBOutlet weak var navigationItemList: UINavigationItem!
-    
-    var latitude   : CLLocationDegrees = 45.511278
-    var longtitude : CLLocationDegrees = -73.565778
+    var myDouble = Double(MyVariables.fetchedLat)
+
+    var latitude   : CLLocationDegrees = (MyVariables.fetchedLat as NSString).doubleValue
+    var longtitude : CLLocationDegrees = (MyVariables.fetchedLong as NSString).doubleValue
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,8 +41,6 @@ class EventMapViewController: UIViewController {
         }
     
         self.tabBarController?.tabBar.isHidden = true
-        
-        
      
         // Do any additional setup after loading the view.
     }
@@ -129,7 +128,7 @@ extension EventMapViewController: CLLocationManagerDelegate {
             let marker = GMSMarker()
             marker.position = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
             marker.appearAnimation = .pop
-            marker.title = "Current location"
+            marker.title = MyVariables.markerTitle
             marker.snippet = ""
             marker.map = self.mapView
             

@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import Nuke
+import FBSDKLoginKit
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 //var itemArray :Array = String
 var itemArray = [String]()
@@ -26,10 +30,12 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     @IBOutlet weak var topHeaderView: UIView!
     @IBOutlet var navigationItemList: UINavigationItem!
     
+    @IBOutlet weak var usernamelabel: UILabel!
     @IBOutlet var editButton: UIButton!
     @IBOutlet var profileImageview: UIImageView!
     @IBOutlet var settingsTableView: UITableView!
     var delegate : SettingsViewControllerDelegate?
+    var tagArray = [TagList]()
     override func viewDidLoad() {
         super.viewDidLoad()
        setNavBar()
@@ -47,6 +53,8 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         itemArray = ["Share the app","Rate the app","Terms of service","Privacy policy"]
         itemArray2 = ["Events","Business","Items","Posts","Users","Logout"]
 //        topHeaderView.backgroundColor = UIColor(red: 216/255.0, green: 216/255.0, blue: 216/255.0, alpha: 1.0)
+        
+        setUserDetails()
 
     }
 
@@ -109,7 +117,11 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         
         if indexPath.section == 1 && indexPath.row == 5 {
             
+            DBProvider.Instance.firebaseLogout()
             delegate?.logout()
+            FBSDKLoginManager().logOut()
+            PrefsManager.sharedinstance.logoutprefences()
+            PrefsManager.sharedinstance.isLoginned = false
             _ = self.navigationController?.popToRootViewController(animated: true)
         }
         
@@ -156,42 +168,37 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         super.viewWillAppear(animated)
         // Hide the navigation bar on the this view controller
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        setUserDetails()
     }
     
     // Edit button Navigation //
     @IBAction func didTappedEdit(_ sender: Any) {
         
         delegate?.sendlogoutstatus()
-//      _ = self.navigationController?.popToRootViewController(animated: true)
-        
-        
-        
-        
+   
         let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: "SettingsEdit_ProfieViewController") as! SettingsEdit_ProfieViewController
         vc.show        = false
         self.navigationController!.pushViewController(vc, animated: true)
+ }
+   
+    func setUserDetails(){
         
-//        let controllers = self.navigationController?.viewControllers
-//        for vc in controllers! {
-//            if vc is Edit_ProfileVC {
-//                let aVC = Edit_ProfileVC()
-//                aVC.show = true
-//                _ = self.navigationController?.popToViewController(aVC, animated: true)
-//            }
-//        }
-//
- 
+        usernamelabel.text = PrefsManager.sharedinstance.username
+        
+        let apiclient : ApiClient = ApiClient()
+        apiclient.getFireBaseImageUrl(imagepath: PrefsManager.sharedinstance.imageURL, completion: { url in
+            
+            if url != "empty" {
+                
+                Manager.shared.loadImage(with:URL(string:url)!, into: self.profileImageview)
+                
+            }
+            
+            
+        })
+        
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     
     

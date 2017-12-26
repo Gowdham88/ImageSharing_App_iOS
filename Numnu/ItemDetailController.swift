@@ -8,6 +8,8 @@
 
 import UIKit
 import XLPagerTabStrip
+import Alamofire
+import Nuke
 
 class ItemDetailController : ButtonBarPagerTabStripViewController {
     
@@ -28,7 +30,9 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
     
     @IBOutlet weak var mainContainerViewBottom: NSLayoutConstraint!
     @IBOutlet weak var mainContainerView: NSLayoutConstraint!
-    var tagarray = ["Festival","Wine","Party"]
+    
+    var tagarray = [String]()
+    var entintyTagarray = [String]()
     
     /***************contraints***********************/
     
@@ -44,10 +48,17 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
     /***************Read more variable*********************/
     
     var isLabelAtMaxHeight = false
+    
+    /**********************************************/
+    
+    var apiClient : ApiClient!
+    var description_txt : String = ""
+    var itemprimaryid   : Int  = 39
 
     override func viewDidLoad() {
         settings.style.selectedBarHeight = 3.0
         settings.style.buttonBarItemFont = UIFont(name: "Avenir-Medium", size: 14)!
+        settings.style.buttonBarItemsShouldFillAvailiableWidth = true
         super.viewDidLoad()
         myscrollView.delegate = self
         settings.style.buttonBarBackgroundColor = .white
@@ -56,7 +67,7 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
          
         settings.style.buttonBarMinimumLineSpacing = 0
         settings.style.buttonBarItemTitleColor = .black
-        settings.style.buttonBarItemsShouldFillAvailiableWidth = true
+        
         settings.style.buttonBarLeftContentInset = 0
         settings.style.buttonBarRightContentInset = 0
         buttonBarView.selectedBar.backgroundColor = UIColor.appThemeColor()
@@ -67,10 +78,7 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
             newCell?.label.textColor = UIColor.appBlackColor()
             
         }
-//        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(ItemDetailController.navigationTap))
-//        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
-//        self.navigationController?.navigationBar.isUserInteractionEnabled = true
-        
+
         
         let centerImagetap = UITapGestureRecognizer(target: self, action: #selector(EventViewController.centerImagetap))
         ItImageView.addGestureRecognizer(centerImagetap)
@@ -83,25 +91,14 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
         
         tapRegistration()
         alertTapRegister()
-        tagViewUpdate()
-        entitytagUpdate()
+        myscrollView.isHidden = true
+      
+        /******************Api**************************/
         
-        ItDescriptionLabel.text = Constants.dummy
+        apiClient = ApiClient()
+        getItemIdApi()
         
-        /****************Checking number of lines************************/
-        
-        if (ItDescriptionLabel.numberOfVisibleLines > 4) {
-            
-            readMoreButton.isHidden = false
-            
-        } else {
-            
-            readMoreButton.isHidden         = true
-            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: ItDescriptionLabel.frame.width, font: ItDescriptionLabel.font)
-            containerViewTop.constant = 8
-        }
-        
-       
+      
 
         // Do any additional setup after loading the view.
     }
@@ -115,6 +112,12 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
         self.myscrollView.setContentOffset(offset, animated: true)
         
     }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        reloadStripView()
+    }
+    
     func centerImagetap(){
         
         let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
@@ -130,6 +133,7 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
         
         let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3) as! ReviewEventViewController
         child_1.popdelegate = self
+        child_1.apiType     = "Item"
         let child_2 = UIStoryboard(name: Constants.ItemDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid7)  as! LocationTabController
         child_2.locationdelegate = self
         let child_3 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1) as! EventTabController
@@ -151,7 +155,7 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
             
             readMoreButton.setTitle("less", for: .normal)
             isLabelAtMaxHeight = true
-            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: ItDescriptionLabel.frame.width, font: ItDescriptionLabel.font)
+            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: description_txt, width: ItDescriptionLabel.frame.width, font: ItDescriptionLabel.font)
            
         }
         
@@ -224,7 +228,7 @@ extension ItemDetailController {
         
         var expandableWidth : CGFloat = 0
         
-        for (i,text) in tagarray.enumerated() {
+        for (i,text) in entintyTagarray.enumerated() {
             
             let textLabel : UILabel = UILabel()
             let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: text, fontname: "Avenir-Medium", size: 12)
@@ -380,6 +384,196 @@ extension ItemDetailController : LocationTabControllerDelegate {
         mainContainerViewBottom.constant = 0
     }
   
+    
+}
+
+extension ItemDetailController {
+    
+    func getItemIdApi() {
+        
+        LoadingHepler.instance.show()
+        
+        apiClient.getFireBaseToken(completion: { token in
+            
+            let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
+            
+            self.apiClient.getItemById(id: self.itemprimaryid, headers: header, completion: { status,item in
+                
+                if status == "success" {
+                    
+                    LoadingHepler.instance.hide()
+                    
+                    if let itemlist = item {
+                        
+                        DispatchQueue.main.async {
+                            
+                            self.getItemDetails(item: itemlist)
+                        }
+                        
+                    }
+                   
+                    
+                } else {
+                    
+                    LoadingHepler.instance.hide()
+                    
+                    DispatchQueue.main.async {
+                        
+                       self.myscrollView.isHidden = true
+                    }
+                   
+                    
+                }
+                
+                
+            })
+            
+            
+        })
+        
+    }
+    
+    func getItemDetails(item : ItemList) {
+        
+        /****************Name************************/
+        
+        if let itemname = item.name {
+            
+            ItTitleLabel.text = itemname
+        
+        }
+        
+        /****************Imagee************************/
+        
+        if let imageList = item.itemImageList {
+            
+            if imageList.count > 0 {
+                
+                if let url = imageList[imageList.count-1].imageurl {
+                    
+                    apiClient.getFireBaseImageUrl(imagepath: url, completion: { imageUrl in
+                        
+                        if imageUrl != "empty" {
+                            
+                            Manager.shared.loadImage(with: URL(string : imageUrl)!, into: self.ItImageView)
+                        }
+                        
+                    })
+                    
+                    
+                }
+      
+                
+            }
+        }
+        
+        /****************Description************************/
+        
+        if let itemDes = item.description {
+            
+            ItDescriptionLabel.text = itemDes
+        }
+        
+        /****************Checking number of lines************************/
+        
+        if (ItDescriptionLabel.numberOfVisibleLines > 4) {
+            
+            readMoreButton.isHidden = false
+            
+        } else {
+            
+            readMoreButton.isHidden         = true
+            if let description = item.description {
+                eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: description, width: ItDescriptionLabel.frame.width, font: ItDescriptionLabel.font)
+                 description_txt = description
+            }
+            
+            containerViewTop.constant = 8
+        }
+        
+         /****************Tags************************/
+        
+        if let itemTag = item.tagList {
+            
+            if itemTag.count > 0 {
+                
+                tagarray.removeAll()
+                
+                for tag in itemTag {
+                    
+                    tagarray.append(tag.text_str ?? "")
+                    
+                }
+                
+                tagViewUpdate()
+                
+            }
+            
+            
+        }
+        
+        self.myscrollView.isHidden = false
+        
+        /****************Business Entity************************/
+        
+        if let entinty = item.businessEntity {
+            
+            if let entintyname = entinty.businessname {
+                
+                businessEntityNameLabel.text = entintyname
+            }
+            
+            if let itemTag = entinty.taglist {
+                
+                if itemTag.count > 0 {
+                    
+                    entintyTagarray.removeAll()
+                    
+                    for tag in itemTag {
+                        
+                        entintyTagarray.append(tag.text_str ?? "")
+                        
+                    }
+                    
+                    entitytagUpdate()
+                }
+                
+                
+            }
+            
+            
+            /****************Business Entity image************************/
+            
+            if let entintyimgaelist = entinty.imagelist {
+                
+                if entintyimgaelist.count > 0 {
+                    
+                    if let url = entintyimgaelist[entintyimgaelist.count-1].imageurl_str {
+                        
+                        apiClient.getFireBaseImageUrl(imagepath: url, completion: { imageUrl in
+                            
+                            if imageUrl != "empty" {
+                                
+                                Manager.shared.loadImage(with: URL(string : imageUrl)!, into: self.businessEntityImage)
+                            }
+                            
+                        })
+                        
+                        
+                    }
+                    
+                    
+                }
+                
+            }
+            
+            
+        }
+        
+        
+       
+    }
+    
     
 }
 

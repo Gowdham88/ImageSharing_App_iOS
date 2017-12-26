@@ -11,9 +11,9 @@ import FirebaseAuth
 import Firebase
 import FBSDKLoginKit
 import FBSDKCoreKit
-import PKHUD
 import FBSDKLoginKit
 import Alamofire
+import IQKeyboardManagerSwift
 
 var closed = String()
 
@@ -24,6 +24,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
     var credential: AuthCredential?
     var userprofilename : String = ""
     var userprofileimage : String = ""
+    var token_str : String = "empty"
 
     @IBOutlet weak var passwordReveal: UIButton!
     
@@ -49,13 +50,19 @@ class signInVC: UIViewController, UITextFieldDelegate {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
         self.view.addGestureRecognizer(tapGesture)
         // Do any additional setup after loading the view.
-        
-       
+        IQKeyboardManager.sharedManager().enable = false
+        IQKeyboardManager.sharedManager().enableAutoToolbar = false
+        if #available(iOS 11, *) {
+            emailAddressTF.textContentType = UITextContentType.emailAddress
+            passwordTF.textContentType = UITextContentType("")
+        }
         
     }
     func dismissKeyboard (_ sender: UITapGestureRecognizer) {
+        
         emailAddressTF.resignFirstResponder()
         passwordTF.resignFirstResponder()
+        
     }
     @IBAction func dismissPressed(_ sender: Any) {
         
@@ -73,6 +80,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
         
         if self.currentReachabilityStatus != .notReachable {
             
+
               login()
             
         } else {
@@ -90,38 +98,25 @@ class signInVC: UIViewController, UITextFieldDelegate {
             
            if ValidationHelper.Instance.isValidEmail(email:email) && pwd.count > 2 {
             
+            LoadingHepler.instance.show()
+            
             Auth.auth().signIn(withEmail: email, password: pwd, completion: { (user, error) in
                 
-                HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
                 
-                if user == nil {
-                    
-                    self.authenticationError(error: "Oops! Invalid login.")
-                    
-                    HUD.hide()
+                if user != nil {
+             
+                    LoadingHepler.instance.hide()
+                    self.getFirebaseToken()
                     
                     return
                     
                 }
                 
-                self.idprim.removeAll()
-               
-                if self.currentReachabilityStatus != .notReachable {
-                    
-                    self.userLoginApi(uid: (user?.uid)!)
-                    
-                } else {
-                    
-                    DispatchQueue.main.async {
-                        
-                        AlertProvider.Instance.showInternetAlert(vc: self)
-                    }
-                    
-                    
-                }
-               
+                print(error.debugDescription)
+                LoadingHepler.instance.hide()
+                AlertProvider.Instance.showAlert(title: "Oops", subtitle: error.debugDescription, vc: self)
+             
                 
-                print("firebase id is:::",user?.uid as Any)
             })
                 
            } else {
@@ -162,30 +157,62 @@ class signInVC: UIViewController, UITextFieldDelegate {
         passwordInfoLabel.isHidden = true
         
         if textField == emailAddressTF  {
+
             emailtitleLAbel.textColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
             emailLineView.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
-        }else {
+        }else if textField == passwordTF {
+
             passwordTitleLabel.textColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
             passwordLineview.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
-        }
+        }else{}
         
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == emailAddressTF {
+
             emailtitleLAbel.textColor = UIColor(red: 129/255.0, green: 125/255.0, blue: 144/255.0, alpha: 1.0)
             emailLineView.backgroundColor = UIColor(red: 229/255.0, green: 229/255.0, blue: 229/255.0, alpha: 1.0)
-        }else{
+        }else if textField == passwordTF {
+
             passwordTitleLabel.textColor = UIColor(red: 129/255.0, green: 125/255.0, blue: 144/255.0, alpha: 1.0)
             passwordLineview.backgroundColor = UIColor(red: 229/255.0, green: 229/255.0, blue: 229/255.0, alpha: 1.0)
-        }
+        }else{}
 
     }
-    
-    
+//
+//    func animateViewMoving(up:Bool, moveValue :CGFloat) {
+//
+//        let movementDuration:TimeInterval = 0.3
+//        let movement:CGFloat = ( up ? -moveValue : moveValue)
+//
+//        UIView.beginAnimations("animateView", context: nil)
+//        UIView.setAnimationBeginsFromCurrentState(true)
+//        UIView.setAnimationDuration(movementDuration)
+//
+//        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+//
+//        UIView.commitAnimations()
+//    }
     
     @IBAction func showPassword(_ sender: Any) {
         
+        if(iconClick == true) {
+            passwordTF.isSecureTextEntry = false
+            iconClick = false
+            passwordReveal.setImage(UIImage(named: "eye-off.png"), for: .normal)
+            passwordReveal.tintColor = UIColor(red: 42/255.0, green: 42/255.0, blue: 42/255.0, alpha: 1.0)
+        } else if iconClick == false {
+            passwordTF.isSecureTextEntry = true
+            iconClick = true
+            passwordReveal.setImage(UIImage(named: "Show password icon.png"), for: .normal)
+            passwordReveal.tintColor = UIColor(red: 136/255.0, green: 143/255.0, blue: 158/255.0, alpha: 1.0)
+        }
+        
+    }
+    
+    
+    @IBAction func passwordhideTouchout(_ sender: Any) {
         if(iconClick == true) {
             passwordTF.isSecureTextEntry = false
             iconClick = false
@@ -230,21 +257,17 @@ class signInVC: UIViewController, UITextFieldDelegate {
         animation.fromValue = NSValue(cgPoint: CGPoint(x: self.passwordInfoLabel.center.x - 10, y: self.passwordInfoLabel.center.y))
         animation.toValue = NSValue(cgPoint: CGPoint(x: self.passwordInfoLabel.center.x + 10, y: self.passwordInfoLabel.center.y))
         self.passwordInfoLabel.layer.add(animation, forKey: "position")
-        HUD.hide()
+        LoadingHepler.instance.hide()
         
     }
     
-    func openStoryBoard(name: String,id : String) {
-        
-        window                          = UIWindow(frame: UIScreen.main.bounds)
+    func openStoryBoard(name: String,id : String,user:UserList) {
+
         let storyboard                  = UIStoryboard(name: name, bundle: nil)
-        let initialViewController       = storyboard.instantiateViewController(withIdentifier: id) as! Edit_ProfileVC
-        initialViewController.boolForTitle  = true
+        let initialViewController       = storyboard.instantiateViewController(withIdentifier: id) as! Profile_PostViewController
         self.navigationController!.pushViewController(initialViewController, animated: true)
-//        window?.rootViewController = initialViewController
-//        window?.makeKeyAndVisible()
-        
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -268,7 +291,19 @@ class signInVC: UIViewController, UITextFieldDelegate {
             fbLoginManager.logIn(withReadPermissions: ["public_profile", "email"], from: self) { (result, error) in
                 if let error = error {
                     print("Failed to login: \(error.localizedDescription)")
+                    DispatchQueue.main.async {
+                 
+                        AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Login failed.", vc: self)
+                   
+                    }
+                    FBSDKLoginManager().logOut()
                     return
+                } else if(result?.isCancelled)! {
+                    
+                    
+                    FBSDKLoginManager().logOut()
+                    
+                    
                 }
                 
                 
@@ -277,21 +312,33 @@ class signInVC: UIViewController, UITextFieldDelegate {
                     return
                 }
                 
+                DispatchQueue.main.async {
+                    
+                    LoadingHepler.instance.show()
+                }
+                
+                
                 
                 let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
-                
-                // Perform login by calling Firebase APIs
+          
                 Auth.auth().signIn(with: credential, completion: { (user, error) in
+                    
                     if let error = error {
-                        print("Login error: \(error.localizedDescription)")
-                        let alertController = UIAlertController(title: "Login Error", message: error.localizedDescription, preferredStyle: .alert)
-                        let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                        alertController.addAction(okayAction)
-                        self.present(alertController, animated: true, completion: nil)
                         
+                        print("Login error: \(error.localizedDescription)")
+                        DispatchQueue.main.async {
+                        AlertProvider.Instance.showAlert(title: "Oops!", subtitle: error.localizedDescription, vc: self)
+                        LoadingHepler.instance.hide()
+                        }
                         return
                     }
-                    self.userLoginApi(uid: (user?.uid)!)
+        
+                    DispatchQueue.main.async {
+                        
+                      LoadingHepler.instance.hide()
+                        
+                    }
+                    self.getFirebaseToken()
                    
                 })
                 
@@ -311,14 +358,13 @@ class signInVC: UIViewController, UITextFieldDelegate {
 
 extension signInVC {
    
-    func userLoginApi(uid:String) {
+    func userLoginApi() {
         
-        let clientIp = ValidationHelper.Instance.getIPAddress() ?? "1.0.1"
+       LoadingHepler.instance.show()
         
-        let parameters : Parameters = ["firebaseuid" : uid,"createdByUserId" : "","updatedByUserId" : "","createdTimestamp" : "","updatedTimestamp" : "","clientApp": "iosapp","clientIP":clientIp]
-        
+        let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
         let loginRequest : ApiClient  = ApiClient()
-        loginRequest.userLogin(parameters: parameters, completion: { status,userlist in
+        loginRequest.userLogin(headers: header, completion: { status,userlist in
             
             if status == "success" {
                 
@@ -328,13 +374,12 @@ extension signInVC {
                         
                         print(user.firebaseuid!)
                         self.getUserDetails(user: user)
-                    
+                        self.openStoryBoard(name: Constants.Main, id: Constants.Profile_PostViewController,user: user)
+                   
                     }
                     
-                    HUD.hide()
-                    
-//                    self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId)
-
+                    LoadingHepler.instance.hide()
+                   
                     self.emailAddressTF.text = ""
                     self.passwordTF.text     = ""
                     
@@ -342,13 +387,28 @@ extension signInVC {
                 
             } else {
                 
-                 HUD.hide()
+                 DispatchQueue.main.async {
+                    LoadingHepler.instance.hide()
+                    self.authenticationError(error: "Login failed.")
+                }
                 
             }
             
             
         })
         
+        
+    }
+    
+    func getFirebaseToken() {
+        
+        let Request : ApiClient  = ApiClient()
+        Request.getFireBaseToken(completion:{ token in
+            
+            self.token_str = token
+            self.userLoginApi()
+            
+        })
         
     }
     
@@ -360,11 +420,11 @@ extension signInVC {
             
         }
         
-//        if let userid = user.id {
+        if let userid = user.id {
         
-//            PrefsManager.sharedinstance.userid = userid
+            PrefsManager.sharedinstance.userId = userid
             
-//        }
+        }
         
         if let username = user.username {
             
@@ -372,18 +432,59 @@ extension signInVC {
             
         }
         
-//        if let dateofbirth = user.dateOfBirth {
-//
-//            PrefsManager.sharedinstance.dateOfBirth = dateofbirth
-//
-//        }
+        if let dateofbirth = user.dateofbirth {
+
+            PrefsManager.sharedinstance.dateOfBirth = dateofbirth
+
+        }
+        
+        if let userEmail = user.email {
+            
+            PrefsManager.sharedinstance.userEmail = userEmail
+            
+        }
         
         if let gender = user.gender {
+            
             PrefsManager.sharedinstance.gender = gender
             
         }
         
-       
+        if let desc = user.description {
+            
+            PrefsManager.sharedinstance.description = desc
+            
+        }
+        
+        if let name = user.name {
+            
+            PrefsManager.sharedinstance.name = name
+            
+        }
+        
+        if let userImagesList = user.imgList {
+            
+            if userImagesList.count > 0 {
+                
+                PrefsManager.sharedinstance.imageURL = userImagesList[userImagesList.count-1].imageurl_str ?? "empty"
+                
+            }
+         
+        }
+        
+        if let taglist = user.tagList {
+            
+            PrefsManager.sharedinstance.tagList = taglist
+        }
+        
+        if let locitem = user.locItem {
+            
+            PrefsManager.sharedinstance.userCity = "\(locitem.address_str ?? "Address")"
+            
+        }
+        
+        PrefsManager.sharedinstance.isLoginned = true
+    
         
     }
  
