@@ -577,6 +577,42 @@ class  ApiClient {
         
     }
     
+    
+    
+    /********************************getItemsbasedid*************************************************/
+    
+    func getBusinessByIdEvent(eventid : Int,businessid: Int , headers : HTTPHeaders,completion : @escaping (String,BusinessDetailModel?)-> Void) {
+        
+        Alamofire.request("\(Constants.EventApiUrl)/\(eventid)/businesses/\(businessid)", method: .get,encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            
+            print(response.request as Any)
+            print(response.result.value as Any)
+            
+            switch response.result {
+                
+            case .success :
+                
+                if let value = response.result.value {
+                    
+                    let json = JSON(value)
+                    if let businesList = BusinessDetailModel(json: json) {
+                        
+                        completion("success",businesList)
+                    }
+                    
+                }
+                
+                
+            case .failure(let error):
+                
+                print(error.localizedDescription)
+                completion(error.localizedDescription,nil)
+                
+            }
+            
+        }
+        
+    }
     /************************Events Api**********************************/
     func getEventsTypesApi(parameters : Parameters,completion : @escaping (String,EventTypeList?) -> Void) {
         
@@ -692,6 +728,45 @@ class  ApiClient {
         
         
     }
+    
+    ////******************************* Get Location by Item Id ****************************************/////
+    
+    func getLocationByItemId(id : Int,page : String,headers : HTTPHeaders,completion : @escaping (String,ItemLocationList?)-> Void) {
+        
+        Alamofire.request("\(Constants.ItemsApiUrl)/\(id)/locations?\(page)", method: .get,encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            
+            print("response request is:::::::::::",response.request as Any)
+            print("response result is:::::::",response.result.value as Any)
+            
+            switch response.result {
+                
+            case .success :
+                
+                if let value = response.result.value {
+                    
+                    let json = JSON(value)
+                    if let list = ItemLocationList(json: json) {
+                        
+                        completion("success",list)
+                        
+                    }
+                    
+                }
+                
+                
+            case .failure(let error):
+                
+                print(error.localizedDescription)
+                completion(error.localizedDescription,nil)
+                
+            }
+            
+        }
+        
+    }
+    
+    
+    
     
     
     /**********************************getPlace Lat long*************************************************/

@@ -25,6 +25,8 @@ class LocList {
     var createdby        : [Int]?
     var updatedby        : [Int]?
     
+    var imageurl         : [String]?
+
     
     
     var id_str               : Int?
@@ -138,6 +140,8 @@ class LocList {
             }
         }
         
+    
+        
     }
     //    *********************************************************
     init?(array : JSON) {
@@ -201,6 +205,31 @@ class LocList {
             
             self.updatedby_str = updatedby
             
+        }
+        
+        if let imgArray = array["locationimages"].array  {
+            
+            for item in imgArray {
+                
+                let tag_imageurl  = item["imageurl"].string ??  "empty"
+                let tag_createdat = item["createdat"].string ?? "empty"
+                
+                if imageurl == nil {
+                    
+                    imageurl = []
+                    
+                }
+                if createdat == nil {
+                    
+                    createdat = []
+                    
+                }
+                
+                imageurl?.append(tag_imageurl)
+                createdat?.append(tag_createdat)
+                
+                
+            }
         }
    
     }

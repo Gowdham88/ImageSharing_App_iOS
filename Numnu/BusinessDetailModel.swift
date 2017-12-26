@@ -12,25 +12,26 @@ import SwiftyJSON
 
 struct  BusinessDetailModel {
     
-    var id              : Int?
-    var name            : String?
-    var username        : String?
-    var description     : String?
-    var firebaseuid     : String?
-    var dateofbirth     : String?
-    var gender          : Int?
-    var email            : String?
-    var isemailverified  : Bool?
-    var businessname     : String?
-    var businessusername : String?
+    var id                 : Int?
+    var name               : String?
+    var username           : String?
+    var description        : String?
+    var firebaseuid        : String?
+    var dateofbirth        : String?
+    var gender             : Int?
+    var email              : String?
+    var isemailverified    : Bool?
+    var businessname       : String?
+    var businessusername   : String?
     var businessuserphone  : String?
-    var businessdescription : String?
-    var eventLinkList   : [EventlinkList]?
-    var taglist         : [TagList]?
-    var loclist         : LocList?
-    var businessloclist : LocList?
-    var imagelist       : [ImgList]?
-    var bussinessTypeList : [BusinessTypeModel]?
+    var businessdescription: String?
+    var eventLinkList      : [EventlinkList]?
+    var taglist            : [TagList]?
+    var loclist            : LocList?
+    var businessloclist    : LocList?
+    var imagelist          : [ImgList]?
+    var bussinessTypeList  : [BusinessTypeModel]?
+    var eventlist          : EventList?
     
     var name_Str : String?
     var id_Str   : Int?
@@ -214,6 +215,12 @@ struct  BusinessDetailModel {
             
         }
         
+        let jsonEvent = JSON(json["event"])
+        if let businessEvent = EventList(json: jsonEvent) {
+            
+            self.eventlist = businessEvent
+            
+        }
     }
     
     

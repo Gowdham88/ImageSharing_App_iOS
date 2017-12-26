@@ -51,7 +51,7 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
     var apiClient     : ApiClient!
     var description_txt : String = ""
     var businessprimaryid : Int  = 50
-    
+    var eventid : Int  = 34
 
     override func viewDidLoad() {
         settings.style.selectedBarHeight = 3.0
@@ -368,7 +368,7 @@ extension BusinessDetailViewController {
         
         let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
         
-        apiClient.getBusinessById(id : self.businessprimaryid,headers: header, completion: { status,Values in
+        apiClient.getBusinessByIdEvent(eventid: eventid,businessid:  self.businessprimaryid,headers: header, completion: { status,Values in
             
             if status == "success" {
                 if let response = Values {
@@ -404,7 +404,11 @@ extension BusinessDetailViewController {
         if let description = response.businessdescription {
             eventDescriptionLabel.text = description
         }
-        
+        if let busevent = response.eventlist {
+            if let buseventName = busevent.name {
+                buseventLabel.text = buseventName
+            }
+        }
         
         
         if let taglist = response.taglist {
