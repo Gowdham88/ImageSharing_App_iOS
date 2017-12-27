@@ -271,7 +271,7 @@ class  ApiClient {
     }
     
     
-    /*********************************PostsByEventId********************************************************/
+    /*********************************Posts********************************************************/
     func getPostList(id : Int,page : String,type : String,headers: HTTPHeaders,completion : @escaping (String,PostListByEventId?) -> Void) {
         
         var Baseurl : String?
@@ -293,6 +293,37 @@ class  ApiClient {
         
         
         Alamofire.request("\(Baseurl!)/\(id)/posts?\(page)", method: .get, encoding: JSONEncoding.default,headers: headers).validate().responseJSON { response in
+            
+            switch response.result {
+                
+            case .success:
+                
+                if let value = response.result.value {
+                    
+                    let json = JSON(value)
+                    if let itemList = PostListByEventId(json: json) {
+                        
+                        completion("success",itemList)
+                    }
+                    
+                }
+                
+                
+            case .failure(let error):
+                
+                print(error)
+                completion(error.localizedDescription,nil)
+                
+            }
+            
+        }
+        
+    }
+    
+    /*********************************PostsByEventContext********************************************************/
+    func getPostListByEvent(eventId : Int,id : Int,page : String,type : String,headers: HTTPHeaders,completion : @escaping (String,PostListByEventId?) -> Void) {
+        
+        Alamofire.request("\(Constants.EventApiUrl)/\(eventId)/businesses/\(id)/posts?\(page)", method: .get, encoding: JSONEncoding.default,headers: headers).validate().responseJSON { response in
             
             switch response.result {
                 
@@ -358,6 +389,7 @@ class  ApiClient {
      }
     
     /********************************getItemTag based Event*************************************************/
+    /********************************Event context******************************************/
     
     func getItemTagBusinessEvent(id : Int,businessid : Int,page : String,headers : HTTPHeaders,completion : @escaping (String,BusinessItemTagModel?)-> Void) {
         
@@ -513,6 +545,7 @@ class  ApiClient {
     }
     
     /********************************getItemList based Item Tag id*************************************************/
+    /********************************Event context******************************************/
     
     func getItemListByTagIdEvent(eventid : Int,businessid:Int,tagid : Int,page : String,headers : HTTPHeaders,completion : @escaping (String,ItemListModel?)-> Void) {
         

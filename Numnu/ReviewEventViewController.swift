@@ -30,8 +30,12 @@ class ReviewEventViewController: UIViewController,IndicatorInfoProvider {
     var window : UIWindow?
     var popdelegate : ReviewEventViewControllerDelegate?
     var viewState       : Bool = false
-    var primaryid       : Int = 34
+    var primaryid       : Int  = 34
     var apiType         : String = "Event"
+    
+   /*********************Event context*******************************/
+    
+    var eventId         : Int = 34
     
     @IBOutlet weak var businesslabelwidth: NSLayoutConstraint!
     override func viewDidLoad() {
@@ -62,9 +66,15 @@ class ReviewEventViewController: UIViewController,IndicatorInfoProvider {
         
         let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
         let param  : String  = "page=\(pageno)&limit\(limit)"
-
-            self.apiClient.getPostList(id: self.primaryid, page: param, type: self.apiType, headers: header, completion: { status,Values in
-    
+            
+            switch self.apiType {
+                
+            case "BusinessEvent":
+                
+                /********************************Event context******************************************/
+                
+                self.apiClient.getPostListByEvent(eventId: self.eventId,id: self.primaryid, page: param, type: self.apiType, headers: header, completion: { status,Values in
+                    
                     if status == "success" {
                         
                         if let itemlist = Values {
@@ -79,22 +89,62 @@ class ReviewEventViewController: UIViewController,IndicatorInfoProvider {
                         }
                         
                         DispatchQueue.main.async {
-                           
+                            
                             self.postEventTableview.reloadData()
                             print("APi\(self.postList.count)")
                         }
                         
                         self.reloadTable()
+                        
+                    } else {
+                        
+                        LoadingHepler.instance.hide()
+                        self.reloadTable()
+                        
+                    }
                     
+                    
+                })
+                
+                
+            default:
+                
+                self.apiClient.getPostList(id: self.primaryid, page: param, type: self.apiType, headers: header, completion: { status,Values in
+                    
+                    if status == "success" {
+                        
+                        if let itemlist = Values {
+                            
+                            self.postModel = itemlist
+                            
+                            if let list = itemlist.data {
+                                
+                                self.postList += list
+                            }
+                            
+                        }
+                        
+                        DispatchQueue.main.async {
+                            
+                            self.postEventTableview.reloadData()
+                            print("APi\(self.postList.count)")
+                        }
+                        
+                        self.reloadTable()
+                        
                     }else {
                         
                         LoadingHepler.instance.hide()
                         self.reloadTable()
                         
-            }
+                    }
+                    
+                    
+                })
                 
-           
-            })
+            }
+
+        
         })
         
         

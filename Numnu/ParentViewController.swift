@@ -377,7 +377,7 @@ extension ParentViewController : UITableViewDataSource,UITableViewDelegate {
         
         autocompleteplaceArray.removeAll()
         
-        let parameters: Parameters = ["input": place_Str ,"types" : "geocode" , "key" : "AIzaSyDmfYE1gIA6UfjrmOUkflK9kw0nLZf0nYw"]
+        let parameters: Parameters = ["input": place_Str ,"types" : "(cities)" , "key" : "AIzaSyDmfYE1gIA6UfjrmOUkflK9kw0nLZf0nYw"]
         
         Alamofire.request(Constants.PlaceApiUrl, parameters: parameters).validate().responseJSON { response in
             
