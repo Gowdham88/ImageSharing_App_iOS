@@ -45,7 +45,7 @@ class MenuEventViewController: UIViewController,IndicatorInfoProvider,UITableVie
     var itemType : String = "default"
     
     var primayId : Int = 34
-    
+    var eventId  : Int = 34
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +63,12 @@ class MenuEventViewController: UIViewController,IndicatorInfoProvider,UITableVie
         if itemType == "Business" {
        
             getItemTagBusiness(pageno: pageno, limit: limitno)
+            
+        }
+        
+        if itemType == "BusinessEvent" {
+            
+            getItemTagEventBusiness(pageno: pageno, limit: limitno)
             
         }
         
@@ -91,6 +97,10 @@ class MenuEventViewController: UIViewController,IndicatorInfoProvider,UITableVie
         case "Business":
             
            getItemTagBusiness(pageno: pageno, limit: limitno)
+            
+        case "BusinessEvent":
+            
+            getItemTagEventBusiness(pageno: pageno, limit: limitno)
             
         default:
             
@@ -129,6 +139,9 @@ class MenuEventViewController: UIViewController,IndicatorInfoProvider,UITableVie
         case "Business":
             return itemBusinessTagList.count
             
+        case "BusinessEvent":
+            return itemBusinessTagList.count
+            
         default:
             return 0
             
@@ -153,6 +166,15 @@ class MenuEventViewController: UIViewController,IndicatorInfoProvider,UITableVie
             cell.item = itemTagList[indexPath.row]
             
         case "Business":
+            
+            guard itemBusinessTagList.count > 0 else {
+                
+                return cell
+            }
+            
+            cell.itemBusiness = itemBusinessTagList[indexPath.row]
+        
+        case "BusinessEvent":
             
             guard itemBusinessTagList.count > 0 else {
                 
@@ -206,6 +228,21 @@ class MenuEventViewController: UIViewController,IndicatorInfoProvider,UITableVie
                 }
                 
             }
+        
+        case "BusinessEvent":
+            if indexPath.row == itemBusinessTagList.count - 1 && viewState {
+                
+                if let pageItem = tagBusinessModel {
+                    
+                    if itemBusinessTagList.count  < pageItem.totalRows ?? 0 {
+                        pageno += 1
+                        limitno = 25 * pageno
+                        getItemTagBusiness(pageno: pageno, limit: limitno)
+                    }
+                    
+                }
+                
+            }
 
             
         default:
@@ -229,6 +266,9 @@ extension MenuEventViewController   {
         case "Business":
             openStoryBoard(name: Constants.EventDetail, id: Constants.MenuItemId,heading: itemBusinessTagList[indexPath.row].tagtext ?? "Title", primid: 51,tagid: itemBusinessTagList[indexPath.row].tagid ?? 0,type: "Business")
             
+        case "BusinessEvent":
+            openStoryBoard(name: Constants.EventDetail, id: Constants.MenuItemId,heading: itemBusinessTagList[indexPath.row].tagtext ?? "Title", primid: 51,tagid: itemBusinessTagList[indexPath.row].tagid ?? 0,type: "BusinessEvent")
+            
         default:
      
             break
@@ -246,6 +286,12 @@ extension MenuEventViewController   {
         vc.primaryid        = primid
         vc.tag_id           = tagid
         vc.itemType         = type
+        if type == "BusinessEvent" {
+            
+            vc.primaryid          = eventId
+            vc.businessid         = primid
+        }
+       
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
@@ -345,6 +391,53 @@ extension MenuEventViewController {
             let param  : String  = "page=\(pageno)&limit\(limit)"
             
             self.apiClient.getItemTagBusiness(id: self.primayId, page: param, headers: header, completion: { status,taglist in
+                
+                if status == "success" {
+                    
+                    if let item = taglist {
+                        
+                        self.tagBusinessModel = item
+                        
+                        if let list = item.tagItemList {
+                            
+                            self.itemBusinessTagList += list
+                        }
+                    }
+                    
+                    DispatchQueue.main.async {
+                        
+                        self.menuCategoryTableview.reloadData()
+                        
+                    }
+                    
+                    self.reloadTable()
+                    
+                } else {
+                    
+                    LoadingHepler.instance.hide()
+                    self.reloadTable()
+                    
+                }
+                
+                
+            })
+            
+            
+        })
+        
+        
+    }
+    
+    func getItemTagEventBusiness(pageno:Int,limit:Int) {
+        
+        LoadingHepler.instance.show()
+        
+        apiClient.getFireBaseToken(completion: { token in
+            
+            let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
+            let param  : String  = "page=\(pageno)&limit\(limit)"
+            
+            self.apiClient.getItemTagBusinessEvent(id: self.eventId,businessid: self.primayId,page: param, headers: header, completion: { status,taglist in
                 
                 if status == "success" {
                     

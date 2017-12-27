@@ -21,8 +21,9 @@ class MenuItemViewController: UIViewController {
     var itemModel  : ItemListModel?
     var pageno  : Int = 1
     var limitno : Int = 25
-    var primaryid : Int = 0
-    var tag_id   : Int = 0
+    var primaryid  : Int = 0
+    var businessid : Int = 0
+    var tag_id     : Int = 0
     /********************variable which select which api ************************/
     var itemType : String = "Event"
     
@@ -40,7 +41,15 @@ class MenuItemViewController: UIViewController {
         itemList.removeAll()
         pageno  = 1
         limitno = 25
-        getItemList(pageno: pageno, limit: limitno)
+        switch itemType {
+        case "BusinessEvent":
+            getItemListEvent(pageno: pageno, limit: limitno)
+            
+        default:
+            getItemList(pageno: pageno, limit: limitno)
+        }
+        
+        
     }
     func navigationTap(){
         let offset = CGPoint(x: 0,y :0)
@@ -120,7 +129,13 @@ extension MenuItemViewController : UITableViewDelegate,UITableViewDataSource {
                 if itemList.count  < pageItem.totalRows ?? 0 {
                     pageno += 1
                     limitno = 25 * pageno
-                    getItemList(pageno: pageno, limit: limitno)
+                    switch itemType {
+                    case "BusinessEvent":
+                        getItemListEvent(pageno: pageno, limit: limitno)
+                        
+                    default:
+                        getItemList(pageno: pageno, limit: limitno)
+                    }
                 }
                 
             }
@@ -245,7 +260,57 @@ extension MenuItemViewController {
         
     }
     
-    
+    func getItemListEvent(pageno:Int,limit:Int) {
+        
+        LoadingHepler.instance.show()
+        
+        apiClient.getFireBaseToken(completion: { token in
+            
+            let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
+            let param  : String  = "page=\(pageno)&limit\(limit)"
+            
+            self.apiClient.getItemListByTagIdEvent(eventid: self.primaryid, businessid: self.businessid,tagid: self.tag_id,page: param, headers: header, completion: { status,itemlists in
+                
+                if status == "success" {
+                    
+                    if let itemlist = itemlists {
+                        
+                        self.itemModel = itemlist
+                        
+                        if let list = itemlist.itemList {
+                            
+                            self.itemList += list
+                        }
+                    }
+                    
+                    DispatchQueue.main.async {
+                        
+                        LoadingHepler.instance.hide()
+                        self.menuItemTableview.reloadData()
+                        
+                    }
+                    
+                    
+                    
+                } else {
+                    
+                    LoadingHepler.instance.hide()
+                    DispatchQueue.main.async {
+                        
+                        self.menuItemTableview.reloadData()
+                        
+                    }
+                    
+                }
+                
+                
+            })
+            
+            
+        })
+        
+        
+    }
    
     
     

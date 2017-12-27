@@ -212,7 +212,7 @@
                                                     <constraint firstAttribute="width" constant="18" id="x9Q-PW-1gW"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FsV-rV-hgk">
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FsV-rV-hgk">
                                                 <rect key="frame" x="67" y="23" width="234" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="24" id="z2O-pV-sxo"/>
@@ -221,7 +221,7 @@
                                                 <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bookmark" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hlk-Zu-TiW">
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bookmark" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hlk-Zu-TiW">
                                                 <rect key="frame" x="67" y="74" width="234" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="24" id="3gW-rB-cGs"/>
@@ -283,6 +283,7 @@
                     <size key="freeformSize" width="320" height="1100"/>
                     <connections>
                         <outlet property="TabBarView" destination="JnR-Aw-N5a" id="l0P-gf-Rzd"/>
+                        <outlet property="bookmarkbusinesslabel" destination="Hlk-Zu-TiW" id="s0y-jg-52d"/>
                         <outlet property="busDescriptionHeight" destination="xJD-Vx-Sxv" id="OFn-3K-TRZ"/>
                         <outlet property="busImageView" destination="egJ-dm-ObJ" id="m3O-FD-Ac5"/>
                         <outlet property="busTitleLabel" destination="dbq-an-3gn" id="nST-5Z-2pH"/>
@@ -299,6 +300,7 @@
                         <outlet property="pagerView" destination="eYQ-kW-VVX" id="raK-dr-4ep"/>
                         <outlet property="readMoreButton" destination="KR4-Ba-hk7" id="Uej-J6-YBz"/>
                         <outlet property="shareView" destination="SWR-ZR-YvQ" id="EJY-Ah-5XP"/>
+                        <outlet property="sharebusinesslabel" destination="FsV-rV-hgk" id="HE7-lR-sIj"/>
                         <outlet property="tagScrollView" destination="Ycz-53-5i8" id="aya-Rc-kit"/>
                     </connections>
                 </viewController>

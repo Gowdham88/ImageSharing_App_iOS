@@ -13,7 +13,7 @@ import Alamofire
 
 protocol ReviewEventViewControllerDelegate {
     
-    func popupClick()
+    func popupClick(postid : Int,postname : String)
     func postTableHeight(height : CGFloat)
 }
 
@@ -324,7 +324,7 @@ extension ReviewEventViewController : postEventDetailTableViewCellDelegate {
     
     func bookmarkPost(tag: Int) {
         
-       popdelegate!.popupClick()
+       popdelegate!.popupClick(postid: postList[tag].id ?? 0, postname: postList[tag].business?.businessname ?? "Entinty name")
         
     }
     

@@ -357,6 +357,42 @@ class  ApiClient {
             
      }
     
+    /********************************getItemTag based Event*************************************************/
+    
+    func getItemTagBusinessEvent(id : Int,businessid : Int,page : String,headers : HTTPHeaders,completion : @escaping (String,BusinessItemTagModel?)-> Void) {
+        
+        Alamofire.request("\(Constants.EventApiUrl)/\(id)/businesses/\(businessid)/itemtags?\(page)", method: .get,encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            
+            print(response.request as Any)
+            print(response.result.value as Any)
+            
+            switch response.result {
+                
+            case .success :
+                
+                if let value = response.result.value {
+                    
+                    let json = JSON(value)
+                    if let list = BusinessItemTagModel(json: json) {
+                        
+                        completion("success",list)
+                        
+                    }
+                    
+                }
+                
+                
+            case .failure(let error):
+                
+                print(error.localizedDescription)
+                completion(error.localizedDescription,nil)
+                
+            }
+            
+        }
+        
+    }
+    
     /********************************getItemTag based Business*************************************************/
     
     func getItemTagBusiness(id : Int,page : String,headers : HTTPHeaders,completion : @escaping (String,BusinessItemTagModel?)-> Void) {
@@ -446,6 +482,41 @@ class  ApiClient {
         }
         
         Alamofire.request("\(BaseUrl!)/\(primaryid)/itemtags/\(tagid)/items?\(page)", method: .get,encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            
+            print(response.request as Any)
+            print(response.result.value as Any)
+            
+            switch response.result {
+                
+            case .success :
+                
+                if let value = response.result.value {
+                    
+                    let json = JSON(value)
+                    if let list = ItemListModel(json: json) {
+                        
+                        completion("success",list)
+                        
+                    }
+                    
+                }
+                
+            case .failure(let error):
+                
+                print(error.localizedDescription)
+                completion(error.localizedDescription,nil)
+                
+            }
+            
+        }
+        
+    }
+    
+    /********************************getItemList based Item Tag id*************************************************/
+    
+    func getItemListByTagIdEvent(eventid : Int,businessid:Int,tagid : Int,page : String,headers : HTTPHeaders,completion : @escaping (String,ItemListModel?)-> Void) {
+        
+        Alamofire.request("\(Constants.EventApiUrl)/\(eventid)/businesses/\(businessid)/itemtags/\(tagid)/items?\(page)", method: .get,encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             
             print(response.request as Any)
             print(response.result.value as Any)
@@ -601,6 +672,51 @@ class  ApiClient {
                 
                 print(error)
                 completion(error.localizedDescription,nil)
+                
+            }
+            
+        }
+        
+    }
+    
+    /************************Events Api**********************************/
+    func bookmarEntinty(parameters : Parameters,headers : HTTPHeaders,completion : @escaping (String,BookmarkModel?) -> Void) {
+        
+        Alamofire.request("\(Constants.Bookmarkpost)/\(PrefsManager.sharedinstance.userId)/bookmarks", method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            
+            print(response.request)
+            
+            switch response.result {
+                
+            case .success:
+                
+                if let value = response.result.value {
+                    
+                    let json = JSON(value)
+                    if let bookmarkresponse = BookmarkModel(json: json) {
+                        
+                        print(bookmarkresponse)
+                        completion("success",bookmarkresponse)
+                    }
+                    
+                }
+                
+                
+            case .failure(let error) :
+                
+                print(error)
+                if let httpStatusCode = response.response?.statusCode {
+                    
+                    if let value = response.data,httpStatusCode == 422  {
+                        let json = JSON(value)
+                        print(json)
+                       completion("422",nil)
+                    }
+                    
+                }
+                
+                completion(error.localizedDescription,nil)
+           
                 
             }
             
