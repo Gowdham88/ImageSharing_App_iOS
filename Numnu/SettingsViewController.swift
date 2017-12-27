@@ -41,6 +41,9 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         super.viewDidLoad()
        setNavBar()
         myScrollView.delegate = self
+        myScrollView.isScrollEnabled = true
+        settingsTableView.isScrollEnabled = false
+        
         self.navigationController?.navigationBar.titleTextAttributes =
             [NSForegroundColorAttributeName: UIColor.black,
              NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
