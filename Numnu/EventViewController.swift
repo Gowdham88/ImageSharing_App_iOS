@@ -19,6 +19,7 @@ struct MyVariables {
     static var fetchedLat  = String()
     static var fetchedLong = String()
     static var markerTitle = String()
+    static var address     = String()
     static var link1 = String()
     static var link2 = String()
     
@@ -580,10 +581,22 @@ extension EventViewController {
         
         if let loclist = response.loclist {
             if response.loclist != nil {
-                eventPlaceLabel.text    = loclist.name_str
-                MyVariables.fetchedLat  = loclist.lattitude_str!
-                MyVariables.fetchedLong = loclist.longitude_str!
-                MyVariables.markerTitle = loclist.name_str!
+                if let Eplace     = loclist.name_str {
+                    eventPlaceLabel.text    = Eplace
+                }
+                if let Elat       = loclist.lattitude_str {
+                    MyVariables.fetchedLat  = Elat
+                }
+                if let Elon       = loclist.longitude_str {
+                    MyVariables.fetchedLong = Elon
+                }
+                if let Etitle     = loclist.name_str {
+                    MyVariables.markerTitle = Etitle
+                }
+                if let addressval = loclist.address_str {
+                    MyVariables.address     = addressval
+                }
+               
                 print("lat and lon values are:::::",MyVariables.fetchedLat,MyVariables.fetchedLong)
             }
         }

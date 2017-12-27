@@ -688,38 +688,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     }
     
     @IBAction func didTappedSave(_ sender: Any) {
-        
-       if self.currentReachabilityStatus != .notReachable {
-        
-        let Email:NSString = emailaddress.text! as NSString
-        if nameTextfield.text == "" || emailaddress.text == ""  || cityTextfield.text == "" || genderTextfield.text == "" || usernameTextField.text == ""  {
-            AlertProvider.Instance.showAlert(title: "Oops", subtitle: "Fields Cannot be empty", vc: self)
-        } else {
-            if isValidEmail(testStr: Email as String) == true {
-                
-                if cityDictonary == nil {
-                    
-                    if let latlong = currentLocation {
-                        
-                        cityDictonary = ["name":cityTextfield.text!,"address":cityTextfield.text!,"isgoogleplace":false,"lattitude":latlong.coordinate.latitude,"longitude":latlong.coordinate.longitude]
-                        
-                    }
-                    
-                    
-                }
-                
-                completeSignupApi()
-               
-            }else {
-                AlertProvider.Instance.showAlert(title: "Oops", subtitle: "Please Enter Valid Email ID", vc: self)
-            }
-        }
-        
-       } else {
-        
-          AlertProvider.Instance.showInternetAlert(vc: self)
-        
-       }
+        saveClicked()
+       
     }
     
     func uploadImage(image: UIImage,id : Int, completion:@escaping (String?) -> Void) {
@@ -837,11 +807,12 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         navigationItemList.title = "Complete Sign up"
         let button: UIButton = UIButton(type: UIButtonType.custom)
         button.setImage(UIImage(named: "ic_arrow_back"), for: UIControlState.normal)
-        button.addTarget(self, action: #selector(EventViewController.backButtonClicked), for: UIControlEvents.touchUpInside)
+        button.addTarget(self, action: #selector(Edit_ProfileVC.backButtonClicked), for: UIControlEvents.touchUpInside)
         button.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
         let leftButton =  UIBarButtonItem(customView: button)
         leftButton.isEnabled = true
-        let rightButton = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        
+        let rightButton = UIBarButtonItem(title: "SignUp", style: .plain, target: self, action: #selector(saveClicked))
         navigationItemList.leftBarButtonItem = leftButton
         navigationItemList.rightBarButtonItem = rightButton
     }
@@ -849,7 +820,39 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     func backButtonClicked() {
         _ = self.navigationController?.popViewController(animated: true)
     }
-    
+    func saveClicked(){
+        if self.currentReachabilityStatus != .notReachable {
+            
+            let Email:NSString = emailaddress.text! as NSString
+            if nameTextfield.text == "" || emailaddress.text == ""  || cityTextfield.text == "" || genderTextfield.text == "" || usernameTextField.text == ""  {
+                AlertProvider.Instance.showAlert(title: "Oops", subtitle: "Fields Cannot be empty", vc: self)
+            } else {
+                if isValidEmail(testStr: Email as String) == true {
+                    
+                    if cityDictonary == nil {
+                        
+                        if let latlong = currentLocation {
+                            
+                            cityDictonary = ["name":cityTextfield.text!,"address":cityTextfield.text!,"isgoogleplace":false,"lattitude":latlong.coordinate.latitude,"longitude":latlong.coordinate.longitude]
+                            
+                        }
+                        
+                        
+                    }
+                    
+                    completeSignupApi()
+                    
+                }else {
+                    AlertProvider.Instance.showAlert(title: "Oops", subtitle: "Please Enter Valid Email ID", vc: self)
+                }
+            }
+            
+        } else {
+            
+            AlertProvider.Instance.showInternetAlert(vc: self)
+            
+        }
+    }
 /// collectionView for food preferences ///
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
