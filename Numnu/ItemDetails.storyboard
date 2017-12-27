@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -959,7 +959,7 @@
                                                             <outlet property="postEventPlace" destination="KfF-SQ-AGl" id="DFQ-Ye-fKw"/>
                                                             <outlet property="postEventPlaceIcon" destination="CYH-xa-DyP" id="OFb-vW-AVu"/>
                                                             <outlet property="postLikeImage" destination="7bf-Rr-9Xh" id="sy1-OA-Qf8"/>
-                                                            <outlet property="postUserImage" destination="TGL-p7-sXW" id="PFW-ig-oTp"/>
+                                                            <outlet property="postUserImage" destination="KDb-I8-lcK" id="Nbp-d0-0Lu"/>
                                                             <outlet property="postUserTime" destination="PGd-5J-bZT" id="VPs-Tn-g2Y"/>
                                                             <outlet property="postUsernameLabel" destination="14s-FF-9b3" id="PVG-9c-Htf"/>
                                                             <outlet property="postUserplaceLabbel" destination="S3b-kC-Ua9" id="nxH-HN-Z6f"/>
@@ -1106,10 +1106,12 @@
                         <outlet property="ItDescriptionLabel" destination="PDJ-Mg-Fhj" id="Fl0-IY-FlS"/>
                         <outlet property="ItImageView" destination="8vv-oB-nKf" id="wi7-Ie-BVh"/>
                         <outlet property="ItTitleLabel" destination="KPP-zS-WtN" id="apz-b3-c45"/>
+                        <outlet property="businessIcon" destination="hVN-ok-w9U" id="Mnf-zf-4gr"/>
                         <outlet property="businessName" destination="beU-Vf-sSS" id="9c4-29-iGY"/>
                         <outlet property="completemainview" destination="PBX-Yr-1C5" id="kzE-q5-7qo"/>
                         <outlet property="containerviewtop" destination="Jo5-i0-b1w" id="uIg-J7-RIA"/>
                         <outlet property="eventDescriptionHeight" destination="jZa-iA-teb" id="gZX-Ot-c3I"/>
+                        <outlet property="eventIcon" destination="XUb-hN-ryp" id="lKG-b3-hnO"/>
                         <outlet property="eventname" destination="EDd-mz-7je" id="age-xC-ph1"/>
                         <outlet property="mainContainerView" destination="7YT-bR-bj6" id="wm0-s6-hxj"/>
                         <outlet property="mainContainerViewBottom" destination="zK6-wp-lpU" id="mmB-jX-2PY"/>
