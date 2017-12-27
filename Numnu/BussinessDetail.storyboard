@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -74,7 +74,7 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.49803921579999999" green="0.49803921579999999" blue="0.49803921579999999" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="79Q-lb-B6x">
+                                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="79Q-lb-B6x">
                                                 <rect key="frame" x="0.0" y="201.5" width="320" height="50"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="View profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vmS-gW-20e">
@@ -105,10 +105,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eYQ-kW-VVX">
-                                                <rect key="frame" x="0.0" y="259.5" width="320" height="590.5"/>
+                                                <rect key="frame" x="0.0" y="209.5" width="320" height="640.5"/>
                                             </scrollView>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="JnR-Aw-N5a" customClass="ButtonBarView" customModule="XLPagerTabStrip">
-                                                <rect key="frame" x="0.0" y="259.5" width="320" height="64"/>
+                                                <rect key="frame" x="0.0" y="209.5" width="320" height="64"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="64" id="5H0-R3-irC"/>
@@ -159,7 +159,6 @@
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="JnR-Aw-N5a" firstAttribute="top" secondItem="79Q-lb-B6x" secondAttribute="bottom" constant="8" id="0k6-R7-50J"/>
                                             <constraint firstItem="Ycz-53-5i8" firstAttribute="top" secondItem="dbq-an-3gn" secondAttribute="bottom" constant="5" id="37a-Kf-JmC"/>
                                             <constraint firstItem="oxf-Md-44l" firstAttribute="top" secondItem="Ycz-53-5i8" secondAttribute="bottom" constant="8" id="38e-ur-4Xz"/>
                                             <constraint firstItem="egJ-dm-ObJ" firstAttribute="top" secondItem="YJ2-oM-Y9r" secondAttribute="top" constant="8" id="6QE-Yr-et7"/>
@@ -176,14 +175,15 @@
                                             <constraint firstAttribute="trailing" secondItem="dbq-an-3gn" secondAttribute="trailing" constant="4" id="K3w-6H-yes"/>
                                             <constraint firstItem="79Q-lb-B6x" firstAttribute="leading" secondItem="YJ2-oM-Y9r" secondAttribute="leading" id="KPx-At-gwV"/>
                                             <constraint firstItem="JnR-Aw-N5a" firstAttribute="leading" secondItem="YJ2-oM-Y9r" secondAttribute="leading" id="PcJ-Si-u5F"/>
-                                            <constraint firstItem="eYQ-kW-VVX" firstAttribute="top" secondItem="79Q-lb-B6x" secondAttribute="bottom" constant="8" id="VdA-GU-JXx"/>
                                             <constraint firstItem="Ycz-53-5i8" firstAttribute="leading" secondItem="egJ-dm-ObJ" secondAttribute="trailing" constant="8" id="YBj-kx-xL9"/>
                                             <constraint firstAttribute="trailing" secondItem="JnR-Aw-N5a" secondAttribute="trailing" id="aHm-9v-Tcw"/>
                                             <constraint firstAttribute="trailing" secondItem="0A4-Sx-8eI" secondAttribute="trailing" constant="10" id="bRx-lV-N2E"/>
                                             <constraint firstAttribute="bottom" secondItem="eYQ-kW-VVX" secondAttribute="bottom" id="bWw-oC-ZCX"/>
                                             <constraint firstAttribute="trailing" secondItem="KR4-Ba-hk7" secondAttribute="trailing" constant="10" id="bg0-vS-9XV"/>
                                             <constraint firstItem="59l-cz-Dep" firstAttribute="leading" secondItem="egJ-dm-ObJ" secondAttribute="trailing" constant="8" id="eRz-ab-SKv"/>
+                                            <constraint firstItem="JnR-Aw-N5a" firstAttribute="top" secondItem="0A4-Sx-8eI" secondAttribute="bottom" constant="43" id="jIB-BK-Ug5"/>
                                             <constraint firstItem="KR4-Ba-hk7" firstAttribute="top" secondItem="0A4-Sx-8eI" secondAttribute="bottom" id="jvp-fo-ueg"/>
+                                            <constraint firstItem="eYQ-kW-VVX" firstAttribute="top" secondItem="0A4-Sx-8eI" secondAttribute="bottom" constant="43" id="s17-yE-Tza"/>
                                             <constraint firstItem="dbq-an-3gn" firstAttribute="leading" secondItem="egJ-dm-ObJ" secondAttribute="trailing" constant="8" id="vNX-ps-lNJ"/>
                                             <constraint firstAttribute="trailing" secondItem="Ycz-53-5i8" secondAttribute="trailing" constant="8" id="weE-Of-BCZ"/>
                                             <constraint firstAttribute="trailing" secondItem="eYQ-kW-VVX" secondAttribute="trailing" id="wnE-gK-fCV"/>
@@ -283,6 +283,7 @@
                     <size key="freeformSize" width="320" height="1100"/>
                     <connections>
                         <outlet property="TabBarView" destination="JnR-Aw-N5a" id="l0P-gf-Rzd"/>
+                        <outlet property="barButtonTop" destination="jIB-BK-Ug5" id="gG2-Rp-os6"/>
                         <outlet property="bookmarkbusinesslabel" destination="Hlk-Zu-TiW" id="s0y-jg-52d"/>
                         <outlet property="busDescriptionHeight" destination="xJD-Vx-Sxv" id="OFn-3K-TRZ"/>
                         <outlet property="busImageView" destination="egJ-dm-ObJ" id="m3O-FD-Ac5"/>
@@ -292,7 +293,7 @@
                         <outlet property="buttonBarView" destination="JnR-Aw-N5a" id="Enw-3o-JLo"/>
                         <outlet property="completeViewMenu" destination="79Q-lb-B6x" id="w6k-Mw-vrq"/>
                         <outlet property="containerView" destination="eYQ-kW-VVX" id="AiZ-7u-pN0"/>
-                        <outlet property="containerViewTop" destination="7a6-yq-vJ6" id="YdL-1R-hpW"/>
+                        <outlet property="containerViewTop" destination="s17-yE-Tza" id="drZ-3a-nf7"/>
                         <outlet property="eventDescriptionLabel" destination="0A4-Sx-8eI" id="wJ3-lA-m8U"/>
                         <outlet property="mainContainerView" destination="EKD-Uq-tq9" id="Tro-bF-YmK"/>
                         <outlet property="mainContainerViewBottom" destination="ING-nN-A1o" id="6M3-vl-wNM"/>

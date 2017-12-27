@@ -391,18 +391,44 @@ extension EventViewController {
     
     func openPopup() {
         
-        self.shareView.alpha   = 1
-        
-        let top = CGAffineTransform(translationX: 0, y: 0)
-        
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-            self.shareView.isHidden = false
-            self.shareView.transform = top
+        let Alert = UIAlertController(title: "", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        let FemaleAction = UIAlertAction(title: "Share", style: UIAlertActionStyle.default) { _ in
             
-        }, completion: nil)
-        
-        
+            
+        }
+        let MaleAction = UIAlertAction(title: "Bookmark", style: UIAlertActionStyle.default) { _ in
+            
+           self.getBookmarkToken()
+            
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) { _ in
+        }
+        Alert.addAction(FemaleAction)
+        Alert.addAction(MaleAction)
+        Alert.addAction(cancelAction)
+        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad) {
+            Alert.popoverPresentationController?.sourceView = self.view
+            Alert.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
+            present(Alert, animated: true, completion:nil )
+        }else{
+            present(Alert, animated: true, completion:nil )
+        }
     }
+    
+//    func openPopup() {
+//
+//        self.shareView.alpha   = 1
+//
+//        let top = CGAffineTransform(translationX: 0, y: 0)
+//
+//        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+//            self.shareView.isHidden = false
+//            self.shareView.transform = top
+//
+//        }, completion: nil)
+//
+//
+//    }
     
     func closePopup() {
         
@@ -636,6 +662,7 @@ extension EventViewController {
         let clientIp  = ValidationHelper.Instance.getIPAddress() ?? "1.0.1"
         let userid    = PrefsManager.sharedinstance.userId
        
+        LoadingHepler.instance.show()
         
         let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
         let parameters: Parameters = ["entityid": bookmarkid, "entityname":bookmarkname , "type" : bookmarktype ,"createdby" : userid,"updatedby": userid ,"clientip": clientIp, "clientapp": Constants.clientApp]
@@ -645,11 +672,14 @@ extension EventViewController {
                 
                 DispatchQueue.main.async {
                     
+                    LoadingHepler.instance.hide()
                     AlertProvider.Instance.showAlert(title: "Hey!", subtitle: "Bookmarked successfully.", vc: self)
                     self.closePopup()
                 }
                 
             } else {
+                
+                LoadingHepler.instance.hide()
                 
                 if status == "422" {
                     
@@ -674,6 +704,17 @@ extension EventViewController {
            
             self.bookmarkpost(token: token)
            
+        })
+        
+    }
+    
+    
+    func getBookmarkToken() {
+        
+        apiClient.getFireBaseToken(completion:{ token in
+            
+            self.bookmarkpost(token: token)
+            
         })
         
     }

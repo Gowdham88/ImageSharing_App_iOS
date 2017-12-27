@@ -320,10 +320,41 @@ class  ApiClient {
         
     }
     
-    /*********************************PostsByEventContext********************************************************/
+    /*********************************PostsByEventContextBusiness********************************************************/
     func getPostListByEvent(eventId : Int,id : Int,page : String,type : String,headers: HTTPHeaders,completion : @escaping (String,PostListByEventId?) -> Void) {
         
         Alamofire.request("\(Constants.EventApiUrl)/\(eventId)/businesses/\(id)/posts?\(page)", method: .get, encoding: JSONEncoding.default,headers: headers).validate().responseJSON { response in
+            
+            switch response.result {
+                
+            case .success:
+                
+                if let value = response.result.value {
+                    
+                    let json = JSON(value)
+                    if let itemList = PostListByEventId(json: json) {
+                        
+                        completion("success",itemList)
+                    }
+                    
+                }
+                
+                
+            case .failure(let error):
+                
+                print(error)
+                completion(error.localizedDescription,nil)
+                
+            }
+            
+        }
+        
+    }
+    
+    /*********************************PostsByEventContextBusiness********************************************************/
+    func getPostListByItemEvent(eventId : Int,id : Int,page : String,type : String,headers: HTTPHeaders,completion : @escaping (String,PostListByEventId?) -> Void) {
+        
+        Alamofire.request("\(Constants.EventApiUrl)/\(eventId)/items/\(id)/posts?\(page)", method: .get, encoding: JSONEncoding.default,headers: headers).validate().responseJSON { response in
             
             switch response.result {
                 

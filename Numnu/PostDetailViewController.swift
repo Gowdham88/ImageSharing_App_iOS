@@ -214,19 +214,19 @@ class PostDetailViewController : UIViewController {
     }
     func postDUserImagetap(){
         
-        let storyboard  = UIStoryboard(name: Constants.Main, bundle: nil)
-        let vc          = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
-        vc.boolForBack = false
-        self.navigationController!.pushViewController(vc, animated: true)
+        let storyboard = UIStoryboard(name: Constants.PostDetail, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.Profile_LinkViewController) as! ProfileLinkController
+        vc.postListDataItems = item
+        self.navigationController?.pushViewController(vc, animated: true)
         
     }
     
     func profileusernametap(){
         
-        let storyboard  = UIStoryboard(name: Constants.Main, bundle: nil)
-        let vc          = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
-        vc.boolForBack = false
-        self.navigationController!.pushViewController(vc, animated: true)
+        let storyboard = UIStoryboard(name: Constants.PostDetail, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.Profile_LinkViewController) as! ProfileLinkController
+        vc.postListDataItems = item
+        self.navigationController?.pushViewController(vc, animated: true)
         
     }
     func postitemlabeltap(){
@@ -402,17 +402,43 @@ extension PostDetailViewController {
     
     func openPopup() {
         
-         alertViewHide.alpha = 1
-        
-        UIView.animate(withDuration: 2, animations: {
+        let Alert = UIAlertController(title: "", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        let FemaleAction = UIAlertAction(title: "Share", style: UIAlertActionStyle.default) { _ in
             
-            self.alertviewBottomConstraints.constant  = 0
-           
             
-        }, completion: nil)
-        
-       
+        }
+        let MaleAction = UIAlertAction(title: "Bookmark", style: UIAlertActionStyle.default) { _ in
+            
+            self.getBookmarkToken()
+            
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) { _ in
+        }
+        Alert.addAction(FemaleAction)
+        Alert.addAction(MaleAction)
+        Alert.addAction(cancelAction)
+        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad) {
+            Alert.popoverPresentationController?.sourceView = self.view
+            Alert.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
+            present(Alert, animated: true, completion:nil )
+        }else{
+            present(Alert, animated: true, completion:nil )
+        }
     }
+    
+//    func openPopup() {
+//
+//         alertViewHide.alpha = 1
+//
+//        UIView.animate(withDuration: 2, animations: {
+//
+//            self.alertviewBottomConstraints.constant  = 0
+//
+//
+//        }, completion: nil)
+//
+//
+//    }
     
     func setHeight(heightview : Float){
         
@@ -465,6 +491,8 @@ extension PostDetailViewController {
         let userid    = PrefsManager.sharedinstance.userId
         let eventname = "Post name"
         
+        LoadingHepler.instance.show()
+        
         let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
         let parameters: Parameters = ["entityid": item?.id ?? 0, "entityname":eventname , "type" : "post" ,"createdby" : userid,"updatedby": userid ,"clientip": clientIp, "clientapp": Constants.clientApp]
         apiClient.bookmarEntinty(parameters: parameters,headers: header, completion: { status,response in
@@ -473,12 +501,14 @@ extension PostDetailViewController {
                 
                 DispatchQueue.main.async {
                     
+                    LoadingHepler.instance.hide()
                     AlertProvider.Instance.showAlert(title: "Hey!", subtitle: "Bookmarked successfully.", vc: self)
                     self.closePopup()
                 }
                 
             } else {
                 
+                LoadingHepler.instance.hide()
                 if status == "422" {
                     
                     AlertProvider.Instance.showAlert(title: "Hey!", subtitle: "Already bookmarked.", vc: self)
@@ -498,6 +528,16 @@ extension PostDetailViewController {
         
         apiClient.getFireBaseToken(completion:{ token in
             
+            
+            self.bookmarkpost(token: token)
+            
+        })
+        
+    }
+    
+    func getBookmarkToken() {
+        
+        apiClient.getFireBaseToken(completion:{ token in
             
             self.bookmarkpost(token: token)
             

@@ -1,24 +1,15 @@
 //
-//  Profile_PostViewController.swift
+//  ProfileLinkController.swift
 //  Numnu
 //
-//  Created by Gowdhaman on 06/11/17.
+//  Created by CZ Ltd on 12/27/17.
 //  Copyright © 2017 czsm. All rights reserved.
 //
 
 import UIKit
 import Nuke
 
-protocol Profile_PostViewControllerDelegae {
-    
-    func sendlogoutstatus()
-    
-    func logout()
-}
-
-
-
-class Profile_PostViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout  {
+class ProfileLinkController: UIViewController,UITableViewDataSource,UITableViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout  {
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var navigationItemList: UINavigationItem!
@@ -28,19 +19,20 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
     @IBOutlet weak var descriptionlabel: UILabel!
     @IBOutlet weak var userNamelabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var mainViewBottom: NSLayoutConstraint! 
+    @IBOutlet weak var mainViewBottom: NSLayoutConstraint!
     @IBOutlet weak var mainViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var shareview: UIView!
-    var boolForBack : Bool = true
-
+    
+    var postListDataItems : PostListDataItems?
+    
     @IBOutlet weak var EventverticalConstraint: NSLayoutConstraint!
     var itemArray = [TagList]()
     var delegate : Profile_PostViewControllerDelegae?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         setNavBar()
         LoadingHepler.instance.hide()
@@ -55,10 +47,10 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         
         /***********************Setuserdetails****************************/
         setUserDetails()
-       
-    
+        
+        
     }
-    func navigationTap(){
+    func navigationTap() {
         let offset = CGPoint(x: 0,y :0)
         self.myScrollView.setContentOffset(offset, animated: true)
         
@@ -66,9 +58,9 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
-            let navigationOnTap = UITapGestureRecognizer(target:self,action:#selector(EventViewController.navigationTap))
-            self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
-            self.navigationController?.navigationBar.isUserInteractionEnabled = true
+        let navigationOnTap = UITapGestureRecognizer(target:self,action:#selector(EventViewController.navigationTap))
+        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+        self.navigationController?.navigationBar.isUserInteractionEnabled = true
         // Hide the navigation bar on the this view controller
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
         
@@ -78,17 +70,10 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
     
     func setNavBar() {
         
-        navigationItemList.title = "@\(PrefsManager.sharedinstance.username)"
+        
         
         let button: UIButton = UIButton(type: UIButtonType.custom)
-        //set image for button
-        if  boolForBack == false {
-//            button.setImage(UIImage(named: "ic_arrow_back"), for: UIControlState.normal)
-            button.setImage(UIImage(named: "ic_arrow_back"), for: UIControlState.normal)
-
-        }else{
-            button.setImage(UIImage(named: ""), for: UIControlState.normal)
-        }
+        button.setImage(UIImage(named: "ic_arrow_back"), for: UIControlState.normal)
         //add function for button
         button.addTarget(self, action: #selector(EventViewController.backButtonClicked), for: UIControlEvents.touchUpInside)
         //set frame
@@ -98,18 +83,18 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         
         let button2: UIButton = UIButton(type: UIButtonType.custom)
         //set image for button
-        button2.setImage(UIImage(named: "settings"), for: UIControlState.normal)
+        button2.setImage(UIImage(named: ""), for: UIControlState.normal)
         //add function for button
         button2.addTarget(self, action: #selector(settingsClicked), for: UIControlEvents.touchUpInside)
         //set frame
         button2.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
         
         // Create left and right button for navigation item
-       
+        
         let leftButton =  UIBarButtonItem(customView:button)
         leftButton.isEnabled = true
         
-//        let rightButton = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        //        let rightButton = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         
         let rightButton = UIBarButtonItem(customView:button2)
         rightButton.isEnabled = true
@@ -120,7 +105,7 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         
         
     }
-  
+    
     func backButtonClicked() {
         
         _ = self.navigationController?.popViewController(animated: true)
@@ -129,13 +114,11 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
     
     func settingsClicked() {
         
-        let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: "SettingsVC") as! SettingsViewController
-        vc.delegate    = self
-        self.navigationController!.pushViewController(vc, animated: true)
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return 3
     }
     
@@ -178,24 +161,24 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
-//        let storyboard = UIStoryboard(name: Constants.PostDetail, bundle: nil)
-//        let vc         = storyboard.instantiateViewController(withIdentifier: "postdetailid")
-//        self.navigationController!.pushViewController(vc, animated: true)
+        
+        //        let storyboard = UIStoryboard(name: Constants.PostDetail, bundle: nil)
+        //        let vc         = storyboard.instantiateViewController(withIdentifier: "postdetailid")
+        //        self.navigationController!.pushViewController(vc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
         let lastRowIndex = tableView.numberOfRows(inSection: 0)
         if indexPath.row == lastRowIndex - 1 {
-           menuTableHeight(height: self.tableView.contentSize.height)
+            menuTableHeight(height: self.tableView.contentSize.height)
         }
     }
     
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        self.navigationController?.setNavigationBarHidden(false, animated: true)
-//    }
+    //    override func viewDidLayoutSubviews() {
+    //        super.viewDidLayoutSubviews()
+    //        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    //    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -212,11 +195,11 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId)
         self.navigationController!.pushViewController(vc, animated: true)
     }
-        
+    
     func postEventPlaceIcon(){
-            let storyboard = UIStoryboard(name: Constants.ItemDetail, bundle: nil)
-            let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId)
-            self.navigationController!.pushViewController(vc, animated: true)
+        let storyboard = UIStoryboard(name: Constants.ItemDetail, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId)
+        self.navigationController!.pushViewController(vc, animated: true)
         
     }
     func postEventDishLabel(){
@@ -226,7 +209,7 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         
     }
     
-    func postEventDishIcon(){
+    func postEventDishIcon() {
         let storyboard = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId)
         self.navigationController!.pushViewController(vc, animated: true)
@@ -243,7 +226,7 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         let vc         = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)
         self.navigationController!.pushViewController(vc, animated: true)
     }
-// collectionview cell //
+    // collectionview cell //
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return itemArray.count
@@ -259,7 +242,7 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
             cell.setLabelSize(size: textSize)
             
         }
-  
+        
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -282,38 +265,78 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10
     }
-   
+    
     /***********************Setuserdetails****************************/
     
     func setUserDetails(){
         
-        userNamelabel.text = PrefsManager.sharedinstance.username
-        addressLabel.text  = PrefsManager.sharedinstance.userCity
-        descriptionlabel.text = PrefsManager.sharedinstance.description
-        print(PrefsManager.sharedinstance.tagList)
-        itemArray  = PrefsManager.sharedinstance.tagList
-        collectionView.reloadData()
-        
-        let apiclient : ApiClient = ApiClient()
-        apiclient.getFireBaseImageUrl(imagepath: PrefsManager.sharedinstance.imageURL, completion: { url in
+        if let item = postListDataItems {
             
-            if url != "empty" {
+            if let postitem = item.postcreator {
                 
-                Manager.shared.loadImage(with:URL(string:url)!, into: self.userImage)
+                if let name = postitem.name {
+                    
+                    userNamelabel.text = name
+                    navigationItemList.title = "@\(name)"
+                }
+                
+                if let images = postitem.userimages {
+                    
+                    if images.count > 0 {
+                        
+                        let apiclient : ApiClient = ApiClient()
+                        apiclient.getFireBaseImageUrl(imagepath: images[0].imageurl_str ?? "empty", completion: { url in
+                            
+                            if url != "empty" {
+                                
+                                Manager.shared.loadImage(with:URL(string:url)!, into: self.userImage)
+                                
+                            }
+                            
+                            
+                        })
+                    }
+                    
+                    
+                }
                 
             }
             
+            if let locitem = item.location {
+                
+                if let locname = locitem.name_str {
+                    
+                    addressLabel.text = "\(locname)\(locitem.address_str ?? "")"
+                }
+                
+            }
             
-        })
-       
+            if let tags = item.tags {
+                
+                itemArray  = tags
+                
+            }
+                
+           
+        }
+        
+        
+   
+//        descriptionlabel.text = PrefsManager.sharedinstance.description
+        
+        
+        collectionView.reloadData()
+        
+        
+        
     }
-
+    
 }
 
-extension Profile_PostViewController : Profile_postTableViewCellDelegate {
+extension ProfileLinkController : Profile_postTableViewCellDelegate {
     
     func popup() {
-       
+        
         openPopup()
         
     }
@@ -344,7 +367,7 @@ extension Profile_PostViewController : Profile_postTableViewCellDelegate {
         }
         let MaleAction = UIAlertAction(title: "Bookmark", style: UIAlertActionStyle.default) { _ in
             
-           
+            
             
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) { _ in
@@ -383,46 +406,5 @@ extension Profile_PostViewController : Profile_postTableViewCellDelegate {
     }
 }
 
-extension Profile_PostViewController :SettingsViewControllerDelegate {
-    
-    func sendlogoutstatus() {
-        
-        delegate?.sendlogoutstatus()
-        
-    }
-    
-    func logout() {
-        
-        
-        addProfileContainer()
-        
-    }
-    
-    func addProfileContainer() {
-        
-        /**************************Setting tabs*********************************/
-        
-        let nav1              = UINavigationController()
-        let storyboard        = UIStoryboard(name: Constants.Main, bundle: nil)
-        let controller        = storyboard.instantiateViewController(withIdentifier: Constants.ProfileId) as! Edit_ProfileVC
-        controller.boolForTitle = false
-        nav1.viewControllers = [controller]
-        self.tabBarController?.viewControllers?.append(nav1)
-        let myImage = UIImage(named: "profileunselected")!
-        self.tabBarItem.title        = nil
-        controller.tabBarItem = UITabBarItem(title: nil, image: myImage, selectedImage: myImage)
-        controller.tabBarItem.imageInsets  = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
 
-        /**************************Removing tabs*********************************/
-        
-        if let tabBarController = self.tabBarController {
-            let indexToRemove = 2
-            if indexToRemove < (tabBarController.viewControllers?.count)! {
-                var viewControllers = tabBarController.viewControllers
-                viewControllers?.remove(at: indexToRemove)
-                tabBarController.viewControllers = viewControllers
-            }
-        }
-        
-    }
-}
+

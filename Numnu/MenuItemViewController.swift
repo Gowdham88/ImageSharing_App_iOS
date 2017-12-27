@@ -150,6 +150,9 @@ extension MenuItemViewController : UITableViewDelegate,UITableViewDataSource {
         case "Business":
             openStoryBoardBusiness(name: Constants.ItemDetail, id: Constants.ItemDetailId)
             
+        case "BusinessEvent":
+            openStoryBoardBusiness(name: Constants.ItemDetail, id: Constants.ItemDetailId)
+            
         default:
             openStoryBoard(name: Constants.ItemDetail, id: Constants.ItemCompleteId)
         }

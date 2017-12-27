@@ -134,6 +134,7 @@
 		B4C515911FA0AC1700348E2A /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C515901FA0AC1600348E2A /* WebViewController.swift */; };
 		B4C7BCEB1F9F74E500B2BEC4 /* PostEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C7BCEA1F9F74E500B2BEC4 /* PostEventTableViewCell.swift */; };
 		B4CFB51D1FE0FA2100DE0817 /* ItemListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4CFB51C1FE0FA2100DE0817 /* ItemListModel.swift */; };
+		B4FC17FD1FF39D09009CAE6A /* ProfileLinkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FC17FC1FF39D09009CAE6A /* ProfileLinkController.swift */; };
 		BE2E37EC1FCD6ED8000BEE63 /* LuanchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2E37EB1FCD6ED8000BEE63 /* LuanchScreenViewController.swift */; };
 		BE5201F41FBDE82E00462B0E /* UserProfileTagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5201F31FBDE82E00462B0E /* UserProfileTagCollectionViewCell.swift */; };
 		BE57DEF71FBB0BCD00A9C93B /* PostImageZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE57DEF61FBB0BCD00A9C93B /* PostImageZoomViewController.swift */; };
@@ -303,6 +304,7 @@
 		B4C515901FA0AC1600348E2A /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		B4C7BCEA1F9F74E500B2BEC4 /* PostEventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEventTableViewCell.swift; sourceTree = "<group>"; };
 		B4CFB51C1FE0FA2100DE0817 /* ItemListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListModel.swift; sourceTree = "<group>"; };
+		B4FC17FC1FF39D09009CAE6A /* ProfileLinkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLinkController.swift; sourceTree = "<group>"; };
 		BE2E37EB1FCD6ED8000BEE63 /* LuanchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuanchScreenViewController.swift; sourceTree = "<group>"; };
 		BE5201F31FBDE82E00462B0E /* UserProfileTagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileTagCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE57DEF61FBB0BCD00A9C93B /* PostImageZoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImageZoomViewController.swift; sourceTree = "<group>"; };
@@ -600,6 +602,7 @@
 				B426C68D1F9E0A6B008D586B /* SplashViewController.swift */,
 				B46310231FA323E2009F6F0E /* PostDetailViewController.swift */,
 				BE2E37EB1FCD6ED8000BEE63 /* LuanchScreenViewController.swift */,
+				B4FC17FC1FF39D09009CAE6A /* ProfileLinkController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1021,6 +1024,7 @@
 				B45CBCE81FA9A166004B6E66 /* DefaultHomeTableViewCell.swift in Sources */,
 				B4917B8A1FE3F2C8005EF4B2 /* BusinessDetailModel.swift in Sources */,
 				3FC6CEBC1F6F744700DF2A12 /* ViewController.swift in Sources */,
+				B4FC17FD1FF39D09009CAE6A /* ProfileLinkController.swift in Sources */,
 				B4CFB51D1FE0FA2100DE0817 /* ItemListModel.swift in Sources */,
 				B4470EE31FBEEACC00DC2625 /* ValidationHelper.swift in Sources */,
 				B4C515861FA0800000348E2A /* MenuEventTableViewCell.swift in Sources */,

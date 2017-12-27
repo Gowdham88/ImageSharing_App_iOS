@@ -457,16 +457,41 @@ extension ParentViewController : PostTabControllerDelegate {
     
     func openPopup() {
         
-        self.shareView.alpha   = 1
-        
-        let top = CGAffineTransform(translationX: 0, y: 0)
-        
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-            self.shareView.isHidden = false
-            self.shareView.transform = top
+        let Alert = UIAlertController(title: "", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        let FemaleAction = UIAlertAction(title: "Share", style: UIAlertActionStyle.default) { _ in
             
-        }, completion: nil)
-        
-        
+            
+        }
+        let MaleAction = UIAlertAction(title: "Bookmark", style: UIAlertActionStyle.default) { _ in
+            
+            
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) { _ in
+        }
+        Alert.addAction(FemaleAction)
+        Alert.addAction(MaleAction)
+        Alert.addAction(cancelAction)
+        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad) {
+            Alert.popoverPresentationController?.sourceView = self.view
+            Alert.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
+            present(Alert, animated: true, completion:nil )
+        }else{
+            present(Alert, animated: true, completion:nil )
+        }
     }
+    
+//    func openPopup() {
+//
+//        self.shareView.alpha   = 1
+//
+//        let top = CGAffineTransform(translationX: 0, y: 0)
+//
+//        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+//            self.shareView.isHidden = false
+//            self.shareView.transform = top
+//
+//        }, completion: nil)
+//
+//
+//    }
 }
