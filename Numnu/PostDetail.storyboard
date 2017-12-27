@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -294,7 +294,7 @@
                                             <constraint firstAttribute="height" constant="20" id="kHy-dG-dta"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h2F-Mg-a2g">
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h2F-Mg-a2g">
                                         <rect key="frame" x="67" y="23" width="234" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="S7R-GB-hVE"/>
@@ -303,7 +303,7 @@
                                         <color key="textColor" red="0.16470588235294117" green="0.16470588235294117" blue="0.16470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bookmark" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2qF-xS-C5e">
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bookmark" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2qF-xS-C5e">
                                         <rect key="frame" x="67" y="74" width="234" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="ERk-tf-Ayg"/>
@@ -359,6 +359,7 @@
                         <outlet property="alertView" destination="mTc-GP-fFl" id="j7g-bf-v4D"/>
                         <outlet property="alertViewHide" destination="tM9-9p-dVI" id="00h-Ps-a55"/>
                         <outlet property="alertviewBottomConstraints" destination="rcv-Jf-mfa" id="MuW-ig-wMy"/>
+                        <outlet property="bookmarkpostlabel" destination="2qF-xS-C5e" id="EVg-UZ-NhA"/>
                         <outlet property="businessTap" destination="S26-95-fXa" id="TPf-QU-HzK"/>
                         <outlet property="dishwidthDConstaint" destination="Rsm-62-fT5" id="dIE-IH-o7a"/>
                         <outlet property="eventTap" destination="S8b-G0-oRa" id="qUh-Gc-PkA"/>
@@ -377,6 +378,7 @@
                         <outlet property="postDUserTime" destination="2HT-QO-BFJ" id="rxF-2X-Mcp"/>
                         <outlet property="postDUsernameLabel" destination="o8O-Eg-dsa" id="GG0-iJ-GYr"/>
                         <outlet property="postDUserplaceLabbel" destination="sab-nU-cTw" id="SEb-xg-i4u"/>
+                        <outlet property="sharepostlabel" destination="h2F-Mg-a2g" id="eoU-eb-M5V"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l2N-MO-vj6" userLabel="First Responder" sceneMemberID="firstResponder"/>

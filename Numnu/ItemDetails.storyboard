@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -374,7 +374,7 @@
                                                     <constraint firstAttribute="width" constant="18" id="8wy-rX-MmK"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGD-sC-gMF">
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGD-sC-gMF">
                                                 <rect key="frame" x="67" y="23" width="234" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="24" id="okN-Us-fon"/>
@@ -383,7 +383,7 @@
                                                 <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bookmark" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G4g-Iq-oeD">
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bookmark" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G4g-Iq-oeD">
                                                 <rect key="frame" x="67" y="74" width="234" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="24" id="k12-om-H7O"/>
@@ -448,6 +448,7 @@
                         <outlet property="ItImageView" destination="iuh-M2-zhK" id="MM7-7Q-zZM"/>
                         <outlet property="ItTitleLabel" destination="AiP-XY-Ag8" id="aHn-mn-wUV"/>
                         <outlet property="TabBarView" destination="5Zj-U8-6qn" id="LOl-9b-eIM"/>
+                        <outlet property="bookmarkItemDetlabel" destination="G4g-Iq-oeD" id="RZ6-LY-eBg"/>
                         <outlet property="businessEntityImage" destination="lSM-Je-UDZ" id="tK0-qv-ZKf"/>
                         <outlet property="businessEntityNameLabel" destination="dBS-0C-qvl" id="7iX-id-daU"/>
                         <outlet property="businessEntityScrollview" destination="xhe-SY-7v8" id="P6V-pe-jGb"/>
@@ -462,6 +463,7 @@
                         <outlet property="navigationItemList" destination="Qp3-Ni-I7b" id="aaG-Ui-Hxh"/>
                         <outlet property="pagerView" destination="hPy-br-hTK" id="7mt-bE-G8W"/>
                         <outlet property="readMoreButton" destination="OSA-us-qK6" id="44h-LJ-VcV"/>
+                        <outlet property="shareItemDetlabel" destination="dGD-sC-gMF" id="2Sc-XE-FTo"/>
                         <outlet property="shareView" destination="EK7-jI-jXn" id="Ol2-tg-2nh"/>
                         <outlet property="tagScrollView" destination="DT7-qh-O90" id="Jm7-zo-93X"/>
                     </connections>
@@ -493,7 +495,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OY7-kD-Bhu">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="bdx-9P-ZEB" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="3" translatesAutoresizingMaskIntoConstraints="NO" id="bdx-9P-ZEB" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
                                                             <rect key="frame" x="8" y="10" width="80" height="80"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="80" id="f5U-R9-FGj"/>
@@ -731,7 +733,7 @@
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="heP-DS-CdW">
                                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="427"/>
                                                                     <subviews>
-                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="foodie" translatesAutoresizingMaskIntoConstraints="NO" id="TGL-p7-sXW" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="TGL-p7-sXW" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
                                                                             <rect key="frame" x="10" y="94.5" width="300" height="200"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="200" id="0bM-0f-oAD"/>
@@ -1031,7 +1033,7 @@
                                                     <constraint firstAttribute="width" constant="18" id="mPy-QW-QYN"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TZj-xC-QNo">
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TZj-xC-QNo">
                                                 <rect key="frame" x="67" y="23" width="234" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="24" id="Pom-Af-m9G"/>
@@ -1040,7 +1042,7 @@
                                                 <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bookmark" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MqW-Kf-1Cd">
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bookmark" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MqW-Kf-1Cd">
                                                 <rect key="frame" x="67" y="74" width="234" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="24" id="0eA-Xr-2TM"/>
@@ -1116,6 +1118,8 @@
                         <outlet property="postTableview" destination="UAk-Co-3Yj" id="8D1-L6-2Sz"/>
                         <outlet property="readMoreButton" destination="mAC-eR-bQx" id="hH6-Bp-2sA"/>
                         <outlet property="shareView" destination="rAS-KP-uGj" id="ev3-bb-COn"/>
+                        <outlet property="sharebookmarklabel" destination="MqW-Kf-1Cd" id="wAs-Hk-wGw"/>
+                        <outlet property="shareitemlabel" destination="TZj-xC-QNo" id="hIC-Nl-o9H"/>
                         <outlet property="tagScrollView" destination="bAb-vn-mBc" id="131-4M-kS9"/>
                     </connections>
                 </viewController>
@@ -1134,7 +1138,6 @@
         <image name="dish_ico" width="22" height="23"/>
         <image name="eventDots" width="24" height="24"/>
         <image name="event_ico" width="25" height="27"/>
-        <image name="foodie" width="640" height="480"/>
         <image name="image_placeholder" width="960" height="796"/>
         <image name="location_ico" width="16" height="23"/>
         <image name="map_ico" width="25" height="25"/>

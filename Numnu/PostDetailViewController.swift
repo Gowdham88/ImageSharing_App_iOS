@@ -8,6 +8,7 @@
 
 import UIKit
 import Nuke
+import Alamofire
 
 class PostDetailViewController : UIViewController {
     
@@ -37,6 +38,12 @@ class PostDetailViewController : UIViewController {
     var window : UIWindow?
     var coverView : UIView?
     var item : PostListDataItems?
+    var apiClient : ApiClient!
+    
+    /*******************share label*****************************/
+    
+    @IBOutlet weak var sharepostlabel: UILabel!
+    @IBOutlet weak var bookmarkpostlabel: UILabel!
     
     @IBOutlet weak var eventTopHeight: NSLayoutConstraint!
     @IBOutlet weak var alertviewBottomConstraints: NSLayoutConstraint!
@@ -101,6 +108,8 @@ class PostDetailViewController : UIViewController {
             eventTopHeight.constant = 52
             
         }
+        
+        apiClient = ApiClient()
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -358,6 +367,9 @@ extension PostDetailViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.closePopup(sender:)))
         self.view.addGestureRecognizer(tap)
         
+        let bookmarktap = UITapGestureRecognizer(target: self, action: #selector(self.getBookmarkToken(sender:)))
+        self.bookmarkpostlabel.addGestureRecognizer(bookmarktap)
+        
     }
     
     func closePopup(sender : UITapGestureRecognizer) {
@@ -423,6 +435,74 @@ extension PostDetailViewController {
             placeWidthDConstraint.constant = 387
             
         }
+        
+    }
+    
+    
+    
+}
+
+/***************************Bookmark function********************************/
+
+extension PostDetailViewController {
+    
+    func bookmarkpost(token : String){
+        
+        let clientIp  = ValidationHelper.Instance.getIPAddress() ?? "1.0.1"
+        let userid    = PrefsManager.sharedinstance.userId
+        let eventname = "Post name"
+        
+        let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
+        let parameters: Parameters = ["entityid": item?.id ?? 0, "entityname":eventname , "type" : "post" ,"createdby" : userid,"updatedby": userid ,"clientip": clientIp, "clientapp": Constants.clientApp]
+        apiClient.bookmarEntinty(parameters: parameters,headers: header, completion: { status,response in
+            
+            if status == "success" {
+                
+                DispatchQueue.main.async {
+                    
+                    AlertProvider.Instance.showAlert(title: "Hey!", subtitle: "Bookmarked successfully.", vc: self)
+                    self.closePopup()
+                }
+                
+            } else {
+                
+                if status == "422" {
+                    
+                    AlertProvider.Instance.showAlert(title: "Hey!", subtitle: "Already bookmarked.", vc: self)
+                    
+                } else {
+                    
+                    AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Bookmark failed.", vc: self)
+                    
+                }
+            }
+            
+        })
+        
+    }
+    
+    func getBookmarkToken(sender : UITapGestureRecognizer){
+        
+        apiClient.getFireBaseToken(completion:{ token in
+            
+            
+            self.bookmarkpost(token: token)
+            
+        })
+        
+    }
+    
+    func closePopup() {
+       
+        
+        alertViewHide.alpha = 0
+        
+        UIView.animate(withDuration: 2, animations: {
+            
+            self.alertviewBottomConstraints.constant = self.view.frame.height + 600
+            
+            
+        }, completion: nil)
         
     }
     
