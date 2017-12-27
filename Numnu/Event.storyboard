@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -321,7 +321,7 @@
                                                     <constraint firstAttribute="height" constant="20" id="lWl-E4-SGH"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E9R-Co-fwj">
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E9R-Co-fwj">
                                                 <rect key="frame" x="67" y="23" width="234" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="24" id="Eec-Hs-aQV"/>
@@ -330,7 +330,7 @@
                                                 <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bookmark" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ssI-lf-0po">
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bookmark" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ssI-lf-0po">
                                                 <rect key="frame" x="67" y="74" width="234" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="24" id="H7E-cv-4cM"/>
@@ -394,6 +394,7 @@
                         <outlet property="EventLinkLabel1" destination="gAt-qt-Cww" id="tVB-hZ-S7v"/>
                         <outlet property="TabBarView" destination="Qgo-S0-0CV" id="4j6-ho-BhH"/>
                         <outlet property="barButtonTop" destination="3Bn-dk-BjB" id="s6m-Io-GCo"/>
+                        <outlet property="bookmarklabel" destination="ssI-lf-0po" id="rxA-nM-Bpf"/>
                         <outlet property="buttonBarView" destination="Qgo-S0-0CV" id="Wwd-ub-KUB"/>
                         <outlet property="containerView" destination="cgp-wT-7F1" id="iq1-Ph-x4k"/>
                         <outlet property="containerViewTop" destination="A1r-xE-hgH" id="6lp-7A-ekg"/>
@@ -413,6 +414,7 @@
                         <outlet property="pagerView" destination="cgp-wT-7F1" id="TOd-BD-B2D"/>
                         <outlet property="readMoreButton" destination="WMp-Up-FUj" id="e5W-aV-pPD"/>
                         <outlet property="shareView" destination="2Uq-Cf-kwz" id="6sE-Lb-UlP"/>
+                        <outlet property="sharelabel" destination="E9R-Co-fwj" id="c0D-s1-EBB"/>
                         <outlet property="tagScrollView" destination="Aos-pn-hej" id="lvl-QS-oRw"/>
                     </connections>
                 </viewController>

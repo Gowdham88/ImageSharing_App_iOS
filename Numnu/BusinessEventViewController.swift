@@ -90,6 +90,7 @@ class BusinessEventViewController: UIViewController,IndicatorInfoProvider {
         let storyboard      = UIStoryboard(name: name, bundle: nil)
         let vc              = storyboard.instantiateViewController(withIdentifier: id) as! BusinessDetailViewController
         vc.businessprimaryid = 50
+        vc.eventid           = primaryId
         self.navigationController!.pushViewController(vc, animated: true)
         
     }

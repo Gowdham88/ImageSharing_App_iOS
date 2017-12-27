@@ -64,6 +64,15 @@ class ItemCompleteviewcontroller : UIViewController {
 
     var itemprimaryid   : Int  = 39
     
+    @IBOutlet weak var shareitemlabel: UILabel!
+    @IBOutlet weak var sharebookmarklabel: UILabel!
+    
+    /*******************share***************************/
+    
+    lazy var bookmarkid   : Int       = 0
+    lazy var bookmarkname : String    = "name"
+    lazy var bookmarktype : String    = "empty"
+    
     override func viewDidLoad() {
        super.viewDidLoad()
         
@@ -315,7 +324,7 @@ extension ItemCompleteviewcontroller {
         //set image for button
         button2.setImage(UIImage(named: "eventDots"), for: UIControlState.normal)
         //add function for button
-        button2.addTarget(self, action: #selector(EventViewController.openPopup), for: UIControlEvents.touchUpInside)
+        button2.addTarget(self, action: #selector(EventViewController.openSheet), for: UIControlEvents.touchUpInside)
         //set frame
         button2.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
         
@@ -351,15 +360,32 @@ extension ItemCompleteviewcontroller {
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.closePopup(sender:)))
         self.shareView.addGestureRecognizer(tap)
         
+        let bookmarktap = UITapGestureRecognizer(target: self, action: #selector(self.getBookmarkToken(sender:)))
+        self.sharebookmarklabel.addGestureRecognizer(bookmarktap)
+        
     }
     
     func closePopup(sender : UITapGestureRecognizer) {
+        
+        bookmarkid   = 0
+        bookmarkname = "name"
+        bookmarktype = "empty"
         
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
             
             self.shareView.alpha                 = 0
             
         }, completion: nil)
+        
+    }
+    
+    func openSheet() {
+        
+        bookmarkid   = itemprimaryid
+        bookmarkname = ItTitleLabel.text ?? "Item name"
+        bookmarktype = "item"
+        
+        openPopup()
         
     }
     
@@ -375,6 +401,20 @@ extension ItemCompleteviewcontroller {
             
         }, completion: nil)
         
+        
+    }
+    
+    func closePopup() {
+        
+        bookmarkid   = 0
+        bookmarkname = "name"
+        bookmarktype = "empty"
+        
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            
+            self.shareView.alpha                 = 0
+            
+        }, completion: nil)
         
     }
     
@@ -546,9 +586,69 @@ extension ItemCompleteviewcontroller : PostEventTableViewCellDelegate {
     
     func bookmarkPost(tag: Int) {
         
+        bookmarkid   = postList[tag].id ?? 0
+        bookmarkname = postList[tag].business?.businessname ?? "name"
+        bookmarktype = "post"
+        
        openPopup()
         
     }
 
 }
+
+/***************************Bookmark function********************************/
+
+extension ItemCompleteviewcontroller {
+    
+    func bookmarkpost(token : String) {
+        
+        let clientIp  = ValidationHelper.Instance.getIPAddress() ?? "1.0.1"
+        let userid    = PrefsManager.sharedinstance.userId
+        let eventname = ItTitleLabel.text ?? "Item name"
+        
+        let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
+        let parameters: Parameters = ["entityid": itemprimaryid, "entityname":eventname , "type" : "item" ,"createdby" : userid,"updatedby": userid ,"clientip": clientIp, "clientapp": Constants.clientApp]
+        apiClient.bookmarEntinty(parameters: parameters,headers: header, completion: { status,response in
+            
+            if status == "success" {
+                
+                DispatchQueue.main.async {
+                    
+                    AlertProvider.Instance.showAlert(title: "Hey!", subtitle: "Bookmarked successfully.", vc: self)
+                    self.closePopup()
+                }
+                
+                
+                
+            } else {
+                
+                if status == "422" {
+                    
+                    AlertProvider.Instance.showAlert(title: "Hey!", subtitle: "Already bookmarked.", vc: self)
+                    
+                } else {
+                    
+                    AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Bookmark failed.", vc: self)
+                    
+                }
+            }
+            
+        })
+        
+    }
+    
+    func getBookmarkToken(sender : UITapGestureRecognizer) {
+        
+        apiClient.getFireBaseToken(completion:{ token in
+            
+            self.bookmarkpost(token: token)
+            
+        })
+        
+    }
+    
+    
+    
+}
+
 

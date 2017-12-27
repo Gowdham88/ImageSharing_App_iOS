@@ -69,9 +69,21 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     var isLabelAtMaxHeight = false
     var contentHeignt      = 649
     
+    /**********************share label********************************/
+    
+    @IBOutlet weak var sharelabel: UILabel!
+    @IBOutlet weak var bookmarklabel: UILabel!
+    
+    /**********************share********************************/
+    
+    lazy var bookmarkid   : Int       = 0
+    lazy var bookmarkname : String    = "name"
+    lazy var bookmarktype : String    = "empty"
+    
+    
     override func viewDidLoad() {
         settings.style.selectedBarHeight = 3.0
-         settings.style.buttonBarItemFont = UIFont(name: "Avenir-Medium", size: 14)!
+        settings.style.buttonBarItemFont = UIFont(name: "Avenir-Medium", size: 14)!
         super.viewDidLoad()
         myscrollView.delegate = self
         settings.style.buttonBarBackgroundColor = .white
@@ -303,7 +315,7 @@ extension EventViewController {
         //set image for button
         button2.setImage(UIImage(named: "eventDots"), for: UIControlState.normal)
         //add function for button
-        button2.addTarget(self, action: #selector(EventViewController.openPopup), for: UIControlEvents.touchUpInside)
+        button2.addTarget(self, action: #selector(EventViewController.openSheet), for: UIControlEvents.touchUpInside)
         //set frame
         button2.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
         
@@ -317,6 +329,8 @@ extension EventViewController {
  
         
     }
+    
+    
     
     func backButtonClicked() {
         
@@ -337,8 +351,6 @@ extension EventViewController {
         
         let storyboard      = UIStoryboard(name: Constants.Event, bundle: nil)
         let vc              = storyboard.instantiateViewController(withIdentifier: Constants.MapStoryId) as! EventMapViewController
-
-        
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
@@ -348,16 +360,33 @@ extension EventViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.closePopup(sender:)))
         self.shareView.addGestureRecognizer(tap)
         
+        let bookmarktap = UITapGestureRecognizer(target: self, action: #selector(self.getBookmarkToken(sender:)))
+        self.bookmarklabel.addGestureRecognizer(bookmarktap)
+        
     }
     
     func closePopup(sender : UITapGestureRecognizer) {
         
+        bookmarkid   = 0
+        bookmarkname = "name"
+        bookmarktype = "empty"
+        
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
            
-            self.shareView.alpha                 = 0
+            self.shareView.alpha   = 0
             
         }, completion: nil)
      
+    }
+    
+    func openSheet() {
+        
+        bookmarkid   = eventprimaryid
+        bookmarkname = eventTitleLabel.text ?? "name"
+        bookmarktype = "event"
+        
+        openPopup()
+        
     }
     
     func openPopup() {
@@ -375,21 +404,39 @@ extension EventViewController {
         
     }
     
+    func closePopup() {
+        
+        bookmarkid   = 0
+        bookmarkname = "name"
+        bookmarktype = "empty"
+        
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            
+            self.shareView.alpha                 = 0
+            
+        }, completion: nil)
+        
+    }
+    
 }
 
 /*************Post Delegate****************/
 
 extension EventViewController : ReviewEventViewControllerDelegate {
-    
-    func popupClick() {
-        
-        openPopup()
-    }
-    
+   
     func postTableHeight(height: CGFloat) {
      
         mainContainerView.constant = 532 + height
         mainContainerViewBottom.constant = 0
+    }
+    
+    func popupClick(postid: Int, postname: String) {
+        
+        bookmarkid   = postid
+        bookmarkname = postname
+        bookmarktype = "post"
+        
+        openPopup()
     }
     
    
@@ -431,7 +478,8 @@ extension EventViewController {
         })
         
     }
-    func MethodToCallApi(){
+    
+    func MethodToCallApi() {
         
        
         LoadingHepler.instance.show()
@@ -577,6 +625,61 @@ extension EventViewController {
         
         self.myscrollView.isHidden = false
     }
+}
+
+/***************************Bookmark function********************************/
+
+extension EventViewController {
+    
+    func bookmarkpost(token : String) {
+       
+        let clientIp  = ValidationHelper.Instance.getIPAddress() ?? "1.0.1"
+        let userid    = PrefsManager.sharedinstance.userId
+       
+        
+        let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
+        let parameters: Parameters = ["entityid": bookmarkid, "entityname":bookmarkname , "type" : bookmarktype ,"createdby" : userid,"updatedby": userid ,"clientip": clientIp, "clientapp": Constants.clientApp]
+        apiClient.bookmarEntinty(parameters: parameters,headers: header, completion: { status,response in
+            
+            if status == "success" {
+                
+                DispatchQueue.main.async {
+                    
+                    AlertProvider.Instance.showAlert(title: "Hey!", subtitle: "Bookmarked successfully.", vc: self)
+                    self.closePopup()
+                }
+                
+            } else {
+                
+                if status == "422" {
+                    
+                    AlertProvider.Instance.showAlert(title: "Hey!", subtitle: "Already bookmarked.", vc: self)
+              
+                } else {
+                    
+                    AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Bookmark failed.", vc: self)
+                    
+                }
+                
+                
+            }
+            
+        })
+        
+    }
+    
+    func getBookmarkToken(sender : UITapGestureRecognizer) {
+        
+        apiClient.getFireBaseToken(completion:{ token in
+           
+            self.bookmarkpost(token: token)
+           
+        })
+        
+    }
+    
+    
+    
 }
 
 

@@ -9,6 +9,7 @@
 import UIKit
 import XLPagerTabStrip
 import GoogleMaps
+import Alamofire
 
 class LocationDetailcontroller: ButtonBarPagerTabStripViewController {
     
@@ -46,6 +47,10 @@ class LocationDetailcontroller: ButtonBarPagerTabStripViewController {
     
     var latitude   : CLLocationDegrees = 45.511278
     var longtitude : CLLocationDegrees = -73.565778
+    
+    
+    @IBOutlet weak var bookmarkloclabel: UILabel!
+    @IBOutlet weak var shareloclabel: UILabel!
     
     override func viewDidLoad() {
         settings.style.selectedBarHeight = 3.0
@@ -388,8 +393,7 @@ extension LocationDetailcontroller : CLLocationManagerDelegate {
 
 extension LocationDetailcontroller : ReviewEventViewControllerDelegate {
     
-    func popupClick() {
-        
+    func popupClick(postid: Int, postname: String) {
         openPopup()
     }
     
@@ -413,4 +417,34 @@ extension LocationDetailcontroller : MenuEventViewControllerDelegate {
     }
     
 }
+
+extension LocationDetailcontroller {
+    
+    func bookmarkpost(sender : UITapGestureRecognizer) {
+//
+//        let clientIp  = ValidationHelper.Instance.getIPAddress() ?? "1.0.1"
+//        let userid    = PrefsManager.sharedinstance.userId
+//        let eventname = LocAddressLabel.text ?? "Item name"
+//
+//        let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
+//        let parameters: Parameters = ["entityid": itemprimaryid, "entityname":eventname , "type" : "item" ,"createdby" : userid,"updatedby": userid ,"clientip": clientIp, "clientapp": Constants.clientApp]
+//        apiClient.bookmarEntinty(parameters: parameters,headers: header, completion: { status,response in
+//
+//            if status == "success" {
+//
+//                AlertProvider.Instance.showAlert(title: "Hey!", subtitle: "Bookmarked successfully.", vc: self)
+//
+//            } else {
+//
+//                AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Bookmark failed.", vc: self)
+//            }
+//
+//        })
+        
+    }
+    
+    
+    
+}
+
 
