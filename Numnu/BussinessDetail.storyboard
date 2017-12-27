@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -287,6 +287,7 @@
                         <outlet property="busDescriptionHeight" destination="xJD-Vx-Sxv" id="OFn-3K-TRZ"/>
                         <outlet property="busImageView" destination="egJ-dm-ObJ" id="m3O-FD-Ac5"/>
                         <outlet property="busTitleLabel" destination="dbq-an-3gn" id="nST-5Z-2pH"/>
+                        <outlet property="buseventIcon" destination="59l-cz-Dep" id="wGn-Wm-qJV"/>
                         <outlet property="buseventLabel" destination="oxf-Md-44l" id="whr-RV-rST"/>
                         <outlet property="buttonBarView" destination="JnR-Aw-N5a" id="Enw-3o-JLo"/>
                         <outlet property="completeViewMenu" destination="79Q-lb-B6x" id="w6k-Mw-vrq"/>

@@ -18,7 +18,8 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
     @IBOutlet weak var busImageView: ImageExtender!
     @IBOutlet weak var busTitleLabel: UILabel!
     @IBOutlet weak var buseventLabel: UILabel!
-   
+    @IBOutlet var buseventIcon: ImageExtender!
+    
     @IBOutlet weak var eventDescriptionLabel: UILabel!
     @IBOutlet weak var readMoreButton: UIButton!
     
@@ -91,6 +92,12 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
         let businesstap = UITapGestureRecognizer(target: self, action: #selector(BusinessDetailViewController.businesstap))
         buseventLabel.addGestureRecognizer(businesstap)
         buseventLabel.isUserInteractionEnabled = true
+        
+        let businessIcontap = UITapGestureRecognizer(target: self, action: #selector(BusinessDetailViewController.businesstap))
+        buseventIcon.addGestureRecognizer(businessIcontap)
+        buseventIcon.isUserInteractionEnabled = true
+        
+        
         /**********************set Nav bar****************************/
         
         setNavBar()
@@ -116,6 +123,13 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
     }
     func businesstap(){
      
+        let storyboard      = UIStoryboard(name: Constants.Event, bundle: nil)
+        let vc              = storyboard.instantiateViewController(withIdentifier: "eventstoryid")
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
+    
+    func businessIcontap(){
+        
         let storyboard      = UIStoryboard(name: Constants.Event, bundle: nil)
         let vc              = storyboard.instantiateViewController(withIdentifier: "eventstoryid")
         self.navigationController!.pushViewController(vc, animated: true)

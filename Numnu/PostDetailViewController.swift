@@ -97,6 +97,10 @@ class PostDetailViewController : UIViewController {
         postDUserplaceLabbel.addGestureRecognizer(profileusernametagtap)
         postDUserplaceLabbel.isUserInteractionEnabled = true
         
+        let profileusernametap = UITapGestureRecognizer(target: self, action:#selector(PostDetailViewController.profileusernametap))
+        postDUsernameLabel.addGestureRecognizer(profileusernametap)
+        postDUsernameLabel.isUserInteractionEnabled = true
+        
         if (postDEventDishLabel.numberOfVisibleLines > 1) {
             
             eventTopHeight.constant = 52
@@ -209,6 +213,15 @@ class PostDetailViewController : UIViewController {
                         }
     }
     func postDUserImagetap(){
+        
+        let storyboard  = UIStoryboard(name: Constants.Main, bundle: nil)
+        let vc          = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
+        vc.boolForBack = false
+        self.navigationController!.pushViewController(vc, animated: true)
+        
+    }
+    
+    func profileusernametap(){
         
         let storyboard  = UIStoryboard(name: Constants.Main, bundle: nil)
         let vc          = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
