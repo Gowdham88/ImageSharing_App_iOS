@@ -24,9 +24,10 @@ protocol SettingsViewControllerDelegate {
 }
 
 
-class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, UIScrollViewDelegate {
 
-   
+    @IBOutlet weak var myScrollView: UIScrollView!
+    
     @IBOutlet weak var topHeaderView: UIView!
     @IBOutlet var navigationItemList: UINavigationItem!
     
@@ -39,6 +40,7 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
        setNavBar()
+        myScrollView.delegate = self
         self.navigationController?.navigationBar.titleTextAttributes =
             [NSForegroundColorAttributeName: UIColor.black,
              NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
