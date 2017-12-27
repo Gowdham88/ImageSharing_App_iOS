@@ -121,6 +121,8 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         datePicker.isHidden = true
         superVieww.isHidden = true
         doneView.isHidden = true
+        cancelDatePicker.isHidden = true
+
         usernameTextField.delegate = self
         nameTextfield.delegate = self
         emailaddress.delegate = self
@@ -180,8 +182,6 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         
         dropdownTableView.layer.shadowColor = UIColor.darkGray.cgColor
         dropdownTableView.backgroundColor = UIColor.clear
-
-        dropdownTableView.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1.0)
         dropdownTableView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
         dropdownTableView.layer.shadowOpacity = 2.0
         dropdownTableView.layer.shadowRadius = 5
@@ -229,7 +229,10 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         myscrollView.setContentOffset(offset, animated: true)
     }
     func datecancelClicked () {
-        datePicker.isHidden = true
+        datePicker.isHidden       = true
+        doneView.isHidden         = true
+        cancelDatePicker.isHidden = true
+        superVieww.isHidden       = true
     }
     func addClicked() {
         if foodTextfield.text == "" {
@@ -374,6 +377,8 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             datePicker.isHidden = false
             superVieww.isHidden = false
             doneView.isHidden = false
+            cancelDatePicker.isHidden = false
+
            showPopup(table1: true, table2: true)
         }else if textField == cityTextfield {
             
@@ -382,27 +387,44 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             datePicker.isHidden = true
             superVieww.isHidden = true
             doneView.isHidden   = true
-            
+            cancelDatePicker.isHidden = true
+
         }else if textField == genderTextfield {
             showPopup(table1: true, table2: true)
             
             genderTextfield.resignFirstResponder()
             showGenderActionsheet()
         }else if textField == foodTextfield {
-             showPopup(table1: true, table2: false)
+            let foodtext = foodTextfield.text!
+            if foodtext.count > 1 {
+                showPopup(table1: true, table2: false)
+
+            }else{
+                showPopup(table1: true, table2: true)
+
+            }
+           
         }else{
             showPopup(table1: true, table2: true)
             self.datePickerValueChanged(sender: datePicker)
             datePicker.isHidden = true
             superVieww.isHidden = true
             doneView.isHidden   = true
+            cancelDatePicker.isHidden = true
+
         }
     }
-    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        
+            citytableview.isHidden = true
+      
+        
+        return true
+    }
     func textFieldDidEndEditing(_ textField: UITextField) {
         
         focusEdittext(textfield: textField,focus: false)
-        
+       
         if textField == usernameTextField {
             
             if let userNamefield = textField.text,userNamefield != PrefsManager.sharedinstance.username {
@@ -430,6 +452,8 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             datePicker.isHidden = true
             superVieww.isHidden = true
             doneView.isHidden = true
+            cancelDatePicker.isHidden = true
+
         }
         if textField == genderTextfield {
             genderTextfield.tintColor = .clear
@@ -437,6 +461,11 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         if textField == foodTextfield {
             
             foodTextfield.text = ""
+            
+        }
+        if textField == cityTextfield {
+            
+        citytableview.isHidden = true
             
         }
     }
@@ -464,6 +493,8 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         datePicker.isHidden = false
         superVieww.isHidden = false
         doneView.isHidden = false
+        cancelDatePicker.isHidden = false
+
         // Creates the toolbar
         let toolBar = UIToolbar()
         toolBar.barStyle = .default
@@ -478,6 +509,8 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         superVieww.isHidden = true
         datePicker.isHidden = true
         doneView.isHidden = true
+        cancelDatePicker.isHidden = true
+
     }
     
     func datePickerValueChanged(sender:UIDatePicker) {
@@ -956,6 +989,8 @@ extension SettingsEdit_ProfieViewController {
             datePicker.isHidden = true
             superVieww.isHidden = true
             doneView.isHidden = true
+            cancelDatePicker.isHidden = true
+
             
         }
    

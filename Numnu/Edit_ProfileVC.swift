@@ -315,6 +315,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     }
     func dateCancelClicked() {
         cancelBool = true
+        
         datePicker.isHidden = true
         doneView.isHidden = true
         superVieww.isHidden = true
@@ -476,6 +477,13 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
         focusEdittext(textfield: textField,focus: true)
+        
+        if !(textField == birthTextfield) {
+            datePicker.isHidden = true
+            superVieww.isHidden = true
+            doneView.isHidden   = true
+            
+        }
 
         if textField == birthTextfield {
             showDatePicker()
@@ -498,9 +506,15 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
            genderTextfield.resignFirstResponder()
            showGenderActionsheet()
             
-        }else if textField == foodTextfield {
-            showPopup(table1: true, table2: false)
-            
+        }else if textField == foodTextfield {            
+            let foodtext = foodTextfield.text!
+            if foodtext.count > 1 {
+                showPopup(table1: true, table2: false)
+                
+            }else{
+                showPopup(table1: true, table2: true)
+                
+            }
         } else {
             showPopup(table1: true, table2: true)
             genderTextfield.resignFirstResponder()
@@ -575,6 +589,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             cityDictonary = nil
             cityTextfield.text = ""
             
+        }
+        if textField == foodTextfield {
+            dropdownTableView.isHidden = true
         }
         
         return false

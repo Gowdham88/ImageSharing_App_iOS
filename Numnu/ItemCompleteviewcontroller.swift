@@ -34,7 +34,10 @@ class ItemCompleteviewcontroller : UIViewController {
     @IBOutlet weak var readMoreButton: UIButton!
     
     @IBOutlet weak var businessName: UILabel!
+    @IBOutlet var businessIcon: ImageExtender!
+    
     @IBOutlet weak var eventname: UILabel!
+    @IBOutlet var eventIcon: ImageExtender!
     
     
     @IBOutlet weak var tagScrollView: UIScrollView!
@@ -92,9 +95,17 @@ class ItemCompleteviewcontroller : UIViewController {
         eventname.addGestureRecognizer(eventtap)
         eventname.isUserInteractionEnabled = true
         
+        let eventIcontap = UITapGestureRecognizer(target: self, action: #selector(ItemCompleteviewcontroller.eventIcontap))
+        eventIcon.addGestureRecognizer(eventIcontap)
+        eventIcon.isUserInteractionEnabled = true
+        
         let businesstap = UITapGestureRecognizer(target: self, action: #selector(ItemCompleteviewcontroller.businesstap))
         businessName.addGestureRecognizer(businesstap)
         businessName.isUserInteractionEnabled = true
+        
+        let businessIcontap = UITapGestureRecognizer(target: self, action: #selector(ItemCompleteviewcontroller.businessIcontap))
+        businessIcon.addGestureRecognizer(businessIcontap)
+        businessIcon.isUserInteractionEnabled = true
         
         ItDescriptionLabel.text = Constants.dummy
         
@@ -196,7 +207,21 @@ class ItemCompleteviewcontroller : UIViewController {
         let vc              = storyboard.instantiateViewController(withIdentifier: "eventstoryid")
         self.navigationController!.pushViewController(vc, animated: true)
     }
+    
+    func eventIcontap(){
+        
+        let storyboard      = UIStoryboard(name: Constants.Event, bundle: nil)
+        let vc              = storyboard.instantiateViewController(withIdentifier: "eventstoryid")
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
     func businesstap(){
+        
+        let storyboard = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId)
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
+    
+    func businessIcontap(){
         
         let storyboard = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId)
