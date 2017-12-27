@@ -376,6 +376,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             doneView.isHidden = false
            showPopup(table1: true, table2: true)
         }else if textField == cityTextfield {
+            
             showPopup(table1: false, table2: true)
             self.datePickerValueChanged(sender: datePicker)
             datePicker.isHidden = true
@@ -422,9 +423,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
                 })
                 
             }
-            
-           
-        }
+    }
         
         if textField == birthTextfield {
             self.datePickerValueChanged(sender: datePicker)
