@@ -237,7 +237,6 @@ class ItemCompleteviewcontroller : UIViewController {
         super.viewDidAppear(true)
         viewState = true
 
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -499,7 +498,7 @@ extension ItemCompleteviewcontroller : UITableViewDelegate,UITableViewDataSource
         cell.postEventBookMark.tag = indexPath.row
         cell.setHeight(heightview : Float(UIScreen.main.bounds.size.height))
         
-        let posteventImagetap = UITapGestureRecognizer(target: self, action: #selector(getter: PostEventTableViewCell.postEventImage))
+        let posteventImagetap = UITapGestureRecognizer(target: self, action: #selector(ItemCompleteviewcontroller.postEventImage(sender:)))
         cell.postEventImage.addGestureRecognizer(posteventImagetap)
         cell.postEventImage.isUserInteractionEnabled = true
         
@@ -577,10 +576,14 @@ extension ItemCompleteviewcontroller : UITableViewDelegate,UITableViewDataSource
         }
     }
     
-    func postEventImage() {
-        let storyboard = UIStoryboard(name: Constants.PostDetail, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: "postdetailid")
-        self.navigationController!.pushViewController(vc, animated: true)
+    func postEventImage(sender : UITapGestureRecognizer) {
+        
+            let tag        = sender.view!.tag
+            let storyboard = UIStoryboard(name: Constants.PostDetail, bundle: nil)
+            let vc         = storyboard.instantiateViewController(withIdentifier: "postdetailid") as! PostDetailViewController
+            vc.item        = postList[tag]
+            self.navigationController!.pushViewController(vc, animated: true)
+    
         
     }
     func postEventPlace() {
