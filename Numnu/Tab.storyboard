@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -269,7 +269,7 @@
                                             <outlet property="postEventPlace" destination="hhi-c2-Xbg" id="Y4o-2l-r13"/>
                                             <outlet property="postEventPlaceIcon" destination="SrC-yZ-1Ga" id="Gtw-vD-iUd"/>
                                             <outlet property="postLikeImage" destination="Xgc-Zh-vj3" id="23E-ws-F3M"/>
-                                            <outlet property="postUserImage" destination="2ZJ-Fd-oY6" id="FYb-1G-D1H"/>
+                                            <outlet property="postUserImage" destination="TLs-Db-xH6" id="4H2-a0-X5q"/>
                                             <outlet property="postUserTime" destination="aFd-tL-wcC" id="Asv-Bd-LYD"/>
                                             <outlet property="postUsernameLabel" destination="7sA-Fj-o0e" id="eo7-mh-poA"/>
                                             <outlet property="postUserplaceLabbel" destination="vX8-z1-p7r" id="a47-vU-yS9"/>
@@ -1044,7 +1044,7 @@
                                         </cells>
                                     </collectionView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Past Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="103-ut-mdO">
-                                        <rect key="frame" x="10" y="175" width="86" height="30"/>
+                                        <rect key="frame" x="10" y="175" width="90.5" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="bkp-e5-x09"/>
                                         </constraints>
@@ -1342,7 +1342,7 @@
         <image name="onboard" width="375" height="667"/>
         <image name="onboardbg" width="2225" height="1348"/>
         <image name="profile" width="512" height="512"/>
-        <image name="rating1" width="32" height="29"/>
+        <image name="rating1" width="70" height="70"/>
         <image name="restaurant_ico" width="26" height="26"/>
     </resources>
 </document>

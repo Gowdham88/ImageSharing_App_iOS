@@ -130,10 +130,7 @@ extension PostTabController : UITableViewDelegate,UITableViewDataSource {
     }
     func postEventImage() {
         let storyboard = UIStoryboard(name: Constants.PostDetail, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: "postdetailid") as! PostImageZoomViewController
-
-//        vc.imagePassed = postEventImage.image!
-        
+        let vc         = storyboard.instantiateViewController(withIdentifier: "postdetailid") as! PostDetailViewController
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
