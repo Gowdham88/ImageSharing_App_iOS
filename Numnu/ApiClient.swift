@@ -120,15 +120,16 @@ class  ApiClient {
                 if let value = response.result.value {
                     
                     let json = JSON(value)
+                    if let usernameexistsno = json["usernameexists"].int {
+                        
+                        completion("success",usernameexistsno == 1 ? true : false)
+                    }
                     if let usernameexists = json["usernameexists"].bool {
                         
                         completion("success",usernameexists)
                     }
                     
-                    if let usernameexistsno = json["usernameexists"].int {
-                        
-                        completion("success",usernameexistsno == 1 ? true : false)
-                    }
+                   
                     
                 }
                 

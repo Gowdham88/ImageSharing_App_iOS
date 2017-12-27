@@ -551,21 +551,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     
     @IBAction func didTappedSave(_ sender: Any) {
       
-        let Email:NSString = emailaddress.text! as NSString
-        if nameTextfield.text == "" || emailaddress.text == ""  || cityTextfield.text == "" || genderTextfield.text == "" || usernameTextField.text == ""  {
-            AlertProvider.Instance.showAlert(title: "Oops", subtitle: "Fields Cannot be empty", vc: self)
-        } else {
-            if isValidEmail(testStr: Email as String) == true {
-                PrefsManager.sharedinstance.isLoginned = true
-                let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
-                let vc         = storyboard.instantiateViewController(withIdentifier: "SettingsVC") as! SettingsViewController
-                vc.delegate    = self as? SettingsViewControllerDelegate
-                self.navigationController!.pushViewController(vc, animated: true)
-                
-            }else {
-                AlertProvider.Instance.showAlert(title: "Oops", subtitle: "Please Enter Valid Email ID", vc: self)
-            }
-        }
+        saveClicked()
     }
     
    
@@ -662,7 +648,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         button.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
         let leftButton =  UIBarButtonItem(customView: button)
         leftButton.isEnabled = true
-        let rightButton = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        let rightButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveClicked))
         navigationItemList.leftBarButtonItem = leftButton
         navigationItemList.rightBarButtonItem = rightButton
     }
@@ -670,7 +656,24 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     func backButtonClicked() {
         _ = self.navigationController?.popViewController(animated: true)
     }
-    
+    func saveClicked(){
+        let Email:NSString = emailaddress.text! as NSString
+        if nameTextfield.text == "" || emailaddress.text == ""  || cityTextfield.text == "" || genderTextfield.text == "" || usernameTextField.text == ""  {
+            AlertProvider.Instance.showAlert(title: "Oops", subtitle: "Fields Cannot be empty", vc: self)
+        } else {
+            if isValidEmail(testStr: Email as String) == true {
+                PrefsManager.sharedinstance.isLoginned = true
+                let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
+                let vc         = storyboard.instantiateViewController(withIdentifier: "SettingsVC") as! SettingsViewController
+                vc.delegate    = self as? SettingsViewControllerDelegate
+//                self.navigationController!.pushViewController(vc, animated: true)
+                self.navigationController?.popViewController(animated: true)
+                
+            }else {
+                AlertProvider.Instance.showAlert(title: "Oops", subtitle: "Please Enter Valid Email ID", vc: self)
+            }
+        }
+    }
     /// collectionView for food preferences ///
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
