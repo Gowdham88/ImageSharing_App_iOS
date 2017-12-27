@@ -139,22 +139,25 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
-        let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid2) as! MenuEventViewController
-        child_1.menuDelegate    = self
-        child_1.itemType        = "Business"
-        child_1.primayId        = 50
+        let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3) as! ReviewEventViewController
+        child_1.popdelegate     = self
+        child_1.apiType         = "Business"
+        child_1.primaryid       = 50
         
-        let child_2 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3) as! ReviewEventViewController
-        child_2.popdelegate     = self
-        child_2.apiType         = "Business"
-        child_2.primaryid       = 50
+        let child_2 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid2) as! MenuEventViewController
+        child_2.menuDelegate    = self
+        child_2.itemType        = "Business"
+        child_2.primayId        = 50
         
-        let child_3 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1) as! EventTabController
-        child_3.scrolltableview = false
-        child_3.eventdelegate   = self
-        child_3.apiType         = "Business"
+        let child_3 = UIStoryboard(name: Constants.ItemDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid7)  as! LocationTabController
+        child_3.locationdelegate = self
         
-        return [child_1,child_2,child_3]
+        let child_4 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1) as! EventTabController
+        child_4.scrolltableview = false
+        child_4.eventdelegate   = self
+        child_4.apiType         = "Business"
+        
+        return [child_1,child_2,child_3,child_4]
         
     }
     
@@ -389,6 +392,20 @@ extension BusinessCompleteViewController : EventTabControllerDelegate {
     
     
 }
+
+/*******************Location delegate****************************/
+
+extension BusinessCompleteViewController : LocationTabControllerDelegate {
+    
+    func locationTableHeight(height: CGFloat) {
+        
+        mainContainerView.constant = 440 + height
+        mainContainerViewBottom.constant = 0
+    }
+    
+    
+}
+
 
 extension BusinessCompleteViewController {
     

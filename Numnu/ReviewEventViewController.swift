@@ -52,7 +52,7 @@ class ReviewEventViewController: UIViewController,IndicatorInfoProvider {
         }
         apiClient = ApiClient()
         
-        if apiType == "Item" || apiType == "Location" {
+        if apiType == "Item" || apiType == "Location" || apiType == "Business" {
             
             methodToCallApi(pageno: pageno, limit: limitno)
         }
