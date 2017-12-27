@@ -23,6 +23,7 @@
 		472A91DA1FE2945B0070FE0B /* PostListByEventId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472A91D91FE2945B0070FE0B /* PostListByEventId.swift */; };
 		472A91DC1FE2972F0070FE0B /* PostListDataItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472A91DB1FE2972F0070FE0B /* PostListDataItems.swift */; };
 		472A91DE1FE2A7FB0070FE0B /* PostCreatorList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472A91DD1FE2A7FB0070FE0B /* PostCreatorList.swift */; };
+		475FBA3E1FF22268008BA5D8 /* ItemLocationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475FBA3D1FF22268008BA5D8 /* ItemLocationList.swift */; };
 		601D46771F8D205E00832BDD /* signInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601D46761F8D205E00832BDD /* signInVC.swift */; };
 		601D46791F8F3B1C00832BDD /* UserList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601D46781F8F3B1C00832BDD /* UserList.swift */; };
 		6043865C1FB052860049F971 /* FoodPreferenceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6043865B1FB052860049F971 /* FoodPreferenceCollectionViewCell.swift */; };
@@ -180,6 +181,7 @@
 		472A91D91FE2945B0070FE0B /* PostListByEventId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListByEventId.swift; sourceTree = "<group>"; };
 		472A91DB1FE2972F0070FE0B /* PostListDataItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListDataItems.swift; sourceTree = "<group>"; };
 		472A91DD1FE2A7FB0070FE0B /* PostCreatorList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreatorList.swift; sourceTree = "<group>"; };
+		475FBA3D1FF22268008BA5D8 /* ItemLocationList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemLocationList.swift; sourceTree = "<group>"; };
 		601D46761F8D205E00832BDD /* signInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signInVC.swift; sourceTree = "<group>"; };
 		601D46781F8F3B1C00832BDD /* UserList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserList.swift; sourceTree = "<group>"; };
 		601D467A1F8FAF4B00832BDD /* Numnu.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Numnu.entitlements; sourceTree = "<group>"; };
@@ -487,6 +489,7 @@
 				472A91D91FE2945B0070FE0B /* PostListByEventId.swift */,
 				472A91DB1FE2972F0070FE0B /* PostListDataItems.swift */,
 				472A91DD1FE2A7FB0070FE0B /* PostCreatorList.swift */,
+				475FBA3D1FF22268008BA5D8 /* ItemLocationList.swift */,
 			);
 			name = TabModel;
 			sourceTree = "<group>";
@@ -1042,6 +1045,7 @@
 				472A91DC1FE2972F0070FE0B /* PostListDataItems.swift in Sources */,
 				B44E1D531FA1BECE001F754E /* ReviewEventViewController.swift in Sources */,
 				604386601FB0A9480049F971 /* Profile_postTableViewCell.swift in Sources */,
+				475FBA3E1FF22268008BA5D8 /* ItemLocationList.swift in Sources */,
 				B42F2A261FA9EA96002419AB /* LocationDetailcontroller.swift in Sources */,
 				472A91DE1FE2A7FB0070FE0B /* PostCreatorList.swift in Sources */,
 				B4C515881FA085BB00348E2A /* ListTabController.swift in Sources */,
