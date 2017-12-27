@@ -53,7 +53,7 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
     var businessprimaryid : Int  = 50
     var eventid : Int  = 34
 
-    var eventid           : Int  = 34
+//    var eventid           : Int  = 34
     
     @IBOutlet weak var bookmarkbusinesslabel: UILabel!
     @IBOutlet weak var sharebusinesslabel: UILabel!

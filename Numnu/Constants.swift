@@ -135,14 +135,14 @@ class Constants {
     
     /*********Api **********/
     
-    static let LoginApiUrl         = "https://numnu-server-dev.appspot.com/users/signin"
-    static let TagApiUrl           = "https://numnu-server-dev.appspot.com/tags"
-    static let EventApiUrl         = "https://numnu-server-dev.appspot.com/events"
-    static let ItemsApiUrl         = "https://numnu-server-dev.appspot.com/items"
-    static let EventTypeApiUrl     = "https://numnu-server-dev.appspot.com/eventtypes"
-    static let PostsByEventId      = "https://numnu-server-dev.appspot.com/events/34/posts"
-    static let BusinessDetailApi   = "https://numnu-server-dev.appspot.com/businesses"
-    static let PostsByItemId       = "https://numnu-server-dev.appspot.com/items"
+//    static let LoginApiUrl         = "https://numnu-server-dev.appspot.com/users/signin"
+//    static let TagApiUrl           = "https://numnu-server-dev.appspot.com/tags"
+//    static let EventApiUrl         = "https://numnu-server-dev.appspot.com/events"
+//    static let ItemsApiUrl         = "https://numnu-server-dev.appspot.com/items"
+//    static let EventTypeApiUrl     = "https://numnu-server-dev.appspot.com/eventtypes"
+//    static let PostsByEventId      = "https://numnu-server-dev.appspot.com/events/34/posts"
+//    static let BusinessDetailApi   = "https://numnu-server-dev.appspot.com/businesses"
+//    static let PostsByItemId       = "https://numnu-server-dev.appspot.com/items"
     static let LoginApiUrl        = "https://numnu-server-dev.appspot.com/users/signin"
     static let TagApiUrl          = "https://numnu-server-dev.appspot.com/tags"
     static let EventApiUrl        = "https://numnu-server-dev.appspot.com/events"
