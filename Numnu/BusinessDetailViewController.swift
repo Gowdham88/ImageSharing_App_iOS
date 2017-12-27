@@ -163,6 +163,7 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
         child_2.popdelegate = self
         child_2.apiType     = "BusinessEvent"
         child_2.primaryid   = businessprimaryid
+        child_2.eventId     = eventid
         return [child_1, child_2]
         
     }

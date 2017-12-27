@@ -45,6 +45,7 @@ class MenuEventViewController: UIViewController,IndicatorInfoProvider,UITableVie
     var itemType : String = "default"
     
     var primayId : Int = 34
+    /********************************Event context******************************************/
     var eventId  : Int = 34
     
     override func viewDidLoad() {
@@ -65,6 +66,8 @@ class MenuEventViewController: UIViewController,IndicatorInfoProvider,UITableVie
             getItemTagBusiness(pageno: pageno, limit: limitno)
             
         }
+        
+        /********************************Event context******************************************/
         
         if itemType == "BusinessEvent" {
             
@@ -334,6 +337,8 @@ extension MenuEventViewController : UICollectionViewDelegate,UICollectionViewDat
 
 extension MenuEventViewController {
     
+    /********************************Event Detail******************************************/
+    
     func getItemTag(pageno:Int,limit:Int) {
         
        LoadingHepler.instance.show()
@@ -381,6 +386,8 @@ extension MenuEventViewController {
         
     }
     
+    /********************************Business Detail******************************************/
+    
     func getItemTagBusiness(pageno:Int,limit:Int) {
         
        LoadingHepler.instance.show()
@@ -427,6 +434,8 @@ extension MenuEventViewController {
         
         
     }
+    
+    /********************************Event context******************************************/
     
     func getItemTagEventBusiness(pageno:Int,limit:Int) {
         
