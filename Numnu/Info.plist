@@ -138,10 +138,16 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSLocationUsageDescription</key>
+	<string>Numnu wants to enable your location</string>
+	<key>NSPrefPaneIconFile</key>
+	<string></string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Numnu wants to enable your location</string>
 	<key>NSCameraUsageDescription</key>
 	<string>$(PRODUCT_NAME) app requires access to the camera</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Numnu wants to enable your location</string>
+	<string>Numnu wants to enable your location allow</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Numnu wants to enable your location</string>
 	<key>NSPhotoLibraryUsageDescription</key>

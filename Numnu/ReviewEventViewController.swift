@@ -52,7 +52,7 @@ class ReviewEventViewController: UIViewController,IndicatorInfoProvider {
         }
         apiClient = ApiClient()
         
-        if apiType == "Item" || apiType == "Location" {
+        if apiType == "Item" || apiType == "Location" || apiType == "Business"   {
             
             methodToCallApi(pageno: pageno, limit: limitno)
         }
@@ -238,15 +238,15 @@ extension ReviewEventViewController : UITableViewDelegate,UITableViewDataSource 
         cell.postDtEventName.addGestureRecognizer(posteventnametap)
         cell.postDtEventName.isUserInteractionEnabled = true
         
-        let profiletap = UITapGestureRecognizer(target: self, action:#selector(getter: postEventDetailTableViewCell.postDtUserImage))
+        let profiletap = UITapGestureRecognizer(target: self, action:#selector(postDtUserImage(sender:)))
         cell.postDtUserImage.addGestureRecognizer(profiletap)
         cell.postDtUserImage.isUserInteractionEnabled = true
         
-        let profileusernametap = UITapGestureRecognizer(target: self, action:#selector(getter: postEventDetailTableViewCell.postDtUsernameLabel))
+        let profileusernametap = UITapGestureRecognizer(target: self, action:#selector(postDtUserImage(sender:)))
         cell.postDtUsernameLabel.addGestureRecognizer(profileusernametap)
         cell.postDtUsernameLabel.isUserInteractionEnabled = true
         
-        let profileusernametagtap = UITapGestureRecognizer(target: self, action:#selector(getter: postEventDetailTableViewCell.postDtUsernameLabel))
+        let profileusernametagtap = UITapGestureRecognizer(target: self, action:#selector(postDtUserImage(sender:)))
         cell.postDtUserplaceLabbel.addGestureRecognizer(profileusernametagtap)
         cell.postDtUserplaceLabbel.isUserInteractionEnabled = true
         
@@ -290,7 +290,7 @@ extension ReviewEventViewController : UITableViewDelegate,UITableViewDataSource 
     }
    
     func postDtEventImages(sender: UITapGestureRecognizer) {
-        var tag        = sender.view!.tag
+        let tag        = sender.view!.tag
         let storyboard = UIStoryboard(name: Constants.PostDetail, bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: "postdetailid") as! PostDetailViewController
         vc.item        = postList[tag]
@@ -338,19 +338,20 @@ extension ReviewEventViewController : UITableViewDelegate,UITableViewDataSource 
         let vc         = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)
         self.navigationController!.pushViewController(vc, animated: true)
     }
-    func postDtUserImage(){
+    func postDtUserImage(sender: UITapGestureRecognizer){
+        let tag        = sender.view!.tag
+        let storyboard = UIStoryboard(name: Constants.PostDetail, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.Profile_LinkViewController) as! ProfileLinkController
+        vc.postListDataItems  = postList[tag]
+        self.navigationController?.pushViewController(vc, animated: true)
         
-        let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
-        vc.boolForBack = false
-        self.navigationController!.pushViewController(vc, animated: true)
     }
-    func postDtUsernameLabel(){
-        
-        let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
-        vc.boolForBack = false
-        self.navigationController!.pushViewController(vc, animated: true)
+    func postDtUsernameLabel(sender: UITapGestureRecognizer){
+        let tag        = sender.view!.tag
+        let storyboard = UIStoryboard(name: Constants.PostDetail, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.Profile_LinkViewController) as! ProfileLinkController
+        vc.postListDataItems  = postList[tag]
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
 }

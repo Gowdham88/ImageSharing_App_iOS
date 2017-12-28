@@ -40,6 +40,7 @@ class Constants {
     static let LocationDetailId   = "locationDetailid"
     static let MenuItemId         = "menuItemstory"
     static let Profile_PostViewController = "Profile_PostViewController"
+    static let Profile_LinkViewController = "Profile_LinkViewController"
     
     // Event story id
     
@@ -111,6 +112,7 @@ class Constants {
     static let gender       = "gender"
     static let userCity     = "userCity"
     static let description  = "description"
+    static let lastlocation = "lastlocation"
     static let taglist      = "taglist"
 
 
@@ -130,8 +132,9 @@ class Constants {
     
     // Web Api key
     
-    static let PlaceApiUrl = "https://maps.googleapis.com/maps/api/place/autocomplete/json"
-    static let PlaceDetailApi = "https://maps.googleapis.com/maps/api/place/details/json"
+    static let PlaceApiUrl      = "https://maps.googleapis.com/maps/api/place/autocomplete/json"
+    static let PlaceDetailApi   = "https://maps.googleapis.com/maps/api/place/details/json"
+    static let PlaceGeoCodeApi = "https://maps.googleapis.com/maps/api/geocode/json"
     
     /*********Api **********/
     

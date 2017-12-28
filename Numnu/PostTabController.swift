@@ -130,10 +130,7 @@ extension PostTabController : UITableViewDelegate,UITableViewDataSource {
     }
     func postEventImage() {
         let storyboard = UIStoryboard(name: Constants.PostDetail, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: "postdetailid") as! PostImageZoomViewController
-
-//        vc.imagePassed = postEventImage.image!
-        
+        let vc         = storyboard.instantiateViewController(withIdentifier: "postdetailid") as! PostDetailViewController
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
@@ -175,16 +172,14 @@ extension PostTabController : UITableViewDelegate,UITableViewDataSource {
         self.navigationController!.pushViewController(vc, animated: true)
     }
     func postUserImage(){
-        let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
-        vc.boolForBack = false
+        let storyboard = UIStoryboard(name: Constants.PostDetail, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.Profile_LinkViewController) as! ProfileLinkController
         self.navigationController?.pushViewController(vc, animated: true)
     }
     func postUsernameLabel(){
         
-        let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
-        vc.boolForBack = false
+        let storyboard = UIStoryboard(name: Constants.PostDetail, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.Profile_LinkViewController) as! ProfileLinkController
         self.navigationController!.pushViewController(vc, animated: true)
     }
     

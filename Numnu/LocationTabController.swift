@@ -28,7 +28,8 @@ class LocationTabController: UIViewController,IndicatorInfoProvider {
     @IBOutlet weak var locationTableView: UITableView!
     var locationdelegate : LocationTabControllerDelegate?
     var viewState        : Bool = false
-    
+    var primaryid        : Int  = 35
+    var type             : String = "Item"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +65,7 @@ class LocationTabController: UIViewController,IndicatorInfoProvider {
             let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
             let param  : String  = "page=\(pageno)&limit\(limit)"
             
-            self.apiClient.getLocationByItemId(id: 35, page: param,headers: header, completion: { status,list in
+            self.apiClient.getLocationByItemId(id: self.primaryid, page: param,type: self.type,headers: header, completion: { status,list in
                 
                 if status == "success" {
                     

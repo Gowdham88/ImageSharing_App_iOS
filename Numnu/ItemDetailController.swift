@@ -143,10 +143,13 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
         let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3) as! ReviewEventViewController
         child_1.popdelegate = self
         child_1.apiType     = "Item"
+        child_1.primaryid   = 149
         let child_2 = UIStoryboard(name: Constants.ItemDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid7)  as! LocationTabController
         child_2.locationdelegate = self
+        child_2.primaryid        = 35
+        child_2.type             = "Item"
         let child_3 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1) as! EventTabController
-        child_3.eventdelegate = self
+        child_3.eventdelegate   = self
         child_3.scrolltableview = false
         return [child_1,child_2]
         
@@ -353,18 +356,44 @@ extension ItemDetailController {
     
     func openPopup() {
         
-        self.shareView.alpha   = 1
-        
-        let top = CGAffineTransform(translationX: 0, y: 0)
-        
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-            self.shareView.isHidden = false
-            self.shareView.transform = top
+        let Alert = UIAlertController(title: "", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        let FemaleAction = UIAlertAction(title: "Share", style: UIAlertActionStyle.default) { _ in
             
-        }, completion: nil)
-        
-        
+            
+        }
+        let MaleAction = UIAlertAction(title: "Bookmark", style: UIAlertActionStyle.default) { _ in
+            
+            self.getBookmarkToken()
+            
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) { _ in
+        }
+        Alert.addAction(FemaleAction)
+        Alert.addAction(MaleAction)
+        Alert.addAction(cancelAction)
+        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad) {
+            Alert.popoverPresentationController?.sourceView = self.view
+            Alert.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
+            present(Alert, animated: true, completion:nil )
+        }else{
+            present(Alert, animated: true, completion:nil )
+        }
     }
+    
+//    func openPopup() {
+//
+//        self.shareView.alpha   = 1
+//
+//        let top = CGAffineTransform(translationX: 0, y: 0)
+//
+//        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+//            self.shareView.isHidden = false
+//            self.shareView.transform = top
+//
+//        }, completion: nil)
+//
+//
+//    }
     
 }
 
@@ -617,6 +646,8 @@ extension ItemDetailController {
         let userid    = PrefsManager.sharedinstance.userId
         let eventname = ItTitleLabel.text ?? "Item name"
         
+        LoadingHepler.instance.show()
+        
         let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
         let parameters: Parameters = ["entityid": itemprimaryid, "entityname":eventname , "type" : "item" ,"createdby" : userid,"updatedby": userid ,"clientip": clientIp, "clientapp": Constants.clientApp]
         apiClient.bookmarEntinty(parameters: parameters,headers: header, completion: { status,response in
@@ -624,13 +655,14 @@ extension ItemDetailController {
             if status == "success" {
                 
                 DispatchQueue.main.async {
-                    
+                    LoadingHepler.instance.hide()
                     AlertProvider.Instance.showAlert(title: "Hey!", subtitle: "Bookmarked successfully.", vc: self)
                     self.closePopup()
                 }
                 
             } else {
                 
+                LoadingHepler.instance.hide()
                 if status == "422" {
                     
                     AlertProvider.Instance.showAlert(title: "Hey!", subtitle: "Already bookmarked.", vc: self)
@@ -650,6 +682,16 @@ extension ItemDetailController {
         
         apiClient.getFireBaseToken(completion:{ token in
             
+            
+            self.bookmarkpost(token: token)
+            
+        })
+        
+    }
+    
+    func getBookmarkToken() {
+        
+        apiClient.getFireBaseToken(completion:{ token in
             
             self.bookmarkpost(token: token)
             
