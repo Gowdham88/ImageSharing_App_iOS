@@ -184,7 +184,13 @@ extension ParentViewController : UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        
+        LoadingHepler.instance.show()
+        let when = DispatchTime.now() + 1
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            LoadingHepler.instance.hide()
+        }
+
+        reloadPagerTabStripView()
         dismissKeyboard()
         
     }
@@ -282,11 +288,7 @@ extension ParentViewController {
         self.collectionContainerView.addSubview(controller.view)
         self.addChildViewController(controller)
         controller.didMove(toParentViewController: self)
-        
-        
     }
-    
-    
 }
 
 /*************************Google place autocomplete*******************************************/

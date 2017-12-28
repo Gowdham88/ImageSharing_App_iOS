@@ -15,9 +15,13 @@ class BusinessTableViewCell: UITableViewCell {
     @IBOutlet weak var businessImageView: ImageExtender!
     @IBOutlet weak var businessTagCollectionView: UICollectionView!
 
+    @IBOutlet weak var tagTopConstraint: NSLayoutConstraint!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -25,6 +29,9 @@ class BusinessTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    
+    
     
     func setCollectionViewDataSourceDelegate<D: UICollectionViewDataSource & UICollectionViewDelegate>(_ dataSourceDelegate: D, forRow row: Int) {
         
