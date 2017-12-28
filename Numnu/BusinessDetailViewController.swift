@@ -293,8 +293,11 @@ extension BusinessDetailViewController {
     func tapRegistration() {
         
         let completemenuTap = UITapGestureRecognizer(target: self, action: #selector(BusinessDetailViewController.openCompleteMenu(sender:)))
-        completeViewMenu.isUserInteractionEnabled = true
-        completeViewMenu.addGestureRecognizer(completemenuTap)
+        busImageView.isUserInteractionEnabled = true
+        busImageView.addGestureRecognizer(completemenuTap)
+        let completemenuTap1 = UITapGestureRecognizer(target: self, action: #selector(BusinessDetailViewController.openCompleteMenu(sender:)))
+        busTitleLabel.isUserInteractionEnabled = true
+        busTitleLabel.addGestureRecognizer(completemenuTap1)
     
     }
     
@@ -349,17 +352,43 @@ extension BusinessDetailViewController {
     
     func openPopup() {
         
-        self.shareView.alpha   = 1
-        
-        let top = CGAffineTransform(translationX: 0, y: 0)
-        
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-            self.shareView.isHidden = false
-            self.shareView.transform = top
+        let Alert = UIAlertController(title: "", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        let FemaleAction = UIAlertAction(title: "Share", style: UIAlertActionStyle.default) { _ in
             
-        }, completion: nil)
-      
+            
+        }
+        let MaleAction = UIAlertAction(title: "Bookmark", style: UIAlertActionStyle.default) { _ in
+            
+            self.getBookmarkToken()
+            
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) { _ in
+        }
+        Alert.addAction(FemaleAction)
+        Alert.addAction(MaleAction)
+        Alert.addAction(cancelAction)
+        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad) {
+            Alert.popoverPresentationController?.sourceView = self.view
+            Alert.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
+            present(Alert, animated: true, completion:nil )
+        }else{
+            present(Alert, animated: true, completion:nil )
+        }
     }
+    
+//    func openPopup() {
+//
+//        self.shareView.alpha   = 1
+//
+//        let top = CGAffineTransform(translationX: 0, y: 0)
+//
+//        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+//            self.shareView.isHidden = false
+//            self.shareView.transform = top
+//
+//        }, completion: nil)
+//
+//    }
     
 }
 
@@ -379,7 +408,7 @@ extension BusinessDetailViewController : ReviewEventViewControllerDelegate {
     
     func postTableHeight(height: CGFloat) {
         
-        mainContainerView.constant       = 324 + height
+        mainContainerView.constant       = 274 + height
         mainContainerViewBottom.constant = 0
     }
     
@@ -393,7 +422,7 @@ extension BusinessDetailViewController : MenuEventViewControllerDelegate {
     
     func menuTableHeight(height: CGFloat) {
         
-        mainContainerView.constant       = 324 + height
+        mainContainerView.constant       = 274 + height
         mainContainerViewBottom.constant = 0
     }
     
@@ -500,6 +529,7 @@ extension BusinessDetailViewController {
             
             readMoreButton.isHidden   = true
             containerViewTop.constant = 8
+            barButtonTop.constant     = 8
             
             if let description = response.businessdescription {
                 busDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: description, width: eventDescriptionLabel.frame.width, font: eventDescriptionLabel.font)
@@ -519,6 +549,8 @@ extension BusinessDetailViewController {
     
     func bookmarkpost(token : String){
         
+        LoadingHepler.instance.show()
+        
         let clientIp  = ValidationHelper.Instance.getIPAddress() ?? "1.0.1"
         let userid    = PrefsManager.sharedinstance.userId
         let eventname = busTitleLabel.text ?? "Business name"
@@ -530,12 +562,13 @@ extension BusinessDetailViewController {
             if status == "success" {
                 
                 DispatchQueue.main.async {
-                    
+                    LoadingHepler.instance.hide()
                     AlertProvider.Instance.showAlert(title: "Hey!", subtitle: "Bookmarked successfully.", vc: self)
                     self.closePopup()
                 }
                 
             } else {
+                LoadingHepler.instance.hide()
                 
                 if status == "422" {
                     
@@ -553,6 +586,17 @@ extension BusinessDetailViewController {
     }
     
     func getBookmarkToken(sender : UITapGestureRecognizer){
+        
+        apiClient.getFireBaseToken(completion:{ token in
+            
+            
+            self.bookmarkpost(token: token)
+            
+        })
+        
+    }
+    
+    func getBookmarkToken(){
         
         apiClient.getFireBaseToken(completion:{ token in
             

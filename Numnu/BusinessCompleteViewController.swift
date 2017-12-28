@@ -139,22 +139,25 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
-        let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid2) as! MenuEventViewController
-        child_1.menuDelegate    = self
-        child_1.itemType        = "Business"
-        child_1.primayId        = 50
+        let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3) as! ReviewEventViewController
+        child_1.popdelegate     = self
+        child_1.apiType         = "Business"
+        child_1.primaryid       = 50
         
-        let child_2 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3) as! ReviewEventViewController
-        child_2.popdelegate     = self
-        child_2.apiType         = "Business"
-        child_2.primaryid       = 50
+        let child_2 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid2) as! MenuEventViewController
+        child_2.menuDelegate    = self
+        child_2.itemType        = "Business"
+        child_2.primayId        = 50
         
-        let child_3 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1) as! EventTabController
-        child_3.scrolltableview = false
-        child_3.eventdelegate   = self
-        child_3.apiType         = "Business"
+        let child_3 = UIStoryboard(name: Constants.ItemDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid7)  as! LocationTabController
+        child_3.locationdelegate = self
         
-        return [child_1,child_2,child_3]
+        let child_4 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1) as! EventTabController
+        child_4.scrolltableview = false
+        child_4.eventdelegate   = self
+        child_4.apiType         = "Business"
+        
+        return [child_1,child_2,child_3,child_4]
         
     }
     
@@ -326,18 +329,44 @@ extension BusinessCompleteViewController {
     
     func openPopup() {
         
-        self.shareView.alpha   = 1
-        
-        let top = CGAffineTransform(translationX: 0, y: 0)
-        
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-            self.shareView.isHidden = false
-            self.shareView.transform = top
+        let Alert = UIAlertController(title: "", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        let FemaleAction = UIAlertAction(title: "Share", style: UIAlertActionStyle.default) { _ in
             
-        }, completion: nil)
-        
-        
+            
+        }
+        let MaleAction = UIAlertAction(title: "Bookmark", style: UIAlertActionStyle.default) { _ in
+            
+            self.getBookmarkToken()
+            
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) { _ in
+        }
+        Alert.addAction(FemaleAction)
+        Alert.addAction(MaleAction)
+        Alert.addAction(cancelAction)
+        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad) {
+            Alert.popoverPresentationController?.sourceView = self.view
+            Alert.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
+            present(Alert, animated: true, completion:nil )
+        }else{
+            present(Alert, animated: true, completion:nil )
+        }
     }
+    
+//    func openPopup() {
+//
+//        self.shareView.alpha   = 1
+//
+//        let top = CGAffineTransform(translationX: 0, y: 0)
+//
+//        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+//            self.shareView.isHidden = false
+//            self.shareView.transform = top
+//
+//        }, completion: nil)
+//
+//
+//    }
     
 }
 
@@ -389,6 +418,20 @@ extension BusinessCompleteViewController : EventTabControllerDelegate {
     
     
 }
+
+/*******************Location delegate****************************/
+
+extension BusinessCompleteViewController : LocationTabControllerDelegate {
+    
+    func locationTableHeight(height: CGFloat) {
+        
+        mainContainerView.constant = 440 + height
+        mainContainerViewBottom.constant = 0
+    }
+    
+    
+}
+
 
 extension BusinessCompleteViewController {
     
@@ -506,6 +549,8 @@ extension BusinessCompleteViewController {
     
     func bookmarkpost(token : String){
         
+        LoadingHepler.instance.show()
+        
         let clientIp  = ValidationHelper.Instance.getIPAddress() ?? "1.0.1"
         let userid    = PrefsManager.sharedinstance.userId
         let eventname = BcTitleLabel.text ?? "Business name"
@@ -517,13 +562,14 @@ extension BusinessCompleteViewController {
             if status == "success" {
                 
                 DispatchQueue.main.async {
-                    
+                    LoadingHepler.instance.hide()
                     AlertProvider.Instance.showAlert(title: "Hey!", subtitle: "Bookmarked successfully.", vc: self)
                     self.closePopup()
                 }
                 
             } else {
                 
+                LoadingHepler.instance.hide()
                 if status == "422" {
                     
                     AlertProvider.Instance.showAlert(title: "Hey!", subtitle: "Already bookmarked.", vc: self)
@@ -543,6 +589,16 @@ extension BusinessCompleteViewController {
         
         apiClient.getFireBaseToken(completion:{ token in
             
+            
+            self.bookmarkpost(token: token)
+            
+        })
+        
+    }
+    
+    func getBookmarkToken() {
+        
+        apiClient.getFireBaseToken(completion:{ token in
             
             self.bookmarkpost(token: token)
             

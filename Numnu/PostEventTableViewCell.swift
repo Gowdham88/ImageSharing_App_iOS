@@ -19,8 +19,8 @@ protocol PostEventTableViewCellDelegate {
 class PostEventTableViewCell: UITableViewCell {
  
     
-    @IBOutlet weak var postUsernameLabel: UILabel!
-    @IBOutlet weak var postUserImage: ImageExtender!
+    @IBOutlet weak var postUsernameLabel : UILabel!
+    @IBOutlet weak var postUserImage    : ImageExtender!
     @IBOutlet weak var postUserplaceLabbel: UILabel!
     @IBOutlet weak var postUserTime: UILabel!
     @IBOutlet weak var postCommentLabel: UILabel!

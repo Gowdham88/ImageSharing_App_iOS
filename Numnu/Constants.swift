@@ -40,6 +40,7 @@ class Constants {
     static let LocationDetailId   = "locationDetailid"
     static let MenuItemId         = "menuItemstory"
     static let Profile_PostViewController = "Profile_PostViewController"
+    static let Profile_LinkViewController = "Profile_LinkViewController"
     
     // Event story id
     

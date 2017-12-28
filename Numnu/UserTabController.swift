@@ -36,10 +36,11 @@ imagesArray = [UIImage(named: "p7.png")!,UIImage(named: "p8.png")!,UIImage(named
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
-        vc.boolForBack = false
-        self.navigationController!.pushViewController(vc, animated: true)
+        
+        let storyboard = UIStoryboard(name: Constants.PostDetail, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.Profile_LinkViewController) as! ProfileLinkController
+        self.navigationController?.pushViewController(vc, animated: true)
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

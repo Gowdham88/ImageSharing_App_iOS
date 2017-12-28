@@ -153,7 +153,7 @@ class ItemCompleteviewcontroller : UIViewController {
             let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
             let param  : String  = "page=\(pageno)&limit\(limit)"
             
-            self.apiClient.getPostList(id: self.primaryid, page: param, type: self.apiType, headers: header, completion: { status,Values in
+            self.apiClient.getPostListByItemEvent(eventId: 34,id: self.primaryid, page: param, type: self.apiType, headers: header, completion: { status,Values in
                 
                 if status == "success" {
                     
@@ -277,8 +277,11 @@ extension ItemCompleteviewcontroller {
     func tapRegistration() {
         
         let completemenuTap = UITapGestureRecognizer(target: self, action: #selector(ItemCompleteviewcontroller.openCompleteMenu(sender:)))
-        completemainview.isUserInteractionEnabled = true
-        completemainview.addGestureRecognizer(completemenuTap)
+        ItImageView.isUserInteractionEnabled = true
+        ItImageView.addGestureRecognizer(completemenuTap)
+        let completemenuTap1 = UITapGestureRecognizer(target: self, action: #selector(ItemCompleteviewcontroller.openCompleteMenu(sender:)))
+        ItTitleLabel.isUserInteractionEnabled = true
+        ItTitleLabel.addGestureRecognizer(completemenuTap1)
         
     }
     
@@ -416,18 +419,44 @@ extension ItemCompleteviewcontroller {
     
     func openPopup() {
         
-        self.shareView.alpha   = 1
-        
-        let top = CGAffineTransform(translationX: 0, y: 0)
-        
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-            self.shareView.isHidden = false
-            self.shareView.transform = top
+        let Alert = UIAlertController(title: "", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        let FemaleAction = UIAlertAction(title: "Share", style: UIAlertActionStyle.default) { _ in
             
-        }, completion: nil)
-        
-        
+            
+        }
+        let MaleAction = UIAlertAction(title: "Bookmark", style: UIAlertActionStyle.default) { _ in
+            
+            self.getBookmarkToken()
+            
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) { _ in
+        }
+        Alert.addAction(FemaleAction)
+        Alert.addAction(MaleAction)
+        Alert.addAction(cancelAction)
+        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad) {
+            Alert.popoverPresentationController?.sourceView = self.view
+            Alert.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
+            present(Alert, animated: true, completion:nil )
+        }else{
+            present(Alert, animated: true, completion:nil )
+        }
     }
+    
+//    func openPopup() {
+//
+//        self.shareView.alpha   = 1
+//
+//        let top = CGAffineTransform(translationX: 0, y: 0)
+//
+//        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+//            self.shareView.isHidden = false
+//            self.shareView.transform = top
+//
+//        }, completion: nil)
+//
+//
+//    }
     
     func closePopup() {
         
@@ -631,6 +660,8 @@ extension ItemCompleteviewcontroller {
         let userid    = PrefsManager.sharedinstance.userId
         let eventname = ItTitleLabel.text ?? "Item name"
         
+        LoadingHepler.instance.show()
+        
         let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
         let parameters: Parameters = ["entityid": itemprimaryid, "entityname":eventname , "type" : "item" ,"createdby" : userid,"updatedby": userid ,"clientip": clientIp, "clientapp": Constants.clientApp]
         apiClient.bookmarEntinty(parameters: parameters,headers: header, completion: { status,response in
@@ -638,7 +669,7 @@ extension ItemCompleteviewcontroller {
             if status == "success" {
                 
                 DispatchQueue.main.async {
-                    
+                    LoadingHepler.instance.hide()
                     AlertProvider.Instance.showAlert(title: "Hey!", subtitle: "Bookmarked successfully.", vc: self)
                     self.closePopup()
                 }
@@ -647,6 +678,7 @@ extension ItemCompleteviewcontroller {
                 
             } else {
                 
+                LoadingHepler.instance.hide()
                 if status == "422" {
                     
                     AlertProvider.Instance.showAlert(title: "Hey!", subtitle: "Already bookmarked.", vc: self)
@@ -663,6 +695,16 @@ extension ItemCompleteviewcontroller {
     }
     
     func getBookmarkToken(sender : UITapGestureRecognizer) {
+        
+        apiClient.getFireBaseToken(completion:{ token in
+            
+            self.bookmarkpost(token: token)
+            
+        })
+        
+    }
+    
+    func getBookmarkToken() {
         
         apiClient.getFireBaseToken(completion:{ token in
             

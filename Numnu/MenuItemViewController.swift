@@ -145,8 +145,19 @@ extension MenuItemViewController : UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        switch itemType {
+        case "Business":
+            openStoryBoardBusiness(name: Constants.ItemDetail, id: Constants.ItemDetailId)
+            
+        case "BusinessEvent":
+            openStoryBoardBusiness(name: Constants.ItemDetail, id: Constants.ItemDetailId)
+            
+        default:
+            openStoryBoard(name: Constants.ItemDetail, id: Constants.ItemCompleteId)
+        }
       
-        openStoryBoard(name: Constants.ItemDetail, id: Constants.ItemCompleteId)
+        
      
         
     }
@@ -156,6 +167,15 @@ extension MenuItemViewController : UITableViewDelegate,UITableViewDataSource {
         let storyboard      = UIStoryboard(name: name, bundle: nil)
         let vc              = storyboard.instantiateViewController(withIdentifier: id) as! ItemCompleteviewcontroller
         vc.itemprimaryid    = 39
+        self.navigationController!.pushViewController(vc, animated: true)
+        
+    }
+    
+    func openStoryBoardBusiness(name : String,id : String) {
+        
+        let storyboard = UIStoryboard(name: name, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId) as! ItemDetailController
+        vc.itemprimaryid = 39
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
