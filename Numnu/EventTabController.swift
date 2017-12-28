@@ -194,6 +194,7 @@ extension EventTabController : UICollectionViewDelegate,UICollectionViewDataSour
             
             cell.setLabelSize(size: textSize)
             
+            
         }
      
         return cell

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -461,11 +461,10 @@
                                                         <constraint firstItem="JMH-KR-CYy" firstAttribute="leading" secondItem="OJJ-cT-mgd" secondAttribute="trailing" constant="10" id="T7g-io-mIo"/>
                                                         <constraint firstItem="OJJ-cT-mgd" firstAttribute="top" secondItem="E4b-dH-26W" secondAttribute="top" constant="10" id="ZKa-SE-r9K"/>
                                                         <constraint firstItem="THf-9n-WXD" firstAttribute="leading" secondItem="OJJ-cT-mgd" secondAttribute="trailing" constant="10" id="ZcE-5L-xh1"/>
-                                                        <constraint firstItem="Nwy-Nx-Cw1" firstAttribute="top" secondItem="JMH-KR-CYy" secondAttribute="bottom" constant="38" id="ael-GN-hja"/>
                                                         <constraint firstAttribute="trailing" secondItem="THf-9n-WXD" secondAttribute="trailing" constant="35" id="cHf-Ws-go5"/>
                                                         <constraint firstItem="Nwy-Nx-Cw1" firstAttribute="leading" secondItem="OJJ-cT-mgd" secondAttribute="trailing" constant="10" id="dUL-Dv-fBm"/>
-                                                        <constraint firstItem="THf-9n-WXD" firstAttribute="top" secondItem="JMH-KR-CYy" secondAttribute="bottom" constant="8" id="jhC-Ic-3bY"/>
                                                         <constraint firstAttribute="trailing" secondItem="JMH-KR-CYy" secondAttribute="trailing" constant="35" id="ref-31-SUf"/>
+                                                        <constraint firstItem="Nwy-Nx-Cw1" firstAttribute="top" secondItem="THf-9n-WXD" secondAttribute="bottom" constant="8" id="v9B-fp-JKB"/>
                                                         <constraint firstItem="OJJ-cT-mgd" firstAttribute="leading" secondItem="E4b-dH-26W" secondAttribute="leading" constant="8" id="vnm-5I-szT"/>
                                                     </constraints>
                                                 </view>
@@ -482,6 +481,7 @@
                                             <outlet property="businessImageView" destination="OJJ-cT-mgd" id="QrT-Ek-SSI"/>
                                             <outlet property="businessNameLabel" destination="JMH-KR-CYy" id="x4n-mI-XtD"/>
                                             <outlet property="businessTagCollectionView" destination="THf-9n-WXD" id="wtt-9F-z37"/>
+                                            <outlet property="tagTopConstraint" destination="Qmg-pa-2Uc" id="0ZU-mD-zi7"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -837,14 +837,14 @@
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="eventcell" rowHeight="100" id="MRD-DW-MFv" customClass="EventTableViewCell" customModule="Numnu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MRD-DW-MFv" id="IWY-aZ-vak">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MRD-DW-MFv" id="IWY-aZ-vak">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9rh-kg-N9i">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9rh-kg-N9i">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="2rW-U3-DAu" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="2rW-U3-DAu" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
                                                             <rect key="frame" x="8" y="10" width="80" height="80"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="80" id="puk-B9-kfJ"/>
@@ -856,8 +856,8 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Flatron South Beach Wine &amp; Food Festival" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vFJ-eq-bHU">
-                                                            <rect key="frame" x="98" y="7" width="187" height="36"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flatron South Beach Wine &amp; Food Festival" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vFJ-eq-bHU">
+                                                            <rect key="frame" x="98" y="8" width="187" height="36"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="45" id="46U-Tg-0eo"/>
                                                             </constraints>
@@ -865,8 +865,8 @@
                                                             <color key="textColor" red="0.1529197991" green="0.15295344590000001" blue="0.15291768310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="mSr-uw-chr">
-                                                            <rect key="frame" x="98" y="48.5" width="187" height="22"/>
+                                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="mSr-uw-chr">
+                                                            <rect key="frame" x="98" y="49.5" width="187" height="22"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="22" id="BPt-ye-1bW"/>
@@ -905,8 +905,8 @@
                                                                 <outlet property="delegate" destination="zsI-ft-QpU" id="s8A-Ub-bcw"/>
                                                             </connections>
                                                         </collectionView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="August 30,Montreal" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FmM-7i-LBP">
-                                                            <rect key="frame" x="98" y="73.5" width="187" height="19.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="August 30,Montreal" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FmM-7i-LBP">
+                                                            <rect key="frame" x="98" y="76" width="187" height="16.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="39" id="mbR-Df-wCR"/>
                                                             </constraints>
@@ -919,7 +919,6 @@
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="mSr-uw-chr" secondAttribute="trailing" constant="35" id="7dl-NV-NMq"/>
                                                         <constraint firstItem="FmM-7i-LBP" firstAttribute="leading" secondItem="2rW-U3-DAu" secondAttribute="trailing" constant="10" id="CU8-9F-f7v"/>
-                                                        <constraint firstItem="mSr-uw-chr" firstAttribute="top" secondItem="vFJ-eq-bHU" secondAttribute="bottom" constant="4" id="HbK-k5-ODk"/>
                                                         <constraint firstItem="2rW-U3-DAu" firstAttribute="top" secondItem="9rh-kg-N9i" secondAttribute="top" constant="10" id="LWA-St-gzv"/>
                                                         <constraint firstItem="2rW-U3-DAu" firstAttribute="leading" secondItem="9rh-kg-N9i" secondAttribute="leading" constant="8" id="NG9-bb-1B4"/>
                                                         <constraint firstItem="mSr-uw-chr" firstAttribute="top" secondItem="vFJ-eq-bHU" secondAttribute="bottom" constant="5" id="NRc-Un-OEW"/>
@@ -929,7 +928,7 @@
                                                         <constraint firstAttribute="trailing" secondItem="vFJ-eq-bHU" secondAttribute="trailing" constant="35" id="auV-gh-9j6"/>
                                                         <constraint firstAttribute="trailing" secondItem="FmM-7i-LBP" secondAttribute="trailing" constant="35" id="ivM-fX-a0k"/>
                                                         <constraint firstItem="FmM-7i-LBP" firstAttribute="top" secondItem="vFJ-eq-bHU" secondAttribute="bottom" constant="32" id="jat-Nz-1cq"/>
-                                                        <constraint firstAttribute="height" constant="110" id="uta-4C-nrh"/>
+                                                        <constraint firstAttribute="height" constant="100" id="uta-4C-nrh"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -941,10 +940,12 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="dateTopConstraint" destination="jat-Nz-1cq" id="PFD-hJ-SDc"/>
                                             <outlet property="eventDateLabel" destination="FmM-7i-LBP" id="V00-iy-67Y"/>
                                             <outlet property="eventImageView" destination="2rW-U3-DAu" id="SHi-Nx-h1g"/>
                                             <outlet property="eventNameLabel" destination="vFJ-eq-bHU" id="uOD-R1-jDE"/>
                                             <outlet property="eventTagCollectionView" destination="mSr-uw-chr" id="eDF-RR-hc9"/>
+                                            <outlet property="tagTopConstraint" destination="NRc-Un-OEW" id="7GY-VK-IGI"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -964,7 +965,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yAR-bF-oIm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1803" y="43"/>
+            <point key="canvasLocation" x="1941" y="52"/>
         </scene>
         <!--Default Tab Controller-->
         <scene sceneID="add-io-htX">
