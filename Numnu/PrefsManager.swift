@@ -277,6 +277,28 @@ struct PrefsManager {
         }
     }
     
+    var lastlocation : String? {
+        
+        get {
+            
+            if checkprefsobject(object: Constants.lastlocation) {
+                
+                return UserDefaults.standard.string(forKey: Constants.lastlocation)!
+            } else {
+                
+                return nil
+            }
+            
+        }
+        
+        set {
+            
+            UserDefaults.standard.set(newValue, forKey: Constants.lastlocation)
+            
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
 
     var startsat : String {
         
