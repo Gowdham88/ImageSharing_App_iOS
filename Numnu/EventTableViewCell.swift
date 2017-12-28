@@ -16,6 +16,8 @@ class EventTableViewCell : UITableViewCell {
     @IBOutlet weak var eventImageView: ImageExtender!
     @IBOutlet weak var eventTagCollectionView: UICollectionView!
   
+    @IBOutlet weak var dateTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tagTopConstraint: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -41,7 +43,19 @@ class EventTableViewCell : UITableViewCell {
     
     var item : EventTypeListItem! {
         didSet {
-            eventNameLabel.text = item.name
+            if let eventname = item.name {
+                eventNameLabel.text = eventname
+
+            }
+            
+            
+            if item.taglist == nil {
+                dateTopConstraint.constant = 5
+            } else {
+                
+                dateTopConstraint.constant = 32
+            }
+            
             
             if let userimageList = item.imgList {
                 

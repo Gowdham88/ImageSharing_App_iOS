@@ -203,7 +203,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
             
         if ValidationHelper.Instance.isValidEmail(email:email) && pwd.count > 2 {
             
-            LoadingHepler.instance.hide()
+            LoadingHepler.instance.show()
             
             
             Auth.auth().createUser(withEmail: email, password: pwd) { (user: User?, error) in

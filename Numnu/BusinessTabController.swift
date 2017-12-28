@@ -13,6 +13,8 @@ class BusinessTabController: UIViewController,IndicatorInfoProvider {
     
     @IBOutlet weak var businessTableView: UITableView!
     
+    
+    
     var tagarray = ["Festival","Wine","Party","Rum","Barbaque","Pasta","Sandwich","Burger"]
 
     override func viewDidLoad() {
