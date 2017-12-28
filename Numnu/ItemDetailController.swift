@@ -143,10 +143,13 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
         let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3) as! ReviewEventViewController
         child_1.popdelegate = self
         child_1.apiType     = "Item"
+        child_1.primaryid   = 149
         let child_2 = UIStoryboard(name: Constants.ItemDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid7)  as! LocationTabController
         child_2.locationdelegate = self
+        child_2.primaryid        = 35
+        child_2.type             = "Item"
         let child_3 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1) as! EventTabController
-        child_3.eventdelegate = self
+        child_3.eventdelegate   = self
         child_3.scrolltableview = false
         return [child_1,child_2]
         

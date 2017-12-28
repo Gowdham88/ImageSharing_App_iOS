@@ -151,6 +151,8 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
         
         let child_3 = UIStoryboard(name: Constants.ItemDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid7)  as! LocationTabController
         child_3.locationdelegate = self
+        child_3.primaryid        = 50
+        child_3.type             = "Business"
         
         let child_4 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1) as! EventTabController
         child_4.scrolltableview = false
