@@ -134,7 +134,7 @@ extension OnboardingVC: CLLocationManagerDelegate {
             
         case .notDetermined:
             print("Location status not determined.")
-            self.openStoryBoard(name: Constants.Main, id: Constants.TabStoryId)
+            
         case .authorizedAlways: fallthrough
         case .authorizedWhenInUse:
             print("Location status is OK.")
