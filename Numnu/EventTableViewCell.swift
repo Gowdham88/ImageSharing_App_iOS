@@ -71,7 +71,7 @@ class EventTableViewCell : UITableViewCell {
                     
                 }
                 
-            }
+            } 
             
             guard let start_date =  item.startsat,let end_date =  item.endsat else {
                 

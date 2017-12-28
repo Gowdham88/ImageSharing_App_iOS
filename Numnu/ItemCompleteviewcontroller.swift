@@ -196,9 +196,7 @@ class ItemCompleteviewcontroller : UIViewController {
             self.mainContainerViewBottom.constant = 0
             LoadingHepler.instance.hide()
         }
-            
-          
-        
+    
     }
     
     func eventtap(){

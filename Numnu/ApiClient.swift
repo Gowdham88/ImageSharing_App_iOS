@@ -912,9 +912,22 @@ class  ApiClient {
     
     ////******************************* Get Location by Item Id ****************************************/////
     
-    func getLocationByItemId(id : Int,page : String,headers : HTTPHeaders,completion : @escaping (String,ItemLocationList?)-> Void) {
+    func getLocationByItemId(id : Int,page : String,type : String,headers : HTTPHeaders,completion : @escaping (String,ItemLocationList?)-> Void) {
         
-        Alamofire.request("\(Constants.ItemsApiUrl)/\(id)/locations?\(page)", method: .get,encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+        var BaseUrl :String?
+        
+        switch type {
+        case "Item":
+            BaseUrl = Constants.ItemsApiUrl
+            
+        case "Business":
+            BaseUrl = Constants.BusinessDetailApi
+            
+        default:
+            BaseUrl = Constants.ItemsApiUrl
+        }
+        
+        Alamofire.request("\(BaseUrl!)/\(id)/locations?\(page)", method: .get,encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             
             print("response request is:::::::::::",response.request as Any)
             print("response result is:::::::",response.result.value as Any)
@@ -945,9 +958,7 @@ class  ApiClient {
         }
         
     }
-    
-    
-    
+   
     
     
     /**********************************getPlace Lat long*************************************************/
@@ -978,6 +989,51 @@ class  ApiClient {
                 print(error)
                 completion(0,0)
             
+            }
+            
+        }
+        
+    }
+    
+    /************************City Api****************************/
+    
+    func getPlaceGeocode(placeid_Str:String,completion : @escaping (String,String) -> Void) {
+        
+        let parameters: Parameters = ["latlng": placeid_Str , "key" : "AIzaSyDmfYE1gIA6UfjrmOUkflK9kw0nLZf0nYw"]
+        
+        Alamofire.request(Constants.PlaceGeoCodeApi, parameters: parameters).validate().responseJSON { response in
+            
+            print(response.request as Any)
+            
+            switch response.result {
+            case .success:
+                if let value = response.result.value {
+                    let json = JSON(value)
+                    
+                    if let jsonarray = json["results"].array {
+                        
+                        for (no,item) in jsonarray.enumerated() {
+                            
+                            if let address = item["formatted_address"].string {
+                                
+                                if no == 0 {
+                                    
+                                    completion("OK",address)
+                                }
+                                
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            case .failure(let error) :
+                print(error)
+                completion("No",error.localizedDescription)
+                
             }
             
         }

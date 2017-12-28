@@ -79,6 +79,12 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
         filtertable.delegate   = self
         filtertable.dataSource = self
         
+        if let address =  PrefsManager.sharedinstance.lastlocation {
+            
+            editsearchbyLocation.text = address
+            
+        }
+        
     }
   
     func navigationTap(){
@@ -226,6 +232,8 @@ extension ParentViewController {
         tabScrollView.isHidden           = false
         
         navigationItemList.title = "Numnu"
+
+
         
         let button: UIButton = UIButton(type: UIButtonType.custom)
         //set image for button
@@ -363,7 +371,7 @@ extension ParentViewController : UITableViewDataSource,UITableViewDelegate {
             let currentCell = tableView.cellForRow(at: indexPath) as! UITableViewCell
             editsearchbyLocation.text = (currentCell.textLabel?.text)
             editsearchbyLocation.text = autocompleteplaceArray[indexPath.row]
-
+            PrefsManager.sharedinstance.lastlocation = editsearchbyLocation.text
         }
  
         dismissKeyboard()
