@@ -21,10 +21,12 @@ import IQKeyboardManagerSwift
  
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+//    var orientationLock = UIInterfaceOrientationMask.portrait
     var orientationLock = UIInterfaceOrientationMask.portrait
+//    var myOrientation: UIInterfaceOrientationMask = .portrait
 
     var window: UIWindow?
-
+    var shouldRotate = false
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -45,19 +47,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
 //        return self.orientationLock
 //    }
-    
-    struct AppUtility {
-        static func lockOrientation(_ orientation: UIInterfaceOrientationMask) {
-            if let delegate = UIApplication.shared.delegate as? AppDelegate {
-                delegate.orientationLock = orientation
-            }
-        }
-        
-        static func lockOrientation(_ orientation: UIInterfaceOrientationMask, andRotateTo rotateOrientation:UIInterfaceOrientation) {
-            self.lockOrientation(orientation)
-            UIDevice.current.setValue(rotateOrientation.rawValue, forKey: "orientation")
-        }
-    }
+//
+//    struct AppUtility {
+//        static func lockOrientation(_ orientation: UIInterfaceOrientationMask) {
+//            if let delegate = UIApplication.shared.delegate as? AppDelegate {
+//                delegate.orientationLock = orientation
+//            }
+//        }
+//
+//        static func lockOrientation(_ orientation: UIInterfaceOrientationMask, andRotateTo rotateOrientation:UIInterfaceOrientation) {
+//            self.lockOrientation(orientation)
+//            UIDevice.current.setValue(rotateOrientation.rawValue, forKey: "orientation")
+//        }
+//    }
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -83,32 +85,58 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
+//    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+//        return orientationLock
+//    }
+//    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) ->
+//        UIInterfaceOrientationMask {
+//    
+//            return orientationLock
+//    }
+    
+    
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
         
-        
-        
-        if let rootViewController = UIApplication.topViewController() {
+        if self.window?.rootViewController?.presentedViewController is PostImageZoomViewController {
             
-            if rootViewController is PostImageZoomViewController {
-                
-                let controller = rootViewController as! PostImageZoomViewController
-                
-                if controller.isPresented {
-                    
-                    return .all
-                    
-                }
-                
+            let secondController = self.window!.rootViewController!.presentedViewController as! PostImageZoomViewController
+            
+            if secondController.isPresented { // Check current controller state
+                return UIInterfaceOrientationMask.all;
+            } else {
+                return UIInterfaceOrientationMask.portrait;
             }
-           
-            
+        } else {
+            return UIInterfaceOrientationMask.portrait;
         }
         
-        
-        
-        return .portrait
-        
     }
+//    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+//
+//
+//
+//        if let rootViewController = UIApplication.topViewController() {
+//
+//            if rootViewController is PostImageZoomViewController {
+//
+//                let controller = rootViewController as! PostImageZoomViewController
+//
+//                if controller.isPresented {
+//
+//                    return .all
+//
+//                }
+//
+//            }
+//
+//
+//        }
+//
+//
+//
+//        return .portrait
+//
+//    }
 
  func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
     return FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)

@@ -13,7 +13,11 @@ class PostImageZoomViewController: UIViewController,UIScrollViewDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imagePhoto: UIImageView!
     var imagePassed = UIImage()
-    var isPresented: Bool = true
+    
+    var isPresented = true // This property is very important, set it to true initially
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.minimumZoomScale = 1.0
@@ -29,46 +33,40 @@ class PostImageZoomViewController: UIViewController,UIScrollViewDelegate {
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
         swipeDown.direction = UISwipeGestureRecognizerDirection.down
         self.scrollView.addGestureRecognizer(swipeDown)
+
+//        NotificationCenter.default.addObserver(self, selector: #selector(changeMode), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         
-//        let value = UIInterfaceOrientation.landscapeLeft.rawValue
-//        UIDevice.current.setValue(value, forKey: "orientation")
-    }
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        if UIDevice.current.orientation.isLandscape {
-            print("landscape mode on")
-        }else{
-            print("potrait mode on")
-        }
-    }
-//    private func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-//        return UIInterfaceOrientationMask.landscapeLeft
-//    }
-//    
-//    private func shouldAutorotate() -> Bool {
-//        return true
-//    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-//        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight, andRotateTo: UIInterfaceOrientation.landscapeRight)
-//          getOrientaion()
-        self.navigationController?.isNavigationBarHidden = true
-        self.tabBarController?.tabBar.isHidden = true
-        isPresented = true
 
     }
-    func getOrientaion(){
-//        switch UIDevice.current.orientation {
-//        case .portrait:
-//            AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight, andRotateTo: UIInterfaceOrientation.portrait)
-//        case .landscapeRight:
-//            AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight, andRotateTo: UIInterfaceOrientation.landscapeRight)
+    
+    
+    
+    
+    //working
+    
+//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+//        if UIDevice.current.orientation.isLandscape {
+//            print("landscape mode on")
+//            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//            appDelegate.myOrientation = .landscape
 //
-//        default:
-//            AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight, andRotateTo: UIInterfaceOrientation.portrait)
+//        }else{
+//            print("potrait mode on")
+//            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//            appDelegate.myOrientation = .portrait
 //
 //        }
-        
+//    }
+   
+   
+
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
+        self.tabBarController?.tabBar.isHidden = true
+
     }
+
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
         var text=""
         switch UIDevice.current.orientation{
@@ -88,14 +86,10 @@ class PostImageZoomViewController: UIViewController,UIScrollViewDelegate {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-//        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
 
-        isPresented = false
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-//        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
-        isPresented = false
 
     }
     
@@ -123,7 +117,14 @@ class PostImageZoomViewController: UIViewController,UIScrollViewDelegate {
     }
 
     @IBAction func removeButton(_ sender: Any) {
-     dismiss(animated: true, completion: nil)
+//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//        appDelegate.orientationLock = .portrait
+        
+        isPresented = false // Set this flag to NO before dismissing controller, so that correct orientation will be chosen for the bottom controller
+        self.presentingViewController!.dismiss(animated: true, completion: nil);
+
+        
+//     dismiss(animated: true, completion: nil)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
