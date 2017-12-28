@@ -151,6 +151,7 @@ extension OnboardingVC: CLLocationManagerDelegate {
     // Handle location manager errors.
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         locationManager.stopUpdatingLocation()
+        self.openStoryBoard(name: Constants.Main, id: Constants.TabStoryId)
         print("Error: \(error)")
     }
 }
