@@ -88,7 +88,8 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         }else if indexPath.section == 1 {
             cell.nameLabel.text = itemArray2[indexPath.row]
         }else if indexPath.section == 2 {
-            cell.nameLabel.text = "Logout"
+            cell.textLabel?.text = "       Logout"
+            cell.textLabel?.font = UIFont(name: "Avenir-Medium", size: 14)
         }else {
             cell.textLabel?.text = ""
         }
@@ -101,7 +102,7 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     if section == 1 {
         return 40
     }else if section == 2 {
-    return 0
+    return 40
     }else{
         return 0
     }
