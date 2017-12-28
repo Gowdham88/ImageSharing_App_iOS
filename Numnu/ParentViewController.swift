@@ -220,6 +220,8 @@ extension ParentViewController {
         tabScrollView.isHidden           = false
         
         navigationItemList.title = "Numnu"
+
+
         
         let button: UIButton = UIButton(type: UIButtonType.custom)
         //set image for button

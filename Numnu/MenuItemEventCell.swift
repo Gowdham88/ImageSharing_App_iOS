@@ -14,6 +14,7 @@ class MenuItemEventCell: UITableViewCell {
     @IBOutlet weak var eventMenImageView: ImageExtender!
     @IBOutlet weak var eventMenLabel: UILabel!
     @IBOutlet weak var eventMenCollectionView: UICollectionView!
+    @IBOutlet weak var priceLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -609,9 +610,8 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="63" height="22"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8pN-Nw-ZWx">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8pN-Nw-ZWx">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="60" height="22"/>
-                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                                 <color key="backgroundColor" red="0.60000002379999995" green="0.40000000600000002" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="12"/>
                                                                                 <color key="textColor" red="0.54117647058823526" green="0.55686274509803924" blue="0.58431372549019611" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -619,24 +619,42 @@
                                                                             </label>
                                                                         </subviews>
                                                                     </view>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="bottom" secondItem="8pN-Nw-ZWx" secondAttribute="bottom" id="cU5-vt-Poc"/>
+                                                                        <constraint firstAttribute="trailingMargin" secondItem="8pN-Nw-ZWx" secondAttribute="trailing" constant="-5" id="cef-QY-7aR"/>
+                                                                        <constraint firstItem="8pN-Nw-ZWx" firstAttribute="leading" secondItem="wcL-Oz-h7O" secondAttribute="leading" id="eTf-5b-x5u"/>
+                                                                        <constraint firstItem="8pN-Nw-ZWx" firstAttribute="top" secondItem="wcL-Oz-h7O" secondAttribute="top" id="muV-fH-L0G"/>
+                                                                    </constraints>
                                                                     <connections>
                                                                         <outlet property="tagnamelabel" destination="8pN-Nw-ZWx" id="2Qs-Ol-ejc"/>
                                                                     </connections>
                                                                 </collectionViewCell>
                                                             </cells>
                                                         </collectionView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="$5.40" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tF4-yE-AQp">
+                                                            <rect key="frame" x="98" y="85" width="64" height="14"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="64" id="Po2-Tv-pHo"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
+                                                            <color key="textColor" red="0.46274509803921571" green="0.5607843137254902" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
+                                                        <constraint firstItem="tF4-yE-AQp" firstAttribute="top" secondItem="9Ud-aE-sHk" secondAttribute="bottom" constant="39" id="7le-as-cxN"/>
                                                         <constraint firstAttribute="height" constant="100" id="AE3-ej-QSi"/>
                                                         <constraint firstItem="Qan-Gz-I1d" firstAttribute="top" secondItem="XT7-7m-pMZ" secondAttribute="top" constant="10" id="Aea-tJ-wWd"/>
                                                         <constraint firstItem="Iuu-SS-fjo" firstAttribute="top" secondItem="9Ud-aE-sHk" secondAttribute="bottom" constant="9" id="EUh-Fj-9xy"/>
                                                         <constraint firstItem="Iuu-SS-fjo" firstAttribute="top" secondItem="9Ud-aE-sHk" secondAttribute="bottom" constant="9" id="Esh-HH-dOf"/>
+                                                        <constraint firstItem="tF4-yE-AQp" firstAttribute="top" secondItem="Iuu-SS-fjo" secondAttribute="bottom" constant="8" id="YWS-hV-uMt"/>
                                                         <constraint firstAttribute="trailing" secondItem="9Ud-aE-sHk" secondAttribute="trailing" constant="35" id="aAK-cD-fqq"/>
                                                         <constraint firstItem="Iuu-SS-fjo" firstAttribute="leading" secondItem="Qan-Gz-I1d" secondAttribute="trailing" constant="10" id="biC-Gc-jAU"/>
                                                         <constraint firstItem="9Ud-aE-sHk" firstAttribute="leading" secondItem="Qan-Gz-I1d" secondAttribute="trailing" constant="10" id="cXr-ty-oIr"/>
                                                         <constraint firstItem="9Ud-aE-sHk" firstAttribute="top" secondItem="XT7-7m-pMZ" secondAttribute="top" constant="10" id="r4R-nf-7IQ"/>
                                                         <constraint firstItem="Qan-Gz-I1d" firstAttribute="leading" secondItem="XT7-7m-pMZ" secondAttribute="leading" constant="8" id="sSJ-e2-75p"/>
+                                                        <constraint firstItem="tF4-yE-AQp" firstAttribute="leading" secondItem="Iuu-SS-fjo" secondAttribute="leading" id="wpW-y5-HHB"/>
                                                         <constraint firstAttribute="trailing" secondItem="Iuu-SS-fjo" secondAttribute="trailing" constant="35" id="yIG-zP-ZST"/>
                                                     </constraints>
                                                 </view>
@@ -652,6 +670,7 @@
                                             <outlet property="eventMenCollectionView" destination="Iuu-SS-fjo" id="4d7-tY-cVY"/>
                                             <outlet property="eventMenImageView" destination="Qan-Gz-I1d" id="Vzi-cZ-Uwp"/>
                                             <outlet property="eventMenLabel" destination="9Ud-aE-sHk" id="ILr-r6-Foq"/>
+                                            <outlet property="priceLabel" destination="tF4-yE-AQp" id="4xR-03-pQC"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -672,7 +691,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="guv-MK-NnU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2154" y="75"/>
+            <point key="canvasLocation" x="2152.5" y="75"/>
         </scene>
     </scenes>
     <resources>

@@ -740,8 +740,11 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
                 return cell!
             }
             cell?.textLabel?.text = tagnamearray[indexPath.row]
+            cell?.textLabel?.font = UIFont(name: "Avenir-Medium", size: 14)
             dropdownTableView.transform = CGAffineTransform(scaleX: 1, y: -1)
             cell?.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
+//            view.transform = view.transform.rotated(by angle: CGFloat(45 * M_PI / 180))
+
             //            cell?.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1.0)
             cell?.textLabel?.textColor = UIColor(red: 129/255.0, green: 135/255.0, blue: 155/255.0, alpha: 1.0)
             
@@ -760,6 +763,8 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
                 
                 return cell!
             }
+            cell?.textLabel?.font = UIFont(name: "Avenir-Medium", size: 14)
+
             citytableview.transform = CGAffineTransform(scaleX: 1, y: -1)
             cell?.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
             //            cell?.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1.0)
