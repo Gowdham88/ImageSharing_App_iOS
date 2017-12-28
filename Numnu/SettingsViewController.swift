@@ -56,7 +56,7 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         self.profileImageview.clipsToBounds = true
         
         itemArray = ["Share the app","Rate the app","Terms of service","Privacy policy"]
-        itemArray2 = ["Events","Business","Items","Posts","Users","Logout"]
+        itemArray2 = ["Events","Business","Items","Posts","Users"]
 //        topHeaderView.backgroundColor = UIColor(red: 216/255.0, green: 216/255.0, blue: 216/255.0, alpha: 1.0)
         
         setUserDetails()
@@ -72,6 +72,8 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
             return itemArray.count
         }else if section == 1 {
             return itemArray2.count
+        }else if section == 2 {
+            return 1
         }else{
             return 0
         }
@@ -85,6 +87,8 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
             cell.nameLabel.text = itemArray[indexPath.row]
         }else if indexPath.section == 1 {
             cell.nameLabel.text = itemArray2[indexPath.row]
+        }else if indexPath.section == 2 {
+            cell.nameLabel.text = "Logout"
         }else {
             cell.textLabel?.text = ""
         }
