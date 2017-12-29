@@ -39,6 +39,8 @@
 		6F44F2601F9365F200AF45F2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F44F25C1F9365F200AF45F2 /* CoreData.framework */; };
 		6F542A931FB1BD9B0024AC7D /* PlaceTableviewcellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F542A921FB1BD9B0024AC7D /* PlaceTableviewcellTableViewCell.swift */; };
 		6F5FF1081FF619A4004BC364 /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5FF1071FF619A4004BC364 /* LocationModel.swift */; };
+		6F5FF10A1FF63A58004BC364 /* LocationTableview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5FF1091FF63A58004BC364 /* LocationTableview.swift */; };
+		6F5FF10E1FF63C28004BC364 /* LocationviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5FF10D1FF63C28004BC364 /* LocationviewCell.swift */; };
 		6FC0A9C31FCEA1F500D91B0C /* ImgList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC0A9C21FCEA1F500D91B0C /* ImgList.swift */; };
 		6FC0A9C51FCEAEE300D91B0C /* LocList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC0A9C41FCEAEE300D91B0C /* LocList.swift */; };
 		6FEB33831FC41A6F00E13505 /* Eventlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEB33821FC41A6F00E13505 /* Eventlist.swift */; };
@@ -200,6 +202,8 @@
 		6F44F25C1F9365F200AF45F2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		6F542A921FB1BD9B0024AC7D /* PlaceTableviewcellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceTableviewcellTableViewCell.swift; sourceTree = "<group>"; };
 		6F5FF1071FF619A4004BC364 /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
+		6F5FF1091FF63A58004BC364 /* LocationTableview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableview.swift; sourceTree = "<group>"; };
+		6F5FF10D1FF63C28004BC364 /* LocationviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LocationviewCell.swift; path = /Users/CZSM/Documents/Numnu_adavan_ios/Numnu/LocationviewCell.swift; sourceTree = "<absolute>"; };
 		6FC0A9C21FCEA1F500D91B0C /* ImgList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgList.swift; sourceTree = "<group>"; };
 		6FC0A9C41FCEAEE300D91B0C /* LocList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocList.swift; sourceTree = "<group>"; };
 		6FEB33821FC41A6F00E13505 /* Eventlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Eventlist.swift; sourceTree = "<group>"; };
@@ -604,6 +608,8 @@
 				B426C68D1F9E0A6B008D586B /* SplashViewController.swift */,
 				B46310231FA323E2009F6F0E /* PostDetailViewController.swift */,
 				BE2E37EB1FCD6ED8000BEE63 /* LuanchScreenViewController.swift */,
+				6F5FF1091FF63A58004BC364 /* LocationTableview.swift */,
+				6F5FF10D1FF63C28004BC364 /* LocationviewCell.swift */,
 				B4FC17FC1FF39D09009CAE6A /* ProfileLinkController.swift */,
 			);
 			name = Controller;
@@ -1038,6 +1044,7 @@
 				B41842411F8FD28500CBBA57 /* NotificationsTableViewCell.swift in Sources */,
 				60B4EA421FAAFB9300C1A6C9 /* SettingsViewController.swift in Sources */,
 				6043865C1FB052860049F971 /* FoodPreferenceCollectionViewCell.swift in Sources */,
+				6F5FF10E1FF63C28004BC364 /* LocationviewCell.swift in Sources */,
 				B4BD9EF01F6FA57300C43182 /* PostList.swift in Sources */,
 				3F00064B1FD6CDC70098B132 /* UIWindowTransitions.swift in Sources */,
 				3FC6CEEA1F6FA25600DF2A12 /* feedTableViewCell.swift in Sources */,
@@ -1094,6 +1101,7 @@
 				B418423F1F8FD1B000CBBA57 /* NotificationsVC.swift in Sources */,
 				B44E1D551FA1CF00001F754E /* BusinessCategoryEventViewCellTableViewCell.swift in Sources */,
 				B4483EFE1FDEA4CA00D99E0E /* EventTypeList.swift in Sources */,
+				6F5FF10A1FF63A58004BC364 /* LocationTableview.swift in Sources */,
 				6F5FF1081FF619A4004BC364 /* LocationModel.swift in Sources */,
 				B42201B21F8E661E0058A4ED /* ImageExtender.swift in Sources */,
 				3F0006491FD6CDBB0098B132 /* Package.swift in Sources */,
