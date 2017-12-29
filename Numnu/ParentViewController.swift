@@ -154,7 +154,7 @@ extension ParentViewController : UITextFieldDelegate {
         
         if textField == editsearchbyLocation  {
             
-            if editsearchbyItem.text != nil {
+            if editsearchbyItem.text != "" {
                 
                  setNavBar()
             }
@@ -195,13 +195,17 @@ extension ParentViewController : UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        LoadingHepler.instance.show()
-        let when = DispatchTime.now() + 1
-        DispatchQueue.main.asyncAfter(deadline: when) {
-            LoadingHepler.instance.hide()
+        
+        if editsearchbyItem.text != "" {
+            LoadingHepler.instance.show()
+            let when = DispatchTime.now() + 1
+            DispatchQueue.main.asyncAfter(deadline: when) {
+                LoadingHepler.instance.hide()
+            }
+            
+            reloadPagerTabStripView()
         }
-
-        reloadPagerTabStripView()
+       
         dismissKeyboard()
         
     }
@@ -485,7 +489,6 @@ extension ParentViewController : PostTabControllerDelegate {
         
         let Alert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
         let FemaleAction = UIAlertAction(title: "Share", style: UIAlertActionStyle.default) { _ in
-            
             
         }
         let MaleAction = UIAlertAction(title: "Bookmark", style: UIAlertActionStyle.default) { _ in

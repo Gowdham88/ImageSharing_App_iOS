@@ -22,16 +22,23 @@ struct MyVariables {
     static var address     = String()
     static var link1 = String()
     static var link2 = String()
+    static var link3 = String()
     
 }
 class EventViewController: ButtonBarPagerTabStripViewController {
     
     var token_str     : String = "empty"
     var apiClient     : ApiClient!
-    let textLabel : UILabel = UILabel()
     var description_txt : String = ""
     var eventprimaryid  : Int    = 34
 
+    @IBOutlet weak var dateIconTopToEventname: NSLayoutConstraint!
+    @IBOutlet weak var dateTopToEventname: NSLayoutConstraint!
+    @IBOutlet weak var scrollViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var descriptionTopcostraintToWeblink2: NSLayoutConstraint!
+    @IBOutlet weak var descriptionTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var weblink3TopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var weblink2TopConstraint: NSLayoutConstraint!
     @IBOutlet weak var myscrollView: UIScrollView!
     @IBOutlet weak var eventImageView: ImageExtender!
     @IBOutlet weak var eventTitleLabel: UILabel!
@@ -105,7 +112,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
             oldCell?.label.textColor = UIColor.textlightDark()
             newCell?.label.textColor = UIColor.appBlackColor()
          
-          
+
             
         }
 
@@ -126,7 +133,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
         apiClient = ApiClient()
         
         getFirebaseToken()
-   
+
     }
     
     
@@ -251,8 +258,8 @@ extension EventViewController {
     
     func webLink3(sender:UITapGestureRecognizer) {
         
-        openWebBoard(url: "http://www.totc.ca")
-        
+        openWebBoard(url: MyVariables.link3)
+      // "http://www.totc.ca"
     }
     
     func mapRedirect(sender:UITapGestureRecognizer) {
@@ -265,7 +272,8 @@ extension EventViewController {
     func tagViewUpdate() {
         
         var expandableWidth : CGFloat = 0
-        
+        let textLabel : UILabel = UILabel()
+
         for (i,text) in tagarray.enumerated() {
             
             let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: text, fontname: "Avenir-Medium", size: 12)
@@ -273,10 +281,11 @@ extension EventViewController {
             textLabel.text = text
             textLabel.backgroundColor  = UIColor.tagBgColor()
             textLabel.textColor        = UIColor.tagTextColor()
+    
             textLabel.layer.cornerRadius = 4
             textLabel.layer.masksToBounds = true
             textLabel.textAlignment = .center
-            
+
             if i == 0 {
                 
                 textLabel.frame = CGRect(x: 0, y: 0, width: textSize.width+20, height: 22)
@@ -286,9 +295,8 @@ extension EventViewController {
                 textLabel.frame = CGRect(x: expandableWidth, y: 0, width: textSize.width+20, height: 22)
                 
             }
-            
             expandableWidth += textSize.width+30
-            tagScrollView.addSubview(textLabel)
+            tagScrollView.addSubview(textLabel) 
            
         }
         
@@ -330,8 +338,7 @@ extension EventViewController {
  
         
     }
-    
-    
+  
     
     func backButtonClicked() {
         
@@ -507,7 +514,6 @@ extension EventViewController {
     }
     
     func MethodToCallApi() {
-        
        
         LoadingHepler.instance.show()
         let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
@@ -553,7 +559,6 @@ extension EventViewController {
         if let startsat = response.startsat {
             print(startsat)
             if response.startsat != nil {
-                //                eventDateLabel.text = PrefsManager.sharedinstance.startsat + "-" + (PrefsManager.sharedinstance.endsat)
             }
         }
         
@@ -567,10 +572,7 @@ extension EventViewController {
                 let date = formatter.date(from: endsat)
                 let date2 = formatter.date(from: response.startsat!)
                 
-                print("date: \(String(describing: date))")
-                print("date: \(String(describing: date2))")
-                
-                formatter.dateFormat = "MMM dd,h:mm a"
+                formatter.dateFormat = "MMM dd, h:mm a"
                 let dateString = formatter.string(from: date!)
                 let dateString2 = formatter.string(from: date2!)
                 eventDateLabel.text = dateString2 + " - " + dateString
@@ -580,29 +582,49 @@ extension EventViewController {
         
         
         if let eventLinkList = response.eventLinkList {
-            if  eventLinkList.count > 0 {
-                EventLinkLabel1.text = eventLinkList[0].linktext
-                MyVariables.link1 = eventLinkList[0].weblink!
-                
+            if eventLinkList.count > 0 {
+                if let weblink1 = eventLinkList[0].weblink {
+                    EventLinkLabel1.text = eventLinkList[0].linktext
+                    MyVariables.link1    = weblink1
+                }
+                if let weblink2 = eventLinkList[1].weblink {
+                    eventLinkLabel2.text = eventLinkList[1].linktext
+                    MyVariables.link2    = weblink2
+                    descriptionTopcostraintToWeblink2.constant = 25
+                    
+                }
+            }else {
             }
-            if eventLinkList.count > 1 {
-                eventLinkLabel2.text = eventLinkList[1].linktext
-                MyVariables.link2 = eventLinkList[1].weblink!
-                
-                
+            
+            if eventLinkList.count > 2 {
+                if let weblink3 = eventLinkList[2].weblink {
+                    eventLinkLabel3.text   = eventLinkList[2].linktext
+                    MyVariables.link3      = weblink3
+                    
+                }
+            }else{
+                descriptionTopcostraintToWeblink2.constant = 5
             }
         }
         
         
         if let taglist = response.taglist {
+           dateIconTopToEventname.constant = 40
+            dateTopToEventname.constant = 37
+            tagarray.removeAll()
             if taglist.count > 0 {
                 for item in taglist {
-                    if let tagname = item.text_str {
-                        tagarray.append(tagname)
-                    }
+                    
+                        tagarray.append(item.text_str ?? "")
+                        print("tags::::",tagarray)
+                    tagViewUpdate()
+
                 }
-                tagViewUpdate()
             }
+        }else{
+            dateIconTopToEventname.constant = 6
+            dateTopToEventname.constant = 5
+
         }
         
         if let loclist = response.loclist {
