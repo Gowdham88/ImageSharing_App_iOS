@@ -125,7 +125,7 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.section == 1 && indexPath.row == 5 {
+        if indexPath.section == 2  {
             
             DBProvider.Instance.firebaseLogout()
             delegate?.logout()
