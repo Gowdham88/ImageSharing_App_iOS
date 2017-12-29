@@ -14,9 +14,16 @@ struct ItemList {
     
     var id              : Int?
     var name            : String?
+    var itemname        : String?
     var description     : String?
+    var itemdescription : String?
     var displayorder    : Int?
+    var eventid         : Int?
+    var eventname       : String?
     var businessuserid  : Int?
+    var priceamount     : String?
+    var currencyid      : Int?
+    var currencycode    : String?
     var businessname    : String?
     var updatedat       : String?
     var createdat       : String?
@@ -40,9 +47,21 @@ struct ItemList {
             
         }
         
+        if let itemname = json["itemname"].string {
+            
+            self.itemname = itemname
+            
+        }
+        
         if let description = json["description"].string {
             
             self.description = description
+            
+        }
+        
+        if let itemdescription = json["itemdescription"].string {
+            
+            self.itemdescription = itemdescription
             
         }
         
@@ -80,6 +99,36 @@ struct ItemList {
         if let updatedby = json["updatedby"].int {
             
             self.updatedby = updatedby
+            
+        }
+        
+        if let eventid = json["eventid"].int {
+            
+            self.eventid = eventid
+            
+        }
+        
+        if let eventname = json["eventname"].string {
+            
+            self.eventname = eventname
+            
+        }
+        
+        if let priceamount = json["priceamount"].string {
+            
+            self.priceamount = priceamount
+            
+        }
+        
+        if let currencyid = json["currencyid"].int {
+            
+            self.currencyid = currencyid
+            
+        }
+        
+        if let currencycode = json["currencycode"].string {
+            
+            self.currencycode = currencycode
             
         }
         
@@ -142,6 +191,20 @@ struct ItemList {
             }
         }
         
+        
+        if let tagArray = json["itemtags"].array {
+            
+            for item in tagArray {
+                
+                let tagItem = TagList(array: item)
+                if tagList == nil {
+                    tagList = []
+                }
+                tagList?.append(tagItem)
+                
+                
+            }
+        }
     }
     
 }

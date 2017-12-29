@@ -723,6 +723,41 @@ class  ApiClient {
         
     }
     
+    /********************************getItemsbasedidEvent*************************************************/
+    
+    func getItemByIdEvent(eventid : Int,id : Int,headers : HTTPHeaders,completion : @escaping (String,ItemList?)-> Void) {
+        
+        Alamofire.request("\(Constants.EventApiUrl)/\(eventid)/items/\(id)", method: .get,encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            
+            print(response.request as Any)
+            print(response.result.value as Any)
+            
+            switch response.result {
+                
+            case .success :
+                
+                if let value = response.result.value {
+                    
+                    let json = JSON(value)
+                    if let itemList = ItemList(json: json) {
+                        
+                        completion("success",itemList)
+                    }
+                    
+                }
+                
+                
+            case .failure(let error):
+                
+                print(error.localizedDescription)
+                completion(error.localizedDescription,nil)
+                
+            }
+            
+        }
+        
+    }
+    
     /********************************getItemsbasedid*************************************************/
     
     func getBusinessById(id : Int,headers : HTTPHeaders,completion : @escaping (String,BusinessDetailModel?)-> Void) {
@@ -1004,6 +1039,40 @@ class  ApiClient {
         
     }
    
+    /************************Location detail api**********************************/
+    
+    func getLocationsById(id : Int,headers : HTTPHeaders,completion : @escaping (String,LocationModel?)-> Void) {
+        
+        Alamofire.request("\(Constants.LocationApiUrl)/\(id)", method: .get,encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            
+            print(response.request as Any)
+            print(response.result.value as Any)
+            
+            switch response.result {
+                
+            case .success :
+                
+                if let value = response.result.value {
+                    
+                    let json = JSON(value)
+                    if let itemList = LocationModel(json: json) {
+                        
+                        completion("success",itemList)
+                    }
+                    
+                }
+                
+                
+            case .failure(let error):
+                
+                print(error.localizedDescription)
+                completion(error.localizedDescription,nil)
+                
+            }
+            
+        }
+        
+    }
     
     
     /**********************************getPlace Lat long*************************************************/

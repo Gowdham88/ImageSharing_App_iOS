@@ -27,6 +27,7 @@ class ItemCompleteviewcontroller : UIViewController {
 
     @IBOutlet weak var ItImageView: ImageExtender!
     @IBOutlet weak var ItTitleLabel: UILabel!
+    var description_txt : String = ""
     
     @IBOutlet weak var myscrollView: UIScrollView!
     
@@ -39,6 +40,7 @@ class ItemCompleteviewcontroller : UIViewController {
     @IBOutlet weak var eventname: UILabel!
     @IBOutlet var eventIcon: ImageExtender!
     
+    @IBOutlet weak var itemPriceLabel: UILabel!
     
     @IBOutlet weak var tagScrollView: UIScrollView!
     
@@ -46,7 +48,7 @@ class ItemCompleteviewcontroller : UIViewController {
     
     @IBOutlet weak var mainContainerViewBottom: NSLayoutConstraint!
     @IBOutlet weak var mainContainerView: NSLayoutConstraint!
-    var tagarray = ["Festival","Wine","Party"]
+    var tagarray = [String]()
     var postList = [PostListDataItems]()
     var postModel  : PostListByEventId?
     
@@ -64,8 +66,9 @@ class ItemCompleteviewcontroller : UIViewController {
     var primaryid       : Int = 149
     var pageno  : Int = 1
     var limitno : Int = 25
-
-    var itemprimaryid   : Int  = 39
+   
+    var itemprimaryid   : Int  = 35
+    var eventid         : Int  = 34
     
     @IBOutlet weak var shareitemlabel: UILabel!
     @IBOutlet weak var sharebookmarklabel: UILabel!
@@ -75,6 +78,21 @@ class ItemCompleteviewcontroller : UIViewController {
     lazy var bookmarkid   : Int       = 0
     lazy var bookmarkname : String    = "name"
     lazy var bookmarktype : String    = "empty"
+    
+    /********************Constraints****************************/
+    @IBOutlet weak var titleTopContraints       : UIView!
+    @IBOutlet weak var tagscroltopConstraint    : NSLayoutConstraint!
+    @IBOutlet weak var descriptionTopConstraint : NSLayoutConstraint!
+    
+    @IBOutlet weak var itemTitleConstraint: NSLayoutConstraint!
+    @IBOutlet weak var eventTitleTop      : NSLayoutConstraint!
+    
+    @IBOutlet weak var tagscrollviewheightconstraint : NSLayoutConstraint!
+    @IBOutlet weak var itemImageHeightConstraint : NSLayoutConstraint!
+    @IBOutlet weak var itemImageTopConstraint    : NSLayoutConstraint!
+    
+    @IBOutlet weak var eventImageTopConstraint    : NSLayoutConstraint!
+    @IBOutlet weak var eventImageHeightConstraint : NSLayoutConstraint!
     
     override func viewDidLoad() {
        super.viewDidLoad()
@@ -89,7 +107,7 @@ class ItemCompleteviewcontroller : UIViewController {
         tapRegistration()
         alertTapRegister()
         
-        tagViewUpdate()
+        self.myscrollView.isHidden = true
         
         let eventtap = UITapGestureRecognizer(target: self, action: #selector(ItemCompleteviewcontroller.eventtap))
         eventname.addGestureRecognizer(eventtap)
@@ -125,7 +143,7 @@ class ItemCompleteviewcontroller : UIViewController {
         postTableview.delegate   = self
         postTableview.dataSource = self
         postTableview.isScrollEnabled = false
-//        ododToCallApi(pageno: pageno, limit: limitno)
+
        
         
         // Do any additional setup after loading the view.
@@ -135,15 +153,8 @@ class ItemCompleteviewcontroller : UIViewController {
         self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
         self.navigationController?.navigationBar.isUserInteractionEnabled = true
         viewState = true
-
-        postList.removeAll()
-        postTableview.reloadData()
-        pageno  = 1
-        limitno = 25
-        
-        methodToCallApi(pageno: pageno, limit: limitno)
-
- 
+        getItemIdApi()
+     
     }
     func methodToCallApi(pageno: Int , limit: Int) {
         
@@ -253,15 +264,14 @@ class ItemCompleteviewcontroller : UIViewController {
             isLabelAtMaxHeight = false
             eventDescriptionHeight.constant = 75
             
-            
         } else {
             
             readMoreButton.setTitle("less", for: .normal)
             isLabelAtMaxHeight = true
-            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: ItDescriptionLabel.frame.width, font: ItDescriptionLabel.font)
-         
+            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: description_txt, width: ItDescriptionLabel.frame.width, font: ItDescriptionLabel.font)
+            
         }
-     
+      
         
     }
     
@@ -535,8 +545,6 @@ extension ItemCompleteviewcontroller : UITableViewDelegate,UITableViewDataSource
         cell.postUsernameLabel.isUserInteractionEnabled = true
         
         
-        
-        
         return cell
         
     }
@@ -712,6 +720,196 @@ extension ItemCompleteviewcontroller {
         
     }
     
+    
+    
+}
+
+extension ItemCompleteviewcontroller {
+    
+    func getItemIdApi() {
+        
+        LoadingHepler.instance.show()
+        
+        apiClient.getFireBaseToken(completion: { token in
+            
+            let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
+            
+            self.apiClient.getItemByIdEvent(eventid: self.eventid,id: self.itemprimaryid, headers: header, completion: { status,item in
+                
+                if status == "success" {
+                    
+                    LoadingHepler.instance.hide()
+                    
+                    if let itemlist = item {
+                        
+                        DispatchQueue.main.async {
+                            
+                            self.getItemDetails(item: itemlist)
+                        }
+                        
+                        self.postList.removeAll()
+                        self.postTableview.reloadData()
+                        self.pageno  = 1
+                        self.limitno = 25
+                        self.methodToCallApi(pageno: self.pageno, limit: self.limitno)
+                        
+                    }
+                    
+                    
+                } else {
+                    
+                    LoadingHepler.instance.hide()
+                    
+                    DispatchQueue.main.async {
+                        
+                        self.myscrollView.isHidden = true
+                    }
+                    
+                    
+                }
+                
+                
+            })
+            
+            
+        })
+        
+    }
+    
+    func getItemDetails(item : ItemList) {
+        
+
+    
+        
+        /****************Name************************/
+        
+        if let itemname = item.itemname {
+            
+            ItTitleLabel.text = itemname
+            
+        }
+        
+        if let event = item.eventname {
+            
+            eventname.text = event
+            
+            if (ItDescriptionLabel.numberOfVisibleLines > 1) {
+                
+                descriptionTopConstraint.constant = 46
+            }
+            
+            
+        } else {
+            
+            
+            eventImageHeightConstraint.constant = 0
+            
+        }
+        
+        if let business = item.businessname {
+            
+            businessName.text = business
+            
+            
+        } else {
+            
+            if (ItDescriptionLabel.numberOfVisibleLines > 1) {
+                
+                descriptionTopConstraint.constant = 30
+            }
+            
+            itemImageTopConstraint.constant    = 0
+            itemImageHeightConstraint.constant = 0
+        }
+        
+        if let itemcurrenyid = item.currencycode,let itemcurrency = item.priceamount {
+            
+            itemPriceLabel.text = "\(itemcurrenyid) \(itemcurrency)"
+            
+        }
+        
+        
+        /****************Imagee************************/
+        
+        if let imageList = item.itemImageList {
+            
+            if imageList.count > 0 {
+                
+                if let url = imageList[imageList.count-1].imageurl {
+                    
+                    apiClient.getFireBaseImageUrl(imagepath: url, completion: { imageUrl in
+                        
+                        if imageUrl != "empty" {
+                            
+                            print(imageUrl)
+                            Manager.shared.loadImage(with: URL(string : imageUrl)!, into: self.ItImageView)
+                        }
+                        
+                    })
+                
+                }
+             }
+        }
+        
+        /****************Description************************/
+        
+        if let itemDes = item.itemdescription {
+            
+            ItDescriptionLabel.text = itemDes
+        }
+        
+        /****************Checking number of lines************************/
+        
+        if (ItDescriptionLabel.numberOfVisibleLines > 4) {
+            
+            readMoreButton.isHidden = false
+            
+        } else {
+            
+            readMoreButton.isHidden         = true
+            if let description = item.description {
+                eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: description, width: ItDescriptionLabel.frame.width, font: ItDescriptionLabel.font)
+                description_txt = description
+            }
+            
+            containerviewtop.constant = 8
+        }
+        
+        /****************Tags************************/
+        
+        if let itemTag = item.tagList {
+            
+            
+            if itemTag.count > 0 {
+                
+                tagarray.removeAll()
+                
+                for tag in itemTag {
+                    
+                    tagarray.append(tag.text_str ?? "")
+                    
+                }
+                
+                tagViewUpdate()
+                
+            }
+            
+            
+        } else {
+            
+            if (ItDescriptionLabel.numberOfVisibleLines > 1) {
+                
+                descriptionTopConstraint.constant = 30
+            }
+            
+            tagscrollviewheightconstraint.constant = 0
+            tagscroltopConstraint.constant         = 0
+         
+        }
+        
+        self.myscrollView.isHidden = false
+    
+    }
     
     
 }

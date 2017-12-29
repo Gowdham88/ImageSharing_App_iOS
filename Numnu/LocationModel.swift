@@ -23,12 +23,6 @@ struct LocationModel {
     var type            : Int?
     var createdat       : String?
     var updatedat       : String?
-    
-    
-    var imageurl         : [String]?
-    var imagecreatedat        : [String]?
-
-
     var createdby       : String?
     var updatedby       : String?
 
@@ -56,7 +50,7 @@ struct LocationModel {
             
         }
         
-        if let lattitude = json["displayorder"].string {
+        if let lattitude = json["lattitude"].string {
             
             self.lattitude = lattitude
         }
@@ -103,46 +97,22 @@ struct LocationModel {
             
         }
         
-//        if let itemImages  = json["locationimages"].array {
-//
-//            for item in itemImages {
-//                let tag_imageurl  = item["imageurl"].string ??  "empty"
-//                let tag_createdat = item["createdat"].string ?? "empty"
-//                if let imageItem = locationimages(json: item) {
-//
-//                    if locationimages == nil {
-//
-//                        locationimages = []
-//                    }
-//
-//                    locationimages?.append(imageItem)
-//                }
-//
-//            }
-//
-//        }
+
         if let imgArray = json["locationimages"].array  {
             
             for item in imgArray {
                 
-                let tag_imageurl  = item["imageurl"].string ??  "empty"
-                let tag_createdat = item["createdat"].string ?? "empty"
-                
-                if imageurl == nil {
+                if locationimages == nil {
                     
-                    imageurl = []
-                    
-                }
-                if imagecreatedat == nil {
-                    
-                    imagecreatedat = []
+                    locationimages = []
                     
                 }
                 
-                imageurl?.append(tag_imageurl)
-                createdat?.append(tag_createdat)
-                
-                
+                if let imageList =  ItemImageList(json:item) {
+                    
+                    locationimages?.append(imageList)
+                }
+               
             }
         }
 
@@ -155,19 +125,7 @@ struct LocationModel {
             
         }
         
-        if let tagArray = json["tags"].array {
-            
-            for item in tagArray {
-                
-                let tagItem = TagList(array: item)
-                if tag == nil {
-                    tag = []
-                }
-                tag?.append(tagItem)
-                
-                
-            }
-        }
+       
         
     }
     
