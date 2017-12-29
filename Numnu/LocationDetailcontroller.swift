@@ -52,6 +52,15 @@ class LocationDetailcontroller: ButtonBarPagerTabStripViewController {
     @IBOutlet weak var bookmarkloclabel: UILabel!
     @IBOutlet weak var shareloclabel: UILabel!
     
+    var apiClient     : ApiClient!
+    var primaryId     : Int = 0
+    
+    /**********************share********************************/
+    
+    lazy var bookmarkid   : Int       = 0
+    lazy var bookmarkname : String    = "name"
+    lazy var bookmarktype : String    = "empty"
+    
     override func viewDidLoad() {
         settings.style.selectedBarHeight = 3.0
         settings.style.buttonBarItemFont = UIFont(name: "Avenir-Medium", size: 14)!
@@ -109,7 +118,7 @@ class LocationDetailcontroller: ButtonBarPagerTabStripViewController {
        
         setMap()
         
-        
+        apiClient  = ApiClient()
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -132,8 +141,7 @@ class LocationDetailcontroller: ButtonBarPagerTabStripViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
  
-        let desiredOffset = CGPoint(x: -1, y: 0)
-        pagerView.setContentOffset(desiredOffset, animated: true)
+       
     }
     
     override func viewDidLayoutSubviews() {
@@ -153,8 +161,13 @@ class LocationDetailcontroller: ButtonBarPagerTabStripViewController {
         let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3) as! ReviewEventViewController
         child_1.popdelegate = self
         child_1.apiType     = "Location"
+        child_1.primaryid   = 180
+        
         let child_2 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid2) as! MenuEventViewController
         child_2.menuDelegate = self
+        child_2.itemType     = "Location"
+        child_2.primayId     = 179
+        
         return [child_1,child_2]
         
     }
@@ -245,7 +258,7 @@ extension LocationDetailcontroller {
         //set image for button
         button2.setImage(UIImage(named: "eventDots"), for: UIControlState.normal)
         //add function for button
-        button2.addTarget(self, action: #selector(EventViewController.openPopup), for: UIControlEvents.touchUpInside)
+        button2.addTarget(self, action: #selector(EventViewController.openSheet), for: UIControlEvents.touchUpInside)
         //set frame
         button2.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
         
@@ -315,11 +328,25 @@ extension LocationDetailcontroller {
     
     func closePopup(sender : UITapGestureRecognizer) {
         
+        bookmarkid   = 0
+        bookmarkname = "name"
+        bookmarktype = "empty"
+        
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
             
-            self.shareView.alpha                 = 0
+            self.shareView.alpha   = 0
             
         }, completion: nil)
+        
+    }
+    
+    func openSheet() {
+        
+        bookmarkid   = primaryId
+        bookmarkname = LocTitleLabel.text ?? "name"
+        bookmarktype = "location"
+        
+        openPopup()
         
     }
     
@@ -362,6 +389,20 @@ extension LocationDetailcontroller {
 //
 //
 //    }
+    
+    func closePopup() {
+        
+        bookmarkid   = 0
+        bookmarkname = "name"
+        bookmarktype = "empty"
+        
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            
+            self.shareView.alpha                 = 0
+            
+        }, completion: nil)
+        
+    }
     
 }
 
@@ -419,6 +460,11 @@ extension LocationDetailcontroller : CLLocationManagerDelegate {
 extension LocationDetailcontroller : ReviewEventViewControllerDelegate {
     
     func popupClick(postid: Int, postname: String) {
+        
+        bookmarkid   = postid
+        bookmarkname = postname
+        bookmarktype = "post"
+        
         openPopup()
     }
     
@@ -445,26 +491,65 @@ extension LocationDetailcontroller : MenuEventViewControllerDelegate {
 
 extension LocationDetailcontroller {
     
-    func bookmarkpost(sender : UITapGestureRecognizer) {
-//
-//        let clientIp  = ValidationHelper.Instance.getIPAddress() ?? "1.0.1"
-//        let userid    = PrefsManager.sharedinstance.userId
-//        let eventname = LocAddressLabel.text ?? "Item name"
-//
-//        let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
-//        let parameters: Parameters = ["entityid": itemprimaryid, "entityname":eventname , "type" : "item" ,"createdby" : userid,"updatedby": userid ,"clientip": clientIp, "clientapp": Constants.clientApp]
-//        apiClient.bookmarEntinty(parameters: parameters,headers: header, completion: { status,response in
-//
-//            if status == "success" {
-//
-//                AlertProvider.Instance.showAlert(title: "Hey!", subtitle: "Bookmarked successfully.", vc: self)
-//
-//            } else {
-//
-//                AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Bookmark failed.", vc: self)
-//            }
-//
-//        })
+    func bookmarkpost(token : String) {
+        
+        let clientIp  = ValidationHelper.Instance.getIPAddress() ?? "1.0.1"
+        let userid    = PrefsManager.sharedinstance.userId
+        
+        LoadingHepler.instance.show()
+        
+        let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
+        let parameters: Parameters = ["entityid": bookmarkid, "entityname":bookmarkname , "type" : bookmarktype ,"createdby" : userid,"updatedby": userid ,"clientip": clientIp, "clientapp": Constants.clientApp]
+        apiClient.bookmarEntinty(parameters: parameters,headers: header, completion: { status,response in
+            
+            if status == "success" {
+                
+                DispatchQueue.main.async {
+                    
+                    LoadingHepler.instance.hide()
+                    AlertProvider.Instance.showAlert(title: "Hey!", subtitle: "Bookmarked successfully.", vc: self)
+                    self.closePopup()
+                }
+                
+            } else {
+                
+                LoadingHepler.instance.hide()
+                
+                if status == "422" {
+                    
+                    AlertProvider.Instance.showAlert(title: "Hey!", subtitle: "Already bookmarked.", vc: self)
+                    
+                } else {
+                    
+                    AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Bookmark failed.", vc: self)
+                    
+                }
+                
+                
+            }
+            
+        })
+        
+    }
+    
+    func getBookmarkToken(sender : UITapGestureRecognizer) {
+        
+        apiClient.getFireBaseToken(completion:{ token in
+            
+            self.bookmarkpost(token: token)
+            
+        })
+        
+    }
+    
+    
+    func getBookmarkToken() {
+        
+        apiClient.getFireBaseToken(completion:{ token in
+            
+            self.bookmarkpost(token: token)
+            
+        })
         
     }
     
