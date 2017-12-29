@@ -170,7 +170,7 @@ extension MenuItemViewController : UITableViewDelegate,UITableViewDataSource {
         
         let storyboard      = UIStoryboard(name: name, bundle: nil)
         let vc              = storyboard.instantiateViewController(withIdentifier: id) as! ItemCompleteviewcontroller
-        vc.itemprimaryid    = 39
+        vc.itemprimaryid    = 35
         self.navigationController!.pushViewController(vc, animated: true)
         
     }

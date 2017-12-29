@@ -64,6 +64,17 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
     lazy var bookmarkname : String    = "name"
     lazy var bookmarktype : String    = "empty"
     
+    /********************Constraints****************************/
+    @IBOutlet weak var titleTopContraints: UIView!
+    @IBOutlet weak var tagscroltopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var descriptionTopConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var scrollHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var businessEntintyTitleConstraint: NSLayoutConstraint!
+    @IBOutlet weak var businessEntintScrollTop: NSLayoutConstraint!
+    
+    @IBOutlet weak var BusinessEntinyTopConstraint: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         settings.style.selectedBarHeight = 3.0
         settings.style.buttonBarItemFont = UIFont(name: "Avenir-Medium", size: 14)!
@@ -106,8 +117,7 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
         
         apiClient = ApiClient()
         getItemIdApi()
-        
-      
+       
 
         // Do any additional setup after loading the view.
     }
@@ -569,7 +579,13 @@ extension ItemDetailController {
             }
             
             
+        } else {
+            
+            tagscroltopConstraint.constant  = 0
+            scrollHeightConstraint.constant = 0
         }
+        
+
         
         self.myscrollView.isHidden = false
         
@@ -580,6 +596,9 @@ extension ItemDetailController {
             if let entintyname = entinty.businessname {
                 
                 businessEntityNameLabel.text = entintyname
+            } else {
+                
+                businessEntintScrollTop.constant = 0
             }
             
             if let itemTag = entinty.taglist {

@@ -127,9 +127,7 @@ extension EventMapViewController: CLLocationManagerDelegate {
         
         DispatchQueue.main.async {
             
-//            let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
-//                                                  longitude: location.coordinate.longitude,
-//                                                  zoom: self.zoomLevel)
+
             let camera = GMSCameraPosition.camera(withLatitude: self.latitude,
                                                   longitude: self.longtitude,
                                                   zoom: self.zoomLevel)
