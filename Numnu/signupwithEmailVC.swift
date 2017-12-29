@@ -287,8 +287,8 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     
     func openStoryBoard(name: String,id : String,firebaseid : String) {
 
-        let storyboard                  = UIStoryboard(name: name, bundle: nil)
-        let initialViewController       = storyboard.instantiateViewController(withIdentifier: id) as! Edit_ProfileVC
+        let storyboard                     = UIStoryboard(name: name, bundle: nil)
+        let initialViewController          = storyboard.instantiateViewController(withIdentifier: id) as! Edit_ProfileVC
         initialViewController.boolForTitle = true
         initialViewController.firebaseid   = firebaseid
         self.navigationController!.pushViewController(initialViewController, animated: true)
