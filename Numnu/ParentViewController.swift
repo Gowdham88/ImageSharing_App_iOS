@@ -483,7 +483,7 @@ extension ParentViewController : PostTabControllerDelegate {
     
     func openPopup() {
         
-        let Alert = UIAlertController(title: "", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        let Alert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
         let FemaleAction = UIAlertAction(title: "Share", style: UIAlertActionStyle.default) { _ in
             
             
