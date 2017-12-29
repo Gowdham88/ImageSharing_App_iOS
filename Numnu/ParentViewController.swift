@@ -148,9 +148,20 @@ extension ParentViewController : UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
        
-        if textField == editsearchbyItem {
+        if textField == editsearchbyItem  {
             setNavBar()
         }
+        
+        if textField == editsearchbyLocation  {
+            
+            if editsearchbyItem.text != nil {
+                
+                 setNavBar()
+            }
+           
+        }
+        
+        
         
         let top = CGAffineTransform(translationX: 0, y: 0)
         
@@ -346,6 +357,11 @@ extension ParentViewController : UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "placecell", for: indexPath) as! PlaceTableviewcellTableViewCell
+        
+        guard autocompleteplaceArray.count > 0 else {
+            
+            return cell
+        }
         
         cell.placename.text = autocompleteplaceArray[indexPath.row]
         
