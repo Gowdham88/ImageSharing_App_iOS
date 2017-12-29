@@ -133,6 +133,7 @@ struct  EventList {
                     }
                     
                     taglist?.append(taglistItem)
+                print("taglists::::::",taglist)
                     
                 }
             
