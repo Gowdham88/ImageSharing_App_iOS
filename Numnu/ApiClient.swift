@@ -287,6 +287,8 @@ class  ApiClient {
             case "Item":
             Baseurl = Constants.PostsByItemId
 
+            case "Location":
+            Baseurl = Constants.LocationApiUrl
             
             default:
             Baseurl = Constants.EventApiUrl
@@ -421,6 +423,42 @@ class  ApiClient {
      }
     
     /********************************getItemTag based Event*************************************************/
+    
+    func getItemTagLocation(id : Int,page : String,headers : HTTPHeaders,completion : @escaping (String,EventItemTagModel?)-> Void) {
+        
+        Alamofire.request("\(Constants.LocationApiUrl)/\(id)/itemtags?\(page)", method: .get,encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            
+            print(response.request as Any)
+            print(response.result.value as Any)
+            
+            switch response.result {
+                
+            case .success :
+                
+                if let value = response.result.value {
+                    
+                    let json = JSON(value)
+                    if let list = EventItemTagModel(json: json) {
+                        
+                        completion("success",list)
+                        
+                    }
+                    
+                }
+                
+                
+            case .failure(let error):
+                
+                print(error.localizedDescription)
+                completion(error.localizedDescription,nil)
+                
+            }
+            
+        }
+        
+    }
+    
+    /********************************getItemTag based Event*************************************************/
     /********************************Event context******************************************/
     
     func getItemTagBusinessEvent(id : Int,businessid : Int,page : String,headers : HTTPHeaders,completion : @escaping (String,BusinessItemTagModel?)-> Void) {
@@ -535,11 +573,18 @@ class  ApiClient {
         var BaseUrl :String?
         
         switch type {
+            
         case "Event":
             BaseUrl = Constants.EventApiUrl
             
         case "Business":
             BaseUrl = Constants.BusinessDetailApi
+            
+        case "Business":
+            BaseUrl = Constants.BusinessDetailApi
+        
+        case "Location":
+            BaseUrl = Constants.LocationApiUrl
             
         default:
             BaseUrl = Constants.EventApiUrl
