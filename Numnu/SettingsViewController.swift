@@ -36,6 +36,7 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     @IBOutlet var profileImageview: UIImageView!
     @IBOutlet var settingsTableView: UITableView!
     var delegate : SettingsViewControllerDelegate?
+    var type : String?
     var tagArray = [TagList]()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -124,8 +125,32 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedCell:UITableViewCell = tableView.cellForRow(at: indexPath)!
+        selectedCell.contentView.backgroundColor = UIColor.clear
         
-        if indexPath.section == 2  {
+        
+        if indexPath.section == 1  {
+            if indexPath.row == 0 {
+                type = "Event"
+
+            }else if indexPath.row == 1 {
+                type = "Business"
+                
+            }else if indexPath.row == 2 {
+                type = "Item"
+
+            }else if indexPath.row == 3 {
+                type = "Post"
+            }
+            
+            let storyboard = UIStoryboard(name: Constants.LocationDetail, bundle: nil)
+            let vc         = storyboard.instantiateViewController(withIdentifier:"BookmarkViewController") as! BookmarkViewController
+            vc.apiType     = type
+            self.navigationController?.pushViewController(vc, animated: true)
+        
+        }
+
+        if  indexPath.section == 2 && indexPath.row == 0 {
             let Alert = UIAlertController(title: "Do you want to logout?", message: nil, preferredStyle: UIAlertControllerStyle.alert)
             
             let CancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) {_ in
@@ -139,8 +164,8 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
           
         }
         
-        let selectedCell:UITableViewCell = tableView.cellForRow(at: indexPath)!
-        selectedCell.contentView.backgroundColor = UIColor.clear
+       
+        
         
     }
     func logout (){
