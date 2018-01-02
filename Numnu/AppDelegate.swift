@@ -51,10 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         }
         
-//        NotificationCenter.default.addObserver(self,
-//                                               selector: #selector(self.tokenRefreshNotification),
-//                                               name: .,
-//                                               object: nil)
+
         
         Thread.sleep(forTimeInterval: 3.0)
         
@@ -67,19 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
     
     
-    /******************Notification****************************/
     
-    func tokenRefreshNotification(_ notification: Notification) {
-        
-        if let refreshedToken = InstanceID.instanceID().token() {
-            
-            print("InstanceID token: \(refreshedToken)")
-          
-        }
-        
-        
-        connectToFcm()
-    }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
@@ -396,6 +381,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("dateds", remoteMessage.appData)
         
         
+    }
+    
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        print("Firebase registration token: \(fcmToken)")
+        
+        // TODO: If necessary send token to application server.
+        // Note: This callback is fired at each app startup and whenever a new token is generated.
+    }
+    
+    func application(application: UIApplication,
+                     didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        Messaging.messaging().apnsToken = deviceToken
     }
  }
   
