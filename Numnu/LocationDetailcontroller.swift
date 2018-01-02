@@ -96,7 +96,6 @@ class LocationDetailcontroller: ButtonBarPagerTabStripViewController {
             
         }
         
-        
         let centerImagetap = UITapGestureRecognizer(target: self, action: #selector(EventViewController.centerImagetap))
         LocImageView.addGestureRecognizer(centerImagetap)
         LocImageView.isUserInteractionEnabled = true
@@ -129,6 +128,8 @@ class LocationDetailcontroller: ButtonBarPagerTabStripViewController {
         alertTapRegister()
        
         setMap()
+        
+        myscrollView.isHidden = true
         
         apiClient  = ApiClient()
         getLocationIdApi()
@@ -477,7 +478,7 @@ extension LocationDetailcontroller : ReviewEventViewControllerDelegate {
     
     func postTableHeight(height: CGFloat) {
         
-        mainContainerView.constant = 667 + height
+        mainContainerView.constant = (buttonBarView.frame.origin.y+64) + height
         mainContainerViewBottom.constant = 0
     }
 }
@@ -490,7 +491,7 @@ extension LocationDetailcontroller : MenuEventViewControllerDelegate {
     
     func menuTableHeight(height: CGFloat) {
         
-        mainContainerView.constant = 667 + height
+        mainContainerView.constant = (buttonBarView.frame.origin.y+64) + height
         mainContainerViewBottom.constant = 0
     }
     
@@ -627,7 +628,8 @@ func getItemDetails(item : LocationModel) {
     
     if let itemDes = item.address {
         
-        LocAddressLabel.text = ""
+        LocAddressLabel.text = itemDes
+         
     } else {
         
         addressTopConstraint.constant = 0
@@ -668,25 +670,26 @@ func getItemDetails(item : LocationModel) {
             if let itemname = item.name {
                 
                 marker.title = itemname
+                MyVariables.markerTitle = itemname
                 
             }
             if let itemDes = item.address {
                 
-               marker.snippet = itemDes
+                marker.snippet = itemDes
+                MyVariables.address = itemDes
             }
             
+           MyVariables.fetchedLat  = lat
+           MyVariables.fetchedLong = long
             
-            marker.map = mapView
+           marker.map = mapView
             
         }
         
        
     }
     
-    
-    
-    
-    
+ 
     
     
     self.myscrollView.isHidden = false

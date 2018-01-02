@@ -48,7 +48,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Barbadous and rum food festival " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dbq-an-3gn">
                                                 <rect key="frame" x="98" y="8" width="218" height="22"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="22" id="Cde-W5-k8j"/>
+                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="22" id="Cde-W5-k8j"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
                                                 <color key="textColor" red="0.16470588235294117" green="0.16470588235294117" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
@@ -145,7 +145,7 @@
                                                 </connections>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="event_ico" translatesAutoresizingMaskIntoConstraints="NO" id="59l-cz-Dep" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
-                                                <rect key="frame" x="98" y="66" width="15" height="15"/>
+                                                <rect key="frame" x="98" y="65" width="15" height="15"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="15" id="H8B-fn-U30"/>
                                                     <constraint firstAttribute="height" constant="15" id="p7T-tu-xNe"/>
@@ -162,12 +162,11 @@
                                             <constraint firstItem="Ycz-53-5i8" firstAttribute="top" secondItem="dbq-an-3gn" secondAttribute="bottom" constant="5" id="37a-Kf-JmC"/>
                                             <constraint firstItem="oxf-Md-44l" firstAttribute="top" secondItem="Ycz-53-5i8" secondAttribute="bottom" constant="8" id="38e-ur-4Xz"/>
                                             <constraint firstItem="egJ-dm-ObJ" firstAttribute="top" secondItem="YJ2-oM-Y9r" secondAttribute="top" constant="8" id="6QE-Yr-et7"/>
-                                            <constraint firstItem="0A4-Sx-8eI" firstAttribute="top" secondItem="oxf-Md-44l" secondAttribute="bottom" constant="10" id="7CC-sG-DU5"/>
                                             <constraint firstItem="79Q-lb-B6x" firstAttribute="top" secondItem="0A4-Sx-8eI" secondAttribute="bottom" constant="35" id="7a6-yq-vJ6"/>
                                             <constraint firstAttribute="trailing" secondItem="oxf-Md-44l" secondAttribute="trailing" constant="8" id="8uD-Zy-kY8"/>
                                             <constraint firstItem="dbq-an-3gn" firstAttribute="top" secondItem="YJ2-oM-Y9r" secondAttribute="top" constant="8" id="DyC-iq-tqI"/>
                                             <constraint firstAttribute="height" constant="850" id="EKD-Uq-tq9"/>
-                                            <constraint firstItem="59l-cz-Dep" firstAttribute="top" secondItem="Ycz-53-5i8" secondAttribute="bottom" constant="9" id="Eoa-0i-0DJ"/>
+                                            <constraint firstItem="0A4-Sx-8eI" firstAttribute="top" secondItem="egJ-dm-ObJ" secondAttribute="bottom" constant="3.5" id="GnB-Bh-sHb"/>
                                             <constraint firstItem="0A4-Sx-8eI" firstAttribute="leading" secondItem="YJ2-oM-Y9r" secondAttribute="leading" constant="10" id="Gth-oX-57V"/>
                                             <constraint firstAttribute="trailing" secondItem="79Q-lb-B6x" secondAttribute="trailing" id="HWA-sX-YfD"/>
                                             <constraint firstItem="eYQ-kW-VVX" firstAttribute="leading" secondItem="YJ2-oM-Y9r" secondAttribute="leading" id="IO7-ob-ZVD"/>
@@ -181,6 +180,7 @@
                                             <constraint firstAttribute="bottom" secondItem="eYQ-kW-VVX" secondAttribute="bottom" id="bWw-oC-ZCX"/>
                                             <constraint firstAttribute="trailing" secondItem="KR4-Ba-hk7" secondAttribute="trailing" constant="10" id="bg0-vS-9XV"/>
                                             <constraint firstItem="59l-cz-Dep" firstAttribute="leading" secondItem="egJ-dm-ObJ" secondAttribute="trailing" constant="8" id="eRz-ab-SKv"/>
+                                            <constraint firstItem="59l-cz-Dep" firstAttribute="top" secondItem="oxf-Md-44l" secondAttribute="top" id="iBU-8b-LBb"/>
                                             <constraint firstItem="JnR-Aw-N5a" firstAttribute="top" secondItem="0A4-Sx-8eI" secondAttribute="bottom" constant="43" id="jIB-BK-Ug5"/>
                                             <constraint firstItem="KR4-Ba-hk7" firstAttribute="top" secondItem="0A4-Sx-8eI" secondAttribute="bottom" id="jvp-fo-ueg"/>
                                             <constraint firstItem="eYQ-kW-VVX" firstAttribute="top" secondItem="0A4-Sx-8eI" secondAttribute="bottom" constant="43" id="s17-yE-Tza"/>
@@ -283,6 +283,7 @@
                     <size key="freeformSize" width="320" height="1100"/>
                     <connections>
                         <outlet property="TabBarView" destination="JnR-Aw-N5a" id="l0P-gf-Rzd"/>
+                        <outlet property="TagscrollviewTop" destination="37a-Kf-JmC" id="Tq3-Ty-5aR"/>
                         <outlet property="barButtonTop" destination="jIB-BK-Ug5" id="gG2-Rp-os6"/>
                         <outlet property="bookmarkbusinesslabel" destination="Hlk-Zu-TiW" id="s0y-jg-52d"/>
                         <outlet property="busDescriptionHeight" destination="xJD-Vx-Sxv" id="OFn-3K-TRZ"/>
@@ -294,7 +295,10 @@
                         <outlet property="completeViewMenu" destination="79Q-lb-B6x" id="w6k-Mw-vrq"/>
                         <outlet property="containerView" destination="eYQ-kW-VVX" id="AiZ-7u-pN0"/>
                         <outlet property="containerViewTop" destination="s17-yE-Tza" id="drZ-3a-nf7"/>
+                        <outlet property="descriptionTop" destination="GnB-Bh-sHb" id="SFu-bA-FGd"/>
                         <outlet property="eventDescriptionLabel" destination="0A4-Sx-8eI" id="wJ3-lA-m8U"/>
+                        <outlet property="eventImageHeight" destination="p7T-tu-xNe" id="6cs-52-jyf"/>
+                        <outlet property="eventTop" destination="38e-ur-4Xz" id="IT1-me-5oV"/>
                         <outlet property="mainContainerView" destination="EKD-Uq-tq9" id="Tro-bF-YmK"/>
                         <outlet property="mainContainerViewBottom" destination="ING-nN-A1o" id="6M3-vl-wNM"/>
                         <outlet property="myscrollView" destination="sy9-94-BJi" id="dIK-q9-F6A"/>
@@ -304,6 +308,7 @@
                         <outlet property="shareView" destination="SWR-ZR-YvQ" id="EJY-Ah-5XP"/>
                         <outlet property="sharebusinesslabel" destination="FsV-rV-hgk" id="HE7-lR-sIj"/>
                         <outlet property="tagScrollView" destination="Ycz-53-5i8" id="aya-Rc-kit"/>
+                        <outlet property="tagscrollviewheight" destination="YE3-dZ-n2r" id="grL-AD-fdu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fMK-xq-Muf" userLabel="First Responder" sceneMemberID="firstResponder"/>

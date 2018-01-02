@@ -886,6 +886,9 @@
                     <size key="freeformSize" width="320" height="1000"/>
                     <connections>
                         <outlet property="addressLabel" destination="7Pa-fF-Cuu" id="Aob-e4-upT"/>
+                        <outlet property="addresslabelTop" destination="1im-Be-gcS" id="wB0-wd-8VE"/>
+                        <outlet property="collectionTagHeight" destination="9c6-OL-6JN" id="iSU-Fu-xhu"/>
+                        <outlet property="collectionTagTop" destination="mVV-a5-FNR" id="YOP-vJ-XrM"/>
                         <outlet property="collectionView" destination="eDJ-x0-5l6" id="hnF-t2-eRX"/>
                         <outlet property="descriptionlabel" destination="95U-hC-Csy" id="i7h-yn-lGq"/>
                         <outlet property="mainViewBottom" destination="1Ip-Tj-JoR" id="zXg-De-XPR"/>

@@ -167,10 +167,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hPy-br-hTK">
-                                                <rect key="frame" x="0.0" y="480.5" width="320" height="669.5"/>
+                                                <rect key="frame" x="0.0" y="470.5" width="320" height="679.5"/>
                                             </scrollView>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5Zj-U8-6qn" customClass="ButtonBarView" customModule="XLPagerTabStrip">
-                                                <rect key="frame" x="0.0" y="480.5" width="320" height="64"/>
+                                                <rect key="frame" x="0.0" y="470.5" width="320" height="64"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="64" id="Zmi-ki-BR8"/>
@@ -321,7 +321,7 @@
                                             <constraint firstItem="YSc-MB-4kd" firstAttribute="top" secondItem="fRO-eD-Le5" secondAttribute="bottom" constant="8" id="Yyi-Db-auv"/>
                                             <constraint firstAttribute="trailing" secondItem="6bz-va-xTV" secondAttribute="trailing" constant="10" id="Zaw-zD-Ofn"/>
                                             <constraint firstItem="VpD-PE-uYq" firstAttribute="leading" secondItem="f5v-ff-v3w" secondAttribute="trailing" constant="8" id="Zjl-mf-Hb9"/>
-                                            <constraint firstItem="hPy-br-hTK" firstAttribute="top" secondItem="xAC-LR-yqq" secondAttribute="bottom" constant="10" id="a1R-Z1-9Sf"/>
+                                            <constraint firstItem="hPy-br-hTK" firstAttribute="top" secondItem="xAC-LR-yqq" secondAttribute="bottom" id="a1R-Z1-9Sf"/>
                                             <constraint firstAttribute="trailing" secondItem="YSc-MB-4kd" secondAttribute="trailing" id="azH-fp-L5f"/>
                                             <constraint firstItem="iuh-M2-zhK" firstAttribute="top" secondItem="q7q-vD-aPP" secondAttribute="top" constant="10" id="bLo-28-FQ3"/>
                                             <constraint firstItem="B22-Vg-4hD" firstAttribute="top" secondItem="6bz-va-xTV" secondAttribute="bottom" constant="8" id="c6P-sF-6UZ"/>
@@ -340,7 +340,7 @@
                                             <constraint firstAttribute="trailing" secondItem="mGI-B3-ZbW" secondAttribute="trailing" constant="12" id="q4j-yY-bt2"/>
                                             <constraint firstItem="YSc-MB-4kd" firstAttribute="top" secondItem="3cw-7s-mrr" secondAttribute="bottom" id="qWk-pJ-leI"/>
                                             <constraint firstItem="0Yq-E2-7Q7" firstAttribute="leading" secondItem="q7q-vD-aPP" secondAttribute="leading" constant="8" id="rPA-Sn-rv2"/>
-                                            <constraint firstItem="5Zj-U8-6qn" firstAttribute="top" secondItem="xAC-LR-yqq" secondAttribute="bottom" constant="10" id="rfP-hx-vTl"/>
+                                            <constraint firstItem="5Zj-U8-6qn" firstAttribute="top" secondItem="xAC-LR-yqq" secondAttribute="bottom" id="rfP-hx-vTl"/>
                                             <constraint firstItem="5Zj-U8-6qn" firstAttribute="leading" secondItem="q7q-vD-aPP" secondAttribute="leading" id="s9v-og-fqa"/>
                                             <constraint firstItem="3cw-7s-mrr" firstAttribute="leading" secondItem="q7q-vD-aPP" secondAttribute="leading" id="t2Y-qc-Esp"/>
                                             <constraint firstItem="mGI-B3-ZbW" firstAttribute="leading" secondItem="oA5-sW-Klg" secondAttribute="trailing" constant="10" id="tq1-p8-tpf"/>

@@ -38,6 +38,10 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
     var itemArray = [TagList]()
     var delegate : Profile_PostViewControllerDelegae?
     
+    @IBOutlet weak var collectionTagTop: NSLayoutConstraint!
+    @IBOutlet weak var collectionTagHeight: NSLayoutConstraint!
+    @IBOutlet weak var addresslabelTop: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -292,6 +296,13 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         descriptionlabel.text = PrefsManager.sharedinstance.description
         print(PrefsManager.sharedinstance.tagList)
         itemArray  = PrefsManager.sharedinstance.tagList
+        if itemArray.count < 1 {
+            
+            collectionTagTop.constant = 0
+            collectionTagHeight.constant = 0
+            
+        }
+        
         collectionView.reloadData()
         
         let apiclient : ApiClient = ApiClient()

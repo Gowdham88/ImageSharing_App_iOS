@@ -58,6 +58,12 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
     lazy var bookmarkname : String    = "name"
     lazy var bookmarktype : String    = "empty"
     
+    /************************constraints************************************/
+    
+    @IBOutlet weak var tagscrollConstaintTop : NSLayoutConstraint!
+    @IBOutlet weak var tagconstraintHeight   : NSLayoutConstraint!
+    @IBOutlet weak var descriptionTopConstraint: NSLayoutConstraint!
+    
     override func viewDidLoad() {
        settings.style.selectedBarHeight = 3.0
        settings.style.buttonBarItemFont = UIFont(name: "Avenir-Medium", size: 14)!
@@ -387,7 +393,7 @@ extension BusinessCompleteViewController : ReviewEventViewControllerDelegate {
     
     func postTableHeight(height: CGFloat) {
         
-        mainContainerView.constant = 440 + height
+        mainContainerView.constant = (buttonBarView.frame.origin.y+64) + height
         mainContainerViewBottom.constant = 0
     }
     
@@ -401,7 +407,7 @@ extension BusinessCompleteViewController : MenuEventViewControllerDelegate {
     
     func menuTableHeight(height: CGFloat) {
         
-        mainContainerView.constant = 440 + height
+        mainContainerView.constant = (buttonBarView.frame.origin.y+64) + height
         mainContainerViewBottom.constant = 0
     }
     
@@ -413,7 +419,7 @@ extension BusinessCompleteViewController : EventTabControllerDelegate {
     
     func eventTableHeight(height: CGFloat) {
         
-        mainContainerView.constant = 440 + height
+        mainContainerView.constant = (buttonBarView.frame.origin.y+64) + height
         mainContainerViewBottom.constant = 0
         
     }
@@ -427,7 +433,7 @@ extension BusinessCompleteViewController : LocationTabControllerDelegate {
     
     func locationTableHeight(height: CGFloat) {
         
-        mainContainerView.constant = 440 + height
+        mainContainerView.constant = (buttonBarView.frame.origin.y+64) + height
         mainContainerViewBottom.constant = 0
     }
     
@@ -484,6 +490,10 @@ extension BusinessCompleteViewController {
         
         if let name = response.businessname {
             BcTitleLabel.text = name
+        } else {
+            
+            tagscrollConstaintTop.constant = 0
+            
         }
         
         if let description = response.businessdescription {
@@ -501,6 +511,10 @@ extension BusinessCompleteViewController {
                 }
                 tagViewUpdate()
             }
+        } else {
+            
+            tagscrollConstaintTop.constant = 0
+            tagconstraintHeight.constant   = 0
         }
         
        

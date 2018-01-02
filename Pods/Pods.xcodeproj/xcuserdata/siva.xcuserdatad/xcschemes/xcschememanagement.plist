@@ -59,25 +59,30 @@
 			<key>orderHint</key>
 			<integer>12</integer>
 		</dict>
-		<key>SwiftyJSON.xcscheme</key>
+		<key>Protobuf.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>13</integer>
 		</dict>
-		<key>Toucan.xcscheme</key>
+		<key>SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>14</integer>
 		</dict>
+		<key>Toucan.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>15</integer>
+		</dict>
 		<key>XLPagerTabStrip-XLPagerTabStrip.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>16</integer>
+			<integer>17</integer>
 		</dict>
 		<key>XLPagerTabStrip.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>15</integer>
+			<integer>16</integer>
 		</dict>
 		<key>leveldb-library.xcscheme</key>
 		<dict>

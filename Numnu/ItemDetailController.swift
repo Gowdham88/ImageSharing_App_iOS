@@ -424,7 +424,7 @@ extension ItemDetailController : ReviewEventViewControllerDelegate {
     
     func postTableHeight(height: CGFloat) {
         
-        mainContainerView.constant = 548 + height
+        mainContainerView.constant = (buttonBarView.frame.origin.y+64) + height
         mainContainerViewBottom.constant = 0
     }
   
@@ -437,7 +437,7 @@ extension ItemDetailController : EventTabControllerDelegate {
     
     func eventTableHeight(height: CGFloat) {
         
-        mainContainerView.constant = 548 + height
+        mainContainerView.constant = (buttonBarView.frame.origin.y+64) + height
         mainContainerViewBottom.constant = 0
     }
   
@@ -449,7 +449,7 @@ extension ItemDetailController : LocationTabControllerDelegate {
     
     func locationTableHeight(height: CGFloat) {
         
-        mainContainerView.constant = 548 + height
+        mainContainerView.constant = (buttonBarView.frame.origin.y+64) + height
         mainContainerViewBottom.constant = 0
     }
   

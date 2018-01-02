@@ -100,19 +100,7 @@ class PostDetailViewController : UIViewController {
         let profileusernametap = UITapGestureRecognizer(target: self, action:#selector(PostDetailViewController.profileusernametap))
         postDUsernameLabel.addGestureRecognizer(profileusernametap)
         postDUsernameLabel.isUserInteractionEnabled = true
-        
-        if (postDEventDishLabel.numberOfVisibleLines > 1) {
-            
-            eventTopHeight.constant = 52
-            
-        }
-        
-        if (postDEventPlace.numberOfVisibleLines > 1) {
-            
-            eventTopHeight.constant = 52
-            
-        }
-        
+       
         apiClient = ApiClient()
         
     }
@@ -472,6 +460,18 @@ extension PostDetailViewController {
             
             dishwidthDConstaint.constant   = 387
             placeWidthDConstraint.constant = 387
+            
+        }
+        
+        if (postDEventDishLabel.numberOfVisibleLines > 1) {
+            
+            eventTopHeight.constant = 50
+            
+        }
+        
+        if (postDEventPlace.numberOfVisibleLines > 1) {
+            
+            eventTopHeight.constant = 50
             
         }
         

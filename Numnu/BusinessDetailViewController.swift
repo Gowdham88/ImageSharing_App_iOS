@@ -65,6 +65,15 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
     lazy var bookmarkname : String    = "name"
     lazy var bookmarktype : String    = "empty"
     
+    /***********************constraints************************************/
+    
+    @IBOutlet weak var TagscrollviewTop: NSLayoutConstraint!
+    @IBOutlet weak var tagscrollviewheight: NSLayoutConstraint!
+    
+    @IBOutlet weak var descriptionTop: NSLayoutConstraint!
+    @IBOutlet weak var eventImageHeight: NSLayoutConstraint!
+    @IBOutlet weak var eventTop: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         settings.style.selectedBarHeight = 3.0
         settings.style.buttonBarItemFont = UIFont(name: "Avenir-Medium", size: 14)!
@@ -474,9 +483,14 @@ extension BusinessDetailViewController {
         })
     }
     func getDetails(response:BusinessDetailModel) {
-        
+          
         if let name = response.businessname {
             busTitleLabel.text = name
+            
+        } else {
+            
+            TagscrollviewTop.constant = 0
+            descriptionTop.constant  = 4
         }
         
         if let description = response.businessdescription {
@@ -485,6 +499,12 @@ extension BusinessDetailViewController {
         if let busevent = response.eventlist {
             if let buseventName = busevent.name {
                 buseventLabel.text = buseventName
+                
+                if buseventLabel.numberOfVisibleLines > 1 {
+                    
+                    descriptionTop.constant = 15
+                }
+                
             }
         }
         
@@ -498,6 +518,12 @@ extension BusinessDetailViewController {
                 }
                 tagViewUpdate()
             }
+        } else {
+            
+            descriptionTop.constant  = 4
+            TagscrollviewTop.constant = 0
+            tagscrollviewheight.constant = 0
+            
         }
         
         
