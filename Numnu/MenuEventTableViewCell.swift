@@ -15,6 +15,12 @@ class MenuEventTableViewCell: UITableViewCell {
     @IBOutlet weak var menuTagCollectionView: UICollectionView!
     @IBOutlet weak var menuDateLabel: UILabel!
     
+    /*******************constaints************************/
+    
+    @IBOutlet weak var tagcollectionTop: NSLayoutConstraint!
+    @IBOutlet weak var tagcollectionHeight: NSLayoutConstraint!
+    @IBOutlet weak var datacollectionheight: NSLayoutConstraint!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

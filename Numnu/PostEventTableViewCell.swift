@@ -94,13 +94,13 @@ class PostEventTableViewCell: UITableViewCell {
         
         if (postEventDishLabel.numberOfVisibleLines > 1) {
             
-            eventTopConstraint.constant = 52
+            eventTopConstraint.constant = 50
             
         }
         
         if (postEventPlace.numberOfVisibleLines > 1) {
             
-            eventTopConstraint.constant = 52
+            eventTopConstraint.constant = 50
             
         }
         

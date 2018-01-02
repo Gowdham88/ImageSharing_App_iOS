@@ -16,6 +16,9 @@ class MenuItemEventCell: UITableViewCell {
     @IBOutlet weak var eventMenCollectionView: UICollectionView!
     @IBOutlet weak var priceLabel: UILabel!
 
+    @IBOutlet weak var priceConstraintTop: NSLayoutConstraint!
+    @IBOutlet weak var tagConstraintHeight: NSLayoutConstraint!
+    @IBOutlet weak var tagConstarintTop: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -40,7 +43,16 @@ class MenuItemEventCell: UITableViewCell {
         
         didSet {
             
-            eventMenLabel.text = item.businessname ?? ""
+            if let name = item.businessname {
+                
+                eventMenLabel.text =  name
+                
+            } else {
+                
+                tagConstarintTop.constant = 0
+                
+                
+            }
             
             if let userimageList = item.itemImageList {
                 
@@ -56,6 +68,12 @@ class MenuItemEventCell: UITableViewCell {
                     
                 }
                 
+            }
+            
+            if item.tagList == nil {
+                
+                tagConstarintTop.constant = 0
+                tagConstraintHeight.constant = 0
             }
             
             

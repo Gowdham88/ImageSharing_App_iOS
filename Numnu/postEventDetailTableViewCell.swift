@@ -95,13 +95,13 @@ class postEventDetailTableViewCell : UITableViewCell {
         
         if (postDtEventDishLabel.numberOfVisibleLines > 1) {
             
-            eventTopHeight.constant = 52
+            eventTopHeight.constant = 50
             
         }
         
         if (postDtEventPlace.numberOfVisibleLines > 1) {
             
-            eventTopHeight.constant = 52
+            eventTopHeight.constant = 50
             
         }
         

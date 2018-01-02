@@ -507,7 +507,8 @@ extension ItemCompleteviewcontroller : UITableViewDelegate,UITableViewDataSource
         cell.postEventBookMark.tag = indexPath.row
         cell.setHeight(heightview : Float(UIScreen.main.bounds.size.height))
         
-        let posteventImagetap = UITapGestureRecognizer(target: self, action: #selector(getter: PostEventTableViewCell.postEventImage))
+        let posteventImagetap = UITapGestureRecognizer(target: self, action: #selector(postEventImage(sender:)))
+        cell.postEventImage.tag = indexPath.row
         cell.postEventImage.addGestureRecognizer(posteventImagetap)
         cell.postEventImage.isUserInteractionEnabled = true
         
@@ -583,9 +584,10 @@ extension ItemCompleteviewcontroller : UITableViewDelegate,UITableViewDataSource
         }
     }
     
-    func postEventImage() {
+    func postEventImage(sender : UITapGestureRecognizer) {
         let storyboard = UIStoryboard(name: Constants.PostDetail, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: "postdetailid")
+        let vc         = storyboard.instantiateViewController(withIdentifier: "postdetailid") as! PostDetailViewController
+        vc.item        = postList[sender.view!.tag]
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
@@ -793,7 +795,7 @@ extension ItemCompleteviewcontroller {
             
             eventname.text = event
             
-            if (ItDescriptionLabel.numberOfVisibleLines > 1) {
+            if (eventname.numberOfVisibleLines > 1) {
                 
                 descriptionTopConstraint.constant = 46
             }
@@ -801,7 +803,7 @@ extension ItemCompleteviewcontroller {
             
         } else {
             
-            
+            descriptionTopConstraint.constant = 30
             eventImageHeightConstraint.constant = 0
             
         }
@@ -813,11 +815,7 @@ extension ItemCompleteviewcontroller {
             
         } else {
             
-            if (ItDescriptionLabel.numberOfVisibleLines > 1) {
-                
-                descriptionTopConstraint.constant = 30
-            }
-            
+            descriptionTopConstraint.constant = 30
             itemImageTopConstraint.constant    = 0
             itemImageHeightConstraint.constant = 0
         }
@@ -827,8 +825,7 @@ extension ItemCompleteviewcontroller {
             itemPriceLabel.text = "\(itemcurrenyid) \(itemcurrency)"
             
         }
-        
-        
+       
         /****************Imagee************************/
         
         if let imageList = item.itemImageList {
@@ -879,7 +876,6 @@ extension ItemCompleteviewcontroller {
         
         if let itemTag = item.tagList {
             
-            
             if itemTag.count > 0 {
                 
                 tagarray.removeAll()
@@ -894,14 +890,9 @@ extension ItemCompleteviewcontroller {
                 
             }
             
-            
         } else {
             
-            if (ItDescriptionLabel.numberOfVisibleLines > 1) {
-                
-                descriptionTopConstraint.constant = 30
-            }
-            
+            descriptionTopConstraint.constant = 30
             tagscrollviewheightconstraint.constant = 0
             tagscroltopConstraint.constant         = 0
          

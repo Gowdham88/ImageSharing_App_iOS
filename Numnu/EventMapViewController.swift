@@ -34,14 +34,7 @@ class EventMapViewController: UIViewController {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
         locationManager.requestWhenInUseAuthorization()
-        
-        if CLLocationManager.locationServicesEnabled()
-        {
-            locationManager.distanceFilter = 50
-            locationManager.startUpdatingLocation()
-            locationManager.delegate = self
-        
-        }
+        locationManager.delegate = self
     
         self.tabBarController?.tabBar.isHidden = true
      
@@ -122,19 +115,19 @@ extension EventMapViewController: CLLocationManagerDelegate {
     
     // Handle incoming location events.
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location: CLLocation = locations.last!
-        print("Location: \(location)")
         
-        DispatchQueue.main.async {
+        locationManager.stopUpdatingLocation()
+        locationManager.delegate = self
+        
+        if let location: CLLocation = locations.last {
             
-
-            let camera = GMSCameraPosition.camera(withLatitude: self.latitude,
-                                                  longitude: self.longtitude,
+            let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
+                                                  longitude: location.coordinate.latitude,
                                                   zoom: self.zoomLevel)
             let marker = GMSMarker()
-            marker.position        = CLLocationCoordinate2D(latitude: self.latitude, longitude: self.longtitude)
+            marker.position        = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.latitude)
             marker.appearAnimation = .pop
-            marker.title           = MyVariables.markerTitle
+            marker.title           = "Current Location"
             marker.snippet         = ""
             marker.map = self.mapView
             
@@ -145,10 +138,9 @@ extension EventMapViewController: CLLocationManagerDelegate {
                 self.mapView.animate(to: camera)
             }
             
+            
         }
-        
-        
-        
+   
        
     }
     
@@ -166,6 +158,12 @@ extension EventMapViewController: CLLocationManagerDelegate {
         case .authorizedAlways: fallthrough
         case .authorizedWhenInUse:
             print("Location status is OK.")
+            if CLLocationManager.locationServicesEnabled()
+            {
+                self.locationManager.distanceFilter = 50
+                self.locationManager.startUpdatingLocation()
+                
+            }
         }
     }
     

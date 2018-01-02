@@ -14,7 +14,13 @@ class BusinessTableViewCell: UITableViewCell {
     @IBOutlet weak var businessNameLabel: UILabel!
     @IBOutlet weak var businessImageView: ImageExtender!
     @IBOutlet weak var businessTagCollectionView: UICollectionView!
-
+    
+    
+    /*******************constaints************************/
+    
+   
+    @IBOutlet weak var tagcollectionHeight: NSLayoutConstraint!
+    @IBOutlet weak var datacollectionheight: NSLayoutConstraint!
     @IBOutlet weak var tagTopConstraint: NSLayoutConstraint!
 
     override func awakeFromNib() {

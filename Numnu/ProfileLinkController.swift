@@ -30,6 +30,12 @@ class ProfileLinkController: UIViewController,UITableViewDataSource,UITableViewD
     var itemArray = [TagList]()
     var delegate : Profile_PostViewControllerDelegae?
     
+    /*********************constarints********************************/
+    
+    @IBOutlet weak var collectionTagTop: NSLayoutConstraint!
+    @IBOutlet weak var collectionTagHeight: NSLayoutConstraint!
+    @IBOutlet weak var addresslabelTop: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -278,6 +284,10 @@ class ProfileLinkController: UIViewController,UITableViewDataSource,UITableViewD
                     
                     userNamelabel.text = name
                     navigationItemList.title = "@\(name)"
+                } else {
+                    
+                  collectionTagTop.constant = 0
+                   
                 }
                 
                 if let images = postitem.userimages {
@@ -315,13 +325,15 @@ class ProfileLinkController: UIViewController,UITableViewDataSource,UITableViewD
                 
                 itemArray  = tags
                 
+            } else {
+                
+                collectionTagTop.constant = 0
+                collectionTagHeight.constant = 0
             }
                 
            
         }
-        
-        
-   
+    
 //        descriptionlabel.text = PrefsManager.sharedinstance.description
         
         
