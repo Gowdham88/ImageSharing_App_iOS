@@ -257,7 +257,7 @@ extension EventTabController {
         
         let storyboard    = UIStoryboard(name: Constants.Event, bundle: nil)
         let vc            = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId) as! EventViewController
-        vc.eventprimaryid = 34
+        vc.eventprimaryid = primaryid
         self.navigationController!.pushViewController(vc, animated: true)
         
     }

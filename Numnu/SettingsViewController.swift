@@ -126,20 +126,31 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.section == 2  {
+            let Alert = UIAlertController(title: "Do you want to logout?", message: nil, preferredStyle: UIAlertControllerStyle.alert)
             
-            DBProvider.Instance.firebaseLogout()
-            delegate?.logout()
-            FBSDKLoginManager().logOut()
-            PrefsManager.sharedinstance.logoutprefences()
-            PrefsManager.sharedinstance.isLoginned = false
-            _ = self.navigationController?.popToRootViewController(animated: true)
+            let CancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) {_ in
+            }
+            let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) { ACTION in
+                self.logout()
+            }
+            Alert.addAction(OkAction)
+            Alert.addAction(CancelAction)
+            present(Alert, animated: true, completion:nil )
+          
         }
         
         let selectedCell:UITableViewCell = tableView.cellForRow(at: indexPath)!
         selectedCell.contentView.backgroundColor = UIColor.clear
         
     }
-    
+    func logout (){
+        DBProvider.Instance.firebaseLogout()
+        delegate?.logout()
+        FBSDKLoginManager().logOut()
+        PrefsManager.sharedinstance.logoutprefences()
+        PrefsManager.sharedinstance.isLoginned = false
+        _ = self.navigationController?.popToRootViewController(animated: true)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

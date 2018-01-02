@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -250,9 +250,11 @@
                                             <constraint firstAttribute="trailing" secondItem="bDD-uk-I6b" secondAttribute="trailing" constant="10" id="Ede-sW-Hig"/>
                                             <constraint firstItem="4rU-V5-StF" firstAttribute="leading" secondItem="g0V-rF-TMW" secondAttribute="leading" constant="10" id="Ekx-06-IAt"/>
                                             <constraint firstItem="4rU-V5-StF" firstAttribute="top" secondItem="U0Z-Mj-lZB" secondAttribute="bottom" constant="5" id="FBd-Pd-NCZ"/>
+                                            <constraint firstItem="5iE-8T-Lm3" firstAttribute="top" secondItem="wz1-XR-z7e" secondAttribute="bottom" constant="37" id="Frr-a5-alf"/>
                                             <constraint firstItem="wz1-XR-z7e" firstAttribute="leading" secondItem="g0V-rF-TMW" secondAttribute="leading" constant="10" id="Fsw-68-05q"/>
                                             <constraint firstItem="bDD-uk-I6b" firstAttribute="leading" secondItem="g0V-rF-TMW" secondAttribute="leading" constant="20" id="HAz-ME-nR4"/>
                                             <constraint firstItem="aOH-4t-Zwo" firstAttribute="top" secondItem="5iE-8T-Lm3" secondAttribute="bottom" constant="8" id="Hg7-0m-Yt3"/>
+                                            <constraint firstItem="e0U-hc-Duc" firstAttribute="top" secondItem="wz1-XR-z7e" secondAttribute="bottom" constant="40" id="Iqw-Mz-Fe8"/>
                                             <constraint firstAttribute="trailing" secondItem="gAt-qt-Cww" secondAttribute="trailing" constant="10" id="JNa-jG-1z1"/>
                                             <constraint firstAttribute="trailing" secondItem="8Se-ej-wg2" secondAttribute="trailing" constant="13" id="JqG-Is-SGy"/>
                                             <constraint firstItem="xcz-an-LvS" firstAttribute="top" secondItem="e0U-hc-Duc" secondAttribute="bottom" constant="11" id="K95-Kq-JjG"/>
@@ -274,6 +276,7 @@
                                             <constraint firstItem="A5m-9M-c9p" firstAttribute="top" secondItem="5iE-8T-Lm3" secondAttribute="bottom" constant="5" id="Xvm-ue-Jnu"/>
                                             <constraint firstAttribute="trailing" secondItem="3NW-yD-oxA" secondAttribute="trailing" constant="10" id="Y15-Il-R5e"/>
                                             <constraint firstItem="e0U-hc-Duc" firstAttribute="top" secondItem="Aos-pn-hej" secondAttribute="bottom" constant="10" id="ZH6-JY-C49"/>
+                                            <constraint firstItem="4rU-V5-StF" firstAttribute="top" secondItem="bDD-uk-I6b" secondAttribute="bottom" constant="25" id="and-aL-bf8"/>
                                             <constraint firstItem="8Se-ej-wg2" firstAttribute="leading" secondItem="aOH-4t-Zwo" secondAttribute="trailing" constant="13" id="bAe-mS-8LE"/>
                                             <constraint firstItem="Aos-pn-hej" firstAttribute="top" secondItem="wz1-XR-z7e" secondAttribute="bottom" constant="8" id="bpo-Bi-ocJ"/>
                                             <constraint firstItem="5iE-8T-Lm3" firstAttribute="leading" secondItem="e0U-hc-Duc" secondAttribute="trailing" constant="7" id="cIP-3h-4ys"/>
@@ -296,7 +299,6 @@
                                             <constraint firstItem="Qgo-S0-0CV" firstAttribute="leading" secondItem="g0V-rF-TMW" secondAttribute="leading" id="sIj-Vn-pKf"/>
                                             <constraint firstAttribute="trailing" secondItem="WMp-Up-FUj" secondAttribute="trailing" constant="10" id="sRC-Kq-P8r"/>
                                             <constraint firstItem="cgp-wT-7F1" firstAttribute="leading" secondItem="g0V-rF-TMW" secondAttribute="leading" id="tYT-CD-iCm"/>
-                                            <constraint firstItem="5iE-8T-Lm3" firstAttribute="top" secondItem="Aos-pn-hej" secondAttribute="bottom" constant="7" id="xTe-63-rf3"/>
                                             <constraint firstItem="gAt-qt-Cww" firstAttribute="top" secondItem="A5m-9M-c9p" secondAttribute="bottom" constant="5" id="xzf-1G-yZ5"/>
                                         </constraints>
                                     </view>
@@ -398,6 +400,10 @@
                         <outlet property="buttonBarView" destination="Qgo-S0-0CV" id="Wwd-ub-KUB"/>
                         <outlet property="containerView" destination="cgp-wT-7F1" id="iq1-Ph-x4k"/>
                         <outlet property="containerViewTop" destination="A1r-xE-hgH" id="6lp-7A-ekg"/>
+                        <outlet property="dateIconTopToEventname" destination="Iqw-Mz-Fe8" id="CQc-Tc-qPv"/>
+                        <outlet property="dateTopToEventname" destination="Frr-a5-alf" id="kuJ-8q-vvc"/>
+                        <outlet property="descriptionTopConstraint" destination="FBd-Pd-NCZ" id="quL-QR-aL4"/>
+                        <outlet property="descriptionTopcostraintToWeblink2" destination="and-aL-bf8" id="mpk-PS-lLe"/>
                         <outlet property="eventDateLabel" destination="5iE-8T-Lm3" id="cOM-pG-vA9"/>
                         <outlet property="eventDescriptionHeight" destination="Pbs-jB-hTE" id="XHs-gm-EiQ"/>
                         <outlet property="eventDescriptionLabel" destination="4rU-V5-StF" id="lck-XP-oD6"/>
@@ -413,9 +419,12 @@
                         <outlet property="navigationItemList" destination="Xtw-y6-M2U" id="ZFh-MY-6XS"/>
                         <outlet property="pagerView" destination="cgp-wT-7F1" id="TOd-BD-B2D"/>
                         <outlet property="readMoreButton" destination="WMp-Up-FUj" id="e5W-aV-pPD"/>
+                        <outlet property="scrollViewTopConstraint" destination="bpo-Bi-ocJ" id="bd6-tR-W39"/>
                         <outlet property="shareView" destination="2Uq-Cf-kwz" id="6sE-Lb-UlP"/>
                         <outlet property="sharelabel" destination="E9R-Co-fwj" id="c0D-s1-EBB"/>
                         <outlet property="tagScrollView" destination="Aos-pn-hej" id="lvl-QS-oRw"/>
+                        <outlet property="weblink2TopConstraint" destination="o4M-GN-35w" id="SZ2-X5-tgV"/>
+                        <outlet property="weblink3TopConstraint" destination="pon-YS-uG9" id="KLe-m4-74P"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6vr-6v-6F6" userLabel="First Responder" sceneMemberID="firstResponder"/>

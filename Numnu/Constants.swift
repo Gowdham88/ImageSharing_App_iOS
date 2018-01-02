@@ -155,6 +155,7 @@ class Constants {
     static let BusinessDetailApi  = "https://numnu-server-dev.appspot.com/businesses"
     static let PostsByItemId      = "https://numnu-server-dev.appspot.com/items"
     static let Bookmarkpost       = "https://numnu-server-dev.appspot.com/users"
+    static let LocationApiUrl     = "https://numnu-server-dev.appspot.com/locations"
     
     static let CheckUserName = "https://numnu-server-dev.appspot.com/users"
     

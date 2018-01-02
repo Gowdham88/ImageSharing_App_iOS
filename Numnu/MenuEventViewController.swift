@@ -100,6 +100,10 @@ class MenuEventViewController: UIViewController,IndicatorInfoProvider,UITableVie
         case "Business":
             
            getItemTagBusiness(pageno: pageno, limit: limitno)
+        
+        case "Location":
+            
+            getItemTagLocation(pageno: pageno, limit: limitno)
             
         case "BusinessEvent":
             
@@ -145,6 +149,9 @@ class MenuEventViewController: UIViewController,IndicatorInfoProvider,UITableVie
         case "BusinessEvent":
             return itemBusinessTagList.count
             
+        case "Location":
+            return itemTagList.count
+            
         default:
             return 0
             
@@ -160,6 +167,15 @@ class MenuEventViewController: UIViewController,IndicatorInfoProvider,UITableVie
         switch itemType {
             
         case "Event":
+            
+            guard itemTagList.count > 0 else {
+                
+                return cell
+            }
+            
+            cell.item = itemTagList[indexPath.row]
+        
+        case "Location":
             
             guard itemTagList.count > 0 else {
                 
@@ -215,8 +231,23 @@ class MenuEventViewController: UIViewController,IndicatorInfoProvider,UITableVie
                 }
                 
             }
-
+         
+        case "Location":
             
+            if indexPath.row == itemTagList.count - 1 && viewState {
+                
+                if let pageItem = tagModel {
+                    
+                    if itemTagList.count  < pageItem.totalRows ?? 0 {
+                        pageno += 1
+                        limitno = 25 * pageno
+                        getItemTag(pageno: pageno, limit: limitno)
+                    }
+                    
+                }
+                
+            }
+           
         case "Business":
             if indexPath.row == itemBusinessTagList.count - 1 && viewState {
                 
@@ -268,6 +299,9 @@ extension MenuEventViewController   {
             
         case "Business":
             openStoryBoard(name: Constants.EventDetail, id: Constants.MenuItemId,heading: itemBusinessTagList[indexPath.row].tagtext ?? "Title", primid: 51,tagid: itemBusinessTagList[indexPath.row].tagid ?? 0,type: "Business")
+       
+        case "Location":
+            openStoryBoard(name: Constants.EventDetail, id: Constants.MenuItemId,heading: itemTagList[indexPath.row].tagtext ?? "Title", primid: 179,tagid: itemTagList[indexPath.row].tagid ?? 0,type: "Location")
             
         case "BusinessEvent":
             openStoryBoard(name: Constants.EventDetail, id: Constants.MenuItemId,heading: itemBusinessTagList[indexPath.row].tagtext ?? "Title", primid: 51,tagid: itemBusinessTagList[indexPath.row].tagid ?? 0,type: "BusinessEvent")
@@ -349,6 +383,55 @@ extension MenuEventViewController {
             let param  : String  = "page=\(pageno)&limit\(limit)"
             
             self.apiClient.getItemTagEvent(id: self.primayId, page: param, headers: header, completion: { status,taglist in
+                
+                if status == "success" {
+                    
+                    if let item = taglist {
+                        
+                        self.tagModel = item
+                        
+                        if let list = item.tagItemList {
+                            
+                            self.itemTagList += list
+                        }
+                    }
+                    
+                    DispatchQueue.main.async {
+                        
+                        self.menuCategoryTableview.reloadData()
+                        
+                    }
+                    
+                    self.reloadTable()
+                    
+                } else {
+                    
+                    LoadingHepler.instance.hide()
+                    self.reloadTable()
+                    
+                }
+                
+                
+            })
+            
+            
+        })
+        
+        
+    }
+    
+    /********************************Item Location******************************************/
+    
+    func getItemTagLocation(pageno:Int,limit:Int) {
+        
+        LoadingHepler.instance.show()
+        
+        apiClient.getFireBaseToken(completion: { token in
+            
+            let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
+            let param  : String  = "page=\(pageno)&limit\(limit)"
+            
+            self.apiClient.getItemTagLocation(id: self.primayId, page: param, headers: header, completion: { status,taglist in
                 
                 if status == "success" {
                     
