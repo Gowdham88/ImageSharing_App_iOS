@@ -102,13 +102,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func connectToFcm() {
-        Messaging.messaging().connect { (error) in
-            if error != nil {
-                print("Unable to connect with FCM. \(String(describing: error))")
-            } else {
-                print("Connected to FCM.")
-            }
-        }
+//        Messaging.messaging().connect { (error) in
+//            if error != nil {
+//                print("Unable to connect with FCM. \(String(describing: error))")
+//            } else {
+//                print("Connected to FCM.")
+//            }
+//        }
     }
 
 
@@ -142,7 +142,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         
-        InstanceID.instanceID().setAPNSToken(deviceToken, type: InstanceIDAPNSTokenType.unknown)
+        Messaging.messaging().apnsToken = deviceToken
         
         print("Firtoken: \(InstanceID.instanceID().token())")
         
@@ -160,14 +160,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-//    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
-//        return orientationLock
-//    }
-//    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) ->
-//        UIInterfaceOrientationMask {
-//    
-//            return orientationLock
-//    }
+
     
     
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
@@ -390,10 +383,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Note: This callback is fired at each app startup and whenever a new token is generated.
     }
     
-    func application(application: UIApplication,
-                     didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        Messaging.messaging().apnsToken = deviceToken as Data
-    }
+   
  }
   
  
