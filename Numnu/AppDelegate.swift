@@ -392,7 +392,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication,
                      didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        Messaging.messaging().apnsToken = deviceToken
+        Messaging.messaging().apnsToken = deviceToken as Data
     }
  }
   
