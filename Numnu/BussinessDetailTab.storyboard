@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -403,7 +403,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Barbadous and rum food festival" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IIT-eM-7iS">
                                                 <rect key="frame" x="10" y="199" width="300" height="22"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="22" id="EhY-cB-G5O"/>
+                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="22" id="EhY-cB-G5O"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
                                                 <color key="textColor" red="0.16468328237533569" green="0.16471883654594421" blue="0.16468104720115662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -611,7 +611,6 @@
                                             <constraint firstItem="o10-fq-NHl" firstAttribute="leading" secondItem="yiT-ll-IaZ" secondAttribute="leading" constant="10" id="Vax-uG-52h"/>
                                             <constraint firstItem="02U-Jr-3EC" firstAttribute="leading" secondItem="yiT-ll-IaZ" secondAttribute="leading" constant="10" id="Wem-AT-TIe"/>
                                             <constraint firstItem="H7o-yV-lbd" firstAttribute="leading" secondItem="rkz-bK-KWE" secondAttribute="trailing" constant="8" id="YQM-ls-ajh"/>
-                                            <constraint firstItem="nfW-pc-mNv" firstAttribute="top" secondItem="jq6-W2-rl2" secondAttribute="bottom" constant="7" id="ZY7-yi-jyj"/>
                                             <constraint firstAttribute="bottom" secondItem="Ogp-uE-AMy" secondAttribute="bottom" id="Zkp-OO-16z"/>
                                             <constraint firstItem="1lW-hB-p6D" firstAttribute="top" secondItem="hDJ-th-ytJ" secondAttribute="bottom" constant="8" id="ZsT-lZ-J0f"/>
                                             <constraint firstItem="Ogp-uE-AMy" firstAttribute="top" secondItem="o10-fq-NHl" secondAttribute="bottom" constant="38" id="dWx-85-YOB"/>
@@ -628,6 +627,7 @@
                                             <constraint firstItem="H7o-yV-lbd" firstAttribute="top" secondItem="nfW-pc-mNv" secondAttribute="bottom" constant="10" id="m4W-q3-jBu"/>
                                             <constraint firstItem="BIb-eF-MWh" firstAttribute="leading" secondItem="yiT-ll-IaZ" secondAttribute="leading" constant="10" id="ogm-wt-qXJ"/>
                                             <constraint firstItem="IIT-eM-7iS" firstAttribute="top" secondItem="BIb-eF-MWh" secondAttribute="bottom" constant="10" id="qiw-Tc-WDy"/>
+                                            <constraint firstItem="o10-fq-NHl" firstAttribute="top" secondItem="jq6-W2-rl2" secondAttribute="bottom" constant="12" id="qwm-7q-mkQ"/>
                                             <constraint firstItem="zap-vb-pMv" firstAttribute="leading" secondItem="yiT-ll-IaZ" secondAttribute="leading" constant="10" id="sAE-Sd-mPs"/>
                                             <constraint firstItem="WZK-XB-fTr" firstAttribute="top" secondItem="nfW-pc-mNv" secondAttribute="bottom" constant="15" id="sVY-xI-Pls"/>
                                             <constraint firstItem="BIb-eF-MWh" firstAttribute="top" secondItem="yiT-ll-IaZ" secondAttribute="top" constant="10" id="tze-yd-lfO"/>
@@ -735,6 +735,7 @@
                         <outlet property="buttonBarView" destination="SfR-e9-tEN" id="S61-cw-qWl"/>
                         <outlet property="containerView" destination="Ogp-uE-AMy" id="XVc-ds-AU0"/>
                         <outlet property="containerViewTop" destination="dWx-85-YOB" id="s25-gS-ywM"/>
+                        <outlet property="descriptionTopConstraint" destination="qwm-7q-mkQ" id="2QF-Fp-B7P"/>
                         <outlet property="eventDescriptionHeight" destination="YFW-Oe-e7y" id="hhn-JG-ue2"/>
                         <outlet property="mainContainerView" destination="6px-BC-kh5" id="qB0-ja-Oy8"/>
                         <outlet property="mainContainerViewBottom" destination="IlD-BM-uOa" id="NSz-Ee-Hbl"/>
@@ -745,11 +746,13 @@
                         <outlet property="shareView" destination="lwg-fG-j9c" id="zeU-uU-dBM"/>
                         <outlet property="sharebusdetaillabel" destination="adx-k0-dCc" id="SFm-GQ-JXk"/>
                         <outlet property="tagScrollView" destination="jq6-W2-rl2" id="50z-Vd-MrJ"/>
+                        <outlet property="tagconstraintHeight" destination="nbW-w3-4SI" id="npY-Y8-hUE"/>
+                        <outlet property="tagscrollConstaintTop" destination="PIL-NC-79Q" id="077-OZ-alu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JJR-KM-sxz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1344" y="235"/>
+            <point key="canvasLocation" x="-1344.375" y="234.50704225352112"/>
         </scene>
     </scenes>
     <resources>
@@ -763,7 +766,7 @@
         <image name="image_placeholder" width="960" height="796"/>
         <image name="location_ico" width="16" height="23"/>
         <image name="map_ico" width="25" height="25"/>
-        <image name="rating1" width="32" height="29"/>
+        <image name="rating1" width="70" height="70"/>
         <image name="restaurant_ico" width="26" height="26"/>
         <image name="share" width="18" height="20"/>
     </resources>

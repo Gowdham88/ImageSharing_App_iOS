@@ -48,7 +48,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Barbadous and rum food festival " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dbq-an-3gn">
                                                 <rect key="frame" x="98" y="8" width="218" height="22"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="22" id="Cde-W5-k8j"/>
+                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="22" id="Cde-W5-k8j"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
                                                 <color key="textColor" red="0.16470588235294117" green="0.16470588235294117" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
@@ -283,6 +283,7 @@
                     <size key="freeformSize" width="320" height="1100"/>
                     <connections>
                         <outlet property="TabBarView" destination="JnR-Aw-N5a" id="l0P-gf-Rzd"/>
+                        <outlet property="TagscrollviewTop" destination="37a-Kf-JmC" id="Tq3-Ty-5aR"/>
                         <outlet property="barButtonTop" destination="jIB-BK-Ug5" id="gG2-Rp-os6"/>
                         <outlet property="bookmarkbusinesslabel" destination="Hlk-Zu-TiW" id="s0y-jg-52d"/>
                         <outlet property="busDescriptionHeight" destination="xJD-Vx-Sxv" id="OFn-3K-TRZ"/>
@@ -294,7 +295,10 @@
                         <outlet property="completeViewMenu" destination="79Q-lb-B6x" id="w6k-Mw-vrq"/>
                         <outlet property="containerView" destination="eYQ-kW-VVX" id="AiZ-7u-pN0"/>
                         <outlet property="containerViewTop" destination="s17-yE-Tza" id="drZ-3a-nf7"/>
+                        <outlet property="descriptionTop" destination="GnB-Bh-sHb" id="SFu-bA-FGd"/>
                         <outlet property="eventDescriptionLabel" destination="0A4-Sx-8eI" id="wJ3-lA-m8U"/>
+                        <outlet property="eventImageHeight" destination="p7T-tu-xNe" id="6cs-52-jyf"/>
+                        <outlet property="eventTop" destination="38e-ur-4Xz" id="IT1-me-5oV"/>
                         <outlet property="mainContainerView" destination="EKD-Uq-tq9" id="Tro-bF-YmK"/>
                         <outlet property="mainContainerViewBottom" destination="ING-nN-A1o" id="6M3-vl-wNM"/>
                         <outlet property="myscrollView" destination="sy9-94-BJi" id="dIK-q9-F6A"/>
@@ -304,6 +308,7 @@
                         <outlet property="shareView" destination="SWR-ZR-YvQ" id="EJY-Ah-5XP"/>
                         <outlet property="sharebusinesslabel" destination="FsV-rV-hgk" id="HE7-lR-sIj"/>
                         <outlet property="tagScrollView" destination="Ycz-53-5i8" id="aya-Rc-kit"/>
+                        <outlet property="tagscrollviewheight" destination="YE3-dZ-n2r" id="grL-AD-fdu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fMK-xq-Muf" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -260,14 +260,22 @@ extension ReviewEventViewController : UITableViewDelegate,UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-
-        if TextSize.sharedinstance.getNumberoflines(text: Constants.dummy, width: tableView.frame.width, font: UIFont(name: "Avenir-Book", size: 16)!) > 1 {
-
-            return 428
-
+        
+        if let item = postList[indexPath.row].comment {
+            
+            if TextSize.sharedinstance.getNumberoflines(text: item, width: tableView.frame.width, font: UIFont(name: "Avenir-Book", size: 16)!) > 1 {
+                
+                return 428
+                
+            } else {
+                
+                return 392
+            }
+            
         } else {
-
-            return 402
+            
+            return 392
+            
         }
 
     }

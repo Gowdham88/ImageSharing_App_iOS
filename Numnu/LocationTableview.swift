@@ -17,7 +17,7 @@ class LocationTableview: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LocationviewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! Locationtableviewcell
         
         return cell
     }

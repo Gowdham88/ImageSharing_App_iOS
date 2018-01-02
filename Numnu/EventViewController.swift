@@ -460,7 +460,7 @@ extension EventViewController : ReviewEventViewControllerDelegate {
    
     func postTableHeight(height: CGFloat) {
      
-        mainContainerView.constant = 532 + height
+        mainContainerView.constant = (buttonBarView.frame.origin.y+64) + height
         mainContainerViewBottom.constant = 0
     }
     
@@ -483,7 +483,7 @@ extension EventViewController : BusinessEventViewControllerDelegate {
     
     func BusinessTableHeight(height: CGFloat) {
         
-        mainContainerView.constant = 532 + height
+        mainContainerView.constant = (buttonBarView.frame.origin.y+64) + height
         mainContainerViewBottom.constant = 0
     }
     
@@ -494,7 +494,7 @@ extension EventViewController : MenuEventViewControllerDelegate {
     
     func menuTableHeight(height: CGFloat) {
         
-        mainContainerView.constant = 532 + height
+        mainContainerView.constant = (buttonBarView.frame.origin.y+64) + height
         mainContainerViewBottom.constant = 0
     }
     
@@ -642,7 +642,7 @@ extension EventViewController {
                     MyVariables.markerTitle = Etitle
                 }
                 if let addressval = loclist.address_str {
-                    MyVariables.address     = addressval
+                    MyVariables.address = addressval
                 }
                
                 print("lat and lon values are:::::",MyVariables.fetchedLat,MyVariables.fetchedLong)

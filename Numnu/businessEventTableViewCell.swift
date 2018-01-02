@@ -15,6 +15,8 @@ class businessEventTableViewCell : UITableViewCell {
     @IBOutlet weak var eventBusLabel: UILabel!
     @IBOutlet weak var eventBusCollectionView: UICollectionView!
     
+    @IBOutlet weak var tagConstraintTop: NSLayoutConstraint!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -39,7 +41,14 @@ class businessEventTableViewCell : UITableViewCell {
     
     var item : BussinessEventList! {
         didSet {
-            eventBusLabel.text = item.businessname
+            
+            if let name = item.businessname {
+                
+                eventBusLabel.text = item.businessname
+            } else {
+                
+                tagConstraintTop.constant = 0
+            }
             
             if let userimageList = item.imgList {
                 
