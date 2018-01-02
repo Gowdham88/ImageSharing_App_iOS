@@ -24,6 +24,10 @@
 		472A91DC1FE2972F0070FE0B /* PostListDataItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472A91DB1FE2972F0070FE0B /* PostListDataItems.swift */; };
 		472A91DE1FE2A7FB0070FE0B /* PostCreatorList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472A91DD1FE2A7FB0070FE0B /* PostCreatorList.swift */; };
 		475FBA3E1FF22268008BA5D8 /* ItemLocationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475FBA3D1FF22268008BA5D8 /* ItemLocationList.swift */; };
+		47B46CE51FFB6AC400BA104A /* BookmarkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B46CE41FFB6AC400BA104A /* BookmarkTableViewCell.swift */; };
+		47B46CE71FFB777E00BA104A /* BookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B46CE61FFB777E00BA104A /* BookmarkViewController.swift */; };
+		47B46CEB1FFB7D0000BA104A /* BookmarksDataItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B46CEA1FFB7D0000BA104A /* BookmarksDataItems.swift */; };
+		47B46CED1FFB80EB00BA104A /* BookMarkMainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B46CEC1FFB80EB00BA104A /* BookMarkMainModel.swift */; };
 		601D46771F8D205E00832BDD /* signInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601D46761F8D205E00832BDD /* signInVC.swift */; };
 		601D46791F8F3B1C00832BDD /* UserList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601D46781F8F3B1C00832BDD /* UserList.swift */; };
 		6043865C1FB052860049F971 /* FoodPreferenceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6043865B1FB052860049F971 /* FoodPreferenceCollectionViewCell.swift */; };
@@ -185,6 +189,10 @@
 		472A91DB1FE2972F0070FE0B /* PostListDataItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListDataItems.swift; sourceTree = "<group>"; };
 		472A91DD1FE2A7FB0070FE0B /* PostCreatorList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreatorList.swift; sourceTree = "<group>"; };
 		475FBA3D1FF22268008BA5D8 /* ItemLocationList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemLocationList.swift; sourceTree = "<group>"; };
+		47B46CE41FFB6AC400BA104A /* BookmarkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkTableViewCell.swift; sourceTree = "<group>"; };
+		47B46CE61FFB777E00BA104A /* BookmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewController.swift; sourceTree = "<group>"; };
+		47B46CEA1FFB7D0000BA104A /* BookmarksDataItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksDataItems.swift; sourceTree = "<group>"; };
+		47B46CEC1FFB80EB00BA104A /* BookMarkMainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkMainModel.swift; sourceTree = "<group>"; };
 		601D46761F8D205E00832BDD /* signInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signInVC.swift; sourceTree = "<group>"; };
 		601D46781F8F3B1C00832BDD /* UserList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserList.swift; sourceTree = "<group>"; };
 		601D467A1F8FAF4B00832BDD /* Numnu.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Numnu.entitlements; sourceTree = "<group>"; };
@@ -414,6 +422,15 @@
 			path = NumnuUITests;
 			sourceTree = "<group>";
 		};
+		47B46CE91FFB7CD800BA104A /* BookmarksModel */ = {
+			isa = PBXGroup;
+			children = (
+				47B46CEA1FFB7D0000BA104A /* BookmarksDataItems.swift */,
+				47B46CEC1FFB80EB00BA104A /* BookMarkMainModel.swift */,
+			);
+			path = BookmarksModel;
+			sourceTree = "<group>";
+		};
 		64D081BCA83EE6AB3BD4A5DA /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -588,6 +605,8 @@
 		B4BD9EE91F6FA4AF00C43182 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				47B46CE61FFB777E00BA104A /* BookmarkViewController.swift */,
+				47B46CE41FFB6AC400BA104A /* BookmarkTableViewCell.swift */,
 				BE57DEF61FBB0BCD00A9C93B /* PostImageZoomViewController.swift */,
 				60B4EA3F1FAAEA7600C1A6C9 /* SettingsVC.swift */,
 				B42F2A241FA9EA6B002419AB /* LocationDetailController */,
@@ -634,6 +653,7 @@
 		B4BD9EEB1F6FA54400C43182 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				47B46CE91FFB7CD800BA104A /* BookmarksModel */,
 				B4A8FECC1FE90B4C00D8A7CB /* BusinessTabModel */,
 				B4483EFC1FDEA3FD00D99E0E /* TabModel */,
 				B47833491FE004FF00970412 /* EventTabModel */,
@@ -1010,6 +1030,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47B46CE71FFB777E00BA104A /* BookmarkViewController.swift in Sources */,
 				B42214981FC2F84F00FD56B0 /* TagList.swift in Sources */,
 				BE5201F41FBDE82E00462B0E /* UserProfileTagCollectionViewCell.swift in Sources */,
 				B49ABD881F9F25A60091C5D1 /* DefaultTabController.swift in Sources */,
@@ -1072,6 +1093,7 @@
 				B41842391F8FCBF100CBBA57 /* Edit_ProfileVC.swift in Sources */,
 				3FC6CEBA1F6F744700DF2A12 /* AppDelegate.swift in Sources */,
 				B43F16CB1FC4364200BBBF87 /* EventModelList.swift in Sources */,
+				47B46CEB1FFB7D0000BA104A /* BookmarksDataItems.swift in Sources */,
 				B464D78F1F8D1F3E002A1FDC /* EventCollectionCell.swift in Sources */,
 				6F24289A1FB34568003AD3AF /* ItemCompleteviewcontroller.swift in Sources */,
 				60B4EA401FAAEA7600C1A6C9 /* SettingsVC.swift in Sources */,
@@ -1108,7 +1130,9 @@
 				3F0006491FD6CDBB0098B132 /* Package.swift in Sources */,
 				B478334B1FE0052700970412 /* EventItemTagModel.swift in Sources */,
 				B45CD8721F9CDA99009262B8 /* UILabel.swift in Sources */,
+				47B46CED1FFB80EB00BA104A /* BookMarkMainModel.swift in Sources */,
 				3F065CB81FE7C1D400483718 /* BusinessItemTagModel.swift in Sources */,
+				47B46CE51FFB6AC400BA104A /* BookmarkTableViewCell.swift in Sources */,
 				3FC6CEE81F6FA17300DF2A12 /* HomeViewController.swift in Sources */,
 				6FC0A9C31FCEA1F500D91B0C /* ImgList.swift in Sources */,
 				B406DE261FA730B30092E2B4 /* BusinessDetailViewController.swift in Sources */,

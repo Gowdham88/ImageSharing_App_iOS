@@ -422,7 +422,7 @@ class  ApiClient {
             
      }
     
-    /********************************getItemTag based Event*************************************************/
+    /********************************getItemTag based Location*************************************************/
     
     func getItemTagLocation(id : Int,page : String,headers : HTTPHeaders,completion : @escaping (String,EventItemTagModel?)-> Void) {
         
@@ -1153,6 +1153,41 @@ class  ApiClient {
         }
         
     }
+    
+    ///////******** Get Bookmarks **********/////////
+    func getBookmarks(id : Int,page : String,headers : HTTPHeaders,completion : @escaping (String,BookMarkMainModel?)-> Void) {
+        
+        Alamofire.request("\(Constants.Bookmarkpost)/\(id)/bookmarks?\(page)", method: .get,encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            
+            
+            switch response.result {
+                
+            case .success :
+                
+                if let value = response.result.value {
+                    
+                    let json = JSON(value)
+                    if let list = BookMarkMainModel(json: json) {
+                        
+                        completion("success",list)
+                        
+                    }
+                    
+                }
+                
+                
+            case .failure(let error):
+                
+                print(error.localizedDescription)
+                completion(error.localizedDescription,nil)
+                
+            }
+            
+        }
+        
+    }
+    
+
     
     
 }
