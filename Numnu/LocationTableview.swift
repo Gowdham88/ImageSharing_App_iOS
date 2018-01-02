@@ -13,21 +13,34 @@ class LocationTableview: UIViewController, UITableViewDelegate, UITableViewDataS
     var location = ""
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return location.count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+<<<<<<< HEAD
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! BookmarkTableViewCell
+=======
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! Locationtableviewcell
+>>>>>>> 572f87be2ec6c6f4f289aea56d09788bb860a2ac
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        methodToCallApi()
+    }
+    
+    func methodToCallApi (){
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
