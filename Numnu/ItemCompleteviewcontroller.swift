@@ -94,6 +94,7 @@ class ItemCompleteviewcontroller : UIViewController {
     @IBOutlet weak var eventImageTopConstraint    : NSLayoutConstraint!
     @IBOutlet weak var eventImageHeightConstraint : NSLayoutConstraint!
     
+    
     override func viewDidLoad() {
        super.viewDidLoad()
         

@@ -9,7 +9,7 @@
 import UIKit
 import Nuke
 
-class ProfileLinkController: UIViewController,UITableViewDataSource,UITableViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout  {
+class ProfileLinkController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout  {
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var navigationItemList: UINavigationItem!
@@ -35,6 +35,14 @@ class ProfileLinkController: UIViewController,UITableViewDataSource,UITableViewD
     @IBOutlet weak var collectionTagTop: NSLayoutConstraint!
     @IBOutlet weak var collectionTagHeight: NSLayoutConstraint!
     @IBOutlet weak var addresslabelTop: NSLayoutConstraint!
+    
+    
+    var primaryid       : Int = 149
+    var pageno          : Int = 1
+    var limitno         : Int = 25
+    
+    var postList = [PostListDataItems]()
+    var postModel  : PostListByEventId?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -123,64 +131,6 @@ class ProfileLinkController: UIViewController,UITableViewDataSource,UITableViewD
         
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return 3
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! Profile_postTableViewCell
-        
-        cell.delegate = self
-        cell.postEventBookMark.tag = indexPath.row
-        
-        let posteventlabeltap = UITapGestureRecognizer(target: self, action: #selector(Profile_postTableViewCell.CenterImageTapped))
-        cell.postUserImage.addGestureRecognizer(posteventlabeltap)
-        cell.postUserImage.isUserInteractionEnabled = true
-        
-        let posteventplacetap = UITapGestureRecognizer(target: self, action:#selector(getter: Profile_postTableViewCell.postEventPlace))
-        cell.postEventPlace.addGestureRecognizer(posteventplacetap)
-        cell.postEventPlace.isUserInteractionEnabled = true
-        
-        //Item page Icon Tapping
-        let posteventplaceIcontap = UITapGestureRecognizer(target: self, action:#selector(getter: Profile_postTableViewCell.postEventPlaceIcon))
-        cell.postEventPlaceIcon.addGestureRecognizer(posteventplaceIcontap)
-        cell.postEventPlaceIcon.isUserInteractionEnabled = true
-        
-        let posteventdishtap = UITapGestureRecognizer(target: self, action:#selector(getter: Profile_postTableViewCell.postEventDishLabel))
-        cell.postEventDishLabel.addGestureRecognizer(posteventdishtap)
-        cell.postEventDishLabel.isUserInteractionEnabled = true
-        
-        //Icon dish page
-        let postEventDishIcontap = UITapGestureRecognizer(target: self, action:#selector(getter: Profile_postTableViewCell.postEventDishIcon))
-        cell.postEventDishIcon.addGestureRecognizer(postEventDishIcontap)
-        cell.postEventDishIcon.isUserInteractionEnabled = true
-        
-        let posteventnametap = UITapGestureRecognizer(target: self, action:#selector(getter: Profile_postTableViewCell.postEventName))
-        cell.postEventName.addGestureRecognizer(posteventnametap)
-        cell.postEventName.isUserInteractionEnabled = true
-        
-        let postEventNameIcontap = UITapGestureRecognizer(target: self, action:#selector(getter: Profile_postTableViewCell.postEventNameIcon))
-        cell.postEventNameIcon.addGestureRecognizer(postEventNameIcontap)
-        cell.postEventNameIcon.isUserInteractionEnabled = true
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        //        let storyboard = UIStoryboard(name: Constants.PostDetail, bundle: nil)
-        //        let vc         = storyboard.instantiateViewController(withIdentifier: "postdetailid")
-        //        self.navigationController!.pushViewController(vc, animated: true)
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
-        let lastRowIndex = tableView.numberOfRows(inSection: 0)
-        if indexPath.row == lastRowIndex - 1 {
-            menuTableHeight(height: self.tableView.contentSize.height)
-        }
-    }
-    
     //    override func viewDidLayoutSubviews() {
     //        super.viewDidLayoutSubviews()
     //        self.navigationController?.setNavigationBarHidden(false, animated: true)
@@ -190,48 +140,7 @@ class ProfileLinkController: UIViewController,UITableViewDataSource,UITableViewD
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    func CenterImageTapped(){
-        let storyboard = UIStoryboard(name: Constants.PostDetail, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: "postdetailid")
-        self.navigationController!.pushViewController(vc, animated: true)
-        
-    }
-    func postEventPlace(){
-        let storyboard = UIStoryboard(name: Constants.ItemDetail, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId)
-        self.navigationController!.pushViewController(vc, animated: true)
-    }
     
-    func postEventPlaceIcon(){
-        let storyboard = UIStoryboard(name: Constants.ItemDetail, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId)
-        self.navigationController!.pushViewController(vc, animated: true)
-        
-    }
-    func postEventDishLabel(){
-        let storyboard = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId)
-        self.navigationController!.pushViewController(vc, animated: true)
-        
-    }
-    
-    func postEventDishIcon() {
-        let storyboard = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId)
-        self.navigationController!.pushViewController(vc, animated: true)
-    }
-    func postEventName(){
-        
-        let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)
-        self.navigationController!.pushViewController(vc, animated: true)
-    }
-    func postEventNameIcon(){
-        
-        let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)
-        self.navigationController!.pushViewController(vc, animated: true)
-    }
     // collectionview cell //
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -417,6 +326,163 @@ extension ProfileLinkController : Profile_postTableViewCellDelegate {
         mainViewBottom.constant = 0
     }
 }
+
+//extension ProfileLinkController : UITableViewDelegate,UITableViewDataSource {
+//    
+//    
+//    
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        
+//        return postList.count
+//        
+//    }
+//    
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "postEventCell", for: indexPath) as! PostEventTableViewCell
+//        guard postList.count > 0 else {
+//            
+//            return cell
+//        }
+//        
+//        cell.item = postList[indexPath.row]
+//        cell.delegate = self
+//        cell.postEventBookMark.tag = indexPath.row
+//        cell.setHeight(heightview : Float(UIScreen.main.bounds.size.height))
+//        
+//        let posteventImagetap = UITapGestureRecognizer(target: self, action: #selector(postEventImage(sender:)))
+//        cell.postEventImage.tag = indexPath.row
+//        cell.postEventImage.addGestureRecognizer(posteventImagetap)
+//        cell.postEventImage.isUserInteractionEnabled = true
+//        
+//        let posteventplacetap = UITapGestureRecognizer(target: self, action:#selector(getter: PostEventTableViewCell.postEventPlace))
+//        cell.postEventPlace.addGestureRecognizer(posteventplacetap)
+//        cell.postEventPlace.isUserInteractionEnabled = true
+//        
+//        let posteventplaceIcontap = UITapGestureRecognizer(target: self, action:#selector(getter: PostEventTableViewCell.postEventPlaceIcon))
+//        cell.postEventPlaceIcon.addGestureRecognizer(posteventplaceIcontap)
+//        cell.postEventPlaceIcon.isUserInteractionEnabled = true
+//        
+//        
+//        let posteventdishtap = UITapGestureRecognizer(target: self, action:#selector(getter: PostEventTableViewCell.postEventDishLabel))
+//        cell.postEventDishLabel.addGestureRecognizer(posteventdishtap)
+//        cell.postEventDishLabel.isUserInteractionEnabled = true
+//        
+//        let posteventdishIcontap = UITapGestureRecognizer(target: self, action:#selector(getter: PostEventTableViewCell.postEventDishIcon))
+//        cell.postEventDishIcon.addGestureRecognizer(posteventdishIcontap)
+//        cell.postEventDishIcon.isUserInteractionEnabled = true
+//        
+//        let posteventnametap = UITapGestureRecognizer(target: self, action:#selector(getter: PostEventTableViewCell.postEventName))
+//        cell.postEventName.addGestureRecognizer(posteventnametap)
+//        cell.postEventName.isUserInteractionEnabled = true
+//        
+//        let posteventnameIcontap = UITapGestureRecognizer(target: self, action:#selector(getter: PostEventTableViewCell.postEventNameIcon))
+//        cell.postEventNameIcon.addGestureRecognizer(posteventnameIcontap)
+//        cell.postEventNameIcon.isUserInteractionEnabled = true
+//        
+//        let profiletap = UITapGestureRecognizer(target: self, action:#selector(getter: PostEventTableViewCell.postUserImage))
+//        cell.postUserImage.addGestureRecognizer(profiletap)
+//        cell.postUserImage.isUserInteractionEnabled = true
+//        
+//        let profileusernametap = UITapGestureRecognizer(target: self, action:#selector(getter: PostEventTableViewCell.postUsernameLabel))
+//        cell.postUsernameLabel.addGestureRecognizer(profileusernametap)
+//        cell.postUsernameLabel.isUserInteractionEnabled = true
+//        
+//        
+//        return cell
+//        
+//    }
+//    
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        
+//       
+//    }
+//    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        
+//        if TextSize.sharedinstance.getNumberoflines(text: Constants.dummy, width: tableView.frame.width, font: UIFont(name: "Avenir-Book", size: 16)!) > 1 {
+//            
+//            return 428
+//            
+//        } else {
+//            
+//            return 402
+//        }
+//        
+//    }
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        
+//        if indexPath.row == postList.count - 1 && viewState {
+//            
+//            if let pageItem = postModel {
+//                
+//                if postList.count  < pageItem.totalRows ?? 0 {
+//                    pageno += 1
+//                    limitno = 25 * pageno
+//                    methodToCallApi(pageno: pageno, limit: limitno)
+//                }
+//                
+//            }
+//            
+//        }
+//    }
+//    
+//    func postEventImage(sender : UITapGestureRecognizer) {
+//        let storyboard = UIStoryboard(name: Constants.PostDetail, bundle: nil)
+//        let vc         = storyboard.instantiateViewController(withIdentifier: "postdetailid") as! PostDetailViewController
+//        vc.item        = postList[sender.view!.tag]
+//        self.navigationController!.pushViewController(vc, animated: true)
+//        
+//    }
+//    func postEventPlace() {
+//        let storyboard = UIStoryboard(name: Constants.ItemDetail, bundle: nil)
+//        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId)
+//        self.navigationController!.pushViewController(vc, animated: true)
+//        
+//    }
+//    func postEventPlaceIcon(){
+//        let storyboard = UIStoryboard(name: Constants.ItemDetail, bundle: nil)
+//        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId)
+//        self.navigationController!.pushViewController(vc, animated: true)
+//    }
+//    func postEventDishLabel(){
+//        let storyboard = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
+//        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId)
+//        self.navigationController!.pushViewController(vc, animated: true)
+//    }
+//    
+//    func postEventDishIcon(){
+//        let storyboard = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
+//        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId)
+//        self.navigationController!.pushViewController(vc, animated: true)
+//    }
+//    func postEventName(){
+//        
+//        let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
+//        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)
+//        self.navigationController!.pushViewController(vc, animated: true)
+//    }
+//    func postEventNameIcon(){
+//        
+//        let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
+//        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)
+//        self.navigationController!.pushViewController(vc, animated: true)
+//    }
+//    func postUserImage(){
+//        let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
+//        let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
+//        vc.boolForBack = false
+//        self.navigationController?.pushViewController(vc, animated: true)
+//    }
+//    func postUsernameLabel(){
+//        
+//        let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
+//        let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
+//        vc.boolForBack = false
+//        self.navigationController!.pushViewController(vc, animated: true)
+//    }
+//    
+//}
 
 
 
