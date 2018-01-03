@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -33,7 +33,7 @@
                                         <rect key="frame" x="0.0" y="75" width="320" height="423"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="5" translatesAutoresizingMaskIntoConstraints="NO" id="g5y-2m-2RR">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="g5y-2m-2RR">
                                                 <rect key="frame" x="0.0" y="84" width="320" height="249"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                             </imageView>
@@ -80,7 +80,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="emq-kw-nq5">
                                 <rect key="frame" x="0.0" y="20" width="320" height="504"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="r9a-im-5f4" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="r9a-im-5f4" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
                                         <rect key="frame" x="10" y="103" width="300" height="200"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="200" id="dvd-t3-n34"/>
@@ -538,7 +538,7 @@
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lgc-CV-EuH">
                                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="427"/>
                                                                     <subviews>
-                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="foodie" translatesAutoresizingMaskIntoConstraints="NO" id="WeY-B7-3ZL" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="WeY-B7-3ZL" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
                                                                             <rect key="frame" x="10" y="94.5" width="300" height="200"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="200" id="wZK-9b-rMj"/>
@@ -634,7 +634,7 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="event_ico" translatesAutoresizingMaskIntoConstraints="NO" id="Nwj-G7-jOF" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
-                                                                            <rect key="frame" x="10" y="346.5" width="14" height="15"/>
+                                                                            <rect key="frame" x="10" y="343.5" width="14" height="15"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="14" id="OFD-j7-idg"/>
                                                                                 <constraint firstAttribute="height" constant="15" id="zxf-fD-6bp"/>
@@ -645,10 +645,10 @@
                                                                                 </userDefinedRuntimeAttribute>
                                                                             </userDefinedRuntimeAttributes>
                                                                         </imageView>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BarBados food and rum festival djshdjh djshdjh djshd " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2c6-1c-b3j">
-                                                                            <rect key="frame" x="32" y="342.5" width="263" height="40"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BarBados food and rum festival " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2c6-1c-b3j">
+                                                                            <rect key="frame" x="32" y="342.5" width="263" height="18"/>
                                                                             <constraints>
-                                                                                <constraint firstAttribute="height" constant="40" id="Ehl-ic-nzy"/>
+                                                                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="40" id="Ehl-ic-nzy"/>
                                                                                 <constraint firstAttribute="width" constant="263" id="aHp-36-4M6"/>
                                                                             </constraints>
                                                                             <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="13"/>
@@ -656,7 +656,7 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1mA-nI-GHH">
-                                                                            <rect key="frame" x="10" y="396.5" width="300" height="1"/>
+                                                                            <rect key="frame" x="10" y="374.5" width="300" height="1"/>
                                                                             <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="1" id="MJu-1Q-Yn8"/>
@@ -720,7 +720,7 @@
                                                                         <constraint firstItem="4dL-XQ-Z5f" firstAttribute="leading" secondItem="Yxh-ax-VOn" secondAttribute="trailing" constant="8" id="QrP-ev-AEG"/>
                                                                         <constraint firstItem="kjS-Sp-ITA" firstAttribute="leading" secondItem="2yX-ae-AOf" secondAttribute="trailing" constant="8" id="Rcs-w1-0Bl"/>
                                                                         <constraint firstItem="Agb-9z-6fG" firstAttribute="leading" secondItem="odK-Bn-MN0" secondAttribute="trailing" constant="8" id="ST3-1p-ymq"/>
-                                                                        <constraint firstItem="Nwj-G7-jOF" firstAttribute="top" secondItem="2c6-1c-b3j" secondAttribute="top" constant="4" id="VuC-Ln-qvn"/>
+                                                                        <constraint firstItem="Nwj-G7-jOF" firstAttribute="top" secondItem="2c6-1c-b3j" secondAttribute="top" constant="1" id="VuC-Ln-qvn"/>
                                                                         <constraint firstItem="Agb-9z-6fG" firstAttribute="top" secondItem="WeY-B7-3ZL" secondAttribute="bottom" constant="8" id="Xo0-0c-DYx"/>
                                                                         <constraint firstAttribute="trailing" secondItem="WeY-B7-3ZL" secondAttribute="trailing" constant="10" id="Z3F-6k-Yfd"/>
                                                                         <constraint firstAttribute="trailing" secondItem="1mA-nI-GHH" secondAttribute="trailing" constant="10" id="Z71-MO-udE"/>
@@ -765,7 +765,7 @@
                                                             <outlet property="postEventPlace" destination="Agb-9z-6fG" id="pua-xA-wqk"/>
                                                             <outlet property="postEventPlaceIcon" destination="odK-Bn-MN0" id="c5S-1p-kC4"/>
                                                             <outlet property="postLikeImage" destination="J3q-hw-EOP" id="PtD-p6-9YW"/>
-                                                            <outlet property="postUserImage" destination="WeY-B7-3ZL" id="mpi-el-2uZ"/>
+                                                            <outlet property="postUserImage" destination="2yX-ae-AOf" id="7T4-m8-wJh"/>
                                                             <outlet property="postUserTime" destination="N9d-JX-wlW" id="g7M-Ye-ZN6"/>
                                                             <outlet property="postUsernameLabel" destination="kjS-Sp-ITA" id="y6i-sI-vsG"/>
                                                             <outlet property="postUserplaceLabbel" destination="ZF0-Jr-zSc" id="TqA-Sa-7y5"/>
@@ -907,15 +907,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="1" width="1280" height="853"/>
-        <image name="5" width="1280" height="853"/>
         <image name="Bookmark" width="14" height="24"/>
         <image name="Numnu_appicon" width="122" height="122"/>
         <image name="closebtn" width="35" height="35"/>
         <image name="dish_ico" width="22" height="23"/>
         <image name="eventDots" width="24" height="24"/>
         <image name="event_ico" width="25" height="27"/>
-        <image name="foodie" width="640" height="480"/>
         <image name="image_placeholder" width="960" height="796"/>
         <image name="location_ico" width="16" height="23"/>
         <image name="rating1" width="70" height="70"/>
