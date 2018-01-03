@@ -436,20 +436,34 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         if textField == foodTextfield {
-            
-            dropdownTableView.isHidden = false
+            let foodtext = foodTextfield.text!
+            if foodtext.count > 1 {
+                showPopup(table1: true, table2: false)
+                
+            }else{
+                showPopup(table1: true, table2: true)
+                
+            }
+//            dropdownTableView.isHidden = false
             let substring = (foodTextfield.text! as NSString).replacingCharacters(in: range, with: string )
             loadTagList(tag: substring)
             
         } else if textField == cityTextfield {
-            
-            if let place = textField.text {
+            let citytext = cityTextfield.text!
+            if citytext.count > 1 {
+                showPopup(table1: false, table2: true)
                 
-                getPlaceApi(place_Str: "\(place)\(string)" as String)
+            }else{
+                showPopup(table1: true, table2: true)
                 
             }
+                if let place = textField.text {
+                    
+                    getPlaceApi(place_Str: "\(place)\(string)" as String)
+                    
+                }
         
-            cityTableView.isHidden  = false
+//            cityTableView.isHidden  = false
             
         } else {
             showPopup(table1: true, table2: true)
@@ -493,7 +507,14 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             doneView.isHidden = false
             showPopup(table1: true, table2: true)
         }else if textField == cityTextfield {
-            showPopup(table1: false, table2: true)
+            let cityText = cityTextfield.text!
+            if cityText.count > 1 {
+                showPopup(table1: false, table2: true)
+
+            }else{
+                showPopup(table1: true, table2: true)
+
+            }
             
 
         } else if textField == genderTextfield {
@@ -575,6 +596,10 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             foodTextfield.text = ""
             
         }
+        
+        if textField == cityTextfield {
+            cityTableView.isHidden = true
+        }
     }
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         
@@ -588,7 +613,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             
             cityDictonary = nil
             cityTextfield.text = ""
-            
+            self.cityTableView.isHidden = true
+
         }
         if textField == foodTextfield {
             dropdownTableView.isHidden = true

@@ -237,6 +237,7 @@
                                             <constraint firstItem="RPa-ch-qag" firstAttribute="top" secondItem="ZK6-Ap-emM" secondAttribute="bottom" id="01n-UQ-F9u"/>
                                             <constraint firstItem="WMp-Up-FUj" firstAttribute="top" secondItem="4rU-V5-StF" secondAttribute="bottom" id="0I5-Wl-TIg"/>
                                             <constraint firstItem="U0Z-Mj-lZB" firstAttribute="leading" secondItem="g0V-rF-TMW" secondAttribute="leading" constant="20" id="0MU-wN-nf0"/>
+                                            <constraint firstItem="4rU-V5-StF" firstAttribute="top" secondItem="A5m-9M-c9p" secondAttribute="bottom" constant="70" id="0VR-dQ-zLt"/>
                                             <constraint firstItem="3NW-yD-oxA" firstAttribute="leading" secondItem="g0V-rF-TMW" secondAttribute="leading" constant="10" id="2ma-sr-jSL"/>
                                             <constraint firstItem="Qgo-S0-0CV" firstAttribute="top" secondItem="4rU-V5-StF" secondAttribute="bottom" constant="29" id="3Bn-dk-BjB"/>
                                             <constraint firstItem="Aos-pn-hej" firstAttribute="leading" secondItem="g0V-rF-TMW" secondAttribute="leading" constant="10" id="7JQ-Ka-HvH"/>
@@ -255,6 +256,7 @@
                                             <constraint firstItem="bDD-uk-I6b" firstAttribute="leading" secondItem="g0V-rF-TMW" secondAttribute="leading" constant="20" id="HAz-ME-nR4"/>
                                             <constraint firstItem="aOH-4t-Zwo" firstAttribute="top" secondItem="5iE-8T-Lm3" secondAttribute="bottom" constant="8" id="Hg7-0m-Yt3"/>
                                             <constraint firstItem="e0U-hc-Duc" firstAttribute="top" secondItem="wz1-XR-z7e" secondAttribute="bottom" constant="40" id="Iqw-Mz-Fe8"/>
+                                            <constraint firstItem="U0Z-Mj-lZB" firstAttribute="top" secondItem="A5m-9M-c9p" secondAttribute="bottom" constant="45" id="JGa-eQ-F3s"/>
                                             <constraint firstAttribute="trailing" secondItem="gAt-qt-Cww" secondAttribute="trailing" constant="10" id="JNa-jG-1z1"/>
                                             <constraint firstAttribute="trailing" secondItem="8Se-ej-wg2" secondAttribute="trailing" constant="13" id="JqG-Is-SGy"/>
                                             <constraint firstItem="xcz-an-LvS" firstAttribute="top" secondItem="e0U-hc-Duc" secondAttribute="bottom" constant="11" id="K95-Kq-JjG"/>
@@ -271,7 +273,6 @@
                                             <constraint firstItem="gAt-qt-Cww" firstAttribute="leading" secondItem="g0V-rF-TMW" secondAttribute="leading" constant="20" id="SvE-Hv-bRj"/>
                                             <constraint firstItem="wz1-XR-z7e" firstAttribute="top" secondItem="sJV-kG-cov" secondAttribute="bottom" constant="12" id="T2X-sx-bJH"/>
                                             <constraint firstItem="xcz-an-LvS" firstAttribute="leading" secondItem="g0V-rF-TMW" secondAttribute="leading" constant="12" id="Tx3-CH-2Lo"/>
-                                            <constraint firstItem="4rU-V5-StF" firstAttribute="top" secondItem="A5m-9M-c9p" secondAttribute="bottom" constant="70" id="Ur2-qp-ffy"/>
                                             <constraint firstItem="sJV-kG-cov" firstAttribute="leading" secondItem="g0V-rF-TMW" secondAttribute="leading" constant="10" id="W09-t0-cJc"/>
                                             <constraint firstItem="3NW-yD-oxA" firstAttribute="top" secondItem="RPa-ch-qag" secondAttribute="bottom" constant="8" id="WJr-1Q-w5D"/>
                                             <constraint firstItem="A5m-9M-c9p" firstAttribute="top" secondItem="5iE-8T-Lm3" secondAttribute="bottom" constant="5" id="Xvm-ue-Jnu"/>
@@ -401,10 +402,12 @@
                         <outlet property="buttonBarView" destination="Qgo-S0-0CV" id="Wwd-ub-KUB"/>
                         <outlet property="containerView" destination="cgp-wT-7F1" id="iq1-Ph-x4k"/>
                         <outlet property="containerViewTop" destination="A1r-xE-hgH" id="6lp-7A-ekg"/>
+                        <outlet property="dateIconHeight" destination="hXR-Ne-k4u" id="Kyt-3a-6Az"/>
                         <outlet property="dateIconTopToEventname" destination="Iqw-Mz-Fe8" id="CQc-Tc-qPv"/>
+                        <outlet property="dateLabelHeight" destination="sW7-rv-MBE" id="2H2-5Z-Lxm"/>
                         <outlet property="dateTopToEventname" destination="Frr-a5-alf" id="kuJ-8q-vvc"/>
                         <outlet property="descriptionTopConstraint" destination="FBd-Pd-NCZ" id="quL-QR-aL4"/>
-                        <outlet property="descriptionTopToLocation" destination="Ur2-qp-ffy" id="8Hn-sB-RN1"/>
+                        <outlet property="descriptionTopToLocationname" destination="0VR-dQ-zLt" id="n7k-bp-bol"/>
                         <outlet property="descriptionTopcostraintToWeblink2" destination="and-aL-bf8" id="mpk-PS-lLe"/>
                         <outlet property="eventDateLabel" destination="5iE-8T-Lm3" id="cOM-pG-vA9"/>
                         <outlet property="eventDescriptionHeight" destination="Pbs-jB-hTE" id="XHs-gm-EiQ"/>
@@ -415,8 +418,13 @@
                         <outlet property="eventMap" destination="8Se-ej-wg2" id="2dt-lW-oov"/>
                         <outlet property="eventPlaceLabel" destination="A5m-9M-c9p" id="Tog-Hl-7WJ"/>
                         <outlet property="eventTitleLabel" destination="wz1-XR-z7e" id="xfs-aV-Saw"/>
+                        <outlet property="locationIconHeight" destination="9N6-Hz-iDy" id="dKM-c9-pr0"/>
+                        <outlet property="locationLabelHeight" destination="gfR-Xr-pqE" id="Fbg-f3-ioT"/>
                         <outlet property="mainContainerView" destination="qJZ-CM-9pt" id="gUv-Si-KR0"/>
                         <outlet property="mainContainerViewBottom" destination="yqZ-my-MC5" id="S43-Gc-Gz0"/>
+                        <outlet property="mapIconHeight" destination="ais-k3-F87" id="izt-2U-ReV"/>
+                        <outlet property="mapIconTopToDateIcon" destination="K95-Kq-JjG" id="7CV-gU-5Zx"/>
+                        <outlet property="mapLabelHeight" destination="2dA-JO-NJZ" id="A2g-D8-0AL"/>
                         <outlet property="myscrollView" destination="IhJ-Hd-al3" id="Fqg-cC-iXm"/>
                         <outlet property="navigationItemList" destination="Xtw-y6-M2U" id="ZFh-MY-6XS"/>
                         <outlet property="pagerView" destination="cgp-wT-7F1" id="TOd-BD-B2D"/>
@@ -425,13 +433,17 @@
                         <outlet property="shareView" destination="2Uq-Cf-kwz" id="6sE-Lb-UlP"/>
                         <outlet property="sharelabel" destination="E9R-Co-fwj" id="c0D-s1-EBB"/>
                         <outlet property="tagScrollView" destination="Aos-pn-hej" id="lvl-QS-oRw"/>
+                        <outlet property="weblink1Height" destination="CoE-td-Qp7" id="31o-6W-MUl"/>
+                        <outlet property="weblink2Height" destination="2jD-MC-1OJ" id="wJs-Jl-KIw"/>
                         <outlet property="weblink2TopConstraint" destination="o4M-GN-35w" id="SZ2-X5-tgV"/>
+                        <outlet property="weblink3Height" destination="RrK-dJ-PGg" id="PmE-oi-WjC"/>
                         <outlet property="weblink3TopConstraint" destination="pon-YS-uG9" id="KLe-m4-74P"/>
+                        <outlet property="weblink3TopToLocationame" destination="JGa-eQ-F3s" id="1uI-Cm-QtR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6vr-6v-6F6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-229" y="-3"/>
+            <point key="canvasLocation" x="-230.625" y="-3.1690140845070425"/>
         </scene>
         <!--Title-->
         <scene sceneID="UJV-8I-47J">
