@@ -381,8 +381,15 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
 
            showPopup(table1: true, table2: true)
         }else if textField == cityTextfield {
-            
-            showPopup(table1: false, table2: true)
+            let cityText = cityTextfield.text!
+            if cityText.count > 1 {
+                showPopup(table1: false, table2: true)
+                
+            }else{
+                showPopup(table1: false, table2: false)
+                
+            }
+//            showPopup(table1: false, table2: true)
             self.datePickerValueChanged(sender: datePicker)
             datePicker.isHidden = true
             superVieww.isHidden = true
@@ -522,13 +529,13 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         dateFormatter.dateFormat = "dd"
         let day: String = dateFormatter.string(from: self.datePicker.date)
         
-        if setdatebirth {
-            
+//        if setdatebirth {
+        
             dateLabel.text = day
             monthLabel.text = month
             yearLabel.text = year
             
-        }
+//        }
         
     }
     func addCollectionContainer(){

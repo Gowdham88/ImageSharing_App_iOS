@@ -32,7 +32,18 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     var description_txt : String = ""
     var eventprimaryid  : Int    = 34
 
-    @IBOutlet weak var descriptionTopToLocation: NSLayoutConstraint!
+    @IBOutlet weak var descriptionTopToLocationname: NSLayoutConstraint!
+    @IBOutlet weak var weblink3TopToLocationame: NSLayoutConstraint!
+    @IBOutlet weak var mapIconTopToDateIcon: NSLayoutConstraint!
+    @IBOutlet weak var dateIconHeight: NSLayoutConstraint!
+    @IBOutlet weak var dateLabelHeight: NSLayoutConstraint!
+    @IBOutlet weak var mapLabelHeight: NSLayoutConstraint!
+    @IBOutlet weak var mapIconHeight: NSLayoutConstraint!
+    @IBOutlet weak var locationIconHeight: NSLayoutConstraint!
+    @IBOutlet weak var locationLabelHeight: NSLayoutConstraint!
+    @IBOutlet weak var weblink3Height: NSLayoutConstraint!
+    @IBOutlet weak var weblink2Height: NSLayoutConstraint!
+    @IBOutlet weak var weblink1Height: NSLayoutConstraint!
     @IBOutlet weak var dateIconTopToEventname: NSLayoutConstraint!
     @IBOutlet weak var dateTopToEventname: NSLayoutConstraint!
     @IBOutlet weak var scrollViewTopConstraint: NSLayoutConstraint!
@@ -560,13 +571,18 @@ extension EventViewController {
         if let startsat = response.startsat {
             print(startsat)
             if response.startsat != nil {
+                dateLabelHeight.constant = 20
+                dateIconHeight.constant  = 13
+            }else{
+                dateLabelHeight.constant = 0
+                dateIconHeight.constant  = 0
             }
         }
         
         if let endsat = response.endsat {
-            print(endsat)
-            if response.endsat != nil {
-                
+            
+            if response.endsat != "" {
+               
                 let formatter = DateFormatter()
                 formatter.locale = Locale(identifier: "en_US_POSIX")
                 formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
@@ -579,23 +595,34 @@ extension EventViewController {
                 eventDateLabel.text = dateString2 + " - " + dateString
                 print("datestring:::::",dateString,dateString2)
             }
+        }else{
+            dateLabelHeight.constant = 0
+            dateIconHeight.constant  = 0
+            mapIconTopToDateIcon.constant = -3
+            
         }
         
         
         if let eventLinkList = response.eventLinkList {
             if eventLinkList.count > 0 {
                 if let weblink1 = eventLinkList[0].weblink {
-                    EventLinkLabel1.text = eventLinkList[0].linktext
-                    MyVariables.link1    = weblink1
+                    EventLinkLabel1.text    = eventLinkList[0].linktext
+                    MyVariables.link1       = weblink1
                 }
                 if let weblink2 = eventLinkList[1].weblink {
-                    eventLinkLabel2.text = eventLinkList[1].linktext
-                    MyVariables.link2    = weblink2
-                    descriptionTopcostraintToWeblink2.constant = 25
-                    
+                    eventLinkLabel2.text    = eventLinkList[1].linktext
+                    MyVariables.link2       = weblink2
                 }
+//                if let weblink3 = eventLinkList[2].weblink {
+//                    eventLinkLabel3.text = eventLinkList[2].linktext
+//                    MyVariables.link3    = weblink3
+//                    weblink3Height.constant = 20
+//
+//                }
             }else {
-                descriptionTopToLocation.constant = 0
+                weblink1Height.constant = 0
+                weblink2Height.constant = 0
+                weblink3Height.constant = 0
             }
             
             if eventLinkList.count > 2 {
@@ -605,8 +632,15 @@ extension EventViewController {
                     
                 }
             }else{
+                weblink3Height.constant = 0
                 descriptionTopcostraintToWeblink2.constant = 5
             }
+        }else{
+            weblink1Height.constant = 0
+            weblink2Height.constant = 0
+            weblink3Height.constant = 0
+            descriptionTopToLocationname.constant = 3
+
         }
         
         
@@ -624,13 +658,15 @@ extension EventViewController {
                 }
             }
         }else{
-            dateIconTopToEventname.constant = 6
+            dateIconTopToEventname.constant = 8
             dateTopToEventname.constant = 5
+            
 
         }
         
         if let loclist = response.loclist {
             if response.loclist != nil {
+              
                 if let Eplace     = loclist.name_str {
                     eventPlaceLabel.text    = Eplace
                 }
@@ -646,9 +682,13 @@ extension EventViewController {
                 if let addressval = loclist.address_str {
                     MyVariables.address = addressval
                 }
-               
-                print("lat and lon values are:::::",MyVariables.fetchedLat,MyVariables.fetchedLong)
             }
+        }else{
+            locationLabelHeight.constant = 0
+            locationIconHeight.constant  = 0
+            
+            mapLabelHeight.constant  = 0
+            mapIconHeight.constant   = 0
         }
         
         if let imglist = response.imagelist {

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -625,7 +625,7 @@
                                         <color key="textColor" red="0.50588235294117645" green="0.52941176470588236" blue="0.56470588235294117" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="keU-dd-wio">
+                                    <textField opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Start typing..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="keU-dd-wio">
                                         <rect key="frame" x="35" y="393.5" width="250" height="20"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
@@ -1356,7 +1356,7 @@
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RWR-JS-bro">
                                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="427"/>
                                                                     <subviews>
-                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="fEy-p6-I89" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="foodie" translatesAutoresizingMaskIntoConstraints="NO" id="fEy-p6-I89" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
                                                                             <rect key="frame" x="10" y="94.5" width="300" height="200"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="200" id="MXo-9A-Z69"/>
@@ -1403,7 +1403,7 @@
                                                                                 <constraint firstAttribute="height" constant="21" id="Yim-Wa-YZG"/>
                                                                                 <constraint firstAttribute="width" constant="82" id="m99-I6-peu"/>
                                                                             </constraints>
-                                                                            <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="12"/>
+                                                                            <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="15"/>
                                                                             <color key="textColor" red="0.50588235290000005" green="0.52941176469999995" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
@@ -1452,7 +1452,7 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="event_ico" translatesAutoresizingMaskIntoConstraints="NO" id="fUa-2v-F3f" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
-                                                                            <rect key="frame" x="10" y="343.5" width="14" height="15"/>
+                                                                            <rect key="frame" x="10" y="346.5" width="14" height="15"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="14" id="9O8-Kl-aBz"/>
                                                                                 <constraint firstAttribute="height" constant="15" id="QhZ-K4-xsb"/>
@@ -1463,10 +1463,10 @@
                                                                                 </userDefinedRuntimeAttribute>
                                                                             </userDefinedRuntimeAttributes>
                                                                         </imageView>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BarBados food and rum festival" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ztf-kS-XSy">
-                                                                            <rect key="frame" x="32" y="342.5" width="263" height="18"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BarBados food and rum festival djshdjh djshdjh djshd " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ztf-kS-XSy">
+                                                                            <rect key="frame" x="32" y="342.5" width="263" height="40"/>
                                                                             <constraints>
-                                                                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="40" id="c9r-cB-Lys"/>
+                                                                                <constraint firstAttribute="height" constant="40" id="c9r-cB-Lys"/>
                                                                                 <constraint firstAttribute="width" constant="263" id="uvP-Ej-gbd"/>
                                                                             </constraints>
                                                                             <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="13"/>
@@ -1474,7 +1474,7 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wbp-7J-zw5">
-                                                                            <rect key="frame" x="10" y="374.5" width="300" height="1"/>
+                                                                            <rect key="frame" x="10" y="396.5" width="300" height="1"/>
                                                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="1" id="6zT-5j-HZK"/>
@@ -1536,7 +1536,7 @@
                                                                         <constraint firstItem="Kpd-X5-3zI" firstAttribute="top" secondItem="KKU-bT-JS7" secondAttribute="bottom" constant="3" id="KST-aO-31p"/>
                                                                         <constraint firstAttribute="trailing" secondItem="KKU-bT-JS7" secondAttribute="trailing" constant="10" id="Kjg-lf-m2x"/>
                                                                         <constraint firstItem="ztf-kS-XSy" firstAttribute="leading" secondItem="fUa-2v-F3f" secondAttribute="trailing" constant="8" id="NkW-9Q-LoH"/>
-                                                                        <constraint firstItem="fUa-2v-F3f" firstAttribute="top" secondItem="ztf-kS-XSy" secondAttribute="top" constant="1" id="NrM-Wf-SAS"/>
+                                                                        <constraint firstItem="fUa-2v-F3f" firstAttribute="top" secondItem="ztf-kS-XSy" secondAttribute="top" constant="4" id="NrM-Wf-SAS"/>
                                                                         <constraint firstItem="bjC-BU-wyc" firstAttribute="leading" secondItem="RWR-JS-bro" secondAttribute="leading" constant="10" id="REy-zU-vxi"/>
                                                                         <constraint firstItem="Mod-Ns-rCQ" firstAttribute="leading" secondItem="73t-1a-QcC" secondAttribute="trailing" constant="8" id="Wcb-Wf-4LJ"/>
                                                                         <constraint firstItem="Dy9-pT-3ig" firstAttribute="top" secondItem="2Ed-sH-DzQ" secondAttribute="top" constant="4" id="a3v-qt-oQP"/>
@@ -3869,6 +3869,7 @@ F+cX9Bf3GAQYCRgRGBQYGRghGCQYNhg5GD4AAAAAAAACAQAAAAAAAABZAAAAAAAAAAAAAAAAAAAYQA
         <image name="editPic" width="25" height="25"/>
         <image name="eventDots" width="24" height="24"/>
         <image name="event_ico" width="25" height="27"/>
+        <image name="foodie" width="640" height="480"/>
         <image name="homeunselect" width="24" height="23"/>
         <image name="ic_arrow_drop_down" width="36" height="36"/>
         <image name="ic_more_horiz" width="16" height="4"/>
