@@ -586,7 +586,7 @@ extension ProfileLinkController {
     }
     func getDetails(response:BusinessDetailModel) {
         
-        if let name = response.username {
+        if let name = response.name {
             userNamelabel.text = name
             navigationItemList.title = "@\(name)"
         } else {
