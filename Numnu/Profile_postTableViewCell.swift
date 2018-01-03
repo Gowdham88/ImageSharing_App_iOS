@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import Nuke
 
 protocol  Profile_postTableViewCellDelegate {
     
-    func popup()
+    func bookmarkPost(tag : Int)
     
 }
 
@@ -45,10 +46,7 @@ class Profile_postTableViewCell: UITableViewCell {
 //        postUserImage.addGestureRecognizer(posteventlabeltap)
 //        postUserImage.isUserInteractionEnabled = true
     }
-    func CenterImageTapped(){
-       
-       
-    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
@@ -89,15 +87,127 @@ class Profile_postTableViewCell: UITableViewCell {
             
         }
         if postEventDishLabel.numberOfVisibleLines > 1 {
-            ProfileEventveticalConstaint.constant = 52
+            ProfileEventveticalConstaint.constant = 50
         }
         if postEventPlace.numberOfVisibleLines > 1 {
-            ProfileEventveticalConstaint.constant = 52
+            ProfileEventveticalConstaint.constant = 50
 
         }
     }
     @IBAction func ButtonBookmark(_ sender: UIButton) {
         
-        delegate?.popup()
+        delegate?.bookmarkPost(tag: sender.tag)
+    }
+    
+    var item : PostListDataItems! {
+        didSet {
+            if let startsat = item.createdat {
+                if item.createdat != nil {
+                    print("startat time:::",startsat)
+                    let formatter = DateFormatter()
+                    formatter.locale = Locale(identifier: "en_US_POSIX")
+                    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                    let date = formatter.date(from: startsat)
+                    
+                    print("date: \(String(describing: date))")
+                    
+                    formatter.dateFormat = "h "
+                    let dateString = formatter.string(from: date!)
+                    postUserTime.text =  dateString + "hrs"
+                }
+            }
+            
+            if let posttag = item.postcreator{
+                if let postuser = posttag.name {
+                    postUsernameLabel.text = postuser
+                    
+                }
+                if let postusername = posttag.username {
+                    postUserplaceLabbel.text = "@\(postusername)"
+                    
+                }
+                if let userimageList = posttag.userimages {
+                    
+                    if userimageList.count > 0 {
+                        
+                        let apiclient = ApiClient()
+                        apiclient.getFireBaseImageUrl(imagepath: userimageList[userimageList.count-1].imageurl_str!, completion: { url in
+                            
+                            self.postUserImage.image = nil
+                            Manager.shared.loadImage(with: URL(string : url)!, into: self.postUserImage)
+                            
+                        })
+                        
+                    }
+                    
+                }
+                
+            }
+            //            if let location = item.location{
+            //                if let locationame = location.name_str {
+            //                    postDtUserplaceLabbel.text = locationame
+            //
+            //                }
+            //            }
+            
+            
+            if let postimagelist = item.postimages {
+                
+                if postimagelist.count > 0 {
+                    
+                    let apiclient = ApiClient()
+                    apiclient.getFireBaseImageUrl(imagepath: postimagelist[postimagelist.count-1].imageurl_str!, completion: { url in
+                        
+                        self.postEventImage.image = nil
+                        Manager.shared.loadImage(with: URL(string : url)!, into: self.postEventImage)
+                        
+                    })
+                    
+                }
+                
+            }
+            
+            if let rating = item.rating {
+                if rating == 1 {
+                    postLikeImage.image = UIImage(named:"rating1")
+                    
+                }else if rating == 2 {
+                    postLikeImage.image = UIImage(named:"rating2")
+                }else if rating == 3 {
+                    postLikeImage.image = UIImage(named:"rating3")
+                    
+                }else{
+                    
+                }
+                
+            }
+            
+            if let event = item.event{
+                if let eventname = event.name {
+                    postEventName.text = eventname
+                    
+                }
+            }
+            
+            if let business = item.business{
+                if let businessname = business.businessname {
+                    postEventDishLabel.text = businessname
+                    
+                }
+            }
+            
+            if let taggeditem = item.taggedItemName{
+                
+                postEventPlace.text = taggeditem
+                
+                
+            }
+            
+            if let commentname = item.comment {
+                postCommentLabel.text = commentname
+                
+            }
+            
+        }
     }
 }
