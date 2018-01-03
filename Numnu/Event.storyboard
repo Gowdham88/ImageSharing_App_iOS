@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -271,6 +271,7 @@
                                             <constraint firstItem="gAt-qt-Cww" firstAttribute="leading" secondItem="g0V-rF-TMW" secondAttribute="leading" constant="20" id="SvE-Hv-bRj"/>
                                             <constraint firstItem="wz1-XR-z7e" firstAttribute="top" secondItem="sJV-kG-cov" secondAttribute="bottom" constant="12" id="T2X-sx-bJH"/>
                                             <constraint firstItem="xcz-an-LvS" firstAttribute="leading" secondItem="g0V-rF-TMW" secondAttribute="leading" constant="12" id="Tx3-CH-2Lo"/>
+                                            <constraint firstItem="4rU-V5-StF" firstAttribute="top" secondItem="A5m-9M-c9p" secondAttribute="bottom" constant="70" id="Ur2-qp-ffy"/>
                                             <constraint firstItem="sJV-kG-cov" firstAttribute="leading" secondItem="g0V-rF-TMW" secondAttribute="leading" constant="10" id="W09-t0-cJc"/>
                                             <constraint firstItem="3NW-yD-oxA" firstAttribute="top" secondItem="RPa-ch-qag" secondAttribute="bottom" constant="8" id="WJr-1Q-w5D"/>
                                             <constraint firstItem="A5m-9M-c9p" firstAttribute="top" secondItem="5iE-8T-Lm3" secondAttribute="bottom" constant="5" id="Xvm-ue-Jnu"/>
@@ -403,6 +404,7 @@
                         <outlet property="dateIconTopToEventname" destination="Iqw-Mz-Fe8" id="CQc-Tc-qPv"/>
                         <outlet property="dateTopToEventname" destination="Frr-a5-alf" id="kuJ-8q-vvc"/>
                         <outlet property="descriptionTopConstraint" destination="FBd-Pd-NCZ" id="quL-QR-aL4"/>
+                        <outlet property="descriptionTopToLocation" destination="Ur2-qp-ffy" id="8Hn-sB-RN1"/>
                         <outlet property="descriptionTopcostraintToWeblink2" destination="and-aL-bf8" id="mpk-PS-lLe"/>
                         <outlet property="eventDateLabel" destination="5iE-8T-Lm3" id="cOM-pG-vA9"/>
                         <outlet property="eventDescriptionHeight" destination="Pbs-jB-hTE" id="XHs-gm-EiQ"/>

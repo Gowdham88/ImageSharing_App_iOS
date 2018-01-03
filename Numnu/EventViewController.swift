@@ -32,6 +32,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     var description_txt : String = ""
     var eventprimaryid  : Int    = 34
 
+    @IBOutlet weak var descriptionTopToLocation: NSLayoutConstraint!
     @IBOutlet weak var dateIconTopToEventname: NSLayoutConstraint!
     @IBOutlet weak var dateTopToEventname: NSLayoutConstraint!
     @IBOutlet weak var scrollViewTopConstraint: NSLayoutConstraint!
@@ -594,6 +595,7 @@ extension EventViewController {
                     
                 }
             }else {
+                descriptionTopToLocation.constant = 0
             }
             
             if eventLinkList.count > 2 {
