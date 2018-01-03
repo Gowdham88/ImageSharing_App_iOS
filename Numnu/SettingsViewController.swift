@@ -110,7 +110,7 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 1 {
-            return "          Bookmarks"
+            return "Bookmarks"
         }else if section == 2 {
             return ""
         }
@@ -128,7 +128,16 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         let selectedCell:UITableViewCell = tableView.cellForRow(at: indexPath)!
         selectedCell.contentView.backgroundColor = UIColor.clear
         
-        
+        if indexPath.section == 0 {
+            if indexPath.row == 2 {
+            openWebBoard(url: "http://www.numnu.com/terms/")
+            }
+            if indexPath.row == 3 {
+                openWebBoard(url: "http://numnu.com/privacy-policy/")
+            }
+            
+        }
+       
         if indexPath.section == 1  {
             if indexPath.row == 0 {
                 type = "Event"
@@ -245,8 +254,16 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         })
         
     }
+    func openWebBoard (url: String) {
+        
+        let storyboard      = UIStoryboard(name: Constants.Event, bundle: nil)
+        let vc              = storyboard.instantiateViewController(withIdentifier: Constants.WebViewStoryId) as! WebViewController
+        vc.url_str          = url
+        self.navigationController!.pushViewController(vc, animated: true)
+        
+    }
     
     
     
   
-}
+}//class
