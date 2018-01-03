@@ -35,7 +35,7 @@ class ReviewEventViewController: UIViewController,IndicatorInfoProvider {
     
    /*********************Event context*******************************/
     
-    var eventId         : Int = 34
+    var eventId  : Int = 34
     
     @IBOutlet weak var businesslabelwidth: NSLayoutConstraint!
     override func viewDidLoad() {
@@ -240,14 +240,17 @@ extension ReviewEventViewController : UITableViewDelegate,UITableViewDataSource 
         
         let profiletap = UITapGestureRecognizer(target: self, action:#selector(postDtUserImage(sender:)))
         cell.postDtUserImage.addGestureRecognizer(profiletap)
+        cell.postDtUserImage.tag = indexPath.row
         cell.postDtUserImage.isUserInteractionEnabled = true
         
         let profileusernametap = UITapGestureRecognizer(target: self, action:#selector(postDtUserImage(sender:)))
         cell.postDtUsernameLabel.addGestureRecognizer(profileusernametap)
+        cell.postDtUsernameLabel.tag = indexPath.row
         cell.postDtUsernameLabel.isUserInteractionEnabled = true
         
         let profileusernametagtap = UITapGestureRecognizer(target: self, action:#selector(postDtUserImage(sender:)))
         cell.postDtUserplaceLabbel.addGestureRecognizer(profileusernametagtap)
+        cell.postDtUserplaceLabbel.tag = indexPath.row
         cell.postDtUserplaceLabbel.isUserInteractionEnabled = true
         
         return cell
