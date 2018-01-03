@@ -8,6 +8,7 @@
 
 import UIKit
 import Nuke
+import Alamofire
 
 protocol Profile_PostViewControllerDelegae {
     
@@ -18,7 +19,7 @@ protocol Profile_PostViewControllerDelegae {
 
 
 
-class Profile_PostViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout  {
+class Profile_PostViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout  {
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var navigationItemList: UINavigationItem!
@@ -42,6 +43,15 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
     @IBOutlet weak var collectionTagHeight: NSLayoutConstraint!
     @IBOutlet weak var addresslabelTop: NSLayoutConstraint!
     
+    var primaryid       : Int = 51
+    var pageno          : Int = 1
+    var limitno         : Int = 25
+    var viewState       : Bool = false
+    var apiClient       : ApiClient!
+    
+    var postList = [PostListDataItems]()
+    var postModel  : PostListByEventId?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -57,8 +67,10 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         userImage.clipsToBounds = true
         alertTapRegister()
         
+        apiClient = ApiClient()
         /***********************Setuserdetails****************************/
         setUserDetails()
+        methodToCallApi(pageno: pageno, limit: limitno)
        
     
     }
@@ -139,62 +151,7 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         self.navigationController!.pushViewController(vc, animated: true)
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! Profile_postTableViewCell
-        
-        cell.delegate = self
-        cell.postEventBookMark.tag = indexPath.row
-        
-        let posteventlabeltap = UITapGestureRecognizer(target: self, action: #selector(Profile_postTableViewCell.CenterImageTapped))
-        cell.postUserImage.addGestureRecognizer(posteventlabeltap)
-        cell.postUserImage.isUserInteractionEnabled = true
-        
-        let posteventplacetap = UITapGestureRecognizer(target: self, action:#selector(getter: Profile_postTableViewCell.postEventPlace))
-        cell.postEventPlace.addGestureRecognizer(posteventplacetap)
-        cell.postEventPlace.isUserInteractionEnabled = true
-        
-        //Item page Icon Tapping
-        let posteventplaceIcontap = UITapGestureRecognizer(target: self, action:#selector(getter: Profile_postTableViewCell.postEventPlaceIcon))
-        cell.postEventPlaceIcon.addGestureRecognizer(posteventplaceIcontap)
-        cell.postEventPlaceIcon.isUserInteractionEnabled = true
-        
-        let posteventdishtap = UITapGestureRecognizer(target: self, action:#selector(getter: Profile_postTableViewCell.postEventDishLabel))
-        cell.postEventDishLabel.addGestureRecognizer(posteventdishtap)
-        cell.postEventDishLabel.isUserInteractionEnabled = true
-        
-        //Icon dish page
-        let postEventDishIcontap = UITapGestureRecognizer(target: self, action:#selector(getter: Profile_postTableViewCell.postEventDishIcon))
-        cell.postEventDishIcon.addGestureRecognizer(postEventDishIcontap)
-        cell.postEventDishIcon.isUserInteractionEnabled = true
-        
-        let posteventnametap = UITapGestureRecognizer(target: self, action:#selector(getter: Profile_postTableViewCell.postEventName))
-        cell.postEventName.addGestureRecognizer(posteventnametap)
-        cell.postEventName.isUserInteractionEnabled = true
-        
-        let postEventNameIcontap = UITapGestureRecognizer(target: self, action:#selector(getter: Profile_postTableViewCell.postEventNameIcon))
-        cell.postEventNameIcon.addGestureRecognizer(postEventNameIcontap)
-        cell.postEventNameIcon.isUserInteractionEnabled = true
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
-//        let storyboard = UIStoryboard(name: Constants.PostDetail, bundle: nil)
-//        let vc         = storyboard.instantiateViewController(withIdentifier: "postdetailid")
-//        self.navigationController!.pushViewController(vc, animated: true)
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
-        let lastRowIndex = tableView.numberOfRows(inSection: 0)
-        if indexPath.row == lastRowIndex - 1 {
-           menuTableHeight(height: self.tableView.contentSize.height)
-        }
-    }
+   
     
 //    override func viewDidLayoutSubviews() {
 //        super.viewDidLayoutSubviews()
@@ -205,48 +162,7 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    func CenterImageTapped(){
-        let storyboard = UIStoryboard(name: Constants.PostDetail, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: "postdetailid")
-        self.navigationController!.pushViewController(vc, animated: true)
-        
-    }
-    func postEventPlace(){
-        let storyboard = UIStoryboard(name: Constants.ItemDetail, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId)
-        self.navigationController!.pushViewController(vc, animated: true)
-    }
-        
-    func postEventPlaceIcon(){
-            let storyboard = UIStoryboard(name: Constants.ItemDetail, bundle: nil)
-            let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId)
-            self.navigationController!.pushViewController(vc, animated: true)
-        
-    }
-    func postEventDishLabel(){
-        let storyboard = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId)
-        self.navigationController!.pushViewController(vc, animated: true)
-        
-    }
     
-    func postEventDishIcon(){
-        let storyboard = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId)
-        self.navigationController!.pushViewController(vc, animated: true)
-    }
-    func postEventName(){
-        
-        let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)
-        self.navigationController!.pushViewController(vc, animated: true)
-    }
-    func postEventNameIcon(){
-        
-        let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)
-        self.navigationController!.pushViewController(vc, animated: true)
-    }
 // collectionview cell //
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -323,11 +239,12 @@ class Profile_PostViewController: UIViewController,UITableViewDataSource,UITable
 
 extension Profile_PostViewController : Profile_postTableViewCellDelegate {
     
-    func popup() {
-       
-        openPopup()
+    func bookmarkPost(tag: Int) {
         
+        openPopup()
+     
     }
+    
     
     func alertTapRegister() {
         
@@ -387,11 +304,7 @@ extension Profile_PostViewController : Profile_postTableViewCellDelegate {
 //
 //    }
     
-    func menuTableHeight(height: CGFloat) {
-        
-        mainViewConstraint.constant = 186 + height
-        mainViewBottom.constant = 0
-    }
+    
 }
 
 extension Profile_PostViewController :SettingsViewControllerDelegate {
@@ -436,4 +349,214 @@ extension Profile_PostViewController :SettingsViewControllerDelegate {
         }
         
     }
+}
+
+extension Profile_PostViewController : UITableViewDelegate,UITableViewDataSource {
+    
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return postList.count
+        
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! Profile_postTableViewCell
+        
+        guard postList.count > 0 else {
+            
+            return cell
+        }
+        
+        cell.item = postList[indexPath.row]
+        cell.delegate = self
+        cell.postEventBookMark.tag = indexPath.row
+        cell.setHeight(heightview : Float(UIScreen.main.bounds.size.height))
+        
+        let posteventlabeltap = UITapGestureRecognizer(target: self, action: #selector(self.CenterImageTapped(sender:)))
+        cell.postEventImage.tag = indexPath.row
+        cell.postEventImage.addGestureRecognizer(posteventlabeltap)
+        cell.postEventImage.isUserInteractionEnabled = true
+        
+        let posteventplacetap = UITapGestureRecognizer(target: self, action:#selector(getter: Profile_postTableViewCell.postEventPlace))
+        cell.postEventPlace.addGestureRecognizer(posteventplacetap)
+        cell.postEventPlace.isUserInteractionEnabled = true
+        
+        //Item page Icon Tapping
+        let posteventplaceIcontap = UITapGestureRecognizer(target: self, action:#selector(getter: Profile_postTableViewCell.postEventPlaceIcon))
+        cell.postEventPlaceIcon.addGestureRecognizer(posteventplaceIcontap)
+        cell.postEventPlaceIcon.isUserInteractionEnabled = true
+        
+        let posteventdishtap = UITapGestureRecognizer(target: self, action:#selector(getter: Profile_postTableViewCell.postEventDishLabel))
+        cell.postEventDishLabel.addGestureRecognizer(posteventdishtap)
+        cell.postEventDishLabel.isUserInteractionEnabled = true
+        
+        //Icon dish page
+        let postEventDishIcontap = UITapGestureRecognizer(target: self, action:#selector(getter: Profile_postTableViewCell.postEventDishIcon))
+        cell.postEventDishIcon.addGestureRecognizer(postEventDishIcontap)
+        cell.postEventDishIcon.isUserInteractionEnabled = true
+        
+        let posteventnametap = UITapGestureRecognizer(target: self, action:#selector(getter: Profile_postTableViewCell.postEventName))
+        cell.postEventName.addGestureRecognizer(posteventnametap)
+        cell.postEventName.isUserInteractionEnabled = true
+        
+        let postEventNameIcontap = UITapGestureRecognizer(target: self, action:#selector(getter: Profile_postTableViewCell.postEventNameIcon))
+        cell.postEventNameIcon.addGestureRecognizer(postEventNameIcontap)
+        cell.postEventNameIcon.isUserInteractionEnabled = true
+        return cell
+    }
+    
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if let item = postList[indexPath.row].comment {
+            
+            if TextSize.sharedinstance.getNumberoflines(text: item, width: tableView.frame.width, font: UIFont(name: "Avenir-Book", size: 16)!) > 1 {
+                
+                return 428
+                
+            } else {
+                
+                return 392
+            }
+            
+        } else {
+            
+            return 392
+            
+        }
+        
+    }
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        if indexPath.row == postList.count - 1 && viewState {
+            
+            if let pageItem = postModel {
+                
+                if postList.count  < pageItem.totalRows ?? 0 {
+                    pageno += 1
+                    limitno = 25 * pageno
+                    methodToCallApi(pageno: pageno, limit: limitno)
+                }
+                
+            }
+            
+        }
+    }
+    
+    
+    func CenterImageTapped(sender : UITapGestureRecognizer){
+        let storyboard = UIStoryboard(name: Constants.PostDetail, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: "postdetailid") as! PostDetailViewController
+        vc.item        = postList[sender.view!.tag]
+        self.navigationController!.pushViewController(vc, animated: true)
+        
+    }
+    func postEventPlace(){
+        let storyboard = UIStoryboard(name: Constants.ItemDetail, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId)
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
+    
+    func postEventPlaceIcon(){
+        let storyboard = UIStoryboard(name: Constants.ItemDetail, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId)
+        self.navigationController!.pushViewController(vc, animated: true)
+        
+    }
+    func postEventDishLabel(){
+        let storyboard = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId)
+        self.navigationController!.pushViewController(vc, animated: true)
+        
+    }
+    
+    func postEventDishIcon(){
+        let storyboard = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId)
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
+    func postEventName(){
+        
+        let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
+    func postEventNameIcon(){
+        
+        let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
+    
+}
+
+extension Profile_PostViewController {
+    
+    func methodToCallApi(pageno:Int,limit:Int) {
+        
+        LoadingHepler.instance.show()
+        apiClient.getFireBaseToken(completion: { token in
+            
+            let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
+            let param  : String      = "page=\(pageno)&limit\(limit)"
+            
+            self.apiClient.getPostList(id: PrefsManager.sharedinstance.userId, page: param, type: "Users", headers: header, completion: { status,Values in
+                
+                if status == "success" {
+                    
+                    LoadingHepler.instance.hide()
+                    
+                    if let itemlist = Values {
+                        
+                        self.postModel = itemlist
+                        
+                        if let list = itemlist.data {
+                            
+                            self.postList += list
+                        }
+                        
+                    }
+                    
+                    DispatchQueue.main.async {
+                        
+                        self.tableView.reloadData()
+                        print("APi\(self.postList.count)")
+                    }
+                    
+                    self.reloadTable()
+                    
+                }else {
+                    
+                    LoadingHepler.instance.hide()
+                    self.reloadTable()
+                    
+                }
+                
+            })
+            
+        })
+        
+    }
+    
+    func reloadTable() {
+        
+        let when = DispatchTime.now() + 1
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            
+            self.mainViewConstraint.constant = 186 + self.tableView.contentSize.height
+            self.mainViewBottom.constant = 0
+            LoadingHepler.instance.hide()
+        }
+        
+    }
+    
 }

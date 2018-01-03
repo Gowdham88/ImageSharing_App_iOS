@@ -290,6 +290,9 @@ class  ApiClient {
             case "Location":
             Baseurl = Constants.LocationApiUrl
             
+            case "Users":
+            Baseurl = Constants.Bookmarkpost
+            
             default:
             Baseurl = Constants.EventApiUrl
         }

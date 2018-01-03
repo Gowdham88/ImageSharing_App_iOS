@@ -94,6 +94,7 @@ class ItemCompleteviewcontroller : UIViewController {
     @IBOutlet weak var eventImageTopConstraint    : NSLayoutConstraint!
     @IBOutlet weak var eventImageHeightConstraint : NSLayoutConstraint!
     
+    
     override func viewDidLoad() {
        super.viewDidLoad()
         
@@ -537,14 +538,20 @@ extension ItemCompleteviewcontroller : UITableViewDelegate,UITableViewDataSource
         cell.postEventNameIcon.addGestureRecognizer(posteventnameIcontap)
         cell.postEventNameIcon.isUserInteractionEnabled = true
         
-        let profiletap = UITapGestureRecognizer(target: self, action:#selector(getter: PostEventTableViewCell.postUserImage))
+        let profiletap = UITapGestureRecognizer(target: self, action:#selector(self.postDtUserImage(sender:)))
+        cell.postUserImage.tag = indexPath.row
         cell.postUserImage.addGestureRecognizer(profiletap)
         cell.postUserImage.isUserInteractionEnabled = true
         
-        let profileusernametap = UITapGestureRecognizer(target: self, action:#selector(getter: PostEventTableViewCell.postUsernameLabel))
+        let profileusernametap = UITapGestureRecognizer(target: self, action:#selector(self.postDtUserImage(sender:)))
+        cell.postUsernameLabel.tag = indexPath.row
         cell.postUsernameLabel.addGestureRecognizer(profileusernametap)
         cell.postUsernameLabel.isUserInteractionEnabled = true
         
+        let profileusernameplacetap = UITapGestureRecognizer(target: self, action:#selector(self.postDtUserImage(sender:)))
+        cell.postUserplaceLabbel.tag = indexPath.row
+        cell.postUserplaceLabbel.addGestureRecognizer(profileusernameplacetap)
+        cell.postUserplaceLabbel.isUserInteractionEnabled = true
         
         return cell
         
@@ -557,13 +564,21 @@ extension ItemCompleteviewcontroller : UITableViewDelegate,UITableViewDataSource
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if TextSize.sharedinstance.getNumberoflines(text: Constants.dummy, width: tableView.frame.width, font: UIFont(name: "Avenir-Book", size: 16)!) > 1 {
+        if let item = postList[indexPath.row].comment {
             
-            return 428
+            if TextSize.sharedinstance.getNumberoflines(text: item, width: tableView.frame.width, font: UIFont(name: "Avenir-Book", size: 16)!) > 1 {
+                
+                return 428
+                
+            } else {
+                
+                return 392
+            }
             
         } else {
             
-            return 402
+            return 392
+            
         }
         
     }
@@ -625,11 +640,13 @@ extension ItemCompleteviewcontroller : UITableViewDelegate,UITableViewDataSource
         let vc         = storyboard.instantiateViewController(withIdentifier: Constants.EventStoryId)
         self.navigationController!.pushViewController(vc, animated: true)
     }
-    func postUserImage(){
-        let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: "Profile_PostViewController") as! Profile_PostViewController
-        vc.boolForBack = false
+    func postDtUserImage(sender: UITapGestureRecognizer){
+        let tag        = sender.view!.tag
+        let storyboard = UIStoryboard(name: Constants.PostDetail, bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.Profile_LinkViewController) as! ProfileLinkController
+        vc.postListDataItems  = postList[tag]
         self.navigationController?.pushViewController(vc, animated: true)
+        
     }
     func postUsernameLabel(){
         
