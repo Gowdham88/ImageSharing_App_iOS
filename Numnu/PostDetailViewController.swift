@@ -111,6 +111,11 @@ class PostDetailViewController : UIViewController {
         getData()
     }
     func getData() {
+        
+        if let datepost = item?.createdat {
+            
+            postDUserTime.text =  DateFormatterManager.sharedinstance.dateDiff(dateStr: datepost,Format: "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+        }
 
         if let posttag = item?.postcreator {
                 if let postuser = posttag.name {

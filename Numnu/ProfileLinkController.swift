@@ -552,7 +552,7 @@ extension ProfileLinkController {
         apiClient.getFireBaseToken(completion: { token in
        
            let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
-            self.apiClient.getBusinessById(id : self.postListDataItems?.business?.id ?? 0,headers: header, completion: { status,Values in
+            self.apiClient.getBusinessById(id : self.postListDataItems?.postcreator?.id ?? 0,headers: header, completion: { status,Values in
             
             if status == "success" {
                 if let response = Values {
@@ -586,7 +586,7 @@ extension ProfileLinkController {
     }
     func getDetails(response:BusinessDetailModel) {
         
-        if let name = response.username {
+        if let name = response.name {
             userNamelabel.text = name
             navigationItemList.title = "@\(name)"
         } else {
