@@ -149,16 +149,17 @@ extension ParentViewController : UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
        
         if textField == editsearchbyItem  {
-            setNavBar()
+            let editsearchCount = editsearchbyItem.text!
+            if editsearchCount.count > 0 {
+                setNavBar()
+            }
         }
         
         if textField == editsearchbyLocation  {
-            
-            if editsearchbyItem.text != "" {
-                
+            let editsearchCount = editsearchbyItem.text!
+            if editsearchCount.count > 0 {
                  setNavBar()
             }
-           
         }
         
         
@@ -195,8 +196,8 @@ extension ParentViewController : UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        
-        if editsearchbyItem.text != "" {
+        let editsearchTextCount = editsearchbyItem.text!
+        if editsearchTextCount.count > 0  {
             LoadingHepler.instance.show()
             let when = DispatchTime.now() + 1
             DispatchQueue.main.asyncAfter(deadline: when) {

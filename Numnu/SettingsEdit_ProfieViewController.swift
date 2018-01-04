@@ -115,6 +115,11 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        dropdownTableView.transform = CGAffineTransform(scaleX: 1, y: -1)
+        citytableview.transform = CGAffineTransform(scaleX: 1, y: -1)
+
+  
+        
         dropdownTableView.isHidden = true
         imagePicker.delegate = self
         profileImage.isUserInteractionEnabled = true
@@ -171,22 +176,23 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
 //        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
 //        self.navigationController?.navigationBar.isUserInteractionEnabled = true
         
-        citytableview.layer.shadowColor = UIColor.darkGray.cgColor
-        citytableview.backgroundColor = UIColor.clear
-        citytableview.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
-        citytableview.layer.shadowOpacity = 2.0
-        citytableview.layer.shadowRadius = 5
-        citytableview.layer.cornerRadius = 10
-        citytableview.clipsToBounds = true
-        citytableview.layer.masksToBounds = false
+        citytableview.layer.shadowColor    = UIColor.darkGray.cgColor
+        citytableview.backgroundColor      = UIColor.clear
+        citytableview.layer.shadowOffset   = CGSize(width: 0.0, height: 0.0)
+        citytableview.layer.shadowOpacity  = 2.0
+        citytableview.layer.shadowRadius   = 5
+        citytableview.layer.cornerRadius   = 10
+        citytableview.clipsToBounds        = true
+        citytableview.layer.masksToBounds  = false
+        citytableview.isScrollEnabled      = false
         
-        dropdownTableView.layer.shadowColor = UIColor.darkGray.cgColor
-        dropdownTableView.backgroundColor = UIColor.clear
-        dropdownTableView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+        dropdownTableView.layer.shadowColor   = UIColor.darkGray.cgColor
+        dropdownTableView.backgroundColor     = UIColor.clear
+        dropdownTableView.layer.shadowOffset  = CGSize(width: 0.0, height: 0.0)
         dropdownTableView.layer.shadowOpacity = 2.0
-        dropdownTableView.layer.shadowRadius = 5
-        dropdownTableView.layer.cornerRadius = 10
-        dropdownTableView.clipsToBounds = true
+        dropdownTableView.layer.shadowRadius  = 5
+        dropdownTableView.layer.cornerRadius  = 10
+        dropdownTableView.clipsToBounds       = true
         dropdownTableView.layer.masksToBounds = false
         
         // Checking users login
@@ -225,21 +231,22 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     override func viewDidAppear(_ animated: Bool) {
         showPopup(table1: true, table2: true)
         
-        let offset = CGPoint(x: 0,y :0)
-        myscrollView.setContentOffset(offset, animated: true)
+//        let offset = CGPoint(x: 0,y :0)
+//        myscrollView.setContentOffset(offset, animated: true)
     }
     func datecancelClicked () {
         datePicker.isHidden       = true
         doneView.isHidden         = true
         cancelDatePicker.isHidden = true
         superVieww.isHidden       = true
+ 
+        getDateDetails()
+        datePicker.resignFirstResponder()
     }
     func addClicked() {
         if foodTextfield.text == "" {
-            print("could not add empty fields")
         }else{
             if tagArray.contains(foodTextfield.text!){
-                print("already added in collectionview")
             }else{
                 tagArray.append(foodTextfield.text!)
                 dropdownTableView.isHidden = true
@@ -262,7 +269,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     
     func showGenderActionsheet() {
         
-        Alert = UIAlertController(title: "Select Gender", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        Alert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
         let FemaleAction = UIAlertAction(title: "Female", style: UIAlertActionStyle.default) { _ in
             self.genderTextfield.text = "Female"
             self.genderTextfield.resignFirstResponder()
@@ -329,19 +336,36 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField == foodTextfield {
-            dropdownTableView.isHidden = false
+            let foodtext = foodTextfield.text!
+            if foodtext.count > 1 {
+                showPopup(table1: true, table2: false)
+                
+            }else{
+                showPopup(table1: true, table2: true)
+                
+            }
+//            dropdownTableView.isHidden = false
             let substring = (foodTextfield.text! as NSString).replacingCharacters(in: range, with: string )
             loadTagList(tag: substring)
         }else if textField == cityTextfield {
-            
+            if textField == cityTextfield {
+                let citytext = cityTextfield.text!
+                if citytext.count > 1 {
+                    showPopup(table1: false, table2: true)
+                    
+                }else{
+                    showPopup(table1: true, table2: true)
+                    
+                }
             if let place = textField.text {
                 
                 getPlaceApi(place_Str: "\(place)\(string)" as String)
                 
             }
+            }
             
             
-            citytableview.isHidden  = false
+//            citytableview.isHidden  = false
             
         } else {
             showPopup(table1: true, table2: true)
@@ -373,7 +397,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         
         if textField == birthTextfield {
             showDatePicker()
-            birthTextfield.resignFirstResponder()
+//            birthTextfield.resignFirstResponder()
             datePicker.isHidden = false
             superVieww.isHidden = false
             doneView.isHidden = false
@@ -399,7 +423,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         }else if textField == genderTextfield {
             showPopup(table1: true, table2: true)
             
-            genderTextfield.resignFirstResponder()
+//            genderTextfield.resignFirstResponder()
             showGenderActionsheet()
         }else if textField == foodTextfield {
             let foodtext = foodTextfield.text!
@@ -460,31 +484,35 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             superVieww.isHidden = true
             doneView.isHidden = true
             cancelDatePicker.isHidden = true
-
+        birthTextfield.resignFirstResponder()
         }
         if textField == genderTextfield {
             genderTextfield.tintColor = .clear
+            genderTextfield.resignFirstResponder()
         }
         if textField == foodTextfield {
             
             foodTextfield.text = ""
+            foodTextfield.resignFirstResponder()
             
         }
         if textField == cityTextfield {
             
         citytableview.isHidden = true
             
+            cityTextfield.resignFirstResponder()
+            
         }
     }
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        self.view.endEditing(true)
-    }
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        self.view.endEditing(true)
-        
-    }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        
+//        self.view.endEditing(true)
+//    }
+//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        
+//        self.view.endEditing(true)
+//        
+//    }
     func animateViewMoving (up:Bool, moveValue :CGFloat){
         let movementDuration:TimeInterval = 0.3
         let movement:CGFloat = ( up ? -moveValue : moveValue)
@@ -502,12 +530,12 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         doneView.isHidden = false
         cancelDatePicker.isHidden = false
 
-        // Creates the toolbar
-        let toolBar = UIToolbar()
-        toolBar.barStyle = .default
-        toolBar.isTranslucent = true
-        toolBar.tintColor = UIColor.blue
-        toolBar.sizeToFit()
+//        // Creates the toolbar
+//        let toolBar = UIToolbar()
+//        toolBar.barStyle = .default
+//        toolBar.isTranslucent = true
+//        toolBar.tintColor = UIColor.blue
+//        toolBar.sizeToFit()
         datePicker.addTarget(self, action: #selector(SettingsEdit_ProfieViewController.datePickerValueChanged), for: UIControlEvents.valueChanged)
     }
     func doneClick() {
@@ -566,7 +594,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     // Image Picker //
     @IBAction func editPicture(_ sender: Any) {
         imagePicker.allowsEditing = false
-        let Alert = UIAlertController(title: "Select Source Type", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        let Alert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
         let CameraAction = UIAlertAction(title: "Camera", style: UIAlertActionStyle.default) { ACTION in
             self.showCamera()
             }
@@ -748,8 +776,9 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             }
             cell?.textLabel?.text = tagnamearray[indexPath.row]
             cell?.textLabel?.font = UIFont(name: "Avenir-Medium", size: 14)
-            dropdownTableView.transform = CGAffineTransform(scaleX: 1, y: -1)
             cell?.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
+//            cell?.transform = CGAffineTransformMakeScale(1, -1);
+
 //            view.transform = view.transform.rotated(by angle: CGFloat(45 * M_PI / 180))
 
             //            cell?.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1.0)
@@ -772,7 +801,6 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             }
             cell?.textLabel?.font = UIFont(name: "Avenir-Medium", size: 14)
 
-            citytableview.transform = CGAffineTransform(scaleX: 1, y: -1)
             cell?.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
             //            cell?.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1.0)
             cell?.textLabel?.text = autocompleteplaceArray[indexPath.row]
@@ -1032,25 +1060,7 @@ extension SettingsEdit_ProfieViewController {
             
         }
         
-            let date = DateFormatterManager.sharedinstance.stringtoDate(format: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", date: PrefsManager.sharedinstance.dateOfBirth)
-            
-            if let dateStr = DateFormatterManager.sharedinstance.datetoString(format: "dd", date: date) {
-                
-                dateLabel.text = dateStr
-                
-            }
-            
-            if let monthStr = DateFormatterManager.sharedinstance.datetoString(format: "MM", date: date) {
-                
-                monthLabel.text = monthStr
-                
-            }
-            
-            if let yearStr = DateFormatterManager.sharedinstance.datetoString(format: "yyyy", date: date) {
-                
-                yearLabel.text = yearStr
-                
-            }
+        getDateDetails()
         
             let apiclient : ApiClient = ApiClient()
             apiclient.getFireBaseImageUrl(imagepath: PrefsManager.sharedinstance.imageURL, completion: { url in
@@ -1085,7 +1095,27 @@ extension SettingsEdit_ProfieViewController {
         /**********/
         
      }
-    
+    func getDateDetails(){
+        let date = DateFormatterManager.sharedinstance.stringtoDate(format: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", date: PrefsManager.sharedinstance.dateOfBirth)
+        
+        if let dateStr = DateFormatterManager.sharedinstance.datetoString(format: "dd", date: date) {
+            
+            dateLabel.text = dateStr
+            
+        }
+        
+        if let monthStr = DateFormatterManager.sharedinstance.datetoString(format: "MM", date: date) {
+            
+            monthLabel.text = monthStr
+            
+        }
+        
+        if let yearStr = DateFormatterManager.sharedinstance.datetoString(format: "yyyy", date: date) {
+            
+            yearLabel.text = yearStr
+            
+        }
+    }
     func uploadImage(image: UIImage,id : Int, completion:@escaping (String?) -> Void) {
         
         guard let data = UIImageJPEGRepresentation(image, 0.9) else {
