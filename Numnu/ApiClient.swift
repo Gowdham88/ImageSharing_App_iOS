@@ -57,6 +57,7 @@ class  ApiClient {
                         if let message = UserList(json: json) {
                             
                             completion("400",message)
+                            return
                         }
                         
                     }
@@ -895,6 +896,7 @@ class  ApiClient {
                         let json = JSON(value)
                         print(json)
                        completion("422",nil)
+                        return
                     }
                     
                 }
@@ -1088,18 +1090,24 @@ class  ApiClient {
         
         Alamofire.request(Constants.PlaceDetailApi, parameters: parameters).validate().responseJSON { response in
             
+            print(response.request as Any)
+            
             switch response.result {
             case .success:
                 if let value = response.result.value {
                     let json = JSON(value)
                     let resultjson = json["result"]["geometry"]["location"]
                     
-                    if let lat = resultjson["lat"].double,let lng = resultjson["lng"].double{
+                    if let lat = resultjson["lat"].double,let lng = resultjson["lng"].double {
                         
                         completion(lat,lng)
+                    } else {
+                        
+                         completion(0,0)
+                        
                     }
                     
-                     completion(0,0)
+                    
                 }
                 
             case .failure(let error) :

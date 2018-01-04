@@ -26,8 +26,6 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     var userprofileimage : String = ""
     var ViewMoved = true
 
-    @IBOutlet weak var termsPolictTextView: UITextView!
-//    @IBOutlet weak var TermsPrivacyLabel: UILabel!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var passwordReveal: UIButton!
     @IBOutlet weak var emailtitleLAbel: UILabel!
@@ -63,32 +61,15 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
             emailTextfield.textContentType = UITextContentType.emailAddress
             passwordTextfield.textContentType = UITextContentType("")
         }
-//        let url = NSURL (string : "http://www.numnu.com/terms/")
-//        openWebBoard(url: url)
-         let attributedString = NSMutableAttributedString(string: "By signing up, you agree to our Terms of Service & Privacy Policy")
-         attributedString.addAttribute(NSLinkAttributeName, value:  "http://www.numnu.com/terms/", range: NSRange(location: 32, length: 16))
-        
-         attributedString.addAttribute(NSLinkAttributeName, value:  "http://numnu.com/privacy-policy/", range: NSRange(location: 51, length: 14))
-        
-        termsPolictTextView.attributedText = attributedString
-        
+       
 
-        termsPolictTextView.textColor = UIColor(red : 153/255.0 , green : 153/255.0 , blue : 153/255.0 , alpha : 1.0)
-      
+
 
        
 //        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
 //        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
 
 
-    }
-    func openWebBoard (url: String) {
-        
-        let storyboard      = UIStoryboard(name: Constants.Event, bundle: nil)
-        let vc              = storyboard.instantiateViewController(withIdentifier: Constants.WebViewStoryId) as! WebViewController
-        vc.url_str          = url
-        self.navigationController?.pushViewController(vc, animated: true)
-        
     }
 //    func animateViewMoving(up:Bool, moveValue :CGFloat) {
 //
@@ -228,8 +209,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
             Auth.auth().createUser(withEmail: email, password: pwd) { (user: User?, error) in
                 
                 if user == nil {
-  
-                    self.authenticationError(error: "Oops! Invalid login.")
+           
 
                     LoadingHepler.instance.hide()
                     
@@ -237,10 +217,37 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                         print("signup error:::::::",errorcontent.localizedDescription)
                         
                         if  errorcontent.localizedDescription == "The email address is already in use by another account."  {
-                            AlertProvider.Instance.showAlert(title: "Oops!", subtitle: errorcontent.localizedDescription, vc: self)
+                            
+                             LoadingHepler.instance.show()
+                            
+                            Auth.auth().signIn(withEmail: email, password: pwd) { (loginuser, loginerror) in
+                                
+                                 LoadingHepler.instance.hide()
+                               
+                                if let login_user = loginuser {
+                                    
+                                    self.emailTextfield.text = ""
+                                    self.passwordTextfield.text = ""
+                                    self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId,firebaseid: (login_user.uid))
+                                    
+                                } else {
+                                    
+                                    self.authenticationError(error: "Oops! Invalid login.")
+                                    
+                                }
+                                
+                                
+                            }
+                            
+                            return
                         }
  
+                    } else {
+                        
+                        self.authenticationError(error: "Oops! Invalid login.")
+                        
                     }
+
                     return
                     
                 }
