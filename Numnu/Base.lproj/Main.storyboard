@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -3107,7 +3107,7 @@
         <!--Settings Edit Profie View Controller-->
         <scene sceneID="5FW-yK-3yG">
             <objects>
-                <viewController storyboardIdentifier="SettingsEdit_ProfieViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZOM-Ry-7bs" customClass="SettingsEdit_ProfieViewController" customModule="Numnu" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SettingsEdit_ProfieViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZOM-Ry-7bs" customClass="SettingsEdit_ProfieViewController" customModule="Numnu" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hZk-gN-YEv"/>
                         <viewControllerLayoutGuide type="bottom" id="wIq-Ad-uqQ"/>
@@ -3203,7 +3203,7 @@
                                     </button>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" separatorInsetReference="fromAutomaticInsets" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="J1a-RL-wY5">
                                         <rect key="frame" x="35" y="290" width="250" height="160"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="160" id="15S-qm-fcL"/>
                                         </constraints>
@@ -3713,6 +3713,7 @@
                         <outlet property="doneButotn" destination="3mf-Jb-2Bf" id="D3k-b9-7v1"/>
                         <outlet property="doneView" destination="c9J-0g-2KE" id="Hp5-2e-ZO7"/>
                         <outlet property="dropdownTableView" destination="J1a-RL-wY5" id="GZD-FO-3uJ"/>
+                        <outlet property="dropdowntableheight" destination="15S-qm-fcL" id="siK-IY-yRS"/>
                         <outlet property="editButton" destination="aWA-bG-N6h" id="n7p-xD-f2S"/>
                         <outlet property="emailaddress" destination="f2L-LI-f99" id="o0v-xt-741"/>
                         <outlet property="emailaddresslabel" destination="FCO-fU-c5d" id="6Tc-i0-XqZ"/>

@@ -86,6 +86,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     var autocompleteplaceArray = [String]()
     /***************Tags array*****************/
     
+    @IBOutlet weak var dropdowntableheight: NSLayoutConstraint!
     var tagidArray   = [Int]()
     var tagnamearray = [String]()
     var token_str    : String = "empty"
@@ -117,7 +118,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         
         dropdownTableView.transform = CGAffineTransform(scaleX: 1, y: -1)
         citytableview.transform = CGAffineTransform(scaleX: 1, y: -1)
-
+       
   
         
         dropdownTableView.isHidden = true
@@ -176,24 +177,24 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
 //        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
 //        self.navigationController?.navigationBar.isUserInteractionEnabled = true
         
-        citytableview.layer.shadowColor    = UIColor.darkGray.cgColor
-        citytableview.backgroundColor      = UIColor.clear
-        citytableview.layer.shadowOffset   = CGSize(width: 0.0, height: 0.0)
-        citytableview.layer.shadowOpacity  = 2.0
-        citytableview.layer.shadowRadius   = 5
-        citytableview.layer.cornerRadius   = 10
-        citytableview.clipsToBounds        = true
-        citytableview.layer.masksToBounds  = false
-        citytableview.isScrollEnabled      = false
+//        citytableview.layer.shadowColor    = UIColor.darkGray.cgColor
+//        citytableview.backgroundColor      = UIColor.clear
+//        citytableview.layer.shadowOffset   = CGSize(width: 0.0, height: 0.0)
+//        citytableview.layer.shadowOpacity  = 2.0
+//        citytableview.layer.shadowRadius   = 5
+//        citytableview.layer.cornerRadius   = 10
+//        citytableview.clipsToBounds        = true
+//        citytableview.layer.masksToBounds  = false
+//        citytableview.isScrollEnabled      = false
         
-        dropdownTableView.layer.shadowColor   = UIColor.darkGray.cgColor
-        dropdownTableView.backgroundColor     = UIColor.clear
-        dropdownTableView.layer.shadowOffset  = CGSize(width: 0.0, height: 0.0)
-        dropdownTableView.layer.shadowOpacity = 2.0
-        dropdownTableView.layer.shadowRadius  = 5
-        dropdownTableView.layer.cornerRadius  = 10
-        dropdownTableView.clipsToBounds       = true
-        dropdownTableView.layer.masksToBounds = false
+//        dropdownTableView.layer.shadowColor   = UIColor.darkGray.cgColor
+//        dropdownTableView.backgroundColor     = UIColor.white
+//        dropdownTableView.layer.shadowOffset  = CGSize(width: 0.0, height: 0.0)
+//        dropdownTableView.layer.shadowOpacity = 2.0
+//        dropdownTableView.layer.shadowRadius  = 5
+//        dropdownTableView.layer.cornerRadius  = 10
+//        dropdownTableView.clipsToBounds       = true
+//        dropdownTableView.layer.masksToBounds = false
         
         // Checking users login
         /***********************Api login******************************/
@@ -769,11 +770,13 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             {
                 cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
             }
-            cell?.selectionStyle = .none
+            
             guard tagnamearray.count > 0 else {
                 
                 return cell!
             }
+            cell?.selectionStyle = .none
+            cell?.backgroundColor = UIColor.white
             cell?.textLabel?.text = tagnamearray[indexPath.row]
             cell?.textLabel?.font = UIFont(name: "Avenir-Medium", size: 14)
             cell?.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
@@ -794,11 +797,14 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             {
                 cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
             }
-            cell?.selectionStyle = .none
+            
             guard autocompleteplaceArray.count > 0 else {
                 
                 return cell!
             }
+            
+            cell?.selectionStyle = .none
+            cell?.backgroundColor = UIColor.white
             cell?.textLabel?.font = UIFont(name: "Avenir-Medium", size: 14)
 
             cell?.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
@@ -851,6 +857,8 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             
         }
     }
+    
+   
 }
 
 extension SettingsEdit_ProfieViewController : Profile_PostViewControllerDelegae {
