@@ -85,11 +85,11 @@ class BusinessEventViewController: UIViewController,IndicatorInfoProvider {
         return IndicatorInfo(title: Constants.EventTab1)
     }
     
-    func openStoryBoard (name : String,id : String) {
+    func openStoryBoard (name : String,id : String,businessid : Int) {
         
         let storyboard      = UIStoryboard(name: name, bundle: nil)
         let vc              = storyboard.instantiateViewController(withIdentifier: id) as! BusinessDetailViewController
-        vc.businessprimaryid = 50
+        vc.businessprimaryid = businessid
         vc.eventid           = primaryId
         self.navigationController!.pushViewController(vc, animated: true)
         
@@ -154,11 +154,11 @@ extension BusinessEventViewController : UITableViewDelegate,UITableViewDataSourc
             
             if showentity {
                 
-                openStoryBoard(name: Constants.BusinessDetail, id: Constants.BusinessDetailId)
+                openStoryBoard(name: Constants.BusinessDetail, id: Constants.BusinessDetailId,businessid: bussinessList[indexPath.row].id ?? 0)
                 
             } else {
                 
-                openStoryBoard(name: Constants.BusinessDetailTab, id: Constants.BusinessCompleteId)
+                openStoryBoard(name: Constants.BusinessDetailTab, id: Constants.BusinessCompleteId,businessid: bussinessList[indexPath.row].id ?? 0)
                 
             }
             

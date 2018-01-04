@@ -189,6 +189,21 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         dropdownTableView.layer.cornerRadius = 10
         dropdownTableView.clipsToBounds = true
         dropdownTableView.layer.masksToBounds = false
+        
+        /*************************getting location******************************/
+        locationManager = CLLocationManager()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.delegate = self
+        
+        if CLLocationManager.locationServicesEnabled()
+        {
+            locationManager.distanceFilter = 50
+            locationManager.startUpdatingLocation()
+            
+            
+        }
 
         
         // Checking users login
@@ -283,20 +298,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             } else {
                 
                 addCollectionContainer()
-                
-                /*************************getting location******************************/
-                locationManager = CLLocationManager()
-                locationManager.desiredAccuracy = kCLLocationAccuracyBest
-                locationManager.requestAlwaysAuthorization()
-                locationManager.requestWhenInUseAuthorization()
-                
-                if CLLocationManager.locationServicesEnabled()
-                {
-                    locationManager.distanceFilter = 50
-                    locationManager.startUpdatingLocation()
-                    locationManager.delegate = self
-                    
-                }
+               
                 
             }
         } else {
@@ -862,8 +864,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                             cityDictonary = ["name":cityTextfield.text!,"address":cityTextfield.text!,"isgoogleplace":false,"lattitude":latlong.coordinate.latitude,"longitude":latlong.coordinate.longitude]
                             
                         }
-                        
-                        
+                     
                     }
                     
                     completeSignupApi()
@@ -1165,7 +1166,7 @@ extension Edit_ProfileVC {
         let birthdate : String = dateFormatter.string(from: self.datePicker.date)
         
         print(tagsDictonary)
-        print(cityDictonary!)
+        print(cityDictonary ?? ["name" : "unknown"])
         print(usernameTextField.text!)
         print(nameTextfield.text!)
         print(descriptionTextfield.text!)
@@ -1226,16 +1227,22 @@ extension Edit_ProfileVC {
                         
                         if let meassage = user.errormessage {
                             
-                            AlertProvider.Instance.showAlert(title: "Oops!", subtitle: meassage, vc: self)
+                            if meassage.contains("There is already a user defined with the passed firebaseuid") {
+                                
+                                AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "The email address is already in use by another account.", vc: self)
+                                
+                            } else {
+                                
+                                AlertProvider.Instance.showAlert(title: "Oops!", subtitle: meassage, vc: self)
+                                
+                            }
+                            
                             return
                         }
                    
                     }
                     
                     AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Signup failed", vc: self)
-               
-                
-                
                 
             }
         })
@@ -1378,6 +1385,9 @@ extension Edit_ProfileVC : CLLocationManagerDelegate {
             currentLocation = location
             
         }
+        
+        locationManager.stopUpdatingLocation()
+        locationManager.delegate = nil
    
     }
     
@@ -1396,6 +1406,8 @@ extension Edit_ProfileVC : CLLocationManagerDelegate {
         case .authorizedAlways: fallthrough
         case .authorizedWhenInUse:
             print("Location status is OK.")
+            locationManager.distanceFilter = 50
+            locationManager.startUpdatingLocation()
         }
         
     }

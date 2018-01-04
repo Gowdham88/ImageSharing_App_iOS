@@ -209,8 +209,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
             Auth.auth().createUser(withEmail: email, password: pwd) { (user: User?, error) in
                 
                 if user == nil {
-  
-                    self.authenticationError(error: "Oops! Invalid login.")
+           
 
                     LoadingHepler.instance.hide()
                     
@@ -219,11 +218,36 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
                         
                         if  errorcontent.localizedDescription == "The email address is already in use by another account."  {
                             
-                            AlertProvider.Instance.showAlert(title: "Oops!", subtitle: errorcontent.localizedDescription, vc: self)
+                             LoadingHepler.instance.show()
                             
+                            Auth.auth().signIn(withEmail: email, password: pwd) { (loginuser, loginerror) in
+                                
+                                 LoadingHepler.instance.hide()
+                               
+                                if let login_user = loginuser {
+                                    
+                                    self.emailTextfield.text = ""
+                                    self.passwordTextfield.text = ""
+                                    self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId,firebaseid: (login_user.uid))
+                                    
+                                } else {
+                                    
+                                    self.authenticationError(error: "Oops! Invalid login.")
+                                    
+                                }
+                                
+                                
+                            }
+                            
+                            return
                         }
  
+                    } else {
+                        
+                        self.authenticationError(error: "Oops! Invalid login.")
+                        
                     }
+
                     return
                     
                 }
