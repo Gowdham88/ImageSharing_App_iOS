@@ -18,7 +18,11 @@ class WebViewController: UIViewController,WKNavigationDelegate {
     var backwardButton : UIBarButtonItem?
     var browserButton  : UIBarButtonItem?
     var progressView   : UIProgressView?
-    
+    var vcCount:Int = 0{
+        didSet{
+            navigationItem.title = "Count: \(vcCount)"
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,14 +30,11 @@ class WebViewController: UIViewController,WKNavigationDelegate {
         webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         webView.navigationDelegate = self
         
-        
         let url = NSURL (string: url_str);
         let requestObj = NSURLRequest(url: url! as URL);
         webView.load(requestObj as URLRequest);
         webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
-        
-        
-        
+  
         setNavBar()
         
         progressView = UIProgressView(progressViewStyle: .default)
