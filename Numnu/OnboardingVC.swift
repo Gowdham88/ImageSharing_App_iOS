@@ -88,7 +88,7 @@ extension OnboardingVC: CLLocationManagerDelegate {
     // Handle incoming location events.
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         locationManager.stopUpdatingLocation()
-        locationManager.delegate = self
+        locationManager.delegate = nil
         
         if let location: CLLocation = locations.last {
             

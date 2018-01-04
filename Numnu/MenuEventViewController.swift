@@ -295,7 +295,7 @@ extension MenuEventViewController   {
             
         case "Event":
             
-            openStoryBoard(name: Constants.EventDetail, id: Constants.MenuItemId,heading: itemTagList[indexPath.row].tagtext ?? "Title", primid: 34,tagid: itemTagList[indexPath.row].tagid ?? 0,type: "Event")
+            openStoryBoard(name: Constants.EventDetail, id: Constants.MenuItemId,heading: itemTagList[indexPath.row].tagtext ?? "Title", primid: primayId,tagid: itemTagList[indexPath.row].tagid ?? 0,type: "Event")
             
         case "Business":
             openStoryBoard(name: Constants.EventDetail, id: Constants.MenuItemId,heading: itemBusinessTagList[indexPath.row].tagtext ?? "Title", primid: 51,tagid: itemBusinessTagList[indexPath.row].tagid ?? 0,type: "Business")
