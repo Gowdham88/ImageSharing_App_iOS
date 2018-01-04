@@ -310,8 +310,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     override func viewDidAppear(_ animated: Bool) {
        showPopup(table1: true, table2: true)
        
-        let offset = CGPoint(x: 0,y :0)
-        myscrollView.setContentOffset(offset, animated: true)
+//        let offset = CGPoint(x: 0,y :0)
+//        myscrollView.setContentOffset(offset, animated: true)
     }
     func dateCancelClicked() {
         cancelBool = true
@@ -319,7 +319,15 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         datePicker.isHidden = true
         doneView.isHidden = true
         superVieww.isHidden = true
+        
+
         birthTextfield.text = ""
+                    dateLabel.text = ""
+                    monthLabel.text = ""
+                    yearLabel.text = ""
+        datePicker.resignFirstResponder()
+
+//        birthTextfield.text = ""
     }
     func addClicked() {
         
@@ -362,7 +370,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
   
     func showGenderActionsheet() {
 
-         Alert = UIAlertController(title: "Select Gender", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+         Alert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
         let FemaleAction = UIAlertAction(title: "Female", style: UIAlertActionStyle.default) { _ in
             self.genderTextfield.text = "Female"
             self.genderTextfield.resignFirstResponder()
@@ -576,12 +584,17 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
        
         if textField == birthTextfield {
             
-            if cancelBool == true {
-                birthTextfield.text = ""
-            }else{
-                self.datePickerValueChanged(sender: datePicker)
-
-            }
+                if cancelBool == true {
+                    birthTextfield.text = ""
+                    dateLabel.text      = ""
+                    monthLabel.text     = ""
+                    yearLabel.text      = ""
+                }else{
+                    self.datePickerValueChanged(sender: datePicker)
+                    
+                }
+          
+       
             datePicker.isHidden = true
             superVieww.isHidden = true
             doneView.isHidden   = true
@@ -622,15 +635,15 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         
         return false
     }
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-       
-        self.view.endEditing(true)
-    }
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        self.view.endEditing(true)
-
-    }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//       
+//        self.view.endEditing(true)
+//    }
+//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        
+//        self.view.endEditing(true)
+//
+//    }
     func animateViewMoving (up:Bool, moveValue :CGFloat){
         let movementDuration:TimeInterval = 0.3
         let movement:CGFloat = ( up ? -moveValue : moveValue)
@@ -647,11 +660,11 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         superVieww.isHidden = false
         doneView.isHidden = false
         // Creates the toolbar
-        let toolBar = UIToolbar()
-        toolBar.barStyle = .default
-        toolBar.isTranslucent = true
-        toolBar.tintColor = UIColor.blue
-        toolBar.sizeToFit()
+//        let toolBar = UIToolbar()
+//        toolBar.barStyle = .default
+//        toolBar.isTranslucent = true
+//        toolBar.tintColor = UIColor.blue
+//        toolBar.sizeToFit()
         datePicker.addTarget(self, action: #selector(Edit_ProfileVC.datePickerValueChanged), for: UIControlEvents.valueChanged)
     }
     func doneClick() {
@@ -774,7 +787,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     // Image Picker //
      @IBAction func editPicture(_ sender: Any) {
         imagePicker.allowsEditing = false
-        let Alert = UIAlertController(title: "Select Source Type", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        let Alert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
        
         
         let CameraAction = UIAlertAction(title: "Camera", style: UIAlertActionStyle.default) { ACTION in
@@ -1009,7 +1022,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 dropdownString = (currentCell?.textLabel?.text)!
                 if tagArray.contains(dropdownString) {
                     print("already exist")
-                }else{
+                }else {
                     tagArray.append(dropdownString)
                     let tagItem = ["id": tagidArray[indexPath.row],"displayorder":tagArray.count]
                     tagsDictonary.append(tagItem)
@@ -1031,13 +1044,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 apiClient.getPlaceCordinates(placeid_Str: autocompleteplaceID[indexPath.row], completion: { lat,lang in
                 
                   self.cityDictonary = ["name":self.autocompleteplaceArray[indexPath.row],"address":self.autocompleteplaceArray[indexPath.row],"isgoogleplace":true,"googleplaceid":self.autocompleteplaceID[indexPath.row],"googleplacetype":"geocode","lattitude":lat,"longitude":lang]
-                    
                   })
             }
-            
         }
-        
-        
     }
 }
 
