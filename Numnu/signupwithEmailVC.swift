@@ -17,8 +17,9 @@ import IQKeyboardManagerSwift
 @available(iOS 10.0, *)
 @available(iOS 10.0, *)
 @available(iOS 10.0, *)
-class signupwithEmailVC: UIViewController, UITextFieldDelegate {
-
+class signupwithEmailVC: UIViewController, UITextFieldDelegate,UITextViewDelegate {
+    @IBOutlet weak var termsnpolicy: UITextView!
+    
     var idprim = [String]()
     var window: UIWindow?
     var credential: AuthCredential?
@@ -37,9 +38,24 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
     @IBOutlet var labelcredentials: UILabel!
-
+    let termsAndConditionsURL = "http://www.numnu.com/terms/"
+    let privacyURL            = "http://numnu.com/privacy-policy/"
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.termsnpolicy.delegate = self
+        let str                     = "By signing up, you agree to our Terms of Service & Privacy Policy"
+        let attributedString        = NSMutableAttributedString(string: str)
+        var foundRange              = attributedString.mutableString.range(of: "Terms of Service")
+        attributedString.addAttribute(NSLinkAttributeName, value: termsAndConditionsURL, range: foundRange)
+        foundRange                  = attributedString.mutableString.range(of: "Privacy Policy")
+        attributedString.addAttribute(NSLinkAttributeName, value: privacyURL, range: foundRange)
+        termsnpolicy.attributedText = attributedString
+        termsnpolicy.textColor      = UIColor(red: 153/255.0, green: 153/255.0, blue: 153/255.0, alpha: 1.0)
+        termsnpolicy.textAlignment  = .center
+        termsnpolicy.font = UIFont(name: "Avenir-Medium", size: 13)
+
+        
         self.navigationController?.navigationBar.isHidden = true
 
         passwordReveal.setImage(UIImage(named: "Show password icon"), for: .normal)
@@ -61,31 +77,20 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
             emailTextfield.textContentType = UITextContentType.emailAddress
             passwordTextfield.textContentType = UITextContentType("")
         }
-       
-
-
-
-       
-//        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
-//        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
-
-
     }
-//    func animateViewMoving(up:Bool, moveValue :CGFloat) {
-//
-//        let movementDuration:TimeInterval = 0.3
-//        let movement:CGFloat = ( up ? -moveValue : moveValue)
-//
-//        UIView.beginAnimations("animateView", context: nil)
-//        UIView.setAnimationBeginsFromCurrentState(true)
-//        UIView.setAnimationDuration(movementDuration)
-//
-//        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
-//
-//        //        self.view.frame = offsetBy(self.view.frame, 0, movement)
-//
-//        UIView.commitAnimations()
-//    }
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: Constants.WebViewStoryId) as! WebViewController
+        if (URL.absoluteString == termsAndConditionsURL) {
+            vc.url_str = termsAndConditionsURL
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else if (URL.absoluteString == privacyURL) {
+            vc.url_str = privacyURL
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        return false
+    }
+
     
     var iconClick = Bool()
     

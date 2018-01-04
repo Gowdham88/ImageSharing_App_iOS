@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -638,15 +638,15 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PBX-Yr-1C5">
-                                                <rect key="frame" x="0.0" y="224.5" width="320" height="50"/>
+                                                <rect key="frame" x="0.0" y="224.5" width="320" height="40"/>
                                                 <subviews>
                                                     <button opaque="NO" alpha="0.0" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vF2-OF-etk">
                                                         <rect key="frame" x="320" y="15" width="8" height="20"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                         <state key="normal" image="Shape_new@1x"/>
                                                     </button>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Post" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bgY-bO-UAS">
-                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Posts" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bgY-bO-UAS">
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
                                                         <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
                                                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -659,7 +659,7 @@
                                                     <constraint firstItem="vF2-OF-etk" firstAttribute="leading" secondItem="bgY-bO-UAS" secondAttribute="trailing" id="DYl-dw-z0M"/>
                                                     <constraint firstItem="bgY-bO-UAS" firstAttribute="width" secondItem="PBX-Yr-1C5" secondAttribute="width" id="mYD-Td-bvh"/>
                                                     <constraint firstAttribute="bottom" secondItem="bgY-bO-UAS" secondAttribute="bottom" id="ntA-2a-Mrt"/>
-                                                    <constraint firstAttribute="height" constant="50" id="rz2-Wr-Lfb"/>
+                                                    <constraint firstAttribute="height" constant="40" id="rz2-Wr-Lfb"/>
                                                     <constraint firstItem="bgY-bO-UAS" firstAttribute="top" secondItem="PBX-Yr-1C5" secondAttribute="top" id="xut-uz-FFc"/>
                                                 </constraints>
                                             </view>
@@ -729,7 +729,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </imageView>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="432" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UAk-Co-3Yj">
-                                                <rect key="frame" x="0.0" y="282.5" width="320" height="567.5"/>
+                                                <rect key="frame" x="0.0" y="272.5" width="320" height="577.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="postEventCell" rowHeight="432" id="pwI-yU-GYg" customClass="PostEventTableViewCell" customModule="Numnu" customModuleProvider="target">
