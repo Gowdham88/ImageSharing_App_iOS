@@ -17,7 +17,6 @@ import CoreLocation
 
 class  ApiClient {
     
-    
     /*********************Complete Signup Api*****************************/
     
     func completeSignup(parameters : Parameters,headers : HTTPHeaders,completion : @escaping (String,UserList?) -> Void) {
@@ -144,6 +143,88 @@ class  ApiClient {
             
         }
     }
+    
+    /*********************Complete Signup Api*****************************/
+    
+    func homeSearchApi(parameters : Parameters,type : String,headers : HTTPHeaders,completion : @escaping (String,UserList?) -> Void) {
+        
+        var baseUrl : String =  Constants.homeSearchApi
+        
+        switch type {
+        case "events":
+            
+            baseUrl = "\(Constants.homeSearchApi)/events"
+            
+        case "items":
+            
+            baseUrl = "\(Constants.homeSearchApi)/items"
+            
+        case "businesses":
+            
+            baseUrl = "\(Constants.homeSearchApi)/businesses"
+            
+        case "posts":
+            
+            baseUrl = "\(Constants.homeSearchApi)/events"
+            
+        case "users":
+            
+            baseUrl = "\(Constants.homeSearchApi)/users"
+            
+        default:
+            baseUrl = "\(Constants.homeSearchApi)/events"
+        }
+        
+        Alamofire.request(baseUrl, method: .post, parameters: parameters,encoding: JSONEncoding.default,headers: headers).validate().responseJSON { response in
+            
+            
+            print(response.result.value as Any)
+            
+            switch response.result {
+                
+            case .success:
+                
+                if let value = response.result.value {
+                    
+                    print(value)
+                    
+                    let json = JSON(value)
+                    
+                    if let userList = UserList(json: json) {
+                        
+                        completion("success",userList)
+                    }
+                    
+                    
+                }
+                
+                
+            case .failure(let error):
+                
+                print(error.localizedDescription)
+                
+                if let httpStatusCode = response.response?.statusCode {
+                    
+                    if let value = response.data,httpStatusCode == 400 {
+                        let json = JSON(value)
+                        if let message = UserList(json: json) {
+                            
+                            completion("400",message)
+                            return
+                        }
+                        
+                    }
+                    
+                }
+                
+                completion(error.localizedDescription,nil)
+                
+            }
+        }
+      
+    }
+    
+   
     
     /************************Tags Api**********************************/
     
