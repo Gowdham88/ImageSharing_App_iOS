@@ -21,6 +21,21 @@ class BookmarkViewController: UIViewController,UITableViewDelegate,UITableViewDa
         return cell
     }
     
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.delete) {
+            // handle delete (by removing the data from your array and updating the tableview)
+            bookmarkdataitems.remove(at: indexPath.row)
+            self.bookmarkTableView.reloadData()
+        }
+    }
+    
+    
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
              if apiType == "Event" {
                 let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
