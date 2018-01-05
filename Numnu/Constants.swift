@@ -161,6 +161,7 @@ class Constants {
     static let CheckUserName = "https://numnu-server-dev.appspot.com/users"
     
    static let completeSignup =  "https://numnu-server-dev.appspot.com/users"
+   static let homeSearchApi =  "https://numnu-server-dev.appspot.com/homeSearch"
     
    static let clientApp = "iOS"
     
