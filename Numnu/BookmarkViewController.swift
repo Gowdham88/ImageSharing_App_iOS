@@ -29,8 +29,10 @@ class BookmarkViewController: UIViewController,UITableViewDelegate,UITableViewDa
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.delete) {
             // handle delete (by removing the data from your array and updating the tableview)
-            bookmarkdataitems.remove(at: indexPath.row)
+            
+            self.deleteBookmark(id: bookmarkdataitems[indexPath.row].id ?? 0,position: indexPath.row)
             self.bookmarkTableView.reloadData()
+            
         }
     }
     
@@ -148,6 +150,11 @@ class BookmarkViewController: UIViewController,UITableViewDelegate,UITableViewDa
                 } else {
                     
                     LoadingHepler.instance.hide()
+                    DispatchQueue.main.async {
+                        
+                        self.bookmarkTableView.reloadData()
+                        
+                    }
 //                    self.reloadTable()
                     
                 }
@@ -163,7 +170,25 @@ class BookmarkViewController: UIViewController,UITableViewDelegate,UITableViewDa
     
     func setNavBar() {
         
-        navigationItemList.title = "Bookmarks"
+        switch self.apiType{
+        case "Event"?:         navigationItemList.title = "Event"
+
+            
+        case "Item"?:         navigationItemList.title = "Item"
+
+            
+        case "Business"?:         navigationItemList.title = "Business"
+
+            
+        case "Post"?:         navigationItemList.title = "Post"
+
+            
+        default:         navigationItemList.title = "Bookmarks"
+
+            
+        }
+        
+//        navigationItemList.title = "Bookmarks"
         
         let button: UIButton = UIButton(type: UIButtonType.custom)
         //set image for button
@@ -205,5 +230,29 @@ class BookmarkViewController: UIViewController,UITableViewDelegate,UITableViewDa
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func deleteBookmark(id: Int,position:Int){
+        apiClient.getFireBaseToken(completion: { token in
+            let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
+        
+            self.apiClient.deleteBookmark(id: id, headers: header, completion: { (status) in
+                
+                if status == "success"{
+                    
+                    self.bookmarkdataitems.remove(at: position)
+                    self.bookmarkTableView.reloadData()
+
+                    
+                } else {
+                    
+                    AlertProvider.Instance.showAlert(title: "Bookmarks", subtitle: "Delete failure", vc: self)
+                }
+                
+            })
+            
+            
+        })
+        
+    }
 
 }
