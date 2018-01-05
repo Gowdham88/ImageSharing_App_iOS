@@ -34,9 +34,13 @@ class EventTabController: UIViewController,IndicatorInfoProvider {
     var apiClient : ApiClient!
     var eventList = [EventTypeListItem]()
     var eventItem : EventTypeList?
+    var homeItem  : HomeSearchModel?
     var pageno : Int  = 1
     var limitno : Int = 25
     var apiType : String = "Event"
+    
+    var locationDictonary : [String : Any]?
+    var searchText        : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,6 +82,9 @@ class EventTabController: UIViewController,IndicatorInfoProvider {
             getEvent(pageno: pageno, limit: limitno)
         case "Business":
             getBusinessEvent(pageno: pageno, limit: limitno)
+        case "Home" :
+            getHomeSearchApi(pageno: pageno)
+            
         default:
             getEvent(pageno: pageno, limit: limitno)
         }
@@ -162,10 +169,26 @@ extension EventTabController : UITableViewDelegate,UITableViewDataSource {
                         getEvent(pageno: pageno, limit: limitno)
                     case "Business":
                         getBusinessEvent(pageno: pageno, limit: limitno)
+                    case "Home" :
+                        getHomeSearchApi(pageno: pageno)
                     default:
                         getEvent(pageno: pageno, limit: limitno)
                     }
                 }
+                
+            } else if let pageItem = homeItem {
+                
+                if eventList.count  < pageItem.totalRows ?? 0{
+                    pageno += 1
+                    limitno = 25 * pageno
+                    switch apiType {
+                    case "Home" :
+                        getHomeSearchApi(pageno: pageno)
+                    default:
+                        getEvent(pageno: pageno, limit: limitno)
+                    }
+                }
+                
                 
             }
             
@@ -369,5 +392,75 @@ extension EventTabController {
         
     }
     
+    //
+    /****************************************complete signup******************************************************/
+    
+    func getHomeSearchApi(pageno:Int) {
+        
+        let clientIp = ValidationHelper.Instance.getIPAddress() ?? "1.0.1"
+        if locationDictonary == nil {
+            
+            if let lat = PrefsManager.sharedinstance.lastlocationlat,let long = PrefsManager.sharedinstance.lastlocationlat {
+                
+                locationDictonary = ["lattitude":lat,"longitude":long,"nearMeRadiusInMiles": 15000]
+                
+            }
+        
+        }
+        
+        if searchText == nil {
+            
+            searchText = ""
+        }
+       
+        print(locationDictonary ?? [])
+        print(searchText ?? "xoxo")
+        
+        apiClient.getFireBaseToken(completion: { token in
+        
+        LoadingHepler.instance.show()
+        
+            let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
+            let parameters: Parameters = ["locationObject" : self.locationDictonary!,"searchText" : self.searchText!,"clientip": clientIp, "clientapp": Constants.clientApp]
+            self.apiClient.homeSearchApi(parameters: parameters, type: "events",pageno: pageno, headers: header, completion: { status,homemodel in
+                
+                if status == "success" {
+                    
+                    if let item = homemodel {
+                        
+                        self.homeItem = item
+                        
+                        if let itemlist = item.eventList {
+                            
+                            self.eventList += itemlist
+                        }
+                    }
+                    
+                    DispatchQueue.main.async {
+                        
+                        self.eventTableView.reloadData()
+                        
+                    }
+                    
+                    self.reloadTable()
+                    
+                } else {
+                    
+                    LoadingHepler.instance.hide()
+                    self.reloadTable()
+                    
+                }
+                
+                
+            })
+        
+            
+        })
+        
+        
+    }
+    
     
 }
+
+

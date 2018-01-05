@@ -144,39 +144,38 @@ class  ApiClient {
         }
     }
     
-    /*********************Complete Signup Api*****************************/
+    /*********************Home search api*****************************/
     
-    func homeSearchApi(parameters : Parameters,type : String,headers : HTTPHeaders,completion : @escaping (String,UserList?) -> Void) {
+    func homeSearchApi(parameters : Parameters,type : String,pageno : Int,headers : HTTPHeaders,completion : @escaping (String,HomeSearchModel?) -> Void) {
         
         var baseUrl : String =  Constants.homeSearchApi
         
         switch type {
         case "events":
             
-            baseUrl = "\(Constants.homeSearchApi)/events"
+            baseUrl = "\(Constants.homeSearchApi)/events?page=\(pageno)"
             
         case "items":
             
-            baseUrl = "\(Constants.homeSearchApi)/items"
+            baseUrl = "\(Constants.homeSearchApi)/items?page=\(pageno)"
             
         case "businesses":
             
-            baseUrl = "\(Constants.homeSearchApi)/businesses"
+            baseUrl = "\(Constants.homeSearchApi)/businesses?page=\(pageno)"
             
         case "posts":
             
-            baseUrl = "\(Constants.homeSearchApi)/events"
+            baseUrl = "\(Constants.homeSearchApi)/events?page=\(pageno)"
             
         case "users":
             
-            baseUrl = "\(Constants.homeSearchApi)/users"
+            baseUrl = "\(Constants.homeSearchApi)/users?page=\(pageno)"
             
         default:
-            baseUrl = "\(Constants.homeSearchApi)/events"
+            baseUrl = "\(Constants.homeSearchApi)/events?page=\(pageno)"
         }
         
         Alamofire.request(baseUrl, method: .post, parameters: parameters,encoding: JSONEncoding.default,headers: headers).validate().responseJSON { response in
-            
             
             print(response.result.value as Any)
             
@@ -190,9 +189,9 @@ class  ApiClient {
                     
                     let json = JSON(value)
                     
-                    if let userList = UserList(json: json) {
+                    if let homeList = HomeSearchModel(json: json,type : type) {
                         
-                        completion("success",userList)
+                        completion("success",homeList)
                     }
                     
                     
@@ -207,9 +206,9 @@ class  ApiClient {
                     
                     if let value = response.data,httpStatusCode == 400 {
                         let json = JSON(value)
-                        if let message = UserList(json: json) {
+                        if UserList(json: json) != nil {
                             
-                            completion("400",message)
+                            completion("400",nil)
                             return
                         }
                         

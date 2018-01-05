@@ -19,6 +19,9 @@ class PostTabController: UIViewController,IndicatorInfoProvider {
     @IBOutlet weak var postEventTableView: UITableView!
     var window : UIWindow?
     var popdelegate : PostTabControllerDelegate?
+    
+    var locationDictonary : [String : Any]?
+    var searchText        : String?
 
     override func viewDidLoad() {
         super.viewDidLoad()

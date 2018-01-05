@@ -24,6 +24,7 @@ class DefaultTabController: UIViewController,IndicatorInfoProvider {
     @IBOutlet weak var heightConstraintView1: NSLayoutConstraint!
     @IBOutlet weak var containerView: UIView!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

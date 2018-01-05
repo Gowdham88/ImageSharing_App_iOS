@@ -113,6 +113,11 @@ extension MenuItemViewController : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "menuEventCell", for: indexPath) as! MenuItemEventCell
+        guard itemList.count > 0 else {
+            
+            return cell
+        }
+        
         cell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.row)
         cell.item = itemList[indexPath.row]
         return cell

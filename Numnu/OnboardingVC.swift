@@ -102,6 +102,8 @@ extension OnboardingVC: CLLocationManagerDelegate {
                 if status == "OK" {
                     
                     PrefsManager.sharedinstance.lastlocation = address
+                    PrefsManager.sharedinstance.lastlocationlat = location.coordinate.latitude
+                    PrefsManager.sharedinstance.lastlocationlat = location.coordinate.longitude
                     
                 }
                 

@@ -44,7 +44,7 @@ class businessEventTableViewCell : UITableViewCell {
             
             if let name = item.businessname {
                 
-                eventBusLabel.text = item.businessname
+                eventBusLabel.text = name
             } else {
                 
                 tagConstraintTop.constant = 0
