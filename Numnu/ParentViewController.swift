@@ -29,7 +29,7 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
     var searchClick : Bool = false
     var hideDropdown : Bool = false
     var selectedIndex = 0
-
+var getLocDetails = [String]()
    
     @IBOutlet weak var tabScrollView: UIScrollView!
     
@@ -81,8 +81,7 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
         
         if let address =  PrefsManager.sharedinstance.lastlocation {
             
-            editsearchbyLocation.text = address
-            
+            editsearchbyLocation.text = address.components(separatedBy: ",")[1]
         }
         
     }
