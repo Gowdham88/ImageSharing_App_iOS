@@ -213,7 +213,11 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         
         
     }
-    
+    func navigationTap(){
+        let offset = CGPoint(x: 0,y :0)
+        settingsTableView.setContentOffset(offset, animated: true)
+        
+    }
     func backButtonClicked() {
         
         _ = self.navigationController?.popViewController(animated: true)
@@ -221,9 +225,18 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(Edit_ProfileVC.navigationTap))
+        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+        self.navigationController?.navigationBar.isUserInteractionEnabled = true
         // Hide the navigation bar on the this view controller
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
         setUserDetails()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(Edit_ProfileVC.navigationTap))
+        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+        self.navigationController?.navigationBar.isUserInteractionEnabled = true
     }
     
     // Edit button Navigation //

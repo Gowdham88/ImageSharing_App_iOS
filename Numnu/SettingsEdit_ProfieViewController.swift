@@ -119,11 +119,10 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         
         dropdownTableView.transform = CGAffineTransform(scaleX: 1, y: -1)
         citytableview.transform = CGAffineTransform(scaleX: 1, y: -1)
-       
-  
         
         dropdownTableView.isHidden = true
         dropDownAdjustView.isHidden = true
+        
         imagePicker.delegate = self
         profileImage.isUserInteractionEnabled = true
         datePicker.isHidden = true
@@ -140,9 +139,9 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         foodTextfield.delegate = self
         
         let sampleTapGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(recognizer:)))
-        
         Alert.view.isUserInteractionEnabled = true
         Alert.view.addGestureRecognizer(sampleTapGesture)
+
         IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
 
@@ -155,12 +154,9 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         addButton.addTarget(self, action: #selector(addClicked), for: UIControlEvents.allTouchEvents)
         cancelDatePicker.addTarget(self, action: #selector(datecancelClicked), for: UIControlEvents.allTouchEvents)
         
-        foodTextfield.addTarget(self, action: #selector(textFieldActive), for: UIControlEvents.allTouchEvents)
-        
         dropdownArray = ["Chicken","Chicken chilli","Chicken manjurian","Chicken 65","Chicken fried rice","Grill chicken","Pizza","Burger","Sandwich","Mutton","Mutton chukka","Mutton masala","Mutton fry","Prawn","Gobi chilli","Panneer","Noodles","Mutton soup","Fish fry","Dry fish"]
         
         setNavBar()
-//        dropdownTableView.isHidden = true
         myscrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height+100)
         saveButton.layer.cornerRadius = 25.0
         saveButton.clipsToBounds = true
@@ -175,9 +171,9 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             [NSForegroundColorAttributeName: UIColor.black,
              NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
         
-//        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(Edit_ProfileVC.navigationTap))
-//        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
-//        self.navigationController?.navigationBar.isUserInteractionEnabled = true
+        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(Edit_ProfileVC.navigationTap))
+        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+        self.navigationController?.navigationBar.isUserInteractionEnabled = true
         
         citytableview.layer.shadowColor    = UIColor.darkGray.cgColor
         citytableview.backgroundColor      = UIColor.clear
@@ -216,30 +212,25 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             let navigationOnTap = UITapGestureRecognizer(target:self,action:#selector(EventViewController.navigationTap))
             self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
             self.navigationController?.navigationBar.isUserInteractionEnabled = true
+        
         // Hide the navigation bar on the this view controller
          showPopup(table1: true, table2: true)
          dropDownAdjustView.isHidden = true
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
         if PrefsManager.sharedinstance.isLoginned {
-//            addProfileContainer()
         } else {
             if boolForTitle == false {
-                //                addCollectionContainer()
             }
         }
     }
     override func viewDidAppear(_ animated: Bool) {
         showPopup(table1: true, table2: true)
-        
-//        let offset = CGPoint(x: 0,y :0)
-//        myscrollView.setContentOffset(offset, animated: true)
     }
     func datecancelClicked () {
         datePicker.isHidden       = true
         doneView.isHidden         = true
         cancelDatePicker.isHidden = true
         superVieww.isHidden       = true
- 
         getDateDetails()
         datePicker.resignFirstResponder()
     }
@@ -252,7 +243,6 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
                 dropdownTableView.isHidden = true
             }
             print("the appended item is:::::",foodTextfield.text!)
-            //        tagArray.remove(at: 1)
             if let index = tagArray.index(of:"") {
                 tagArray.remove(at: index)
             }
@@ -291,8 +281,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     func handleTap(recognizer: UITapGestureRecognizer){
         dismiss(animated: true, completion: nil)
     }
-    func textFieldActive() {
-    }
+   
     // Validation func //
     public var emailRegEx = "[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}"
     public var nameRegEx = "[a-zA-Z]+$"
@@ -332,7 +321,8 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             citytableview.isHidden  = true
             
         }
-        textField.resignFirstResponder()
+       textField.resignFirstResponder()
+      
         return true
     }
     
@@ -349,23 +339,15 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             let substring = (foodTextfield.text! as NSString).replacingCharacters(in: range, with: string )
             loadTagList(tag: substring)
         }else if textField == cityTextfield {
-            if textField == cityTextfield {
                 let citytext = cityTextfield.text!
                 if citytext.count > 1 {
                     showPopup(table1: false, table2: true)
-                    
                 }else{
                     showPopup(table1: true, table2: true)
-                    
                 }
             if let place = textField.text {
-                
                 getPlaceApi(place_Str: "\(place)\(string)" as String)
-                
             }
-            }
-            
-            
 //            citytableview.isHidden  = false
             
         } else {
@@ -421,8 +403,8 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             cancelDatePicker.isHidden = true
 
         }else if textField == genderTextfield {
+            dismissKeyboard()
             showPopup(table1: true, table2: true)
-            
 //            genderTextfield.resignFirstResponder()
             showGenderActionsheet()
         } else if textField == foodTextfield {
@@ -512,15 +494,15 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             
         }
     }
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        
-//        self.view.endEditing(true)
-//    }
-//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        
-//        self.view.endEditing(true)
-//        
-//    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        self.view.endEditing(true)
+    }
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        self.view.endEditing(true)
+        
+    }
     func animateViewMoving (up:Bool, moveValue :CGFloat){
         let movementDuration:TimeInterval = 0.3
         let movement:CGFloat = ( up ? -moveValue : moveValue)
@@ -537,13 +519,6 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         superVieww.isHidden = false
         doneView.isHidden = false
         cancelDatePicker.isHidden = false
-
-//        // Creates the toolbar
-//        let toolBar = UIToolbar()
-//        toolBar.barStyle = .default
-//        toolBar.isTranslucent = true
-//        toolBar.tintColor = UIColor.blue
-//        toolBar.sizeToFit()
         datePicker.addTarget(self, action: #selector(SettingsEdit_ProfieViewController.datePickerValueChanged), for: UIControlEvents.valueChanged)
     }
     func doneClick() {
@@ -776,6 +751,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             if(cell == nil)
             {
                 cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
+                dropDownAdjustView.isHidden = true
             }
             
             guard tagnamearray.count > 0 else {
@@ -787,13 +763,9 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             cell?.textLabel?.text = tagnamearray[indexPath.row]
             cell?.textLabel?.font = UIFont(name: "Avenir-Medium", size: 14)
             cell?.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
-//            cell?.transform = CGAffineTransformMakeScale(1, -1);
-
 //            view.transform = view.transform.rotated(by angle: CGFloat(45 * M_PI / 180))
-
-            //            cell?.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1.0)
+//            cell?.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1.0)
             cell?.textLabel?.textColor = UIColor(red: 129/255.0, green: 135/255.0, blue: 155/255.0, alpha: 1.0)
-            
             return cell!
             
             
@@ -809,16 +781,12 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
                 
                 return cell!
             }
-            
             cell?.selectionStyle = .none
             cell?.backgroundColor = UIColor.white
-            cell?.textLabel?.font = UIFont(name: "Avenir-Medium", size: 14)
-
-            cell?.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
-            //            cell?.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1.0)
             cell?.textLabel?.text = autocompleteplaceArray[indexPath.row]
+            cell?.textLabel?.font = UIFont(name: "Avenir-Medium", size: 14)
+            cell?.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
             cell?.textLabel?.textColor = UIColor(red: 129/255.0, green: 135/255.0, blue: 155/255.0, alpha: 1.0)
-            
             return cell!
             
             
@@ -838,7 +806,6 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == dropdownTableView {
-            
             if let indexPath = dropdownTableView.indexPathForSelectedRow  {
                 let currentCell = dropdownTableView.cellForRow(at: indexPath)
                 dropdownString = (currentCell?.textLabel?.text)!
@@ -860,9 +827,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
                 cityTextfield.text = (currentCell?.textLabel?.text)!
                 citytableview.isHidden = true
                 cityTextfield.resignFirstResponder()
-                
             }
-            
         }
     }
     

@@ -713,6 +713,9 @@
                                         <color key="textColor" red="0.16470588235294117" green="0.16470588235294117" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="lpB-uC-X3Q" id="RDr-qK-06x"/>
+                                        </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dwO-jl-NlX">
                                         <rect key="frame" x="35" y="589" width="250" height="1"/>
@@ -3262,6 +3265,9 @@
                                         <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="ZOM-Ry-7bs" id="4j4-cl-6Bb"/>
+                                        </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I5v-LS-lRn">
                                         <rect key="frame" x="35" y="589" width="250" height="1"/>
@@ -3408,6 +3414,17 @@
                                             <constraint firstAttribute="height" constant="1" id="hQi-TC-fac"/>
                                         </constraints>
                                     </view>
+                                    <tableView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Df8-Tp-XLA">
+                                        <rect key="frame" x="35" y="194" width="250" height="190"/>
+                                        <color key="backgroundColor" red="0.56470588239999997" green="0.074509803920000006" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="190" id="PaF-cQ-Lqf"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="dataSource" destination="ZOM-Ry-7bs" id="WdN-FY-iJR"/>
+                                            <outlet property="delegate" destination="ZOM-Ry-7bs" id="ImK-rx-iYv"/>
+                                        </connections>
+                                    </tableView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nXG-su-FtZ">
                                         <rect key="frame" x="0.0" y="620" width="320" height="40"/>
                                         <subviews>
@@ -3557,17 +3574,6 @@
                                             <constraint firstItem="rca-Tf-BYK" firstAttribute="leading" secondItem="c9J-0g-2KE" secondAttribute="leading" constant="7" id="X8m-U6-8Xx"/>
                                         </constraints>
                                     </view>
-                                    <tableView clipsSubviews="YES" contentMode="bottom" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Df8-Tp-XLA">
-                                        <rect key="frame" x="35" y="194" width="250" height="190"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="190" id="PaF-cQ-Lqf"/>
-                                        </constraints>
-                                        <connections>
-                                            <outlet property="dataSource" destination="ZOM-Ry-7bs" id="WdN-FY-iJR"/>
-                                            <outlet property="delegate" destination="ZOM-Ry-7bs" id="ImK-rx-iYv"/>
-                                        </connections>
-                                    </tableView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
