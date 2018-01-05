@@ -113,6 +113,8 @@ class Constants {
     static let userCity     = "userCity"
     static let description  = "description"
     static let lastlocation = "lastlocation"
+    static let lastlocationlat  = "lastlocationlat"
+    static let lastlocationlong = "lastlocationlong"
     static let taglist      = "taglist"
 
 

@@ -128,6 +128,7 @@
 		B49ABD8C1F9F28690091C5D1 /* EventDefaulCollectionCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49ABD8B1F9F28690091C5D1 /* EventDefaulCollectionCell2.swift */; };
 		B4A2C06B1F8669A600C3D400 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4A2C06A1F8669A600C3D400 /* Auth.storyboard */; };
 		B4A2CF541FFF80F500A61D68 /* HomeSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A2CF531FFF80F500A61D68 /* HomeSearchModel.swift */; };
+		B4A2CF561FFFAA1A00A61D68 /* UserHomeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A2CF551FFFAA1A00A61D68 /* UserHomeList.swift */; };
 		B4B0A7DA1FD973C200566507 /* DateFormatterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B0A7D91FD973C200566507 /* DateFormatterManager.swift */; };
 		B4BD9EF01F6FA57300C43182 /* PostList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BD9EEF1F6FA57300C43182 /* PostList.swift */; };
 		B4BD9EF51F6FAAA400C43182 /* DBProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BD9EF41F6FAAA400C43182 /* DBProvider.swift */; };
@@ -305,6 +306,7 @@
 		B49ABD8B1F9F28690091C5D1 /* EventDefaulCollectionCell2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDefaulCollectionCell2.swift; sourceTree = "<group>"; };
 		B4A2C06A1F8669A600C3D400 /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 		B4A2CF531FFF80F500A61D68 /* HomeSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSearchModel.swift; sourceTree = "<group>"; };
+		B4A2CF551FFFAA1A00A61D68 /* UserHomeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHomeList.swift; sourceTree = "<group>"; };
 		B4B0A7D91FD973C200566507 /* DateFormatterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterManager.swift; sourceTree = "<group>"; };
 		B4BD9EEF1F6FA57300C43182 /* PostList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostList.swift; sourceTree = "<group>"; };
 		B4BD9EF41F6FAAA400C43182 /* DBProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBProvider.swift; sourceTree = "<group>"; };
@@ -599,6 +601,7 @@
 			isa = PBXGroup;
 			children = (
 				B4A2CF531FFF80F500A61D68 /* HomeSearchModel.swift */,
+				B4A2CF551FFFAA1A00A61D68 /* UserHomeList.swift */,
 			);
 			name = HomeModel;
 			sourceTree = "<group>";
@@ -1098,6 +1101,7 @@
 				B4C515881FA085BB00348E2A /* ListTabController.swift in Sources */,
 				BEF026A61FC2B5D300100392 /* SettingsEdit_ProfieViewController.swift in Sources */,
 				601D46791F8F3B1C00832BDD /* UserList.swift in Sources */,
+				B4A2CF561FFFAA1A00A61D68 /* UserHomeList.swift in Sources */,
 				B49ABD8C1F9F28690091C5D1 /* EventDefaulCollectionCell2.swift in Sources */,
 				6FEB33851FC42BF300E13505 /* EventlinkList.swift in Sources */,
 				B4483F001FDEA4E500D99E0E /* EventTypeListItem.swift in Sources */,

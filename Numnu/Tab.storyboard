@@ -43,17 +43,6 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LPR-Hf-e84">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="427"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="2ZJ-Fd-oY6" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
-                                                            <rect key="frame" x="10" y="94.5" width="300" height="200"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="200" id="eiE-Q1-2g4"/>
-                                                            </constraints>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                    <real key="value" value="4"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                            </userDefinedRuntimeAttributes>
-                                                        </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Numnu_appicon" translatesAutoresizingMaskIntoConstraints="NO" id="TLs-Db-xH6" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
                                                             <rect key="frame" x="8" y="8" width="40" height="40"/>
                                                             <constraints>
@@ -201,6 +190,17 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="2ZJ-Fd-oY6" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                                            <rect key="frame" x="8" y="97" width="300" height="200"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="200" id="eiE-Q1-2g4"/>
+                                                            </constraints>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                    <real key="value" value="4"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
@@ -313,7 +313,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TaZ-nY-bzg">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="TaZ-nY-bzg">
                                                     <rect key="frame" x="20" y="10" width="50" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="CbB-IY-Jfm"/>
@@ -321,27 +321,40 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQj-Dy-U0T">
-                                                    <rect key="frame" x="90" y="24" width="180" height="21"/>
+                                                    <rect key="frame" x="90" y="10" width="215" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="rBo-6R-Rr4"/>
+                                                        <constraint firstAttribute="height" constant="21" id="y4J-hq-KRD"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="17"/>
                                                     <color key="textColor" red="0.16470588235294117" green="0.16470588235294117" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TtB-8S-dzP">
+                                                    <rect key="frame" x="90" y="38" width="215" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="Fln-Rd-a6H"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="15"/>
+                                                    <color key="textColor" red="0.50588235290000005" green="0.52941176469999995" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="BQj-Dy-U0T" firstAttribute="leading" secondItem="TaZ-nY-bzg" secondAttribute="trailing" constant="20" id="0cG-s4-bFC"/>
+                                                <constraint firstAttribute="trailing" secondItem="BQj-Dy-U0T" secondAttribute="trailing" constant="15" id="3rf-DU-jLd"/>
                                                 <constraint firstItem="TaZ-nY-bzg" firstAttribute="leading" secondItem="tq9-Fn-3ED" secondAttribute="leading" constant="20" id="7rZ-RC-X8q"/>
-                                                <constraint firstAttribute="bottom" secondItem="BQj-Dy-U0T" secondAttribute="bottom" constant="24.5" id="JNh-ax-9bi"/>
+                                                <constraint firstItem="TtB-8S-dzP" firstAttribute="leading" secondItem="TaZ-nY-bzg" secondAttribute="trailing" constant="20" id="IfO-EY-q3K"/>
+                                                <constraint firstAttribute="trailing" secondItem="TtB-8S-dzP" secondAttribute="trailing" constant="15" id="Ogf-PB-zdg"/>
+                                                <constraint firstItem="TtB-8S-dzP" firstAttribute="top" secondItem="BQj-Dy-U0T" secondAttribute="bottom" constant="7" id="cz4-eW-lYD"/>
                                                 <constraint firstItem="TaZ-nY-bzg" firstAttribute="top" secondItem="tq9-Fn-3ED" secondAttribute="top" constant="10" id="d5M-3Y-aCQ"/>
-                                                <constraint firstItem="BQj-Dy-U0T" firstAttribute="top" secondItem="tq9-Fn-3ED" secondAttribute="top" constant="24" id="hfX-Cu-z0D"/>
-                                                <constraint firstAttribute="trailing" secondItem="BQj-Dy-U0T" secondAttribute="trailing" constant="50" id="s1p-o8-65Z"/>
+                                                <constraint firstItem="BQj-Dy-U0T" firstAttribute="leading" secondItem="TaZ-nY-bzg" secondAttribute="trailing" constant="20" id="gf7-td-CDF"/>
+                                                <constraint firstItem="TtB-8S-dzP" firstAttribute="top" secondItem="BQj-Dy-U0T" secondAttribute="bottom" constant="7" id="gwR-La-1sz"/>
+                                                <constraint firstItem="BQj-Dy-U0T" firstAttribute="top" secondItem="tq9-Fn-3ED" secondAttribute="top" constant="10" id="jra-aa-jJA"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="userImage" destination="TaZ-nY-bzg" id="aCa-kZ-YYl"/>
                                             <outlet property="userLabel" destination="BQj-Dy-U0T" id="BnE-2A-gH9"/>
+                                            <outlet property="userSublabel" destination="TtB-8S-dzP" id="B0L-Kt-bqy"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -384,7 +397,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E4b-dH-26W">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4" translatesAutoresizingMaskIntoConstraints="NO" id="OJJ-cT-mgd" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="OJJ-cT-mgd" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
                                                             <rect key="frame" x="8" y="10" width="80" height="80"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="80" id="cY5-yS-Rqj"/>
@@ -542,7 +555,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7rv-N0-4ie">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="3" translatesAutoresizingMaskIntoConstraints="NO" id="8Bl-27-3IN" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="8Bl-27-3IN" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
                                                             <rect key="frame" x="8" y="10" width="80" height="80"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="80" id="5y7-ya-vdM"/>
@@ -849,7 +862,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9rh-kg-N9i">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="2rW-U3-DAu" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="2rW-U3-DAu" customClass="ImageExtender" customModule="Numnu" customModuleProvider="target">
                                                             <rect key="frame" x="8" y="10" width="80" height="80"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="80" id="puk-B9-kfJ"/>
@@ -1050,7 +1063,7 @@
                                         </cells>
                                     </collectionView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Past Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="103-ut-mdO">
-                                        <rect key="frame" x="10" y="175" width="90.5" height="30"/>
+                                        <rect key="frame" x="10" y="175" width="86" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="bkp-e5-x09"/>
                                         </constraints>
@@ -1332,9 +1345,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="1" width="1280" height="853"/>
-        <image name="3" width="1280" height="1280"/>
-        <image name="4" width="1280" height="824"/>
         <image name="Numnu_appicon" width="122" height="122"/>
         <image name="arrow" width="18" height="10"/>
         <image name="dish_ico" width="22" height="23"/>
@@ -1343,6 +1353,7 @@
         <image name="event_ico" width="25" height="27"/>
         <image name="foodie" width="640" height="480"/>
         <image name="ic_chat_bubble_outline" width="12" height="11"/>
+        <image name="image_placeholder" width="960" height="796"/>
         <image name="in-love" width="24" height="22"/>
         <image name="location_ico" width="16" height="23"/>
         <image name="onboard" width="375" height="667"/>

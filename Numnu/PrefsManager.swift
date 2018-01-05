@@ -299,6 +299,50 @@ struct PrefsManager {
         }
     }
     
+    var lastlocationlat : Double? {
+        
+        get {
+            
+            if checkprefsobject(object: Constants.lastlocationlat) {
+                
+                return UserDefaults.standard.double(forKey: Constants.lastlocationlat)
+            } else {
+                
+                return 0
+            }
+            
+        }
+        
+        set {
+            
+            UserDefaults.standard.set(newValue, forKey: Constants.lastlocationlat)
+            
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    var lastlocationlong : Double? {
+        
+        get {
+            
+            if checkprefsobject(object: Constants.lastlocationlong) {
+                
+                return UserDefaults.standard.double(forKey: Constants.lastlocationlong)
+            } else {
+                
+                return 0
+            }
+            
+        }
+        
+        set {
+            
+            UserDefaults.standard.set(newValue, forKey: Constants.lastlocationlong)
+            
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
 
     var startsat : String {
         

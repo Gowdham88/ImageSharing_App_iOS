@@ -35,9 +35,14 @@ var getLocDetails = [String]()
     
     /*******************place api*************************/
     var autocompleteplaceArray = [String]()
+    var autocompleteplaceID    = [String]()
     @IBOutlet weak var shareView : UIView!
     
     @IBOutlet weak var collectionContainerView: UIView!
+    
+    var locationDictonary : [String : Any]?
+    var searchText        : String?
+    var apiClient : ApiClient!
   
     override func viewDidLoad() {
         settings.style.selectedBarHeight = 3.0
@@ -78,6 +83,8 @@ var getLocDetails = [String]()
         filtertableView.isHidden = true
         filtertable.delegate   = self
         filtertable.dataSource = self
+        
+        apiClient = ApiClient()
         
         if let address =  PrefsManager.sharedinstance.lastlocation {
             
@@ -127,12 +134,26 @@ var getLocDetails = [String]()
         
             let child_1 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1) as! EventTabController
             child_1.scrolltableview = true
-            let child_2 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid2)
-            let child_3 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid3)
+            child_1.locationDictonary = locationDictonary
+            child_1.searchText        = searchText
+            child_1.apiType           = "Home"
+        
+            let child_2 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid2) as! BusinessTabController
+            child_2.locationDictonary = locationDictonary
+            child_2.searchText        = searchText
+        
+            let child_3 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid3) as! MenuTabController
+            child_3.locationDictonary = locationDictonary
+            child_3.searchText        = searchText
+        
             let child_4 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid4) as! PostTabController
             child_4.popdelegate = self
+            child_4.locationDictonary = locationDictonary
+            child_4.searchText        = searchText
+        
             let child_5 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid5) as! UserTabController
-            let child_6 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid6)
+            child_5.locationDictonary = locationDictonary
+            child_5.searchText        = searchText
             return [child_1, child_2,child_3,child_4,child_5]
     
     }
@@ -185,27 +206,25 @@ extension ParentViewController : UITextFieldDelegate {
         if textField == editsearchbyLocation {
             
             editsearchbyLocation.text = ""
+            locationDictonary = nil
             
         } else {
             
             editsearchbyItem.text = ""
+            searchText = nil
         }
         
         return false
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        
         let editsearchTextCount = editsearchbyItem.text!
         if editsearchTextCount.count > 0  {
-            LoadingHepler.instance.show()
-            let when = DispatchTime.now() + 1
-            DispatchQueue.main.asyncAfter(deadline: when) {
-                LoadingHepler.instance.hide()
-            }
-            
+            searchText   = editsearchbyItem.text!
             reloadPagerTabStripView()
         }
-       
+      
         dismissKeyboard()
         
     }
@@ -391,7 +410,14 @@ extension ParentViewController : UITableViewDataSource,UITableViewDelegate {
             let currentCell = tableView.cellForRow(at: indexPath) as! UITableViewCell
             editsearchbyLocation.text = (currentCell.textLabel?.text)
             editsearchbyLocation.text = autocompleteplaceArray[indexPath.row]
-            PrefsManager.sharedinstance.lastlocation = editsearchbyLocation.text
+            apiClient.getPlaceCordinates(placeid_Str: autocompleteplaceID[indexPath.row], completion: { lat,lang in
+                
+                self.locationDictonary = ["lattitude":lat,"longitude":lang,"nearMeRadiusInMiles": 15000]
+                PrefsManager.sharedinstance.lastlocationlat = lat
+                PrefsManager.sharedinstance.lastlocationlat = lang
+                PrefsManager.sharedinstance.lastlocation = self.editsearchbyLocation.text
+            })
+            
         }
  
         dismissKeyboard()
@@ -406,6 +432,7 @@ extension ParentViewController : UITableViewDataSource,UITableViewDelegate {
     func getPlaceApi(place_Str:String) {
         
         autocompleteplaceArray.removeAll()
+        autocompleteplaceID.removeAll()
         
         let parameters: Parameters = ["input": place_Str ,"types" : "(cities)" , "key" : "AIzaSyDmfYE1gIA6UfjrmOUkflK9kw0nLZf0nYw"]
         
@@ -422,9 +449,11 @@ extension ParentViewController : UITableViewDataSource,UITableViewDelegate {
                             for item in place_dic {
                                 
                                 let placeName = item["description"].string ?? "empty"
+                                 let placeid   = item["place_id"].string ?? "empty"
                                 if self.autocompleteplaceArray.count < 6 {
                                     
                                     self.autocompleteplaceArray.append(placeName)
+                                    self.autocompleteplaceID.append(placeid)
                                 }
                                 
                                 
@@ -524,3 +553,5 @@ extension ParentViewController : PostTabControllerDelegate {
 //
 //    }
 }
+
+
