@@ -1279,6 +1279,52 @@ class  ApiClient {
         
     }
     
+    
+    /************************Event Detail*******************************/
+    func deleteBookmark(id:Int,headers : HTTPHeaders,completion : @escaping (String) -> Void) {
+        
+        Alamofire.request("\(Constants.bookMarkApi)/\(id)",method: .delete, encoding: JSONEncoding.default,headers: headers).validate().responseJSON { response in
+            
+            switch response.result {
+                
+            case .success:
+                
+                if let httpStatusCode = response.response?.statusCode {
+                
+                    if httpStatusCode == 200{
+                        
+                        completion("success")
+                    }
+                    
+                    
+                } else {
+                    
+                    completion("failure")
+                }
+                
+                
+            case .failure(let error):
+                
+                print(error)
+                if let httpStatusCode = response.response?.statusCode {
+                    
+                    if httpStatusCode == 200 {
+                        
+                        completion("success")
+                    }
+                    
+                    
+                } else {
+                    
+                    completion("failure")
+                }
+                
+            }
+            
+        }
+        
+    }
+    
 
     
     
