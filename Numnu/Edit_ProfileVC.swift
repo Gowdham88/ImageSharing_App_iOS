@@ -1032,7 +1032,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                     tagsDictonary.append(tagItem)
                 }
                 collectionView.reloadData()
-                dropdownTableView.isHidden = true
+                dropdownTableView.isHidden  = true
+                dropDownAdjustView.isHidden = true
                 foodTextfield.resignFirstResponder()
                
             }

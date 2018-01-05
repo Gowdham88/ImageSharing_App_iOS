@@ -118,7 +118,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         super.viewDidLoad()
         
         dropdownTableView.transform = CGAffineTransform(scaleX: 1, y: -1)
-        citytableview.transform = CGAffineTransform(scaleX: 1, y: -1)
+        citytableview.transform     = CGAffineTransform(scaleX: 1, y: -1)
         
         dropdownTableView.isHidden = true
         dropDownAdjustView.isHidden = true
@@ -176,7 +176,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         self.navigationController?.navigationBar.isUserInteractionEnabled = true
         
         citytableview.layer.shadowColor    = UIColor.darkGray.cgColor
-        citytableview.backgroundColor      = UIColor.clear
+        citytableview.backgroundColor      = UIColor.white
         citytableview.layer.shadowOffset   = CGSize(width: 0.0, height: 0.0)
         citytableview.layer.shadowOpacity  = 2.0
         citytableview.layer.shadowRadius   = 5
@@ -185,6 +185,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         citytableview.layer.masksToBounds  = false
         citytableview.isScrollEnabled      = false
         
+        dropDownAdjustView.backgroundColor      = UIColor.white
         dropDownAdjustView.layer.shadowColor = UIColor.darkGray.cgColor
         dropDownAdjustView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
         dropDownAdjustView.layer.shadowOpacity = 2.0
@@ -204,9 +205,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         self.myscrollView.setContentOffset(offset, animated: true)
         
     }
-    //     @objc override func dismissKeyboard{
-    //
-    //    }
+   
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
             let navigationOnTap = UITapGestureRecognizer(target:self,action:#selector(EventViewController.navigationTap))
@@ -240,9 +239,9 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             if tagArray.contains(foodTextfield.text!){
             }else{
                 tagArray.append(foodTextfield.text!)
-                dropdownTableView.isHidden = true
+                dropdownTableView.isHidden  = true
+                dropDownAdjustView.isHidden = true
             }
-            print("the appended item is:::::",foodTextfield.text!)
             if let index = tagArray.index(of:"") {
                 tagArray.remove(at: index)
             }
@@ -332,12 +331,13 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             if foodtext.count > 1 {
                 showPopup(table1: true, table2: false)
                 dropDownAdjustView.isHidden = false
+                let substring = (foodTextfield.text! as NSString).replacingCharacters(in: range, with: string )
+                loadTagList(tag: substring)
             }else{
                 showPopup(table1: true, table2: true)
                 dropDownAdjustView.isHidden = true
             }
-            let substring = (foodTextfield.text! as NSString).replacingCharacters(in: range, with: string )
-            loadTagList(tag: substring)
+            
         }else if textField == cityTextfield {
                 let citytext = cityTextfield.text!
                 if citytext.count > 1 {
@@ -348,7 +348,6 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             if let place = textField.text {
                 getPlaceApi(place_Str: "\(place)\(string)" as String)
             }
-//            citytableview.isHidden  = false
             
         } else {
             showPopup(table1: true, table2: true)
@@ -384,8 +383,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             superVieww.isHidden = false
             doneView.isHidden = false
             cancelDatePicker.isHidden = false
-
-           showPopup(table1: true, table2: true)
+            showPopup(table1: true, table2: true)
         }else if textField == cityTextfield {
             let cityText = cityTextfield.text!
             if cityText.count > 1 {
@@ -868,6 +866,7 @@ extension SettingsEdit_ProfieViewController {
                     }
                     DispatchQueue.main.async {
                         self.dropdownTableView.reloadData()
+
                     }
                 }
                 

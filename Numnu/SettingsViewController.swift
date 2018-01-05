@@ -215,7 +215,7 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     }
     func navigationTap(){
         let offset = CGPoint(x: 0,y :0)
-        settingsTableView.setContentOffset(offset, animated: true)
+        myScrollView.setContentOffset(offset, animated: true)
         
     }
     func backButtonClicked() {
