@@ -24,6 +24,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     var autocompleteUrls = [String]()
     var tagArrayList = [TagList]()
     
+    @IBOutlet weak var dropDownAdjustView: UIView!
     @IBOutlet weak var cancelDatePicker: UIButton!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var doneButotn: UIButton!
@@ -122,6 +123,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
   
         
         dropdownTableView.isHidden = true
+        dropDownAdjustView.isHidden = true
         imagePicker.delegate = self
         profileImage.isUserInteractionEnabled = true
         datePicker.isHidden = true
@@ -158,7 +160,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         dropdownArray = ["Chicken","Chicken chilli","Chicken manjurian","Chicken 65","Chicken fried rice","Grill chicken","Pizza","Burger","Sandwich","Mutton","Mutton chukka","Mutton masala","Mutton fry","Prawn","Gobi chilli","Panneer","Noodles","Mutton soup","Fish fry","Dry fish"]
         
         setNavBar()
-        dropdownTableView.isHidden = true
+//        dropdownTableView.isHidden = true
         myscrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height+100)
         saveButton.layer.cornerRadius = 25.0
         saveButton.clipsToBounds = true
@@ -177,24 +179,20 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
 //        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
 //        self.navigationController?.navigationBar.isUserInteractionEnabled = true
         
-//        citytableview.layer.shadowColor    = UIColor.darkGray.cgColor
-//        citytableview.backgroundColor      = UIColor.clear
-//        citytableview.layer.shadowOffset   = CGSize(width: 0.0, height: 0.0)
-//        citytableview.layer.shadowOpacity  = 2.0
-//        citytableview.layer.shadowRadius   = 5
-//        citytableview.layer.cornerRadius   = 10
-//        citytableview.clipsToBounds        = true
-//        citytableview.layer.masksToBounds  = false
-//        citytableview.isScrollEnabled      = false
+        citytableview.layer.shadowColor    = UIColor.darkGray.cgColor
+        citytableview.backgroundColor      = UIColor.clear
+        citytableview.layer.shadowOffset   = CGSize(width: 0.0, height: 0.0)
+        citytableview.layer.shadowOpacity  = 2.0
+        citytableview.layer.shadowRadius   = 5
+        citytableview.layer.cornerRadius   = 10
+        citytableview.clipsToBounds        = true
+        citytableview.layer.masksToBounds  = false
+        citytableview.isScrollEnabled      = false
         
-//        dropdownTableView.layer.shadowColor   = UIColor.darkGray.cgColor
-//        dropdownTableView.backgroundColor     = UIColor.white
-//        dropdownTableView.layer.shadowOffset  = CGSize(width: 0.0, height: 0.0)
-//        dropdownTableView.layer.shadowOpacity = 2.0
-//        dropdownTableView.layer.shadowRadius  = 5
-//        dropdownTableView.layer.cornerRadius  = 10
-//        dropdownTableView.clipsToBounds       = true
-//        dropdownTableView.layer.masksToBounds = false
+        dropDownAdjustView.layer.shadowColor = UIColor.darkGray.cgColor
+        dropDownAdjustView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+        dropDownAdjustView.layer.shadowOpacity = 2.0
+        dropDownAdjustView.layer.shadowRadius = 5
         
         // Checking users login
         /***********************Api login******************************/
@@ -220,6 +218,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             self.navigationController?.navigationBar.isUserInteractionEnabled = true
         // Hide the navigation bar on the this view controller
          showPopup(table1: true, table2: true)
+         dropDownAdjustView.isHidden = true
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
         if PrefsManager.sharedinstance.isLoginned {
 //            addProfileContainer()
@@ -325,6 +324,8 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == foodTextfield {
             dropdownTableView.isHidden = true
+            dropDownAdjustView.isHidden = true
+
             
         } else if textField == cityTextfield {
             
@@ -340,12 +341,11 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             let foodtext = foodTextfield.text!
             if foodtext.count > 1 {
                 showPopup(table1: true, table2: false)
-                
+                dropDownAdjustView.isHidden = false
             }else{
                 showPopup(table1: true, table2: true)
-                
+                dropDownAdjustView.isHidden = true
             }
-//            dropdownTableView.isHidden = false
             let substring = (foodTextfield.text! as NSString).replacingCharacters(in: range, with: string )
             loadTagList(tag: substring)
         }else if textField == cityTextfield {
@@ -398,7 +398,6 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         
         if textField == birthTextfield {
             showDatePicker()
-//            birthTextfield.resignFirstResponder()
             datePicker.isHidden = false
             superVieww.isHidden = false
             doneView.isHidden = false
@@ -426,29 +425,37 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             
 //            genderTextfield.resignFirstResponder()
             showGenderActionsheet()
-        }else if textField == foodTextfield {
+        } else if textField == foodTextfield {
             let foodtext = foodTextfield.text!
             if foodtext.count > 1 {
                 showPopup(table1: true, table2: false)
-
+                dropDownAdjustView.isHidden = false
             }else{
                 showPopup(table1: true, table2: true)
-
+                dropDownAdjustView.isHidden = true
             }
            
-        }else{
-            showPopup(table1: true, table2: true)
-            self.datePickerValueChanged(sender: datePicker)
-            datePicker.isHidden = true
-            superVieww.isHidden = true
-            doneView.isHidden   = true
-            cancelDatePicker.isHidden = true
-
         }
+//        else{
+//            showPopup(table1: true, table2: true)
+//            self.datePickerValueChanged(sender: datePicker)
+//            datePicker.isHidden = true
+//            superVieww.isHidden = true
+//            doneView.isHidden   = true
+//            cancelDatePicker.isHidden = true
+//
+//        }
     }
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         
+        if textField == foodTextfield {
+            dropDownAdjustView.isHidden = true
+            dropdownTableView.isHidden  = true
+
+        }
+        if textField == cityTextfield {
             citytableview.isHidden = true
+        }
       
         
         return true
@@ -841,7 +848,8 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
                     tagArray.append(dropdownString)
                 }
                 collectionView.reloadData()
-                dropdownTableView.isHidden = true
+                dropdownTableView.isHidden  = true
+                dropDownAdjustView.isHidden = true
                 foodTextfield.resignFirstResponder()
             }
             

@@ -25,6 +25,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     var autocompleteUrls = [String]()
     var cancelBool : Bool = true
     
+    @IBOutlet weak var dropDownAdjustView: UIView!
     
     /*************Parameters************************/
     
@@ -112,6 +113,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
 
         imagePicker.delegate = self
         profileImage.isUserInteractionEnabled = true
+        dropDownAdjustView.isHidden = true
         datePicker.isHidden = true
         superVieww.isHidden = true
         doneView.isHidden = true
@@ -167,8 +169,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         self.navigationController?.navigationBar.titleTextAttributes =
             [NSForegroundColorAttributeName: UIColor.black,
              NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
-        
-        
+    
         
         cityTableView.layer.shadowColor = UIColor.darkGray.cgColor
         cityTableView.isUserInteractionEnabled = true
@@ -180,15 +181,10 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         cityTableView.clipsToBounds = true
         cityTableView.layer.masksToBounds = false
         
-        dropdownTableView.layer.shadowColor = UIColor.darkGray.cgColor
-        dropdownTableView.isUserInteractionEnabled = true
-        dropdownTableView.backgroundColor = UIColor.clear
-        dropdownTableView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
-        dropdownTableView.layer.shadowOpacity = 2.0
-        dropdownTableView.layer.shadowRadius = 5
-        dropdownTableView.layer.cornerRadius = 10
-        dropdownTableView.clipsToBounds = true
-        dropdownTableView.layer.masksToBounds = false
+        dropDownAdjustView.layer.shadowColor = UIColor.darkGray.cgColor
+        dropDownAdjustView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+        dropDownAdjustView.layer.shadowOpacity = 2.0
+        dropDownAdjustView.layer.shadowRadius = 5
         
         /*************************getting location******************************/
         locationManager = CLLocationManager()
@@ -289,6 +285,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
         self.navigationController?.navigationBar.isUserInteractionEnabled = true
         // Hide the navigation bar on the this view controller
+        dropDownAdjustView.isHidden = true
         showPopup(table1: true, table2: true)
         if boolForTitle == false {
             if PrefsManager.sharedinstance.isLoginned {
@@ -310,6 +307,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         
     }
     override func viewDidAppear(_ animated: Bool) {
+        dropDownAdjustView.isHidden = true
        showPopup(table1: true, table2: true)
        
 //        let offset = CGPoint(x: 0,y :0)
@@ -431,6 +429,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == foodTextfield {
+            dropDownAdjustView.isHidden = true
             dropdownTableView.isHidden = true
             datePicker.isHidden = true
             doneView.isHidden = true
@@ -449,11 +448,12 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             let foodtext = foodTextfield.text!
             if foodtext.count > 1 {
                 showPopup(table1: true, table2: false)
-                
+                dropDownAdjustView.isHidden = false
+
             }else{
                 showPopup(table1: true, table2: true)
-                
-            }
+                dropDownAdjustView.isHidden = true
+          }
 //            dropdownTableView.isHidden = false
             let substring = (foodTextfield.text! as NSString).replacingCharacters(in: range, with: string )
             loadTagList(tag: substring)
@@ -541,22 +541,23 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             let foodtext = foodTextfield.text!
             if foodtext.count > 1 {
                 showPopup(table1: true, table2: false)
-                
+                dropDownAdjustView.isHidden = false
             }else{
                 showPopup(table1: true, table2: true)
-                
+                dropDownAdjustView.isHidden = true
             }
-        } else {
-            showPopup(table1: true, table2: true)
-            genderTextfield.resignFirstResponder()
-            birthTextfield.resignFirstResponder()
-
-            self.datePickerValueChanged(sender: datePicker)
-            datePicker.isHidden = true
-            superVieww.isHidden = true
-            doneView.isHidden = true
-           
         }
+//        else {
+//            showPopup(table1: true, table2: true)
+//            genderTextfield.resignFirstResponder()
+//            birthTextfield.resignFirstResponder()
+//
+//            self.datePickerValueChanged(sender: datePicker)
+//            datePicker.isHidden = true
+//            superVieww.isHidden = true
+//            doneView.isHidden = true
+//
+//        }
 }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -633,6 +634,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         }
         if textField == foodTextfield {
             dropdownTableView.isHidden = true
+            dropDownAdjustView.isHidden = true
         }
         
         return false
@@ -963,6 +965,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 return cell!
             }
             
+            dropdownTableView.isScrollEnabled = true
             cell?.textLabel?.text = tagnamearray[indexPath.row]
             
             dropdownTableView.transform = CGAffineTransform(scaleX: 1, y: -1)
