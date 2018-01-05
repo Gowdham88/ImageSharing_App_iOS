@@ -114,7 +114,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
                 
                 print(error.debugDescription)
                 LoadingHepler.instance.hide()
-                AlertProvider.Instance.showAlert(title: "Oops", subtitle: error.debugDescription, vc: self)
+                AlertProvider.Instance.showAlert(title: "Oops", subtitle: "Login failed.", vc: self)
              
                 
             })
