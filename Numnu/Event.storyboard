@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -416,6 +416,7 @@
                         <outlet property="eventLinkLabel2" destination="bDD-uk-I6b" id="51X-7Z-HFa"/>
                         <outlet property="eventLinkLabel3" destination="U0Z-Mj-lZB" id="4LO-F8-mIU"/>
                         <outlet property="eventMap" destination="8Se-ej-wg2" id="2dt-lW-oov"/>
+                        <outlet property="eventMapIcon" destination="aOH-4t-Zwo" id="13f-BV-0Od"/>
                         <outlet property="eventPlaceLabel" destination="A5m-9M-c9p" id="Tog-Hl-7WJ"/>
                         <outlet property="eventTitleLabel" destination="wz1-XR-z7e" id="xfs-aV-Saw"/>
                         <outlet property="locationIconHeight" destination="9N6-Hz-iDy" id="dKM-c9-pr0"/>
