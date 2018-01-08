@@ -376,7 +376,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate,UITextViewDelegat
                 print("Failed to login: \(error.localizedDescription)")
                 DispatchQueue.main.async {
                     
-                  AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Login failed.", vc: self)
+                  AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Facebook signUp failed.", vc: self)
                
                 }
                 
@@ -416,13 +416,8 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate,UITextViewDelegat
                     LoadingHepler.instance.hide()
                     self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId,firebaseid: (user?.uid)!)
                 }
-                
-                
             })
-          
         }
-
-
     }
 }
 
