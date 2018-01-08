@@ -56,6 +56,8 @@ class UserTabController: UIViewController,IndicatorInfoProvider,UITableViewDataS
         
         let storyboard = UIStoryboard(name: Constants.PostDetail, bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: Constants.Profile_LinkViewController) as! ProfileLinkController
+        vc.primaryid   = userList[indexPath.row].id ?? 0
+        vc.apiType     = "User"
         self.navigationController?.pushViewController(vc, animated: true)
         
     }

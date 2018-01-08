@@ -47,7 +47,7 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
     var token_str       : String   = "empty"
     var description_txt : String   = ""
     var apiClient       : ApiClient!
-    var businessprimaryid : Int    = 50
+    var businessprimaryid : Int    = 0
     
     @IBOutlet weak var bookmarkdetaillabel: UILabel!
     @IBOutlet weak var sharebusdetaillabel: UILabel!
@@ -148,22 +148,23 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
         let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3) as! ReviewEventViewController
         child_1.popdelegate     = self
         child_1.apiType         = "Business"
-        child_1.primaryid       = 50
+        child_1.primaryid       = businessprimaryid
         
         let child_2 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid2) as! MenuEventViewController
         child_2.menuDelegate    = self
         child_2.itemType        = "Business"
-        child_2.primayId        = 50
+        child_2.primayId        = businessprimaryid
         
         let child_3 = UIStoryboard(name: Constants.ItemDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid7)  as! LocationTabController
         child_3.locationdelegate = self
-        child_3.primaryid        = 50
+        child_3.primaryid        = businessprimaryid
         child_3.type             = "Business"
         
         let child_4 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1) as! EventTabController
         child_4.scrolltableview = false
         child_4.eventdelegate   = self
         child_4.apiType         = "Business"
+        child_4.businessid      = businessprimaryid
         
         return [child_1,child_2,child_3,child_4]
         

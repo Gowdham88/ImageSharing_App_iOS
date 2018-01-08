@@ -44,11 +44,12 @@ class ProfileLinkController: UIViewController,UICollectionViewDelegate,UICollect
     lazy var bookmarktype : String    = "empty"
     
     
-    var primaryid       : Int = 51
+    var primaryid       : Int = 0
     var pageno          : Int = 1
     var limitno         : Int = 25
     var viewState       : Bool = false
     var apiClient       : ApiClient!
+    var apiType : String = ""
     
     var postList = [PostListDataItems]()
     var postModel  : PostListByEventId?
@@ -71,7 +72,15 @@ class ProfileLinkController: UIViewController,UICollectionViewDelegate,UICollect
         
         apiClient = ApiClient()
         /***********************Setuserdetails****************************/
-        GetBusinessDetails()
+        
+        switch apiType {
+        case "User":
+            GetUserDetails()
+        default:
+            GetBusinessDetails()
+        }
+        
+        
         
         
     }
@@ -426,8 +435,19 @@ extension ProfileLinkController {
             
             let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
             let param  : String      = "page=\(pageno)&limit\(limit)"
+            var user_id : Int  = 0
             
-            self.apiClient.getPostList(id: self.postListDataItems?.postcreator?.id ?? 0, page: param, type: "Users", headers: header, completion: { status,Values in
+            switch self.apiType {
+                
+            case "User" :
+                 user_id = self.primaryid
+                
+            default :
+                user_id = self.postListDataItems?.postcreator?.id ?? 0
+                
+            }
+            
+            self.apiClient.getPostList(id: user_id, page: param, type: "Users", headers: header, completion: { status,Values in
                 
                 if status == "success" {
                     
@@ -584,55 +604,154 @@ extension ProfileLinkController {
             
         })
     }
-    func getDetails(response:BusinessDetailModel) {
+    func getDetails(response:Any) {
         
-        if let name = response.name {
-            userNamelabel.text = name
-            navigationItemList.title = "@\(name)"
-        } else {
+        switch response {
+        case is BusinessDetailModel:
+      
+          let model = response as! BusinessDetailModel
             
-           collectionTagTop.constant = 0
-            
-        }
-        
-        if let description = response.businessdescription {
-            descriptionlabel.text = description
-        }
-        
-        
-        
-        if let taglist = response.taglist {
-            if taglist.count > 0 {
-                itemArray = taglist
-                collectionView.reloadData()
+            if let name = model.name {
+                userNamelabel.text = name
+                navigationItemList.title = "@\(name)"
+            } else {
+                
+                collectionTagTop.constant = 0
+                
             }
-        } else {
             
-            collectionTagTop.constant = 0
-            collectionTagHeight.constant = 0
-        }
-        
-        
-        if let imglist = response.imagelist {
-            if imglist.count > 0 {
-                if let url = imglist[imglist.count-1].imageurl_str {
-                    
-                    apiClient.getFireBaseImageUrl(imagepath: url, completion: { imageUrl in
+            if let description = model.businessdescription {
+                descriptionlabel.text = description
+            }
+            
+            
+            
+            if let taglist = model.taglist {
+                if taglist.count > 0 {
+                    itemArray = taglist
+                    collectionView.reloadData()
+                }
+            } else {
+                
+                collectionTagTop.constant = 0
+                collectionTagHeight.constant = 0
+            }
+            
+            
+            if let imglist = model.imagelist {
+                if imglist.count > 0 {
+                    if let url = imglist[imglist.count-1].imageurl_str {
                         
-                        if imageUrl != "empty" {
+                        apiClient.getFireBaseImageUrl(imagepath: url, completion: { imageUrl in
                             
-                            Manager.shared.loadImage(with: URL(string : imageUrl)!, into: self.userImage)
-                        }
+                            if imageUrl != "empty" {
+                                
+                                Manager.shared.loadImage(with: URL(string : imageUrl)!, into: self.userImage)
+                            }
+                            
+                        })
                         
-                    })
-                    
-                    
+                        
+                    }
                 }
             }
+            
+        case is UserList:
+            
+            let model = response as! UserList
+            
+            if let name = model.username {
+                userNamelabel.text = name
+                navigationItemList.title = "@\(name)"
+            } else {
+                
+                collectionTagTop.constant = 0
+                
+            }
+            
+            if let description = model.description {
+                descriptionlabel.text = description
+            }
+            
+            
+            
+            if let taglist = model.tagList {
+                if taglist.count > 0 {
+                    itemArray = taglist
+                    collectionView.reloadData()
+                }
+            } else {
+                
+                collectionTagTop.constant = 0
+                collectionTagHeight.constant = 0
+            }
+            
+            
+            if let imglist = model.imgList {
+                if imglist.count > 0 {
+                    if let url = imglist[imglist.count-1].imageurl_str {
+                        
+                        apiClient.getFireBaseImageUrl(imagepath: url, completion: { imageUrl in
+                            
+                            if imageUrl != "empty" {
+                                
+                                Manager.shared.loadImage(with: URL(string : imageUrl)!, into: self.userImage)
+                            }
+                            
+                        })
+                        
+                        
+                    }
+                }
+            }
+            
+        default:
+           userNamelabel.text = ""
         }
        
         self.myScrollView.isHidden = false
     }
+    
+    func GetUserDetails(){
+        
+        LoadingHepler.instance.show()
+        
+        apiClient.getFireBaseToken(completion: { token in
+            
+            let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
+            self.apiClient.getUserById(id : self.primaryid,headers: header, completion: { status,Values in
+                
+                if status == "success" {
+                    if let response = Values {
+                        
+                        LoadingHepler.instance.hide()
+                        self.methodToCallApi(pageno: self.pageno, limit: self.limitno)
+                        
+                        DispatchQueue.main.async {
+                            
+                            self.getDetails(response:response)
+                            
+                        }
+                        
+                    }
+                    
+                } else {
+                    print("json respose failure:::::::")
+                    LoadingHepler.instance.hide()
+                    self.methodToCallApi(pageno: self.pageno, limit: self.limitno)
+                    
+                    DispatchQueue.main.async {
+                        
+                        self.myScrollView.isHidden = false
+                        
+                    }
+                    
+                }
+            })
+            
+        })
+    }
+    
   
 }
 

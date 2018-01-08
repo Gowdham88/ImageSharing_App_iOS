@@ -28,7 +28,7 @@ class LocationTabController: UIViewController,IndicatorInfoProvider {
     @IBOutlet weak var locationTableView: UITableView!
     var locationdelegate : LocationTabControllerDelegate?
     var viewState        : Bool = false
-    var primaryid        : Int  = 35
+    var primaryid        : Int  = 0
     var type             : String = "Item"
     
     override func viewDidLoad() {
@@ -169,7 +169,8 @@ extension LocationTabController : UITableViewDelegate,UITableViewDataSource {
     func  openStoryBoard() {
         
         let storyboard = UIStoryboard(name: Constants.LocationDetail, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.LocationDetailId)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.LocationDetailId) as! LocationDetailcontroller
+        vc.primaryId   = primaryid
         self.navigationController!.pushViewController(vc, animated: true)
         
     }

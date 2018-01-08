@@ -165,7 +165,7 @@ class  ApiClient {
             
         case "posts":
             
-            baseUrl = "\(Constants.homeSearchApi)/events?page=\(pageno)"
+            baseUrl = "\(Constants.homeSearchApi)/posts?page=\(pageno)"
             
         case "users":
             
@@ -936,6 +936,41 @@ class  ApiClient {
             case .failure(let error):
                 
                 print(error)
+                completion(error.localizedDescription,nil)
+                
+            }
+            
+        }
+        
+    }
+    
+    /********************************getItemsbasedid*************************************************/
+    
+    func getUserById(id : Int,headers : HTTPHeaders,completion : @escaping (String,UserList?)-> Void) {
+        
+        Alamofire.request("\(Constants.Bookmarkpost)/\(id)", method: .get,encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            
+            print(response.request as Any)
+            print(response.result.value as Any)
+            
+            switch response.result {
+                
+            case .success :
+                
+                if let value = response.result.value {
+                    
+                    let json = JSON(value)
+                    if let userList = UserList(json: json) {
+                        
+                        completion("success",userList)
+                    }
+                    
+                }
+                
+                
+            case .failure(let error):
+                
+                print(error.localizedDescription)
                 completion(error.localizedDescription,nil)
                 
             }

@@ -54,7 +54,7 @@ class LocationDetailcontroller: ButtonBarPagerTabStripViewController {
     @IBOutlet weak var shareloclabel: UILabel!
     
     var apiClient     : ApiClient!
-    var primaryId     : Int = 179
+    var primaryId     : Int = 0
     
     /**********************share********************************/
     
@@ -176,19 +176,17 @@ class LocationDetailcontroller: ButtonBarPagerTabStripViewController {
         let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3) as! ReviewEventViewController
         child_1.popdelegate = self
         child_1.apiType     = "Location"
-        child_1.primaryid   = 180
+        child_1.primaryid   = primaryId
         
         let child_2 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid2) as! MenuEventViewController
         child_2.menuDelegate = self
         child_2.itemType     = "Location"
-        child_2.primayId     = 179
+        child_2.primayId     = primaryId
         
         return [child_1,child_2]
         
     }
-    
-    
-    
+  
     
 }
 
@@ -215,7 +213,10 @@ extension LocationDetailcontroller {
     
     func openCompleteMenu(sender:UITapGestureRecognizer) {
         
-        openStoryBoard()
+        let storyboard      = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
+        let vc              = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId) as! BusinessCompleteViewController
+        vc.businessprimaryid = sender.view?.tag ?? 0
+        self.navigationController!.pushViewController(vc, animated: true)
         
     }
     
@@ -697,6 +698,8 @@ func getItemDetails(item : LocationModel) {
     /****************Business Entity************************/
     
     if let entinty = item.business {
+        
+        businessEntityView.tag = entinty.id ?? 0
         
         if let entintyname = entinty.businessname {
             
