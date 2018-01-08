@@ -24,6 +24,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     var autocompleteUrls = [String]()
     var tagArrayList = [TagList]()
     
+    @IBOutlet weak var dropAdjustViewEqualHeight: NSLayoutConstraint!
     @IBOutlet weak var dropDownAdjustView: UIView!
     @IBOutlet weak var cancelDatePicker: UIButton!
     @IBOutlet weak var addButton: UIButton!
@@ -138,6 +139,13 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         birthTextfield.delegate = self
         foodTextfield.delegate = self
         
+        
+        // Tap gesture for city popup
+        
+        let tapGesturenew = UITapGestureRecognizer(target: self, action: #selector(self.tapEdit(recognizer:)))
+        citytableview.addGestureRecognizer(tapGesturenew)
+        tapGesturenew.delegate = self as? UIGestureRecognizerDelegate
+        
         let sampleTapGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(recognizer:)))
         Alert.view.isUserInteractionEnabled = true
         Alert.view.addGestureRecognizer(sampleTapGesture)
@@ -199,7 +207,20 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         setUserDetails()
         
     }
-    
+    func tapEdit(recognizer: UITapGestureRecognizer)  {
+        if recognizer.state == UIGestureRecognizerState.ended {
+            let tapLocation = recognizer.location(in: self.citytableview)
+            if let tapIndexPath = self.citytableview.indexPathForRow(at: tapLocation) {
+                if let tappedCell = self.citytableview.cellForRow(at: tapIndexPath) {
+                    print("selected index is::::::::",tappedCell)
+                    cityTextfield.text = tappedCell.textLabel?.text?.components(separatedBy: ",")[0]
+                    cityTextfield.resignFirstResponder()
+                    
+                }
+                citytableview.isHidden = true
+            }
+        }
+    }
     func navigationTap(){
         let offset = CGPoint(x: 0,y :0)
         self.myscrollView.setContentOffset(offset, animated: true)
@@ -378,12 +399,15 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
            focusEdittext(textfield: textField,focus: true)
         
         if textField == birthTextfield {
+            dismissKeyboard()
             showDatePicker()
             datePicker.isHidden = false
             superVieww.isHidden = false
             doneView.isHidden = false
             cancelDatePicker.isHidden = false
             showPopup(table1: true, table2: true)
+            self.datePickerValueChanged(sender: datePicker)
+
         }else if textField == cityTextfield {
             let cityText = cityTextfield.text!
             if cityText.count > 1 {
@@ -818,15 +842,16 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
                 foodTextfield.resignFirstResponder()
             }
             
-        } else {
-            
-            if let indexPath = citytableview.indexPathForSelectedRow  {
-                let currentCell = citytableview.cellForRow(at: indexPath)
-                cityTextfield.text = (currentCell?.textLabel?.text)!
-                citytableview.isHidden = true
-                cityTextfield.resignFirstResponder()
-            }
         }
+//        else {
+//
+//            if let indexPath = citytableview.indexPathForSelectedRow  {
+//                let currentCell = citytableview.cellForRow(at: indexPath)
+//                cityTextfield.text = (currentCell?.textLabel?.text)!
+//                citytableview.isHidden = true
+//                cityTextfield.resignFirstResponder()
+//            }
+//        }
     }
     
    
@@ -861,12 +886,27 @@ extension SettingsEdit_ProfieViewController {
                     if tagList.id != nil {
                         self.tagidArray = tagList.id!
                     }
-                    if tagList.text != nil {
-                        self.tagnamearray = tagList.text!
+                    if let taglst = tagList.text {
+                        self.tagnamearray = taglst
+                        
                     }
                     DispatchQueue.main.async {
                         self.dropdownTableView.reloadData()
-
+                        if self.tagnamearray.count < 5 {
+                            if self.tagnamearray.count == 1        {
+                                self.dropAdjustViewEqualHeight.constant   = 44
+                            } else if self.tagnamearray.count == 2 {
+                                self.dropAdjustViewEqualHeight.constant   = 88
+                                
+                            } else if self.tagnamearray.count == 3 {
+                                self.dropAdjustViewEqualHeight.constant   = 132
+                            }else if self.tagnamearray.count == 0 {
+                                self.dropDownAdjustView.isHidden = true
+                                self.dropAdjustViewEqualHeight.constant   = 0
+                            }
+                        }else {
+                            self.dropAdjustViewEqualHeight.constant   = 165
+                        }
                     }
                 }
                 
@@ -1150,7 +1190,10 @@ extension SettingsEdit_ProfieViewController {
             }
         })
     }
-    
-    
 }
+
+
+
+    
+
 

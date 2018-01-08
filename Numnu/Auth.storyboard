@@ -286,7 +286,7 @@
                                     <action selector="signupPressed:" destination="URX-2s-g1Q" eventType="touchUpInside" id="pAy-hh-ey2"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LcG-lj-qmb">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LcG-lj-qmb">
                                 <rect key="frame" x="20" y="363" width="232" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="IcV-vX-Gsx"/>
@@ -342,11 +342,11 @@
                                     <constraint firstItem="0eC-fW-28K" firstAttribute="leading" secondItem="jJb-Dr-3jW" secondAttribute="trailing" constant="2" id="yCc-EM-Ac5"/>
                                 </constraints>
                             </view>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="By signing up, you agree to our Terms of Service &amp; Privacy Policy" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vLh-ba-DjL">
-                                <rect key="frame" x="20" y="511" width="280" height="44"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="By signing up, you agree to our Terms of Service &amp; Privacy Policy" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vLh-ba-DjL">
+                                <rect key="frame" x="20" y="511" width="280" height="57"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="Atd-BN-eds"/>
+                                    <constraint firstAttribute="height" constant="57" id="Atd-BN-eds"/>
                                 </constraints>
                                 <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
@@ -361,7 +361,7 @@
                             <constraint firstItem="QFP-6L-TOV" firstAttribute="top" secondItem="gt3-3P-gNM" secondAttribute="bottom" constant="2" id="AJd-lI-COC"/>
                             <constraint firstItem="zcN-0i-lpY" firstAttribute="top" secondItem="LcG-lj-qmb" secondAttribute="bottom" constant="4.5" id="B8Q-Vy-hZ4"/>
                             <constraint firstItem="f3z-ur-6gs" firstAttribute="trailing" secondItem="h6X-V3-3ha" secondAttribute="trailing" constant="20" id="BjL-dc-ChC"/>
-                            <constraint firstItem="f3z-ur-6gs" firstAttribute="bottom" secondItem="vLh-ba-DjL" secondAttribute="bottom" constant="13" id="E03-iZ-AG0"/>
+                            <constraint firstItem="f3z-ur-6gs" firstAttribute="bottom" secondItem="vLh-ba-DjL" secondAttribute="bottom" id="E03-iZ-AG0"/>
                             <constraint firstItem="f3z-ur-6gs" firstAttribute="trailing" secondItem="vFc-8d-c7i" secondAttribute="trailing" constant="30" id="EJ6-y3-9vL"/>
                             <constraint firstItem="vLh-ba-DjL" firstAttribute="top" secondItem="mgR-Vb-Tyk" secondAttribute="bottom" id="Ebq-cq-LSD"/>
                             <constraint firstItem="ypX-7D-CMz" firstAttribute="top" secondItem="HcA-is-X0E" secondAttribute="bottom" constant="14" id="ElK-aG-fj5"/>
@@ -408,6 +408,7 @@
                     <navigationItem key="navigationItem" id="bVt-KY-qgi"/>
                     <size key="freeformSize" width="320" height="568"/>
                     <connections>
+                        <outlet property="MainView" destination="3BE-Pg-9hU" id="Lnj-lQ-pET"/>
                         <outlet property="emailLineView" destination="HcA-is-X0E" id="T9d-T7-1lj"/>
                         <outlet property="emailTextfield" destination="h6X-V3-3ha" id="WR6-X0-eV7"/>
                         <outlet property="emailtitleLAbel" destination="IYu-nF-6Nb" id="7Q9-wL-RRA"/>
@@ -853,7 +854,7 @@
                                     <constraint firstAttribute="width" constant="280" id="yZp-PV-0F6"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="please check the password" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ISg-wM-MbH">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="please check the password" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ISg-wM-MbH">
                                 <rect key="frame" x="20" y="406" width="147" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="26" id="VUz-Ha-4Fd"/>
