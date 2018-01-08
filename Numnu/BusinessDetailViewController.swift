@@ -51,8 +51,8 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
     var token_str     : String = "empty"
     var apiClient     : ApiClient!
     var description_txt : String = ""
-    var businessprimaryid : Int  = 50
-    var eventid : Int  = 34
+    var businessprimaryid : Int  = 0
+    var eventid : Int  = 0
 
 //    var eventid           : Int  = 34
     
@@ -133,14 +133,16 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
     func businesstap(){
      
         let storyboard      = UIStoryboard(name: Constants.Event, bundle: nil)
-        let vc              = storyboard.instantiateViewController(withIdentifier: "eventstoryid")
+        let vc              = storyboard.instantiateViewController(withIdentifier: "eventstoryid") as! EventViewController
+        vc.eventprimaryid   = eventid
         self.navigationController!.pushViewController(vc, animated: true)
     }
     
     func businessIcontap(){
         
         let storyboard      = UIStoryboard(name: Constants.Event, bundle: nil)
-        let vc              = storyboard.instantiateViewController(withIdentifier: "eventstoryid")
+        let vc              = storyboard.instantiateViewController(withIdentifier: "eventstoryid") as! EventViewController
+        vc.eventprimaryid   = eventid
         self.navigationController!.pushViewController(vc, animated: true)
     }
     func navigationTap(){
@@ -320,7 +322,7 @@ extension BusinessDetailViewController {
         
         let storyboard      = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
         let vc              = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId) as! BusinessCompleteViewController
-        vc.businessprimaryid = 50
+        vc.businessprimaryid = businessprimaryid
         self.navigationController!.pushViewController(vc, animated: true)
         
     }

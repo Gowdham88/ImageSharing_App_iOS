@@ -153,38 +153,37 @@ extension MenuItemViewController : UITableViewDelegate,UITableViewDataSource {
         
         switch itemType {
         case "Business":
-            openStoryBoardBusiness(name: Constants.ItemDetail, id: Constants.ItemDetailId)
+            openStoryBoardBusiness(name: Constants.ItemDetail, id: Constants.ItemDetailId,itemId: itemList[indexPath.row].id ?? 0)
             
         case "BusinessEvent":
-            openStoryBoardBusiness(name: Constants.ItemDetail, id: Constants.ItemDetailId)
+            openStoryBoardBusiness(name: Constants.ItemDetail, id: Constants.ItemDetailId,itemId: itemList[indexPath.row].id ?? 0)
             
         case "Location":
-            openStoryBoardBusiness(name: Constants.ItemDetail, id: Constants.ItemDetailId)
+            openStoryBoardBusiness(name: Constants.ItemDetail, id: Constants.ItemDetailId,itemId: itemList[indexPath.row].id ?? 0)
             
             
         default:
-            openStoryBoard(name: Constants.ItemDetail, id: Constants.ItemCompleteId)
+            openStoryBoard(name: Constants.ItemDetail, id: Constants.ItemCompleteId,itemId: itemList[indexPath.row].id ?? 0)
         }
-      
-        
-     
+   
         
     }
     
-    func openStoryBoard (name : String,id : String) {
+    func openStoryBoard (name : String,id : String,itemId : Int) {
         
         let storyboard      = UIStoryboard(name: name, bundle: nil)
         let vc              = storyboard.instantiateViewController(withIdentifier: id) as! ItemCompleteviewcontroller
-        vc.itemprimaryid    = 35
+        vc.itemprimaryid    = itemId
+        vc.eventid          = primaryid
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
     
-    func openStoryBoardBusiness(name : String,id : String) {
+    func openStoryBoardBusiness(name : String,id : String,itemId : Int) {
         
-        let storyboard = UIStoryboard(name: name, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId) as! ItemDetailController
-        vc.itemprimaryid = 39
+        let storyboard   = UIStoryboard(name: name, bundle: nil)
+        let vc           = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId) as! ItemDetailController
+        vc.itemprimaryid = itemId
         self.navigationController!.pushViewController(vc, animated: true)
         
     }

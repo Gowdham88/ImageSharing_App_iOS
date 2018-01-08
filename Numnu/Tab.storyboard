@@ -254,9 +254,12 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="businessImageTap" destination="NNQ-iY-1H0" id="BKJ-Yn-J0V"/>
                                             <outlet property="dishRightLayoutConstraint" destination="p1s-vr-LjW" id="hx6-tQ-2pC"/>
                                             <outlet property="dishwidthConstaint" destination="IIn-dz-KqO" id="CqW-Tw-nn3"/>
+                                            <outlet property="eventImageTap" destination="km4-CZ-vdl" id="Wzb-gN-RDJ"/>
                                             <outlet property="eventTopConstraint" destination="zPd-XV-iCi" id="cd5-iK-VZk"/>
+                                            <outlet property="itemImageTap" destination="SrC-yZ-1Ga" id="8n2-aW-OoT"/>
                                             <outlet property="maincontentView" destination="LPR-Hf-e84" id="LcK-Tg-mOU"/>
                                             <outlet property="placeWidthConstraint" destination="97z-6J-QQM" id="FGa-MQ-DA9"/>
                                             <outlet property="postCommentLabel" destination="ZXr-Ym-xbJ" id="tLN-lc-wDJ"/>
@@ -1063,7 +1066,7 @@
                                         </cells>
                                     </collectionView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Past Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="103-ut-mdO">
-                                        <rect key="frame" x="10" y="175" width="86" height="30"/>
+                                        <rect key="frame" x="10" y="175" width="90.5" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="bkp-e5-x09"/>
                                         </constraints>

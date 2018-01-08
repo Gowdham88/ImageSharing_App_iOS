@@ -44,9 +44,9 @@ class MenuEventViewController: UIViewController,IndicatorInfoProvider,UITableVie
     
     var itemType : String = "default"
     
-    var primayId : Int = 34
+    var primayId : Int = 0
     /********************************Event context******************************************/
-    var eventId  : Int = 34
+    var eventId  : Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()

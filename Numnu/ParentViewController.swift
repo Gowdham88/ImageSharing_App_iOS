@@ -201,18 +201,20 @@ extension ParentViewController : UITextFieldDelegate {
             self.filtertableView.isHidden = true
         }, completion: nil)
         
-        dismissKeyboard()
-        
         if textField == editsearchbyLocation {
             
             editsearchbyLocation.text = ""
             locationDictonary = nil
+            reloadPagerTabStripView()
             
         } else {
             
             editsearchbyItem.text = ""
             searchText = nil
+            reloadPagerTabStripView()
         }
+        
+        dismissKeyboard()
         
         return false
     }

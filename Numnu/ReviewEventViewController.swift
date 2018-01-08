@@ -30,12 +30,12 @@ class ReviewEventViewController: UIViewController,IndicatorInfoProvider {
     var window : UIWindow?
     var popdelegate : ReviewEventViewControllerDelegate?
     var viewState       : Bool = false
-    var primaryid       : Int  = 34
+    var primaryid       : Int  = 0
     var apiType         : String = "Event"
     
    /*********************Event context*******************************/
     
-    var eventId  : Int = 34
+    var eventId  : Int = 0
     
     @IBOutlet weak var businesslabelwidth: NSLayoutConstraint!
     override func viewDidLoad() {

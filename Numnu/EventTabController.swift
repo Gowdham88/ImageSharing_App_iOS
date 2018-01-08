@@ -41,6 +41,7 @@ class EventTabController: UIViewController,IndicatorInfoProvider {
     
     var locationDictonary : [String : Any]?
     var searchText        : String?
+    var businessid        : Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -354,7 +355,7 @@ extension EventTabController {
             let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
             let param  : String  = "page=\(pageno)&limit\(limit)"
             
-            self.apiClient.getEventsByBusinessApi(id: 50, page: param,headers: header, completion: { status,eventlist in
+            self.apiClient.getEventsByBusinessApi(id: self.businessid, page: param,headers: header, completion: { status,eventlist in
                 
                 if status == "success" {
                     
