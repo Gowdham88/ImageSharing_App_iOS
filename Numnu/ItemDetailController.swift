@@ -134,6 +134,12 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
         reloadStripView()
     }
     

@@ -104,12 +104,13 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     override func viewDidLoad() {
         settings.style.selectedBarHeight = 3.0
         settings.style.buttonBarItemFont = UIFont(name: "Avenir-Medium", size: 14)!
+        
         super.viewDidLoad()
         myscrollView.delegate = self
         settings.style.buttonBarBackgroundColor = .white
         settings.style.buttonBarItemBackgroundColor = .white
         settings.style.selectedBarBackgroundColor = UIColor.appBlackColor()
-        
+        settings.style.viewcontrollersCount = (self.view.frame.size.width / 3) - 10;
         settings.style.buttonBarMinimumLineSpacing = 0
         settings.style.buttonBarItemTitleColor = .black
         settings.style.buttonBarItemsShouldFillAvailiableWidth = true
@@ -197,14 +198,16 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        reloadStripView()
+        
     }
+    
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
         self.tabBarController?.tabBar.isHidden = false
-        
+        reloadStripView()
        
     }
     

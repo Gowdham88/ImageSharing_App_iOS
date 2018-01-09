@@ -48,6 +48,7 @@ var getLocDetails = [String]()
         settings.style.selectedBarHeight = 3.0
         settings.style.buttonBarItemFont = UIFont(name: "Avenir-Medium", size: 14)!
         settings.style.buttonBarItemsShouldFillAvailiableWidth = true
+        settings.style.viewcontrollersCount = (self.view.frame.size.width / 5) - 10;
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.isHidden = false
@@ -109,12 +110,13 @@ var getLocDetails = [String]()
         super.viewDidLayoutSubviews()
         self.navigationController?.navigationBar.isHidden = false
 
-        reloadStripView()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewDidAppear(true)
         self.navigationController?.navigationBar.isHidden = false
+        reloadStripView()
 
     }
     override func viewWillAppear(_ animated: Bool){

@@ -379,6 +379,13 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 
                 tagArray.remove(at: index)
                 tagsDictonary.remove(at: index)
+                for (position,value) in tagsDictonary.enumerated() {
+                    
+                    var tagdic = value
+                    tagdic.updateValue(position+1, forKey: "displayorder")
+                    tagsDictonary[position] = tagdic
+                    
+                }
                 
             }
             collectionView.reloadData()
@@ -952,6 +959,13 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         let tag = (sender as AnyObject).tag
         tagArray.remove(at: tag!)
         tagsDictonary.remove(at: tag!)
+        for (position,value) in tagsDictonary.enumerated() {
+            
+            var tagdic = value
+            tagdic.updateValue(position+1, forKey: "displayorder")
+            tagsDictonary[position] = tagdic
+            
+        }
         collectionView.reloadData()
         
     }
@@ -1375,7 +1389,7 @@ extension Edit_ProfileVC {
         
         if let locitem = user.locItem {
             
-            PrefsManager.sharedinstance.userCity = "\(locitem.address_str ?? "Address")"
+            PrefsManager.sharedinstance.userCity = "\(locitem.address_str ?? "")"
             PrefsManager.sharedinstance.userCityId = locitem.id_str ?? 0
             
         }

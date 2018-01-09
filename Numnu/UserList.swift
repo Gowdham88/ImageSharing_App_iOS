@@ -70,12 +70,28 @@ struct  UserList {
             
         }
         
-        let jsoncity = JSON(json["citylocation"])
-        if let citylocation = LocList(array: jsoncity) {
+       
+        
+         let jsoncity = JSON(json["citylocation"])
+        
+        if jsoncity != JSON.null {
+            if let citylocation = LocList(array: jsoncity) {
+                
+                self.locItem = citylocation
+                
+            }
             
-            self.locItem = citylocation
+        } else {
             
+            let jsoncity2 = JSON(json["cityLocation"])
+            if let citylocation2 = LocList(array: jsoncity2) {
+                
+                self.locItem = citylocation2
+                
+            }
         }
+        
+        
         
         if let email = json["email"].string {
             
