@@ -13,6 +13,7 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import Alamofire
 import IQKeyboardManagerSwift
+import DeviceCheck
 
 @available(iOS 10.0, *)
 @available(iOS 10.0, *)
@@ -26,7 +27,10 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate,UITextViewDelegat
     var userprofilename : String = ""
     var userprofileimage : String = ""
     var ViewMoved = true
+    var activeField: UITextField?
 
+    @IBOutlet var MainView: UIView!
+    var viewHasMovedToUp : Bool = false
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var passwordReveal: UIButton!
     @IBOutlet weak var emailtitleLAbel: UILabel!
@@ -61,11 +65,12 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate,UITextViewDelegat
         passwordReveal.setImage(UIImage(named: "Show password icon"), for: .normal)
         passwordReveal.tintColor = UIColor(red: 136/255.0, green: 143/255.0, blue: 158/255.0, alpha: 1.0)
         
-        navigationController?.tabBarController?.tabBar.isHidden = true
-        IQKeyboardManager.sharedManager().enable = false
-        IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = false
-        IQKeyboardManager.sharedManager().enableAutoToolbar = false
-        IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 10
+        navigationController?.tabBarController?.tabBar.isHidden          = true
+        IQKeyboardManager.sharedManager().enable                         = false
+        IQKeyboardManager.sharedManager().shouldResignOnTouchOutside     = false
+        IQKeyboardManager.sharedManager().enableAutoToolbar              = false
+        IQKeyboardManager.sharedManager().keyboardDistanceFromTextField  = 10
+        
 
         labelcredentials.isHidden = true
         signUpButton.layer.cornerRadius = 25
@@ -78,6 +83,19 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate,UITextViewDelegat
             passwordTextfield.textContentType = UITextContentType("")
         }
     }
+    func animateViewMoving (up:Bool, moveValue :CGFloat){
+        let movementDuration:TimeInterval = 0.3
+        let movement:CGFloat = ( up ? -moveValue : moveValue)
+        
+        UIView.beginAnimations("animateView", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(movementDuration)
+        
+//        self.view.frame = CGRectOffset(self.view.frame, 0, movement)
+        self.MainView.frame = self.MainView.frame.offsetBy(dx: 0, dy: movement)
+        UIView.commitAnimations()
+    }
+
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
         let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: Constants.WebViewStoryId) as! WebViewController
@@ -152,8 +170,13 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate,UITextViewDelegat
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-//        animateViewMoving(up: true, moveValue: 0)
 
+//        if UIDevice.current.model == IPhone5S {
+//
+//        }
+        if textField == emailTextfield || textField == passwordTextfield {
+            animateViewMoving(up: true, moveValue: 50)
+        }
         
         if textField == emailTextfield {
             emailtitleLAbel.textColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
@@ -167,7 +190,9 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate,UITextViewDelegat
 
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
-        
+        if textField == emailTextfield || textField == passwordTextfield {
+            animateViewMoving(up: false, moveValue: 50)
+        }
 //        animateViewMoving(up: false, moveValue: 0)
         if textField == emailTextfield {
             emailtitleLAbel.textColor = UIColor(red: 129/255.0, green: 125/255.0, blue: 144/255.0, alpha: 1.0)
@@ -351,7 +376,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate,UITextViewDelegat
                 print("Failed to login: \(error.localizedDescription)")
                 DispatchQueue.main.async {
                     
-                  AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Login failed.", vc: self)
+                  AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Facebook signUp failed.", vc: self)
                
                 }
                 
@@ -391,13 +416,8 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate,UITextViewDelegat
                     LoadingHepler.instance.hide()
                     self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId,firebaseid: (user?.uid)!)
                 }
-                
-                
             })
-          
         }
-
-
     }
 }
 

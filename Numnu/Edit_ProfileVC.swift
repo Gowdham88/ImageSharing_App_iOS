@@ -27,6 +27,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     
     @IBOutlet weak var dropDownAdjustView: UIView!
     
+    @IBOutlet weak var dropAdjustViewEqualHeight: NSLayoutConstraint!
+    
     /*************Parameters************************/
     
     var firebaseid : String = "empty"
@@ -126,6 +128,13 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         foodTextfield.delegate = self
         descriptionTextfield.delegate = self
         
+        // Tap gesture for city popup
+        
+        let tapGesturenew = UITapGestureRecognizer(target: self, action: #selector(self.tapEdit(recognizer:)))
+        cityTableView.addGestureRecognizer(tapGesturenew)
+        tapGesturenew.delegate = self as? UIGestureRecognizerDelegate
+        
+        
         let sampleTapGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(recognizer:)))
        
         Alert.view.isUserInteractionEnabled = true
@@ -144,12 +153,14 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         doneButotn.addTarget(self, action: #selector(doneClick), for: UIControlEvents.allTouchEvents)
         addButton.addTarget(self, action: #selector(addClicked), for: UIControlEvents.allTouchEvents)
         cancelDatePicker.addTarget(self, action: #selector(dateCancelClicked), for: UIControlEvents.allTouchEvents)
+//        datePicker.addTarget(self, action: #selector(Edit_ProfileVC.datePickerValueChanged), for: UIControlEvents.valueChanged)
+
 
         foodTextfield.addTarget(self, action: #selector(textFieldActive), for: UIControlEvents.allTouchEvents)
         
-//        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(Edit_ProfileVC.navigationTap))
-//        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
-//        self.navigationController?.navigationBar.isUserInteractionEnabled = true
+        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(Edit_ProfileVC.navigationTap))
+        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+        self.navigationController?.navigationBar.isUserInteractionEnabled = true
         
         
         dropdownArray = []
@@ -200,7 +211,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             
             
         }
-
         
         // Checking users login
         /***********************Api login******************************/
@@ -208,7 +218,25 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         /************************getFirebaseToken*************************************/
         getFirebaseToken()
     }
-    
+    func tapEdit(recognizer: UITapGestureRecognizer)  {
+        if recognizer.state == UIGestureRecognizerState.ended {
+            let tapLocation = recognizer.location(in: self.cityTableView)
+            if let tapIndexPath = self.cityTableView.indexPathForRow(at: tapLocation) {
+                if let tappedCell = self.cityTableView.cellForRow(at: tapIndexPath) {
+                    cityTextfield.text = tappedCell.textLabel?.text?.components(separatedBy: ",")[0]
+                    
+                    apiClient.getPlaceCordinates(placeid_Str: autocompleteplaceID[tapIndexPath.row], completion: { lat,lang in
+                        
+                        self.cityDictonary = ["name":self.autocompleteplaceArray[tapIndexPath.row],"address":self.autocompleteplaceArray[tapIndexPath.row],"isgoogleplace":true,"googleplaceid":self.autocompleteplaceID[tapIndexPath.row],"googleplacetype":"geocode","lattitude":lat,"longitude":lang]
+                    })
+                    cityTextfield.resignFirstResponder()
+
+                }
+
+                cityTableView.isHidden = true
+            }
+        }
+    }
     func focusEdittext(textfield : UITextField,focus:Bool) {
         
         switch textfield {
@@ -315,19 +343,19 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     }
     func dateCancelClicked() {
         cancelBool = true
-        
+       
+//        if dateLabel.text == "" || monthLabel.text == "" || yearLabel.text == "" {
+            birthTextfield.text = ""
+            dateLabel.text = ""
+            monthLabel.text = ""
+            yearLabel.text = ""
+//        }
+    
         datePicker.isHidden = true
         doneView.isHidden = true
         superVieww.isHidden = true
-        
-
-        birthTextfield.text = ""
-                    dateLabel.text = ""
-                    monthLabel.text = ""
-                    yearLabel.text = ""
         datePicker.resignFirstResponder()
 
-//        birthTextfield.text = ""
     }
     func addClicked() {
         
@@ -341,15 +369,14 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             } else {
                 
                 tagArray.append(foodTextfield.text!)
-                dropdownTableView.isHidden = true
+                dropdownTableView.isHidden  = true
+                dropDownAdjustView.isHidden = true
                 
                 /************Adding to dictonary**********************/
                 let tagItem = ["text": foodTextfield.text!,"displayorder":tagArray.count] as [String : Any]
                 tagsDictonary.append(tagItem)
                 
             }
-            print("the appended item is:::::",foodTextfield.text!)
-            //        tagArray.remove(at: 1)
             if let index = tagArray.index(of:"") {
                 
                 tagArray.remove(at: index)
@@ -364,8 +391,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     func genderClicked(){
         genderTextfield.resignFirstResponder()
        showGenderActionsheet()
-
-    
     }
   
     func showGenderActionsheet() {
@@ -437,6 +462,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         } else if textField == cityTextfield {
             
             cityTableView.isHidden  = true
+        } else if textField == genderTextfield {
+            textField.resignFirstResponder()
         }
         textField.resignFirstResponder()
         return true
@@ -449,7 +476,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             if foodtext.count > 1 {
                 showPopup(table1: true, table2: false)
                 dropDownAdjustView.isHidden = false
-
             }else{
                 showPopup(table1: true, table2: true)
                 dropDownAdjustView.isHidden = true
@@ -457,7 +483,6 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
 //            dropdownTableView.isHidden = false
             let substring = (foodTextfield.text! as NSString).replacingCharacters(in: range, with: string )
             loadTagList(tag: substring)
-            
         } else if textField == cityTextfield {
             let citytext = cityTextfield.text!
             if citytext.count > 1 {
@@ -510,13 +535,13 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         }
 
         if textField == birthTextfield {
+            dismissKeyboard()
             showDatePicker()
+//            showPopup(table1: true, table2: true)
+//            self.datePickerValueChanged(sender: datePicker)
             birthTextfield.resignFirstResponder()
-            datePicker.isHidden = false
-            superVieww.isHidden = false
-            doneView.isHidden = false
-            showPopup(table1: true, table2: true)
-        }else if textField == cityTextfield {
+
+        } else if textField == cityTextfield {
             let cityText = cityTextfield.text!
             if cityText.count > 1 {
                 showPopup(table1: false, table2: true)
@@ -528,8 +553,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             
 
         } else if textField == genderTextfield {
+            dismissKeyboard()
             showPopup(table1: true, table2: true)
-            self.datePickerValueChanged(sender: datePicker)
+//            self.datePickerValueChanged(sender: datePicker)
             datePicker.isHidden = true
             superVieww.isHidden = true
             doneView.isHidden   = true
@@ -588,10 +614,12 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         if textField == birthTextfield {
             
                 if cancelBool == true {
-                    birthTextfield.text = ""
-                    dateLabel.text      = ""
-                    monthLabel.text     = ""
-                    yearLabel.text      = ""
+                    if dateLabel.text == "" || monthLabel.text == "" || yearLabel.text == "" {
+                        birthTextfield.text = ""
+                        dateLabel.text = ""
+                        monthLabel.text = ""
+                        yearLabel.text = ""
+                    }
                 }else{
                     self.datePickerValueChanged(sender: datePicker)
                     
@@ -663,20 +691,15 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         datePicker.isHidden = false
         superVieww.isHidden = false
         doneView.isHidden = false
-        // Creates the toolbar
-//        let toolBar = UIToolbar()
-//        toolBar.barStyle = .default
-//        toolBar.isTranslucent = true
-//        toolBar.tintColor = UIColor.blue
-//        toolBar.sizeToFit()
         datePicker.addTarget(self, action: #selector(Edit_ProfileVC.datePickerValueChanged), for: UIControlEvents.valueChanged)
     }
     func doneClick() {
-        birthTextfield.resignFirstResponder()
-        self.view.endEditing(true)
         superVieww.isHidden = true
         datePicker.isHidden = true
         doneView.isHidden = true
+        self.datePickerValueChanged(sender: datePicker)
+        birthTextfield.resignFirstResponder()
+        self.view.endEditing(true)
     }
   
     func datePickerValueChanged(sender:UIDatePicker) {
@@ -970,6 +993,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             
             dropdownTableView.transform = CGAffineTransform(scaleX: 1, y: -1)
             cell?.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
+           
+            
 //            tableView.transform = CGAffineTransform(rotationAngle: (-.pi))
 //            cell?.transform = CGAffineTransform(rotationAngle: (-.pi))
 //            cell?.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1.0)
@@ -1025,8 +1050,11 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 let currentCell = dropdownTableView.cellForRow(at: indexPath)
                 dropdownString = (currentCell?.textLabel?.text)!
                 if tagArray.contains(dropdownString) {
+
                     print("already exist")
+                    
                 } else {
+
                     tagArray.append(dropdownString)
                     let tagItem = ["id": tagidArray[indexPath.row],"displayorder":tagArray.count]
                     tagsDictonary.append(tagItem)
@@ -1038,20 +1066,22 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                
             }
             
-        } else {
-            
-            if let indexPath = cityTableView.indexPathForSelectedRow  {
-                let currentCell = cityTableView.cellForRow(at: indexPath)
-                cityTextfield.text = (currentCell?.textLabel?.text)!
-                cityTableView.isHidden = true
-                cityTextfield.resignFirstResponder()
-                
-                apiClient.getPlaceCordinates(placeid_Str: autocompleteplaceID[indexPath.row], completion: { lat,lang in
-                
-                  self.cityDictonary = ["name":self.autocompleteplaceArray[indexPath.row],"address":self.autocompleteplaceArray[indexPath.row],"isgoogleplace":true,"googleplaceid":self.autocompleteplaceID[indexPath.row],"googleplacetype":"geocode","lattitude":lat,"longitude":lang]
-                  })
-            }
         }
+//        else {
+//
+//            if let indexPath = cityTableView.indexPathForSelectedRow  {
+//                let currentCell = cityTableView.cellForRow(at: indexPath)
+//                cityTextfield.text = (currentCell?.textLabel?.text)!.components(separatedBy: ",")[0]
+//                print("city address is::::",cityTextfield.text as! String)
+//                cityTableView.isHidden = true
+//                cityTextfield.resignFirstResponder()
+//
+//                apiClient.getPlaceCordinates(placeid_Str: autocompleteplaceID[indexPath.row], completion: { lat,lang in
+//
+//                  self.cityDictonary = ["name":self.autocompleteplaceArray[indexPath.row],"address":self.autocompleteplaceArray[indexPath.row],"isgoogleplace":true,"googleplaceid":self.autocompleteplaceID[indexPath.row],"googleplacetype":"geocode","lattitude":lat,"longitude":lang]
+//                  })
+//            }
+//        }
     }
 }
 
@@ -1085,11 +1115,28 @@ extension Edit_ProfileVC {
                     if tagList.id != nil {
                         self.tagidArray = tagList.id!
                     }
-                    if tagList.text != nil {
-                        self.tagnamearray = tagList.text!
+                    if let taglst = tagList.text {
+                        self.tagnamearray = taglst
+
                     }
+                   
                     DispatchQueue.main.async {
                         self.dropdownTableView.reloadData()
+                        if self.tagnamearray.count < 5 {
+                            if self.tagnamearray.count == 1        {
+                                self.dropAdjustViewEqualHeight.constant   = 44
+                            } else if self.tagnamearray.count == 2 {
+                                self.dropAdjustViewEqualHeight.constant   = 88
+
+                            } else if self.tagnamearray.count == 3 {
+                                self.dropAdjustViewEqualHeight.constant   = 132
+                            } else if self.tagnamearray.count == 0 {
+                                self.dropDownAdjustView.isHidden = true
+                                self.dropAdjustViewEqualHeight.constant   = 0
+                            }
+                        }else {
+                            self.dropAdjustViewEqualHeight.constant   = 165
+                        }
                     }
                 }
             } else {
@@ -1349,7 +1396,7 @@ extension Edit_ProfileVC {
         
         if table1 == false || table2 == false {
             
-            self.datePickerValueChanged(sender: datePicker)
+//            self.datePickerValueChanged(sender: datePicker)
             datePicker.isHidden = true
             superVieww.isHidden = true
             doneView.isHidden = true
