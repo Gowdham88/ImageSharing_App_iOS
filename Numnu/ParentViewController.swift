@@ -49,6 +49,8 @@ var getLocDetails = [String]()
         settings.style.buttonBarItemFont = UIFont(name: "Avenir-Medium", size: 14)!
         settings.style.buttonBarItemsShouldFillAvailiableWidth = true
         super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.isHidden = false
         // change selected bar color
         
         settings.style.buttonBarBackgroundColor = .white
@@ -87,8 +89,8 @@ var getLocDetails = [String]()
         apiClient = ApiClient()
         
         if let address =  PrefsManager.sharedinstance.lastlocation {
-            
-            editsearchbyLocation.text = address.components(separatedBy: ",")[1]
+            editsearchbyLocation.text = address
+//            editsearchbyLocation.text = address.components(separatedBy: ",")[1]
         }
         
     }
@@ -105,20 +107,26 @@ var getLocDetails = [String]()
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+        self.navigationController?.navigationBar.isHidden = false
+
         reloadStripView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
+        self.navigationController?.navigationBar.isHidden = false
+
     }
     override func viewWillAppear(_ animated: Bool){
-        
+        self.navigationController?.navigationBar.isHidden = false
+
         let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(ParentViewController.navigationTap))
         self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
         self.navigationController?.navigationBar.isUserInteractionEnabled = true
 
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Avenir-Heavy", size: 16)!]
+
+        
     }
     @IBAction func ButtonSearach(_ sender: UIButton) {
  
@@ -268,6 +276,7 @@ extension ParentViewController {
         tabScrollView.isHidden           = false
         
         navigationItemList.title = "Numnu"
+        
 
 
         

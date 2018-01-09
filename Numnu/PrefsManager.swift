@@ -27,7 +27,28 @@ struct PrefsManager {
         }
         
     }
-
+    var isFirstTime : Bool {
+        
+        get {
+            
+            if checkprefsobject(object: Constants.appopenstatus) {
+                
+                return UserDefaults.standard.bool(forKey: Constants.appopenstatus)
+                
+            } else {
+                
+                return false
+            }
+            
+            
+        }
+        
+        set {
+            
+            UserDefaults.standard.set(newValue, forKey: Constants.appopenstatus)
+            UserDefaults.standard.synchronize()
+        }
+    }
     var isLoginned : Bool {
         
         get {
