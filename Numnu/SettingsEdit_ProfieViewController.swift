@@ -79,7 +79,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     @IBOutlet var myscrollView: UIScrollView!
     @IBOutlet var saveButton: UIButton!
     let locationManager = CLLocationManager()
-    var Alert = UIAlertController()
+//    var Alert = UIAlertController()
     //Upload Image Declaration
     let imagePicker = UIImagePickerController()
     var pickedImagePath: NSURL?
@@ -154,8 +154,8 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         tapGesturenew.delegate = self as? UIGestureRecognizerDelegate
         
         let sampleTapGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(recognizer:)))
-        Alert.view.isUserInteractionEnabled = true
-        Alert.view.addGestureRecognizer(sampleTapGesture)
+//        Alert.view.isUserInteractionEnabled = true
+//        Alert.view.addGestureRecognizer(sampleTapGesture)
 
         IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
@@ -295,21 +295,27 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         
     }
     
+    
+
+    
+    
+    
     func showGenderActionsheet() {
         
-        Alert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
-        let FemaleAction = UIAlertAction(title: "Female", style: UIAlertActionStyle.default) { _ in
+        let Alert: UIAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let FemaleAction: UIAlertAction = UIAlertAction(title: "Female", style:  .default) { _ in
             self.genderTextfield.text = "Female"
             self.genderTextfield.resignFirstResponder()
             
         }
-        let MaleAction = UIAlertAction(title: "Male", style: UIAlertActionStyle.default) { _ in
+        let MaleAction: UIAlertAction = UIAlertAction(title: "Male", style: .default) { _ in
             self.genderTextfield.text = "Male"
             self.genderTextfield.resignFirstResponder()
             
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) { _ in
-        }
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel)
+        cancelAction.setValue(UIColor.red, forKey: "titleTextColor")
+
         Alert.addAction(FemaleAction)
         Alert.addAction(MaleAction)
         Alert.addAction(cancelAction)
@@ -612,21 +618,22 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         saveClicked()
     }
     
-   
+
     
     // Image Picker //
     @IBAction func editPicture(_ sender: Any) {
         imagePicker.allowsEditing = false
-        let Alert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
-        let CameraAction = UIAlertAction(title: "Camera", style: UIAlertActionStyle.default) { ACTION in
+        let Alert: UIAlertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        let CameraAction: UIAlertAction = UIAlertAction(title: "Camera", style: .default) { ACTION in
             self.showCamera()
             }
     
-        let GalleryAction = UIAlertAction(title: "Gallery", style: UIAlertActionStyle.default) { ACTION in
+        let GalleryAction: UIAlertAction = UIAlertAction(title: "Gallery", style: .default) { ACTION in
             self.showGallery()
         }
-        let CancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) {_ in
-        }
+        let CancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel)
+        CancelAction.setValue(UIColor.red, forKey: "titleTextColor")
+
         Alert.addAction(CameraAction)
         Alert.addAction(GalleryAction)
         Alert.addAction(CancelAction)
