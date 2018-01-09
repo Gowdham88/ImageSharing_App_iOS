@@ -255,6 +255,29 @@ struct PrefsManager {
         }
     }
     
+    var userCityId : Int {
+        
+        get {
+            
+            if checkprefsobject(object: Constants.userCityId) {
+                
+                return UserDefaults.standard.integer(forKey: Constants.userCityId)
+                
+            } else {
+                
+                return 0
+            }
+            
+        }
+        
+        set {
+            
+            UserDefaults.standard.set(newValue, forKey: Constants.userCityId)
+            
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
     var description : String {
         
         get {
@@ -262,6 +285,7 @@ struct PrefsManager {
             if checkprefsobject(object: Constants.description) {
                 
                 return UserDefaults.standard.string(forKey: Constants.description)!
+                
             } else {
                 
                 return "empty"
@@ -284,6 +308,7 @@ struct PrefsManager {
             if checkprefsobject(object: Constants.lastlocation) {
                 
                 return UserDefaults.standard.string(forKey: Constants.lastlocation)!
+                
             } else {
                 
                 return nil
