@@ -386,21 +386,6 @@ extension BusinessDetailViewController {
             present(Alert, animated: true, completion:nil )
         }
     }
-    
-//    func openPopup() {
-//
-//        self.shareView.alpha   = 1
-//
-//        let top = CGAffineTransform(translationX: 0, y: 0)
-//
-//        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-//            self.shareView.isHidden = false
-//            self.shareView.transform = top
-//
-//        }, completion: nil)
-//
-//    }
-    
 }
 
 /*************Post Delegate****************/
@@ -473,7 +458,6 @@ extension BusinessDetailViewController {
                 }
                 
             } else {
-                print("json respose failure:::::::")
                 LoadingHepler.instance.hide()
                 DispatchQueue.main.async {
                     
@@ -487,7 +471,7 @@ extension BusinessDetailViewController {
     func getDetails(response:BusinessDetailModel) {
           
         if let name = response.businessname {
-            busTitleLabel.text = name
+            busTitleLabel.text = name + " >"
             
         } else {
             

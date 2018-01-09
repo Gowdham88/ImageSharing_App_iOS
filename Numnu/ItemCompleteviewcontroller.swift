@@ -23,8 +23,11 @@ class ItemCompleteviewcontroller : UIViewController {
     var popdelegate : ItemCompleteviewcontrollerDelegate?
     var viewState       : Bool = false
 
-
-
+    @IBOutlet weak var businessEqualHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var descriptionTopToBusinessname: NSLayoutConstraint!
+    @IBOutlet weak var eventnameTopConstraintToBusinessname: NSLayoutConstraint!
+    
     @IBOutlet weak var ItImageView: ImageExtender!
     @IBOutlet weak var ItTitleLabel: UILabel!
     var description_txt : String = ""
@@ -456,21 +459,6 @@ extension ItemCompleteviewcontroller {
         }
     }
     
-//    func openPopup() {
-//
-//        self.shareView.alpha   = 1
-//
-//        let top = CGAffineTransform(translationX: 0, y: 0)
-//
-//        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-//            self.shareView.isHidden = false
-//            self.shareView.transform = top
-//
-//        }, completion: nil)
-//
-//
-//    }
-    
     func closePopup() {
         
         bookmarkid   = 0
@@ -806,7 +794,7 @@ extension ItemCompleteviewcontroller {
         
         if let itemname = item.itemname {
             
-            ItTitleLabel.text = itemname
+            ItTitleLabel.text = itemname + " >"
             
         }
         
@@ -819,15 +807,16 @@ extension ItemCompleteviewcontroller {
             
             if (eventname.numberOfVisibleLines > 1) {
                 
-                descriptionTopConstraint.constant = 46
+                descriptionTopConstraint.constant = 36
             }
             
             
         } else {
             
             eventname.text = ""
-            descriptionTopConstraint.constant = 30
+            descriptionTopConstraint.constant = 25
             eventImageHeightConstraint.constant = 0
+            
             
         }
         
@@ -840,9 +829,10 @@ extension ItemCompleteviewcontroller {
         } else {
             
             businessName.text = ""
-            descriptionTopConstraint.constant = 30
+            descriptionTopConstraint.constant = 10
             itemImageTopConstraint.constant    = 0
             itemImageHeightConstraint.constant = 0
+//            eventnameTopConstraintToBusinessname.constant = 0
         }
         
         if let itemcurrenyid = item.currencycode,let itemcurrency = item.priceamount {
@@ -917,7 +907,7 @@ extension ItemCompleteviewcontroller {
             
         } else {
             
-            descriptionTopConstraint.constant = 30
+            descriptionTopConstraint.constant      = 25
             tagscrollviewheightconstraint.constant = 0
             tagscroltopConstraint.constant         = 0
          

@@ -358,14 +358,14 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate,UITextViewDelegat
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 //        self.navigationController?.setNavigationBarHidden(true, animated: true)
-        self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.navigationBar.isHidden = true
 
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         // Show the navigation bar on other view controllers
-        self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     @IBAction func fbSignup(_ sender: Any) {

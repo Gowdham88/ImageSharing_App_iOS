@@ -81,7 +81,7 @@ class EventTableViewCell : UITableViewCell {
             let startdate = DateFormatterManager.sharedinstance.stringtoDate(format: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", date: start_date)
             let enddate   = DateFormatterManager.sharedinstance.stringtoDate(format: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", date: end_date)
             
-            guard let start = DateFormatterManager.sharedinstance.datetoString(format: "MMM dd,h:mm a", date: startdate), let end = DateFormatterManager.sharedinstance.datetoString(format: "MMM dd,h:mm a", date: enddate) else {
+            guard let start = DateFormatterManager.sharedinstance.datetoString(format: "MMM dd, h:mm a", date: startdate), let end = DateFormatterManager.sharedinstance.datetoString(format: "MMM dd, h:mm a", date: enddate) else {
                 
                 return
             }
