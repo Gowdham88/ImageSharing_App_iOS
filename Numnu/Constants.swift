@@ -111,6 +111,7 @@ class Constants {
     static let dateOfBirth  = "dateOfBirth"
     static let gender       = "gender"
     static let userCity     = "userCity"
+    static let userCityId   = "userCityId"
     static let description  = "description"
     static let lastlocation = "lastlocation"
     static let lastlocationlat  = "lastlocationlat"

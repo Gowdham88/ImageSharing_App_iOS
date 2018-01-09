@@ -1026,7 +1026,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 dropdownString = (currentCell?.textLabel?.text)!
                 if tagArray.contains(dropdownString) {
                     print("already exist")
-                }else {
+                } else {
                     tagArray.append(dropdownString)
                     let tagItem = ["id": tagidArray[indexPath.row],"displayorder":tagArray.count]
                     tagsDictonary.append(tagItem)
@@ -1331,6 +1331,7 @@ extension Edit_ProfileVC {
         if let locitem = user.locItem {
             
             PrefsManager.sharedinstance.userCity = "\(locitem.address_str ?? "Address")"
+            PrefsManager.sharedinstance.userCityId = locitem.id_str ?? 0
             
         }
         

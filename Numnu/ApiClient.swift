@@ -105,6 +105,59 @@ class  ApiClient {
         
     }
     
+    /*********************Edit Profile Api*****************************/
+    
+    func editProfileApi(parameters : Parameters,id : Int,headers : HTTPHeaders,completion : @escaping (String,UserList?) -> Void) {
+        
+        Alamofire.request("\(Constants.completeSignup)/\(id)", method: .put, parameters: parameters,encoding: JSONEncoding.default,headers: headers).validate().responseJSON { response in
+            
+            print(response.result.value as Any)
+            
+            switch response.result {
+                
+            case .success:
+                
+                if let value = response.result.value {
+                    
+                    print(value)
+                    
+                    let json = JSON(value)
+                    
+                    if let userList = UserList(json: json) {
+                        
+                        completion("success",userList)
+                    }
+                    
+                    
+                }
+                
+                
+            case .failure(let error):
+                
+                print(error.localizedDescription)
+                
+                if let httpStatusCode = response.response?.statusCode {
+                    
+                    if let value = response.data,httpStatusCode == 400 {
+                        let json = JSON(value)
+                        if let message = UserList(json: json) {
+                            
+                            completion("400",message)
+                            return
+                        }
+                        
+                    }
+                    
+                }
+                
+                completion(error.localizedDescription,nil)
+                
+            }
+        }
+        
+        
+    }
+    
     /************************Username check Api**********************************/
     
     func usernameexists(parameters : String,headers : HTTPHeaders,completion : @escaping (String,Bool?) -> Void) {

@@ -17,9 +17,10 @@ import Nuke
 
 
 class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,GMSAutocompleteViewControllerDelegate,UICollectionViewDelegateFlowLayout {
-    var dropdownArray = [String] ()
+    var dropdownArray  = [String]()
     var dropdownString = String ()
-    var tagArray = [String] ()
+    var tagArray       = [String] ()
+    var tagIdArray     = [Int]()
     var selectedIndex = Int()
     var autocompleteUrls = [String]()
     var tagArrayList = [TagList]()
@@ -85,6 +86,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     var localPath: String?
     var apiClient : ApiClient!
     var autocompleteplaceArray = [String]()
+    var autocompleteplaceID    = [String]()
     /***************Tags array*****************/
     
     @IBOutlet weak var dropdowntableheight: NSLayoutConstraint!
@@ -92,6 +94,11 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     var tagnamearray = [String]()
     var token_str    : String = "empty"
     var setdatebirth : Bool   = false
+    
+    /*****************Parameters*************************/
+    
+    var cityDictonary : [String : Any]?
+    var tagsDictonary = [[String: Any]]()
     
     // place autocomplete //
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
@@ -200,7 +207,8 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         
     }
     
-    func navigationTap(){
+    func navigationTap() {
+        
         let offset = CGPoint(x: 0,y :0)
         self.myscrollView.setContentOffset(offset, animated: true)
         
@@ -241,9 +249,15 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
                 tagArray.append(foodTextfield.text!)
                 dropdownTableView.isHidden  = true
                 dropDownAdjustView.isHidden = true
+                
+                /************Adding to dictonary**********************/
+                let tagItem = ["text": foodTextfield.text!,"displayorder":tagArray.count] as [String : Any]
+                tagsDictonary.append(tagItem)
+                
             }
             if let index = tagArray.index(of:"") {
                 tagArray.remove(at: index)
+                tagsDictonary.remove(at: index)
             }
             collectionView.reloadData()
             foodTextfield.resignFirstResponder()
@@ -724,6 +738,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     func buttonClicked(sender: Any){
         let tag = (sender as AnyObject).tag
         tagArray.remove(at: tag!)
+        tagsDictonary.remove(at: tag!)
         collectionView.reloadData()
     }
     
@@ -809,8 +824,10 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
                 dropdownString = (currentCell?.textLabel?.text)!
                 if tagArray.contains(dropdownString) {
                     print("already exist")
-                }else{
+                } else {
                     tagArray.append(dropdownString)
+                    let tagItem = ["id": tagidArray[indexPath.row],"displayorder":tagArray.count]
+                    tagsDictonary.append(tagItem)
                 }
                 collectionView.reloadData()
                 dropdownTableView.isHidden  = true
@@ -820,11 +837,16 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             
         } else {
             
-            if let indexPath = citytableview.indexPathForSelectedRow  {
+            if let indexPath    = citytableview.indexPathForSelectedRow  {
                 let currentCell = citytableview.cellForRow(at: indexPath)
                 cityTextfield.text = (currentCell?.textLabel?.text)!
                 citytableview.isHidden = true
                 cityTextfield.resignFirstResponder()
+                
+                apiClient.getPlaceCordinates(placeid_Str: autocompleteplaceID[indexPath.row], completion: { lat,lang in
+                    
+                    self.cityDictonary = ["name":self.autocompleteplaceArray[indexPath.row],"address":self.autocompleteplaceArray[indexPath.row],"isgoogleplace":true,"googleplaceid":self.autocompleteplaceID[indexPath.row],"googleplacetype":"geocode","lattitude":lat,"longitude":lang]
+                })
             }
         }
     }
@@ -1060,11 +1082,14 @@ extension SettingsEdit_ProfieViewController {
             
             for item in tagArrayList {
                 
-                if let tagName = item.text_str {
+                if let tagName = item.text_str,let tagid = item.id_str {
                     
                     tagArray.append(tagName)
-                    
+                    let tagItem = ["id": tagid,"displayorder":tagArray.count] as [String : Any]
+                    tagsDictonary.append(tagItem)
                 }
+                
+                
                 
             }
             
@@ -1151,6 +1176,158 @@ extension SettingsEdit_ProfieViewController {
         })
     }
     
+    
+}
+
+extension SettingsEdit_ProfieViewController {
+    
+    /****************************************complete signup******************************************************/
+    
+    func completeSignupApi() {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let birthdate : String = dateFormatter.string(from: self.datePicker.date)
+        
+        print(tagsDictonary)
+        print(cityDictonary ?? ["name" : "unknown"])
+        print(usernameTextField.text!)
+        print(nameTextfield.text!)
+        print(descriptionTextField.text!)
+        print(birthdate)
+        print(emailaddress.text!)
+        print(profileImage)
+        
+        let clientIp = ValidationHelper.Instance.getIPAddress() ?? "1.0.1"
+        var gender : Int = 0
+        if genderTextfield.text == "Female" {
+            
+            gender = 1
+            
+        }
+        
+        let userid = PrefsManager.sharedinstance.userId
+        LoadingHepler.instance.show()
+        
+        let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
+        let parameters: Parameters = ["username": usernameTextField.text!, "name":nameTextfield.text! , "description" : descriptionTextField.text!,"dateofbirth": birthdate, "gender": gender as Int,"tags":tagsDictonary,"isbusinessuser": false as Bool,"email": emailaddress.text! ,"citylocation":cityDictonary! ,"clientip": clientIp, "clientapp": Constants.clientApp]
+        
+        apiClient.editProfileApi(parameters: parameters,id: userid,headers: header,completion:{status, Values in
+            
+            print("statusfb: \(status)")
+            if status == "success" {
+                
+                LoadingHepler.instance.hide()
+                
+                if let user = Values {
+                    
+                    self.getUserDetails(user: user)
+                    
+                } else {
+                    
+                    LoadingHepler.instance.hide()
+                    AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Some error occured.", vc: self)
+                    
+                }
+                
+                
+            } else {
+                
+                LoadingHepler.instance.hide()
+                
+                if let user = Values {
+                    
+                    if let meassage = user.errormessage {
+                        
+                        AlertProvider.Instance.showAlert(title: "Oops!", subtitle: meassage, vc: self)
+                  
+                        return
+                    }
+                    
+                }
+                
+                AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Some error occured.", vc: self)
+                
+            }
+        })
+        
+        
+    }
+    
+    func getUserDetails(user:UserList) {
+        
+        if let firebaseid = user.firebaseuid {
+            
+            PrefsManager.sharedinstance.UIDfirebase = firebaseid
+            
+        }
+        
+        if let userid = user.id {
+            
+            PrefsManager.sharedinstance.userId = userid
+            
+        }
+        
+        if let username = user.username {
+            
+            PrefsManager.sharedinstance.username = username
+            
+        }
+        
+        if let dateofbirth = user.dateofbirth {
+            
+            PrefsManager.sharedinstance.dateOfBirth = dateofbirth
+            
+        }
+        
+        if let gender = user.gender {
+            
+            PrefsManager.sharedinstance.gender = gender
+            
+        }
+        
+        if let desc = user.description {
+            
+            PrefsManager.sharedinstance.description = desc
+            
+        }
+        
+        if let name = user.name {
+            
+            PrefsManager.sharedinstance.name = name
+            
+        }
+        
+        if let userEmail = user.email {
+            
+            PrefsManager.sharedinstance.userEmail = userEmail
+            
+        }
+        
+        if let userImagesList = user.imgList {
+            
+            if userImagesList.count > 0 {
+                
+                PrefsManager.sharedinstance.imageURL = userImagesList[userImagesList.count-1].imageurl_str ?? "empty"
+                
+            }
+            
+        }
+        
+        if let taglist = user.tagList {
+            
+            PrefsManager.sharedinstance.tagList = taglist
+        }
+        
+        if let locitem = user.locItem {
+            
+            PrefsManager.sharedinstance.userCity = "\(locitem.address_str ?? "Address")"
+            
+        }
+        
+        PrefsManager.sharedinstance.isLoginned = true
+        
+    }
     
 }
 
