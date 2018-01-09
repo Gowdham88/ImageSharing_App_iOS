@@ -41,6 +41,7 @@ struct EventTypeListItem {
         if let businessuserid = json["businessuserid"].int {
             
             self.businessuserid = businessuserid
+            print("business user id is:::::",businessuserid)
             
         }
         

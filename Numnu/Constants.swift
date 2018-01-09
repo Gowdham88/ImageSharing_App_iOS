@@ -95,7 +95,8 @@ class Constants {
     
     // Prferences
     
-    static let loginstatus  = "loginstatus"
+    static let loginstatus   = "loginstatus"
+    static let appopenstatus = "appopenstatus"
 
 
     static let startsat      = "startsat"

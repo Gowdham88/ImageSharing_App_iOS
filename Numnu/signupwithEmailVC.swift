@@ -358,6 +358,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate,UITextViewDelegat
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 //        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.navigationController?.navigationBar.isHidden = false
 
     }
     override func viewWillDisappear(_ animated: Bool) {
