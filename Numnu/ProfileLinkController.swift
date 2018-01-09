@@ -241,6 +241,7 @@ extension ProfileLinkController : Profile_postTableViewCellDelegate {
             let objectsToShare = [title, textToShare, urlToShare!] as [Any]
             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
             self.present(activityVC, animated: true, completion: nil)
+            //..
 
             
         }
