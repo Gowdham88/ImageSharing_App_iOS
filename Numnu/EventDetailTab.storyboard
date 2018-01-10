@@ -611,8 +611,8 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="63" height="22"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8pN-Nw-ZWx">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="60" height="22"/>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8pN-Nw-ZWx">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="63" height="22"/>
                                                                                 <color key="backgroundColor" red="0.60000002379999995" green="0.40000000600000002" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="12"/>
                                                                                 <color key="textColor" red="0.54117647058823526" green="0.55686274509803924" blue="0.58431372549019611" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -622,7 +622,7 @@
                                                                     </view>
                                                                     <constraints>
                                                                         <constraint firstAttribute="bottom" secondItem="8pN-Nw-ZWx" secondAttribute="bottom" id="WzI-lB-fEc"/>
-                                                                        <constraint firstAttribute="trailingMargin" secondItem="8pN-Nw-ZWx" secondAttribute="trailing" constant="-13" id="cvT-Zm-qEd"/>
+                                                                        <constraint firstAttribute="trailingMargin" secondItem="8pN-Nw-ZWx" secondAttribute="trailing" constant="-8" id="cvT-Zm-qEd"/>
                                                                         <constraint firstItem="8pN-Nw-ZWx" firstAttribute="top" secondItem="wcL-Oz-h7O" secondAttribute="top" id="lNB-e2-lFe"/>
                                                                         <constraint firstItem="8pN-Nw-ZWx" firstAttribute="leading" secondItem="wcL-Oz-h7O" secondAttribute="leading" id="xuk-wD-fTU"/>
                                                                     </constraints>
@@ -649,7 +649,7 @@
                                                         <constraint firstItem="Qan-Gz-I1d" firstAttribute="top" secondItem="XT7-7m-pMZ" secondAttribute="top" constant="10" id="Aea-tJ-wWd"/>
                                                         <constraint firstItem="Iuu-SS-fjo" firstAttribute="top" secondItem="9Ud-aE-sHk" secondAttribute="bottom" constant="9" id="Esh-HH-dOf"/>
                                                         <constraint firstItem="x92-Wi-dG5" firstAttribute="top" secondItem="Iuu-SS-fjo" secondAttribute="bottom" constant="9" id="Ja8-IU-nGc"/>
-                                                        <constraint firstItem="x92-Wi-dG5" firstAttribute="leading" secondItem="Iuu-SS-fjo" secondAttribute="leading" id="Wln-Hj-HFD"/>
+                                                        <constraint firstItem="x92-Wi-dG5" firstAttribute="leading" secondItem="Qan-Gz-I1d" secondAttribute="trailing" constant="10" id="XDW-gS-0KW"/>
                                                         <constraint firstAttribute="trailing" secondItem="9Ud-aE-sHk" secondAttribute="trailing" constant="35" id="aAK-cD-fqq"/>
                                                         <constraint firstItem="Iuu-SS-fjo" firstAttribute="leading" secondItem="Qan-Gz-I1d" secondAttribute="trailing" constant="10" id="biC-Gc-jAU"/>
                                                         <constraint firstItem="9Ud-aE-sHk" firstAttribute="leading" secondItem="Qan-Gz-I1d" secondAttribute="trailing" constant="10" id="cXr-ty-oIr"/>

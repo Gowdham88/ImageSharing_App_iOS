@@ -384,21 +384,6 @@ extension LocationDetailcontroller {
         }
     }
     
-//    func openPopup() {
-//
-//        self.shareView.alpha   = 1
-//
-//        let top = CGAffineTransform(translationX: 0, y: 0)
-//
-//        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-//            self.shareView.isHidden = false
-//            self.shareView.transform = top
-//
-//        }, completion: nil)
-//
-//
-//    }
-    
     func closePopup() {
         
         bookmarkid   = 0

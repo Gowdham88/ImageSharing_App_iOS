@@ -188,7 +188,8 @@ extension ParentViewController : UITextFieldDelegate {
         if textField == editsearchbyLocation  {
             let editsearchCount = editsearchbyItem.text!
             if editsearchCount.count > 0 {
-                 setNavBar()
+//                 setNavBar()
+                
             }
         }
         
@@ -278,10 +279,8 @@ extension ParentViewController {
         tabScrollView.isHidden           = false
         
         navigationItemList.title = "Numnu"
-        
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Avenir-Medium", size: 16)!]
 
-
-        
         let button: UIButton = UIButton(type: UIButtonType.custom)
         //set image for button
         button.setImage(UIImage(named: "ic_arrow_back"), for: UIControlState.normal)
@@ -550,21 +549,6 @@ extension ParentViewController : PostTabControllerDelegate {
             present(Alert, animated: true, completion:nil )
         }
     }
-    
-//    func openPopup() {
-//
-//        self.shareView.alpha   = 1
-//
-//        let top = CGAffineTransform(translationX: 0, y: 0)
-//
-//        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-//            self.shareView.isHidden = false
-//            self.shareView.transform = top
-//
-//        }, completion: nil)
-//
-//
-//    }
 }
 
 
