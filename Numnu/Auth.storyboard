@@ -194,7 +194,7 @@
                                     <constraint firstAttribute="height" constant="1" id="AET-zU-JcO"/>
                                 </constraints>
                             </view>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gt3-3P-gNM">
+                            <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gt3-3P-gNM">
                                 <rect key="frame" x="20" y="331" width="280" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="kvF-fN-dti"/>
@@ -729,7 +729,7 @@
                                     <constraint firstAttribute="height" constant="1" id="vwH-Bn-HDy"/>
                                 </constraints>
                             </view>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NHS-8c-dU0">
+                            <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NHS-8c-dU0">
                                 <rect key="frame" x="20" y="358" width="280" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="nzF-Kr-Lo7"/>
