@@ -55,7 +55,7 @@ class  ApiClient {
                         let json = JSON(value)
                         if let message = UserList(json: json) {
                             
-                            completion("400",message)
+                            completion("400",message)  
                             return
                         }
                         
@@ -102,6 +102,59 @@ class  ApiClient {
                 
             }
         }
+        
+    }
+    
+    /*********************Edit Profile Api*****************************/
+    
+    func editProfileApi(parameters : Parameters,id : Int,headers : HTTPHeaders,completion : @escaping (String,UserList?) -> Void) {
+        
+        Alamofire.request("\(Constants.completeSignup)/\(id)", method: .put, parameters: parameters,encoding: JSONEncoding.default,headers: headers).validate().responseJSON { response in
+            
+            print(response.result.value as Any)
+            
+            switch response.result {
+                
+            case .success:
+                
+                if let value = response.result.value {
+                    
+                    print(value)
+                    
+                    let json = JSON(value)
+                    
+                    if let userList = UserList(json: json) {
+                        
+                        completion("success",userList)
+                    }
+                    
+                    
+                }
+                
+                
+            case .failure(let error):
+                
+                print(error.localizedDescription)
+                
+                if let httpStatusCode = response.response?.statusCode {
+                    
+                    if let value = response.data,httpStatusCode == 400 {
+                        let json = JSON(value)
+                        if let message = UserList(json: json) {
+                            
+                            completion("400",message)
+                            return
+                        }
+                        
+                    }
+                    
+                }
+                
+                completion(error.localizedDescription,nil)
+                
+            }
+        }
+        
         
     }
     
@@ -165,7 +218,7 @@ class  ApiClient {
             
         case "posts":
             
-            baseUrl = "\(Constants.homeSearchApi)/events?page=\(pageno)"
+            baseUrl = "\(Constants.homeSearchApi)/posts?page=\(pageno)"
             
         case "users":
             
@@ -944,6 +997,41 @@ class  ApiClient {
         
     }
     
+    /********************************getItemsbasedid*************************************************/
+    
+    func getUserById(id : Int,headers : HTTPHeaders,completion : @escaping (String,UserList?)-> Void) {
+        
+        Alamofire.request("\(Constants.Bookmarkpost)/\(id)", method: .get,encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            
+            print(response.request as Any)
+            print(response.result.value as Any)
+            
+            switch response.result {
+                
+            case .success :
+                
+                if let value = response.result.value {
+                    
+                    let json = JSON(value)
+                    if let userList = UserList(json: json) {
+                        
+                        completion("success",userList)
+                    }
+                    
+                }
+                
+                
+            case .failure(let error):
+                
+                print(error.localizedDescription)
+                completion(error.localizedDescription,nil)
+                
+            }
+            
+        }
+        
+    }
+    
     /************************Events Api**********************************/
     func bookmarEntinty(parameters : Parameters,headers : HTTPHeaders,completion : @escaping (String,BookmarkModel?) -> Void) {
         
@@ -1279,7 +1367,7 @@ class  ApiClient {
     }
     
     
-    /************************Event Detail*******************************/
+    /************************Delete Bookmark*******************************/
     func deleteBookmark(id:Int,headers : HTTPHeaders,completion : @escaping (String) -> Void) {
         
         Alamofire.request("\(Constants.bookMarkApi)/\(id)",method: .delete, encoding: JSONEncoding.default,headers: headers).validate().responseJSON { response in
@@ -1325,6 +1413,50 @@ class  ApiClient {
     }
     
 
+    /************************Delete Image*******************************/
+    func deleteImage(id:Int,image : String,headers : HTTPHeaders,completion : @escaping (String) -> Void) {
+        
+        Alamofire.request("\(Constants.Bookmarkpost)/\(id)/images/\(image)",method: .delete, encoding: JSONEncoding.default,headers: headers).validate().responseJSON { response in
+            
+            switch response.result {
+                
+            case .success:
+                
+                if let httpStatusCode = response.response?.statusCode {
+                    
+                    if httpStatusCode == 200 {
+                        
+                        completion("success")
+                    }
+                    
+                    
+                } else {
+                    
+                    completion("failure")
+                }
+                
+                
+            case .failure(let error):
+                
+                print(error)
+                if let httpStatusCode = response.response?.statusCode {
+                    
+                    if httpStatusCode == 200 {
+                        
+                        completion("success")
+                    }
+                    
+                    
+                } else {
+                    
+                    completion("failure")
+                }
+                
+            }
+            
+        }
+        
+    }
     
     
 }

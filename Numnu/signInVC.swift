@@ -155,7 +155,9 @@ class signInVC: UIViewController, UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         passwordInfoLabel.isHidden = true
-        
+        if textField == emailAddressTF || textField == passwordTF {
+            animateViewMoving(up: true, moveValue: 50)
+        }
         if textField == emailAddressTF  {
 
             emailtitleLAbel.textColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
@@ -169,6 +171,9 @@ class signInVC: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == emailAddressTF || textField == passwordTF {
+            animateViewMoving(up: false, moveValue: 50)
+        }
         if textField == emailAddressTF {
 
             emailtitleLAbel.textColor = UIColor(red: 129/255.0, green: 125/255.0, blue: 144/255.0, alpha: 1.0)
@@ -180,20 +185,19 @@ class signInVC: UIViewController, UITextFieldDelegate {
         }else{}
 
     }
-//
-//    func animateViewMoving(up:Bool, moveValue :CGFloat) {
-//
-//        let movementDuration:TimeInterval = 0.3
-//        let movement:CGFloat = ( up ? -moveValue : moveValue)
-//
-//        UIView.beginAnimations("animateView", context: nil)
-//        UIView.setAnimationBeginsFromCurrentState(true)
-//        UIView.setAnimationDuration(movementDuration)
-//
-//        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
-//
-//        UIView.commitAnimations()
-//    }
+    
+    func animateViewMoving (up:Bool, moveValue :CGFloat){
+        let movementDuration:TimeInterval = 0.3
+        let movement:CGFloat = ( up ? -moveValue : moveValue)
+        
+        UIView.beginAnimations("animateView", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(movementDuration)
+        
+        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+        UIView.commitAnimations()
+    }
+
     
     @IBAction func showPassword(_ sender: Any) {
         
@@ -254,8 +258,8 @@ class signInVC: UIViewController, UITextFieldDelegate {
         animation.duration = 0.07
         animation.repeatCount = 4
         animation.autoreverses = true
-        animation.fromValue = NSValue(cgPoint: CGPoint(x: self.passwordInfoLabel.center.x - 10, y: self.passwordInfoLabel.center.y))
-        animation.toValue = NSValue(cgPoint: CGPoint(x: self.passwordInfoLabel.center.x + 10, y: self.passwordInfoLabel.center.y))
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: self.passwordInfoLabel.frame.origin.x, y: self.passwordInfoLabel.center.y))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: self.passwordInfoLabel.frame.origin.x + 10, y: self.passwordInfoLabel.center.y))
         self.passwordInfoLabel.layer.add(animation, forKey: "position")
         LoadingHepler.instance.hide()
         
@@ -479,7 +483,8 @@ extension signInVC {
         
         if let locitem = user.locItem {
             
-            PrefsManager.sharedinstance.userCity = "\(locitem.address_str ?? "Address")"
+            PrefsManager.sharedinstance.userCity = "\(locitem.address_str ?? "")"
+            PrefsManager.sharedinstance.userCityId = locitem.id_str ?? 0
             
         }
         

@@ -106,57 +106,57 @@ class DateFormatterManager: NSObject {
         var timeAgo = ""
         if (sec > 0){
             if (sec > 1) {
-                timeAgo = "\(sec) Seconds Ago"
+                timeAgo = "\(sec) seconds ago"
                 
             } else {
-                timeAgo = "\(sec) Second Ago"
+                timeAgo = "\(sec) second ago"
             }
             
         }
         if (min > 0){
             if (min > 1) {
-                timeAgo = "\(min) Minutes Ago"
+                timeAgo = "\(min) minutes ago"
             } else {
-                timeAgo = "\(min) Minute Ago"
+                timeAgo = "\(min) minute ago"
             }
         }
         
         if(hours > 0){
             if (hours > 1) {
-                timeAgo = "\(hours) Hours Ago"
+                timeAgo = "\(hours) hours ago"
             } else {
-                timeAgo = "\(hours) Hour Ago"
+                timeAgo = "\(hours) hour ago"
             }
         }
         if (days > 0) {
             if (days > 1) {
-                timeAgo = "\(days) Days Ago"
+                timeAgo = "\(days) days ago"
             } else {
-                timeAgo = "\(days) Day Ago"
+                timeAgo = "\(days) day ago"
             }
         }
         
         if(weeks > 0){
             if (weeks > 1) {
-                timeAgo = "\(weeks) Weeks Ago"
+                timeAgo = "\(weeks) weeks ago"
             } else {
-                timeAgo = "\(weeks) Week Ago"
+                timeAgo = "\(weeks) Week ago"
             }
         }
         
         if(months > 0){
             if (months > 1) {
-                timeAgo = "\(months) months Ago"
+                timeAgo = "\(months) months ago"
             } else {
-                timeAgo = "\(months) month Ago"
+                timeAgo = "\(months) month ago"
             }
         }
         
         if(years > 0){
             if (years > 1) {
-                timeAgo = "\(years) years Ago"
+                timeAgo = "\(years) years ago"
             } else {
-                timeAgo = "\(years) year Ago"
+                timeAgo = "\(years) year ago"
             }
             
         }

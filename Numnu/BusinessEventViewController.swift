@@ -35,7 +35,7 @@ class BusinessEventViewController: UIViewController,IndicatorInfoProvider {
     var bussinessModel  : BusinessEventModel?
     var pageno  : Int = 1
     var limitno : Int = 25
-    var primaryId : Int = 34
+    var primaryId : Int = 0
     
     override func viewDidLoad() {
         

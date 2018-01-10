@@ -48,7 +48,10 @@ var getLocDetails = [String]()
         settings.style.selectedBarHeight = 3.0
         settings.style.buttonBarItemFont = UIFont(name: "Avenir-Medium", size: 14)!
         settings.style.buttonBarItemsShouldFillAvailiableWidth = true
+        settings.style.viewcontrollersCount = (self.view.frame.size.width / 5) - 10;
         super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.isHidden = false
         // change selected bar color
         
         settings.style.buttonBarBackgroundColor = .white
@@ -87,8 +90,8 @@ var getLocDetails = [String]()
         apiClient = ApiClient()
         
         if let address =  PrefsManager.sharedinstance.lastlocation {
-            
-            editsearchbyLocation.text = address.components(separatedBy: ",")[1]
+            editsearchbyLocation.text = address
+//            editsearchbyLocation.text = address.components(separatedBy: ",")[1]
         }
         
     }
@@ -105,20 +108,27 @@ var getLocDetails = [String]()
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        self.navigationController?.navigationBar.isHidden = false
+
         
-        reloadStripView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        
+        super.viewDidAppear(true)
+        self.navigationController?.navigationBar.isHidden = false
+        reloadStripView()
+
     }
     override func viewWillAppear(_ animated: Bool){
-        
+        self.navigationController?.navigationBar.isHidden = false
+
         let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(ParentViewController.navigationTap))
         self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
         self.navigationController?.navigationBar.isUserInteractionEnabled = true
 
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Avenir-Heavy", size: 16)!]
+
+        
     }
     @IBAction func ButtonSearach(_ sender: UIButton) {
  
@@ -178,7 +188,8 @@ extension ParentViewController : UITextFieldDelegate {
         if textField == editsearchbyLocation  {
             let editsearchCount = editsearchbyItem.text!
             if editsearchCount.count > 0 {
-                 setNavBar()
+//                 setNavBar()
+                
             }
         }
         
@@ -201,18 +212,20 @@ extension ParentViewController : UITextFieldDelegate {
             self.filtertableView.isHidden = true
         }, completion: nil)
         
-        dismissKeyboard()
-        
         if textField == editsearchbyLocation {
             
             editsearchbyLocation.text = ""
             locationDictonary = nil
+            reloadPagerTabStripView()
             
         } else {
             
             editsearchbyItem.text = ""
             searchText = nil
+            reloadPagerTabStripView()
         }
+        
+        dismissKeyboard()
         
         return false
     }
@@ -266,9 +279,8 @@ extension ParentViewController {
         tabScrollView.isHidden           = false
         
         navigationItemList.title = "Numnu"
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Avenir-Medium", size: 16)!]
 
-
-        
         let button: UIButton = UIButton(type: UIButtonType.custom)
         //set image for button
         button.setImage(UIImage(named: "ic_arrow_back"), for: UIControlState.normal)
@@ -516,16 +528,24 @@ extension ParentViewController : PostTabControllerDelegate {
     
     func openPopup() {
         
-        let Alert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
-        let FemaleAction = UIAlertAction(title: "Share", style: UIAlertActionStyle.default) { _ in
-            
-        }
-        let MaleAction = UIAlertAction(title: "Bookmark", style: UIAlertActionStyle.default) { _ in
+        let Alert: UIAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let FemaleAction: UIAlertAction = UIAlertAction(title: "Share", style: .default) { _ in
             
             
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) { _ in
+        let MaleAction: UIAlertAction = UIAlertAction(title: "Bookmark", style: .default) { _ in
+            
+//            self.getBookmarkToken()
+            
         }
+        //        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) { _ in
+        //        }
+        
+        //Create and add the Cancel action
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel)
+        cancelAction.setValue(UIColor.red, forKey: "titleTextColor")
+
+        
         Alert.addAction(FemaleAction)
         Alert.addAction(MaleAction)
         Alert.addAction(cancelAction)
@@ -537,21 +557,6 @@ extension ParentViewController : PostTabControllerDelegate {
             present(Alert, animated: true, completion:nil )
         }
     }
-    
-//    func openPopup() {
-//
-//        self.shareView.alpha   = 1
-//
-//        let top = CGAffineTransform(translationX: 0, y: 0)
-//
-//        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-//            self.shareView.isHidden = false
-//            self.shareView.transform = top
-//
-//        }, completion: nil)
-//
-//
-//    }
 }
 
 

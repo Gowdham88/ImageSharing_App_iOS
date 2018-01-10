@@ -53,7 +53,7 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
     
     var apiClient : ApiClient!
     var description_txt : String = ""
-    var itemprimaryid   : Int  = 39
+    var itemprimaryid   : Int  = 0
 
     @IBOutlet weak var bookmarkItemDetlabel: UILabel!
     @IBOutlet weak var shareItemDetlabel: UILabel!
@@ -134,6 +134,12 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
         reloadStripView()
     }
     
@@ -153,10 +159,10 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
         let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3) as! ReviewEventViewController
         child_1.popdelegate = self
         child_1.apiType     = "Item"
-        child_1.primaryid   = 149
+        child_1.primaryid   = itemprimaryid
         let child_2 = UIStoryboard(name: Constants.ItemDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid7)  as! LocationTabController
         child_2.locationdelegate = self
-        child_2.primaryid        = 35
+        child_2.primaryid        = itemprimaryid
         child_2.type             = "Item"
         let child_3 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1) as! EventTabController
         child_3.eventdelegate   = self
@@ -193,15 +199,18 @@ extension ItemDetailController {
     
     func tapRegistration() {
         
-        let completemenuTap = UITapGestureRecognizer(target: self, action: #selector(BusinessDetailViewController.openCompleteMenu(sender:)))
+        let completemenuTap = UITapGestureRecognizer(target: self, action: #selector(ItemDetailController.openCompleteMenu(sender:)))
         businessEntityView.isUserInteractionEnabled = true
         businessEntityView.addGestureRecognizer(completemenuTap)
         
     }
     
     func openCompleteMenu(sender:UITapGestureRecognizer) {
-        
-        openStoryBoard()
+    
+        let storyboard      = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
+        let vc              = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId) as! BusinessCompleteViewController
+        vc.businessprimaryid = sender.view?.tag ?? 0
+        self.navigationController!.pushViewController(vc, animated: true)
         
     }
     
@@ -325,7 +334,8 @@ extension ItemDetailController {
     func openStoryBoard () {
         
         let storyboard      = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
-        let vc              = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId)
+        let vc              = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId) as! BusinessCompleteViewController
+        
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
@@ -366,18 +376,30 @@ extension ItemDetailController {
     
     func openPopup() {
         
-        let Alert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
-        let FemaleAction = UIAlertAction(title: "Share", style: UIAlertActionStyle.default) { _ in
+        let Alert: UIAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let FemaleAction: UIAlertAction = UIAlertAction(title: "Share", style: .default) { _ in
             
+            let title = "Numnu"
+            let textToShare = "Discover and share experiences with food and drink at events and festivals."
+            let urlToShare = NSURL(string: "https://itunes.apple.com/ca/app/numnu/id1231472732?mt=8")
             
+            let objectsToShare = [title, textToShare, urlToShare!] as [Any]
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            self.present(activityVC, animated: true, completion: nil)
+
         }
-        let MaleAction = UIAlertAction(title: "Bookmark", style: UIAlertActionStyle.default) { _ in
+        let MaleAction: UIAlertAction = UIAlertAction(title: "Bookmark", style: .default) { _ in
             
             self.getBookmarkToken()
             
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) { _ in
-        }
+        //        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) { _ in
+        //        }
+        
+        //Create and add the Cancel action
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel)
+        cancelAction.setValue(UIColor.red, forKey: "titleTextColor")
+
         Alert.addAction(FemaleAction)
         Alert.addAction(MaleAction)
         Alert.addAction(cancelAction)
@@ -592,6 +614,8 @@ extension ItemDetailController {
         /****************Business Entity************************/
         
         if let entinty = item.businessEntity {
+            
+            businessEntityView.tag = entinty.id ?? 0
             
             if let entintyname = entinty.businessname {
                 

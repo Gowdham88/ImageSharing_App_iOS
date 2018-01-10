@@ -51,8 +51,8 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
     var token_str     : String = "empty"
     var apiClient     : ApiClient!
     var description_txt : String = ""
-    var businessprimaryid : Int  = 50
-    var eventid : Int  = 34
+    var businessprimaryid : Int  = 0
+    var eventid : Int  = 0
 
 //    var eventid           : Int  = 34
     
@@ -133,14 +133,16 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
     func businesstap(){
      
         let storyboard      = UIStoryboard(name: Constants.Event, bundle: nil)
-        let vc              = storyboard.instantiateViewController(withIdentifier: "eventstoryid")
+        let vc              = storyboard.instantiateViewController(withIdentifier: "eventstoryid") as! EventViewController
+        vc.eventprimaryid   = eventid
         self.navigationController!.pushViewController(vc, animated: true)
     }
     
     func businessIcontap(){
         
         let storyboard      = UIStoryboard(name: Constants.Event, bundle: nil)
-        let vc              = storyboard.instantiateViewController(withIdentifier: "eventstoryid")
+        let vc              = storyboard.instantiateViewController(withIdentifier: "eventstoryid") as! EventViewController
+        vc.eventprimaryid   = eventid
         self.navigationController!.pushViewController(vc, animated: true)
     }
     func navigationTap(){
@@ -193,14 +195,14 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        reloadStripView()
+      
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
         self.tabBarController?.tabBar.isHidden = false
+        reloadStripView()
     }
     
 }
@@ -320,7 +322,7 @@ extension BusinessDetailViewController {
         
         let storyboard      = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
         let vc              = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId) as! BusinessCompleteViewController
-        vc.businessprimaryid = 50
+        vc.businessprimaryid = businessprimaryid
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
@@ -361,18 +363,30 @@ extension BusinessDetailViewController {
     
     func openPopup() {
         
-        let Alert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
-        let FemaleAction = UIAlertAction(title: "Share", style: UIAlertActionStyle.default) { _ in
+        let Alert: UIAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let FemaleAction: UIAlertAction = UIAlertAction(title: "Share", style: .default) { _ in
             
+            let title = "Numnu"
+            let textToShare = "Discover and share experiences with food and drink at events and festivals."
+            let urlToShare = NSURL(string: "https://itunes.apple.com/ca/app/numnu/id1231472732?mt=8")
             
+            let objectsToShare = [title, textToShare, urlToShare!] as [Any]
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            self.present(activityVC, animated: true, completion: nil)
+
         }
-        let MaleAction = UIAlertAction(title: "Bookmark", style: UIAlertActionStyle.default) { _ in
+        let MaleAction: UIAlertAction = UIAlertAction(title: "Bookmark", style: .default) { _ in
             
             self.getBookmarkToken()
             
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) { _ in
-        }
+        //        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) { _ in
+        //        }
+        
+        //Create and add the Cancel action
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel)
+        cancelAction.setValue(UIColor.red, forKey: "titleTextColor")
+
         Alert.addAction(FemaleAction)
         Alert.addAction(MaleAction)
         Alert.addAction(cancelAction)
@@ -384,21 +398,6 @@ extension BusinessDetailViewController {
             present(Alert, animated: true, completion:nil )
         }
     }
-    
-//    func openPopup() {
-//
-//        self.shareView.alpha   = 1
-//
-//        let top = CGAffineTransform(translationX: 0, y: 0)
-//
-//        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-//            self.shareView.isHidden = false
-//            self.shareView.transform = top
-//
-//        }, completion: nil)
-//
-//    }
-    
 }
 
 /*************Post Delegate****************/
@@ -471,7 +470,6 @@ extension BusinessDetailViewController {
                 }
                 
             } else {
-                print("json respose failure:::::::")
                 LoadingHepler.instance.hide()
                 DispatchQueue.main.async {
                     
@@ -485,7 +483,7 @@ extension BusinessDetailViewController {
     func getDetails(response:BusinessDetailModel) {
           
         if let name = response.businessname {
-            busTitleLabel.text = name
+            busTitleLabel.text = name + " >"
             
         } else {
             

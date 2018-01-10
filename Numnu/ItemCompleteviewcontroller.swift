@@ -23,8 +23,11 @@ class ItemCompleteviewcontroller : UIViewController {
     var popdelegate : ItemCompleteviewcontrollerDelegate?
     var viewState       : Bool = false
 
-
-
+    @IBOutlet weak var businessEqualHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var descriptionTopToBusinessname: NSLayoutConstraint!
+    @IBOutlet weak var eventnameTopConstraintToBusinessname: NSLayoutConstraint!
+    
     @IBOutlet weak var ItImageView: ImageExtender!
     @IBOutlet weak var ItTitleLabel: UILabel!
     var description_txt : String = ""
@@ -63,12 +66,12 @@ class ItemCompleteviewcontroller : UIViewController {
     
     var isLabelAtMaxHeight = false
     
-    var primaryid       : Int = 149
+    
     var pageno  : Int = 1
     var limitno : Int = 25
    
-    var itemprimaryid   : Int  = 35
-    var eventid         : Int  = 34
+    var itemprimaryid   : Int  = 0
+    var eventid         : Int  = 0
     
     @IBOutlet weak var shareitemlabel: UILabel!
     @IBOutlet weak var sharebookmarklabel: UILabel!
@@ -110,19 +113,19 @@ class ItemCompleteviewcontroller : UIViewController {
         
         self.myscrollView.isHidden = true
         
-        let eventtap = UITapGestureRecognizer(target: self, action: #selector(ItemCompleteviewcontroller.eventtap))
+        let eventtap = UITapGestureRecognizer(target: self, action: #selector(ItemCompleteviewcontroller.eventtap(sender:)))
         eventname.addGestureRecognizer(eventtap)
         eventname.isUserInteractionEnabled = true
         
-        let eventIcontap = UITapGestureRecognizer(target: self, action: #selector(ItemCompleteviewcontroller.eventIcontap))
+        let eventIcontap = UITapGestureRecognizer(target: self, action: #selector(ItemCompleteviewcontroller.eventIcontap(sender:)))
         eventIcon.addGestureRecognizer(eventIcontap)
         eventIcon.isUserInteractionEnabled = true
         
-        let businesstap = UITapGestureRecognizer(target: self, action: #selector(ItemCompleteviewcontroller.businesstap))
+        let businesstap = UITapGestureRecognizer(target: self, action: #selector(ItemCompleteviewcontroller.businesstap(sender:)))
         businessName.addGestureRecognizer(businesstap)
         businessName.isUserInteractionEnabled = true
         
-        let businessIcontap = UITapGestureRecognizer(target: self, action: #selector(ItemCompleteviewcontroller.businessIcontap))
+        let businessIcontap = UITapGestureRecognizer(target: self, action: #selector(ItemCompleteviewcontroller.businessIcontap(sender:)))
         businessIcon.addGestureRecognizer(businessIcontap)
         businessIcon.isUserInteractionEnabled = true
         
@@ -165,7 +168,7 @@ class ItemCompleteviewcontroller : UIViewController {
             let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
             let param  : String  = "page=\(pageno)&limit\(limit)"
             
-            self.apiClient.getPostListByItemEvent(eventId: 34,id: self.primaryid, page: param, type: self.apiType, headers: header, completion: { status,Values in
+            self.apiClient.getPostListByItemEvent(eventId: self.eventid,id: self.itemprimaryid, page: param, type: self.apiType, headers: header, completion: { status,Values in
                 
                 if status == "success" {
                     
@@ -211,30 +214,34 @@ class ItemCompleteviewcontroller : UIViewController {
     
     }
     
-    func eventtap(){
+    func eventtap(sender : UITapGestureRecognizer){
         
         let storyboard      = UIStoryboard(name: Constants.Event, bundle: nil)
-        let vc              = storyboard.instantiateViewController(withIdentifier: "eventstoryid")
+        let vc              = storyboard.instantiateViewController(withIdentifier: "eventstoryid") as! EventViewController
+        vc.eventprimaryid   = sender.view?.tag ?? 0
         self.navigationController!.pushViewController(vc, animated: true)
     }
     
-    func eventIcontap(){
+    func eventIcontap(sender : UITapGestureRecognizer){
         
         let storyboard      = UIStoryboard(name: Constants.Event, bundle: nil)
-        let vc              = storyboard.instantiateViewController(withIdentifier: "eventstoryid")
+        let vc              = storyboard.instantiateViewController(withIdentifier: "eventstoryid") as! EventViewController
+        vc.eventprimaryid   = sender.view?.tag ?? 0
         self.navigationController!.pushViewController(vc, animated: true)
     }
-    func businesstap(){
+    func businesstap(sender : UITapGestureRecognizer){
         
         let storyboard = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId) as! BusinessCompleteViewController
+        vc.businessprimaryid = sender.view?.tag ?? 0
         self.navigationController!.pushViewController(vc, animated: true)
     }
     
-    func businessIcontap(){
+    func businessIcontap(sender : UITapGestureRecognizer){
         
         let storyboard = UIStoryboard(name: Constants.BusinessDetailTab, bundle: nil)
-        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId)
+        let vc         = storyboard.instantiateViewController(withIdentifier: Constants.BusinessCompleteId) as! BusinessCompleteViewController
+        vc.businessprimaryid = sender.view?.tag ?? 0
         self.navigationController!.pushViewController(vc, animated: true)
     }
     func navigationTap(){
@@ -387,7 +394,7 @@ extension ItemCompleteviewcontroller {
         
         let storyboard = UIStoryboard(name: Constants.ItemDetail, bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId) as! ItemDetailController
-        vc.itemprimaryid = 39
+        vc.itemprimaryid = itemprimaryid
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
@@ -428,18 +435,31 @@ extension ItemCompleteviewcontroller {
     
     func openPopup() {
         
-        let Alert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
-        let FemaleAction = UIAlertAction(title: "Share", style: UIAlertActionStyle.default) { _ in
+        let Alert: UIAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let FemaleAction: UIAlertAction = UIAlertAction(title: "Share", style: .default) { _ in
             
+            let title = "Numnu"
+            let textToShare = "Discover and share experiences with food and drink at events and festivals."
+            let urlToShare = NSURL(string: "https://itunes.apple.com/ca/app/numnu/id1231472732?mt=8")
+            
+            let objectsToShare = [title, textToShare, urlToShare!] as [Any]
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            self.present(activityVC, animated: true, completion: nil)
+
             
         }
-        let MaleAction = UIAlertAction(title: "Bookmark", style: UIAlertActionStyle.default) { _ in
+        let MaleAction: UIAlertAction = UIAlertAction(title: "Bookmark", style: .default) { _ in
             
             self.getBookmarkToken()
             
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) { _ in
-        }
+        //        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) { _ in
+        //        }
+        
+        //Create and add the Cancel action
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel)
+        cancelAction.setValue(UIColor.red, forKey: "titleTextColor")
+
         Alert.addAction(FemaleAction)
         Alert.addAction(MaleAction)
         Alert.addAction(cancelAction)
@@ -451,21 +471,6 @@ extension ItemCompleteviewcontroller {
             present(Alert, animated: true, completion:nil )
         }
     }
-    
-//    func openPopup() {
-//
-//        self.shareView.alpha   = 1
-//
-//        let top = CGAffineTransform(translationX: 0, y: 0)
-//
-//        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-//            self.shareView.isHidden = false
-//            self.shareView.transform = top
-//
-//        }, completion: nil)
-//
-//
-//    }
     
     func closePopup() {
         
@@ -796,45 +801,51 @@ extension ItemCompleteviewcontroller {
     }
     
     func getItemDetails(item : ItemList) {
-        
-
     
         
         /****************Name************************/
         
         if let itemname = item.itemname {
             
-            ItTitleLabel.text = itemname
+            ItTitleLabel.text = itemname + " >"
             
         }
         
         if let event = item.eventname {
             
+            eventname.tag = item.eventid ?? 0
+            eventIcon.tag = item.eventid ?? 0
+            
             eventname.text = event
             
             if (eventname.numberOfVisibleLines > 1) {
                 
-                descriptionTopConstraint.constant = 46
+                descriptionTopConstraint.constant = 36
             }
             
             
         } else {
             
-            descriptionTopConstraint.constant = 30
+            eventname.text = ""
+            descriptionTopConstraint.constant = 25
             eventImageHeightConstraint.constant = 0
+            
             
         }
         
         if let business = item.businessname {
             
             businessName.text = business
-            
+            businessName.tag = item.businessuserid ?? 0
+            businessIcon.tag = item.businessuserid ?? 0
             
         } else {
             
-            descriptionTopConstraint.constant = 30
+            businessName.text = ""
+            descriptionTopConstraint.constant = 10
             itemImageTopConstraint.constant    = 0
             itemImageHeightConstraint.constant = 0
+//            eventnameTopConstraintToBusinessname.constant = 0
         }
         
         if let itemcurrenyid = item.currencycode,let itemcurrency = item.priceamount {
@@ -909,7 +920,7 @@ extension ItemCompleteviewcontroller {
             
         } else {
             
-            descriptionTopConstraint.constant = 30
+            descriptionTopConstraint.constant      = 25
             tagscrollviewheightconstraint.constant = 0
             tagscroltopConstraint.constant         = 0
          

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -254,9 +254,12 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="businessImageTap" destination="NNQ-iY-1H0" id="BKJ-Yn-J0V"/>
                                             <outlet property="dishRightLayoutConstraint" destination="p1s-vr-LjW" id="hx6-tQ-2pC"/>
                                             <outlet property="dishwidthConstaint" destination="IIn-dz-KqO" id="CqW-Tw-nn3"/>
+                                            <outlet property="eventImageTap" destination="km4-CZ-vdl" id="Wzb-gN-RDJ"/>
                                             <outlet property="eventTopConstraint" destination="zPd-XV-iCi" id="cd5-iK-VZk"/>
+                                            <outlet property="itemImageTap" destination="SrC-yZ-1Ga" id="8n2-aW-OoT"/>
                                             <outlet property="maincontentView" destination="LPR-Hf-e84" id="LcK-Tg-mOU"/>
                                             <outlet property="placeWidthConstraint" destination="97z-6J-QQM" id="FGa-MQ-DA9"/>
                                             <outlet property="postCommentLabel" destination="ZXr-Ym-xbJ" id="tLN-lc-wDJ"/>

@@ -24,6 +24,21 @@ protocol SettingsViewControllerDelegate {
 }
 
 
+//fileprivate func rateApp(appId: String) {
+//    openUrl("itms-apps://itunes.apple.com/app/" + appId)
+//}
+//fileprivate func openUrl(_ urlString:String) {
+//    let url = URL(string: urlString)!
+//    if #available(iOS 10.0, *) {
+//        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+//    } else {
+//        UIApplication.shared.openURL(url)
+//    }
+//}
+
+
+
+
 class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, UIScrollViewDelegate {
 
     @IBOutlet weak var myScrollView: UIScrollView!
@@ -129,6 +144,25 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         selectedCell.contentView.backgroundColor = UIColor.clear
         
         if indexPath.section == 0 {
+            if indexPath.row == 0{
+                
+                let title = "Numnu"
+                let textToShare = "Discover and share experiences with food and drink at events and festivals."
+                let urlToShare = NSURL(string: "https://itunes.apple.com/ca/app/numnu/id1231472732?mt=8")
+                
+                let objectsToShare = [title, textToShare, urlToShare!] as [Any]
+                let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                self.present(activityVC, animated: true, completion: nil)
+            }
+            
+            if indexPath.row == 1{
+                
+//                rateApp(appId: "id1231472732")
+
+
+                showReview()
+
+            }
             if indexPath.row == 2 {
             openWebBoard(url: "http://www.numnu.com/terms/")
             }

@@ -130,7 +130,7 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="search"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
                                         <connections>
                                             <outlet property="delegate" destination="OQc-D9-1pk" id="ajQ-OD-5H4"/>
                                         </connections>
@@ -140,7 +140,7 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" enablesReturnKeyAutomatically="YES"/>
                                         <connections>
                                             <outlet property="delegate" destination="OQc-D9-1pk" id="HHW-m4-J6b"/>
                                         </connections>
@@ -738,7 +738,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="0.5" colorSpace="calibratedRGB"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="ZKq-zL-ITp" firstAttribute="centerY" secondItem="TsQ-eQ-3P4" secondAttribute="centerY" id="dxy-ez-9ca"/>
@@ -876,7 +876,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="0.5" colorSpace="calibratedRGB"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="7Y6-B7-cjS" firstAttribute="leading" secondItem="ZVd-Vu-GrE" secondAttribute="leading" constant="35" id="59F-os-JiH"/>
@@ -1012,10 +1012,10 @@
                                         </constraints>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="bottom" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3AK-8N-ObK">
-                                        <rect key="frame" x="35" y="194" width="250" height="190"/>
+                                        <rect key="frame" x="35" y="188" width="250" height="196"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="190" id="K9J-mr-DNR"/>
+                                            <constraint firstAttribute="height" constant="196" id="K9J-mr-DNR"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="dataSource" destination="lpB-uC-X3Q" id="nPc-Cg-WGG"/>
@@ -1185,6 +1185,7 @@
                         <outlet property="descriptionview" destination="dwO-jl-NlX" id="noN-x8-97A"/>
                         <outlet property="doneButotn" destination="5L2-0H-gQA" id="x8y-7f-bNL"/>
                         <outlet property="doneView" destination="Svp-0q-ODu" id="O4Q-zr-hJh"/>
+                        <outlet property="dropAdjustViewEqualHeight" destination="EKD-sb-aYc" id="kTG-rL-BYm"/>
                         <outlet property="dropDownAdjustView" destination="dqc-z9-ejm" id="fp9-BX-zYP"/>
                         <outlet property="dropdownTableView" destination="qJk-3B-n4F" id="DKK-Mn-nzB"/>
                         <outlet property="editButton" destination="u4L-Rv-YGc" id="bws-Sf-odP"/>
@@ -3302,7 +3303,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="0.5" colorSpace="calibratedRGB"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="AkA-WZ-GPG" firstAttribute="centerY" secondItem="nvK-Gy-IHx" secondAttribute="centerY" id="7hA-Eo-dOQ"/>
@@ -3440,7 +3441,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="0.5" colorSpace="calibratedRGB"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="tq2-XG-Xxl" firstAttribute="leading" secondItem="nXG-su-FtZ" secondAttribute="leading" constant="35" id="Hbz-Ny-gB3"/>
@@ -3542,10 +3543,10 @@
                                         </date>
                                     </datePicker>
                                     <tableView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Df8-Tp-XLA">
-                                        <rect key="frame" x="35" y="204" width="250" height="180"/>
+                                        <rect key="frame" x="35" y="188" width="250" height="196"/>
                                         <color key="backgroundColor" red="0.56470588239999997" green="0.074509803920000006" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="180" id="j8Z-Ua-39S"/>
+                                            <constraint firstAttribute="height" constant="196" id="j8Z-Ua-39S"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="dataSource" destination="ZOM-Ry-7bs" id="WdN-FY-iJR"/>
@@ -3748,6 +3749,7 @@
                         <outlet property="descriptionview" destination="I5v-LS-lRn" id="XVn-oh-LhB"/>
                         <outlet property="doneButotn" destination="3mf-Jb-2Bf" id="D3k-b9-7v1"/>
                         <outlet property="doneView" destination="c9J-0g-2KE" id="Hp5-2e-ZO7"/>
+                        <outlet property="dropAdjustViewEqualHeight" destination="FYd-iP-IEP" id="Bww-jk-vkr"/>
                         <outlet property="dropDownAdjustView" destination="1CV-Jh-ddm" id="QuR-h4-9hg"/>
                         <outlet property="dropdownTableView" destination="J1a-RL-wY5" id="GZD-FO-3uJ"/>
                         <outlet property="editButton" destination="aWA-bG-N6h" id="n7p-xD-f2S"/>

@@ -48,6 +48,7 @@ class OnboardingVC: UIViewController {
     }
     
     @IBAction func letmeinPressed(_ sender: Any) {
+        PrefsManager.sharedinstance.isFirstTime = true
         
         onboardingText.isHidden      = true
         letmeinButtonoutlet.isHidden = true

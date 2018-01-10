@@ -30,6 +30,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var shouldRotate = false
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        incrementAppRuns()
+
+        
         // Override point for customization after application launch.
         FirebaseApp.configure()
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
@@ -188,17 +192,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  /********************opening onboard screen***********************/
   
     func openFirstScreen() {
+        if PrefsManager.sharedinstance.isFirstTime == true{
+           
+            window         = UIWindow(frame: UIScreen.main.bounds)
+            let storyboard                  = UIStoryboard(name: Constants.Main, bundle: nil)
+            let initialViewController       = storyboard.instantiateViewController(withIdentifier: Constants.TabStoryId)
+            //        self.present(initialViewController, animated: false, completion: nil)
 
-        let when = DispatchTime.now() + 0
-        DispatchQueue.main.asyncAfter(deadline: when) {
-
-            self.window    = UIWindow(frame: UIScreen.main.bounds)
-            let storyboard = UIStoryboard(name: Constants.Auth, bundle: nil)
-            let initialViewController = storyboard.instantiateViewController(withIdentifier: Constants.LoginStoryId)
-            self.window?.rootViewController = initialViewController
+            var options = UIWindow.TransitionOptions()
+            options.direction = .toRight
+            options.duration = 0.2
+            options.style = .easeOut
+            window?.setRootViewController(initialViewController, options: options)
             self.window?.makeKeyAndVisible()
-
+        
+//            let when = DispatchTime.now() + 0
+//            DispatchQueue.main.asyncAfter(deadline: when) {
+//
+//                self.window    = UIWindow(frame: UIScreen.main.bounds)
+//                let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
+//                let initialViewController = storyboard.instantiateViewController(withIdentifier: "ParentViewController")
+//                self.window?.rootViewController = initialViewController
+//                self.window?.makeKeyAndVisible()
+//
+//            }
+        }else{
+            let when = DispatchTime.now() + 0
+            DispatchQueue.main.asyncAfter(deadline: when) {
+                
+                self.window    = UIWindow(frame: UIScreen.main.bounds)
+                let storyboard = UIStoryboard(name: Constants.Auth, bundle: nil)
+                let initialViewController = storyboard.instantiateViewController(withIdentifier: Constants.LoginStoryId)
+                self.window?.rootViewController = initialViewController
+                self.window?.makeKeyAndVisible()
+                
+            }
         }
+
 
     }
 

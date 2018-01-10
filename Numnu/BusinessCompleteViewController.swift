@@ -47,7 +47,7 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
     var token_str       : String   = "empty"
     var description_txt : String   = ""
     var apiClient       : ApiClient!
-    var businessprimaryid : Int    = 50
+    var businessprimaryid : Int    = 0
     
     @IBOutlet weak var bookmarkdetaillabel: UILabel!
     @IBOutlet weak var sharebusdetaillabel: UILabel!
@@ -130,6 +130,9 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
         reloadStripView()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+    }
     
     func centerImagetap() {
         
@@ -148,22 +151,23 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
         let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3) as! ReviewEventViewController
         child_1.popdelegate     = self
         child_1.apiType         = "Business"
-        child_1.primaryid       = 50
+        child_1.primaryid       = businessprimaryid
         
         let child_2 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid2) as! MenuEventViewController
         child_2.menuDelegate    = self
         child_2.itemType        = "Business"
-        child_2.primayId        = 50
+        child_2.primayId        = businessprimaryid
         
         let child_3 = UIStoryboard(name: Constants.ItemDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid7)  as! LocationTabController
         child_3.locationdelegate = self
-        child_3.primaryid        = 50
+        child_3.primaryid        = businessprimaryid
         child_3.type             = "Business"
         
         let child_4 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1) as! EventTabController
         child_4.scrolltableview = false
         child_4.eventdelegate   = self
         child_4.apiType         = "Business"
+        child_4.businessid      = businessprimaryid
         
         return [child_1,child_2,child_3,child_4]
         
@@ -337,18 +341,30 @@ extension BusinessCompleteViewController {
     
     func openPopup() {
         
-        let Alert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
-        let FemaleAction = UIAlertAction(title: "Share", style: UIAlertActionStyle.default) { _ in
+        let Alert: UIAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let FemaleAction: UIAlertAction = UIAlertAction(title: "Share", style: .default) { _ in
+            let title = "Numnu"
+            let textToShare = "Discover and share experiences with food and drink at events and festivals."
+            let urlToShare = NSURL(string: "https://itunes.apple.com/ca/app/numnu/id1231472732?mt=8")
             
+            let objectsToShare = [title, textToShare, urlToShare!] as [Any]
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            self.present(activityVC, animated: true, completion: nil)
+
             
         }
-        let MaleAction = UIAlertAction(title: "Bookmark", style: UIAlertActionStyle.default) { _ in
+        let MaleAction: UIAlertAction = UIAlertAction(title: "Bookmark", style: .default) { _ in
             
             self.getBookmarkToken()
             
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) { _ in
-        }
+        //        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) { _ in
+        //        }
+        
+        //Create and add the Cancel action
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel)
+        cancelAction.setValue(UIColor.red, forKey: "titleTextColor")
+
         Alert.addAction(FemaleAction)
         Alert.addAction(MaleAction)
         Alert.addAction(cancelAction)

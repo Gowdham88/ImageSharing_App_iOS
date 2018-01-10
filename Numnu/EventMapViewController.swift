@@ -73,6 +73,8 @@ class EventMapViewController: UIViewController {
     }
     
     func setNavBar() {
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Avenir-Medium", size: 16)!]
+
         if boolForMapTitle == true{
             navigationItemList.title = "Event Map"
 
