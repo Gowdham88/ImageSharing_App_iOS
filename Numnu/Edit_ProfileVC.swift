@@ -24,6 +24,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     var selectedIndex = Int()
     var autocompleteUrls = [String]()
     var cancelBool : Bool = true
+    var activeTextField = UITextField()
+
     
     @IBOutlet weak var dropDownAdjustView: UIView!
     
@@ -223,7 +225,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
             let tapLocation = recognizer.location(in: self.cityTableView)
             if let tapIndexPath = self.cityTableView.indexPathForRow(at: tapLocation) {
                 if let tappedCell = self.cityTableView.cellForRow(at: tapIndexPath) {
-                    cityTextfield.text = tappedCell.textLabel?.text?.components(separatedBy: ",")[0]
+                    cityTextfield.text = tappedCell.textLabel?.text
                     
                     apiClient.getPlaceCordinates(placeid_Str: autocompleteplaceID[tapIndexPath.row], completion: { lat,lang in
                         
@@ -477,7 +479,11 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         } else if textField == genderTextfield {
             textField.resignFirstResponder()
         }
-        textField.resignFirstResponder()
+        if let nextField = activeTextField.superview?.viewWithTag(activeTextField.tag + 1) as? UITextField {
+            nextField.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
         return true
     }
     
@@ -537,6 +543,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.activeTextField = textField
         focusEdittext(textfield: textField,focus: true)
         
         if !(textField == birthTextfield) {
@@ -894,10 +901,14 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         button.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
         let leftButton =  UIBarButtonItem(customView: button)
         leftButton.isEnabled = true
-        
-        let rightButton = UIBarButtonItem(title: "SignUp", style: .plain, target: self, action: #selector(saveClicked))
         navigationItemList.leftBarButtonItem = leftButton
-        navigationItemList.rightBarButtonItem = rightButton
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveClicked))
+        navigationItem.rightBarButtonItem?.titleTextAttributes(for: .normal)
+        if let font = UIFont(name: "Avenir-Medium", size: 16) {
+            navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSFontAttributeName:font], for: .normal)
+        }
+
     }
    
     func backButtonClicked() {

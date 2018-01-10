@@ -25,6 +25,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
     var userprofilename : String = ""
     var userprofileimage : String = ""
     var token_str : String = "empty"
+    var activeField = UITextField()
 
     @IBOutlet weak var passwordReveal: UIButton!
     
@@ -146,7 +147,11 @@ class signInVC: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
+        if let nextField = activeField.superview?.viewWithTag(activeField.tag + 1) as? UITextField {
+            nextField.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
         textField.resignFirstResponder()
         
         return true
@@ -154,6 +159,7 @@ class signInVC: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.activeField = textField
         passwordInfoLabel.isHidden = true
         if textField == emailAddressTF || textField == passwordTF {
             animateViewMoving(up: true, moveValue: 50)

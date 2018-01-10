@@ -181,7 +181,7 @@
                                 </constraints>
                                 <color key="textColor" red="0.16470588235294117" green="0.16470588235294117" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" textContentType="nickname"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES" textContentType="nickname"/>
                                 <connections>
                                     <action selector="emailTextField:" destination="xzY-CQ-uLZ" eventType="editingDidEnd" id="VfX-P3-jEt"/>
                                     <outlet property="delegate" destination="URX-2s-g1Q" id="P0o-mk-MzU"/>
@@ -717,7 +717,7 @@
                                 </constraints>
                                 <color key="textColor" red="0.16470588235294117" green="0.16470588235294117" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" textContentType="name"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES" textContentType="name"/>
                                 <connections>
                                     <outlet property="delegate" destination="WUv-D2-SgJ" id="MBu-Nm-6Q1"/>
                                 </connections>

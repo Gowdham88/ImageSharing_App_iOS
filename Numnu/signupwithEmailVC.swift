@@ -27,7 +27,8 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate,UITextViewDelegat
     var userprofilename : String = ""
     var userprofileimage : String = ""
     var ViewMoved = true
-    var activeField: UITextField?
+    var activeField = UITextField()
+    
 
     @IBOutlet var MainView: UIView!
     var viewHasMovedToUp : Bool = false
@@ -163,6 +164,11 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate,UITextViewDelegat
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if let nextField = activeField.superview?.viewWithTag(activeField.tag + 1) as? UITextField {
+            nextField.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
         textField.resignFirstResponder()
         
         return true
@@ -170,7 +176,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate,UITextViewDelegat
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-
+         self.activeField = textField
 //        if UIDevice.current.model == IPhone5S {
 //
 //        }

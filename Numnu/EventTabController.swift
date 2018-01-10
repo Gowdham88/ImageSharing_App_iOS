@@ -73,7 +73,8 @@ class EventTabController: UIViewController,IndicatorInfoProvider {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
+
         eventList.removeAll()
         eventTableView.reloadData()
         pageno  = 1

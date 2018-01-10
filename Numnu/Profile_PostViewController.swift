@@ -21,9 +21,11 @@ protocol Profile_PostViewControllerDelegae {
 
 class Profile_PostViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout  {
     
+    @IBOutlet weak var TopViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var navigationItemList: UINavigationItem!
     @IBOutlet weak var myScrollView: UIScrollView!
+    @IBOutlet weak var descritionEqualHeight: NSLayoutConstraint!
     
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var descriptionlabel: UILabel!
@@ -72,6 +74,11 @@ class Profile_PostViewController: UIViewController,UICollectionViewDelegate,UICo
         setUserDetails()
         methodToCallApi(pageno: pageno, limit: limitno)
        
+        if descriptionlabel.numberOfVisibleLines > 1 {
+            TopViewHeightConstraint.constant = 186
+        }else{
+            TopViewHeightConstraint.constant = 166
+        }
     
     }
     func navigationTap(){
