@@ -48,7 +48,7 @@ var getLocDetails = [String]()
         settings.style.selectedBarHeight = 3.0
         settings.style.buttonBarItemFont = UIFont(name: "Avenir-Medium", size: 14)!
         settings.style.buttonBarItemsShouldFillAvailiableWidth = true
-        settings.style.viewcontrollersCount = (self.view.frame.size.width / 5) - 10;
+        settings.style.viewcontrollersCount = 5
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.isHidden = false
