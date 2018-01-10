@@ -48,6 +48,7 @@ var getLocDetails = [String]()
         settings.style.selectedBarHeight = 3.0
         settings.style.buttonBarItemFont = UIFont(name: "Avenir-Medium", size: 14)!
         settings.style.buttonBarItemsShouldFillAvailiableWidth = true
+        settings.style.viewcontrollersCount = (self.view.frame.size.width / 5) - 10;
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.isHidden = false
@@ -109,12 +110,13 @@ var getLocDetails = [String]()
         super.viewDidLayoutSubviews()
         self.navigationController?.navigationBar.isHidden = false
 
-        reloadStripView()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewDidAppear(true)
         self.navigationController?.navigationBar.isHidden = false
+        reloadStripView()
 
     }
     override func viewWillAppear(_ animated: Bool){
@@ -526,16 +528,24 @@ extension ParentViewController : PostTabControllerDelegate {
     
     func openPopup() {
         
-        let Alert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
-        let FemaleAction = UIAlertAction(title: "Share", style: UIAlertActionStyle.default) { _ in
-            
-        }
-        let MaleAction = UIAlertAction(title: "Bookmark", style: UIAlertActionStyle.default) { _ in
+        let Alert: UIAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let FemaleAction: UIAlertAction = UIAlertAction(title: "Share", style: .default) { _ in
             
             
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) { _ in
+        let MaleAction: UIAlertAction = UIAlertAction(title: "Bookmark", style: .default) { _ in
+            
+//            self.getBookmarkToken()
+            
         }
+        //        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) { _ in
+        //        }
+        
+        //Create and add the Cancel action
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel)
+        cancelAction.setValue(UIColor.red, forKey: "titleTextColor")
+
+        
         Alert.addAction(FemaleAction)
         Alert.addAction(MaleAction)
         Alert.addAction(cancelAction)

@@ -30,6 +30,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var shouldRotate = false
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        incrementAppRuns()
+
+        
         // Override point for customization after application launch.
         FirebaseApp.configure()
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)

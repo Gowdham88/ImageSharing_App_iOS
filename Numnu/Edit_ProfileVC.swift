@@ -93,7 +93,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet var saveButton: UIButton!
    
-    var Alert = UIAlertController()
+//    var Alert = UIAlertController()
     //Upload Image Declaration
     let imagePicker = UIImagePickerController()
     var pickedImagePath: NSURL?
@@ -137,8 +137,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         
         let sampleTapGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(recognizer:)))
        
-        Alert.view.isUserInteractionEnabled = true
-        Alert.view.addGestureRecognizer(sampleTapGesture)
+//        Alert.view.isUserInteractionEnabled = true
+//        Alert.view.addGestureRecognizer(sampleTapGesture)
         IQKeyboardManager.sharedManager().enable                     = true
         IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
         IQKeyboardManager.sharedManager().enableAutoToolbar          = false
@@ -379,6 +379,13 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 
                 tagArray.remove(at: index)
                 tagsDictonary.remove(at: index)
+                for (position,value) in tagsDictonary.enumerated() {
+                    
+                    var tagdic = value
+                    tagdic.updateValue(position+1, forKey: "displayorder")
+                    tagsDictonary[position] = tagdic
+                    
+                }
                 
             }
             collectionView.reloadData()
@@ -390,22 +397,29 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         genderTextfield.resignFirstResponder()
        showGenderActionsheet()
     }
+    
+    
+    
+    
+    
   
     func showGenderActionsheet() {
 
-         Alert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
-        let FemaleAction = UIAlertAction(title: "Female", style: UIAlertActionStyle.default) { _ in
+        let Alert: UIAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let FemaleAction: UIAlertAction = UIAlertAction(title: "Female", style: .default) { _ in
             self.genderTextfield.text = "Female"
             self.genderTextfield.resignFirstResponder()
 
         }
-        let MaleAction = UIAlertAction(title: "Male", style: UIAlertActionStyle.default) { _ in
+        let MaleAction: UIAlertAction = UIAlertAction(title: "Male", style: .default) { _ in
             self.genderTextfield.text = "Male"
             self.genderTextfield.resignFirstResponder()
 
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) { _ in
-        }
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel)
+        cancelAction.setValue(UIColor.red, forKey: "titleTextColor")
+
+        
         Alert.addAction(FemaleAction)
         Alert.addAction(MaleAction)
         Alert.addAction(cancelAction)
@@ -809,22 +823,27 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         })
     }
     
+    
+
+    
+    
+    
     // Image Picker //
      @IBAction func editPicture(_ sender: Any) {
         imagePicker.allowsEditing = false
-        let Alert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        let Alert: UIAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
        
         
-        let CameraAction = UIAlertAction(title: "Camera", style: UIAlertActionStyle.default) { ACTION in
+        let CameraAction: UIAlertAction = UIAlertAction(title: "Camera", style: .default) { ACTION in
             self.showCamera()
         }
-        let GalleryAction = UIAlertAction(title: "Gallery", style: UIAlertActionStyle.default) { ACTION in
+        let GalleryAction: UIAlertAction = UIAlertAction(title: "Gallery", style: .default) { ACTION in
        
            self.showGallery()
         }
-        let CancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) {_ in
-        }
-       
+        let CancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel)
+        CancelAction.setValue(UIColor.red, forKey: "titleTextColor")
+
         if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad) {
             Alert.popoverPresentationController?.sourceView = self.view
             Alert.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
@@ -952,6 +971,13 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         let tag = (sender as AnyObject).tag
         tagArray.remove(at: tag!)
         tagsDictonary.remove(at: tag!)
+        for (position,value) in tagsDictonary.enumerated() {
+            
+            var tagdic = value
+            tagdic.updateValue(position+1, forKey: "displayorder")
+            tagsDictonary[position] = tagdic
+            
+        }
         collectionView.reloadData()
         
     }
@@ -1375,7 +1401,7 @@ extension Edit_ProfileVC {
         
         if let locitem = user.locItem {
             
-            PrefsManager.sharedinstance.userCity = "\(locitem.address_str ?? "Address")"
+            PrefsManager.sharedinstance.userCity = "\(locitem.address_str ?? "")"
             PrefsManager.sharedinstance.userCityId = locitem.id_str ?? 0
             
         }

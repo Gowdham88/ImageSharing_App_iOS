@@ -31,7 +31,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1212"
             endingLineNumber = "1212"
-            landmarkName = "deleteBookmark(id:headers:completion:)"
+            landmarkName = "getLocationByItemId(id:page:type:headers:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -47,7 +47,23 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1227"
             endingLineNumber = "1227"
-            landmarkName = "deleteBookmark(id:headers:completion:)"
+            landmarkName = "getLocationsById(id:headers:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Numnu/SettingsViewController.swift"
+            timestampString = "537197425.478529"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
+            landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -10,6 +10,9 @@ import UIKit
 import Alamofire
 
 class BookmarkViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+    
+    var selectedIndex: NSInteger?
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return bookmarkdataitems.count
     }
@@ -17,28 +20,56 @@ class BookmarkViewController: UIViewController,UITableViewDelegate,UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! BookmarkTableViewCell
         cell.item = bookmarkdataitems[indexPath.row]
+        
+        cell.deleteAction.addTarget(self, action: #selector(doneClick), for: UIControlEvents.allTouchEvents)
+        
+        cell.deleteAction.tag = indexPath.row
 
         return cell
     }
     
     
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if (editingStyle == UITableViewCellEditingStyle.delete) {
-            // handle delete (by removing the data from your array and updating the tableview)
-            
-            self.deleteBookmark(id: bookmarkdataitems[indexPath.row].id ?? 0,position: indexPath.row)
-            self.bookmarkTableView.reloadData()
+    func doneClick(sender: UIButton){
+      
+        selectedIndex = sender.tag
+
+        let Alert: UIAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let MaleAction: UIAlertAction = UIAlertAction(title: "Delete", style: .default) { _ in
+
+            self.delete()
             
         }
+        //        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) { _ in
+        //        }
+        
+        //Create and add the Cancel action
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel) { action -> Void in
+            //Just dismiss the action sheet
+        }
+        cancelAction.setValue(UIColor.red, forKey: "titleTextColor")
+        Alert.addAction(MaleAction)
+        Alert.addAction(cancelAction)
+        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad) {
+            Alert.popoverPresentationController?.sourceView = self.view
+            Alert.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
+            present(Alert, animated: true, completion:nil )
+        }else{
+            present(Alert, animated: true, completion:nil )
+        }
+        
     }
     
-    
+    func delete(){
+        
+        
+        self.deleteBookmark(id: bookmarkdataitems[selectedIndex!].id ?? 0,position: selectedIndex!)
+        self.bookmarkTableView.reloadData()
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
              if apiType == "Event" {
                 let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
                 let vc         = storyboard.instantiateViewController(withIdentifier:Constants.EventStoryId) as! EventViewController
@@ -76,6 +107,7 @@ class BookmarkViewController: UIViewController,UITableViewDelegate,UITableViewDa
     @IBOutlet weak var bookmarkTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         apiClient = ApiClient()
         // Do any additional setup after loading the view.
         if apiType == "Event" || apiType == "Business" || apiType == "Item" || apiType == "Post"{

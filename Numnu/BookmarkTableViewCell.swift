@@ -10,6 +10,8 @@ import UIKit
 
 class BookmarkTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var bookmarkImage: ImageExtender!
+    @IBOutlet weak var deleteAction: UIButton!
     @IBOutlet weak var nameLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
