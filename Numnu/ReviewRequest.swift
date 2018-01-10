@@ -9,7 +9,7 @@ import StoreKit
 
 
 let runIncrementerSetting = "numberOfRuns"  // UserDefauls dictionary key where we store number of runs
-let minimumRunCount = 5                     // Minimum number of runs that we should have until we ask for review
+let minimumRunCount = 0                     // Minimum number of runs that we should have until we ask for review
 
 
 func incrementAppRuns() {                   // counter for number of runs for the app. You can call this from App Delegate
@@ -46,7 +46,7 @@ func showReview() {
         
         if #available(iOS 10.3, *) {
             print("Review Requested")
-            SKStoreReviewController.requestReview()
+//            SKStoreReviewController.requestReview()
             guard let url = URL(string: "https://itunes.apple.com/ca/app/numnu/id1231472732?mt=8&action=write-review") else { return }
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
 
