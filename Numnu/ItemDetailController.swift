@@ -79,6 +79,7 @@ class ItemDetailController : ButtonBarPagerTabStripViewController {
         settings.style.selectedBarHeight = 3.0
         settings.style.buttonBarItemFont = UIFont(name: "Avenir-Medium", size: 14)!
         settings.style.buttonBarItemsShouldFillAvailiableWidth = true
+        settings.style.viewcontrollersCount = 2
         super.viewDidLoad()
         myscrollView.delegate = self
         settings.style.buttonBarBackgroundColor = .white

@@ -150,6 +150,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
 
         buttonBarView.selectedBarHeight = settings.style.selectedBarHeight
         buttonBarView.selectedBarVerticalAlignment = settings.style.selectedBarVerticalAlignment
+        buttonBarView.viewcontrollersCount   = settings.style.viewcontrollersCount
 
         // register button bar item cell
         switch buttonBarItemSpec! {
