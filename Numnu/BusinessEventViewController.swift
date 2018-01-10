@@ -82,7 +82,7 @@ class BusinessEventViewController: UIViewController,IndicatorInfoProvider {
     }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: Constants.EventTab1)
+        return IndicatorInfo(title: "Vendors")
     }
     
     func openStoryBoard (name : String,id : String,businessid : Int) {

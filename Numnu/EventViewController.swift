@@ -34,7 +34,15 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     var description_txt : String = ""
     var eventprimaryid  : Int    = 34
 
-    @IBOutlet weak var descriptionTopToLocationname: NSLayoutConstraint!
+    @IBOutlet weak var weblinkIcon1TopToEventmapIcon: NSLayoutConstraint!
+    @IBOutlet weak var weblink2IconTopToweblinkIcon1: NSLayoutConstraint!
+    @IBOutlet weak var weblink1TopToEventmap: NSLayoutConstraint!
+    @IBOutlet weak var descriptionTopToEventmap: NSLayoutConstraint!
+    @IBOutlet weak var weblink3IconHeight: NSLayoutConstraint!
+    @IBOutlet weak var weblink2IconHeight: NSLayoutConstraint!
+    @IBOutlet weak var weblink1IconHeight: NSLayoutConstraint!
+    @IBOutlet weak var mapIconTopToLocationIcon: NSLayoutConstraint!
+    @IBOutlet weak var eventMapTopToLocationname: NSLayoutConstraint!
     @IBOutlet weak var weblink3TopToLocationame: NSLayoutConstraint!
     @IBOutlet weak var mapIconTopToDateIcon: NSLayoutConstraint!
     @IBOutlet weak var dateIconHeight: NSLayoutConstraint!
@@ -151,8 +159,6 @@ class EventViewController: ButtonBarPagerTabStripViewController {
 
     }
     
-    
-   
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
 
@@ -461,21 +467,6 @@ extension EventViewController {
         }
     }
     
-//    func openPopup() {
-//
-//        self.shareView.alpha   = 1
-//
-//        let top = CGAffineTransform(translationX: 0, y: 0)
-//
-//        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-//            self.shareView.isHidden = false
-//            self.shareView.transform = top
-//
-//        }, completion: nil)
-//
-//
-//    }
-    
     func closePopup() {
         
         bookmarkid   = 0
@@ -631,6 +622,10 @@ extension EventViewController {
         
         if let eventLinkList = response.eventLinkList {
             if eventLinkList.count > 0 {
+//                weblink1TopToEventmap.constant = 5
+//                weblink2TopConstraint.constant = 5
+//                weblinkIcon1TopToEventmapIcon.constant = 5
+//                weblink2IconTopToweblinkIcon1.constant = 5
                 if let weblink1 = eventLinkList[0].weblink {
                     EventLinkLabel1.text    = eventLinkList[0].linktext
                     MyVariables.link1       = weblink1
@@ -646,9 +641,12 @@ extension EventViewController {
 //
 //                }
             }else {
-                weblink1Height.constant = 0
-                weblink2Height.constant = 0
-                weblink3Height.constant = 0
+                weblink1Height.constant     = 0
+                weblink1IconHeight.constant = 0
+                weblink2IconHeight.constant = 0
+                weblink3IconHeight.constant = 0
+                weblink2Height.constant     = 0
+                weblink3Height.constant     = 0
             }
             
             if eventLinkList.count > 2 {
@@ -658,21 +656,28 @@ extension EventViewController {
                     
                 }
             }else{
-                weblink3Height.constant = 0
-                descriptionTopcostraintToWeblink2.constant = 5
+                weblink3Height.constant     = 0
+                weblink3IconHeight.constant = 0
+                descriptionTopcostraintToWeblink2.constant = 0
+                weblink1TopToEventmap.constant = 5
+                weblink2TopConstraint.constant = 0
+                weblinkIcon1TopToEventmapIcon.constant = 12
+                weblink2IconTopToweblinkIcon1.constant = 15
             }
         }else{
-            weblink1Height.constant = 0
-            weblink2Height.constant = 0
-            weblink3Height.constant = 0
-            descriptionTopToLocationname.constant = 3
-
+            weblink1Height.constant     = 0
+            weblink1IconHeight.constant = 0
+            weblink2IconHeight.constant = 0
+            weblink3IconHeight.constant = 0
+            weblink2Height.constant     = 0
+            weblink3Height.constant     = 0
+            descriptionTopToEventmap.constant = 0
         }
         
         
         if let taglist = response.taglist {
            dateIconTopToEventname.constant = 40
-            dateTopToEventname.constant = 37
+            dateTopToEventname.constant    = 37
             tagarray.removeAll()
             if taglist.count > 0 {
                 for item in taglist {
@@ -685,7 +690,7 @@ extension EventViewController {
             }
         }else{
             dateIconTopToEventname.constant = 8
-            dateTopToEventname.constant = 5
+            dateTopToEventname.constant     = 5
             
 
         }

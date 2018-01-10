@@ -24,7 +24,8 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     var selectedIndex = Int()
     var autocompleteUrls = [String]()
     var tagArrayList = [TagList]()
-    
+    var activeTextField = UITextField()
+
     @IBOutlet weak var dropAdjustViewEqualHeight: NSLayoutConstraint!
     @IBOutlet weak var dropDownAdjustView: UIView!
     @IBOutlet weak var cancelDatePicker: UIButton!
@@ -95,7 +96,6 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     var tagnamearray = [String]()
     var token_str    : String = "empty"
     var setdatebirth : Bool   = false
-    
     /*****************Parameters*************************/
     
     var cityDictonary : [String : Any]?
@@ -221,7 +221,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             if let tapIndexPath = self.citytableview.indexPathForRow(at: tapLocation) {
                 if let tappedCell = self.citytableview.cellForRow(at: tapIndexPath) {
                     print("selected index is::::::::",tappedCell)
-                    cityTextfield.text = tappedCell.textLabel?.text?.components(separatedBy: ",")[0]
+                    cityTextfield.text = tappedCell.textLabel?.text
                     apiClient.getPlaceCordinates(placeid_Str: autocompleteplaceID[tapIndexPath.row], completion: { lat,lang in
                         
                         self.cityDictonary = ["name":self.autocompleteplaceArray[tapIndexPath.row],"address":self.autocompleteplaceArray[tapIndexPath.row],"isgoogleplace":true,"googleplaceid":self.autocompleteplaceID[tapIndexPath.row],"googleplacetype":"geocode","lattitude":lat,"longitude":lang]
@@ -368,6 +368,9 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     /// TextField delegates ///
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+      
+        
         if textField == foodTextfield {
             dropdownTableView.isHidden = true
             dropDownAdjustView.isHidden = true
@@ -378,9 +381,15 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             citytableview.isHidden  = true
             
         }
-       textField.resignFirstResponder()
+        if let nextField = activeTextField.superview?.viewWithTag(activeTextField.tag + 1) as? UITextField {
+            nextField.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+        return false
       
-        return true
+        
+       
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -432,7 +441,8 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        
+        self.activeTextField = textField
+
            focusEdittext(textfield: textField,focus: true)
         
         if textField == birthTextfield {
@@ -443,15 +453,19 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             doneView.isHidden = false
             cancelDatePicker.isHidden = false
             showPopup(table1: true, table2: true)
+            dropDownAdjustView.isHidden = true
             self.datePickerValueChanged(sender: datePicker)
 
         }else if textField == cityTextfield {
             let cityText = cityTextfield.text!
             if cityText.count > 1 {
                 showPopup(table1: false, table2: true)
+                dropDownAdjustView.isHidden = true
                 
             }else{
-                showPopup(table1: false, table2: false)
+                showPopup(table1: true, table2: true)
+                dropDownAdjustView.isHidden = true
+
                 
             }
 //            showPopup(table1: false, table2: true)
@@ -633,8 +647,6 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         saveClicked()
     }
     
-
-    
     // Image Picker //
     @IBAction func editPicture(_ sender: Any) {
         imagePicker.allowsEditing = false
@@ -735,9 +747,32 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         button.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
         let leftButton =  UIBarButtonItem(customView: button)
         leftButton.isEnabled = true
-        let rightButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveClicked))
+        
+     // Another method to add right bar button item
+        
+//        let button2: UIButton = UIButton(type: UIButtonType.custom)
+//        button2.addTarget(self, action: #selector(SettingsEdit_ProfieViewController.saveClicked), for: UIControlEvents.touchUpInside)
+//        button2.frame = CGRect(x: 0, y: 0, width: 100, height: 22)
+//        let rightButton =  UIBarButtonItem(customView: button2)
+//        rightButton.title = "Save"
+//        rightButton.titleTextAttributes(for: UIControlState.normal)
+//        if let font = UIFont(name: "Avenir-Medium", size: 15) {
+//            rightButton.setTitleTextAttributes([NSFontAttributeName:font], for: .normal)
+//        }
+//
+//        rightButton.isEnabled = true
+        
+        //        let rightButton = UIBarButtonItem(title: "Save", for: UIControlEvents.touchUpInside, style: .plain, target: self, action: #selector(saveClicked))
+        //        rightButton.isEnabled = true
+        //        navigationItemList.rightBarButtonItem = rightButton
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveClicked))
+       navigationItem.rightBarButtonItem?.titleTextAttributes(for: .normal)
+        if let font = UIFont(name: "Avenir-Medium", size: 16) {
+                        navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSFontAttributeName:font], for: .normal)
+                    }
+
         navigationItemList.leftBarButtonItem = leftButton
-        navigationItemList.rightBarButtonItem = rightButton
     }
     
     func backButtonClicked() {
@@ -858,13 +893,14 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             if(cell == nil)
             {
                 cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
+                citytableview.isHidden = true
             }
             
             guard autocompleteplaceArray.count > 0 else {
                 
                 return cell!
             }
-            cell?.selectionStyle = .none
+            cell?.selectionStyle  = .none
             cell?.backgroundColor = UIColor.white
             cell?.textLabel?.text = autocompleteplaceArray[indexPath.row]
             cell?.textLabel?.font = UIFont(name: "Avenir-Medium", size: 14)
@@ -961,18 +997,26 @@ extension SettingsEdit_ProfieViewController {
                                 self.dropAdjustViewEqualHeight.constant   = 132
                             }else if self.tagnamearray.count == 0 {
                                 self.dropDownAdjustView.isHidden = true
+                                self.dropdownTableView.isHidden  = true
                                 self.dropAdjustViewEqualHeight.constant   = 0
                             }
                         }else {
                             self.dropAdjustViewEqualHeight.constant   = 165
                         }
                     }
+                }else {
+                    self.showPopup(table1: true, table2: true)
+                    self.dropDownAdjustView.isHidden = true
+
                 }
                 
             } else {
                 
                 DispatchQueue.main.async {
                     self.dropdownTableView.reloadData()
+                    self.showPopup(table1: true, table2: true)
+                    self.dropDownAdjustView.isHidden = true
+
                 }
                 
             }
@@ -1115,6 +1159,8 @@ extension SettingsEdit_ProfieViewController {
             superVieww.isHidden = true
             doneView.isHidden = true
             cancelDatePicker.isHidden = true
+            dropDownAdjustView.isHidden = false
+
 
             
         }

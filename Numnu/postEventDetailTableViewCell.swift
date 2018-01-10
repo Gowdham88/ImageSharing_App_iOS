@@ -58,54 +58,54 @@ class postEventDetailTableViewCell : UITableViewCell {
         delegate!.bookmarkPost(tag: sender.tag)
     }
     
-    func setHeight(heightview : Float) {
-        
-        if heightview <= 568 {
-            
-            postDtdishwidthConstaint.constant   = 75
-            DtplaceWidthConstraint.constant = 75
-            
-            
-        } else if heightview <= 667 {
-            
-            postDtdishwidthConstaint.constant   = 99
-            DtplaceWidthConstraint.constant = 99
-            
-        } else if heightview <= 736 {
-            
-            postDtdishwidthConstaint.constant   = 117
-            DtplaceWidthConstraint.constant = 117
-            
-        } else if heightview <= 812 {
-            
-            postDtdishwidthConstaint.constant   = 99
-            DtplaceWidthConstraint.constant = 99
-            
-        } else if heightview <= 1024 {
-            
-            postDtdishwidthConstaint.constant   = 274
-            DtplaceWidthConstraint.constant = 274
-            
-        } else {
-            
-            postDtdishwidthConstaint.constant   = 387
-            DtplaceWidthConstraint.constant = 387
-            
-        }
-        
-        if (postDtEventDishLabel.numberOfVisibleLines > 1) {
-            
-            eventTopHeight.constant = 50
-            
-        }
-        
-        if (postDtEventPlace.numberOfVisibleLines > 1) {
-            
-            eventTopHeight.constant = 50
-            
-        }
-        
-    }
+//    func setHeight(heightview : Float) {
+//
+//        if heightview <= 568 {
+//
+//            postDtdishwidthConstaint.constant   = 75
+//            DtplaceWidthConstraint.constant = 75
+//
+//
+//        } else if heightview <= 667 {
+//
+//            postDtdishwidthConstaint.constant   = 99
+//            DtplaceWidthConstraint.constant = 99
+//
+//        } else if heightview <= 736 {
+//
+//            postDtdishwidthConstaint.constant   = 117
+//            DtplaceWidthConstraint.constant = 117
+//
+//        } else if heightview <= 812 {
+//
+//            postDtdishwidthConstaint.constant   = 99
+//            DtplaceWidthConstraint.constant = 99
+//
+//        } else if heightview <= 1024 {
+//
+//            postDtdishwidthConstaint.constant   = 274
+//            DtplaceWidthConstraint.constant = 274
+//
+//        } else {
+//
+//            postDtdishwidthConstaint.constant   = 387
+//            DtplaceWidthConstraint.constant = 387
+//
+//        }
+//
+//        if (postDtEventDishLabel.numberOfVisibleLines > 1) {
+//
+//            eventTopHeight.constant = 50
+//
+//        }
+//
+//        if (postDtEventPlace.numberOfVisibleLines > 1) {
+//
+//            eventTopHeight.constant = 50
+//
+//        }
+//
+//    }
     
     var item : PostListDataItems! {
         didSet {
