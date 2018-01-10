@@ -222,6 +222,10 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
                 if let tappedCell = self.citytableview.cellForRow(at: tapIndexPath) {
                     print("selected index is::::::::",tappedCell)
                     cityTextfield.text = tappedCell.textLabel?.text?.components(separatedBy: ",")[0]
+                    apiClient.getPlaceCordinates(placeid_Str: autocompleteplaceID[tapIndexPath.row], completion: { lat,lang in
+                        
+                        self.cityDictonary = ["name":self.autocompleteplaceArray[tapIndexPath.row],"address":self.autocompleteplaceArray[tapIndexPath.row],"isgoogleplace":true,"googleplaceid":self.autocompleteplaceID[tapIndexPath.row],"googleplacetype":"geocode","lattitude":lat,"longitude":lang]
+                    })
                     cityTextfield.resignFirstResponder()
                     
                 }
@@ -283,6 +287,15 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             if let index = tagArray.index(of:"") {
                 tagArray.remove(at: index)
                 tagsDictonary.remove(at: index)
+                
+                 for (position,value) in tagsDictonary.enumerated() {
+                    
+                    var tagdic = value
+                    tagdic.updateValue(position+1, forKey: "displayorder")
+                    tagsDictonary[position] = tagdic
+                    
+                }
+              
             }
             collectionView.reloadData()
             foodTextfield.resignFirstResponder()
@@ -477,6 +490,8 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         }
         if textField == cityTextfield {
             citytableview.isHidden = true
+            cityDictonary = nil
+            cityTextfield.text = ""
         }
       
         
@@ -666,23 +681,30 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
                    LoadingHepler.instance.show()
                     
                     let apiclient : ApiClient = ApiClient()
-                    apiclient.getFireBaseImageUrl(imagepath: url_str, completion: { url in
+                    let imageRemove = PrefsManager.sharedinstance.imageURL.replacingOccurrences(of: "/images/users/", with: "")
+                    let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(self.token_str)"]
+                    apiclient.deleteImage(id: PrefsManager.sharedinstance.userId, image: imageRemove, headers: header, completion: { status in
                         
-                        LoadingHepler.instance.hide()
+                        apiclient.getFireBaseImageUrl(imagepath: url_str, completion: { url in
+                            
+                            LoadingHepler.instance.hide()
+                            
+                            if url != "empty" {
+                                
+                                PrefsManager.sharedinstance.imageURL = url_str
+                                Manager.shared.loadImage(with:URL(string:url)!, into: self.profileImage)
+                                
+                            } else {
+                                
+                                AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Image upload failed", vc: self)
+                                
+                            }
+                            
+                        })
                         
-                        if url != "empty" {
-                            
-                            PrefsManager.sharedinstance.imageURL = url_str
-                            Manager.shared.loadImage(with:URL(string:url)!, into: self.profileImage)
-                            
-                        } else {
-                            
-                            AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Image upload failed", vc: self)
-                            
-                        }
                         
                     })
-                    
+                  
                 } else {
                     
                     LoadingHepler.instance.hide()
@@ -715,21 +737,24 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         _ = self.navigationController?.popViewController(animated: true)
     }
     func saveClicked(){
+        if self.currentReachabilityStatus != .notReachable {
         let Email:NSString = emailaddress.text! as NSString
         if nameTextfield.text == "" || emailaddress.text == ""  || cityTextfield.text == "" || genderTextfield.text == "" || usernameTextField.text == ""  {
             AlertProvider.Instance.showAlert(title: "Oops", subtitle: "Fields Cannot be empty", vc: self)
         } else {
             if isValidEmail(testStr: Email as String) == true {
-                PrefsManager.sharedinstance.isLoginned = true
-                let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
-                let vc         = storyboard.instantiateViewController(withIdentifier: "SettingsVC") as! SettingsViewController
-                vc.delegate    = self as? SettingsViewControllerDelegate
-//                self.navigationController!.pushViewController(vc, animated: true)
-                self.navigationController?.popViewController(animated: true)
+                
+                ediprofileApi()
+                
                 
             }else {
                 AlertProvider.Instance.showAlert(title: "Oops", subtitle: "Please Enter Valid Email ID", vc: self)
             }
+        }
+            
+        } else {
+            
+            AlertProvider.Instance.showInternetAlert(vc: self)
         }
     }
     /// collectionView for food preferences ///
@@ -767,6 +792,16 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         let tag = (sender as AnyObject).tag
         tagArray.remove(at: tag!)
         tagsDictonary.remove(at: tag!)
+        
+        for (position,value) in tagsDictonary.enumerated() {
+            
+            var tagdic = value
+            tagdic.updateValue(position+1, forKey: "displayorder")
+            tagsDictonary[position] = tagdic
+            
+            
+        }
+        
         collectionView.reloadData()
     }
     
@@ -1006,6 +1041,7 @@ extension SettingsEdit_ProfieViewController {
     func getPlaceApi(place_Str:String) {
         
         autocompleteplaceArray.removeAll()
+        autocompleteplaceID.removeAll()
         
         let parameters: Parameters = ["input": place_Str ,"types" : "(cities)" , "key" : "AIzaSyDmfYE1gIA6UfjrmOUkflK9kw0nLZf0nYw"]
         
@@ -1022,13 +1058,15 @@ extension SettingsEdit_ProfieViewController {
                             for item in place_dic {
                                 
                                 let placeName = item["description"].string ?? "empty"
+                                let placeid   = item["place_id"].string ?? "empty"
                                 
                                 if self.autocompleteplaceArray.count < 6 {
                                     
                                     self.autocompleteplaceArray.append(placeName)
+                                    self.autocompleteplaceID.append(placeid)
+                                    
                                 }
-                                
-                                
+                           
                             }
                             
                             DispatchQueue.main.async {
@@ -1086,6 +1124,15 @@ extension SettingsEdit_ProfieViewController {
         cityTextfield.text = PrefsManager.sharedinstance.userCity
         descriptionTextField.text = PrefsManager.sharedinstance.description
         usernameTextField.text    = PrefsManager.sharedinstance.username
+        
+        if PrefsManager.sharedinstance.userCityId == 0 {
+            
+            cityDictonary = nil
+            
+        } else {
+            
+            cityDictonary = ["id" : PrefsManager.sharedinstance.userCityId]
+        }
         
         if PrefsManager.sharedinstance.gender == 0 {
             
@@ -1217,7 +1264,7 @@ extension SettingsEdit_ProfieViewController {
     
     /****************************************complete signup******************************************************/
     
-    func completeSignupApi() {
+    func ediprofileApi() {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -1244,44 +1291,54 @@ extension SettingsEdit_ProfieViewController {
         LoadingHepler.instance.show()
         
         let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
-        let parameters: Parameters = ["username": usernameTextField.text!, "name":nameTextfield.text! , "description" : descriptionTextField.text!,"dateofbirth": birthdate, "gender": gender as Int,"tags":tagsDictonary,"isbusinessuser": false as Bool,"email": emailaddress.text! ,"citylocation":cityDictonary! ,"clientip": clientIp, "clientapp": Constants.clientApp]
+        let parameters: Parameters = ["username": usernameTextField.text!, "name":nameTextfield.text! , "description" : descriptionTextField.text!,"dateofbirth": birthdate, "gender": gender as Int,"tags":tagsDictonary,"isbusinessuser": false as Bool,"email": emailaddress.text! ,"citylocation":cityDictonary ?? [],"clientip": clientIp, "clientapp": Constants.clientApp]
         
         apiClient.editProfileApi(parameters: parameters,id: userid,headers: header,completion:{status, Values in
-            
+
             print("statusfb: \(status)")
             if status == "success" {
-                
+
                 LoadingHepler.instance.hide()
-                
+
                 if let user = Values {
-                    
+
                     self.getUserDetails(user: user)
-                    
+                    let alert = UIAlertController(title: "Hey!", message: "Profile updated successfully.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
+                        
+                        let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
+                        let vc         = storyboard.instantiateViewController(withIdentifier: "SettingsVC") as! SettingsViewController
+                        vc.delegate    = self as? SettingsViewControllerDelegate
+                        self.navigationController?.popViewController(animated: true)
+                        
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+
                 } else {
-                    
+
                     LoadingHepler.instance.hide()
                     AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Some error occured.", vc: self)
-                    
+
                 }
-                
-                
+
+
             } else {
-                
+
                 LoadingHepler.instance.hide()
-                
+
                 if let user = Values {
-                    
+
                     if let meassage = user.errormessage {
-                        
+
                         AlertProvider.Instance.showAlert(title: "Oops!", subtitle: meassage, vc: self)
-                  
+
                         return
                     }
-                    
+
                 }
-                
+
                 AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Some error occured.", vc: self)
-                
+
             }
         })
         
@@ -1355,7 +1412,8 @@ extension SettingsEdit_ProfieViewController {
         
         if let locitem = user.locItem {
             
-            PrefsManager.sharedinstance.userCity = "\(locitem.address_str ?? "Address")"
+            PrefsManager.sharedinstance.userCity = "\(locitem.address_str ?? "")"
+            PrefsManager.sharedinstance.userCityId = locitem.id_str ?? 0
             
         }
         

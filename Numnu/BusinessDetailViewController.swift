@@ -195,14 +195,14 @@ class BusinessDetailViewController: ButtonBarPagerTabStripViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        reloadStripView()
+      
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
         self.tabBarController?.tabBar.isHidden = false
+        reloadStripView()
     }
     
 }

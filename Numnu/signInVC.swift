@@ -483,7 +483,8 @@ extension signInVC {
         
         if let locitem = user.locItem {
             
-            PrefsManager.sharedinstance.userCity = "\(locitem.address_str ?? "Address")"
+            PrefsManager.sharedinstance.userCity = "\(locitem.address_str ?? "")"
+            PrefsManager.sharedinstance.userCityId = locitem.id_str ?? 0
             
         }
         
