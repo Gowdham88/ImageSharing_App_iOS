@@ -48,6 +48,7 @@ class BookmarkViewController: UIViewController,UITableViewDelegate,UITableViewDa
         let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel) { action -> Void in
             //Just dismiss the action sheet
         }
+        cancelAction.setValue(UIColor.red, forKey: "titleTextColor")
         Alert.addAction(MaleAction)
         Alert.addAction(cancelAction)
         if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad) {
