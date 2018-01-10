@@ -68,6 +68,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     @IBOutlet weak var eventDateLabel: UILabel!
     @IBOutlet weak var eventPlaceLabel: UILabel!
     @IBOutlet weak var eventMap: UILabel!
+    @IBOutlet var eventMapIcon: UIImageView!
     
     
     @IBOutlet weak var EventLinkLabel1: UILabel!
@@ -266,6 +267,10 @@ extension EventViewController {
         let maptap = UITapGestureRecognizer(target: self, action: #selector(EventViewController.mapRedirect(sender:)))
         eventMap.isUserInteractionEnabled = true
         eventMap.addGestureRecognizer(maptap)
+        
+        let maptapIcon = UITapGestureRecognizer(target: self, action: #selector(EventViewController.mapRedirect(sender:)))
+        eventMapIcon.isUserInteractionEnabled = true
+        eventMapIcon.addGestureRecognizer(maptapIcon)
         
     }
     

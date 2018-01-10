@@ -11,6 +11,7 @@ import XLPagerTabStrip
 import GoogleMaps
 import Alamofire
 import Nuke
+import MapKit
 
 class LocationDetailcontroller: ButtonBarPagerTabStripViewController {
     
@@ -191,6 +192,7 @@ class LocationDetailcontroller: ButtonBarPagerTabStripViewController {
     
 }
 
+@available(iOS 10.0, *)
 extension LocationDetailcontroller {
     
     /****************etap function************************/
@@ -209,7 +211,9 @@ extension LocationDetailcontroller {
     
     func mapRedirect(sender:UITapGestureRecognizer) {
         
-        openMapBoard()
+//        openMapBoard()
+        openApplemap()
+        
     }
     
     func openCompleteMenu(sender:UITapGestureRecognizer) {
@@ -404,6 +408,22 @@ extension LocationDetailcontroller {
         }, completion: nil)
         
     }
+    
+    func openApplemap(){
+        let lat:CLLocationDegrees = 41.887
+        let log:CLLocationDegrees = -87.662
+        
+        let regionDistance:CLLocationDistance = 1000;
+        let coordinates = CLLocationCoordinate2DMake(lat, log)
+        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
+        
+        
+        let options = [MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center), MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)]
+        
+        let placemark = MKPlacemark(coordinate: coordinates)
+        let mapItem = MKMapItem(placemark: placemark)
+        mapItem.openInMaps(launchOptions: options)
+    }//openApplemap
     
 }
 
