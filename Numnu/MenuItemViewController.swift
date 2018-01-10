@@ -50,6 +50,7 @@ class MenuItemViewController: UIViewController {
         }
         
         
+        
     }
     func navigationTap(){
         let offset = CGPoint(x: 0,y :0)

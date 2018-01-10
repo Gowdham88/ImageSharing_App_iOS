@@ -1343,7 +1343,7 @@
 				CODE_SIGN_ENTITLEMENTS = Numnu/Numnu.entitlements;
 				DEVELOPMENT_TEAM = 74E53UM8BJ;
 				INFOPLIST_FILE = Numnu/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.numnu.numnu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1362,7 +1362,7 @@
 				CODE_SIGN_ENTITLEMENTS = Numnu/Numnu.entitlements;
 				DEVELOPMENT_TEAM = 74E53UM8BJ;
 				INFOPLIST_FILE = Numnu/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.numnu.numnu;
 				PRODUCT_NAME = "$(TARGET_NAME)";

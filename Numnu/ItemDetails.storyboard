@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -522,27 +521,33 @@
                                                             <color key="textColor" red="0.16470588235294117" green="0.16470588235294117" blue="0.16470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="August 30,Montreal " lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HTX-sS-Kvh">
-                                                            <rect key="frame" x="98" y="50.5" width="184" height="19.5"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="41" id="1Wt-P1-x7H"/>
-                                                            </constraints>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="August 30, Montreal " lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HTX-sS-Kvh">
+                                                            <rect key="frame" x="114" y="52" width="184" height="20"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                                             <color key="textColor" red="0.45812767744064331" green="0.4779319167137146" blue="0.51118749380111694" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location_ico" translatesAutoresizingMaskIntoConstraints="NO" id="oem-qo-Xwj">
+                                                            <rect key="frame" x="98" y="56" width="9" height="13"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="9" id="Gc1-pX-cLc"/>
+                                                                <constraint firstAttribute="height" constant="13" id="XBj-GX-Ojf"/>
+                                                            </constraints>
+                                                        </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
+                                                        <constraint firstItem="HTX-sS-Kvh" firstAttribute="top" secondItem="tIX-eT-dzU" secondAttribute="bottom" constant="6" id="2SV-pa-STM"/>
                                                         <constraint firstItem="tIX-eT-dzU" firstAttribute="top" secondItem="OY7-kD-Bhu" secondAttribute="top" constant="10" id="7Ww-9h-Zb4"/>
+                                                        <constraint firstItem="oem-qo-Xwj" firstAttribute="top" secondItem="tIX-eT-dzU" secondAttribute="bottom" constant="10" id="C7K-AR-qPT"/>
                                                         <constraint firstAttribute="height" constant="110" id="DhW-8i-VRz"/>
-                                                        <constraint firstAttribute="trailing" secondItem="HTX-sS-Kvh" secondAttribute="trailing" constant="38" id="G7L-gX-sOb"/>
                                                         <constraint firstItem="tIX-eT-dzU" firstAttribute="leading" secondItem="bdx-9P-ZEB" secondAttribute="trailing" constant="10" id="JOw-rO-BFS"/>
-                                                        <constraint firstItem="HTX-sS-Kvh" firstAttribute="leading" secondItem="bdx-9P-ZEB" secondAttribute="trailing" constant="10" id="NrK-da-dji"/>
-                                                        <constraint firstItem="HTX-sS-Kvh" firstAttribute="top" secondItem="tIX-eT-dzU" secondAttribute="bottom" constant="5" id="VE0-5Z-zVC"/>
+                                                        <constraint firstItem="HTX-sS-Kvh" firstAttribute="leading" secondItem="oem-qo-Xwj" secondAttribute="trailing" constant="7" id="SRL-wE-iLr"/>
+                                                        <constraint firstAttribute="trailing" secondItem="HTX-sS-Kvh" secondAttribute="trailing" constant="22" id="Xmn-xd-ewg"/>
                                                         <constraint firstItem="bdx-9P-ZEB" firstAttribute="leading" secondItem="OY7-kD-Bhu" secondAttribute="leading" constant="8" id="dMq-XE-Sq2"/>
                                                         <constraint firstItem="bdx-9P-ZEB" firstAttribute="top" secondItem="OY7-kD-Bhu" secondAttribute="top" constant="10" id="hh5-u6-ybq"/>
                                                         <constraint firstAttribute="trailing" secondItem="tIX-eT-dzU" secondAttribute="trailing" constant="38" id="j2R-GZ-24w"/>
+                                                        <constraint firstItem="oem-qo-Xwj" firstAttribute="leading" secondItem="bdx-9P-ZEB" secondAttribute="trailing" constant="10" id="k1Q-Cx-5U9"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
