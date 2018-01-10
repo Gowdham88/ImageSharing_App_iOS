@@ -204,7 +204,7 @@ extension ReviewEventViewController : UITableViewDelegate,UITableViewDataSource 
         cell.delegate = self
         cell.item = postList[indexPath.row]
         cell.postDtEventBookMark.tag = indexPath.row
-        cell.setHeight(heightview : Float(UIScreen.main.bounds.size.height))
+//        cell.setHeight(heightview : Float(UIScreen.main.bounds.size.height))
         
         let posteventImagetap = UITapGestureRecognizer(target: self, action: #selector(postDtEventImages(sender:)))
         cell.postDtEventImage.addGestureRecognizer(posteventImagetap)

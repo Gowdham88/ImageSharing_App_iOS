@@ -67,6 +67,7 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
     override func viewDidLoad() {
        settings.style.selectedBarHeight = 3.0
        settings.style.buttonBarItemFont = UIFont(name: "Avenir-Medium", size: 14)!
+       settings.style.viewcontrollersCount = 2
        super.viewDidLoad()
         
         myscrollView.delegate = self
