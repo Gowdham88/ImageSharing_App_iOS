@@ -135,9 +135,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
             guard changeCurrentIndex == true else { return }
             oldCell?.label.textColor = UIColor.textlightDark()
             newCell?.label.textColor = UIColor.appBlackColor()
-         
-
-            
+        
         }
 
         let centerImagetap = UITapGestureRecognizer(target: self, action: #selector(EventViewController.centerImagetap))

@@ -25,7 +25,7 @@ struct  EventTypeList {
     var currentPage_l  : String?
     var nextPage_l     : String?
     
-    init?(json : JSON){
+    init?(json : JSON) {
         
        let jsonpage = JSON(json["pagination"])
         
@@ -122,11 +122,8 @@ struct  EventTypeList {
             }
             
         }
-        
-        
+    
         
     }
-    
-    
-    
+  
 }
