@@ -410,12 +410,9 @@ extension LocationDetailcontroller {
     }
     
     func openApplemap(){
-        let lat:CLLocationDegrees = 41.887
-        let log:CLLocationDegrees = -87.662
-//        if let lat_double = Double(lat),let long_double = Double(long) {
-//            //        let lat:CLLocationDegrees = MyVariables.fetchedLat
-//            //        let log:CLLocationDegrees = MyVariables.fetchedLong
-//        }
+        let lat:CLLocationDegrees = (MyVariables.fetchedLat as NSString).doubleValue
+
+        let log:CLLocationDegrees = (MyVariables.fetchedLong as NSString).doubleValue
 
         
         let regionDistance:CLLocationDistance = 1000;
