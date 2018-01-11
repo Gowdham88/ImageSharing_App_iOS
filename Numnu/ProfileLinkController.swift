@@ -314,7 +314,7 @@ extension ProfileLinkController : UITableViewDelegate,UITableViewDataSource {
         cell.item = postList[indexPath.row]
         cell.delegate = self
         cell.postEventBookMark.tag = indexPath.row
-        cell.setHeight(heightview : Float(UIScreen.main.bounds.size.height))
+//        cell.setHeight(heightview : Float(UIScreen.main.bounds.size.height))
         
         let posteventlabeltap = UITapGestureRecognizer(target: self, action: #selector(self.CenterImageTapped(sender:)))
         cell.postEventImage.tag = indexPath.row

@@ -70,31 +70,31 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Alamofire.SessionManager.MultipartFormDataEncodingResult) -&gt; () in Numnu.Edit_ProfileVC.uploadImage(image: __ObjC.UIImage, id: Swift.Int, completion: (Swift.Optional&lt;Swift.String&gt;) -&gt; ()) -&gt; ()"
+                  symbolName = "Numnu.Edit_ProfileVC.uploadImage(image: __ObjC.UIImage, id: Swift.Int, completion: (Swift.Optional&lt;Swift.String&gt;) -&gt; ()) -&gt; ()"
                   moduleName = "Numnu"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/czsm2/numnu_ios_karthik/Numnu/Edit_ProfileVC.swift"
-                  timestampString = "537282206.029222"
+                  timestampString = "537348040.936514"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "787"
-                  endingLineNumber = "787"
-                  offsetFromSymbolStart = "73">
+                  startingLineNumber = "788"
+                  endingLineNumber = "788"
+                  offsetFromSymbolStart = "744">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Alamofire.SessionManager.MultipartFormDataEncodingResult) -&gt; () in Numnu.Edit_ProfileVC.uploadImage(image: __ObjC.UIImage, id: Swift.Int, completion: (Swift.Optional&lt;Swift.String&gt;) -&gt; ()) -&gt; ()"
+                  symbolName = "closure #1 (Alamofire.MultipartFormData) -&gt; () in Numnu.Edit_ProfileVC.uploadImage(image: __ObjC.UIImage, id: Swift.Int, completion: (Swift.Optional&lt;Swift.String&gt;) -&gt; ()) -&gt; ()"
                   moduleName = "Numnu"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/czsm2/numnu_ios_karthik/Numnu/Edit_ProfileVC.swift"
-                  timestampString = "537282206.030776"
+                  timestampString = "537348040.937971"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "787"
-                  endingLineNumber = "787"
-                  offsetFromSymbolStart = "102">
+                  startingLineNumber = "790"
+                  endingLineNumber = "790"
+                  offsetFromSymbolStart = "32">
                </Location>
             </Locations>
          </BreakpointContent>

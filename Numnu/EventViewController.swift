@@ -10,7 +10,7 @@ import UIKit
 import XLPagerTabStrip
 import Alamofire
 import SwiftyJSON
-
+import MapKit
 import Nuke
 import NVActivityIndicatorView
 
@@ -33,7 +33,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     var apiClient     : ApiClient!
     var description_txt : String = ""
     var eventprimaryid  : Int    = 34
-
+    
     @IBOutlet weak var weblinkIcon1TopToEventmapIcon: NSLayoutConstraint!
     @IBOutlet weak var weblink2IconTopToweblinkIcon1: NSLayoutConstraint!
     @IBOutlet weak var weblink1TopToEventmap: NSLayoutConstraint!
@@ -292,7 +292,8 @@ extension EventViewController {
     
     func mapRedirect(sender:UITapGestureRecognizer) {
         
-        openMapBoard()
+//        openMapBoard()
+          openApplemap()
     }
     
     /*************************Tag view updating************************************/
@@ -390,6 +391,27 @@ extension EventViewController {
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
+    
+    func openApplemap(){
+       
+        let lat:CLLocationDegrees = (MyVariables.fetchedLat as NSString).doubleValue
+        let log:CLLocationDegrees = (MyVariables.fetchedLong as NSString).doubleValue
+
+//        var latitude   : CLLocationDegrees = (MyVariables.fetchedLat as NSString).doubleValue
+        let regionDistance:CLLocationDistance = 1000;
+        let coordinates = CLLocationCoordinate2DMake(lat, log)
+        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
+
+
+        let options = [MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center), MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)]
+
+        let placemark = MKPlacemark(coordinate: coordinates)
+        let mapItem = MKMapItem(placemark: placemark)
+        mapItem.openInMaps(launchOptions: options)
+        print(lat)
+        print(log)
+        
+    }//openApplemap
     
     func alertTapRegister() {
         
@@ -618,7 +640,9 @@ extension EventViewController {
         }else{
             dateLabelHeight.constant = 0
             dateIconHeight.constant  = 0
-            mapIconTopToDateIcon.constant = -3
+            mapIconTopToDateIcon.constant = 5
+            
+            
             
         }
         
@@ -661,11 +685,13 @@ extension EventViewController {
             }else{
                 weblink3Height.constant     = 0
                 weblink3IconHeight.constant = 0
-                descriptionTopcostraintToWeblink2.constant = 0
-                weblink1TopToEventmap.constant = 5
-                weblink2TopConstraint.constant = 0
+                descriptionTopcostraintToWeblink2.constant = -15
+                weblink1TopToEventmap.constant = 10
+                weblink2TopConstraint.constant = -20
                 weblinkIcon1TopToEventmapIcon.constant = 12
-                weblink2IconTopToweblinkIcon1.constant = 15
+                weblink2IconTopToweblinkIcon1.constant = 11
+                weblink1TopToEventmap.constant = 9
+                eventMapTopToLocationname.constant = 6
             }
         }else{
             weblink1Height.constant     = 0
