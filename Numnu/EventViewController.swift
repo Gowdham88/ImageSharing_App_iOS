@@ -10,7 +10,7 @@ import UIKit
 import XLPagerTabStrip
 import Alamofire
 import SwiftyJSON
-
+import MapKit
 import Nuke
 import NVActivityIndicatorView
 
@@ -292,7 +292,8 @@ extension EventViewController {
     
     func mapRedirect(sender:UITapGestureRecognizer) {
         
-        openMapBoard()
+//        openMapBoard()
+          openApplemap()
     }
     
     /*************************Tag view updating************************************/
@@ -390,6 +391,26 @@ extension EventViewController {
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
+    
+    func openApplemap(){
+       
+        let lat:CLLocationDegrees = 41.887
+        let log:CLLocationDegrees = -87.662
+
+        let regionDistance:CLLocationDistance = 1000;
+        let coordinates = CLLocationCoordinate2DMake(lat, log)
+        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
+
+
+        let options = [MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center), MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)]
+
+        let placemark = MKPlacemark(coordinate: coordinates)
+        let mapItem = MKMapItem(placemark: placemark)
+        mapItem.openInMaps(launchOptions: options)
+        print(lat)
+        print(log)
+        
+    }//openApplemap
     
     func alertTapRegister() {
         
