@@ -382,7 +382,12 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             
         }
         if let nextField = activeTextField.superview?.viewWithTag(activeTextField.tag + 1) as? UITextField {
-            nextField.becomeFirstResponder()
+            if activeTextField == genderTextfield {
+                nextField.resignFirstResponder
+
+            }else{
+                nextField.becomeFirstResponder()
+            }
         } else {
             textField.resignFirstResponder()
         }
@@ -406,11 +411,21 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             }
             
         }else if textField == cityTextfield {
+            
+            dropDownAdjustView.isHidden = true
+            dropdownTableView.isHidden  = true
+
                 let citytext = cityTextfield.text!
                 if citytext.count > 1 {
                     showPopup(table1: false, table2: true)
+                    dropdownTableView.isHidden  = true
+
                 }else{
                     showPopup(table1: true, table2: true)
+                    dropDownAdjustView.isHidden = true
+                    dropdownTableView.isHidden  = true
+
+
                 }
             if let place = textField.text {
                 getPlaceApi(place_Str: "\(place)\(string)" as String)
@@ -418,7 +433,10 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             
         } else {
             showPopup(table1: true, table2: true)
-            
+            dropDownAdjustView.isHidden = true
+            dropdownTableView.isHidden  = true
+
+
         }
         return true
     }
@@ -457,17 +475,17 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             self.datePickerValueChanged(sender: datePicker)
 
         }else if textField == cityTextfield {
-            let cityText = cityTextfield.text!
-            if cityText.count > 1 {
-                showPopup(table1: false, table2: true)
-                dropDownAdjustView.isHidden = true
-                
-            }else{
-                showPopup(table1: true, table2: true)
-                dropDownAdjustView.isHidden = true
-
-                
-            }
+//            let cityText = cityTextfield.text!
+//            if cityText.count > 1 {
+//                showPopup(table1: true, table2: true)
+//                dropDownAdjustView.isHidden = true
+//
+//            }else{
+//                showPopup(table1: true, table2: true)
+//                dropDownAdjustView.isHidden = true
+//
+//                
+//            }
 //            showPopup(table1: false, table2: true)
             self.datePickerValueChanged(sender: datePicker)
             datePicker.isHidden = true
@@ -512,6 +530,8 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
             citytableview.isHidden = true
             cityDictonary = nil
             cityTextfield.text = ""
+            dropDownAdjustView.isHidden = true
+            dropdownTableView.isHidden  = true
         }
       
         
@@ -767,6 +787,7 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         //        navigationItemList.rightBarButtonItem = rightButton
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveClicked))
+        navigationItem.rightBarButtonItem?.tintColor = UIColor(displayP3Red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
        navigationItem.rightBarButtonItem?.titleTextAttributes(for: .normal)
         if let font = UIFont(name: "Avenir-Medium", size: 16) {
                         navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSFontAttributeName:font], for: .normal)
@@ -1148,7 +1169,7 @@ extension SettingsEdit_ProfieViewController {
     }
     
     func showPopup(table1: Bool,table2 : Bool) {
-        
+        dropDownAdjustView.isHidden = table2
         citytableview.isHidden      = table1
         dropdownTableView.isHidden  = table2
         
@@ -1159,7 +1180,7 @@ extension SettingsEdit_ProfieViewController {
             superVieww.isHidden = true
             doneView.isHidden = true
             cancelDatePicker.isHidden = true
-            dropDownAdjustView.isHidden = false
+            
 
 
             
