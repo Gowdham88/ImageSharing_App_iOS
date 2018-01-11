@@ -23,7 +23,7 @@ class MenuItemEventCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         if eventMenLabel.numberOfVisibleLines > 1 {
-            tagConstarintTop.constant = 30
+            tagConstarintTop.constant = 7
         }
         
     }

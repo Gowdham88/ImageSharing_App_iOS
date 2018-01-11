@@ -661,11 +661,13 @@ extension EventViewController {
             }else{
                 weblink3Height.constant     = 0
                 weblink3IconHeight.constant = 0
-                descriptionTopcostraintToWeblink2.constant = 0
-                weblink1TopToEventmap.constant = 5
-                weblink2TopConstraint.constant = 0
+                descriptionTopcostraintToWeblink2.constant = -15
+                weblink1TopToEventmap.constant = 10
+                weblink2TopConstraint.constant = -20
                 weblinkIcon1TopToEventmapIcon.constant = 12
-                weblink2IconTopToweblinkIcon1.constant = 15
+                weblink2IconTopToweblinkIcon1.constant = 11
+                weblink1TopToEventmap.constant = 9
+                eventMapTopToLocationname.constant = 5
             }
         }else{
             weblink1Height.constant     = 0

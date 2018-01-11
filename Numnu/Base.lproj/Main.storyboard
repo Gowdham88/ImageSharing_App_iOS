@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -578,7 +578,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VH4-X6-Kdb">
-                                <rect key="frame" x="0.0" y="44" width="320" height="907"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="951"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="LJ0-Io-Clr">
                                         <rect key="frame" x="115" y="35" width="90" height="90"/>
@@ -1011,11 +1011,11 @@
                                             <constraint firstItem="5L2-0H-gQA" firstAttribute="centerY" secondItem="Svp-0q-ODu" secondAttribute="centerY" id="t7M-sG-68F"/>
                                         </constraints>
                                     </view>
-                                    <tableView clipsSubviews="YES" contentMode="bottom" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3AK-8N-ObK">
-                                        <rect key="frame" x="35" y="188" width="250" height="196"/>
+                                    <tableView clipsSubviews="YES" contentMode="bottom" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3AK-8N-ObK">
+                                        <rect key="frame" x="35" y="183" width="250" height="201"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="196" id="K9J-mr-DNR"/>
+                                            <constraint firstAttribute="height" constant="201" id="K9J-mr-DNR"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="dataSource" destination="lpB-uC-X3Q" id="nPc-Cg-WGG"/>
@@ -1166,6 +1166,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="FPt-lc-Be3"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <size key="freeformSize" width="320" height="1000"/>
                     <connections>
                         <outlet property="addButton" destination="b82-wu-vP4" id="Lby-fL-c9I"/>
@@ -1301,14 +1302,14 @@
                                                         <rect key="frame" x="135" y="103" width="169" height="28"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location_ico" translatesAutoresizingMaskIntoConstraints="NO" id="gX4-II-R2s">
-                                                                <rect key="frame" x="0.0" y="6" width="10" height="15"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="10" height="15"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="10" id="Vor-NU-CCr"/>
                                                                     <constraint firstAttribute="height" constant="15" id="fok-Eu-B8y"/>
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Montreal" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XJC-Kz-2dW">
-                                                                <rect key="frame" x="15" y="5" width="57.5" height="19"/>
+                                                                <rect key="frame" x="15" y="0.0" width="57.5" height="19"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="39" id="RGi-AC-4l0"/>
                                                                 </constraints>
@@ -1320,10 +1321,10 @@
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstItem="gX4-II-R2s" firstAttribute="leading" secondItem="9SE-RC-ukt" secondAttribute="leading" id="9k3-Dm-A4d"/>
-                                                            <constraint firstItem="XJC-Kz-2dW" firstAttribute="top" secondItem="9SE-RC-ukt" secondAttribute="top" constant="5" id="Iwb-mm-dv9"/>
-                                                            <constraint firstAttribute="bottom" secondItem="XJC-Kz-2dW" secondAttribute="bottom" constant="4" id="OeH-lk-cpE"/>
+                                                            <constraint firstItem="XJC-Kz-2dW" firstAttribute="top" secondItem="9SE-RC-ukt" secondAttribute="top" id="Iwb-mm-dv9"/>
+                                                            <constraint firstAttribute="bottom" secondItem="XJC-Kz-2dW" secondAttribute="bottom" constant="9" id="OeH-lk-cpE"/>
                                                             <constraint firstItem="XJC-Kz-2dW" firstAttribute="leading" secondItem="gX4-II-R2s" secondAttribute="trailing" constant="5" id="PWk-BJ-Mnp"/>
-                                                            <constraint firstItem="gX4-II-R2s" firstAttribute="top" secondItem="XJC-Kz-2dW" secondAttribute="top" constant="1" id="mZT-bM-baY"/>
+                                                            <constraint firstItem="gX4-II-R2s" firstAttribute="top" secondItem="XJC-Kz-2dW" secondAttribute="top" id="mZT-bM-baY"/>
                                                             <constraint firstAttribute="trailing" secondItem="XJC-Kz-2dW" secondAttribute="trailing" constant="96.5" id="vbi-5c-3ra"/>
                                                         </constraints>
                                                     </view>
@@ -2109,7 +2110,7 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AfZ-Z6-ECu">
                                         <rect key="frame" x="35" y="377" width="250" height="1"/>
@@ -3312,7 +3313,7 @@
                                         <rect key="frame" x="35" y="721.5" width="250" height="20"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hPB-hb-eYF">
                                         <rect key="frame" x="35" y="744.5" width="250" height="1"/>
@@ -3540,10 +3541,10 @@
                                         </date>
                                     </datePicker>
                                     <tableView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Df8-Tp-XLA">
-                                        <rect key="frame" x="35" y="188" width="250" height="196"/>
+                                        <rect key="frame" x="35" y="183" width="250" height="201"/>
                                         <color key="backgroundColor" red="0.56470588239999997" green="0.074509803920000006" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="196" id="j8Z-Ua-39S"/>
+                                            <constraint firstAttribute="height" constant="201" id="j8Z-Ua-39S"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="dataSource" destination="ZOM-Ry-7bs" id="WdN-FY-iJR"/>

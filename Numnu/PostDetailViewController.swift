@@ -28,8 +28,8 @@ class PostDetailViewController : UIViewController {
     @IBOutlet var businessTap: ImageExtender!
     @IBOutlet var eventTap: ImageExtender!
     @IBOutlet weak var dishwidthDConstaint: NSLayoutConstraint!
-    @IBOutlet weak var placeWidthDConstraint: NSLayoutConstraint!
-    @IBOutlet weak var dishRightDLayoutConstraint: NSLayoutConstraint!
+//    @IBOutlet weak var placeWidthDConstraint: NSLayoutConstraint!
+//    @IBOutlet weak var dishRightDLayoutConstraint: NSLayoutConstraint!
 
     @IBOutlet weak var alertViewHide: UIView!
     @IBOutlet weak var mainPostView: UIView!
@@ -51,7 +51,7 @@ class PostDetailViewController : UIViewController {
         super.viewDidLoad()
         
         setNavBar()
-        setHeight(heightview: Float(UIScreen.main.bounds.size.height))
+//        setHeight(heightview: Float(UIScreen.main.bounds.size.height))
         
         alertviewBottomConstraints.constant = self.view.frame.height + 600
         alertViewHide.alpha = 0
@@ -445,54 +445,54 @@ extension PostDetailViewController {
 //
 //    }
     
-    func setHeight(heightview : Float){
-        
-        if heightview <= 568 {
-            
-            dishwidthDConstaint.constant   = 75
-            placeWidthDConstraint.constant = 75
-            
-            
-        } else if heightview <= 667 {
-            
-            dishwidthDConstaint.constant   = 99
-            placeWidthDConstraint.constant = 99
-            
-        } else if heightview <= 736 {
-            
-            dishwidthDConstaint.constant   = 117
-            placeWidthDConstraint.constant = 117
-            
-        } else if heightview <= 812 {
-            
-            dishwidthDConstaint.constant   = 99
-            placeWidthDConstraint.constant = 99
-            
-        } else if heightview <= 1024 {
-            
-            dishwidthDConstaint.constant   = 274
-            placeWidthDConstraint.constant = 274
-            
-        } else {
-            
-            dishwidthDConstaint.constant   = 387
-            placeWidthDConstraint.constant = 387
-            
-        }
-        
-        if (postDEventDishLabel.numberOfVisibleLines > 1) {
-            
-            eventTopHeight.constant = 50
-            
-        }
-        
-        if (postDEventPlace.numberOfVisibleLines > 1) {
-            
-            eventTopHeight.constant = 50
-            
-        }
-        
-    }
+//    func setHeight(heightview : Float){
+//        
+//        if heightview <= 568 {
+//            
+////            dishwidthDConstaint.constant   = 75
+////            placeWidthDConstraint.constant = 75
+//            
+//            
+//        } else if heightview <= 667 {
+//            
+////            dishwidthDConstaint.constant   = 99
+////            placeWidthDConstraint.constant = 99
+//            
+//        } else if heightview <= 736 {
+//            
+//            dishwidthDConstaint.constant   = 117
+//            placeWidthDConstraint.constant = 117
+//            
+//        } else if heightview <= 812 {
+//            
+//            dishwidthDConstaint.constant   = 99
+//            placeWidthDConstraint.constant = 99
+//            
+//        } else if heightview <= 1024 {
+//            
+//            dishwidthDConstaint.constant   = 274
+//            placeWidthDConstraint.constant = 274
+//            
+//        } else {
+//            
+//            dishwidthDConstaint.constant   = 387
+//            placeWidthDConstraint.constant = 387
+//            
+//        }
+//        
+//        if (postDEventDishLabel.numberOfVisibleLines > 1) {
+//            
+//            eventTopHeight.constant = 50
+//            
+//        }
+//        
+//        if (postDEventPlace.numberOfVisibleLines > 1) {
+//            
+//            eventTopHeight.constant = 50
+//            
+//        }
+//        
+//    }
     
     
     

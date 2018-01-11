@@ -46,6 +46,11 @@ class WebViewController: UIViewController,WKNavigationDelegate {
        
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

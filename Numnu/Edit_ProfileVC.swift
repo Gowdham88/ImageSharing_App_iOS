@@ -25,7 +25,9 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     var autocompleteUrls = [String]()
     var cancelBool : Bool = true
     var activeTextField = UITextField()
-
+    var day   : String = "empty"
+    var month : String = "empty"
+    var year  : String = "empty"
     
     @IBOutlet weak var dropDownAdjustView: UIView!
     
@@ -236,6 +238,8 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                 }
 
                 cityTableView.isHidden = true
+                dropDownAdjustView.isHidden = true
+                dropdownTableView.isHidden  = true
             }
         }
     }
@@ -345,10 +349,10 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         cancelBool = true
        
 //        if dateLabel.text == "" || monthLabel.text == "" || yearLabel.text == "" {
-            birthTextfield.text = ""
-            dateLabel.text = ""
-            monthLabel.text = ""
-            yearLabel.text = ""
+//            birthTextfield.text = ""
+//            dateLabel.text = ""
+//            monthLabel.text = ""
+//            yearLabel.text = ""
 //        }
     
         datePicker.isHidden = true
@@ -619,10 +623,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                         AlertProvider.Instance.showAlert(title: "Hey!", subtitle: "Username already exists", vc: self)
                         
                     } else {
-                        
                         print("the username available")
-                        
-                        
                     }
                 })
                 
@@ -640,7 +641,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
                         yearLabel.text = ""
                     }
                 }else{
-                    self.datePickerValueChanged(sender: datePicker)
+//                    self.datePickerValueChanged(sender: datePicker)
                     
                 }
           
@@ -661,23 +662,28 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         }
         
         if textField == cityTextfield {
-            cityTableView.isHidden = true
+            cityTableView.isHidden      = true
+            dropdownTableView.isHidden  = true
+            dropDownAdjustView.isHidden = true
         }
     }
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-            self.cityTableView.isHidden = true
+            self.cityTableView.isHidden      = true
+            self.dropdownTableView.isHidden  = true
+            self.dropDownAdjustView.isHidden = true
         }, completion: nil)
         
         dismissKeyboard()
         
         if textField == cityTextfield {
             
-            cityDictonary = nil
+            cityDictonary      = nil
             cityTextfield.text = ""
             self.cityTableView.isHidden = true
-
+            dropdownTableView.isHidden = true
+            dropDownAdjustView.isHidden = true
         }
         if textField == foodTextfield {
             dropdownTableView.isHidden = true
@@ -710,13 +716,16 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         datePicker.isHidden = false
         superVieww.isHidden = false
         doneView.isHidden = false
-        datePicker.addTarget(self, action: #selector(Edit_ProfileVC.datePickerValueChanged), for: UIControlEvents.valueChanged)
     }
     func doneClick() {
         superVieww.isHidden = true
         datePicker.isHidden = true
         doneView.isHidden = true
+        datePicker.addTarget(self, action: #selector(Edit_ProfileVC.datePickerValueChanged), for: UIControlEvents.valueChanged)
         self.datePickerValueChanged(sender: datePicker)
+        dateLabel.text = day
+        monthLabel.text = month
+        yearLabel.text = year
         birthTextfield.resignFirstResponder()
         self.view.endEditing(true)
     }
@@ -724,14 +733,11 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     func datePickerValueChanged(sender:UIDatePicker) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy"
-        let year: String = dateFormatter.string(from: self.datePicker.date)
+         year = dateFormatter.string(from: self.datePicker.date)
         dateFormatter.dateFormat = "MM"
-        let month: String = dateFormatter.string(from: self.datePicker.date)
+         month = dateFormatter.string(from: self.datePicker.date)
         dateFormatter.dateFormat = "dd"
-        let day: String = dateFormatter.string(from: self.datePicker.date)
-        dateLabel.text = day
-        monthLabel.text = month
-        yearLabel.text = year
+         day = dateFormatter.string(from: self.datePicker.date)
 }
     func addCollectionContainer(){
         let storyboard         = UIStoryboard(name: Constants.Auth, bundle: nil)
@@ -904,11 +910,11 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
         navigationItemList.leftBarButtonItem = leftButton
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveClicked))
+        navigationItem.rightBarButtonItem?.tintColor = UIColor(displayP3Red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
         navigationItem.rightBarButtonItem?.titleTextAttributes(for: .normal)
         if let font = UIFont(name: "Avenir-Medium", size: 16) {
             navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSFontAttributeName:font], for: .normal)
-        }
-
+        }                                                                                                                                                                                                                                                                                                                                              
     }
    
     func backButtonClicked() {

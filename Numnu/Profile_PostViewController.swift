@@ -37,7 +37,7 @@ class Profile_PostViewController: UIViewController,UICollectionViewDelegate,UICo
     @IBOutlet weak var shareview: UIView!
     var boolForBack : Bool = true
 
-    @IBOutlet weak var EventverticalConstraint: NSLayoutConstraint!
+//    @IBOutlet weak var EventverticalConstraint: NSLayoutConstraint!
     var itemArray = [TagList]()
     var delegate : Profile_PostViewControllerDelegae?
     
@@ -385,7 +385,7 @@ extension Profile_PostViewController : UITableViewDelegate,UITableViewDataSource
         cell.item = postList[indexPath.row]
         cell.delegate = self
         cell.postEventBookMark.tag = indexPath.row
-        cell.setHeight(heightview : Float(UIScreen.main.bounds.size.height))
+//        cell.setHeight(heightview : Float(UIScreen.main.bounds.size.height))
         
         let posteventlabeltap = UITapGestureRecognizer(target: self, action: #selector(self.CenterImageTapped(sender:)))
         cell.postEventImage.tag = indexPath.row
