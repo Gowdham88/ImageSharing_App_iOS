@@ -335,6 +335,8 @@ extension ParentViewController {
         self.addChildViewController(controller)
         controller.didMove(toParentViewController: self)
     }
+    
+    
 }
 
 /*************************Google place autocomplete*******************************************/
@@ -353,9 +355,7 @@ extension ParentViewController : GMSAutocompleteViewControllerDelegate {
             
             print("Place address: \(placeName)")
         }
-        
-        
-        
+     
         dismiss(animated: true, completion: nil)
     }
     

@@ -276,6 +276,117 @@ class  ApiClient {
       
     }
     
+    
+    /*********************Home horizontal search api*****************************/
+    
+    func homeHorizontalSearchApi(parameters : Parameters,headers : HTTPHeaders,completion : @escaping (String,HomehorizontalListModel?) -> Void) {
+      
+        
+        Alamofire.request(Constants.homeListApi, method: .post, parameters: parameters,encoding: JSONEncoding.default,headers: headers).validate().responseJSON { response in
+            
+            print(response.result.value as Any)
+            
+            switch response.result {
+                
+            case .success:
+                
+                if let value = response.result.value {
+                    
+                    print(value)
+                    
+                    if let json = JSON(value).array {
+                    
+                    if let homeList = HomehorizontalListModel(json: json) {
+                        
+                        completion("success",homeList)
+                    }
+                        
+                    } else {
+                        
+                        completion("failure",nil)
+                        
+                    }
+                    
+                    
+                }
+                
+                
+            case .failure(let error):
+                
+                print(error.localizedDescription)
+                
+                if let httpStatusCode = response.response?.statusCode {
+                    
+                    if let value = response.data,httpStatusCode == 400 {
+                        let json = JSON(value)
+                        if UserList(json: json) != nil {
+                            
+                            completion("400",nil)
+                            return
+                        }
+                        
+                    }
+                    
+                }
+                
+                completion(error.localizedDescription,nil)
+                
+            }
+        }
+        
+    }
+    
+    /*********************Home horizontal search api*****************************/
+    
+    func homeHorizontalSearchApiPagination(parameters : Parameters,id:Int,page : Int,headers : HTTPHeaders,completion : @escaping (String,HomehorizontalModel?) -> Void) {
+        
+        
+        Alamofire.request("\(Constants.homeListApi)/\(id)?page=\(page)", method: .post, parameters: parameters,encoding: JSONEncoding.default,headers: headers).validate().responseJSON { response in
+            
+            print(response.result.value as Any)
+            
+            switch response.result {
+                
+            case .success:
+                
+                if let value = response.result.value {
+                    
+                    print(value)
+                    
+                     let json = JSON(value)
+                        
+                        if let homeList = HomehorizontalModel(json: json) {
+                            
+                            completion("success",homeList)
+                        }
+                   
+                }
+                
+                
+            case .failure(let error):
+                
+                print(error.localizedDescription)
+                
+                if let httpStatusCode = response.response?.statusCode {
+                    
+                    if let value = response.data,httpStatusCode == 400 {
+                        let json = JSON(value)
+                        if UserList(json: json) != nil {
+                            
+                            completion("400",nil)
+                            return
+                        }
+                        
+                    }
+                    
+                }
+                
+                completion(error.localizedDescription,nil)
+                
+            }
+        }
+        
+    }
    
     
     /************************Tags Api**********************************/

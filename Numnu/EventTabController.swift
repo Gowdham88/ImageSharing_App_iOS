@@ -43,6 +43,10 @@ class EventTabController: UIViewController,IndicatorInfoProvider {
     var searchText        : String?
     var businessid        : Int = 0
     
+    var homesearchItem     : HomehorizontalModel?
+    var homesearchItemList = [HomeSearchItem]()
+    var indexposition : Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -86,6 +90,8 @@ class EventTabController: UIViewController,IndicatorInfoProvider {
             getBusinessEvent(pageno: pageno, limit: limitno)
         case "Home" :
             getHomeSearchApi(pageno: pageno)
+        case "HomeSearch" :
+            getHomeSearchApi(position: indexposition, pageno: pageno)
             
         default:
             getEvent(pageno: pageno, limit: limitno)
@@ -126,31 +132,70 @@ extension EventTabController : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return eventList.count
+        if apiType == "HomeSearch" {
+            
+            return homesearchItemList.count
+            
+        } else {
+            
+            return eventList.count
+            
+        }
+        
+        
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "eventcell", for: indexPath) as! EventTableViewCell
+        if apiType == "HomeSearch" {
         
-        guard eventList.count > 0 else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "eventcell", for: indexPath) as! EventTableViewCell
             
+            guard homesearchItemList.count > 0 else {
+                
+                return cell
+            }
+            
+            cell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.row)
+            cell.itemSearch = homesearchItemList[indexPath.row]
             return cell
-        }
         
-        cell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.row)
-        cell.item = eventList[indexPath.row]
-        return cell
+            
+        } else {
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "eventcell", for: indexPath) as! EventTableViewCell
+            
+            guard eventList.count > 0 else {
+                
+                return cell
+            }
+            
+            cell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.row)
+            cell.item = eventList[indexPath.row]
+            return cell
+            
+        }
         
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if let id = eventList[indexPath.row].id {
+        if apiType == "HomeSearch" {
+        
+            if let id = homesearchItemList[indexPath.row].id {
             
             openStoryBoard(primaryid: id)
             
+            }
+            
+        } else {
+            
+            if let id = eventList[indexPath.row].id {
+                
+                openStoryBoard(primaryid: id)
+                
+            }
         }
         
         
@@ -194,6 +239,18 @@ extension EventTabController : UITableViewDelegate,UITableViewDataSource {
                 
             }
             
+        } else if indexPath.row == homesearchItemList.count - 1 && viewState {
+            
+            if let pageItem = homesearchItem {
+                
+                if homesearchItemList.count  < pageItem.totalRows ?? 0 {
+                    pageno += 1
+                    limitno = 25 * pageno
+                    getHomeSearchApi(position: indexposition, pageno: pageno)
+                }
+                
+            }
+            
         }
     }
     
@@ -204,14 +261,23 @@ extension EventTabController : UICollectionViewDelegate,UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return eventList[collectionView.tag].taglist?.count ?? 0
+        if apiType == "HomeSearch" {
+        
+         return homesearchItemList[collectionView.tag].taglist?.count ?? 0
+            
+        } else {
+            
+            return eventList[collectionView.tag].taglist?.count ?? 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
+        if apiType == "HomeSearch" {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "tagcell", for: indexPath) as! EventTagCollectionCell
         
-        if let tagname = eventList[collectionView.tag].taglist?[indexPath.row].text_str {
+        if let tagname = homesearchItemList[collectionView.tag].taglist?[indexPath.row].text_str {
             
             let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagname, fontname: "Avenir-Medium", size: 12)
             
@@ -223,24 +289,60 @@ extension EventTabController : UICollectionViewDelegate,UICollectionViewDataSour
         }
      
         return cell
+            
+        } else {
+            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "tagcell", for: indexPath) as! EventTagCollectionCell
+            
+            if let tagname = eventList[collectionView.tag].taglist?[indexPath.row].text_str {
+                
+                let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagname, fontname: "Avenir-Medium", size: 12)
+                
+                cell.tagnamelabel.text = tagname
+                
+                cell.setLabelSize(size: textSize)
+                
+                
+            }
+            
+            return cell
+            
+        }
         
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        if let tagname = eventList[collectionView.tag].taglist?[indexPath.row].text_str {
+        if apiType == "HomeSearch" {
         
-        let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagname, fontname: "Avenir-Medium", size: 12)
+            if let tagname = homesearchItemList[collectionView.tag].taglist?[indexPath.row].text_str {
         
-        return CGSize(width: textSize.width+20, height: 22)
+                let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagname, fontname: "Avenir-Medium", size: 12)
+                
+                return CGSize(width: textSize.width+20, height: 22)
+            
+            } else {
+            
+                return CGSize(width: 0, height: 22)
+           }
             
         } else {
             
-            return CGSize(width: 0, height: 22)
+            if let tagname = eventList[collectionView.tag].taglist?[indexPath.row].text_str {
+                
+                let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagname, fontname: "Avenir-Medium", size: 12)
+                
+                return CGSize(width: textSize.width+20, height: 22)
+                
+            } else {
+                
+                return CGSize(width: 0, height: 22)
+            }
+            
+            
         }
+    
     }
-    
-    
     
 }
 
@@ -456,6 +558,66 @@ extension EventTabController {
                 
             })
         
+            
+        })
+        
+        
+    }
+    
+    
+    /****************************************complete signup******************************************************/
+    
+    func getHomeSearchApi(position:Int,pageno : Int) {
+        
+        let clientIp = ValidationHelper.Instance.getIPAddress() ?? "1.0.1"
+        if locationDictonary == nil {
+            
+            if let lat = PrefsManager.sharedinstance.lastlocationlat,let long = PrefsManager.sharedinstance.lastlocationlat {
+                
+                locationDictonary = ["lattitude":lat,"longitude":long,"nearMeRadiusInMiles": 15000]
+                
+            }
+            
+        }
+        
+        print(locationDictonary ?? [])
+        
+        apiClient.getFireBaseToken(completion: { token in
+            
+            LoadingHepler.instance.show()
+            
+            let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
+            let parameters : Parameters = ["locationObject" : self.locationDictonary!,"clientip": clientIp, "clientapp": Constants.clientApp]
+            self.apiClient.homeHorizontalSearchApiPagination(parameters: parameters, id: position, page: pageno, headers: header, completion: { status,homemodel in
+                
+                if status == "success" {
+                    
+                    if let item = homemodel {
+                        
+                        self.homesearchItem = item
+                        
+                        if let itemlist = item.eventHorizontalList {
+                            
+                            self.homesearchItemList += itemlist
+                        }
+                    }
+                    
+                    DispatchQueue.main.async {
+                        
+                        LoadingHepler.instance.hide()
+                        self.eventTableView.reloadData()
+                        
+                    }
+                    
+                    
+                } else {
+                    
+                    LoadingHepler.instance.hide()
+                    
+                }
+                
+                
+            })
             
         })
         
