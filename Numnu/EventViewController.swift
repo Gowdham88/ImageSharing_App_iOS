@@ -33,7 +33,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     var apiClient     : ApiClient!
     var description_txt : String = ""
     var eventprimaryid  : Int    = 34
-
+    
     @IBOutlet weak var weblinkIcon1TopToEventmapIcon: NSLayoutConstraint!
     @IBOutlet weak var weblink2IconTopToweblinkIcon1: NSLayoutConstraint!
     @IBOutlet weak var weblink1TopToEventmap: NSLayoutConstraint!
@@ -394,9 +394,10 @@ extension EventViewController {
     
     func openApplemap(){
        
-        let lat:CLLocationDegrees = 41.887
-        let log:CLLocationDegrees = -87.662
+        let lat:CLLocationDegrees = (MyVariables.fetchedLat as NSString).doubleValue
+        let log:CLLocationDegrees = (MyVariables.fetchedLong as NSString).doubleValue
 
+//        var latitude   : CLLocationDegrees = (MyVariables.fetchedLat as NSString).doubleValue
         let regionDistance:CLLocationDistance = 1000;
         let coordinates = CLLocationCoordinate2DMake(lat, log)
         let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
@@ -639,7 +640,9 @@ extension EventViewController {
         }else{
             dateLabelHeight.constant = 0
             dateIconHeight.constant  = 0
-            mapIconTopToDateIcon.constant = -3
+            mapIconTopToDateIcon.constant = 5
+            
+            
             
         }
         
@@ -688,7 +691,7 @@ extension EventViewController {
                 weblinkIcon1TopToEventmapIcon.constant = 12
                 weblink2IconTopToweblinkIcon1.constant = 11
                 weblink1TopToEventmap.constant = 9
-                eventMapTopToLocationname.constant = 5
+                eventMapTopToLocationname.constant = 6
             }
         }else{
             weblink1Height.constant     = 0
