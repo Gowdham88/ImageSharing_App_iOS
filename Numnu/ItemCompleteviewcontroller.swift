@@ -153,6 +153,9 @@ class ItemCompleteviewcontroller : UIViewController {
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.titleTextAttributes =
+            [NSForegroundColorAttributeName: UIColor.black,
+             NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
         let navigationOnTap = UITapGestureRecognizer(target:self,action:#selector(EventViewController.navigationTap))
         self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
         self.navigationController?.navigationBar.isUserInteractionEnabled = true
@@ -444,7 +447,14 @@ extension ItemCompleteviewcontroller {
             
             let objectsToShare = [title, textToShare, urlToShare!] as [Any]
             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-            self.present(activityVC, animated: true, completion: nil)
+            if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad) {
+                activityVC.popoverPresentationController?.sourceView = self.view
+                activityVC.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
+                self.present(activityVC, animated: true, completion:nil )
+            }else{
+                self.present(activityVC, animated: true, completion:nil )
+            }
+//            self.present(activityVC, animated: true, completion: nil)
 
             
         }
@@ -511,7 +521,7 @@ extension ItemCompleteviewcontroller : UITableViewDelegate,UITableViewDataSource
         cell.item = postList[indexPath.row]
         cell.delegate = self
         cell.postEventBookMark.tag = indexPath.row
-        cell.setHeight(heightview : Float(UIScreen.main.bounds.size.height))
+//        cell.setHeight(heightview : Float(UIScreen.main.bounds.size.height))
         
         let posteventImagetap = UITapGestureRecognizer(target: self, action: #selector(postEventImage(sender:)))
         cell.postEventImage.tag = indexPath.row

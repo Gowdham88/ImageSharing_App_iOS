@@ -13,6 +13,8 @@ import SwiftyJSON
 import MapKit
 import Nuke
 import NVActivityIndicatorView
+import GoogleMaps
+
 
 
 
@@ -34,16 +36,17 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     var description_txt : String = ""
     var eventprimaryid  : Int    = 34
     
+//    @IBOutlet weak var descriptionTopToWeblink1: NSLayoutConstraint!
     @IBOutlet weak var weblinkIcon1TopToEventmapIcon: NSLayoutConstraint!
     @IBOutlet weak var weblink2IconTopToweblinkIcon1: NSLayoutConstraint!
     @IBOutlet weak var weblink1TopToEventmap: NSLayoutConstraint!
-    @IBOutlet weak var descriptionTopToEventmap: NSLayoutConstraint!
+//    @IBOutlet weak var descriptionTopToEventmap: NSLayoutConstraint!
     @IBOutlet weak var weblink3IconHeight: NSLayoutConstraint!
     @IBOutlet weak var weblink2IconHeight: NSLayoutConstraint!
     @IBOutlet weak var weblink1IconHeight: NSLayoutConstraint!
     @IBOutlet weak var mapIconTopToLocationIcon: NSLayoutConstraint!
     @IBOutlet weak var eventMapTopToLocationname: NSLayoutConstraint!
-    @IBOutlet weak var weblink3TopToLocationame: NSLayoutConstraint!
+//    @IBOutlet weak var weblink3TopToLocationame: NSLayoutConstraint!
     @IBOutlet weak var mapIconTopToDateIcon: NSLayoutConstraint!
     @IBOutlet weak var dateIconHeight: NSLayoutConstraint!
     @IBOutlet weak var dateLabelHeight: NSLayoutConstraint!
@@ -57,7 +60,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     @IBOutlet weak var dateIconTopToEventname: NSLayoutConstraint!
     @IBOutlet weak var dateTopToEventname: NSLayoutConstraint!
     @IBOutlet weak var scrollViewTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var descriptionTopcostraintToWeblink2: NSLayoutConstraint!
+//    @IBOutlet weak var descriptionTopcostraintToWeblink2: NSLayoutConstraint!
     @IBOutlet weak var descriptionTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var weblink3TopConstraint: NSLayoutConstraint!
     @IBOutlet weak var weblink2TopConstraint: NSLayoutConstraint!
@@ -393,23 +396,53 @@ extension EventViewController {
     }
     
     func openApplemap(){
-       
-        let lat:CLLocationDegrees = (MyVariables.fetchedLat as NSString).doubleValue
-        let log:CLLocationDegrees = (MyVariables.fetchedLong as NSString).doubleValue
+       //apple map
+        let lat1:CLLocationDegrees = (MyVariables.fetchedLat as NSString).doubleValue
+        let log1:CLLocationDegrees = (MyVariables.fetchedLong as NSString).doubleValue
 
 //        var latitude   : CLLocationDegrees = (MyVariables.fetchedLat as NSString).doubleValue
-        let regionDistance:CLLocationDistance = 1000;
-        let coordinates = CLLocationCoordinate2DMake(lat, log)
-        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
+//        let regionDistance:CLLocationDistance = 1000;
+//        let coordinates = CLLocationCoordinate2DMake(lat1, log1)
+//        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
+//
+//
+//        let options = [MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center), MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)]
+//
+//        let placemark = MKPlacemark(coordinate: coordinates)
+//        let mapItem = MKMapItem(placemark: placemark)
+//        mapItem.openInMaps(launchOptions: options)
+//
+//        //google map
+////        let lat = (MyVariables.fetchedLat as NSString).doubleValue
+////        let lon = (MyVariables.fetchedLong as NSString).doubleValue
+//
+//        let camera = GMSCameraPosition.camera(withLatitude: lat1, longitude: log1, zoom: 14)
+//        let mapView = GMSMapView.map(withFrame: .zero, camera: camera)
+//
+//        let marker = GMSMarker()
+//        marker.position = camera.target
+//        marker.snippet = "location"
+//        marker.appearAnimation = GMSMarkerAnimation.pop
+//        marker.map = mapView
 
+//        view = mapView
+        if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
+            
+            UIApplication.shared.openURL(NSURL(string:
+                "comgooglemaps://?center=\(Float(lat1)),\(Float(log1))&zoom=14&views=traffic")! as URL)
+//            UIApplication.shared.openURL(NSURL(string:
+//                "comgooglemaps://?center=40.765819,-73.975866&zoom=14&views=traffic")! as URL)
+            
+            
+        } else {
+            // if GoogleMap App is not installed
+            UIApplication.shared.openURL(NSURL(string:
+                "http://maps.apple.com/?ll=\(Float(lat1)),\(Float(log1))")! as URL)
+            
+//            "http://maps.apple.com/?ll=\(Float(lat1)),\(Float(log1))")!
+        }
 
-        let options = [MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center), MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)]
-
-        let placemark = MKPlacemark(coordinate: coordinates)
-        let mapItem = MKMapItem(placemark: placemark)
-        mapItem.openInMaps(launchOptions: options)
-        print(lat)
-        print(log)
+        
         
     }//openApplemap
     
@@ -462,8 +495,14 @@ extension EventViewController {
 
             let objectsToShare = [title, textToShare, urlToShare!] as [Any]
             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-            self.present(activityVC, animated: true, completion: nil)
-            
+//            self.present(activityVC, animated: true, completion: nil)
+            if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad) {
+                activityVC.popoverPresentationController?.sourceView = self.view
+                activityVC.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
+                self.present(activityVC, animated: true, completion:nil )
+            }else{
+                self.present(activityVC, animated: true, completion:nil )
+            }
             
             
             
@@ -641,9 +680,7 @@ extension EventViewController {
             dateLabelHeight.constant = 0
             dateIconHeight.constant  = 0
             mapIconTopToDateIcon.constant = 5
-            
-            
-            
+       
         }
         
         
@@ -657,10 +694,22 @@ extension EventViewController {
                     EventLinkLabel1.text    = eventLinkList[0].linktext
                     MyVariables.link1       = weblink1
                 }
-                if let weblink2 = eventLinkList[1].weblink {
-                    eventLinkLabel2.text    = eventLinkList[1].linktext
-                    MyVariables.link2       = weblink2
+                if eventLinkList.count > 1 {
+                    if let weblink2 = eventLinkList[1].weblink {
+                        eventLinkLabel2.text    = eventLinkList[1].linktext
+                        MyVariables.link2       = weblink2
+
+//                        weblink1TopToEventmap.constant = 10
+                    }
+                }else{
+                    weblink2Height.constant     = 0
+                    weblink2IconHeight.constant = 0
+//                    descriptionTopToWeblink1.constant = 5
+//                    weblink1TopToEventmap.constant = 0
                 }
+              
+                
+               
 //                if let weblink3 = eventLinkList[2].weblink {
 //                    eventLinkLabel3.text = eventLinkList[2].linktext
 //                    MyVariables.link3    = weblink3
@@ -680,18 +729,19 @@ extension EventViewController {
                 if let weblink3 = eventLinkList[2].weblink {
                     eventLinkLabel3.text   = eventLinkList[2].linktext
                     MyVariables.link3      = weblink3
-                    
                 }
             }else{
                 weblink3Height.constant     = 0
                 weblink3IconHeight.constant = 0
-                descriptionTopcostraintToWeblink2.constant = -15
-                weblink1TopToEventmap.constant = 10
-                weblink2TopConstraint.constant = -20
-                weblinkIcon1TopToEventmapIcon.constant = 12
-                weblink2IconTopToweblinkIcon1.constant = 11
-                weblink1TopToEventmap.constant = 9
-                eventMapTopToLocationname.constant = 6
+//                descriptionTopcostraintToWeblink2.constant = 3
+
+//                descriptionTopcostraintToWeblink2.constant = -15
+//                weblink1TopToEventmap.constant = 10
+//                weblink2TopConstraint.constant = -20
+//                weblinkIcon1TopToEventmapIcon.constant = 12
+//                weblink2IconTopToweblinkIcon1.constant = 11
+//                weblink1TopToEventmap.constant = 9
+//                eventMapTopToLocationname.constant = 6
             }
         }else{
             weblink1Height.constant     = 0
@@ -700,7 +750,7 @@ extension EventViewController {
             weblink3IconHeight.constant = 0
             weblink2Height.constant     = 0
             weblink3Height.constant     = 0
-            descriptionTopToEventmap.constant = 0
+//            descriptionTopToEventmap.constant = 0
         }
         
         
@@ -754,17 +804,11 @@ extension EventViewController {
         if let imglist = response.imagelist {
             if imglist.count > 0 {
                 if let url = imglist[imglist.count-1].imageurl_str {
-                    
                     apiClient.getFireBaseImageUrl(imagepath: url, completion: { imageUrl in
-                        
                         if imageUrl != "empty" {
-                            
                             Manager.shared.loadImage(with: URL(string : imageUrl)!, into: self.eventImageView)
                         }
-                        
                     })
-                    
-                    
                 }
             }
         }
@@ -776,7 +820,6 @@ extension EventViewController {
             readMoreButton.isHidden = false
             
         } else {
-            
             readMoreButton.isHidden   = true
             containerViewTop.constant = 8
             barButtonTop.constant     = 8
@@ -785,7 +828,6 @@ extension EventViewController {
             description_txt = description
             }
         }
-        
         self.myscrollView.isHidden = false
     }
 }
@@ -795,69 +837,41 @@ extension EventViewController {
 extension EventViewController {
     
     func bookmarkpost(token : String) {
-       
         let clientIp  = ValidationHelper.Instance.getIPAddress() ?? "1.0.1"
         let userid    = PrefsManager.sharedinstance.userId
-       
         LoadingHepler.instance.show()
-        
         let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
         let parameters: Parameters = ["entityid": bookmarkid, "entityname":bookmarkname , "type" : bookmarktype ,"createdby" : userid,"updatedby": userid ,"clientip": clientIp, "clientapp": Constants.clientApp]
         apiClient.bookmarEntinty(parameters: parameters,headers: header, completion: { status,response in
-            
             if status == "success" {
-                
                 DispatchQueue.main.async {
-                    
                     LoadingHepler.instance.hide()
                     AlertProvider.Instance.showAlert(title: "Hey!", subtitle: "Bookmarked successfully.", vc: self)
                     self.closePopup()
                 }
-                
             } else {
-                
                 LoadingHepler.instance.hide()
-                
                 if status == "422" {
-                    
                     AlertProvider.Instance.showAlert(title: "Hey!", subtitle: "Already bookmarked.", vc: self)
-              
                 } else {
-                    
                     AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Bookmark failed.", vc: self)
-                    
                 }
-                
-                
             }
-            
         })
-        
     }
     
     func getBookmarkToken(sender : UITapGestureRecognizer) {
-        
         apiClient.getFireBaseToken(completion:{ token in
-           
             self.bookmarkpost(token: token)
-           
         })
-        
     }
     
     
     func getBookmarkToken() {
-        
         apiClient.getFireBaseToken(completion:{ token in
-            
             self.bookmarkpost(token: token)
-            
         })
-        
     }
-    
-    
-    
 }
 
 

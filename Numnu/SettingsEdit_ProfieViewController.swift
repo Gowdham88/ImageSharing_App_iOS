@@ -785,15 +785,25 @@ class SettingsEdit_ProfieViewController: UIViewController, UITextFieldDelegate,U
         //        let rightButton = UIBarButtonItem(title: "Save", for: UIControlEvents.touchUpInside, style: .plain, target: self, action: #selector(saveClicked))
         //        rightButton.isEnabled = true
         //        navigationItemList.rightBarButtonItem = rightButton
-
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveClicked))
-        navigationItem.rightBarButtonItem?.tintColor = UIColor(displayP3Red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
-       navigationItem.rightBarButtonItem?.titleTextAttributes(for: .normal)
+        
+        
+        let button2 = UIButton.init(type: .custom)
+        button2.setTitle("Save", for: .normal)
+        button2.setTitleColor(.darkGray, for: .normal)
+        button2.setTitleColor(UIColor(displayP3Red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0), for: .normal)
+        button2.addTarget(self, action: #selector(self.saveClicked), for: .touchUpInside)
         if let font = UIFont(name: "Avenir-Medium", size: 16) {
-                        navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSFontAttributeName:font], for: .normal)
-                    }
+            navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSFontAttributeName:font], for: .normal)
+        }
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: button2)
+
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveClicked))
+//        navigationItem.rightBarButtonItem?.tintColor = UIColor(displayP3Red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
+//       navigationItem.rightBarButtonItem?.titleTextAttributes(for: .normal)
+       
 
         navigationItemList.leftBarButtonItem = leftButton
+//        navigationItemList.rightBarButtonItem = button2
     }
     
     func backButtonClicked() {
