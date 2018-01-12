@@ -427,12 +427,11 @@ extension EventViewController {
 
 //        view = mapView
         if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
-//            UIApplication.shared.openURL(NSURL(string:
-//                "comgooglemaps://?saddr=&daddr=\(Float(lat1)),\(Float(log1))&views=traffic")! as URL)
-//            UIApplication.shared.openURL(NSURL(string:
-//                "comgooglemaps://?center=\(Float(lat1)),\(Float(log1))&zoom=14&views=traffic")! as URL)
+            
             UIApplication.shared.openURL(NSURL(string:
-                "comgooglemaps://?center=40.765819,-73.975866&zoom=14&views=traffic")! as URL)
+                "comgooglemaps://?center=\(Float(lat1)),\(Float(log1))&zoom=14&views=traffic")! as URL)
+//            UIApplication.shared.openURL(NSURL(string:
+//                "comgooglemaps://?center=40.765819,-73.975866&zoom=14&views=traffic")! as URL)
             
             
         } else {
@@ -443,6 +442,7 @@ extension EventViewController {
 //            "http://maps.apple.com/?ll=\(Float(lat1)),\(Float(log1))")!
         }
 
+        
         
     }//openApplemap
     
