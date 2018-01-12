@@ -153,6 +153,9 @@ class ItemCompleteviewcontroller : UIViewController {
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.titleTextAttributes =
+            [NSForegroundColorAttributeName: UIColor.black,
+             NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
         let navigationOnTap = UITapGestureRecognizer(target:self,action:#selector(EventViewController.navigationTap))
         self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
         self.navigationController?.navigationBar.isUserInteractionEnabled = true
@@ -511,7 +514,7 @@ extension ItemCompleteviewcontroller : UITableViewDelegate,UITableViewDataSource
         cell.item = postList[indexPath.row]
         cell.delegate = self
         cell.postEventBookMark.tag = indexPath.row
-        cell.setHeight(heightview : Float(UIScreen.main.bounds.size.height))
+//        cell.setHeight(heightview : Float(UIScreen.main.bounds.size.height))
         
         let posteventImagetap = UITapGestureRecognizer(target: self, action: #selector(postEventImage(sender:)))
         cell.postEventImage.tag = indexPath.row

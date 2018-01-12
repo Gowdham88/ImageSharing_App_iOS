@@ -371,7 +371,7 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate,UITextViewDelegat
         super.viewWillDisappear(animated)
         
         // Show the navigation bar on other view controllers
-        self.navigationController?.navigationBar.isHidden = true
+        self.navigationController?.navigationBar.isHidden = false
     }
     
     @IBAction func fbSignup(_ sender: Any) {

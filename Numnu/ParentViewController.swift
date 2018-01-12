@@ -172,9 +172,14 @@ var getLocDetails = [String]()
 extension ParentViewController : UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-      
+        let editsearchString   = editsearchbyItem.text!
+        let editLocationString = editsearchbyLocation.text!
+        if textField == editsearchbyLocation && editLocationString.count > 0 && editsearchString.count > 0 {
+            editsearchbyLocation.returnKeyType = .search
+        }else {
+            editsearchbyLocation.returnKeyType = .default
+        }
     }
-    
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
        
@@ -186,15 +191,15 @@ extension ParentViewController : UITextFieldDelegate {
         }
         
         if textField == editsearchbyLocation  {
+            let editItemSearch  = editsearchbyLocation.text!
             let editsearchCount = editsearchbyItem.text!
-            if editsearchCount.count > 0 {
-//                 setNavBar()
-                
+            if  editItemSearch.count > 0 && editsearchCount.count > 0 {
+             setNavBar()
+            }else {
             }
         }
         
-        
-        
+     
         let top = CGAffineTransform(translationX: 0, y: 0)
         
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
@@ -259,6 +264,14 @@ extension ParentViewController : UITextFieldDelegate {
             }
         }
         
+//        let editsearchString   = editsearchbyItem.text!
+//        let editLocationString = editsearchbyLocation.text!
+//        if textField == editsearchbyLocation && editLocationString.count > 0 && editsearchString.count > 0 {
+//            editsearchbyLocation.returnKeyType = .search
+//        }else {
+//            editsearchbyLocation.returnKeyType = .done
+//        }
+//
         
         return true
     }
