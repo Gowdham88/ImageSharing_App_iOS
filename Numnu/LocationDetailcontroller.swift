@@ -410,21 +410,35 @@ extension LocationDetailcontroller {
     }
     
     func openApplemap(){
-        let lat:CLLocationDegrees = (MyVariables.fetchedLat as NSString).doubleValue
 
-        let log:CLLocationDegrees = (MyVariables.fetchedLong as NSString).doubleValue
-
+        let lat = (MyVariables.fetchedLat as NSString).doubleValue
+        let lon = (MyVariables.fetchedLong as NSString).doubleValue
+        let camera = GMSCameraPosition.camera(withLatitude: lat, longitude:lon, zoom: 14)
+        let mapView = GMSMapView.map(withFrame: .zero, camera: camera)
         
-        let regionDistance:CLLocationDistance = 1000;
-        let coordinates = CLLocationCoordinate2DMake(lat, log)
-        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
+        let marker = GMSMarker()
+        marker.position = camera.target
+        marker.snippet = "location"
+        marker.appearAnimation = GMSMarkerAnimation.pop
+        marker.map = mapView
         
-        
-        let options = [MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center), MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)]
-        
-        let placemark = MKPlacemark(coordinate: coordinates)
-        let mapItem = MKMapItem(placemark: placemark)
-        mapItem.openInMaps(launchOptions: options)
+        view = mapView
+    
+//        let lat:CLLocationDegrees = (MyVariables.fetchedLat as NSString).doubleValue
+//
+//        let log:CLLocationDegrees = (MyVariables.fetchedLong as NSString).doubleValue
+//
+//
+//        let regionDistance:CLLocationDistance = 1000;
+//        let coordinates = CLLocationCoordinate2DMake(lat, log)
+//        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
+//
+//
+//        let options = [MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center), MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)]
+//
+//        let placemark = MKPlacemark(coordinate: coordinates)
+//        let mapItem = MKMapItem(placemark: placemark)
+//        mapItem.openInMaps(launchOptions: options)
     }//openApplemap
     
 }
