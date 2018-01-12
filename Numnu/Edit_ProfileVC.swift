@@ -309,6 +309,7 @@ class Edit_ProfileVC: UIViewController, UITextFieldDelegate,UIImagePickerControl
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
             self.navigationController?.navigationBar.isHidden = false
+
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

@@ -185,9 +185,10 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
     // MARK: - Helpers
 
     open func updateIfNeeded() {
-        if isViewLoaded && !lastSize.equalTo(containerView.bounds.size) {
-            updateContent()
+            if isViewLoaded && !lastSize.equalTo(containerView.bounds.size) {
+                updateContent()
         }
+        
     }
 
     open func canMoveTo(index: Int) -> Bool {

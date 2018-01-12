@@ -34,17 +34,17 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     var description_txt : String = ""
     var eventprimaryid  : Int    = 34
     
-    @IBOutlet weak var descriptionTopToWeblink1: NSLayoutConstraint!
+//    @IBOutlet weak var descriptionTopToWeblink1: NSLayoutConstraint!
     @IBOutlet weak var weblinkIcon1TopToEventmapIcon: NSLayoutConstraint!
     @IBOutlet weak var weblink2IconTopToweblinkIcon1: NSLayoutConstraint!
     @IBOutlet weak var weblink1TopToEventmap: NSLayoutConstraint!
-    @IBOutlet weak var descriptionTopToEventmap: NSLayoutConstraint!
+//    @IBOutlet weak var descriptionTopToEventmap: NSLayoutConstraint!
     @IBOutlet weak var weblink3IconHeight: NSLayoutConstraint!
     @IBOutlet weak var weblink2IconHeight: NSLayoutConstraint!
     @IBOutlet weak var weblink1IconHeight: NSLayoutConstraint!
     @IBOutlet weak var mapIconTopToLocationIcon: NSLayoutConstraint!
     @IBOutlet weak var eventMapTopToLocationname: NSLayoutConstraint!
-    @IBOutlet weak var weblink3TopToLocationame: NSLayoutConstraint!
+//    @IBOutlet weak var weblink3TopToLocationame: NSLayoutConstraint!
     @IBOutlet weak var mapIconTopToDateIcon: NSLayoutConstraint!
     @IBOutlet weak var dateIconHeight: NSLayoutConstraint!
     @IBOutlet weak var dateLabelHeight: NSLayoutConstraint!
@@ -58,7 +58,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     @IBOutlet weak var dateIconTopToEventname: NSLayoutConstraint!
     @IBOutlet weak var dateTopToEventname: NSLayoutConstraint!
     @IBOutlet weak var scrollViewTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var descriptionTopcostraintToWeblink2: NSLayoutConstraint!
+//    @IBOutlet weak var descriptionTopcostraintToWeblink2: NSLayoutConstraint!
     @IBOutlet weak var descriptionTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var weblink3TopConstraint: NSLayoutConstraint!
     @IBOutlet weak var weblink2TopConstraint: NSLayoutConstraint!
@@ -642,6 +642,7 @@ extension EventViewController {
             dateLabelHeight.constant = 0
             dateIconHeight.constant  = 0
             mapIconTopToDateIcon.constant = 5
+       
         }
         
         
@@ -659,13 +660,16 @@ extension EventViewController {
                     if let weblink2 = eventLinkList[1].weblink {
                         eventLinkLabel2.text    = eventLinkList[1].linktext
                         MyVariables.link2       = weblink2
+
+//                        weblink1TopToEventmap.constant = 10
                     }
                 }else{
                     weblink2Height.constant     = 0
                     weblink2IconHeight.constant = 0
-                    descriptionTopToWeblink1.constant = 5
+//                    descriptionTopToWeblink1.constant = 5
 //                    weblink1TopToEventmap.constant = 0
                 }
+              
                 
                
 //                if let weblink3 = eventLinkList[2].weblink {
@@ -691,13 +695,15 @@ extension EventViewController {
             }else{
                 weblink3Height.constant     = 0
                 weblink3IconHeight.constant = 0
-                descriptionTopcostraintToWeblink2.constant = -15
-                weblink1TopToEventmap.constant = 10
-                weblink2TopConstraint.constant = -20
-                weblinkIcon1TopToEventmapIcon.constant = 12
-                weblink2IconTopToweblinkIcon1.constant = 11
-                weblink1TopToEventmap.constant = 9
-                eventMapTopToLocationname.constant = 6
+//                descriptionTopcostraintToWeblink2.constant = 3
+
+//                descriptionTopcostraintToWeblink2.constant = -15
+//                weblink1TopToEventmap.constant = 10
+//                weblink2TopConstraint.constant = -20
+//                weblinkIcon1TopToEventmapIcon.constant = 12
+//                weblink2IconTopToweblinkIcon1.constant = 11
+//                weblink1TopToEventmap.constant = 9
+//                eventMapTopToLocationname.constant = 6
             }
         }else{
             weblink1Height.constant     = 0
@@ -706,7 +712,7 @@ extension EventViewController {
             weblink3IconHeight.constant = 0
             weblink2Height.constant     = 0
             weblink3Height.constant     = 0
-            descriptionTopToEventmap.constant = 0
+//            descriptionTopToEventmap.constant = 0
         }
         
         

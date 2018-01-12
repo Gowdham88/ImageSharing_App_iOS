@@ -115,6 +115,12 @@ class BookmarkViewController: UIViewController,UITableViewDelegate,UITableViewDa
         }
         setNavBar()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.titleTextAttributes =
+            [NSForegroundColorAttributeName: UIColor.black,
+             NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
+    }
+    
     func methodToCallApi(pageno:Int,limit:Int) {
         
         LoadingHepler.instance.show()
