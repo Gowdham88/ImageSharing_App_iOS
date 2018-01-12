@@ -308,6 +308,7 @@
                                             <constraint firstItem="ZK6-Ap-emM" firstAttribute="top" secondItem="U0Z-Mj-lZB" secondAttribute="bottom" constant="-13" id="ckU-wV-2R0"/>
                                             <constraint firstAttribute="trailing" secondItem="Aos-pn-hej" secondAttribute="trailing" constant="10" id="dqo-ba-yDD"/>
                                             <constraint firstItem="3NW-yD-oxA" firstAttribute="top" secondItem="RPa-ch-qag" secondAttribute="bottom" constant="8" id="ezE-fs-k6s"/>
+                                            <constraint firstItem="4rU-V5-StF" firstAttribute="top" secondItem="gAt-qt-Cww" secondAttribute="bottom" constant="41" id="gbx-s2-INb"/>
                                             <constraint firstItem="aOH-4t-Zwo" firstAttribute="top" secondItem="xcz-an-LvS" secondAttribute="bottom" constant="9" id="hhk-pc-KMo"/>
                                             <constraint firstItem="VVk-vg-G9v" firstAttribute="top" secondItem="g0V-rF-TMW" secondAttribute="top" constant="10" id="ioW-PO-sxh"/>
                                             <constraint firstItem="8Se-ej-wg2" firstAttribute="leading" secondItem="aOH-4t-Zwo" secondAttribute="trailing" constant="10" id="jbP-Xg-OIS"/>
@@ -437,6 +438,7 @@
                         <outlet property="dateTopToEventname" destination="Frr-a5-alf" id="kuJ-8q-vvc"/>
                         <outlet property="descriptionTopConstraint" destination="FBd-Pd-NCZ" id="quL-QR-aL4"/>
                         <outlet property="descriptionTopToEventmap" destination="Coi-jY-l8f" id="Hco-qK-Esv"/>
+                        <outlet property="descriptionTopToWeblink1" destination="gbx-s2-INb" id="PuW-0N-Ow2"/>
                         <outlet property="descriptionTopcostraintToWeblink2" destination="and-aL-bf8" id="mpk-PS-lLe"/>
                         <outlet property="eventDateLabel" destination="5iE-8T-Lm3" id="cOM-pG-vA9"/>
                         <outlet property="eventDescriptionHeight" destination="Pbs-jB-hTE" id="XHs-gm-EiQ"/>

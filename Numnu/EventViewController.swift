@@ -34,6 +34,7 @@ class EventViewController: ButtonBarPagerTabStripViewController {
     var description_txt : String = ""
     var eventprimaryid  : Int    = 34
     
+    @IBOutlet weak var descriptionTopToWeblink1: NSLayoutConstraint!
     @IBOutlet weak var weblinkIcon1TopToEventmapIcon: NSLayoutConstraint!
     @IBOutlet weak var weblink2IconTopToweblinkIcon1: NSLayoutConstraint!
     @IBOutlet weak var weblink1TopToEventmap: NSLayoutConstraint!
@@ -641,9 +642,6 @@ extension EventViewController {
             dateLabelHeight.constant = 0
             dateIconHeight.constant  = 0
             mapIconTopToDateIcon.constant = 5
-            
-            
-            
         }
         
         
@@ -657,10 +655,19 @@ extension EventViewController {
                     EventLinkLabel1.text    = eventLinkList[0].linktext
                     MyVariables.link1       = weblink1
                 }
-                if let weblink2 = eventLinkList[1].weblink {
-                    eventLinkLabel2.text    = eventLinkList[1].linktext
-                    MyVariables.link2       = weblink2
+                if eventLinkList.count > 1 {
+                    if let weblink2 = eventLinkList[1].weblink {
+                        eventLinkLabel2.text    = eventLinkList[1].linktext
+                        MyVariables.link2       = weblink2
+                    }
+                }else{
+                    weblink2Height.constant     = 0
+                    weblink2IconHeight.constant = 0
+                    descriptionTopToWeblink1.constant = 5
+//                    weblink1TopToEventmap.constant = 0
                 }
+                
+               
 //                if let weblink3 = eventLinkList[2].weblink {
 //                    eventLinkLabel3.text = eventLinkList[2].linktext
 //                    MyVariables.link3    = weblink3
@@ -680,7 +687,6 @@ extension EventViewController {
                 if let weblink3 = eventLinkList[2].weblink {
                     eventLinkLabel3.text   = eventLinkList[2].linktext
                     MyVariables.link3      = weblink3
-                    
                 }
             }else{
                 weblink3Height.constant     = 0
@@ -754,17 +760,11 @@ extension EventViewController {
         if let imglist = response.imagelist {
             if imglist.count > 0 {
                 if let url = imglist[imglist.count-1].imageurl_str {
-                    
                     apiClient.getFireBaseImageUrl(imagepath: url, completion: { imageUrl in
-                        
                         if imageUrl != "empty" {
-                            
                             Manager.shared.loadImage(with: URL(string : imageUrl)!, into: self.eventImageView)
                         }
-                        
                     })
-                    
-                    
                 }
             }
         }
@@ -776,7 +776,6 @@ extension EventViewController {
             readMoreButton.isHidden = false
             
         } else {
-            
             readMoreButton.isHidden   = true
             containerViewTop.constant = 8
             barButtonTop.constant     = 8
@@ -785,7 +784,6 @@ extension EventViewController {
             description_txt = description
             }
         }
-        
         self.myscrollView.isHidden = false
     }
 }
@@ -795,69 +793,41 @@ extension EventViewController {
 extension EventViewController {
     
     func bookmarkpost(token : String) {
-       
         let clientIp  = ValidationHelper.Instance.getIPAddress() ?? "1.0.1"
         let userid    = PrefsManager.sharedinstance.userId
-       
         LoadingHepler.instance.show()
-        
         let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
         let parameters: Parameters = ["entityid": bookmarkid, "entityname":bookmarkname , "type" : bookmarktype ,"createdby" : userid,"updatedby": userid ,"clientip": clientIp, "clientapp": Constants.clientApp]
         apiClient.bookmarEntinty(parameters: parameters,headers: header, completion: { status,response in
-            
             if status == "success" {
-                
                 DispatchQueue.main.async {
-                    
                     LoadingHepler.instance.hide()
                     AlertProvider.Instance.showAlert(title: "Hey!", subtitle: "Bookmarked successfully.", vc: self)
                     self.closePopup()
                 }
-                
             } else {
-                
                 LoadingHepler.instance.hide()
-                
                 if status == "422" {
-                    
                     AlertProvider.Instance.showAlert(title: "Hey!", subtitle: "Already bookmarked.", vc: self)
-              
                 } else {
-                    
                     AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Bookmark failed.", vc: self)
-                    
                 }
-                
-                
             }
-            
         })
-        
     }
     
     func getBookmarkToken(sender : UITapGestureRecognizer) {
-        
         apiClient.getFireBaseToken(completion:{ token in
-           
             self.bookmarkpost(token: token)
-           
         })
-        
     }
     
     
     func getBookmarkToken() {
-        
         apiClient.getFireBaseToken(completion:{ token in
-            
             self.bookmarkpost(token: token)
-            
         })
-        
     }
-    
-    
-    
 }
 
 
