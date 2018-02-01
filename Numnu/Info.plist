@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>Numnu</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -26,7 +28,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2.4</string>
+	<string>2.20</string>
 	<key>FacebookAppID</key>
 	<string>2170111179882504</string>
 	<key>FacebookDisplayName</key>
@@ -138,15 +140,25 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>$(PRODUCT_NAME) app requires access to the camera</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Numnu wants to enable your location</string>
 	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Numnu wants to enable your location allow</string>
+	<key>NSLocationUsageDescription</key>
 	<string>Numnu wants to enable your location</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Numnu wants to enable your location</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>$(PRODUCT_NAME) app requires access to the photo library</string>
+	<key>NSPrefPaneIconFile</key>
+	<string></string>
 	<key>UIAppFonts</key>
 	<array>
 		<string></string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

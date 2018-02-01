@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Nuke
 
 class EventDefaulCollectionCell : UICollectionViewCell {
     
@@ -14,6 +15,8 @@ class EventDefaulCollectionCell : UICollectionViewCell {
     @IBOutlet weak var eventLocationname: UILabel!
     @IBOutlet weak var eventLabelname: UILabel!
     @IBOutlet weak var eventImage: ImageExtender!
+    @IBOutlet weak var eventdate: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -27,5 +30,45 @@ class EventDefaulCollectionCell : UICollectionViewCell {
 //        self.eventImage.clipsToBounds = true
     }
 
+    var item : HomeSearchItem! {
+        didSet {
+            if let eventname = item.name {
+                eventLabelname.text = eventname
+                
+            }
+           
+            if let userimageList = item.imgList {
+                
+                if userimageList.count > 0 {
+                    
+                    let apiclient = ApiClient()
+                    apiclient.getFireBaseImageUrl(imagepath: userimageList[userimageList.count-1].imageurl_str!, completion: { url in
+                        
+                        self.eventImage.image = nil
+                        Manager.shared.loadImage(with: URL(string : url)!, into: self.eventImage)
+                        
+                    })
+                    
+                }
+                
+            }
+            
+            guard let start_date =  item.startsat,let end_date =  item.endsat else {
+                
+                return
+            }
+            
+            let startdate = DateFormatterManager.sharedinstance.stringtoDate(format: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", date: start_date)
+            let enddate   = DateFormatterManager.sharedinstance.stringtoDate(format: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", date: end_date)
+            
+            guard let start = DateFormatterManager.sharedinstance.datetoString(format: "MMM dd", date: startdate), let end = DateFormatterManager.sharedinstance.datetoString(format: "MMM dd", date: enddate) else {
+                
+                return
+            }
+            
+            eventdate.text = "\(start) - \(end)"
+            
+        }
+    }
     
 }

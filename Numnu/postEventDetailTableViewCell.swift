@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Nuke
 
 protocol postEventDetailTableViewCellDelegate {
     
@@ -27,7 +28,11 @@ class postEventDetailTableViewCell : UITableViewCell {
     @IBOutlet weak var postDtEventPlace: UILabel!
     @IBOutlet weak var postDtEventDishLabel: UILabel!
     @IBOutlet weak var postDtEventBookMark: UIButton!
-    
+    var getList = [String]()
+    @IBOutlet var itemImageTap: ImageExtender!
+    @IBOutlet var businessImageTap: ImageExtender!
+    @IBOutlet var eventImageTap: ImageExtender!
+    @IBOutlet weak var postusernametag: UILabel!
     @IBOutlet weak var mainDtContentview: UIView!
     @IBOutlet weak var postDtdishwidthConstaint: NSLayoutConstraint!
     @IBOutlet weak var DtplaceWidthConstraint: NSLayoutConstraint!
@@ -53,53 +58,155 @@ class postEventDetailTableViewCell : UITableViewCell {
         delegate!.bookmarkPost(tag: sender.tag)
     }
     
-    func setHeight(heightview : Float) {
-        
-        if heightview <= 568 {
+//    func setHeight(heightview : Float) {
+//
+//        if heightview <= 568 {
+//
+//            postDtdishwidthConstaint.constant   = 75
+//            DtplaceWidthConstraint.constant = 75
+//
+//
+//        } else if heightview <= 667 {
+//
+//            postDtdishwidthConstaint.constant   = 99
+//            DtplaceWidthConstraint.constant = 99
+//
+//        } else if heightview <= 736 {
+//
+//            postDtdishwidthConstaint.constant   = 117
+//            DtplaceWidthConstraint.constant = 117
+//
+//        } else if heightview <= 812 {
+//
+//            postDtdishwidthConstaint.constant   = 99
+//            DtplaceWidthConstraint.constant = 99
+//
+//        } else if heightview <= 1024 {
+//
+//            postDtdishwidthConstaint.constant   = 274
+//            DtplaceWidthConstraint.constant = 274
+//
+//        } else {
+//
+//            postDtdishwidthConstaint.constant   = 387
+//            DtplaceWidthConstraint.constant = 387
+//
+//        }
+//
+//        if (postDtEventDishLabel.numberOfVisibleLines > 1) {
+//
+//            eventTopHeight.constant = 50
+//
+//        }
+//
+//        if (postDtEventPlace.numberOfVisibleLines > 1) {
+//
+//            eventTopHeight.constant = 50
+//
+//        }
+//
+//    }
+    
+    var item : PostListDataItems! {
+        didSet {
             
-            postDtdishwidthConstaint.constant   = 75
-            DtplaceWidthConstraint.constant = 75
+            if let datepost = item.createdat {
+                
+                postDtvUserTime.text =  DateFormatterManager.sharedinstance.dateDiff(dateStr: datepost,Format: "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+            }
             
+            if let posttag = item.postcreator{
+                if let postuser = posttag.name {
+                    postDtUsernameLabel.text = postuser
+
+                }
+                if let postusername = posttag.username {
+                    postDtUserplaceLabbel.text = "@\(postusername)"
+                    
+                }
+                if let userimageList = posttag.userimages {
+                    
+                    if userimageList.count > 0 {
+                        
+                        let apiclient = ApiClient()
+                        apiclient.getFireBaseImageUrl(imagepath: userimageList[userimageList.count-1].imageurl_str!, completion: { url in
+                            
+                            self.postDtUserImage.image = nil
+                            Manager.shared.loadImage(with: URL(string : url)!, into: self.postDtUserImage)
+                            
+                        })
+                        
+                    }
+                    
+                }
+                
+            }
+//            if let location = item.location{
+//                if let locationame = location.name_str {
+//                    postDtUserplaceLabbel.text = locationame
+//
+//                }
+//            }
+
+          
+            if let postimagelist = item.postimages {
+                
+                if postimagelist.count > 0 {
+                    
+                    let apiclient = ApiClient()
+                    apiclient.getFireBaseImageUrl(imagepath: postimagelist[postimagelist.count-1].imageurl_str!, completion: { url in
+                        
+                        self.postDtEventImage.image = nil
+                        Manager.shared.loadImage(with: URL(string : url)!, into: self.postDtEventImage)
+                        
+                    })
+                    
+                }
+                
+            }
             
-        } else if heightview <= 667 {
+            if let rating = item.rating {
+                if rating == 1 {
+                    postDtLikeImage.image = UIImage(named:"rating1")
+
+                }else if rating == 2 {
+                    postDtLikeImage.image = UIImage(named:"rating2")
+                }else if rating == 3 {
+                    postDtLikeImage.image = UIImage(named:"rating3")
+
+                }else{
+                    
+                }
+
+            }
             
-            postDtdishwidthConstaint.constant   = 99
-            DtplaceWidthConstraint.constant = 99
+            if let event = item.event{
+                if let eventname = event.name {
+                    postDtEventName.text = eventname
+                    
+                }
+            }
             
-        } else if heightview <= 736 {
+            if let business = item.business{
+                if let businessname = business.businessname {
+                    postDtEventDishLabel.text = businessname
+                    
+                }
+            }
             
-            postDtdishwidthConstaint.constant   = 117
-            DtplaceWidthConstraint.constant = 117
+            if let taggeditem = item.taggedItemName{
+               
+                    postDtEventPlace.text = taggeditem
+                
+                
+            }
             
-        } else if heightview <= 812 {
-            
-            postDtdishwidthConstaint.constant   = 99
-            DtplaceWidthConstraint.constant = 99
-            
-        } else if heightview <= 1024 {
-            
-            postDtdishwidthConstaint.constant   = 274
-            DtplaceWidthConstraint.constant = 274
-            
-        } else {
-            
-            postDtdishwidthConstaint.constant   = 387
-            DtplaceWidthConstraint.constant = 387
+            if let commentname = item.comment {
+                postDtvCommentLabel.text = commentname
+                
+            }
             
         }
-        
-        if (postDtEventDishLabel.numberOfVisibleLines > 1) {
-            
-            eventTopHeight.constant = 52
-            
-        }
-        
-        if (postDtEventPlace.numberOfVisibleLines > 1) {
-            
-            eventTopHeight.constant = 52
-            
-        }
-        
     }
 
 }

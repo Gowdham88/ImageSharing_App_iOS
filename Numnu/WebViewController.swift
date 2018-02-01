@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import PKHUD
 import WebKit
 
 class WebViewController: UIViewController,WKNavigationDelegate {
@@ -19,7 +18,11 @@ class WebViewController: UIViewController,WKNavigationDelegate {
     var backwardButton : UIBarButtonItem?
     var browserButton  : UIBarButtonItem?
     var progressView   : UIProgressView?
-    
+    var vcCount:Int = 0{
+        didSet{
+            navigationItem.title = "Count: \(vcCount)"
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,14 +30,11 @@ class WebViewController: UIViewController,WKNavigationDelegate {
         webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         webView.navigationDelegate = self
         
-        
         let url = NSURL (string: url_str);
         let requestObj = NSURLRequest(url: url! as URL);
         webView.load(requestObj as URLRequest);
         webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
-        
-        
-        
+  
         setNavBar()
         
         progressView = UIProgressView(progressViewStyle: .default)
@@ -46,6 +46,11 @@ class WebViewController: UIViewController,WKNavigationDelegate {
        
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -54,7 +59,7 @@ class WebViewController: UIViewController,WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         
-        HUD.hide()
+        LoadingHepler.instance.hide()
      
     }
     
@@ -68,7 +73,7 @@ class WebViewController: UIViewController,WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         
-        HUD.hide()
+       LoadingHepler.instance.hide()
         
         backwardButton?.isEnabled = webView.canGoBack
         forwardButton?.isEnabled  = webView.canGoForward

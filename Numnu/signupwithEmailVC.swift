@@ -11,18 +11,27 @@ import FirebaseAuth
 import Firebase
 import FBSDKCoreKit
 import FBSDKLoginKit
-import PKHUD
 import Alamofire
+import IQKeyboardManagerSwift
+import DeviceCheck
 
-class signupwithEmailVC: UIViewController, UITextFieldDelegate {
-
+@available(iOS 10.0, *)
+@available(iOS 10.0, *)
+@available(iOS 10.0, *)
+class signupwithEmailVC: UIViewController, UITextFieldDelegate,UITextViewDelegate {
+    @IBOutlet weak var termsnpolicy: UITextView!
+    
     var idprim = [String]()
     var window: UIWindow?
     var credential: AuthCredential?
     var userprofilename : String = ""
     var userprofileimage : String = ""
     var ViewMoved = true
+    var activeField = UITextField()
+    
 
+    @IBOutlet var MainView: UIView!
+    var viewHasMovedToUp : Bool = false
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var passwordReveal: UIButton!
     @IBOutlet weak var emailtitleLAbel: UILabel!
@@ -34,25 +43,48 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
     @IBOutlet var labelcredentials: UILabel!
-
+    let termsAndConditionsURL = "http://www.numnu.com/terms/"
+    let privacyURL            = "http://numnu.com/privacy-policy/"
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.termsnpolicy.delegate = self
+        let str                     = "By signing up, you agree to our Terms of Service & Privacy Policy"
+        let attributedString        = NSMutableAttributedString(string: str)
+        var foundRange              = attributedString.mutableString.range(of: "Terms of Service")
+        attributedString.addAttribute(NSLinkAttributeName, value: termsAndConditionsURL, range: foundRange)
+        foundRange                  = attributedString.mutableString.range(of: "Privacy Policy")
+        attributedString.addAttribute(NSLinkAttributeName, value: privacyURL, range: foundRange)
+        termsnpolicy.attributedText = attributedString
+        termsnpolicy.textColor      = UIColor(red: 153/255.0, green: 153/255.0, blue: 153/255.0, alpha: 1.0)
+        termsnpolicy.textAlignment  = .center
+        termsnpolicy.font = UIFont(name: "Avenir-Medium", size: 13)
+
+        
+        self.navigationController?.navigationBar.isHidden = true
+
         passwordReveal.setImage(UIImage(named: "Show password icon"), for: .normal)
         passwordReveal.tintColor = UIColor(red: 136/255.0, green: 143/255.0, blue: 158/255.0, alpha: 1.0)
         
-        navigationController?.tabBarController?.tabBar.isHidden = true
+        navigationController?.tabBarController?.tabBar.isHidden          = true
+        IQKeyboardManager.sharedManager().enable                         = false
+        IQKeyboardManager.sharedManager().shouldResignOnTouchOutside     = false
+        IQKeyboardManager.sharedManager().enableAutoToolbar              = false
+        IQKeyboardManager.sharedManager().keyboardDistanceFromTextField  = 10
+        
 
         labelcredentials.isHidden = true
         signUpButton.layer.cornerRadius = 25
         signUpButton.clipsToBounds = true
-
-//        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
-//        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
-//
-
+        emailTextfield.autocorrectionType = .no
+        passwordTextfield.autocorrectionType = .no
+        
+        if #available(iOS 11, *) {
+            emailTextfield.textContentType = UITextContentType.emailAddress
+            passwordTextfield.textContentType = UITextContentType("")
+        }
     }
     func animateViewMoving (up:Bool, moveValue :CGFloat){
-        
         let movementDuration:TimeInterval = 0.3
         let movement:CGFloat = ( up ? -moveValue : moveValue)
         
@@ -60,46 +92,63 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         UIView.setAnimationBeginsFromCurrentState(true)
         UIView.setAnimationDuration(movementDuration)
         
-        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
-        
-        //        self.view.frame = offsetBy(self.view.frame, 0, movement)
-        
+//        self.view.frame = CGRectOffset(self.view.frame, 0, movement)
+        self.MainView.frame = self.MainView.frame.offsetBy(dx: 0, dy: movement)
         UIView.commitAnimations()
     }
+
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        let storyboard = UIStoryboard(name: Constants.Event, bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: Constants.WebViewStoryId) as! WebViewController
+        if (URL.absoluteString == termsAndConditionsURL) {
+            vc.url_str = termsAndConditionsURL
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else if (URL.absoluteString == privacyURL) {
+            vc.url_str = privacyURL
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        return false
+    }
+
     
     var iconClick = Bool()
     
     @IBAction func passwordHideButton(_ sender: Any) {
         
         if(iconClick == true) {
-            
+
             passwordTextfield.isSecureTextEntry = false
             iconClick = false
             passwordReveal.setImage(UIImage(named: "eye-off.png"), for: .normal)
             passwordReveal.tintColor = UIColor(red: 42/255.0, green: 42/255.0, blue: 42/255.0, alpha: 1.0)
-//                        passwordReveal.setBackgroundImage(UIImage(named:"eye-off.png"), for: .normal)
 
+        } else if iconClick == false {
 
-        }else if iconClick == false {
-            
             passwordTextfield.isSecureTextEntry = true
             iconClick = true
             passwordReveal.setImage(UIImage(named: "Show password icon.png"), for: .normal)
             passwordReveal.tintColor = UIColor(red: 136/255.0, green: 143/255.0, blue: 158/255.0, alpha: 1.0)
 
-//            passwordReveal.setBackgroundImage(UIImage(named:"Show password icon.png"), for: .normal)
-
         }
-        
-//        if passwordTextfield.isSecureTextEntry == false {
-//            passwordReveal.setImage(UIImage(named: "eye-off.png"), for: .normal)
-//        }else {
-//            iconClick = true
-//            passwordReveal.setImage(UIImage(named: "Show password icon.png"), for: .normal)
-//            passwordReveal.setBackgroundImage(UIImage(named:"Show password icon.png"), for: .normal)
-//        }
     }
     
+    @IBAction func passwordhideTouchout(_ sender: Any) {
+        if(iconClick == true) {
+            
+            passwordTextfield.isSecureTextEntry = false
+            iconClick = false
+            passwordReveal.setImage(UIImage(named: "eye-off.png"), for: .normal)
+            passwordReveal.tintColor = UIColor(red: 42/255.0, green: 42/255.0, blue: 42/255.0, alpha: 1.0)
+            
+        } else if iconClick == false {
+            
+            passwordTextfield.isSecureTextEntry = true
+            iconClick = true
+            passwordReveal.setImage(UIImage(named: "Show password icon.png"), for: .normal)
+            passwordReveal.tintColor = UIColor(red: 136/255.0, green: 143/255.0, blue: 158/255.0, alpha: 1.0)
+            
+        }
+    }
     @IBAction func signinPressed(_ sender: Any) {
         
         let storyboard = UIStoryboard(name: Constants.Auth, bundle: nil)
@@ -111,10 +160,15 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         self.view.endEditing(true)
+        dismissKeyboard()
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
+        if let nextField = activeField.superview?.viewWithTag(activeField.tag + 1) as? UITextField {
+            nextField.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
         textField.resignFirstResponder()
         
         return true
@@ -122,6 +176,13 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+         self.activeField = textField
+//        if UIDevice.current.model == IPhone5S {
+//
+//        }
+        if textField == emailTextfield || textField == passwordTextfield {
+            animateViewMoving(up: true, moveValue: 50)
+        }
         
         if textField == emailTextfield {
             emailtitleLAbel.textColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
@@ -135,9 +196,10 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
 
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
-        
-        textField.resignFirstResponder()
-        animateViewMoving(up: false, moveValue: 0)
+        if textField == emailTextfield || textField == passwordTextfield {
+            animateViewMoving(up: false, moveValue: 50)
+        }
+//        animateViewMoving(up: false, moveValue: 0)
         if textField == emailTextfield {
             emailtitleLAbel.textColor = UIColor(red: 129/255.0, green: 125/255.0, blue: 144/255.0, alpha: 1.0)
             emailLineView.backgroundColor = UIColor(red: 229/255.0, green: 229/255.0, blue: 229/255.0, alpha: 1.0)
@@ -145,6 +207,8 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
             passwordtitleLabel.textColor = UIColor(red: 129/255.0, green: 125/255.0, blue: 144/255.0, alpha: 1.0)
             passwordLineView.backgroundColor = UIColor(red: 229/255.0, green: 229/255.0, blue: 229/255.0, alpha: 1.0)
         }
+        textField.resignFirstResponder()
+
 
     }
     @IBAction func signupPressed(_ sender: Any) {
@@ -175,33 +239,61 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
             
         if ValidationHelper.Instance.isValidEmail(email:email) && pwd.count > 2 {
             
-            HUD.show(.labeledProgress(title: "Loading...", subtitle: ""))
+            LoadingHepler.instance.show()
             
             
             Auth.auth().createUser(withEmail: email, password: pwd) { (user: User?, error) in
                 
                 if user == nil {
-  
-                    self.authenticationError(error: "Oops! Invalid login.")
-                    HUD.hide()
+           
+
+                    LoadingHepler.instance.hide()
+                    
+                    if let errorcontent = error {
+                        print("signup error:::::::",errorcontent.localizedDescription)
+                        
+                        if  errorcontent.localizedDescription == "The email address is already in use by another account."  {
+                            
+                             LoadingHepler.instance.show()
+                            
+                            Auth.auth().signIn(withEmail: email, password: pwd) { (loginuser, loginerror) in
+                                
+                                 LoadingHepler.instance.hide()
+                               
+                                if let login_user = loginuser {
+                                    
+                                    self.emailTextfield.text = ""
+                                    self.passwordTextfield.text = ""
+                                    self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId,firebaseid: (login_user.uid))
+                                    
+                                } else {
+                                    
+                                    self.authenticationError(error: "Oops! Invalid login.")
+                                    
+                                }
+                                
+                                
+                            }
+                            
+                            return
+                        }
+ 
+                    } else {
+                        
+                        self.authenticationError(error: "Oops! Invalid login.")
+                        
+                    }
 
                     return
                     
                 }
                 
-                if self.currentReachabilityStatus != .notReachable {
-                    
-                    self.userLoginApi(uid: (user?.uid)!)
-                    
-                } else {
-                    
-                    DispatchQueue.main.async {
-                        
-                        AlertProvider.Instance.showInternetAlert(vc: self)
-                    }
-                
-                    
-                }
+                self.emailTextfield.text = ""
+                self.passwordTextfield.text = ""
+  
+                LoadingHepler.instance.hide()
+                self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId,firebaseid: (user?.uid)!)
+
                 
                }
                 
@@ -249,25 +341,16 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         animation.fromValue = NSValue(cgPoint: CGPoint(x: self.labelcredentials.center.x - 10, y: self.labelcredentials.center.y))
         animation.toValue = NSValue(cgPoint: CGPoint(x: self.labelcredentials.center.x + 10, y: self.labelcredentials.center.y))
         self.labelcredentials.layer.add(animation, forKey: "position")
-        HUD.hide()
+        LoadingHepler.instance.hide()
         
     }
     
-    func openStoryBoard(name: String,id : String) {
-        
-//        window                          = UIWindow(frame: UIScreen.main.bounds)
-//        let storyboard                  = UIStoryboard(name: name, bundle: nil)
-//        let initialViewController       = storyboard.instantiateViewController(withIdentifier: "profileid") as! Edit_ProfileVC
-//        initialViewController.show      = true
-//        self.navigationController!.pushViewController(initialViewController, animated: true)
-//        window?.rootViewController = initialViewController
-//        window?.makeKeyAndVisible()
-        
-        
-//        window                        = UIWindow(frame: UIScreen.main.bounds)
-        let storyboard                  = UIStoryboard(name: name, bundle: nil)
-        let initialViewController       = storyboard.instantiateViewController(withIdentifier: id) as! Edit_ProfileVC
+    func openStoryBoard(name: String,id : String,firebaseid : String) {
+
+        let storyboard                     = UIStoryboard(name: name, bundle: nil)
+        let initialViewController          = storyboard.instantiateViewController(withIdentifier: id) as! Edit_ProfileVC
         initialViewController.boolForTitle = true
+        initialViewController.firebaseid   = firebaseid
         self.navigationController!.pushViewController(initialViewController, animated: true)
      
     }
@@ -276,49 +359,72 @@ class signupwithEmailVC: UIViewController, UITextFieldDelegate {
         super.viewWillAppear(animated)
         
         // Hide the navigation bar on the this view controller
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        self.navigationController?.navigationBar.isHidden = true
     }
-    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+//        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.navigationController?.navigationBar.isHidden = true
+
+    }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         // Show the navigation bar on other view controllers
-//        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        self.navigationController?.navigationBar.isHidden = false
     }
     
     @IBAction func fbSignup(_ sender: Any) {
+
         
         let fbLoginmanager : FBSDKLoginManager = FBSDKLoginManager()
         fbLoginmanager.logIn(withReadPermissions: ["public_profile", "email"], from: self) { (result, error) in
             if let error = error {
                 print("Failed to login: \(error.localizedDescription)")
+                DispatchQueue.main.async {
+                    
+                  AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Facebook signUp failed.", vc: self)
+               
+                }
+                
+                FBSDKLoginManager().logOut()
+               
                 return
+            } else if(result?.isCancelled)! {
+                
+                FBSDKLoginManager().logOut()
+                
             }
-            
             
             guard let accessToken = FBSDKAccessToken.current() else {
                 print("Failed to get access token")
                 return
             }
             
-            
+            DispatchQueue.main.async {
+                
+               LoadingHepler.instance.show()
+            }
+
             let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
-            
-            // Perform login by calling Firebase APIs
             Auth.auth().signIn(with: credential, completion: { (user, error) in
                 if let error = error {
+                    DispatchQueue.main.async {
+                    LoadingHepler.instance.hide()
+                    AlertProvider.Instance.showAlert(title: "", subtitle: error.localizedDescription, vc: self)
                     
-                    AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Facebook login failed.", vc: self)
-                   
+                    }
+                    print("Login error: \(error.localizedDescription)")
                     return
                 }
-                
-                self.userLoginApi(uid: (user?.uid)!)
-              
+             
+                DispatchQueue.main.async {
+                    
+                    LoadingHepler.instance.hide()
+                    self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId,firebaseid: (user?.uid)!)
+                }
             })
-            
         }
-
     }
 }
 
@@ -338,82 +444,6 @@ extension UITextField {
     }
 }
 
-extension signupwithEmailVC {
-    
-    func userLoginApi(uid:String) {
-        
-        let clientIp = IPChecker.getIP() ?? "1.0.1"
-        
-        let parameters : Parameters = ["firebaseuid" : uid,"createdByUserId" : "","updatedByUserId" : "","createdTimestamp" : "","updatedTimestamp" : "","clientApp": "iosapp","clientIP":clientIp]
-        
-        let loginRequest : ApiClient  = ApiClient()
-        loginRequest.userLogin(parameters: parameters, completion: { status,userlist in
-            
-            if status == "success" {
-                
-                DispatchQueue.main.async {
-                    
-                    if let user = userlist {
-                        
-                        self.getUserDetails(user: user)
-                        
-                    }
-                    
-                    HUD.hide()
-//                    self.openStoryBoard(name: Constants.Main, id: Constants.ProfileId)
-                   
-                    
-                }
-                
-            } else {
-                
-                HUD.hide()
-                
-            }
-            
-            
-        })
-        
-        
-    }
-    
-    func getUserDetails(user:UserList) {
-        
-        if let firebaseid = user.firebaseUID {
-            
-            PrefsManager.sharedinstance.UIDfirebase = firebaseid
-            
-        }
-        
-        if let userid = user.id {
-            
-            PrefsManager.sharedinstance.userId = userid
-            
-        }
-        
-        if let username = user.userName {
-            
-            PrefsManager.sharedinstance.username = username
-            
-        }
-        
-        if let dateofbirth = user.dateOfBirth {
-            
-            PrefsManager.sharedinstance.dateOfBirth = dateofbirth
-            
-        }
-        
-        if let gender = user.gender {
-            
-            PrefsManager.sharedinstance.gender = gender
-            
-        }
-        
-        
-        
-    }
-    
-    
-}
+
 
 

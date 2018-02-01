@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import Nuke
 
 class businessEventTableViewCell : UITableViewCell {
 
     @IBOutlet weak var eventBusImageView: ImageExtender!
     @IBOutlet weak var eventBusLabel: UILabel!
     @IBOutlet weak var eventBusCollectionView: UICollectionView!
+    
+    @IBOutlet weak var tagConstraintTop: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,6 +37,36 @@ class businessEventTableViewCell : UITableViewCell {
         eventBusCollectionView.tag        = row
         eventBusCollectionView.reloadData()
         
+    }
+    
+    var item : BussinessEventList! {
+        didSet {
+            
+            if let name = item.businessname {
+                
+                eventBusLabel.text = name
+            } else {
+                
+                tagConstraintTop.constant = 0
+            }
+            
+            if let userimageList = item.imgList {
+                
+                if userimageList.count > 0 {
+                    
+                    let apiclient = ApiClient()
+                    apiclient.getFireBaseImageUrl(imagepath: userimageList[userimageList.count-1].imageurl_str!, completion: { url in
+                        
+                        self.eventBusImageView.image = nil
+                        Manager.shared.loadImage(with: URL(string : url)!, into: self.eventBusImageView)
+                        
+                    })
+                    
+                }
+                
+            }
+           
+        }
     }
 
 }

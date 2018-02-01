@@ -11,6 +11,7 @@ import XLPagerTabStrip
 import GooglePlaces
 import SwiftyJSON
 import Alamofire
+import IQKeyboardManagerSwift
 
 class ParentViewController: ButtonBarPagerTabStripViewController {
     
@@ -27,39 +28,53 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
     @IBOutlet weak var buttonTabBarView: ButtonBarView!
     var searchClick : Bool = false
     var hideDropdown : Bool = false
+    var selectedIndex = 0
+var getLocDetails = [String]()
    
     @IBOutlet weak var tabScrollView: UIScrollView!
     
     /*******************place api*************************/
     var autocompleteplaceArray = [String]()
+    var autocompleteplaceID    = [String]()
     @IBOutlet weak var shareView : UIView!
     
     @IBOutlet weak var collectionContainerView: UIView!
+    
+    var locationDictonary : [String : Any]?
+    var searchText        : String?
+    var apiClient : ApiClient!
+  
     override func viewDidLoad() {
         settings.style.selectedBarHeight = 3.0
         settings.style.buttonBarItemFont = UIFont(name: "Avenir-Medium", size: 14)!
+        settings.style.buttonBarItemsShouldFillAvailiableWidth = true
+        settings.style.viewcontrollersCount = 5
         super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.isHidden = false
         // change selected bar color
         
         settings.style.buttonBarBackgroundColor = .white
         settings.style.buttonBarItemBackgroundColor = .white
         settings.style.selectedBarBackgroundColor = purpleInspireColor
-        
-        
+        settings.style.buttonBarItemsShouldFillAvailiableWidth = true
+
         settings.style.buttonBarMinimumLineSpacing = 0
         settings.style.buttonBarItemTitleColor = .black
-        settings.style.buttonBarItemsShouldFillAvailiableWidth = true
+        
         settings.style.buttonBarLeftContentInset = 0
         settings.style.buttonBarRightContentInset = 0
         buttonBarView.selectedBar.backgroundColor = UIColor.appThemeColor()
         
         changeCurrentIndexProgressive = { [weak self] (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
             guard changeCurrentIndex == true else { return }
+            
             oldCell?.label.textColor = UIColor.textlightDark()
             newCell?.label.textColor = UIColor.appBlackColor()
-            
+            IQKeyboardManager.sharedManager().enableAutoToolbar = false
+
         }
-        
+    
         hideKeyboardWhenTappedAround()
         buttonTabBarView.isHidden = true
         
@@ -72,37 +87,55 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
         filtertable.delegate   = self
         filtertable.dataSource = self
         
+        apiClient = ApiClient()
+        
+        if let address =  PrefsManager.sharedinstance.lastlocation {
+            editsearchbyLocation.text = address
+//            editsearchbyLocation.text = address.components(separatedBy: ",")[1]
+        }
+        
     }
-
+  
+    func navigationTap(){
+        let offset = CGPoint(x: 0,y :0)
+        self.containerView.setContentOffset(offset, animated: true)
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        
+     
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.navigationController?.navigationBar.isHidden = false
+
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-    
+        super.viewDidAppear(true)
+        self.navigationController?.navigationBar.isHidden = false
+        reloadStripView()
+
+    }
+    override func viewWillAppear(_ animated: Bool){
+        self.navigationController?.navigationBar.isHidden = false
+
+        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(ParentViewController.navigationTap))
+        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+        self.navigationController?.navigationBar.isUserInteractionEnabled = true
+
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Avenir-Heavy", size: 16)!]
+
         
     }
-    
     @IBAction func ButtonSearach(_ sender: UIButton) {
-        
-//        let top = CGAffineTransform(translationX: 0, y: 0)
-//        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-//            self.filtertableView.transform = top
-//            self.filtertableView.isHidden = false
-//        }, completion: nil)
-        
+ 
         
     }
     @IBAction func ButtonLocation(_ sender: UIButton) {
-        
-//        let top = CGAffineTransform(translationX: 0, y: 0)
-//        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-//            self.filtertableView.transform = top
-//            self.filtertableView.isHidden = false
-//        }, completion: nil)
+
        
     }
     // Tab controllers switch func
@@ -111,52 +144,66 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
         
             let child_1 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1) as! EventTabController
             child_1.scrolltableview = true
-            let child_2 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid2)
-            let child_3 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid3)
+            child_1.locationDictonary = locationDictonary
+            child_1.searchText        = searchText
+            child_1.apiType           = "Home"
+        
+            let child_2 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid2) as! BusinessTabController
+            child_2.locationDictonary = locationDictonary
+            child_2.searchText        = searchText
+        
+            let child_3 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid3) as! MenuTabController
+            child_3.locationDictonary = locationDictonary
+            child_3.searchText        = searchText
+        
             let child_4 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid4) as! PostTabController
             child_4.popdelegate = self
-            let child_5 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid5)
-            let child_6 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid6)
+            child_4.locationDictonary = locationDictonary
+            child_4.searchText        = searchText
+        
+            let child_5 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid5) as! UserTabController
+            child_5.locationDictonary = locationDictonary
+            child_5.searchText        = searchText
             return [child_1, child_2,child_3,child_4,child_5]
     
-       
     }
-  
-    func setnavBar()  {
-        
-        let searchController = UISearchController(searchResultsController: nil)
-        if #available(iOS 11.0, *) {
-           navigationController?.navigationBar.prefersLargeTitles = true
-            navigationItem.searchController = searchController
-            navigationItem.hidesSearchBarWhenScrolling = true
-        } else {
-            // Fallback on earlier versions
-        }
-       
-        
-    }
-
 }
 
 extension ParentViewController : UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-      
+        let editsearchString   = editsearchbyItem.text!
+        let editLocationString = editsearchbyLocation.text!
+        if textField == editsearchbyLocation && editLocationString.count > 0 && editsearchString.count > 0 {
+            editsearchbyLocation.returnKeyType = .search
+        }else {
+            editsearchbyLocation.returnKeyType = .default
+        }
     }
-    
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
        
-        if let place = textField.text {
-            
-            getPlaceApi(place_Str: place)
-            
+        if textField == editsearchbyItem  {
+            let editsearchCount = editsearchbyItem.text!
+            if editsearchCount.count > 0 {
+                setNavBar()
+            }
         }
         
+        if textField == editsearchbyLocation  {
+            let editItemSearch  = editsearchbyLocation.text!
+            let editsearchCount = editsearchbyItem.text!
+            if  editItemSearch.count > 0 && editsearchCount.count > 0 {
+             setNavBar()
+            }else {
+            }
+        }
+        
+     
         let top = CGAffineTransform(translationX: 0, y: 0)
         
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-            self.filtertableView.isHidden = false
+            self.filtertableView.isHidden = true
             self.filtertableView.transform = top
         }, completion: nil)
         dismissKeyboard()
@@ -170,29 +217,61 @@ extension ParentViewController : UITextFieldDelegate {
             self.filtertableView.isHidden = true
         }, completion: nil)
         
-        dismissKeyboard()
-        
         if textField == editsearchbyLocation {
             
             editsearchbyLocation.text = ""
+            locationDictonary = nil
+            reloadPagerTabStripView()
             
         } else {
             
             editsearchbyItem.text = ""
+            searchText = nil
+            reloadPagerTabStripView()
         }
+        
+        dismissKeyboard()
         
         return false
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         
+        let editsearchTextCount = editsearchbyItem.text!
+        if editsearchTextCount.count > 0  {
+            searchText   = editsearchbyItem.text!
+            reloadPagerTabStripView()
+        }
+      
         dismissKeyboard()
         
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == editsearchbyLocation {
+            if let place = textField.text {
+               
+                getPlaceApi(place_Str: "\(place)\(string)" as String)
+           
+                let top = CGAffineTransform(translationX: 0, y: 0)
+                
+                UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                    self.filtertableView.isHidden = false
+                    self.filtertableView.transform = top
+                }, completion: nil)
+//                dismissKeyboard()
+                
+            }
+        }
         
-        
+//        let editsearchString   = editsearchbyItem.text!
+//        let editLocationString = editsearchbyLocation.text!
+//        if textField == editsearchbyLocation && editLocationString.count > 0 && editsearchString.count > 0 {
+//            editsearchbyLocation.returnKeyType = .search
+//        }else {
+//            editsearchbyLocation.returnKeyType = .done
+//        }
+//
         
         return true
     }
@@ -212,8 +291,9 @@ extension ParentViewController {
         collectionContainerView.isHidden = true
         tabScrollView.isHidden           = false
         
-        navigationItemList.title = "Explore"
-        
+        navigationItemList.title = "Numnu"
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Avenir-Medium", size: 16)!]
+
         let button: UIButton = UIButton(type: UIButtonType.custom)
         //set image for button
         button.setImage(UIImage(named: "ic_arrow_back"), for: UIControlState.normal)
@@ -246,7 +326,6 @@ extension ParentViewController {
         
         navigationItemList.title = "Numnu"
         searchClick = false
-        reloadPagerTabStripView()
         buttonTabBarView.reloadData()
         buttonTabBarView.isHidden        = true
         tabScrollView.isScrollEnabled    = false
@@ -268,8 +347,6 @@ extension ParentViewController {
         self.collectionContainerView.addSubview(controller.view)
         self.addChildViewController(controller)
         controller.didMove(toParentViewController: self)
-        
-        
     }
     
     
@@ -291,9 +368,7 @@ extension ParentViewController : GMSAutocompleteViewControllerDelegate {
             
             print("Place address: \(placeName)")
         }
-        
-        
-        
+     
         dismiss(animated: true, completion: nil)
     }
     
@@ -331,6 +406,11 @@ extension ParentViewController : UITableViewDataSource,UITableViewDelegate {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "placecell", for: indexPath) as! PlaceTableviewcellTableViewCell
         
+        guard autocompleteplaceArray.count > 0 else {
+            
+            return cell
+        }
+        
         cell.placename.text = autocompleteplaceArray[indexPath.row]
         
         return cell
@@ -346,16 +426,27 @@ extension ParentViewController : UITableViewDataSource,UITableViewDelegate {
             
         } else {
             
-            tableView.allowsSelection = false
+            tableView.allowsSelection = true
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        editsearchbyLocation.text = autocompleteplaceArray[indexPath.row]
+        if let indexPath = tableView.indexPathForSelectedRow  {
+            let currentCell = tableView.cellForRow(at: indexPath) as! UITableViewCell
+            editsearchbyLocation.text = (currentCell.textLabel?.text)
+            editsearchbyLocation.text = autocompleteplaceArray[indexPath.row]
+            apiClient.getPlaceCordinates(placeid_Str: autocompleteplaceID[indexPath.row], completion: { lat,lang in
+                
+                self.locationDictonary = ["lattitude":lat,"longitude":lang,"nearMeRadiusInMiles": 15000]
+                PrefsManager.sharedinstance.lastlocationlat = lat
+                PrefsManager.sharedinstance.lastlocationlat = lang
+                PrefsManager.sharedinstance.lastlocation = self.editsearchbyLocation.text
+            })
+            
+        }
+ 
         dismissKeyboard()
-        setNavBar()
-        
+       
         let top = CGAffineTransform(translationX: 0, y: -self.filtertableView.frame.height)
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
             self.filtertableView.transform = top
@@ -366,8 +457,9 @@ extension ParentViewController : UITableViewDataSource,UITableViewDelegate {
     func getPlaceApi(place_Str:String) {
         
         autocompleteplaceArray.removeAll()
+        autocompleteplaceID.removeAll()
         
-        let parameters: Parameters = ["input": place_Str ,"types" : "geocode" , "key" : "AIzaSyDmfYE1gIA6UfjrmOUkflK9kw0nLZf0nYw"]
+        let parameters: Parameters = ["input": place_Str ,"types" : "(cities)" , "key" : "AIzaSyDmfYE1gIA6UfjrmOUkflK9kw0nLZf0nYw"]
         
         Alamofire.request(Constants.PlaceApiUrl, parameters: parameters).validate().responseJSON { response in
             
@@ -382,7 +474,13 @@ extension ParentViewController : UITableViewDataSource,UITableViewDelegate {
                             for item in place_dic {
                                 
                                 let placeName = item["description"].string ?? "empty"
-                                self.autocompleteplaceArray.append(placeName)
+                                 let placeid   = item["place_id"].string ?? "empty"
+                                if self.autocompleteplaceArray.count < 6 {
+                                    
+                                    self.autocompleteplaceArray.append(placeName)
+                                    self.autocompleteplaceID.append(placeid)
+                                }
+                                
                                 
                             }
                             
@@ -443,16 +541,35 @@ extension ParentViewController : PostTabControllerDelegate {
     
     func openPopup() {
         
-        self.shareView.alpha   = 1
-        
-        let top = CGAffineTransform(translationX: 0, y: 0)
-        
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-            self.shareView.isHidden = false
-            self.shareView.transform = top
+        let Alert: UIAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let FemaleAction: UIAlertAction = UIAlertAction(title: "Share", style: .default) { _ in
             
-        }, completion: nil)
+            
+        }
+        let MaleAction: UIAlertAction = UIAlertAction(title: "Bookmark", style: .default) { _ in
+            
+//            self.getBookmarkToken()
+            
+        }
+        //        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) { _ in
+        //        }
         
+        //Create and add the Cancel action
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel)
+        cancelAction.setValue(UIColor.red, forKey: "titleTextColor")
+
         
+        Alert.addAction(FemaleAction)
+        Alert.addAction(MaleAction)
+        Alert.addAction(cancelAction)
+        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad) {
+            Alert.popoverPresentationController?.sourceView = self.view
+            Alert.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
+            present(Alert, animated: true, completion:nil )
+        }else{
+            present(Alert, animated: true, completion:nil )
+        }
     }
 }
+
+

@@ -8,6 +8,8 @@
 
 import UIKit
 import XLPagerTabStrip
+import Alamofire
+
 
 protocol MenuEventViewControllerDelegate {
    
@@ -18,35 +20,103 @@ class MenuEventViewController: UIViewController,IndicatorInfoProvider,UITableVie
     
     var tagarray = ["Festival","Wine","Party","Rum","Barbaque","Pasta","Sandwich","Burger"]
     
-    @IBOutlet weak var menuEventTableview: UITableView!
+    
     @IBOutlet weak var menuCategoryTableview: UITableView!
     var showentity : Bool = false
     var menuDelegate : MenuEventViewControllerDelegate?
     var viewState    : Bool = false
     
+    /********************Api client********************************/
+    var apiClient : ApiClient!
+    
+    /*********************Event*********************************/
+    var itemTagList = [EventItemtag]()
+    var tagModel  : EventItemTagModel?
+    
+    /*********************Business*********************************/
+    var itemBusinessTagList = [BusinessItemtag]()
+    var tagBusinessModel    : BusinessItemTagModel?
+    
+    var pageno  : Int = 1
+    var limitno : Int = 25
+    
+    /********************variable which select which api ************************/
+    
+    var itemType : String = "default"
+    
+    var primayId : Int = 0
+    /********************************Event context******************************************/
+    var eventId  : Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        menuEventTableview.delegate   = self
-        menuEventTableview.dataSource = self
-        
         menuCategoryTableview.delegate   = self
         menuCategoryTableview.dataSource = self
-        
         menuCategoryTableview.isHidden = false
-        menuEventTableview.isHidden    = true
-        
         menuCategoryTableview.isScrollEnabled = false
-        menuEventTableview.isScrollEnabled    = false
-
-        // Do any additional setup after loading the view.
+        
+        /********************Api client********************************/
+        apiClient = ApiClient()
+        
+        /**********************For Business tab***********************************/
+    
+        if itemType == "Business" {
+       
+            getItemTagBusiness(pageno: pageno, limit: limitno)
+            
+        }
+        
+        /********************************Event context******************************************/
+        
+        if itemType == "BusinessEvent" {
+            
+            getItemTagEventBusiness(pageno: pageno, limit: limitno)
+            
+        }
+        
+       
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
-       viewState = true
-       menuCategoryTableview.reloadData()
+        viewState = true
+        itemTagList.removeAll()
+        itemBusinessTagList.removeAll()
+        self.menuCategoryTableview.reloadData()
+        pageno  = 1
+        limitno = 25
+        switch itemType {
+            
+        case "Event":
+            
+           getItemTag(pageno: pageno, limit: limitno)
+            
+        case "Business":
+            
+           getItemTagBusiness(pageno: pageno, limit: limitno)
+        
+        case "Location":
+            
+            getItemTagLocation(pageno: pageno, limit: limitno)
+            
+        case "BusinessEvent":
+            
+            getItemTagEventBusiness(pageno: pageno, limit: limitno)
+            
+        default:
+            
+           break
+            
+        }
+        
+        
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -61,57 +131,159 @@ class MenuEventViewController: UIViewController,IndicatorInfoProvider,UITableVie
     }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        
         return IndicatorInfo(title: Constants.EventTab2)
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if tableView == self.menuEventTableview {
+        switch itemType {
             
-            return 6
+        case "Event":
+             return itemTagList.count
             
-        } else {
+        case "Business":
+            return itemBusinessTagList.count
             
-            return 8
+        case "BusinessEvent":
+            return itemBusinessTagList.count
+            
+        case "Location":
+            return itemTagList.count
+            
+        default:
+            return 0
             
         }
         
+       
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if tableView == self.menuEventTableview {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "menucategoryCell", for: indexPath) as! MenuCategoryItemCell
+        switch itemType {
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: "menuEventCell", for: indexPath) as! MenuItemEventCell
+        case "Event":
             
-            cell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.row)
+            guard itemTagList.count > 0 else {
+                
+                return cell
+            }
             
-            return cell
+            cell.item = itemTagList[indexPath.row]
+        
+        case "Location":
             
-        } else {
+            guard itemTagList.count > 0 else {
+                
+                return cell
+            }
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: "menucategoryCell", for: indexPath) as! MenuCategoryItemCell
+            cell.item = itemTagList[indexPath.row]
             
-            cell.eventCategoryLabel.text = tagarray[indexPath.row]
+        case "Business":
+            
+            guard itemBusinessTagList.count > 0 else {
+                
+                return cell
+            }
+            
+            cell.itemBusiness = itemBusinessTagList[indexPath.row]
+        
+        case "BusinessEvent":
+            
+            guard itemBusinessTagList.count > 0 else {
+                
+                return cell
+            }
+            
+            cell.itemBusiness = itemBusinessTagList[indexPath.row]
+            
+        default:
             
             return cell
             
         }
         
-        
+        return cell
+      
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        let lastRowIndex = self.menuCategoryTableview.numberOfRows(inSection: 0)
-        if indexPath.row == lastRowIndex - 1 && viewState {
+        switch itemType {
+            
+        case "Event":
+            
+            if indexPath.row == itemTagList.count - 1 && viewState {
+                
+                if let pageItem = tagModel {
+                    
+                    if itemTagList.count  < pageItem.totalRows ?? 0 {
+                        pageno += 1
+                        limitno = 25 * pageno
+                        getItemTag(pageno: pageno, limit: limitno)
+                    }
+                    
+                }
+                
+            }
+         
+        case "Location":
+            
+            if indexPath.row == itemTagList.count - 1 && viewState {
+                
+                if let pageItem = tagModel {
+                    
+                    if itemTagList.count  < pageItem.totalRows ?? 0 {
+                        pageno += 1
+                        limitno = 25 * pageno
+                        getItemTag(pageno: pageno, limit: limitno)
+                    }
+                    
+                }
+                
+            }
+           
+        case "Business":
+            if indexPath.row == itemBusinessTagList.count - 1 && viewState {
+                
+                if let pageItem = tagBusinessModel {
+                    
+                    if itemBusinessTagList.count  < pageItem.totalRows ?? 0 {
+                        pageno += 1
+                        limitno = 25 * pageno
+                        getItemTagBusiness(pageno: pageno, limit: limitno)
+                    }
+                    
+                }
+                
+            }
+        
+        case "BusinessEvent":
+            if indexPath.row == itemBusinessTagList.count - 1 && viewState {
+                
+                if let pageItem = tagBusinessModel {
+                    
+                    if itemBusinessTagList.count  < pageItem.totalRows ?? 0 {
+                        pageno += 1
+                        limitno = 25 * pageno
+                        getItemTagBusiness(pageno: pageno, limit: limitno)
+                    }
+                    
+                }
+                
+            }
 
-            menuDelegate?.menuTableHeight(height: menuCategoryTableview.contentSize.height)
-            viewState = false
+            
+        default:
+            break
         }
+        
     }
-   
 }
 
 extension MenuEventViewController   {
@@ -119,40 +291,44 @@ extension MenuEventViewController   {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        switch itemType {
+            
+        case "Event":
+            
+            openStoryBoard(name: Constants.EventDetail, id: Constants.MenuItemId,heading: itemTagList[indexPath.row].tagtext ?? "Title", primid: primayId,tagid: itemTagList[indexPath.row].tagid ?? 0,type: "Event")
+            
+        case "Business":
+            openStoryBoard(name: Constants.EventDetail, id: Constants.MenuItemId,heading: itemBusinessTagList[indexPath.row].tagtext ?? "Title", primid: 51,tagid: itemBusinessTagList[indexPath.row].tagid ?? 0,type: "Business")
+       
+        case "Location":
+            openStoryBoard(name: Constants.EventDetail, id: Constants.MenuItemId,heading: itemTagList[indexPath.row].tagtext ?? "Title", primid: 179,tagid: itemTagList[indexPath.row].tagid ?? 0,type: "Location")
+            
+        case "BusinessEvent":
+            openStoryBoard(name: Constants.EventDetail, id: Constants.MenuItemId,heading: itemBusinessTagList[indexPath.row].tagtext ?? "Title", primid: 51,tagid: itemBusinessTagList[indexPath.row].tagid ?? 0,type: "BusinessEvent")
+            
+        default:
+     
+            break
+            
+        }
         
-        openStoryBoard(name: Constants.EventDetail, id: Constants.MenuItemId,heading: tagarray[indexPath.row])
-        
-        
-//        if tableView == menuEventTableview {
-//
-//            menuEventTableview.isHidden    = true
-//            menuCategoryTableview.isHidden = false
-//            if showentity {
-//
-//
-//
-//            } else {
-//
-//                openStoryBoard(name: Constants.ItemDetail, id: Constants.ItemDetailId)
-//
-//            }
-//
-//
-//        } else {
-//
-//            menuEventTableview.isHidden    = false
-//            menuCategoryTableview.isHidden = true
-//
-//
-//        }
         
     }
     
-    func openStoryBoard (name : String,id : String,heading : String) {
+    func openStoryBoard (name : String,id : String,heading : String,primid : Int,tagid : Int,type : String) {
         
         let storyboard      = UIStoryboard(name: name, bundle: nil)
         let vc              = storyboard.instantiateViewController(withIdentifier: id) as! MenuItemViewController
         vc.heading          = heading
+        vc.primaryid        = primid
+        vc.tag_id           = tagid
+        vc.itemType         = type
+        if type == "BusinessEvent" {
+            
+            vc.primaryid          = eventId
+            vc.businessid         = primid
+        }
+       
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
@@ -189,6 +365,219 @@ extension MenuEventViewController : UICollectionViewDelegate,UICollectionViewDat
         return CGSize(width: textSize.width+20, height: 22)
     }
     
+    
+    
+}
+
+extension MenuEventViewController {
+    
+    /********************************Event Detail******************************************/
+    
+    func getItemTag(pageno:Int,limit:Int) {
+        
+       LoadingHepler.instance.show()
+        
+        apiClient.getFireBaseToken(completion: { token in
+            
+            let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
+            let param  : String  = "page=\(pageno)&limit\(limit)"
+            
+            self.apiClient.getItemTagEvent(id: self.primayId, page: param, headers: header, completion: { status,taglist in
+                
+                if status == "success" {
+                    
+                    if let item = taglist {
+                        
+                        self.tagModel = item
+                        
+                        if let list = item.tagItemList {
+                            
+                            self.itemTagList += list
+                        }
+                    }
+                    
+                    DispatchQueue.main.async {
+                        
+                        self.menuCategoryTableview.reloadData()
+                        
+                    }
+                    
+                    self.reloadTable()
+                    
+                } else {
+                    
+                    LoadingHepler.instance.hide()
+                    self.reloadTable()
+                    
+                }
+                
+                
+            })
+            
+            
+        })
+        
+        
+    }
+    
+    /********************************Item Location******************************************/
+    
+    func getItemTagLocation(pageno:Int,limit:Int) {
+        
+        LoadingHepler.instance.show()
+        
+        apiClient.getFireBaseToken(completion: { token in
+            
+            let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
+            let param  : String  = "page=\(pageno)&limit\(limit)"
+            
+            self.apiClient.getItemTagLocation(id: self.primayId, page: param, headers: header, completion: { status,taglist in
+                
+                if status == "success" {
+                    
+                    if let item = taglist {
+                        
+                        self.tagModel = item
+                        
+                        if let list = item.tagItemList {
+                            
+                            self.itemTagList += list
+                        }
+                    }
+                    
+                    DispatchQueue.main.async {
+                        
+                        self.menuCategoryTableview.reloadData()
+                        
+                    }
+                    
+                    self.reloadTable()
+                    
+                } else {
+                    
+                    LoadingHepler.instance.hide()
+                    self.reloadTable()
+                    
+                }
+                
+                
+            })
+            
+            
+        })
+        
+        
+    }
+    
+    /********************************Business Detail******************************************/
+    
+    func getItemTagBusiness(pageno:Int,limit:Int) {
+        
+       LoadingHepler.instance.show()
+        
+        apiClient.getFireBaseToken(completion: { token in
+            
+            let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
+            let param  : String  = "page=\(pageno)&limit\(limit)"
+            
+            self.apiClient.getItemTagBusiness(id: self.primayId, page: param, headers: header, completion: { status,taglist in
+                
+                if status == "success" {
+                    
+                    if let item = taglist {
+                        
+                        self.tagBusinessModel = item
+                        
+                        if let list = item.tagItemList {
+                            
+                            self.itemBusinessTagList += list
+                        }
+                    }
+                    
+                    DispatchQueue.main.async {
+                        
+                        self.menuCategoryTableview.reloadData()
+                        
+                    }
+                    
+                    self.reloadTable()
+                    
+                } else {
+                    
+                    LoadingHepler.instance.hide()
+                    self.reloadTable()
+                    
+                }
+                
+                
+            })
+            
+            
+        })
+        
+        
+    }
+    
+    /********************************Event context******************************************/
+    
+    func getItemTagEventBusiness(pageno:Int,limit:Int) {
+        
+        LoadingHepler.instance.show()
+        
+        apiClient.getFireBaseToken(completion: { token in
+            
+            let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
+            let param  : String  = "page=\(pageno)&limit\(limit)"
+            
+            self.apiClient.getItemTagBusinessEvent(id: self.eventId,businessid: self.primayId,page: param, headers: header, completion: { status,taglist in
+                
+                if status == "success" {
+                    
+                    if let item = taglist {
+                        
+                        self.tagBusinessModel = item
+                        
+                        if let list = item.tagItemList {
+                            
+                            self.itemBusinessTagList += list
+                        }
+                    }
+                    
+                    DispatchQueue.main.async {
+                        
+                        self.menuCategoryTableview.reloadData()
+                        
+                    }
+                    
+                    self.reloadTable()
+                    
+                } else {
+                    
+                    LoadingHepler.instance.hide()
+                    self.reloadTable()
+                    
+                }
+                
+                
+            })
+            
+            
+        })
+        
+        
+    }
+    
+    
+    func reloadTable() {
+        
+        let when = DispatchTime.now() + 1
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            
+            self.menuDelegate?.menuTableHeight(height: self.menuCategoryTableview.contentSize.height)
+            LoadingHepler.instance.hide()
+        }
+        
+    }
     
     
 }

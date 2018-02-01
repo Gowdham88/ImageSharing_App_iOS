@@ -56,6 +56,7 @@ class loginMainVC: UIViewController, UIWebViewDelegate {
     @IBAction func signInPressed(_ sender: Any) {
         
         self.performSegue(withIdentifier: "signIn", sender: self)
+        
     }
     
     @IBAction func facebookLoginPressed(_ sender: Any) {
@@ -65,6 +66,12 @@ class loginMainVC: UIViewController, UIWebViewDelegate {
             if let error = error {
                 print("Failed to login: \(error.localizedDescription)")
                 return
+            } else if(result?.isCancelled)! {
+                
+                
+                FBSDKLoginManager().logOut()
+                
+                
             }
 
 

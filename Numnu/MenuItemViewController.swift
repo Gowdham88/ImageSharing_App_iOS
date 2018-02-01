@@ -7,12 +7,25 @@
 //
 
 import UIKit
+import Alamofire
 
 class MenuItemViewController: UIViewController {
 
     @IBOutlet weak var menuItemTableview: UITableView!
     var tagarray = ["Festival","Wine","Party","Rum","Barbaque","Pasta","Sandwich","Burger"]
     var heading : String = ""
+    
+    /********************Api client********************************/
+    var apiClient : ApiClient!
+    var itemList = [ItemList]()
+    var itemModel  : ItemListModel?
+    var pageno  : Int = 1
+    var limitno : Int = 25
+    var primaryid  : Int = 0
+    var businessid : Int = 0
+    var tag_id     : Int = 0
+    /********************variable which select which api ************************/
+    var itemType : String = "Event"
     
     @IBOutlet weak var navigationItemList: UINavigationItem!
     override func viewDidLoad() {
@@ -21,10 +34,34 @@ class MenuItemViewController: UIViewController {
         menuItemTableview.delegate   = self
         menuItemTableview.dataSource = self
        // Do any additional setup after loading the view.
-        
+      
         setNavBar()
+        
+        apiClient = ApiClient()
+        itemList.removeAll()
+        pageno  = 1
+        limitno = 25
+        switch itemType {
+        case "BusinessEvent":
+            getItemListEvent(pageno: pageno, limit: limitno)
+            
+        default:
+            getItemList(pageno: pageno, limit: limitno)
+        }
+        
+        
+        
     }
-    
+    func navigationTap(){
+        let offset = CGPoint(x: 0,y :0)
+        self.menuItemTableview.setContentOffset(offset, animated: true)
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(MenuItemViewController.navigationTap))
+        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+        self.navigationController?.navigationBar.isUserInteractionEnabled = true
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -70,30 +107,84 @@ extension MenuItemViewController : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-            return 6
+            return itemList.count
    
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "menuEventCell", for: indexPath) as! MenuItemEventCell
+        guard itemList.count > 0 else {
+            
+            return cell
+        }
+        
         cell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.row)
+        cell.item = itemList[indexPath.row]
         return cell
     
         
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      
-        openStoryBoard(name: Constants.ItemDetail, id: Constants.ItemCompleteId)
-     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        if indexPath.row == itemList.count - 1  {
+            
+            if let pageItem = itemModel {
+                
+                if itemList.count  < pageItem.totalRows ?? 0 {
+                    pageno += 1
+                    limitno = 25 * pageno
+                    switch itemType {
+                    case "BusinessEvent":
+                        getItemListEvent(pageno: pageno, limit: limitno)
+                        
+                    default:
+                        getItemList(pageno: pageno, limit: limitno)
+                    }
+                }
+                
+            }
+            
+        }
         
     }
     
-    func openStoryBoard (name : String,id : String) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        switch itemType {
+        case "Business":
+            openStoryBoardBusiness(name: Constants.ItemDetail, id: Constants.ItemDetailId,itemId: itemList[indexPath.row].id ?? 0)
+            
+        case "BusinessEvent":
+            openStoryBoardBusiness(name: Constants.ItemDetail, id: Constants.ItemDetailId,itemId: itemList[indexPath.row].id ?? 0)
+            
+        case "Location":
+            openStoryBoardBusiness(name: Constants.ItemDetail, id: Constants.ItemDetailId,itemId: itemList[indexPath.row].id ?? 0)
+            
+            
+        default:
+            openStoryBoard(name: Constants.ItemDetail, id: Constants.ItemCompleteId,itemId: itemList[indexPath.row].id ?? 0)
+        }
+   
+        
+    }
+    
+    func openStoryBoard (name : String,id : String,itemId : Int) {
         
         let storyboard      = UIStoryboard(name: name, bundle: nil)
-        let vc              = storyboard.instantiateViewController(withIdentifier: id)
+        let vc              = storyboard.instantiateViewController(withIdentifier: id) as! ItemCompleteviewcontroller
+        vc.itemprimaryid    = itemId
+        vc.eventid          = primaryid
+        self.navigationController!.pushViewController(vc, animated: true)
+        
+    }
+    
+    func openStoryBoardBusiness(name : String,id : String,itemId : Int) {
+        
+        let storyboard   = UIStoryboard(name: name, bundle: nil)
+        let vc           = storyboard.instantiateViewController(withIdentifier: Constants.ItemDetailId) as! ItemDetailController
+        vc.itemprimaryid = itemId
         self.navigationController!.pushViewController(vc, animated: true)
         
     }
@@ -105,19 +196,23 @@ extension MenuItemViewController : UICollectionViewDelegate,UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return tagarray.count
+        return itemList[collectionView.tag].tagList?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "eventMenuTagCell", for: indexPath) as! EventTagCollectionCell
         
-        let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagarray[indexPath.row], fontname: "Avenir-Medium", size: 12)
-        
-        cell.tagnamelabel.text = tagarray[indexPath.row]
-        
-        cell.setLabelSize(size: textSize)
-        
+        if let tagItem = itemList[collectionView.tag].tagList {
+            
+            let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagItem[indexPath.row].text_str ?? "", fontname: "Avenir-Medium", size: 12)
+            
+            cell.tagnamelabel.text = tagItem[indexPath.row].text_str ?? ""
+            
+            cell.setLabelSize(size: textSize)
+            
+        }
+       
         
         return cell
         
@@ -125,11 +220,129 @@ extension MenuItemViewController : UICollectionViewDelegate,UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagarray[indexPath.row], fontname: "Avenir-Medium", size: 12)
+        if let tagItem = itemList[collectionView.tag].tagList {
+            
+            let textSize  : CGSize  = TextSize.sharedinstance.sizeofString(text: tagItem[indexPath.row].text_str ?? "", fontname: "Avenir-Medium", size: 12)
+            
+            return CGSize(width: textSize.width+20, height: 22)
+            
+        }
         
-        return CGSize(width: textSize.width+20, height: 22)
+        return CGSize(width:0, height: 0)
     }
     
+    
+    
+}
+
+extension MenuItemViewController {
+    
+    func getItemList(pageno:Int,limit:Int) {
+        
+        LoadingHepler.instance.show()
+        
+        apiClient.getFireBaseToken(completion: { token in
+            
+            let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
+            let param  : String  = "page=\(pageno)&limit\(limit)"
+            
+            self.apiClient.getItemListByTagId(primaryid: self.primaryid, tagid: self.tag_id,type: self.itemType,page: param, headers: header, completion: { status,itemlists in
+                
+                if status == "success" {
+                    
+                    if let itemlist = itemlists {
+                        
+                        self.itemModel = itemlist
+                        
+                        if let list = itemlist.itemList {
+                            
+                            self.itemList += list
+                        }
+                    }
+                    
+                    DispatchQueue.main.async {
+                        
+                        LoadingHepler.instance.hide()
+                        self.menuItemTableview.reloadData()
+                        
+                    }
+                    
+                    
+                    
+                } else {
+                    
+                    LoadingHepler.instance.hide()
+                    DispatchQueue.main.async {
+                        
+                        self.menuItemTableview.reloadData()
+                        
+                    }
+                    
+                }
+                
+                
+            })
+            
+            
+        })
+        
+        
+    }
+    
+    /********************************Event context******************************************/
+    
+    func getItemListEvent(pageno:Int,limit:Int) {
+        
+        LoadingHepler.instance.show()
+        
+        apiClient.getFireBaseToken(completion: { token in
+            
+            let header : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
+            let param  : String  = "page=\(pageno)&limit\(limit)"
+            
+            self.apiClient.getItemListByTagIdEvent(eventid: self.primaryid, businessid: self.businessid,tagid: self.tag_id,page: param, headers: header, completion: { status,itemlists in
+                
+                if status == "success" {
+                    
+                    if let itemlist = itemlists {
+                        
+                        self.itemModel = itemlist
+                        
+                        if let list = itemlist.itemList {
+                            
+                            self.itemList += list
+                        }
+                    }
+                    
+                    DispatchQueue.main.async {
+                        
+                        LoadingHepler.instance.hide()
+                        self.menuItemTableview.reloadData()
+                        
+                    }
+                    
+                    
+                    
+                } else {
+                    
+                    LoadingHepler.instance.hide()
+                    DispatchQueue.main.async {
+                        
+                        self.menuItemTableview.reloadData()
+                        
+                    }
+                    
+                }
+                
+                
+            })
+            
+            
+        })
+        
+        
+    }
+   
     
     
 }

@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import Nuke
+import FBSDKLoginKit
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 //var itemArray :Array = String
 var itemArray = [String]()
@@ -20,19 +24,42 @@ protocol SettingsViewControllerDelegate {
 }
 
 
-class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+//fileprivate func rateApp(appId: String) {
+//    openUrl("itms-apps://itunes.apple.com/app/" + appId)
+//}
+//fileprivate func openUrl(_ urlString:String) {
+//    let url = URL(string: urlString)!
+//    if #available(iOS 10.0, *) {
+//        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+//    } else {
+//        UIApplication.shared.openURL(url)
+//    }
+//}
 
-   
+
+
+
+class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, UIScrollViewDelegate {
+
+    @IBOutlet weak var myScrollView: UIScrollView!
+    
     @IBOutlet weak var topHeaderView: UIView!
     @IBOutlet var navigationItemList: UINavigationItem!
     
+    @IBOutlet weak var usernamelabel: UILabel!
     @IBOutlet var editButton: UIButton!
     @IBOutlet var profileImageview: UIImageView!
     @IBOutlet var settingsTableView: UITableView!
     var delegate : SettingsViewControllerDelegate?
+    var type : String?
+    var tagArray = [TagList]()
     override func viewDidLoad() {
         super.viewDidLoad()
        setNavBar()
+        myScrollView.delegate = self
+        myScrollView.isScrollEnabled = true
+        settingsTableView.isScrollEnabled = false
+        
         self.navigationController?.navigationBar.titleTextAttributes =
             [NSForegroundColorAttributeName: UIColor.black,
              NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
@@ -45,8 +72,10 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         self.profileImageview.clipsToBounds = true
         
         itemArray = ["Share the app","Rate the app","Terms of service","Privacy policy"]
-        itemArray2 = ["Events","Business","Items","Posts","Users","Logout"]
+        itemArray2 = ["Events","Business","Items","Posts","Users"]
 //        topHeaderView.backgroundColor = UIColor(red: 216/255.0, green: 216/255.0, blue: 216/255.0, alpha: 1.0)
+        
+        setUserDetails()
 
     }
 
@@ -59,6 +88,8 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
             return itemArray.count
         }else if section == 1 {
             return itemArray2.count
+        }else if section == 2 {
+            return 1
         }else{
             return 0
         }
@@ -72,6 +103,9 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
             cell.nameLabel.text = itemArray[indexPath.row]
         }else if indexPath.section == 1 {
             cell.nameLabel.text = itemArray2[indexPath.row]
+        }else if indexPath.section == 2 {
+            cell.textLabel?.text = "       Logout"
+            cell.textLabel?.font = UIFont(name: "Avenir-Medium", size: 14)
         }else {
             cell.textLabel?.text = ""
         }
@@ -84,7 +118,7 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     if section == 1 {
         return 40
     }else if section == 2 {
-    return 0
+    return 40
     }else{
         return 0
     }
@@ -106,18 +140,93 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if indexPath.section == 1 && indexPath.row == 5 {
-            
-            delegate?.logout()
-            _ = self.navigationController?.popToRootViewController(animated: true)
-        }
-        
         let selectedCell:UITableViewCell = tableView.cellForRow(at: indexPath)!
         selectedCell.contentView.backgroundColor = UIColor.clear
         
+        if indexPath.section == 0 {
+            if indexPath.row == 0{
+                
+                let title = "Numnu"
+                let textToShare = "Discover and share experiences with food and drink at events and festivals."
+                let urlToShare = NSURL(string: "https://itunes.apple.com/ca/app/numnu/id1231472732?mt=8")
+                
+                let objectsToShare = [title, textToShare, urlToShare!] as [Any]
+                let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad) {
+                    activityVC.popoverPresentationController?.sourceView = self.view
+                    activityVC.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
+                    self.present(activityVC, animated: true, completion:nil )
+                }else{
+                    self.present(activityVC, animated: true, completion:nil )
+                }
+
+//                self.present(activityVC, animated: true, completion: nil)
+            }
+            
+            if indexPath.row == 1{
+                
+//                rateApp(appId: "id1231472732")
+
+
+                showReview()
+
+            }
+            if indexPath.row == 2 {
+            openWebBoard(url: "http://www.numnu.com/terms/")
+            }
+            if indexPath.row == 3 {
+                openWebBoard(url: "http://numnu.com/privacy-policy/")
+            }
+            
+        }
+       
+        if indexPath.section == 1  {
+            if indexPath.row == 0 {
+                type = "Event"
+
+            }else if indexPath.row == 1 {
+                type = "Business"
+                
+            }else if indexPath.row == 2 {
+                type = "Item"
+
+            }else if indexPath.row == 3 {
+                type = "Post"
+            }
+            
+            let storyboard = UIStoryboard(name: Constants.LocationDetail, bundle: nil)
+            let vc         = storyboard.instantiateViewController(withIdentifier:"BookmarkViewController") as! BookmarkViewController
+            vc.apiType     = type
+            self.navigationController?.pushViewController(vc, animated: true)
+        
+        }
+
+        if  indexPath.section == 2 && indexPath.row == 0 {
+            let Alert = UIAlertController(title: "Do you want to logout?", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+            
+            let CancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) {_ in
+            }
+            let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) { ACTION in
+                self.logout()
+            }
+            Alert.addAction(OkAction)
+            Alert.addAction(CancelAction)
+            present(Alert, animated: true, completion:nil )
+          
+        }
+        
+       
+        
+        
     }
-    
+    func logout (){
+        DBProvider.Instance.firebaseLogout()
+        delegate?.logout()
+        FBSDKLoginManager().logOut()
+        PrefsManager.sharedinstance.logoutprefences()
+        PrefsManager.sharedinstance.isLoginned = false
+        _ = self.navigationController?.popToRootViewController(animated: true)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -146,7 +255,11 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         
         
     }
-    
+    func navigationTap(){
+        let offset = CGPoint(x: 0,y :0)
+        myScrollView.setContentOffset(offset, animated: true)
+        
+    }
     func backButtonClicked() {
         
         _ = self.navigationController?.popViewController(animated: true)
@@ -154,43 +267,58 @@ class SettingsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(Edit_ProfileVC.navigationTap))
+        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+        self.navigationController?.navigationBar.isUserInteractionEnabled = true
         // Hide the navigation bar on the this view controller
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        setUserDetails()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(Edit_ProfileVC.navigationTap))
+        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+        self.navigationController?.navigationBar.isUserInteractionEnabled = true
     }
     
     // Edit button Navigation //
     @IBAction func didTappedEdit(_ sender: Any) {
         
         delegate?.sendlogoutstatus()
-//      _ = self.navigationController?.popToRootViewController(animated: true)
-        
-        
-        
-        
+   
         let storyboard = UIStoryboard(name: Constants.Main, bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: "SettingsEdit_ProfieViewController") as! SettingsEdit_ProfieViewController
+        vc.show        = false
+        self.navigationController!.pushViewController(vc, animated: true)
+ }
+   
+    func setUserDetails(){
+        
+        usernamelabel.text = PrefsManager.sharedinstance.username
+        
+        let apiclient : ApiClient = ApiClient()
+        apiclient.getFireBaseImageUrl(imagepath: PrefsManager.sharedinstance.imageURL, completion: { url in
+            
+            if url != "empty" {
+                
+                Manager.shared.loadImage(with:URL(string:url)!, into: self.profileImageview)
+                
+            }
+            
+            
+        })
+        
+    }
+    func openWebBoard (url: String) {
+        
+        let storyboard      = UIStoryboard(name: Constants.Event, bundle: nil)
+        let vc              = storyboard.instantiateViewController(withIdentifier: Constants.WebViewStoryId) as! WebViewController
+        vc.url_str          = url
         self.navigationController!.pushViewController(vc, animated: true)
         
-//        let controllers = self.navigationController?.viewControllers
-//        for vc in controllers! {
-//            if vc is Edit_ProfileVC {
-//                let aVC = Edit_ProfileVC()
-//                aVC.show = true
-//                _ = self.navigationController?.popToViewController(aVC, animated: true)
-//            }
-//        }
-//
- 
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
+    
     
   
-}
+}//class

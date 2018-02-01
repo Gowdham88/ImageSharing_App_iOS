@@ -8,12 +8,16 @@
 
 import UIKit
 import XLPagerTabStrip
+import Nuke
+import Alamofire
+
 
 class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
     
     @IBOutlet weak var BcImageView: ImageExtender!
     @IBOutlet weak var BcTitleLabel: UILabel!
    
+    @IBOutlet weak var myscrollView: UIScrollView!
     
     @IBOutlet weak var BcDescriptionLabel: UILabel!
     @IBOutlet weak var readMoreButton: UIButton!
@@ -28,7 +32,7 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
     @IBOutlet weak var shareView: UIView!
     @IBOutlet weak var mainContainerViewBottom: NSLayoutConstraint!
     @IBOutlet weak var mainContainerView: NSLayoutConstraint!
-    var tagarray = ["Festival","Wine","Party","Rum","Barbaque","Pasta","Sandwich","Burger"]
+    var tagarray = [String]()
     
     /***************contraints***********************/
     
@@ -38,13 +42,35 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
     
     /***************Read more variable*********************/
     
-    var isLabelAtMaxHeight = false
-
+    var isLabelAtMaxHeight   = false
+    
+    var token_str       : String   = "empty"
+    var description_txt : String   = ""
+    var apiClient       : ApiClient!
+    var businessprimaryid : Int    = 0
+    
+    @IBOutlet weak var bookmarkdetaillabel: UILabel!
+    @IBOutlet weak var sharebusdetaillabel: UILabel!
+    
+    /**********************share********************************/
+    
+    lazy var bookmarkid   : Int       = 0
+    lazy var bookmarkname : String    = "name"
+    lazy var bookmarktype : String    = "empty"
+    
+    /************************constraints************************************/
+    
+    @IBOutlet weak var tagscrollConstaintTop : NSLayoutConstraint!
+    @IBOutlet weak var tagconstraintHeight   : NSLayoutConstraint!
+    @IBOutlet weak var descriptionTopConstraint: NSLayoutConstraint!
+    
     override func viewDidLoad() {
        settings.style.selectedBarHeight = 3.0
        settings.style.buttonBarItemFont = UIFont(name: "Avenir-Medium", size: 14)!
+       settings.style.viewcontrollersCount = 4
        super.viewDidLoad()
         
+        myscrollView.delegate = self
         settings.style.buttonBarBackgroundColor     = .white
         settings.style.buttonBarItemBackgroundColor = .white
         settings.style.selectedBarBackgroundColor   = UIColor.appBlackColor()
@@ -63,7 +89,14 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
             
         }
         
+//        let navigationOnTap = UITapGestureRecognizer(target: self, action: #selector(BusinessCompleteViewController.navigationTap))
+//        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+//        self.navigationController?.navigationBar.isUserInteractionEnabled = true
+
         
+        let centerImagetap = UITapGestureRecognizer(target: self, action: #selector(EventViewController.centerImagetap))
+        BcImageView.addGestureRecognizer(centerImagetap)
+        BcImageView.isUserInteractionEnabled = true
         /**********************set Nav bar****************************/
         
         setNavBar()
@@ -72,30 +105,47 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
         
         tapRegistration()
         alertTapRegister()
+        myscrollView.isHidden = true
         
-        tagViewUpdate()
-        
-        BcDescriptionLabel.text = Constants.dummy
-        
-        /****************Checking number of lines************************/
-        
-        if (BcDescriptionLabel.numberOfVisibleLines > 4) {
-            
-            readMoreButton.isHidden = false
-            
-        } else {
-            
-            readMoreButton.isHidden         = true
-            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: BcDescriptionLabel.frame.width, font: BcDescriptionLabel.font)
-            containerViewTop.constant  = 8
-            barButtonTop.constant      = 8
-        }
-        
+        apiClient = ApiClient()
+        getFirebaseToken()
+
        
 
         // Do any additional setup after loading the view.
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.titleTextAttributes =
+            [NSForegroundColorAttributeName: UIColor.black,
+             NSFontAttributeName: UIFont(name: "Avenir-Light", size: 16)!]
+        
+        let navigationOnTap = UITapGestureRecognizer(target:self,action:#selector(EventViewController.navigationTap))
+        self.navigationController?.navigationBar.addGestureRecognizer(navigationOnTap)
+        self.navigationController?.navigationBar.isUserInteractionEnabled = true
+    }
+    func navigationTap(){
+        let offset = CGPoint(x: 0,y :0)
+        self.myscrollView.setContentOffset(offset, animated: true)
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        reloadStripView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+    }
+    
+    func centerImagetap() {
+        
+        let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: "PostImageZoomViewController") as! PostImageZoomViewController
+        vc.imagePassed = BcImageView.image!
+        self.navigationController?.present(vc, animated: true, completion: nil)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -103,14 +153,28 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
-        let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid2) as! MenuEventViewController
-        child_1.menuDelegate    = self
-        let child_2 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3) as! ReviewEventViewController
-        child_2.popdelegate     = self
-        let child_3 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1) as! EventTabController
-        child_3.scrolltableview = false
-        child_3.eventdelegate   = self
-        return [child_1,child_2,child_3]
+        let child_1 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid3) as! ReviewEventViewController
+        child_1.popdelegate     = self
+        child_1.apiType         = "Business"
+        child_1.primaryid       = businessprimaryid
+        
+        let child_2 = UIStoryboard(name: Constants.EventDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.EventTabid2) as! MenuEventViewController
+        child_2.menuDelegate    = self
+        child_2.itemType        = "Business"
+        child_2.primayId        = businessprimaryid
+        
+        let child_3 = UIStoryboard(name: Constants.ItemDetail, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid7)  as! LocationTabController
+        child_3.locationdelegate = self
+        child_3.primaryid        = businessprimaryid
+        child_3.type             = "Business"
+        
+        let child_4 = UIStoryboard(name: Constants.Tab, bundle: nil).instantiateViewController(withIdentifier: Constants.Tabid1) as! EventTabController
+        child_4.scrolltableview = false
+        child_4.eventdelegate   = self
+        child_4.apiType         = "Business"
+        child_4.businessid      = businessprimaryid
+        
+        return [child_1,child_2,child_3,child_4]
         
     }
     
@@ -127,7 +191,7 @@ class BusinessCompleteViewController: ButtonBarPagerTabStripViewController {
             
             readMoreButton.setTitle("less", for: .normal)
             isLabelAtMaxHeight = true
-            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: Constants.dummy, width: BcDescriptionLabel.frame.width, font: BcDescriptionLabel.font)
+            eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: description_txt, width: BcDescriptionLabel.frame.width, font: BcDescriptionLabel.font)
             
         }
         
@@ -215,7 +279,7 @@ extension BusinessCompleteViewController {
         //set image for button
         button2.setImage(UIImage(named: "eventDots"), for: UIControlState.normal)
         //add function for button
-        button2.addTarget(self, action: #selector(EventViewController.openPopup), for: UIControlEvents.touchUpInside)
+        button2.addTarget(self, action: #selector(EventViewController.openSheet), for: UIControlEvents.touchUpInside)
         //set frame
         button2.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
         
@@ -246,14 +310,21 @@ extension BusinessCompleteViewController {
         
     }
     
-    func alertTapRegister(){
+    func alertTapRegister() {
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.closePopup(sender:)))
         self.shareView.addGestureRecognizer(tap)
         
+        let bookmarktap = UITapGestureRecognizer(target: self, action: #selector(self.getBookmarkToken(sender:)))
+        self.bookmarkdetaillabel.addGestureRecognizer(bookmarktap)
+        
     }
     
     func closePopup(sender : UITapGestureRecognizer) {
+        
+        bookmarkid   = 0
+        bookmarkname = "name"
+        bookmarktype = "empty"
         
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
             
@@ -263,20 +334,75 @@ extension BusinessCompleteViewController {
         
     }
     
-    func openPopup() {
+    func openSheet() {
         
-        self.shareView.alpha   = 1
+        bookmarkid   = businessprimaryid
+        bookmarkname = BcTitleLabel.text ?? "Business name"
+        bookmarktype = "business"
         
-        let top = CGAffineTransform(translationX: 0, y: 0)
-        
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-            self.shareView.isHidden = false
-            self.shareView.transform = top
-            
-        }, completion: nil)
-        
+        openPopup()
         
     }
+    
+    func openPopup() {
+        
+        let Alert: UIAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let FemaleAction: UIAlertAction = UIAlertAction(title: "Share", style: .default) { _ in
+            let title = "Numnu"
+            let textToShare = "Discover and share experiences with food and drink at events and festivals."
+            let urlToShare = NSURL(string: "https://itunes.apple.com/ca/app/numnu/id1231472732?mt=8")
+            
+            let objectsToShare = [title, textToShare, urlToShare!] as [Any]
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad) {
+                activityVC.popoverPresentationController?.sourceView = self.view
+                activityVC.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
+                self.present(activityVC, animated: true, completion:nil )
+            }else{
+                self.present(activityVC, animated: true, completion:nil )
+            }
+//            self.present(activityVC, animated: true, completion: nil)
+
+            
+        }
+        let MaleAction: UIAlertAction = UIAlertAction(title: "Bookmark", style: .default) { _ in
+            
+            self.getBookmarkToken()
+            
+        }
+        //        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) { _ in
+        //        }
+        
+        //Create and add the Cancel action
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel)
+        cancelAction.setValue(UIColor.red, forKey: "titleTextColor")
+
+        Alert.addAction(FemaleAction)
+        Alert.addAction(MaleAction)
+        Alert.addAction(cancelAction)
+        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad) {
+            Alert.popoverPresentationController?.sourceView = self.view
+            Alert.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
+            present(Alert, animated: true, completion:nil )
+        }else{
+            present(Alert, animated: true, completion:nil )
+        }
+    }
+    
+//    func openPopup() {
+//
+//        self.shareView.alpha   = 1
+//
+//        let top = CGAffineTransform(translationX: 0, y: 0)
+//
+//        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+//            self.shareView.isHidden = false
+//            self.shareView.transform = top
+//
+//        }, completion: nil)
+//
+//
+//    }
     
 }
 
@@ -285,14 +411,17 @@ extension BusinessCompleteViewController {
 
 extension BusinessCompleteViewController : ReviewEventViewControllerDelegate {
     
-    func popupClick() {
+    func popupClick(postid: Int, postname: String) {
         
         openPopup()
+        bookmarkid   = postid
+        bookmarkname = postname
+        bookmarktype = "post"
     }
     
     func postTableHeight(height: CGFloat) {
         
-        mainContainerView.constant = 440 + height
+        mainContainerView.constant = (buttonBarView.frame.origin.y+64) + height
         mainContainerViewBottom.constant = 0
     }
     
@@ -306,7 +435,7 @@ extension BusinessCompleteViewController : MenuEventViewControllerDelegate {
     
     func menuTableHeight(height: CGFloat) {
         
-        mainContainerView.constant = 440 + height
+        mainContainerView.constant = (buttonBarView.frame.origin.y+64) + height
         mainContainerViewBottom.constant = 0
     }
     
@@ -318,10 +447,223 @@ extension BusinessCompleteViewController : EventTabControllerDelegate {
     
     func eventTableHeight(height: CGFloat) {
         
-        mainContainerView.constant = 440 + height
+        mainContainerView.constant = (buttonBarView.frame.origin.y+64) + height
         mainContainerViewBottom.constant = 0
         
     }
+    
+    
+}
+
+/*******************Location delegate****************************/
+
+extension BusinessCompleteViewController : LocationTabControllerDelegate {
+    
+    func locationTableHeight(height: CGFloat) {
+        
+        mainContainerView.constant = (buttonBarView.frame.origin.y+64) + height
+        mainContainerViewBottom.constant = 0
+    }
+    
+    
+}
+
+
+extension BusinessCompleteViewController {
+    
+    func getFirebaseToken() {
+        
+        apiClient.getFireBaseToken(completion:{ token in
+            
+            self.token_str = token
+            self.MethodToCallApi()
+            
+        })
+        
+    }
+    func MethodToCallApi(){
+        
+        LoadingHepler.instance.show()
+        
+        let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token_str)"]
+        
+        apiClient.getBusinessById(id : self.businessprimaryid,headers: header, completion: { status,Values in
+            
+            if status == "success" {
+                if let response = Values {
+                    
+                    LoadingHepler.instance.hide()
+                    
+                    DispatchQueue.main.async {
+                        
+                        self.getDetails(response:response)
+                        
+                    }
+                    
+                }
+                
+            } else {
+                print("json respose failure:::::::")
+                LoadingHepler.instance.hide()
+                DispatchQueue.main.async {
+                    
+                    self.myscrollView.isHidden = true
+                    
+                }
+                
+            }
+        })
+    }
+    func getDetails(response:BusinessDetailModel) {
+        
+        if let name = response.businessname {
+            BcTitleLabel.text = name
+        } else {
+            
+            tagscrollConstaintTop.constant = 0
+            
+        }
+        
+        if let description = response.businessdescription {
+            BcDescriptionLabel.text = description
+        }
+        
+       
+        
+        if let taglist = response.taglist {
+            if taglist.count > 0 {
+                for item in taglist {
+                    if let tagname = item.text_str {
+                        tagarray.append(tagname)
+                    }
+                }
+                tagViewUpdate()
+            }
+        } else {
+            
+            tagscrollConstaintTop.constant = 0
+            tagconstraintHeight.constant   = 0
+        }
+        
+       
+        if let imglist = response.imagelist {
+            if imglist.count > 0 {
+                if let url = imglist[imglist.count-1].imageurl_str {
+                    
+                    apiClient.getFireBaseImageUrl(imagepath: url, completion: { imageUrl in
+                        
+                        if imageUrl != "empty" {
+                            
+                            Manager.shared.loadImage(with: URL(string : imageUrl)!, into: self.BcImageView)
+                        }
+                        
+                    })
+                    
+                    
+                }
+            }
+        }
+        
+        /****************Checking number of lines************************/
+        
+        if (BcDescriptionLabel.numberOfVisibleLines > 4) {
+            
+            readMoreButton.isHidden = false
+            
+        } else {
+            
+            readMoreButton.isHidden   = true
+            containerViewTop.constant = 8
+            barButtonTop.constant     = 8
+            if let description = response.businessdescription {
+                eventDescriptionHeight.constant = TextSize.sharedinstance.getLabelHeight(text: description, width: BcDescriptionLabel.frame.width, font: BcDescriptionLabel.font)
+                description_txt = description
+            }
+            
+            
+        }
+        
+        self.myscrollView.isHidden = false
+    }
+}
+
+/***************************Bookmark function********************************/
+
+extension BusinessCompleteViewController {
+    
+    func bookmarkpost(token : String){
+        
+        LoadingHepler.instance.show()
+        
+        let clientIp  = ValidationHelper.Instance.getIPAddress() ?? "1.0.1"
+        let userid    = PrefsManager.sharedinstance.userId
+        let eventname = BcTitleLabel.text ?? "Business name"
+        
+        let header     : HTTPHeaders = ["Accept-Language" : "en-US","Authorization":"Bearer \(token)"]
+        let parameters: Parameters = ["entityid": businessprimaryid, "entityname":eventname , "type" : "business" ,"createdby" : userid,"updatedby": userid ,"clientip": clientIp, "clientapp": Constants.clientApp]
+        apiClient.bookmarEntinty(parameters: parameters,headers: header, completion: { status,response in
+            
+            if status == "success" {
+                
+                DispatchQueue.main.async {
+                    LoadingHepler.instance.hide()
+                    AlertProvider.Instance.showAlert(title: "Hey!", subtitle: "Bookmarked successfully.", vc: self)
+                    self.closePopup()
+                }
+                
+            } else {
+                
+                LoadingHepler.instance.hide()
+                if status == "422" {
+                    
+                    AlertProvider.Instance.showAlert(title: "Hey!", subtitle: "Already bookmarked.", vc: self)
+                    
+                } else {
+                    
+                    AlertProvider.Instance.showAlert(title: "Oops!", subtitle: "Bookmark failed.", vc: self)
+                    
+                }
+            }
+            
+        })
+        
+    }
+    
+    func getBookmarkToken(sender : UITapGestureRecognizer){
+        
+        apiClient.getFireBaseToken(completion:{ token in
+            
+            
+            self.bookmarkpost(token: token)
+            
+        })
+        
+    }
+    
+    func getBookmarkToken() {
+        
+        apiClient.getFireBaseToken(completion:{ token in
+            
+            self.bookmarkpost(token: token)
+            
+        })
+        
+    }
+    
+    func closePopup() {
+        
+        bookmarkid   = 0
+        bookmarkname = "name"
+        bookmarktype = "empty"
+        
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            
+            self.shareView.alpha                 = 0
+            
+        }, completion: nil)
+        
+    }
+    
     
     
 }

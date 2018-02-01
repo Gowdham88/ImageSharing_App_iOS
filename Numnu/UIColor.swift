@@ -38,4 +38,28 @@ extension UIColor {
         
     }
     
+    static func textfieldFocus() -> UIColor {
+        
+        return UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
+        
+    }
+    
+    static func textfieldUnfocus() -> UIColor {
+        
+        return UIColor(red: 229/255.0, green: 229/255.0, blue: 229/255.0, alpha: 1.0)
+        
+    }
+    
+    static func labelunfocus() -> UIColor {
+        
+        return UIColor(red: 129/255.0, green: 125/255.0, blue: 144/255.0, alpha: 1.0)
+        
+    }
+    
+    
+    
 }
+
+
+
+

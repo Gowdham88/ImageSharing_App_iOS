@@ -27,7 +27,28 @@ struct PrefsManager {
         }
         
     }
-
+    var isFirstTime : Bool {
+        
+        get {
+            
+            if checkprefsobject(object: Constants.appopenstatus) {
+                
+                return UserDefaults.standard.bool(forKey: Constants.appopenstatus)
+                
+            } else {
+                
+                return false
+            }
+            
+            
+        }
+        
+        set {
+            
+            UserDefaults.standard.set(newValue, forKey: Constants.appopenstatus)
+            UserDefaults.standard.synchronize()
+        }
+    }
     var isLoginned : Bool {
         
         get {
@@ -53,19 +74,19 @@ struct PrefsManager {
     
     
     
-    var userId : String {
+    var userId : Int {
         
         get {
             
 
             if checkprefsobject(object: Constants.id) {
                 
-                return UserDefaults.standard.string(forKey: Constants.id)!
+                return UserDefaults.standard.integer(forKey: Constants.id)
 
                 
             } else {
                 
-                return "empty"
+                return 0
             }
             
             
@@ -100,6 +121,27 @@ struct PrefsManager {
         }
     }
     
+    var name : String {
+        
+        get {
+            
+            if checkprefsobject(object: Constants.name) {
+                
+                return UserDefaults.standard.string(forKey: Constants.name)!
+            } else {
+                
+                return "empty"
+            }
+            
+        }
+        
+        set {
+            
+            UserDefaults.standard.set(newValue, forKey: Constants.name)
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
     var username : String {
         
         get {
@@ -121,47 +163,8 @@ struct PrefsManager {
         }
     }
     
-//    var firstname : String {
-//
-//        get {
-//
-//            if checkprefsobject(object: Constants.firstName) {
-//
-//                return UserDefaults.standard.string(forKey: Constants.firstName)!
-//            } else {
-//
-//                return "empty"
-//            }
-//
-//        }
-//
-//        set {
-//
-//            UserDefaults.standard.set(newValue, forKey: Constants.firstName)
-//            UserDefaults.standard.synchronize()
-//        }
-//    }
 
-    var lastname : String {
-        
-        get {
-            
-            if checkprefsobject(object: Constants.lastName) {
-                
-                return UserDefaults.standard.string(forKey: Constants.lastName)!
-            } else {
-                
-                return "empty"
-            }
-            
-        }
-        
-        set {
-            
-            UserDefaults.standard.set(newValue, forKey: Constants.lastName)
-            UserDefaults.standard.synchronize()
-        }
-    }
+    
     
     var UIDfirebase : String {
         
@@ -228,16 +231,17 @@ struct PrefsManager {
         }
     }
     
-    var gender : String {
+    var gender : Int {
         
         get {
             
             if checkprefsobject(object: Constants.gender) {
                 
-                return UserDefaults.standard.string(forKey: Constants.gender)!
+                return UserDefaults.standard.integer(forKey: Constants.gender)
+                
             } else {
                 
-                return "empty"
+                return 0
             }
             
         }
@@ -250,6 +254,239 @@ struct PrefsManager {
         }
     }
     
+    var userCity : String {
+        
+        get {
+            
+            if checkprefsobject(object: Constants.userCity) {
+                
+                return UserDefaults.standard.string(forKey: Constants.userCity)!
+            } else {
+                
+                return "empty"
+            }
+            
+        }
+        
+        set {
+            
+            UserDefaults.standard.set(newValue, forKey: Constants.userCity)
+            
+            UserDefaults.standard.synchronize()
+        }
+    }
     
+    var userCityId : Int {
+        
+        get {
+            
+            if checkprefsobject(object: Constants.userCityId) {
+                
+                return UserDefaults.standard.integer(forKey: Constants.userCityId)
+                
+            } else {
+                
+                return 0
+            }
+            
+        }
+        
+        set {
+            
+            UserDefaults.standard.set(newValue, forKey: Constants.userCityId)
+            
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    var description : String {
+        
+        get {
+            
+            if checkprefsobject(object: Constants.description) {
+                
+                return UserDefaults.standard.string(forKey: Constants.description)!
+                
+            } else {
+                
+                return "empty"
+            }
+            
+        }
+        
+        set {
+            
+            UserDefaults.standard.set(newValue, forKey: Constants.description)
+            
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    var lastlocation : String? {
+        
+        get {
+            
+            if checkprefsobject(object: Constants.lastlocation) {
+                
+                return UserDefaults.standard.string(forKey: Constants.lastlocation)!
+                
+            } else {
+                
+                return nil
+            }
+            
+        }
+        
+        set {
+            
+            UserDefaults.standard.set(newValue, forKey: Constants.lastlocation)
+            
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    var lastlocationlat : Double? {
+        
+        get {
+            
+            if checkprefsobject(object: Constants.lastlocationlat) {
+                
+                return UserDefaults.standard.double(forKey: Constants.lastlocationlat)
+            } else {
+                
+                return 0
+            }
+            
+        }
+        
+        set {
+            
+            UserDefaults.standard.set(newValue, forKey: Constants.lastlocationlat)
+            
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    var lastlocationlong : Double? {
+        
+        get {
+            
+            if checkprefsobject(object: Constants.lastlocationlong) {
+                
+                return UserDefaults.standard.double(forKey: Constants.lastlocationlong)
+            } else {
+                
+                return 0
+            }
+            
+        }
+        
+        set {
+            
+            UserDefaults.standard.set(newValue, forKey: Constants.lastlocationlong)
+            
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+
+    var startsat : String {
+        
+        get {
+            
+            if checkprefsobject(object: Constants.startsat) {
+                
+                return UserDefaults.standard.string(forKey: Constants.startsat)!
+            } else {
+                
+                return "empty"
+            }
+            
+        }
+        
+        set {
+            
+            UserDefaults.standard.set(newValue, forKey: Constants.startsat)
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    var endsat : String {
+        
+        get {
+            
+            if checkprefsobject(object: Constants.endsat) {
+                
+                return UserDefaults.standard.string(forKey: Constants.endsat)!
+            } else {
+                
+                return "empty"
+            }
+            
+        } set {
+                
+                
+                UserDefaults.standard.set(newValue, forKey: Constants.endsat)
+                UserDefaults.standard.synchronize()
+            }
+        }
+
+    var tagList : [TagList] {
+        
+        get {
+            
+            if checkprefsobject(object: Constants.taglist) {
+                
+                let array         = UserDefaults.standard.object(forKey: Constants.taglist) as! NSData
+                return   NSKeyedUnarchiver.unarchiveObject(with: array as Data) as! [TagList]
+                
+                
+            } else {
+                
+                return []
+
+            }
+            } set {
+        
+            let defaults = UserDefaults.standard
+            let encodedData = NSKeyedArchiver.archivedData(withRootObject: newValue)
+            defaults.set(encodedData, forKey: Constants.taglist)
+            defaults.synchronize()
+            
+        }
+    }
+    
+
+    func logoutprefences() {
+        
+        for key in Array(UserDefaults.standard.dictionaryRepresentation().keys) {
+                
+                UserDefaults.standard.removeObject(forKey: key)
+        }
+        
+        UserDefaults.standard.synchronize()
+          
+    }
+    
+//    var eventLinkList : Array<Any> {
+//        
+//        get {
+//            
+//            if checkprefsobject(object: Constants.eventLinkList) {
+//                
+//                return UserDefaults.standard.array(forKey: Constants.eventLinkList)!
+//            } else {
+//                
+//                return ""
+//            }
+//            
+//        }
+//        
+//        set {
+//            
+//            UserDefaults.standard.set(newValue, forKey: Constants.eventLinkList)
+//            UserDefaults.standard.synchronize()
+//        }
+//    }
     
 } // Struct

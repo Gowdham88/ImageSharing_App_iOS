@@ -9,17 +9,20 @@
 import UIKit
 import GoogleMaps
 
-
 class EventMapViewController: UIViewController {
-    
+    var boolForMapTitle: Bool = true
     var locationManager = CLLocationManager()
     var currentLocation: CLLocation?
     var mapView: GMSMapView!
     var zoomLevel: Float = 15.0
     @IBOutlet weak var navigationItemList: UINavigationItem!
-    
-    var latitude   : CLLocationDegrees = 45.511278
-    var longtitude : CLLocationDegrees = -73.565778
+    var myDouble = Double(MyVariables.fetchedLat)
+
+    var latitude   : CLLocationDegrees = (MyVariables.fetchedLat as NSString).doubleValue
+    var longtitude : CLLocationDegrees = (MyVariables.fetchedLong as NSString).doubleValue
+//    var latitude   = 40.741895
+//    var longtitude = -73.989308
+    var markerAddress = MyVariables.address
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,18 +34,9 @@ class EventMapViewController: UIViewController {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
         locationManager.requestWhenInUseAuthorization()
-        
-        if CLLocationManager.locationServicesEnabled()
-        {
-            locationManager.distanceFilter = 50
-            locationManager.startUpdatingLocation()
-            locationManager.delegate = self
-        
-        }
+        locationManager.delegate = self
     
         self.tabBarController?.tabBar.isHidden = true
-        
-        
      
         // Do any additional setup after loading the view.
     }
@@ -56,7 +50,7 @@ class EventMapViewController: UIViewController {
     
     func setMap() {
       
-        let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longtitude, zoom: zoomLevel)
+        let camera = GMSCameraPosition.camera(withLatitude: self.latitude, longitude: self.longtitude, zoom: zoomLevel)
         mapView = GMSMapView.map(withFrame: view.bounds, camera: camera)
         mapView.settings.myLocationButton = true
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -67,9 +61,11 @@ class EventMapViewController: UIViewController {
 //        mapView.isHidden = true
         
         let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: latitude, longitude: longtitude)
-        marker.title = "BOUILLON BILK"
-        marker.snippet = "1595 St Laurent Blvd, Montreal, QC H2X 2S9, Canada"
+        marker.position = CLLocationCoordinate2D(latitude: self.latitude, longitude: self.longtitude)
+        marker.title    = MyVariables.markerTitle
+        if MyVariables.address != "" {
+            marker.snippet  = MyVariables.address
+        }
         marker.map = mapView
         
         
@@ -77,8 +73,15 @@ class EventMapViewController: UIViewController {
     }
     
     func setNavBar() {
-        
-        navigationItemList.title = "Map view"
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Avenir-Medium", size: 16)!]
+
+        if boolForMapTitle == true{
+            navigationItemList.title = "Event Map"
+
+        }else{
+            navigationItemList.title = "Location Map"
+
+        }
         
         let button: UIButton = UIButton(type: UIButtonType.custom)
         //set image for button
@@ -114,19 +117,20 @@ extension EventMapViewController: CLLocationManagerDelegate {
     
     // Handle incoming location events.
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location: CLLocation = locations.last!
-        print("Location: \(location)")
         
-        DispatchQueue.main.async {
+        locationManager.stopUpdatingLocation()
+        locationManager.delegate = nil
+        
+        if let location: CLLocation = locations.last {
             
             let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
-                                                  longitude: location.coordinate.longitude,
+                                                  longitude: location.coordinate.latitude,
                                                   zoom: self.zoomLevel)
             let marker = GMSMarker()
-            marker.position = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+            marker.position        = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.latitude)
             marker.appearAnimation = .pop
-            marker.title = "Current location"
-            marker.snippet = ""
+            marker.title           = "Current Location"
+            marker.snippet         = ""
             marker.map = self.mapView
             
             if self.mapView.isHidden {
@@ -136,10 +140,9 @@ extension EventMapViewController: CLLocationManagerDelegate {
                 self.mapView.animate(to: camera)
             }
             
+            
         }
-        
-        
-        
+   
        
     }
     
@@ -157,6 +160,12 @@ extension EventMapViewController: CLLocationManagerDelegate {
         case .authorizedAlways: fallthrough
         case .authorizedWhenInUse:
             print("Location status is OK.")
+            if CLLocationManager.locationServicesEnabled()
+            {
+                self.locationManager.distanceFilter = 50
+                self.locationManager.startUpdatingLocation()
+                
+            }
         }
     }
     
